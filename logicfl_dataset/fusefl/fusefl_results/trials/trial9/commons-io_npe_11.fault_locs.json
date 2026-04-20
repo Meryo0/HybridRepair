@@ -1,0 +1,24 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.input.ReaderInputStream:94",
+            "code": "return charsetEncoder.maxBytesPerChar() * 2;",
+            "explanation": "This line attempts to call `maxBytesPerChar()` on `charsetEncoder` without checking if `charsetEncoder` is null. If `charsetEncoder` is null, this will throw a NullPointerException."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.input.ReaderInputStream:85",
+            "code": "final float minRequired = minBufferSize(charsetEncoder);",
+            "explanation": "This line calls the `minBufferSize` method with `charsetEncoder` as an argument. If `charsetEncoder` is null, the method will throw a NullPointerException when it tries to use `charsetEncoder`."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.input.ReaderInputStream:149",
+            "code": "charset.newEncoder()",
+            "explanation": "This line attempts to call `newEncoder()` on `charset` without checking if `charset` is null. If `charset` is null, this will throw a NullPointerException."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.input.ReaderInputStream:178",
+            "code": "this.encoderIn = CharBuffer.allocate(checkMinBufferSize(charsetEncoder, bufferSize));",
+            "explanation": "This line calls the `checkMinBufferSize` method with `charsetEncoder` as an argument. If `charsetEncoder` is null, the method will throw a NullPointerException when it tries to use `charsetEncoder`."
+        }
+    ]
+}

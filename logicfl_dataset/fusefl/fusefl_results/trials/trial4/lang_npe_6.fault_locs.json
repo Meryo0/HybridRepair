@@ -1,0 +1,14 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.lang3.ArrayUtils:9267",
+            "code": "result[i] = array[i].booleanValue();",
+            "explanation": "The NullPointerException is thrown because the code attempts to call `booleanValue()` on a `null` element in the `array`. This line does not handle the case where `array[i]` is `null`, leading to the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.ArrayUtils:9266",
+            "code": "for (int i = 0; i < array.length; i++) {",
+            "explanation": "This line starts the loop that iterates over the input array. If any element in the array is `null`, the subsequent line (9267) will throw a NullPointerException. The loop does not include a check for `null` elements."
+        }
+    ]
+}

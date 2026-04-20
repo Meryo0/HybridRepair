@@ -1,0 +1,57 @@
+com.google.gson.stream.JsonWriter:145 `    REPLACEMENT_CHARS = new String[128];`
+com.google.gson.stream.JsonWriter:146 `    for (int i = 0; i <= 0x1f; i++) {`
+com.google.gson.stream.JsonWriter:147 `      REPLACEMENT_CHARS[i] = String.format("\\u%04x", (int) i);`
+com.google.gson.stream.JsonWriter:149 `    REPLACEMENT_CHARS['"'] = "\\\"";`
+com.google.gson.stream.JsonWriter:150 `    REPLACEMENT_CHARS['\\'] = "\\\\";`
+com.google.gson.stream.JsonWriter:151 `    REPLACEMENT_CHARS['\t'] = "\\t";`
+com.google.gson.stream.JsonWriter:152 `    REPLACEMENT_CHARS['\b'] = "\\b";`
+com.google.gson.stream.JsonWriter:153 `    REPLACEMENT_CHARS['\n'] = "\\n";`
+com.google.gson.stream.JsonWriter:154 `    REPLACEMENT_CHARS['\r'] = "\\r";`
+com.google.gson.stream.JsonWriter:155 `    REPLACEMENT_CHARS['\f'] = "\\f";`
+com.google.gson.stream.JsonWriter:156 `    HTML_SAFE_REPLACEMENT_CHARS = REPLACEMENT_CHARS.clone();`
+com.google.gson.stream.JsonWriter:157 `    HTML_SAFE_REPLACEMENT_CHARS['<'] = "\\u003c";`
+com.google.gson.stream.JsonWriter:158 `    HTML_SAFE_REPLACEMENT_CHARS['>'] = "\\u003e";`
+com.google.gson.stream.JsonWriter:159 `    HTML_SAFE_REPLACEMENT_CHARS['&'] = "\\u0026";`
+com.google.gson.stream.JsonWriter:160 `    HTML_SAFE_REPLACEMENT_CHARS['='] = "\\u003d";`
+com.google.gson.stream.JsonWriter:161 `    HTML_SAFE_REPLACEMENT_CHARS['\''] = "\\u0027";`
+com.google.gson.stream.JsonWriter:162 `  }`
+com.google.gson.stream.JsonWriter:167 `  private int[] stack = new int[32];`
+com.google.gson.stream.JsonWriter:168 `  private int stackSize = 0;`
+com.google.gson.stream.JsonWriter:170 `    push(EMPTY_DOCUMENT);`
+com.google.gson.stream.JsonWriter:182 `  private String separator = ":";`
+com.google.gson.stream.JsonWriter:190 `  private boolean serializeNulls = true;`
+com.google.gson.stream.JsonWriter:197 `  public JsonWriter(Writer out) {`
+com.google.gson.stream.JsonWriter:198 `    if (out == null) {`
+com.google.gson.stream.JsonWriter:201 `    this.out = out;`
+com.google.gson.stream.JsonWriter:202 `  }`
+com.google.gson.stream.JsonWriter:287 `    writeDeferredName();`
+com.google.gson.stream.JsonWriter:288 `    return open(EMPTY_ARRAY, "[");`
+com.google.gson.stream.JsonWriter:325 `    beforeValue();`
+com.google.gson.stream.JsonWriter:326 `    push(empty);`
+com.google.gson.stream.JsonWriter:327 `    out.write(openBracket);`
+com.google.gson.stream.JsonWriter:328 `    return this;`
+com.google.gson.stream.JsonWriter:354 `    if (stackSize == stack.length) {`
+com.google.gson.stream.JsonWriter:359 `    stack[stackSize++] = newTop;`
+com.google.gson.stream.JsonWriter:360 `  }`
+com.google.gson.stream.JsonWriter:366 `    if (stackSize == 0) {`
+com.google.gson.stream.JsonWriter:369 `    return stack[stackSize - 1];`
+com.google.gson.stream.JsonWriter:376 `    stack[stackSize - 1] = topOfStack;`
+com.google.gson.stream.JsonWriter:377 `  }`
+com.google.gson.stream.JsonWriter:400 `    if (deferredName != null) {`
+com.google.gson.stream.JsonWriter:405 `  }`
+com.google.gson.stream.JsonWriter:465 `    writeDeferredName();`
+com.google.gson.stream.JsonWriter:466 `    beforeValue();`
+com.google.gson.stream.JsonWriter:467 `    out.write(value ? "true" : "false");`
+com.google.gson.stream.JsonWriter:468 `    return this;`
+com.google.gson.stream.JsonWriter:588 `    if (indent == null) {`
+com.google.gson.stream.JsonWriter:589 `      return;`
+com.google.gson.stream.JsonWriter:620 `    switch (peek()) {`
+com.google.gson.stream.JsonWriter:628 `      replaceTop(NONEMPTY_DOCUMENT);`
+com.google.gson.stream.JsonWriter:629 `      break;`
+com.google.gson.stream.JsonWriter:632 `      replaceTop(NONEMPTY_ARRAY);`
+com.google.gson.stream.JsonWriter:633 `      newline();`
+com.google.gson.stream.JsonWriter:634 `      break;`
+com.google.gson.stream.JsonWriter:637 `      out.append(',');`
+com.google.gson.stream.JsonWriter:638 `      newline();`
+com.google.gson.stream.JsonWriter:639 `      break;`
+com.google.gson.stream.JsonWriter:649 `  }`

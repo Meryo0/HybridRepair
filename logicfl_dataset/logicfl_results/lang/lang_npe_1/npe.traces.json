@@ -1,0 +1,74 @@
+{"npe.traces": [
+    {
+        "test.method": "testToString_URLClassLoader",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "toString",
+                "line": 77,
+                "class": "org.apache.commons.lang3.ClassLoaderUtils"
+            },
+            {
+                "is_target": true,
+                "method": "testToString_URLClassLoader",
+                "line": 64,
+                "class": "org.apache.commons.lang3.ClassLoaderUtilsTest"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            }
+        ],
+        "test.class": "org.apache.commons.lang3.ClassLoaderUtilsTest"
+    },
+    {
+        "test.method": "testToString_ClassLoader",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "toString",
+                "line": 67,
+                "class": "org.apache.commons.lang3.ClassLoaderUtils"
+            },
+            {
+                "is_target": true,
+                "method": "testToString_ClassLoader",
+                "line": 55,
+                "class": "org.apache.commons.lang3.ClassLoaderUtilsTest"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            }
+        ],
+        "test.class": "org.apache.commons.lang3.ClassLoaderUtilsTest"
+    }
+]}

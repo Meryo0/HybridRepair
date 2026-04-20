@@ -1,0 +1,24 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.file.PathUtils:371",
+            "code": "parent = linkOption == LinkOption.NOFOLLOW_LINKS ? parent : readIfSymbolicLink(parent);",
+            "explanation": "The NullPointerException is thrown because the `parent` variable might be null when passed to `readIfSymbolicLink`. This can happen if the `path` passed to `getParent` is a root directory, which has no parent, resulting in `parent` being null."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.file.PathUtils:370",
+            "code": "Path parent = getParent(path);",
+            "explanation": "The `getParent` method can return null if the `path` is a root directory. This null value is then used in the subsequent line, leading to a NullPointerException when `readIfSymbolicLink` is called."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.file.PathUtils:825",
+            "code": "return path == null ? null : path.getParent();",
+            "explanation": "The `getParent` method can return null if the `path` is a root directory. This null value is then used in the subsequent line, leading to a NullPointerException when `readIfSymbolicLink` is called."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.file.PathUtils:1215",
+            "code": "return Files.isSymbolicLink(path) ? Files.readSymbolicLink(path) : path;",
+            "explanation": "The `path` variable might be null, leading to a NullPointerException when `Files.isSymbolicLink` is called. This can happen if the `parent` path is null, which is passed to this method."
+        }
+    ]
+}

@@ -1,0 +1,41 @@
+{
+    "coverage": [
+        {
+            "covered": [ 63, 64, 65 ],
+            "className": "org.jfree.data.general.DatasetGroup"
+        },
+        {
+            "covered": [ 70, 79, 80, 260, 263, 265, 372, 375, 383, 386, 412, 415, 423, 426, 476, 479, 487, 490 ],
+            "className": "org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests"
+        },
+        {
+            "covered": [ 94, 95, 96, 97, 205, 206, 207 ],
+            "className": "org.jfree.data.general.AbstractDataset"
+        },
+        {
+            "covered": [ 125, 128, 129, 130, 133 ],
+            "className": "org.jfree.data.DataUtilities"
+        },
+        {
+            "covered": [ 50, 62 ],
+            "className": "org.jfree.data.resources.DataPackageResources"
+        },
+        {
+            "covered": [ 65, 66 ],
+            "className": "org.jfree.data.general.AbstractSeriesDataset"
+        },
+        {
+            "covered": [ 91, 93, 107, 108, 145, 147, 148, 150, 152, 153, 155, 156, 163, 207, 208, 212, 241, 242, 573, 574, 628, 641, 690, 746, 748 ],
+            "className": "org.jfree.data.category.DefaultIntervalCategoryDataset"
+        }
+    ],
+    "classes": [
+        "org.jfree.data.DataUtilities",
+        "org.jfree.data.category.DefaultIntervalCategoryDataset",
+        "org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests",
+        "org.jfree.data.general.AbstractDataset",
+        "org.jfree.data.general.AbstractSeriesDataset",
+        "org.jfree.data.general.DatasetGroup",
+        "org.jfree.data.resources.DataPackageResources"
+    ]
+}

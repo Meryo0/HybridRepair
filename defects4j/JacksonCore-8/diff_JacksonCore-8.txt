@@ -1,0 +1,16 @@
+diff -U 5 -r ./defects4j/JacksonCore-8/buggy/src/main/java/com/fasterxml/jackson/core/util/TextBuffer.java ./defects4j/JacksonCore-8/fixed/src/main/java/com/fasterxml/jackson/core/util/TextBuffer.java
+--- ./defects4j/JacksonCore-8/buggy/src/main/java/com/fasterxml/jackson/core/util/TextBuffer.java	2024-05-19 19:44:52.066521170 +0900
++++ ./defects4j/JacksonCore-8/fixed/src/main/java/com/fasterxml/jackson/core/util/TextBuffer.java	2024-05-19 19:44:52.082521494 +0900
+@@ -302,11 +302,11 @@
+         if (_resultArray != null)  return _resultArray;
+         if (_resultString != null) {
+             return (_resultArray = _resultString.toCharArray());
+         }
+         // Nope; but does it fit in just one segment?
+-        if (!_hasSegments)  return _currentSegment;
++        if (!_hasSegments && _currentSegment != null)  return _currentSegment;
+         // Nope, need to have/create a non-segmented array and return it
+         return contentsAsArray();
+     }
+ 
+     /*

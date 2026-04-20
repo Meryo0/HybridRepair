@@ -1,0 +1,162 @@
+org.jfree.chart.event.DatasetChangeInfo:49 `public class DatasetChangeInfo {`
+org.jfree.data.ComparableObjectItem:72 `    public ComparableObjectItem(Comparable x, Object y) {`
+org.jfree.data.ComparableObjectItem:73 `        if (x == null) {`
+org.jfree.data.ComparableObjectItem:76 `        this.x = x;`
+org.jfree.data.ComparableObjectItem:77 `        this.obj = y;`
+org.jfree.data.ComparableObjectItem:78 `    }`
+org.jfree.data.ComparableObjectItem:95 `        return this.obj;`
+org.jfree.data.ComparableObjectSeries:67 `    private int maximumItemCount = Integer.MAX_VALUE;`
+org.jfree.data.ComparableObjectSeries:98 `        super(key);`
+org.jfree.data.ComparableObjectSeries:99 `        this.data = new java.util.ArrayList();`
+org.jfree.data.ComparableObjectSeries:100 `        this.autoSort = autoSort;`
+org.jfree.data.ComparableObjectSeries:101 `        this.allowDuplicateXValues = allowDuplicateXValues;`
+org.jfree.data.ComparableObjectSeries:102 `    }`
+org.jfree.data.ComparableObjectSeries:131 `        return this.data.size();`
+org.jfree.data.ComparableObjectSeries:216 `        if (item == null) {`
+org.jfree.data.ComparableObjectSeries:220 `        if (this.autoSort) {`
+org.jfree.data.ComparableObjectSeries:221 `            int index = Collections.binarySearch(this.data, item);`
+org.jfree.data.ComparableObjectSeries:222 `            if (index < 0) {`
+org.jfree.data.ComparableObjectSeries:223 `                this.data.add(-index - 1, item);`
+org.jfree.data.ComparableObjectSeries:244 `        }`
+org.jfree.data.ComparableObjectSeries:256 `        if (getItemCount() > this.maximumItemCount) {`
+org.jfree.data.ComparableObjectSeries:259 `        if (notify) {`
+org.jfree.data.ComparableObjectSeries:260 `            fireSeriesChanged();`
+org.jfree.data.ComparableObjectSeries:262 `    }`
+org.jfree.data.ComparableObjectSeries:333 `        return (ComparableObjectItem) this.data.get(index);`
+org.jfree.data.event.DatasetChangeEvent:87 `        super(source);`
+org.jfree.data.event.DatasetChangeEvent:88 `        if (info == null) {`
+org.jfree.data.event.DatasetChangeEvent:91 `        this.dataset = dataset;`
+org.jfree.data.event.DatasetChangeEvent:92 `        this.info = info;`
+org.jfree.data.event.DatasetChangeEvent:93 `    }`
+org.jfree.data.event.SeriesChangeEvent:70 `        this(source, null);`
+org.jfree.data.event.SeriesChangeEvent:71 `    }`
+org.jfree.data.event.SeriesChangeEvent:82 `        super(source);`
+org.jfree.data.event.SeriesChangeEvent:83 `        this.summary = summary;`
+org.jfree.data.event.SeriesChangeEvent:84 `    }`
+org.jfree.data.general.AbstractDataset:95 `    protected AbstractDataset() {`
+org.jfree.data.general.AbstractDataset:96 `        this.group = new DatasetGroup();`
+org.jfree.data.general.AbstractDataset:97 `        this.listenerList = new EventListenerList();`
+org.jfree.data.general.AbstractDataset:98 `    }`
+org.jfree.data.general.AbstractDataset:176 `        notifyListeners(new DatasetChangeEvent(this, this, info));`
+org.jfree.data.general.AbstractDataset:177 `    }`
+org.jfree.data.general.AbstractDataset:189 `        Object[] listeners = this.listenerList.getListenerList();`
+org.jfree.data.general.AbstractDataset:190 `        for (int i = listeners.length - 2; i >= 0; i -= 2) {`
+org.jfree.data.general.AbstractDataset:196 `    }`
+org.jfree.data.general.AbstractSeriesDataset:66 `        super();`
+org.jfree.data.general.AbstractSeriesDataset:67 `    }`
+org.jfree.data.general.DatasetGroup:63 `        super();`
+org.jfree.data.general.DatasetGroup:64 `        this.id = "NOID";`
+org.jfree.data.general.DatasetGroup:65 `    }`
+org.jfree.data.general.DatasetUtilities:726 `        return iterateDomainBounds(dataset, true);`
+org.jfree.data.general.DatasetUtilities:742 `        if (dataset == null) {`
+org.jfree.data.general.DatasetUtilities:745 `        double minimum = Double.POSITIVE_INFINITY;`
+org.jfree.data.general.DatasetUtilities:746 `        double maximum = Double.NEGATIVE_INFINITY;`
+org.jfree.data.general.DatasetUtilities:747 `        int seriesCount = dataset.getSeriesCount();`
+org.jfree.data.general.DatasetUtilities:750 `        if (includeInterval && dataset instanceof IntervalXYDataset) {`
+org.jfree.data.general.DatasetUtilities:751 `            IntervalXYDataset intervalXYData = (IntervalXYDataset) dataset;`
+org.jfree.data.general.DatasetUtilities:752 `            for (int series = 0; series < seriesCount; series++) {`
+org.jfree.data.general.DatasetUtilities:753 `                int itemCount = dataset.getItemCount(series);`
+org.jfree.data.general.DatasetUtilities:754 `                for (int item = 0; item < itemCount; item++) {`
+org.jfree.data.general.DatasetUtilities:755 `                    lvalue = intervalXYData.getStartXValue(series, item);`
+org.jfree.data.general.DatasetUtilities:756 `                    uvalue = intervalXYData.getEndXValue(series, item);`
+org.jfree.data.general.DatasetUtilities:757 `                    if (!Double.isNaN(lvalue)) {`
+org.jfree.data.general.DatasetUtilities:760 `                    if (!Double.isNaN(uvalue)) {`
+org.jfree.data.general.DatasetUtilities:765 `        }`
+org.jfree.data.general.DatasetUtilities:779 `        if (minimum > maximum) {`
+org.jfree.data.general.DatasetUtilities:780 `            return null;`
+org.jfree.data.general.DatasetUtilities:1213 `        return iterateRangeBounds(dataset, true);`
+org.jfree.data.general.DatasetUtilities:1231 `        double minimum = Double.POSITIVE_INFINITY;`
+org.jfree.data.general.DatasetUtilities:1232 `        double maximum = Double.NEGATIVE_INFINITY;`
+org.jfree.data.general.DatasetUtilities:1233 `        int seriesCount = dataset.getSeriesCount();`
+org.jfree.data.general.DatasetUtilities:1236 `        if (includeInterval && dataset instanceof IntervalXYDataset) {`
+org.jfree.data.general.DatasetUtilities:1238 `            IntervalXYDataset ixyd = (IntervalXYDataset) dataset;`
+org.jfree.data.general.DatasetUtilities:1239 `            for (int series = 0; series < seriesCount; series++) {`
+org.jfree.data.general.DatasetUtilities:1240 `                int itemCount = dataset.getItemCount(series);`
+org.jfree.data.general.DatasetUtilities:1241 `                for (int item = 0; item < itemCount; item++) {`
+org.jfree.data.general.DatasetUtilities:1242 `                    double lvalue = ixyd.getStartYValue(series, item);`
+org.jfree.data.general.DatasetUtilities:1243 `                    double uvalue = ixyd.getEndYValue(series, item);`
+org.jfree.data.general.DatasetUtilities:1244 `                    if (!Double.isNaN(lvalue)) {`
+org.jfree.data.general.DatasetUtilities:1247 `                    if (!Double.isNaN(uvalue)) {`
+org.jfree.data.general.DatasetUtilities:1252 `        }`
+org.jfree.data.general.DatasetUtilities:1283 `        if (minimum == Double.POSITIVE_INFINITY) {`
+org.jfree.data.general.DatasetUtilities:1284 `            return null;`
+org.jfree.data.general.Series:104 `        this(key, null);`
+org.jfree.data.general.Series:105 `    }`
+org.jfree.data.general.Series:113 `    protected Series(Comparable key, String description) {`
+org.jfree.data.general.Series:114 `        if (key == null) {`
+org.jfree.data.general.Series:117 `        this.key = key;`
+org.jfree.data.general.Series:118 `        this.description = description;`
+org.jfree.data.general.Series:119 `        this.listeners = new EventListenerList();`
+org.jfree.data.general.Series:120 `        this.propertyChangeSupport = new PropertyChangeSupport(this);`
+org.jfree.data.general.Series:121 `        this.notify = true;`
+org.jfree.data.general.Series:122 `    }`
+org.jfree.data.general.Series:297 `        this.listeners.add(SeriesChangeListener.class, listener);`
+org.jfree.data.general.Series:298 `    }`
+org.jfree.data.general.Series:315 `        if (this.notify) {`
+org.jfree.data.general.Series:316 `            notifyListeners(new SeriesChangeEvent(this));`
+org.jfree.data.general.Series:318 `    }`
+org.jfree.data.general.Series:328 `        Object[] listenerList = this.listeners.getListenerList();`
+org.jfree.data.general.Series:329 `        for (int i = listenerList.length - 2; i >= 0; i -= 2) {`
+org.jfree.data.general.Series:336 `    }`
+org.jfree.data.xy.AbstractIntervalXYDataset:51 `public abstract class AbstractIntervalXYDataset extends AbstractXYDataset`
+org.jfree.data.xy.AbstractXYDataset:55 `public abstract class AbstractXYDataset extends AbstractSeriesDataset`
+org.jfree.data.xy.XYInterval:78 `            double yHigh) {`
+org.jfree.data.xy.XYInterval:79 `        this.xLow = xLow;`
+org.jfree.data.xy.XYInterval:80 `        this.xHigh = xHigh;`
+org.jfree.data.xy.XYInterval:81 `        this.y = y;`
+org.jfree.data.xy.XYInterval:82 `        this.yLow = yLow;`
+org.jfree.data.xy.XYInterval:83 `        this.yHigh = yHigh;`
+org.jfree.data.xy.XYInterval:84 `    }`
+org.jfree.data.xy.XYInterval:92 `        return this.xLow;`
+org.jfree.data.xy.XYInterval:101 `        return this.xHigh;`
+org.jfree.data.xy.XYInterval:119 `        return this.yLow;`
+org.jfree.data.xy.XYInterval:128 `        return this.yHigh;`
+org.jfree.data.xy.XYIntervalDataItem:64 `        super(new Double(x), new XYInterval(xLow, xHigh, y, yLow, yHigh));`
+org.jfree.data.xy.XYIntervalDataItem:65 `    }`
+org.jfree.data.xy.XYIntervalDataItem:97 `        XYInterval interval = (XYInterval) getObject();`
+org.jfree.data.xy.XYIntervalDataItem:98 `        if (interval != null) {`
+org.jfree.data.xy.XYIntervalDataItem:99 `            return interval.getXLow();`
+org.jfree.data.xy.XYIntervalDataItem:112 `        XYInterval interval = (XYInterval) getObject();`
+org.jfree.data.xy.XYIntervalDataItem:113 `        if (interval != null) {`
+org.jfree.data.xy.XYIntervalDataItem:114 `            return interval.getXHigh();`
+org.jfree.data.xy.XYIntervalDataItem:127 `        XYInterval interval = (XYInterval) getObject();`
+org.jfree.data.xy.XYIntervalDataItem:128 `        if (interval != null) {`
+org.jfree.data.xy.XYIntervalDataItem:129 `            return interval.getYLow();`
+org.jfree.data.xy.XYIntervalDataItem:142 `        XYInterval interval = (XYInterval) getObject();`
+org.jfree.data.xy.XYIntervalDataItem:143 `        if (interval != null) {`
+org.jfree.data.xy.XYIntervalDataItem:144 `            return interval.getYHigh();`
+org.jfree.data.xy.XYIntervalSeries:64 `        this(key, true, true);`
+org.jfree.data.xy.XYIntervalSeries:65 `    }`
+org.jfree.data.xy.XYIntervalSeries:79 `        super(key, autoSort, allowDuplicateXValues);`
+org.jfree.data.xy.XYIntervalSeries:80 `    }`
+org.jfree.data.xy.XYIntervalSeries:94 `        super.add(new XYIntervalDataItem(x, xLow, xHigh, y, yLow, yHigh), true);`
+org.jfree.data.xy.XYIntervalSeries:95 `    }`
+org.jfree.data.xy.XYIntervalSeries:120 `        XYIntervalDataItem item = (XYIntervalDataItem) getDataItem(index);`
+org.jfree.data.xy.XYIntervalSeries:121 `        return item.getXLowValue();`
+org.jfree.data.xy.XYIntervalSeries:135 `        XYIntervalDataItem item = (XYIntervalDataItem) getDataItem(index);`
+org.jfree.data.xy.XYIntervalSeries:136 `        return item.getXHighValue();`
+org.jfree.data.xy.XYIntervalSeries:162 `        XYIntervalDataItem item = (XYIntervalDataItem) getDataItem(index);`
+org.jfree.data.xy.XYIntervalSeries:163 `        return item.getYLowValue();`
+org.jfree.data.xy.XYIntervalSeries:177 `        XYIntervalDataItem item = (XYIntervalDataItem) getDataItem(index);`
+org.jfree.data.xy.XYIntervalSeries:178 `        return item.getYHighValue();`
+org.jfree.data.xy.XYIntervalSeries:189 `        return super.getDataItem(index);`
+org.jfree.data.xy.XYIntervalSeriesCollection:73 `    public XYIntervalSeriesCollection() {`
+org.jfree.data.xy.XYIntervalSeriesCollection:74 `        this.data = new java.util.ArrayList();`
+org.jfree.data.xy.XYIntervalSeriesCollection:75 `    }`
+org.jfree.data.xy.XYIntervalSeriesCollection:84 `        if (series == null) {`
+org.jfree.data.xy.XYIntervalSeriesCollection:87 `        this.data.add(series);`
+org.jfree.data.xy.XYIntervalSeriesCollection:88 `        series.addChangeListener(this);`
+org.jfree.data.xy.XYIntervalSeriesCollection:89 `        fireDatasetChanged(new DatasetChangeInfo());`
+org.jfree.data.xy.XYIntervalSeriesCollection:91 `    }`
+org.jfree.data.xy.XYIntervalSeriesCollection:99 `        return this.data.size();`
+org.jfree.data.xy.XYIntervalSeriesCollection:113 `        if ((series < 0) || (series >= getSeriesCount())) {`
+org.jfree.data.xy.XYIntervalSeriesCollection:116 `        return (XYIntervalSeries) this.data.get(series);`
+org.jfree.data.xy.XYIntervalSeriesCollection:147 `        return getSeries(series).getItemCount();`
+org.jfree.data.xy.XYIntervalSeriesCollection:173 `        XYIntervalSeries s = (XYIntervalSeries) this.data.get(series);`
+org.jfree.data.xy.XYIntervalSeriesCollection:174 `        return s.getXLowValue(item);`
+org.jfree.data.xy.XYIntervalSeriesCollection:187 `        XYIntervalSeries s = (XYIntervalSeries) this.data.get(series);`
+org.jfree.data.xy.XYIntervalSeriesCollection:188 `        return s.getXHighValue(item);`
+org.jfree.data.xy.XYIntervalSeriesCollection:215 `        XYIntervalSeries s = (XYIntervalSeries) this.data.get(series);`
+org.jfree.data.xy.XYIntervalSeriesCollection:216 `        return s.getYLowValue(item);`
+org.jfree.data.xy.XYIntervalSeriesCollection:229 `        XYIntervalSeries s = (XYIntervalSeries) this.data.get(series);`
+org.jfree.data.xy.XYIntervalSeriesCollection:230 `        return s.getYHighValue(item);`

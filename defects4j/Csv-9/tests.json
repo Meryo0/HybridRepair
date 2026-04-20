@@ -1,0 +1,15 @@
+{
+ "buggy.hash": "",
+ "fixed_hash": "2480dffa6d8343b189c6fb57b88b325c45f0b83f",
+ "passed.classes": [],
+ "failed.classes": [
+  "org.apache.commons.csv.CSVRecordTest"
+ ],
+ "failed.tests": [
+  {
+   "class": "org.apache.commons.csv.CSVRecordTest",
+   "name": "testToMapWithNoHeader",
+   "message": ""
+  }
+ ]
+}

@@ -1,0 +1,216 @@
+{"npe.traces": [{
+    "test.method": "testWithDeserializationProblemHandler",
+    "traces": [
+        {
+            "is_target": true,
+            "method": "_deserialize",
+            "line": 170,
+            "class": "com.fasterxml.jackson.databind.jsontype.impl.AsArrayTypeDeserializer"
+        },
+        {
+            "is_target": true,
+            "method": "deserializeTypedFromAny",
+            "line": 100,
+            "class": "com.fasterxml.jackson.databind.jsontype.impl.AsArrayTypeDeserializer"
+        },
+        {
+            "is_target": true,
+            "method": "deserializeWithType",
+            "line": 871,
+            "class": "com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer$Vanilla"
+        },
+        {
+            "is_target": true,
+            "method": "deserialize",
+            "line": 467,
+            "class": "com.fasterxml.jackson.databind.deser.std.CollectionDeserializer"
+        },
+        {
+            "is_target": true,
+            "method": "deserialize",
+            "line": 367,
+            "class": "com.fasterxml.jackson.databind.deser.std.CollectionDeserializer"
+        },
+        {
+            "is_target": true,
+            "method": "deserialize",
+            "line": 38,
+            "class": "com.fasterxml.jackson.databind.deser.std.CollectionDeserializer"
+        },
+        {
+            "is_target": true,
+            "method": "_deserialize",
+            "line": 170,
+            "class": "com.fasterxml.jackson.databind.jsontype.impl.AsArrayTypeDeserializer"
+        },
+        {
+            "is_target": true,
+            "method": "deserializeTypedFromArray",
+            "line": 77,
+            "class": "com.fasterxml.jackson.databind.jsontype.impl.AsArrayTypeDeserializer"
+        },
+        {
+            "is_target": true,
+            "method": "deserializeWithType",
+            "line": 532,
+            "class": "com.fasterxml.jackson.databind.deser.std.CollectionDeserializer"
+        },
+        {
+            "is_target": true,
+            "method": "deserializeAndSet",
+            "line": 202,
+            "class": "com.fasterxml.jackson.databind.deser.impl.MethodProperty"
+        },
+        {
+            "is_target": true,
+            "method": "vanillaDeserialize",
+            "line": 385,
+            "class": "com.fasterxml.jackson.databind.deser.BeanDeserializer"
+        },
+        {
+            "is_target": true,
+            "method": "_deserializeOther",
+            "line": 231,
+            "class": "com.fasterxml.jackson.databind.deser.BeanDeserializer"
+        },
+        {
+            "is_target": true,
+            "method": "deserialize",
+            "line": 186,
+            "class": "com.fasterxml.jackson.databind.deser.BeanDeserializer"
+        },
+        {
+            "is_target": true,
+            "method": "_deserializeTypedForId",
+            "line": 229,
+            "class": "com.fasterxml.jackson.databind.jsontype.impl.AsPropertyTypeDeserializer"
+        },
+        {
+            "is_target": true,
+            "method": "deserializeTypedFromObject",
+            "line": 170,
+            "class": "com.fasterxml.jackson.databind.jsontype.impl.AsPropertyTypeDeserializer"
+        },
+        {
+            "is_target": true,
+            "method": "deserializeWithType",
+            "line": 1719,
+            "class": "com.fasterxml.jackson.databind.deser.BeanDeserializerBase"
+        },
+        {
+            "is_target": true,
+            "method": "deserialize",
+            "line": 82,
+            "class": "com.fasterxml.jackson.databind.deser.impl.TypeWrappedDeserializer"
+        },
+        {
+            "is_target": true,
+            "method": "_readMapAndClose",
+            "line": 4222,
+            "class": "com.fasterxml.jackson.databind.ObjectMapper"
+        },
+        {
+            "is_target": true,
+            "method": "readValue",
+            "line": 3167,
+            "class": "com.fasterxml.jackson.databind.ObjectMapper"
+        },
+        {
+            "is_target": true,
+            "method": "testWithDeserializationProblemHandler",
+            "line": 112,
+            "class": "com.fasterxml.jackson.databind.deser.filter.ProblemHandlerUnknownTypeId2221Test"
+        },
+        {
+            "is_target": false,
+            "method": "invoke0",
+            "line": -2,
+            "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+        },
+        {
+            "is_target": false,
+            "method": "invoke",
+            "line": 77,
+            "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+        },
+        {
+            "is_target": false,
+            "method": "invoke",
+            "line": 43,
+            "class": "jdk.internal.reflect.DelegatingMethodAccessorImpl"
+        },
+        {
+            "is_target": false,
+            "method": "invoke",
+            "line": 569,
+            "class": "java.lang.reflect.Method"
+        },
+        {
+            "is_target": false,
+            "method": "runTest",
+            "line": 177,
+            "class": "junit.framework.TestCase"
+        },
+        {
+            "is_target": false,
+            "method": "runBare",
+            "line": 142,
+            "class": "junit.framework.TestCase"
+        },
+        {
+            "is_target": false,
+            "method": "protect",
+            "line": 122,
+            "class": "junit.framework.TestResult$1"
+        },
+        {
+            "is_target": false,
+            "method": "runProtected",
+            "line": 142,
+            "class": "junit.framework.TestResult"
+        },
+        {
+            "is_target": false,
+            "method": "run",
+            "line": 125,
+            "class": "junit.framework.TestResult"
+        },
+        {
+            "is_target": false,
+            "method": "run",
+            "line": 130,
+            "class": "junit.framework.TestCase"
+        },
+        {
+            "is_target": false,
+            "method": "runTest",
+            "line": 241,
+            "class": "junit.framework.TestSuite"
+        },
+        {
+            "is_target": false,
+            "method": "run",
+            "line": 236,
+            "class": "junit.framework.TestSuite"
+        },
+        {
+            "is_target": false,
+            "method": "run",
+            "line": 90,
+            "class": "org.junit.internal.runners.JUnit38ClassRunner"
+        },
+        {
+            "is_target": false,
+            "method": "run",
+            "line": 137,
+            "class": "org.junit.runner.JUnitCore"
+        },
+        {
+            "is_target": false,
+            "method": "main",
+            "line": 36,
+            "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+        }
+    ],
+    "test.class": "com.fasterxml.jackson.databind.deser.filter.ProblemHandlerUnknownTypeId2221Test"
+}]}

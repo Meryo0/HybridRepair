@@ -1,0 +1,41 @@
+@Test public void testSortInPlaceFaliures(){
+  final double[] nullArray=null;
+  final double[] one={1};
+  final double[] two={1,2};
+  final double[] onep={2};
+  try {
+    MathUtils.sortInPlace(one,two);
+    Assert.fail("Expecting DimensionMismatchException");
+  }
+ catch (  DimensionMismatchException ex) {
+  }
+  try {
+    MathUtils.sortInPlace(one,nullArray);
+    Assert.fail("Expecting NullArgumentException");
+  }
+ catch (  NullArgumentException ex) {
+  }
+  try {
+    MathUtils.sortInPlace(one,onep,nullArray);
+    Assert.fail("Expecting NullArgumentException");
+  }
+ catch (  NullArgumentException ex) {
+  }
+}
+
+
+
+  JUnit Vintage:MathUtilsTest:testSortInPlaceFaliures
+    MethodSource [className = 'org.apache.commons.math.util.MathUtilsTest', methodName = 'testSortInPlaceFaliures', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot read the array length because "y" is null
+       org.apache.commons.math.util.MathUtils.sortInPlace(MathUtils.java:2324)
+       org.apache.commons.math.util.MathUtils.sortInPlace(MathUtils.java:2294)
+       org.apache.commons.math.util.MathUtilsTest.testSortInPlaceFaliures(MathUtilsTest.java:1806)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+       org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+       org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+       [...]

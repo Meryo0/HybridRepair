@@ -1,0 +1,16 @@
+Fault Localization Results
+NPE at line(composite_map_1, 136) / Null Expression - f_composite_172[composite]
+	 can be caused by 
+v_temp_178[temp] - line(composite_map_1, 147).
+
+NPE at line(composite_map_1, 136) / Null Expression - f_composite_172[composite]
+	 can be caused by 
+f_composite_172[composite] - line(composite_map_1, 136).
+
+NPE at line(composite_map_1, 136) / Null Expression - f_composite_172[composite]
+	 can be caused by 
+p_map_175[map] - line(composite_map_1, 146).
+
+NPE at line(composite_map_1, 136) / Null Expression - p_map_175[map]
+	 can be caused by 
+p_map_175[map] - line(composite_map_1, 136).

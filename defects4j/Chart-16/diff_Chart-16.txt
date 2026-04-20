@@ -1,0 +1,31 @@
+diff -U 5 -r defects4j/Chart-16/buggy/source/org/jfree/data/category/DefaultIntervalCategoryDataset.java defects4j/Chart-16/fixed/source/org/jfree/data/category/DefaultIntervalCategoryDataset.java
+--- defects4j/Chart-16/buggy/source/org/jfree/data/category/DefaultIntervalCategoryDataset.java	2024-04-14 01:03:04.000000000 +0900
++++ defects4j/Chart-16/fixed/source/org/jfree/data/category/DefaultIntervalCategoryDataset.java	2024-04-14 01:03:36.000000000 +0900
+@@ -202,12 +202,12 @@
+                     this.categoryKeys = generateKeys(categoryCount, prefix);
+                 }
+ 
+             }
+             else {
+-                this.seriesKeys = null;
+-                this.categoryKeys = null;
++                this.seriesKeys = new Comparable[0];
++                this.categoryKeys = new Comparable[0];
+             }
+         }
+ 
+     }
+ 
+@@ -333,11 +333,11 @@
+      */
+     public void setCategoryKeys(Comparable[] categoryKeys) {
+         if (categoryKeys == null) {
+             throw new IllegalArgumentException("Null 'categoryKeys' argument.");
+         }
+-        if (categoryKeys.length != this.startData[0].length) {
++        if (categoryKeys.length != getCategoryCount()) {
+             throw new IllegalArgumentException(
+                     "The number of categories does not match the data.");
+         }
+         for (int i = 0; i < categoryKeys.length; i++) {
+             if (categoryKeys[i] == null) {

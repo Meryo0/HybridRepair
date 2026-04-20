@@ -1,0 +1,901 @@
+/** 
+ * Draws the chart with a null info object to make sure that no exceptions are thrown (a problem that was occurring at one point).
+ */
+public void testDrawWithNullInfo(){
+  boolean success=false;
+  try {
+    BufferedImage image=new BufferedImage(200,100,BufferedImage.TYPE_INT_RGB);
+    Graphics2D g2=image.createGraphics();
+    this.chart.draw(g2,new Rectangle2D.Double(0,0,200,100),null,null);
+    g2.dispose();
+    success=true;
+  }
+ catch (  Exception e) {
+    success=false;
+    e.printStackTrace();
+  }
+  assertTrue(success);
+}
+
+/** 
+ * Replaces the dataset and checks that it has changed as expected.
+ */
+public void testReplaceDataset(){
+  XYSeries series1=new XYSeries("Series 1");
+  series1.add(10.0,10.0);
+  series1.add(20.0,20.0);
+  series1.add(30.0,30.0);
+  XYDataset dataset=new XYSeriesCollection(series1);
+  LocalListener l=new LocalListener();
+  this.chart.addChangeListener(l);
+  XYPlot plot=(XYPlot)this.chart.getPlot();
+  plot.setDataset(dataset);
+  assertEquals(true,l.flag);
+  ValueAxis axis=plot.getRangeAxis();
+  Range range=axis.getRange();
+  assertTrue("Expecting the lower bound of the range to be around 10: " + range.getLowerBound(),range.getLowerBound() <= 10);
+  assertTrue("Expecting the upper bound of the range to be around 30: " + range.getUpperBound(),range.getUpperBound() >= 30);
+}
+
+/** 
+ * Draws the chart with a null info object to make sure that no exceptions are thrown (a problem that was occurring at one point).
+ */
+public void testDrawWithNullInfo(){
+  boolean success=false;
+  try {
+    BufferedImage image=new BufferedImage(200,100,BufferedImage.TYPE_INT_RGB);
+    Graphics2D g2=image.createGraphics();
+    this.chart.draw(g2,new Rectangle2D.Double(0,0,200,100),null,null);
+    g2.dispose();
+    success=true;
+  }
+ catch (  Exception e) {
+    success=false;
+    e.printStackTrace();
+  }
+  assertTrue(success);
+}
+
+/** 
+ * Draws the chart with a null info object to make sure that no exceptions are thrown (a problem that was occurring at one point).
+ */
+public void testDrawWithNullInfo(){
+  boolean success=false;
+  try {
+    BufferedImage image=new BufferedImage(200,100,BufferedImage.TYPE_INT_RGB);
+    Graphics2D g2=image.createGraphics();
+    this.chart.draw(g2,new Rectangle2D.Double(0,0,200,100),null,null);
+    g2.dispose();
+    success=true;
+  }
+ catch (  Exception e) {
+    success=false;
+    e.printStackTrace();
+  }
+  assertTrue(success);
+}
+
+/** 
+ * Tests the the lower and upper margin settings produce the expected results.
+ */
+public void testAxisMargins(){
+  XYSeries series=new XYSeries("S1");
+  series.add(100.0,1.1);
+  series.add(200.0,2.2);
+  XYSeriesCollection dataset=new XYSeriesCollection(series);
+  dataset.setIntervalWidth(0.0);
+  JFreeChart chart=ChartFactory.createScatterPlot("Title","X","Y",dataset,PlotOrientation.VERTICAL,false,false,false);
+  ValueAxis domainAxis=((XYPlot)chart.getPlot()).getDomainAxis();
+  Range r=domainAxis.getRange();
+  assertEquals(110.0,r.getLength(),EPSILON);
+  domainAxis.setLowerMargin(0.10);
+  domainAxis.setUpperMargin(0.10);
+  r=domainAxis.getRange();
+  assertEquals(120.0,r.getLength(),EPSILON);
+}
+
+/** 
+ * Checks that the auto-range for the domain axis on an XYPlot is working as expected.
+ */
+public void testXYAutoRange1(){
+  XYSeries series=new XYSeries("Series 1");
+  series.add(1.0,1.0);
+  series.add(2.0,2.0);
+  series.add(3.0,3.0);
+  XYSeriesCollection dataset=new XYSeriesCollection();
+  dataset.addSeries(series);
+  JFreeChart chart=ChartFactory.createScatterPlot("Test","X","Y",dataset,PlotOrientation.VERTICAL,false,false,false);
+  XYPlot plot=(XYPlot)chart.getPlot();
+  NumberAxis axis=(NumberAxis)plot.getDomainAxis();
+  axis.setAutoRangeIncludesZero(false);
+  assertEquals(0.9,axis.getLowerBound(),EPSILON);
+  assertEquals(3.1,axis.getUpperBound(),EPSILON);
+}
+
+/** 
+ * Checks that the auto-range for the range axis on an XYPlot is working as expected.
+ */
+public void testXYAutoRange2(){
+  XYSeries series=new XYSeries("Series 1");
+  series.add(1.0,1.0);
+  series.add(2.0,2.0);
+  series.add(3.0,3.0);
+  XYSeriesCollection dataset=new XYSeriesCollection();
+  dataset.addSeries(series);
+  JFreeChart chart=ChartFactory.createScatterPlot("Test","X","Y",dataset,PlotOrientation.VERTICAL,false,false,false);
+  XYPlot plot=(XYPlot)chart.getPlot();
+  LogAxis axis=new LogAxis("Log(Y)");
+  plot.setRangeAxis(axis);
+  assertEquals(0.9465508226401592,axis.getLowerBound(),EPSILON);
+  assertEquals(3.1694019256486126,axis.getUpperBound(),EPSILON);
+}
+
+/** 
+ * Checks that the auto-range for the domain axis on an XYPlot is working as expected.
+ */
+public void testXYAutoRange1(){
+  XYSeries series=new XYSeries("Series 1");
+  series.add(1.0,1.0);
+  series.add(2.0,2.0);
+  series.add(3.0,3.0);
+  XYSeriesCollection dataset=new XYSeriesCollection();
+  dataset.addSeries(series);
+  JFreeChart chart=ChartFactory.createScatterPlot("Test","X","Y",dataset,PlotOrientation.VERTICAL,false,false,false);
+  XYPlot plot=(XYPlot)chart.getPlot();
+  LogAxis axis=new LogAxis("Log(Y)");
+  plot.setRangeAxis(axis);
+  assertEquals(0.9465508226401592,axis.getLowerBound(),EPSILON);
+  assertEquals(3.1694019256486126,axis.getUpperBound(),EPSILON);
+}
+
+/** 
+ * Checks that the auto-range for the range axis on an XYPlot is working as expected.
+ */
+public void testXYAutoRange2(){
+  XYSeries series=new XYSeries("Series 1");
+  series.add(1.0,1.0);
+  series.add(2.0,2.0);
+  series.add(3.0,3.0);
+  XYSeriesCollection dataset=new XYSeriesCollection();
+  dataset.addSeries(series);
+  JFreeChart chart=ChartFactory.createScatterPlot("Test","X","Y",dataset,PlotOrientation.VERTICAL,false,false,false);
+  XYPlot plot=(XYPlot)chart.getPlot();
+  NumberAxis axis=(NumberAxis)plot.getRangeAxis();
+  axis.setAutoRangeIncludesZero(false);
+  assertEquals(0.9,axis.getLowerBound(),EPSILON);
+  assertEquals(3.1,axis.getUpperBound(),EPSILON);
+}
+
+/** 
+ * Check that setting a tool tip generator for a series does override the default generator.
+ */
+public void testSetSeriesToolTipGenerator(){
+  XYPlot plot=(XYPlot)this.chart.getPlot();
+  XYItemRenderer renderer=plot.getRenderer();
+  StandardXYToolTipGenerator tt=new StandardXYToolTipGenerator();
+  renderer.setSeriesToolTipGenerator(0,tt);
+  XYToolTipGenerator tt2=renderer.getToolTipGenerator(0,0,false);
+  assertTrue(tt2 == tt);
+}
+
+/** 
+ * Replaces the dataset and checks that it has changed as expected.
+ */
+public void testReplaceDataset(){
+  XYSeries series1=new XYSeries("Series 1");
+  series1.add(10.0,10.0);
+  series1.add(20.0,20.0);
+  series1.add(30.0,30.0);
+  XYDataset dataset=new XYSeriesCollection(series1);
+  LocalListener l=new LocalListener();
+  this.chart.addChangeListener(l);
+  XYPlot plot=(XYPlot)this.chart.getPlot();
+  plot.setDataset(dataset);
+  assertEquals(true,l.flag);
+  ValueAxis axis=plot.getRangeAxis();
+  Range range=axis.getRange();
+  assertTrue("Expecting the lower bound of the range to be around 10: " + range.getLowerBound(),range.getLowerBound() <= 10);
+  assertTrue("Expecting the upper bound of the range to be around 30: " + range.getUpperBound(),range.getUpperBound() >= 30);
+}
+
+/** 
+ * Replaces the dataset and checks that it has changed as expected.
+ */
+public void testReplaceDataset(){
+  XYSeries series1=new XYSeries("Series 1");
+  series1.add(10.0,10.0);
+  series1.add(20.0,20.0);
+  series1.add(30.0,30.0);
+  XYDataset dataset=new XYSeriesCollection(series1);
+  LocalListener l=new LocalListener();
+  this.chart.addChangeListener(l);
+  XYPlot plot=(XYPlot)this.chart.getPlot();
+  plot.setDataset(dataset);
+  assertEquals(true,l.flag);
+  ValueAxis axis=plot.getRangeAxis();
+  Range range=axis.getRange();
+  assertTrue("Expecting the lower bound of the range to be around 10: " + range.getLowerBound(),range.getLowerBound() <= 10);
+  assertTrue("Expecting the upper bound of the range to be around 30: " + range.getUpperBound(),range.getUpperBound() >= 30);
+}
+
+/** 
+ * Check that setting a tool tip generator for a series does override the default generator.
+ */
+public void testSetSeriesToolTipGenerator(){
+  XYPlot plot=(XYPlot)this.chart.getPlot();
+  XYItemRenderer renderer=plot.getRenderer();
+  StandardXYToolTipGenerator tt=new StandardXYToolTipGenerator();
+  renderer.setSeriesToolTipGenerator(0,tt);
+  XYToolTipGenerator tt2=renderer.getToolTipGenerator(0,0,false);
+  assertTrue(tt2 == tt);
+}
+
+/** 
+ * Check that setting a tool tip generator for a series does override the default generator.
+ */
+public void testSetSeriesToolTipGenerator(){
+  XYPlot plot=(XYPlot)this.chart.getPlot();
+  XYItemRenderer renderer=plot.getRenderer();
+  StandardXYToolTipGenerator tt=new StandardXYToolTipGenerator();
+  renderer.setSeriesToolTipGenerator(0,tt);
+  XYToolTipGenerator tt2=renderer.getToolTipGenerator(0,0,false);
+  assertTrue(tt2 == tt);
+}
+
+/** 
+ * Draws the chart with a null info object to make sure that no exceptions are thrown (a problem that was occurring at one point).
+ */
+public void testDrawWithNullInfo(){
+  boolean success=false;
+  try {
+    BufferedImage image=new BufferedImage(200,100,BufferedImage.TYPE_INT_RGB);
+    Graphics2D g2=image.createGraphics();
+    this.chart.draw(g2,new Rectangle2D.Double(0,0,200,100),null,null);
+    g2.dispose();
+    success=true;
+  }
+ catch (  Exception e) {
+    success=false;
+    e.printStackTrace();
+  }
+  assertTrue(success);
+}
+
+/** 
+ * A test for drawing range grid lines when there is no primary renderer. In 1.0.4, this is throwing a NullPointerException.
+ */
+public void testDrawRangeGridlines(){
+  DefaultXYDataset dataset=new DefaultXYDataset();
+  JFreeChart chart=ChartFactory.createXYLineChart("Title","X","Y",dataset,PlotOrientation.VERTICAL,true,false,false);
+  XYPlot plot=(XYPlot)chart.getPlot();
+  plot.setRenderer(null);
+  boolean success=false;
+  try {
+    BufferedImage image=new BufferedImage(200,100,BufferedImage.TYPE_INT_RGB);
+    Graphics2D g2=image.createGraphics();
+    chart.draw(g2,new Rectangle2D.Double(0,0,200,100),null,null);
+    g2.dispose();
+    success=true;
+  }
+ catch (  Exception e) {
+    e.printStackTrace();
+    success=false;
+  }
+  assertTrue(success);
+}
+
+/** 
+ * Replaces the dataset and checks that it has changed as expected.
+ */
+public void testReplaceDataset(){
+  XYSeries series1=new XYSeries("Series 1");
+  series1.add(10.0,10.0);
+  series1.add(20.0,20.0);
+  series1.add(30.0,30.0);
+  XYDataset dataset=new XYSeriesCollection(series1);
+  LocalListener l=new LocalListener();
+  this.chart.addChangeListener(l);
+  XYPlot plot=(XYPlot)this.chart.getPlot();
+  plot.setDataset(dataset);
+  assertEquals(true,l.flag);
+  ValueAxis axis=plot.getRangeAxis();
+  Range range=axis.getRange();
+  assertTrue("Expecting the lower bound of the range to be around 10: " + range.getLowerBound(),range.getLowerBound() <= 10);
+  assertTrue("Expecting the upper bound of the range to be around 30: " + range.getUpperBound(),range.getUpperBound() >= 30);
+}
+
+/** 
+ * Check that setting a tool tip generator for a series does override the default generator.
+ */
+public void testSetSeriesToolTipGenerator(){
+  XYPlot plot=(XYPlot)this.chart.getPlot();
+  XYItemRenderer renderer=plot.getRenderer();
+  StandardXYToolTipGenerator tt=new StandardXYToolTipGenerator();
+  renderer.setSeriesToolTipGenerator(0,tt);
+  XYToolTipGenerator tt2=renderer.getToolTipGenerator(0,0,false);
+  assertTrue(tt2 == tt);
+}
+
+/** 
+ * Replaces the dataset and checks that it has changed as expected.
+ */
+public void testReplaceDataset(){
+  XYSeries series1=new XYSeries("Series 1");
+  series1.add(10.0,10.0);
+  series1.add(20.0,20.0);
+  series1.add(30.0,30.0);
+  XYDataset dataset=new XYSeriesCollection(series1);
+  LocalListener l=new LocalListener();
+  this.chart.addChangeListener(l);
+  XYPlot plot=(XYPlot)this.chart.getPlot();
+  plot.setDataset(dataset);
+  assertEquals(true,l.flag);
+  ValueAxis axis=plot.getRangeAxis();
+  Range range=axis.getRange();
+  assertTrue("Expecting the lower bound of the range to be around 10: " + range.getLowerBound(),range.getLowerBound() <= 10);
+  assertTrue("Expecting the upper bound of the range to be around 30: " + range.getUpperBound(),range.getUpperBound() >= 30);
+}
+
+/** 
+ * Check that setting a tool tip generator for a series does override the default generator.
+ */
+public void testSetSeriesToolTipGenerator(){
+  XYPlot plot=(XYPlot)this.chart.getPlot();
+  XYItemRenderer renderer=plot.getRenderer();
+  StandardXYToolTipGenerator tt=new StandardXYToolTipGenerator();
+  renderer.setSeriesToolTipGenerator(0,tt);
+  XYToolTipGenerator tt2=renderer.getToolTipGenerator(0,0,false);
+  assertTrue(tt2 == tt);
+}
+
+/** 
+ * Serialize a time seroes chart, restore it, and check for equality.
+ */
+public void testSerialization4(){
+  RegularTimePeriod t=new Day();
+  TimeSeries series=new TimeSeries("Series 1");
+  series.add(t,36.4);
+  t=t.next();
+  series.add(t,63.5);
+  TimeSeriesCollection dataset=new TimeSeriesCollection();
+  dataset.addSeries(series);
+  JFreeChart c1=ChartFactory.createTimeSeriesChart("Test","Date","Value",dataset,true,true,true);
+  JFreeChart c2=null;
+  try {
+    ByteArrayOutputStream buffer=new ByteArrayOutputStream();
+    ObjectOutput out=new ObjectOutputStream(buffer);
+    out.writeObject(c1);
+    out.close();
+    ObjectInput in=new ObjectInputStream(new ByteArrayInputStream(buffer.toByteArray()));
+    c2=(JFreeChart)in.readObject();
+    in.close();
+  }
+ catch (  Exception e) {
+    e.printStackTrace();
+  }
+  assertEquals(c1,c2);
+}
+
+/** 
+ * Draws the chart with a null info object to make sure that no exceptions are thrown (a problem that was occurring at one point).
+ */
+public void testDrawWithNullInfo(){
+  boolean success=false;
+  try {
+    BufferedImage image=new BufferedImage(200,100,BufferedImage.TYPE_INT_RGB);
+    Graphics2D g2=image.createGraphics();
+    this.chart.draw(g2,new Rectangle2D.Double(0,0,200,100),null,null);
+    g2.dispose();
+    success=true;
+  }
+ catch (  Exception e) {
+    success=false;
+    e.printStackTrace();
+  }
+  assertTrue(success);
+}
+
+
+
+testDrawWithNullInfo(org.jfree.chart.junit.XYStepChartTests): Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+	at org.jfree.chart.plot.XYPlot.getDataRange(XYPlot.java:4493)
+	at org.jfree.chart.axis.DateAxis.autoAdjustRange(DateAxis.java:1286)
+	at org.jfree.chart.axis.DateAxis.configure(DateAxis.java:719)
+	at org.jfree.chart.axis.Axis.setPlot(Axis.java:1044)
+	at org.jfree.chart.plot.XYPlot.<init>(XYPlot.java:660)
+	at org.jfree.chart.ChartFactory.createXYStepChart(ChartFactory.java:1792)
+	at org.jfree.chart.junit.XYStepChartTests.createChart(XYStepChartTests.java:177)
+	at org.jfree.chart.junit.XYStepChartTests.setUp(XYStepChartTests.java:96)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testSetSeriesToolTipGenerator(org.jfree.chart.junit.XYStepChartTests): Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+	at org.jfree.chart.plot.XYPlot.getDataRange(XYPlot.java:4493)
+	at org.jfree.chart.axis.DateAxis.autoAdjustRange(DateAxis.java:1286)
+	at org.jfree.chart.axis.DateAxis.configure(DateAxis.java:719)
+	at org.jfree.chart.axis.Axis.setPlot(Axis.java:1044)
+	at org.jfree.chart.plot.XYPlot.<init>(XYPlot.java:660)
+	at org.jfree.chart.ChartFactory.createXYStepChart(ChartFactory.java:1792)
+	at org.jfree.chart.junit.XYStepChartTests.createChart(XYStepChartTests.java:177)
+	at org.jfree.chart.junit.XYStepChartTests.setUp(XYStepChartTests.java:96)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testReplaceDataset(org.jfree.chart.junit.XYStepChartTests): Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+	at org.jfree.chart.plot.XYPlot.getDataRange(XYPlot.java:4493)
+	at org.jfree.chart.axis.DateAxis.autoAdjustRange(DateAxis.java:1286)
+	at org.jfree.chart.axis.DateAxis.configure(DateAxis.java:719)
+	at org.jfree.chart.axis.Axis.setPlot(Axis.java:1044)
+	at org.jfree.chart.plot.XYPlot.<init>(XYPlot.java:660)
+	at org.jfree.chart.ChartFactory.createXYStepChart(ChartFactory.java:1792)
+	at org.jfree.chart.junit.XYStepChartTests.createChart(XYStepChartTests.java:177)
+	at org.jfree.chart.junit.XYStepChartTests.setUp(XYStepChartTests.java:96)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testAxisMargins(org.jfree.chart.axis.junit.ValueAxisTests): Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+	at org.jfree.chart.plot.XYPlot.getDataRange(XYPlot.java:4493)
+	at org.jfree.chart.axis.NumberAxis.autoAdjustRange(NumberAxis.java:434)
+	at org.jfree.chart.axis.NumberAxis.configure(NumberAxis.java:417)
+	at org.jfree.chart.axis.Axis.setPlot(Axis.java:1044)
+	at org.jfree.chart.plot.XYPlot.<init>(XYPlot.java:660)
+	at org.jfree.chart.ChartFactory.createScatterPlot(ChartFactory.java:1490)
+	at org.jfree.chart.axis.junit.ValueAxisTests.testAxisMargins(ValueAxisTests.java:234)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testSerialization4(org.jfree.chart.junit.JFreeChartTests): Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+	at org.jfree.chart.plot.XYPlot.getDataRange(XYPlot.java:4493)
+	at org.jfree.chart.axis.DateAxis.autoAdjustRange(DateAxis.java:1286)
+	at org.jfree.chart.axis.DateAxis.configure(DateAxis.java:719)
+	at org.jfree.chart.axis.Axis.setPlot(Axis.java:1044)
+	at org.jfree.chart.plot.XYPlot.<init>(XYPlot.java:660)
+	at org.jfree.chart.ChartFactory.createTimeSeriesChart(ChartFactory.java:1893)
+	at org.jfree.chart.junit.JFreeChartTests.testSerialization4(JFreeChartTests.java:448)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testXYAutoRange1(org.jfree.chart.axis.junit.LogAxisTests): Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+	at org.jfree.chart.plot.XYPlot.getDataRange(XYPlot.java:4493)
+	at org.jfree.chart.axis.NumberAxis.autoAdjustRange(NumberAxis.java:434)
+	at org.jfree.chart.axis.NumberAxis.configure(NumberAxis.java:417)
+	at org.jfree.chart.axis.Axis.setPlot(Axis.java:1044)
+	at org.jfree.chart.plot.XYPlot.<init>(XYPlot.java:660)
+	at org.jfree.chart.ChartFactory.createScatterPlot(ChartFactory.java:1490)
+	at org.jfree.chart.axis.junit.LogAxisTests.testXYAutoRange1(LogAxisTests.java:260)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testXYAutoRange2(org.jfree.chart.axis.junit.LogAxisTests): Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+	at org.jfree.chart.plot.XYPlot.getDataRange(XYPlot.java:4493)
+	at org.jfree.chart.axis.NumberAxis.autoAdjustRange(NumberAxis.java:434)
+	at org.jfree.chart.axis.NumberAxis.configure(NumberAxis.java:417)
+	at org.jfree.chart.axis.Axis.setPlot(Axis.java:1044)
+	at org.jfree.chart.plot.XYPlot.<init>(XYPlot.java:660)
+	at org.jfree.chart.ChartFactory.createScatterPlot(ChartFactory.java:1490)
+	at org.jfree.chart.axis.junit.LogAxisTests.testXYAutoRange2(LogAxisTests.java:288)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testXYAutoRange1(org.jfree.chart.axis.junit.NumberAxisTests): Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+	at org.jfree.chart.plot.XYPlot.getDataRange(XYPlot.java:4493)
+	at org.jfree.chart.axis.NumberAxis.autoAdjustRange(NumberAxis.java:434)
+	at org.jfree.chart.axis.NumberAxis.configure(NumberAxis.java:417)
+	at org.jfree.chart.axis.Axis.setPlot(Axis.java:1044)
+	at org.jfree.chart.plot.XYPlot.<init>(XYPlot.java:660)
+	at org.jfree.chart.ChartFactory.createScatterPlot(ChartFactory.java:1490)
+	at org.jfree.chart.axis.junit.NumberAxisTests.testXYAutoRange1(NumberAxisTests.java:354)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testXYAutoRange2(org.jfree.chart.axis.junit.NumberAxisTests): Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+	at org.jfree.chart.plot.XYPlot.getDataRange(XYPlot.java:4493)
+	at org.jfree.chart.axis.NumberAxis.autoAdjustRange(NumberAxis.java:434)
+	at org.jfree.chart.axis.NumberAxis.configure(NumberAxis.java:417)
+	at org.jfree.chart.axis.Axis.setPlot(Axis.java:1044)
+	at org.jfree.chart.plot.XYPlot.<init>(XYPlot.java:660)
+	at org.jfree.chart.ChartFactory.createScatterPlot(ChartFactory.java:1490)
+	at org.jfree.chart.axis.junit.NumberAxisTests.testXYAutoRange2(NumberAxisTests.java:382)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testDrawWithNullInfo(org.jfree.chart.junit.TimeSeriesChartTests): Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+	at org.jfree.chart.plot.XYPlot.getDataRange(XYPlot.java:4493)
+	at org.jfree.chart.axis.DateAxis.autoAdjustRange(DateAxis.java:1286)
+	at org.jfree.chart.axis.DateAxis.configure(DateAxis.java:719)
+	at org.jfree.chart.axis.Axis.setPlot(Axis.java:1044)
+	at org.jfree.chart.plot.XYPlot.<init>(XYPlot.java:660)
+	at org.jfree.chart.ChartFactory.createTimeSeriesChart(ChartFactory.java:1893)
+	at org.jfree.chart.junit.TimeSeriesChartTests.createChart(TimeSeriesChartTests.java:176)
+	at org.jfree.chart.junit.TimeSeriesChartTests.setUp(TimeSeriesChartTests.java:95)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testSetSeriesToolTipGenerator(org.jfree.chart.junit.TimeSeriesChartTests): Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+	at org.jfree.chart.plot.XYPlot.getDataRange(XYPlot.java:4493)
+	at org.jfree.chart.axis.DateAxis.autoAdjustRange(DateAxis.java:1286)
+	at org.jfree.chart.axis.DateAxis.configure(DateAxis.java:719)
+	at org.jfree.chart.axis.Axis.setPlot(Axis.java:1044)
+	at org.jfree.chart.plot.XYPlot.<init>(XYPlot.java:660)
+	at org.jfree.chart.ChartFactory.createTimeSeriesChart(ChartFactory.java:1893)
+	at org.jfree.chart.junit.TimeSeriesChartTests.createChart(TimeSeriesChartTests.java:176)
+	at org.jfree.chart.junit.TimeSeriesChartTests.setUp(TimeSeriesChartTests.java:95)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testReplaceDataset(org.jfree.chart.junit.TimeSeriesChartTests): Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+	at org.jfree.chart.plot.XYPlot.getDataRange(XYPlot.java:4493)
+	at org.jfree.chart.axis.DateAxis.autoAdjustRange(DateAxis.java:1286)
+	at org.jfree.chart.axis.DateAxis.configure(DateAxis.java:719)
+	at org.jfree.chart.axis.Axis.setPlot(Axis.java:1044)
+	at org.jfree.chart.plot.XYPlot.<init>(XYPlot.java:660)
+	at org.jfree.chart.ChartFactory.createTimeSeriesChart(ChartFactory.java:1893)
+	at org.jfree.chart.junit.TimeSeriesChartTests.createChart(TimeSeriesChartTests.java:176)
+	at org.jfree.chart.junit.TimeSeriesChartTests.setUp(TimeSeriesChartTests.java:95)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testDrawWithNullInfo(org.jfree.chart.junit.XYStepAreaChartTests): Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+	at org.jfree.chart.plot.XYPlot.getDataRange(XYPlot.java:4493)
+	at org.jfree.chart.axis.NumberAxis.autoAdjustRange(NumberAxis.java:434)
+	at org.jfree.chart.axis.NumberAxis.configure(NumberAxis.java:417)
+	at org.jfree.chart.axis.Axis.setPlot(Axis.java:1044)
+	at org.jfree.chart.plot.XYPlot.<init>(XYPlot.java:660)
+	at org.jfree.chart.ChartFactory.createXYStepAreaChart(ChartFactory.java:1848)
+	at org.jfree.chart.junit.XYStepAreaChartTests.createChart(XYStepAreaChartTests.java:177)
+	at org.jfree.chart.junit.XYStepAreaChartTests.setUp(XYStepAreaChartTests.java:96)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testSetSeriesToolTipGenerator(org.jfree.chart.junit.XYStepAreaChartTests): Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+	at org.jfree.chart.plot.XYPlot.getDataRange(XYPlot.java:4493)
+	at org.jfree.chart.axis.NumberAxis.autoAdjustRange(NumberAxis.java:434)
+	at org.jfree.chart.axis.NumberAxis.configure(NumberAxis.java:417)
+	at org.jfree.chart.axis.Axis.setPlot(Axis.java:1044)
+	at org.jfree.chart.plot.XYPlot.<init>(XYPlot.java:660)
+	at org.jfree.chart.ChartFactory.createXYStepAreaChart(ChartFactory.java:1848)
+	at org.jfree.chart.junit.XYStepAreaChartTests.createChart(XYStepAreaChartTests.java:177)
+	at org.jfree.chart.junit.XYStepAreaChartTests.setUp(XYStepAreaChartTests.java:96)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testReplaceDataset(org.jfree.chart.junit.XYStepAreaChartTests): Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+	at org.jfree.chart.plot.XYPlot.getDataRange(XYPlot.java:4493)
+	at org.jfree.chart.axis.NumberAxis.autoAdjustRange(NumberAxis.java:434)
+	at org.jfree.chart.axis.NumberAxis.configure(NumberAxis.java:417)
+	at org.jfree.chart.axis.Axis.setPlot(Axis.java:1044)
+	at org.jfree.chart.plot.XYPlot.<init>(XYPlot.java:660)
+	at org.jfree.chart.ChartFactory.createXYStepAreaChart(ChartFactory.java:1848)
+	at org.jfree.chart.junit.XYStepAreaChartTests.createChart(XYStepAreaChartTests.java:177)
+	at org.jfree.chart.junit.XYStepAreaChartTests.setUp(XYStepAreaChartTests.java:96)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testDrawWithNullInfo(org.jfree.chart.junit.ScatterPlotTests): Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+	at org.jfree.chart.plot.XYPlot.getDataRange(XYPlot.java:4493)
+	at org.jfree.chart.axis.NumberAxis.autoAdjustRange(NumberAxis.java:434)
+	at org.jfree.chart.axis.NumberAxis.configure(NumberAxis.java:417)
+	at org.jfree.chart.axis.Axis.setPlot(Axis.java:1044)
+	at org.jfree.chart.plot.XYPlot.<init>(XYPlot.java:660)
+	at org.jfree.chart.ChartFactory.createScatterPlot(ChartFactory.java:1490)
+	at org.jfree.chart.junit.ScatterPlotTests.createChart(ScatterPlotTests.java:181)
+	at org.jfree.chart.junit.ScatterPlotTests.setUp(ScatterPlotTests.java:98)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testSetSeriesToolTipGenerator(org.jfree.chart.junit.ScatterPlotTests): Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+	at org.jfree.chart.plot.XYPlot.getDataRange(XYPlot.java:4493)
+	at org.jfree.chart.axis.NumberAxis.autoAdjustRange(NumberAxis.java:434)
+	at org.jfree.chart.axis.NumberAxis.configure(NumberAxis.java:417)
+	at org.jfree.chart.axis.Axis.setPlot(Axis.java:1044)
+	at org.jfree.chart.plot.XYPlot.<init>(XYPlot.java:660)
+	at org.jfree.chart.ChartFactory.createScatterPlot(ChartFactory.java:1490)
+	at org.jfree.chart.junit.ScatterPlotTests.createChart(ScatterPlotTests.java:181)
+	at org.jfree.chart.junit.ScatterPlotTests.setUp(ScatterPlotTests.java:98)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testReplaceDataset(org.jfree.chart.junit.ScatterPlotTests): Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+	at org.jfree.chart.plot.XYPlot.getDataRange(XYPlot.java:4493)
+	at org.jfree.chart.axis.NumberAxis.autoAdjustRange(NumberAxis.java:434)
+	at org.jfree.chart.axis.NumberAxis.configure(NumberAxis.java:417)
+	at org.jfree.chart.axis.Axis.setPlot(Axis.java:1044)
+	at org.jfree.chart.plot.XYPlot.<init>(XYPlot.java:660)
+	at org.jfree.chart.ChartFactory.createScatterPlot(ChartFactory.java:1490)
+	at org.jfree.chart.junit.ScatterPlotTests.createChart(ScatterPlotTests.java:181)
+	at org.jfree.chart.junit.ScatterPlotTests.setUp(ScatterPlotTests.java:98)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testDrawRangeGridlines(org.jfree.chart.plot.junit.XYPlotTests): Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+	at org.jfree.chart.plot.XYPlot.getDataRange(XYPlot.java:4493)
+	at org.jfree.chart.axis.NumberAxis.autoAdjustRange(NumberAxis.java:434)
+	at org.jfree.chart.axis.NumberAxis.configure(NumberAxis.java:417)
+	at org.jfree.chart.plot.XYPlot.configureDomainAxes(XYPlot.java:972)
+	at org.jfree.chart.plot.XYPlot.setRenderer(XYPlot.java:1644)
+	at org.jfree.chart.plot.XYPlot.setRenderer(XYPlot.java:1620)
+	at org.jfree.chart.plot.XYPlot.setRenderer(XYPlot.java:1607)
+	at org.jfree.chart.plot.junit.XYPlotTests.testDrawRangeGridlines(XYPlotTests.java:1056)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testDrawWithNullInfo(org.jfree.chart.junit.XYAreaChartTests): Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+	at org.jfree.chart.plot.XYPlot.getDataRange(XYPlot.java:4493)
+	at org.jfree.chart.axis.NumberAxis.autoAdjustRange(NumberAxis.java:434)
+	at org.jfree.chart.axis.NumberAxis.configure(NumberAxis.java:417)
+	at org.jfree.chart.axis.Axis.setPlot(Axis.java:1044)
+	at org.jfree.chart.plot.XYPlot.<init>(XYPlot.java:660)
+	at org.jfree.chart.ChartFactory.createXYAreaChart(ChartFactory.java:1619)
+	at org.jfree.chart.junit.XYAreaChartTests.createChart(XYAreaChartTests.java:178)
+	at org.jfree.chart.junit.XYAreaChartTests.setUp(XYAreaChartTests.java:96)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testSetSeriesToolTipGenerator(org.jfree.chart.junit.XYAreaChartTests): Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+	at org.jfree.chart.plot.XYPlot.getDataRange(XYPlot.java:4493)
+	at org.jfree.chart.axis.NumberAxis.autoAdjustRange(NumberAxis.java:434)
+	at org.jfree.chart.axis.NumberAxis.configure(NumberAxis.java:417)
+	at org.jfree.chart.axis.Axis.setPlot(Axis.java:1044)
+	at org.jfree.chart.plot.XYPlot.<init>(XYPlot.java:660)
+	at org.jfree.chart.ChartFactory.createXYAreaChart(ChartFactory.java:1619)
+	at org.jfree.chart.junit.XYAreaChartTests.createChart(XYAreaChartTests.java:178)
+	at org.jfree.chart.junit.XYAreaChartTests.setUp(XYAreaChartTests.java:96)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testReplaceDataset(org.jfree.chart.junit.XYAreaChartTests): Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()" because "r" is null
+	at org.jfree.chart.plot.XYPlot.getDataRange(XYPlot.java:4493)
+	at org.jfree.chart.axis.NumberAxis.autoAdjustRange(NumberAxis.java:434)
+	at org.jfree.chart.axis.NumberAxis.configure(NumberAxis.java:417)
+	at org.jfree.chart.axis.Axis.setPlot(Axis.java:1044)
+	at org.jfree.chart.plot.XYPlot.<init>(XYPlot.java:660)
+	at org.jfree.chart.ChartFactory.createXYAreaChart(ChartFactory.java:1619)
+	at org.jfree.chart.junit.XYAreaChartTests.createChart(XYAreaChartTests.java:178)
+	at org.jfree.chart.junit.XYAreaChartTests.setUp(XYAreaChartTests.java:96)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+
+
+

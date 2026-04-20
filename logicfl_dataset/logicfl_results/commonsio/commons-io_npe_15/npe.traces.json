@@ -1,0 +1,54 @@
+{"npe.traces": [{
+    "test.method": "testCopy_inputStreamToOutputStream_nullIn",
+    "traces": [
+        {
+            "is_target": true,
+            "method": "copyLarge",
+            "line": 1160,
+            "class": "org.apache.commons.io.IOUtils"
+        },
+        {
+            "is_target": true,
+            "method": "copy",
+            "line": 882,
+            "class": "org.apache.commons.io.IOUtils"
+        },
+        {
+            "is_target": true,
+            "method": "copyLarge",
+            "line": 1137,
+            "class": "org.apache.commons.io.IOUtils"
+        },
+        {
+            "is_target": true,
+            "method": "copy",
+            "line": 858,
+            "class": "org.apache.commons.io.IOUtils"
+        },
+        {
+            "is_target": true,
+            "method": "testCopy_inputStreamToOutputStream_nullIn",
+            "line": 101,
+            "class": "org.apache.commons.io.IOUtilsCopyTestCase"
+        },
+        {
+            "is_target": false,
+            "method": "invoke",
+            "line": 569,
+            "class": "java.lang.reflect.Method"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        }
+    ],
+    "test.class": "org.apache.commons.io.IOUtilsCopyTestCase"
+}]}

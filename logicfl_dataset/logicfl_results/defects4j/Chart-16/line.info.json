@@ -1,0 +1,266 @@
+{"classes": [
+    {
+        "probe_ranges": [
+            {
+                "endLine": 269,
+                "offset": 4,
+                "startLine": 265,
+                "orgLineEnd": 265,
+                "probedLineEnd": 269,
+                "orgLineStart": 265
+            },
+            {
+                "endLine": 384,
+                "offset": 9,
+                "startLine": 379,
+                "orgLineEnd": 375,
+                "probedLineEnd": 384,
+                "orgLineStart": 375
+            },
+            {
+                "endLine": 400,
+                "offset": 14,
+                "startLine": 395,
+                "orgLineEnd": 386,
+                "probedLineEnd": 400,
+                "orgLineStart": 386
+            },
+            {
+                "endLine": 434,
+                "offset": 19,
+                "startLine": 429,
+                "orgLineEnd": 415,
+                "probedLineEnd": 434,
+                "orgLineStart": 415
+            },
+            {
+                "endLine": 450,
+                "offset": 24,
+                "startLine": 445,
+                "orgLineEnd": 426,
+                "probedLineEnd": 450,
+                "orgLineStart": 426
+            },
+            {
+                "endLine": 507,
+                "offset": 28,
+                "startLine": 503,
+                "orgLineEnd": 479,
+                "probedLineEnd": 507,
+                "orgLineStart": 479
+            },
+            {
+                "endLine": 522,
+                "offset": 32,
+                "startLine": 518,
+                "orgLineEnd": 490,
+                "probedLineEnd": 522,
+                "orgLineStart": 490
+            }
+        ],
+        "classId": "default_interval_category_dataset_tests_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 129,
+                "offset": 4,
+                "startLine": 125,
+                "orgLineEnd": 127,
+                "probedLineEnd": 131,
+                "orgLineStart": 125
+            },
+            {
+                "endLine": 136,
+                "offset": 8,
+                "startLine": 132,
+                "orgLineEnd": 128,
+                "probedLineEnd": 136,
+                "orgLineStart": 128
+            },
+            {
+                "endLine": 140,
+                "offset": 11,
+                "startLine": 137,
+                "orgLineEnd": 129,
+                "probedLineEnd": 140,
+                "orgLineStart": 129
+            },
+            {
+                "endLine": 150,
+                "offset": 19,
+                "startLine": 142,
+                "orgLineEnd": 131,
+                "probedLineEnd": 150,
+                "orgLineStart": 131
+            },
+            {
+                "endLine": 155,
+                "offset": 22,
+                "startLine": 152,
+                "orgLineEnd": 133,
+                "probedLineEnd": 155,
+                "orgLineStart": 133
+            }
+        ],
+        "classId": "data_utilities_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 208,
+                "offset": 3,
+                "startLine": 205,
+                "orgLineEnd": 205,
+                "probedLineEnd": 208,
+                "orgLineStart": 205
+            },
+            {
+                "endLine": 213,
+                "offset": 6,
+                "startLine": 210,
+                "orgLineEnd": 207,
+                "probedLineEnd": 213,
+                "orgLineStart": 207
+            }
+        ],
+        "classId": "abstract_dataset_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 150,
+                "offset": 3,
+                "startLine": 147,
+                "orgLineEnd": 147,
+                "probedLineEnd": 150,
+                "orgLineStart": 147
+            },
+            {
+                "endLine": 154,
+                "offset": 6,
+                "startLine": 151,
+                "orgLineEnd": 148,
+                "probedLineEnd": 154,
+                "orgLineStart": 148
+            },
+            {
+                "endLine": 167,
+                "offset": 36,
+                "startLine": 156,
+                "orgLineEnd": 210,
+                "probedLineEnd": 246,
+                "orgLineStart": 150
+            },
+            {
+                "endLine": 175,
+                "offset": 22,
+                "startLine": 170,
+                "orgLineEnd": 153,
+                "probedLineEnd": 175,
+                "orgLineStart": 153
+            },
+            {
+                "endLine": 181,
+                "offset": 26,
+                "startLine": 177,
+                "orgLineEnd": 155,
+                "probedLineEnd": 181,
+                "orgLineStart": 155
+            },
+            {
+                "endLine": 188,
+                "offset": 32,
+                "startLine": 182,
+                "orgLineEnd": 162,
+                "probedLineEnd": 194,
+                "orgLineStart": 156
+            },
+            {
+                "endLine": 199,
+                "offset": 36,
+                "startLine": 195,
+                "orgLineEnd": 209,
+                "probedLineEnd": 245,
+                "orgLineStart": 163
+            },
+            {
+                "endLine": 280,
+                "offset": 39,
+                "startLine": 277,
+                "orgLineEnd": 241,
+                "probedLineEnd": 280,
+                "orgLineStart": 241
+            },
+            {
+                "endLine": 291,
+                "offset": 48,
+                "startLine": 282,
+                "orgLineEnd": 246,
+                "probedLineEnd": 294,
+                "orgLineStart": 243
+            },
+            {
+                "endLine": 624,
+                "offset": 51,
+                "startLine": 621,
+                "orgLineEnd": 573,
+                "probedLineEnd": 624,
+                "orgLineStart": 573
+            },
+            {
+                "endLine": 635,
+                "offset": 60,
+                "startLine": 626,
+                "orgLineEnd": 578,
+                "probedLineEnd": 638,
+                "orgLineStart": 575
+            },
+            {
+                "endLine": 692,
+                "offset": 64,
+                "startLine": 688,
+                "orgLineEnd": 628,
+                "probedLineEnd": 692,
+                "orgLineStart": 628
+            },
+            {
+                "endLine": 709,
+                "offset": 68,
+                "startLine": 705,
+                "orgLineEnd": 641,
+                "probedLineEnd": 709,
+                "orgLineStart": 641
+            },
+            {
+                "endLine": 762,
+                "offset": 72,
+                "startLine": 758,
+                "orgLineEnd": 690,
+                "probedLineEnd": 762,
+                "orgLineStart": 690
+            },
+            {
+                "endLine": 824,
+                "offset": 76,
+                "startLine": 820,
+                "orgLineEnd": 748,
+                "probedLineEnd": 824,
+                "orgLineStart": 748
+            }
+        ],
+        "classId": "default_interval_category_dataset_1"
+    },
+    {
+        "probe_ranges": [],
+        "classId": "dataset_group_1"
+    },
+    {
+        "probe_ranges": [],
+        "classId": "data_package_resources_1"
+    },
+    {
+        "probe_ranges": [],
+        "classId": "abstract_series_dataset_1"
+    }
+]}

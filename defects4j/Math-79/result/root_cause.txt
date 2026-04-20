@@ -1,0 +1,16 @@
+Fault Localization Results
+NPE at line(kmeans_plus_plus_clusterer_1, 91) / Null Expression - v_cluster_19[cluster]
+	 can be caused by 
+v_cluster_19[cluster] - line(kmeans_plus_plus_clusterer_1, 91).
+
+NPE at line(kmeans_plus_plus_clusterer_1, 91) / Null Expression - v_cluster_19[cluster]
+	 can be caused by 
+v_min_cluster_30[minCluster] - line(kmeans_plus_plus_clusterer_1, 162).
+
+NPE at line(kmeans_plus_plus_clusterer_1, 91) / Null Expression - v_cluster_19[cluster]
+	 can be caused by 
+kmeans_plus_plus_clusterer_1_literal1[null] - line(kmeans_plus_plus_clusterer_1, 154).
+
+NPE at line(kmeans_plus_plus_clusterer_1, 91) / Null Expression - v_cluster_19[cluster]
+	 can be caused by 
+kmeans_plus_plus_clusterer_1_expr6['getNearestCluster(clusters,p)'] - line(kmeans_plus_plus_clusterer_1, 90).

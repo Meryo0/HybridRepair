@@ -1,0 +1,338 @@
+{"npe.traces": [
+    {
+        "test.method": "testNullSafeBugSerialize",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getTypeAdapter",
+                "line": 112,
+                "class": "com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory"
+            },
+            {
+                "is_target": true,
+                "method": "create",
+                "line": 56,
+                "class": "com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory"
+            },
+            {
+                "is_target": true,
+                "method": "getDelegateAdapter",
+                "line": 805,
+                "class": "com.google.gson.Gson"
+            },
+            {
+                "is_target": true,
+                "method": "create",
+                "line": 70,
+                "class": "com.google.gson.regression.JsonAdapterNullSafeTest$Device$JsonAdapterFactory"
+            },
+            {
+                "is_target": true,
+                "method": "getTypeAdapter",
+                "line": 101,
+                "class": "com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory"
+            },
+            {
+                "is_target": true,
+                "method": "create",
+                "line": 56,
+                "class": "com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory"
+            },
+            {
+                "is_target": true,
+                "method": "getAdapter",
+                "line": 691,
+                "class": "com.google.gson.Gson"
+            },
+            {
+                "is_target": true,
+                "method": "toJson",
+                "line": 990,
+                "class": "com.google.gson.Gson"
+            },
+            {
+                "is_target": true,
+                "method": "toJson",
+                "line": 974,
+                "class": "com.google.gson.Gson"
+            },
+            {
+                "is_target": true,
+                "method": "toJson",
+                "line": 919,
+                "class": "com.google.gson.Gson"
+            },
+            {
+                "is_target": true,
+                "method": "toJson",
+                "line": 892,
+                "class": "com.google.gson.Gson"
+            },
+            {
+                "is_target": true,
+                "method": "testNullSafeBugSerialize",
+                "line": 35,
+                "class": "com.google.gson.regression.JsonAdapterNullSafeTest"
+            },
+            {
+                "is_target": false,
+                "method": "invoke0",
+                "line": -2,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 77,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 43,
+                "class": "jdk.internal.reflect.DelegatingMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 177,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 142,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "com.google.gson.regression.JsonAdapterNullSafeTest"
+    },
+    {
+        "test.method": "testNullSafeBugDeserialize",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getTypeAdapter",
+                "line": 112,
+                "class": "com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory"
+            },
+            {
+                "is_target": true,
+                "method": "create",
+                "line": 56,
+                "class": "com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory"
+            },
+            {
+                "is_target": true,
+                "method": "getDelegateAdapter",
+                "line": 805,
+                "class": "com.google.gson.Gson"
+            },
+            {
+                "is_target": true,
+                "method": "create",
+                "line": 70,
+                "class": "com.google.gson.regression.JsonAdapterNullSafeTest$Device$JsonAdapterFactory"
+            },
+            {
+                "is_target": true,
+                "method": "getTypeAdapter",
+                "line": 101,
+                "class": "com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory"
+            },
+            {
+                "is_target": true,
+                "method": "create",
+                "line": 56,
+                "class": "com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory"
+            },
+            {
+                "is_target": true,
+                "method": "getAdapter",
+                "line": 691,
+                "class": "com.google.gson.Gson"
+            },
+            {
+                "is_target": true,
+                "method": "fromJson",
+                "line": 1285,
+                "class": "com.google.gson.Gson"
+            },
+            {
+                "is_target": true,
+                "method": "fromJson",
+                "line": 1233,
+                "class": "com.google.gson.Gson"
+            },
+            {
+                "is_target": true,
+                "method": "fromJson",
+                "line": 1173,
+                "class": "com.google.gson.Gson"
+            },
+            {
+                "is_target": true,
+                "method": "fromJson",
+                "line": 1133,
+                "class": "com.google.gson.Gson"
+            },
+            {
+                "is_target": true,
+                "method": "testNullSafeBugDeserialize",
+                "line": 41,
+                "class": "com.google.gson.regression.JsonAdapterNullSafeTest"
+            },
+            {
+                "is_target": false,
+                "method": "invoke0",
+                "line": -2,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 77,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 43,
+                "class": "jdk.internal.reflect.DelegatingMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 177,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 142,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "com.google.gson.regression.JsonAdapterNullSafeTest"
+    }
+]}

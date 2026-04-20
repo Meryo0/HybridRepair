@@ -1,0 +1,21 @@
+@Test public void testNullCharset() throws IOException {
+  try (CharSequenceInputStream in=new CharSequenceInputStream("A",(Charset)null)){
+    IOUtils.toByteArray(in);
+    assertEquals(Charset.defaultCharset(),in.getCharsetEncoder().charset());
+  }
+ }
+
+
+
+Failures (1):
+  JUnit Jupiter:CharSequenceInputStreamTest:testNullCharset()
+    MethodSource [className = 'org.apache.commons.io.input.CharSequenceInputStreamTest', methodName = 'testNullCharset', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.nio.charset.Charset.newEncoder()" because "charset" is null
+       org.apache.commons.io.input.CharSequenceInputStream.<init>(CharSequenceInputStream.java:75)
+       org.apache.commons.io.input.CharSequenceInputStream.<init>(CharSequenceInputStream.java:62)
+       org.apache.commons.io.input.CharSequenceInputStreamTest.testNullCharset(CharSequenceInputStreamTest.java:79)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Store NPE traces to npe.traces.json
+NPE Stack Traces exported to npe.traces.json

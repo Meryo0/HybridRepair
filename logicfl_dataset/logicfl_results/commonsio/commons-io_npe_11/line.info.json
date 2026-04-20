@@ -1,0 +1,45 @@
+{"classes": [{
+    "probe_ranges": [
+        {
+            "endLine": 89,
+            "offset": 4,
+            "startLine": 85,
+            "orgLineEnd": 85,
+            "probedLineEnd": 89,
+            "orgLineStart": 85
+        },
+        {
+            "endLine": 103,
+            "offset": 9,
+            "startLine": 98,
+            "orgLineEnd": 94,
+            "probedLineEnd": 103,
+            "orgLineStart": 94
+        },
+        {
+            "endLine": 188,
+            "offset": 12,
+            "startLine": 185,
+            "orgLineEnd": 176,
+            "probedLineEnd": 188,
+            "orgLineStart": 176
+        },
+        {
+            "endLine": 192,
+            "offset": 15,
+            "startLine": 189,
+            "orgLineEnd": 177,
+            "probedLineEnd": 192,
+            "orgLineStart": 177
+        },
+        {
+            "endLine": 201,
+            "offset": 23,
+            "startLine": 193,
+            "orgLineEnd": 178,
+            "probedLineEnd": 201,
+            "orgLineStart": 178
+        }
+    ],
+    "classId": "reader_input_stream_1"
+}]}

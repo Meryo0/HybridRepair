@@ -1,0 +1,19 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.lang3.reflect.TypeUtils:805",
+            "code": "return Array.newInstance(rawComponentType, 0).getClass();",
+            "explanation": "The NullPointerException occurs when the `rawComponentType` is null. This can happen if the `getRawType` method returns null for the component type. The code should handle the case where `rawComponentType` is null before calling `Array.newInstance`."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.reflect.TypeUtils:801",
+            "code": "final Class<?> rawComponentType = getRawType(((GenericArrayType) type).getGenericComponentType(), assigningType);",
+            "explanation": "This line retrieves the raw component type. If `getRawType` returns null, the subsequent call to `Array.newInstance` will throw a NullPointerException. The code should check if `rawComponentType` is null and handle it appropriately."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.reflect.TypeUtils:810",
+            "code": "return null;",
+            "explanation": "When the type is a WildcardType, the method returns null. This can lead to a NullPointerException in the calling code if not handled properly. The code should ensure that null values are handled correctly in the context where `getRawType` is called."
+        }
+    ]
+}

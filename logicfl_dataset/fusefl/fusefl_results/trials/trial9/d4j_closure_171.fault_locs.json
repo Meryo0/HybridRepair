@@ -1,0 +1,44 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "com.google.javascript.jscomp.TypedScopeCreator:551",
+            "code": "Var i=globalScope.getVar(\"I\");",
+            "explanation": "The test is failing because `globalScope.getVar(\"I\")` is returning null, which leads to a NullPointerException when `getType()` is called on it. This indicates that the variable `I` is not being correctly added to the global scope, or it is being removed or not initialized properly."
+        },
+        {
+            "faultyLine": "com.google.javascript.jscomp.TypedScopeCreator:552",
+            "code": "assertEquals(\"function (this:I): ?\",i.getType().toString());",
+            "explanation": "This line is attempting to call `getType()` on a null object, which is causing the NullPointerException. The root cause is likely related to the previous line where `globalScope.getVar(\"I\")` returns null."
+        },
+        {
+            "faultyLine": "com.google.javascript.jscomp.TypedScopeCreator:555",
+            "code": "ObjectType iPrototype=(ObjectType)((ObjectType)i.getType()).getPropertyType(\"prototype\");",
+            "explanation": "This line is also dependent on `i` not being null. Since `i` is null, this line will also fail with a NullPointerException. The issue is again related to `globalScope.getVar(\"I\")` returning null."
+        },
+        {
+            "faultyLine": "com.google.javascript.jscomp.TypedScopeCreator:556",
+            "code": "assertEquals(\"I.prototype\",iPrototype.toString());",
+            "explanation": "This line will fail if `iPrototype` is null, which will be the case if `i` is null. The root cause is the same as above."
+        },
+        {
+            "faultyLine": "com.google.javascript.jscomp.TypedScopeCreator:557",
+            "code": "assertTrue(iPrototype.isFunctionPrototypeType());",
+            "explanation": "This line will fail if `iPrototype` is null, which will be the case if `i` is null. The root cause is the same as above."
+        },
+        {
+            "faultyLine": "com.google.javascript.jscomp.TypedScopeCreator:558",
+            "code": "assertEquals(\"number\",iPrototype.getPropertyType(\"bar\").toString());",
+            "explanation": "This line will fail if `iPrototype` is null, which will be the case if `i` is null. The root cause is the same as above."
+        },
+        {
+            "faultyLine": "com.google.javascript.jscomp.TypedScopeCreator:559",
+            "code": "assertEquals(\"function (this:I): undefined\",iPrototype.getPropertyType(\"baz\").toString());",
+            "explanation": "This line will fail if `iPrototype` is null, which will be the case if `i` is null. The root cause is the same as above."
+        },
+        {
+            "faultyLine": "com.google.javascript.jscomp.TypedScopeCreator:560",
+            "code": "assertEquals(iPrototype,globalScope.getVar(\"I.prototype\").getType());",
+            "explanation": "This line will fail if `globalScope.getVar(\"I.prototype\")` is null, which will be the case if `I` is not correctly added to the global scope. The root cause is the same as above."
+        }
+    ]
+}

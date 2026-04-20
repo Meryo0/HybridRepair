@@ -1,0 +1,16 @@
+diff -U 5 -r ./defects4j/JacksonDatabind-107/buggy/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/TypeDeserializerBase.java ./defects4j/JacksonDatabind-107/fixed/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/TypeDeserializerBase.java
+--- ./defects4j/JacksonDatabind-107/buggy/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/TypeDeserializerBase.java	2024-05-19 19:44:51.530510268 +0900
++++ ./defects4j/JacksonDatabind-107/fixed/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/TypeDeserializerBase.java	2024-05-19 19:44:51.586511407 +0900
+@@ -160,11 +160,11 @@
+                 if (deser == null) {
+                     // 10-May-2016, tatu: We may get some help...
+                     JavaType actual = _handleUnknownTypeId(ctxt, typeId);
+                     if (actual == null) { // what should this be taken to mean?
+                         // 17-Jan-2019, tatu: As per [databind#2221], better NOT return `null` but...
+-                        return null;
++                        return NullifyingDeserializer.instance;
+                     }
+                     // ... would this actually work?
+                     deser = ctxt.findContextualValueDeserializer(actual, _property);
+                 }
+             } else {

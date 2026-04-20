@@ -1,0 +1,4 @@
+Fault Localization Results
+NPE at line(argument_matching_tool_1, 48) / Null Expression - p_arg_318[arg]
+	 can be caused by 
+p_arg_318[arg] - line(argument_matching_tool_1, 48).

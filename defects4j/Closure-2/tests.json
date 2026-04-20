@@ -1,0 +1,15 @@
+{
+ "buggy.hash": "",
+ "fixed_hash": "d1cfe67977d8f3aaa85ec20c262171da394d5977",
+ "passed.classes": [],
+ "failed.classes": [
+  "com.google.javascript.jscomp.TypeCheckTest"
+ ],
+ "failed.tests": [
+  {
+   "class": "com.google.javascript.jscomp.TypeCheckTest",
+   "name": "testBadInterfaceExtendsNonExistentInterfaces",
+   "message": ""
+  }
+ ]
+}

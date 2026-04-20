@@ -1,0 +1,15 @@
+{
+ "buggy.hash": "",
+ "fixed_hash": "d7b5d5b28a6dd7ff198f02e1ee82160220135a74",
+ "passed.classes": [],
+ "failed.classes": [
+  "org.jsoup.safety.CleanerTest"
+ ],
+ "failed.tests": [
+  {
+   "class": "org.jsoup.safety.CleanerTest",
+   "name": "handlesFramesets",
+   "message": ""
+  }
+ ]
+}

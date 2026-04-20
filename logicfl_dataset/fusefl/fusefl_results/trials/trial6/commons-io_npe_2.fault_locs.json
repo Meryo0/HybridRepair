@@ -1,0 +1,19 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.IOCase:192",
+            "code": "final int endIndex = str.length() - search.length();",
+            "explanation": "This line attempts to access the length of the 'str' and 'search' variables without checking if they are null. This can lead to a NullPointerException if either 'str' or 'search' is null. The test results indicate that null values are being passed to the 'checkIndexOf' method, causing the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.IOCase:217",
+            "code": "return str.regionMatches(!sensitive, strStartIndex, search, 0, search.length());",
+            "explanation": "This line calls 'search.length()' without checking if 'search' is null. If 'search' is null, this will result in a NullPointerException. The test cases show that null values are being passed, which is causing the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.IOCase:193",
+            "code": "if (endIndex >= strStartIndex) {",
+            "explanation": "This line is part of the logic that uses 'endIndex', which is calculated using 'str.length()' and 'search.length()'. If either 'str' or 'search' is null, the calculation of 'endIndex' will throw a NullPointerException. This indicates that null checks are missing before this calculation."
+        }
+    ]
+}

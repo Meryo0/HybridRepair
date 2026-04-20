@@ -1,0 +1,74 @@
+{"npe.traces": [
+    {
+        "test.method": "test_checkIndexOf_functionality",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "checkIndexOf",
+                "line": 192,
+                "class": "org.apache.commons.io.IOCase"
+            },
+            {
+                "is_target": true,
+                "method": "test_checkIndexOf_functionality",
+                "line": 205,
+                "class": "org.apache.commons.io.IOCaseTest"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            }
+        ],
+        "test.class": "org.apache.commons.io.IOCaseTest"
+    },
+    {
+        "test.method": "test_checkIndexOf_case",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "checkIndexOf",
+                "line": 192,
+                "class": "org.apache.commons.io.IOCase"
+            },
+            {
+                "is_target": true,
+                "method": "test_checkIndexOf_case",
+                "line": 155,
+                "class": "org.apache.commons.io.IOCaseTest"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            }
+        ],
+        "test.class": "org.apache.commons.io.IOCaseTest"
+    }
+]}

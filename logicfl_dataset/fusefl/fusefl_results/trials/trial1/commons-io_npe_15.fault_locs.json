@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.IOUtils:1160",
+            "code": "while (EOF != (n = input.read(buffer))) {",
+            "explanation": "The NullPointerException occurs because the method attempts to read from a null input stream. The input stream should be checked for null before attempting to read from it."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.IOUtils:1158",
+            "code": "long count = 0;",
+            "explanation": "Although this line itself is not faulty, it is part of the method where the null input stream is not handled properly. The method should include a null check for the input stream before this line."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.IOUtils:1137",
+            "code": "return copy(input, output, DEFAULT_BUFFER_SIZE);",
+            "explanation": "This line calls the copy method which eventually leads to the NullPointerException. The copy method should handle null input streams gracefully."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.IOUtils:882",
+            "code": "return copyLarge(input, output, new byte[bufferSize]);",
+            "explanation": "This line calls the copyLarge method which eventually leads to the NullPointerException. The copyLarge method should handle null input streams gracefully."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.IOUtils:858",
+            "code": "final long count = copyLarge(input, output);",
+            "explanation": "This line calls the copyLarge method which eventually leads to the NullPointerException. The copyLarge method should handle null input streams gracefully."
+        }
+    ]
+}

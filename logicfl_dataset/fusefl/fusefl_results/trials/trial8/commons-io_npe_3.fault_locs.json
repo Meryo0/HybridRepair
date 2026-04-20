@@ -1,0 +1,39 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.IOCase:174",
+            "code": "Objects.requireNonNull(str2, \"str2\");",
+            "explanation": "The test `test_checkEquals_functionality` indicates a NullPointerException at this line. The method `checkEquals` should handle null values gracefully. The null check should be performed before calling `Objects.requireNonNull`."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.NameFileFilter:166",
+            "code": "return acceptBaseName(file.getName());",
+            "explanation": "The test `testNameFilter` indicates a NullPointerException at this line. The method `accept` should handle null values for the `file` parameter. A null check should be added before accessing `file.getName()`."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.EmptyFileFilter:107",
+            "code": "if (file.isDirectory()) {",
+            "explanation": "The test `testEmpty` indicates a NullPointerException at this line. The method `accept` should handle null values for the `file` parameter. A null check should be added before accessing `file.isDirectory()`."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.FileFileFilter:100",
+            "code": "return file.isFile();",
+            "explanation": "The test `testFiles` indicates a NullPointerException at this line. The method `accept` should handle null values for the `file` parameter. A null check should be added before accessing `file.isFile()`."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.CanReadFileFilter:95",
+            "code": "return file.canRead();",
+            "explanation": "The test `testCanRead` indicates a NullPointerException at this line. The method `accept` should handle null values for the `file` parameter. A null check should be added before accessing `file.canRead()`."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.CanWriteFileFilter:83",
+            "code": "return file.canWrite();",
+            "explanation": "The test `testCanWrite` indicates a NullPointerException at this line. The method `accept` should handle null values for the `file` parameter. A null check should be added before accessing `file.canWrite()`."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.HiddenFileFilter:117",
+            "code": "return get(() -> toFileVisitResult(Files.isHidden(file)));",
+            "explanation": "The test `testHidden` indicates a NullPointerException at this line. The method `accept` should handle null values for the `file` parameter. A null check should be added before accessing `Files.isHidden(file)`."
+        }
+    ]
+}

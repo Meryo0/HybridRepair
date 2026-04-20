@@ -1,0 +1,24 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.lang3.builder.ReflectionToStringBuilder:535",
+            "code": "super(Objects.requireNonNull(object, \"obj\"), style, buffer);",
+            "explanation": "This line throws a NullPointerException when the object is null. The test case `testConstructorWithNullObject` fails because the constructor does not handle null objects gracefully. The `Objects.requireNonNull` method is called without checking if the object is null, leading to the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.builder.ReflectionToStringBuilder:560",
+            "code": "super(Objects.requireNonNull(object, \"obj\"), style, buffer);",
+            "explanation": "Similar to line 535, this line also throws a NullPointerException when the object is null. The test case `testReflectionNull` fails because the method does not handle null objects gracefully. The `Objects.requireNonNull` method is called without checking if the object is null, leading to the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.builder.ReflectionToStringBuilder:156",
+            "code": "return toString(object, null, false, false, null);",
+            "explanation": "This line calls the `toString` method with the object, which eventually leads to the constructor that throws a NullPointerException if the object is null. The method should handle the null case explicitly before calling the constructor."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.builder.ReflectionToStringBuilder:386",
+            "code": "return new ReflectionToStringBuilder(object, style, null, reflectUpToClass, outputTransients, outputStatics);",
+            "explanation": "This line creates a new instance of `ReflectionToStringBuilder` with the object, which eventually leads to the constructor that throws a NullPointerException if the object is null. The method should handle the null case explicitly before creating the new instance."
+        }
+    ]
+}

@@ -1,0 +1,401 @@
+{"classes": [
+    {
+        "probe_ranges": [
+            {
+                "endLine": 56,
+                "offset": 3,
+                "startLine": 53,
+                "orgLineEnd": 53,
+                "probedLineEnd": 56,
+                "orgLineStart": 53
+            },
+            {
+                "endLine": 95,
+                "offset": 7,
+                "startLine": 91,
+                "orgLineEnd": 90,
+                "probedLineEnd": 97,
+                "orgLineStart": 88
+            },
+            {
+                "endLine": 102,
+                "offset": 11,
+                "startLine": 98,
+                "orgLineEnd": 93,
+                "probedLineEnd": 104,
+                "orgLineStart": 91
+            },
+            {
+                "endLine": 112,
+                "offset": 27,
+                "startLine": 105,
+                "orgLineEnd": 97,
+                "probedLineEnd": 124,
+                "orgLineStart": 94
+            },
+            {
+                "endLine": 116,
+                "offset": 21,
+                "startLine": 113,
+                "orgLineEnd": 95,
+                "probedLineEnd": 116,
+                "orgLineStart": 95
+            },
+            {
+                "endLine": 123,
+                "offset": 27,
+                "startLine": 117,
+                "orgLineEnd": 96,
+                "probedLineEnd": 123,
+                "orgLineStart": 96
+            }
+        ],
+        "classId": "mutable_object_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 191,
+                "offset": 4,
+                "startLine": 187,
+                "orgLineEnd": 187,
+                "probedLineEnd": 191,
+                "orgLineStart": 187
+            },
+            {
+                "endLine": 1588,
+                "offset": 7,
+                "startLine": 1585,
+                "orgLineEnd": 1581,
+                "probedLineEnd": 1588,
+                "orgLineStart": 1581
+            },
+            {
+                "endLine": 1611,
+                "offset": 10,
+                "startLine": 1608,
+                "orgLineEnd": 1601,
+                "probedLineEnd": 1611,
+                "orgLineStart": 1601
+            },
+            {
+                "endLine": 1632,
+                "offset": 13,
+                "startLine": 1629,
+                "orgLineEnd": 1619,
+                "probedLineEnd": 1632,
+                "orgLineStart": 1619
+            },
+            {
+                "endLine": 1653,
+                "offset": 16,
+                "startLine": 1650,
+                "orgLineEnd": 1637,
+                "probedLineEnd": 1653,
+                "orgLineStart": 1637
+            },
+            {
+                "endLine": 1716,
+                "offset": 20,
+                "startLine": 1712,
+                "orgLineEnd": 1698,
+                "probedLineEnd": 1718,
+                "orgLineStart": 1696
+            },
+            {
+                "endLine": 1722,
+                "offset": 23,
+                "startLine": 1719,
+                "orgLineEnd": 1699,
+                "probedLineEnd": 1722,
+                "orgLineStart": 1699
+            },
+            {
+                "endLine": 1747,
+                "offset": 27,
+                "startLine": 1743,
+                "orgLineEnd": 1722,
+                "probedLineEnd": 1749,
+                "orgLineStart": 1720
+            },
+            {
+                "endLine": 1753,
+                "offset": 30,
+                "startLine": 1750,
+                "orgLineEnd": 1723,
+                "probedLineEnd": 1753,
+                "orgLineStart": 1723
+            },
+            {
+                "endLine": 1802,
+                "offset": 34,
+                "startLine": 1798,
+                "orgLineEnd": 1770,
+                "probedLineEnd": 1804,
+                "orgLineStart": 1768
+            },
+            {
+                "endLine": 1808,
+                "offset": 37,
+                "startLine": 1805,
+                "orgLineEnd": 1771,
+                "probedLineEnd": 1808,
+                "orgLineStart": 1771
+            },
+            {
+                "endLine": 1833,
+                "offset": 41,
+                "startLine": 1829,
+                "orgLineEnd": 1794,
+                "probedLineEnd": 1835,
+                "orgLineStart": 1792
+            },
+            {
+                "endLine": 1839,
+                "offset": 44,
+                "startLine": 1836,
+                "orgLineEnd": 1795,
+                "probedLineEnd": 1839,
+                "orgLineStart": 1795
+            },
+            {
+                "endLine": 1864,
+                "offset": 48,
+                "startLine": 1860,
+                "orgLineEnd": 1818,
+                "probedLineEnd": 1866,
+                "orgLineStart": 1816
+            },
+            {
+                "endLine": 1870,
+                "offset": 51,
+                "startLine": 1867,
+                "orgLineEnd": 1819,
+                "probedLineEnd": 1870,
+                "orgLineStart": 1819
+            },
+            {
+                "endLine": 1895,
+                "offset": 55,
+                "startLine": 1891,
+                "orgLineEnd": 1842,
+                "probedLineEnd": 1897,
+                "orgLineStart": 1840
+            },
+            {
+                "endLine": 1901,
+                "offset": 58,
+                "startLine": 1898,
+                "orgLineEnd": 1843,
+                "probedLineEnd": 1901,
+                "orgLineStart": 1843
+            },
+            {
+                "endLine": 1926,
+                "offset": 61,
+                "startLine": 1923,
+                "orgLineEnd": 1865,
+                "probedLineEnd": 1926,
+                "orgLineStart": 1865
+            },
+            {
+                "endLine": 1973,
+                "offset": 65,
+                "startLine": 1969,
+                "orgLineEnd": 1910,
+                "probedLineEnd": 1975,
+                "orgLineStart": 1908
+            },
+            {
+                "endLine": 1979,
+                "offset": 68,
+                "startLine": 1976,
+                "orgLineEnd": 1911,
+                "probedLineEnd": 1979,
+                "orgLineStart": 1911
+            },
+            {
+                "endLine": 2010,
+                "offset": 72,
+                "startLine": 2006,
+                "orgLineEnd": 1940,
+                "probedLineEnd": 2012,
+                "orgLineStart": 1938
+            },
+            {
+                "endLine": 2016,
+                "offset": 75,
+                "startLine": 2013,
+                "orgLineEnd": 1941,
+                "probedLineEnd": 2016,
+                "orgLineStart": 1941
+            },
+            {
+                "endLine": 2047,
+                "offset": 79,
+                "startLine": 2043,
+                "orgLineEnd": 1970,
+                "probedLineEnd": 2049,
+                "orgLineStart": 1968
+            },
+            {
+                "endLine": 2053,
+                "offset": 82,
+                "startLine": 2050,
+                "orgLineEnd": 1971,
+                "probedLineEnd": 2053,
+                "orgLineStart": 1971
+            },
+            {
+                "endLine": 2084,
+                "offset": 86,
+                "startLine": 2080,
+                "orgLineEnd": 2000,
+                "probedLineEnd": 2086,
+                "orgLineStart": 1998
+            },
+            {
+                "endLine": 2090,
+                "offset": 89,
+                "startLine": 2087,
+                "orgLineEnd": 2001,
+                "probedLineEnd": 2090,
+                "orgLineStart": 2001
+            },
+            {
+                "endLine": 2121,
+                "offset": 93,
+                "startLine": 2117,
+                "orgLineEnd": 2030,
+                "probedLineEnd": 2123,
+                "orgLineStart": 2028
+            },
+            {
+                "endLine": 2127,
+                "offset": 96,
+                "startLine": 2124,
+                "orgLineEnd": 2031,
+                "probedLineEnd": 2127,
+                "orgLineStart": 2031
+            },
+            {
+                "endLine": 2249,
+                "offset": 99,
+                "startLine": 2246,
+                "orgLineEnd": 2150,
+                "probedLineEnd": 2249,
+                "orgLineStart": 2150
+            },
+            {
+                "endLine": 2253,
+                "offset": 102,
+                "startLine": 2250,
+                "orgLineEnd": 2151,
+                "probedLineEnd": 2253,
+                "orgLineStart": 2151
+            },
+            {
+                "endLine": 2287,
+                "offset": 106,
+                "startLine": 2283,
+                "orgLineEnd": 2181,
+                "probedLineEnd": 2287,
+                "orgLineStart": 2181
+            },
+            {
+                "endLine": 2293,
+                "offset": 110,
+                "startLine": 2289,
+                "orgLineEnd": 2183,
+                "probedLineEnd": 2293,
+                "orgLineStart": 2183
+            }
+        ],
+        "classId": "to_string_style_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 57,
+                "offset": 4,
+                "startLine": 53,
+                "orgLineEnd": 53,
+                "probedLineEnd": 57,
+                "orgLineStart": 53
+            },
+            {
+                "endLine": 62,
+                "offset": 8,
+                "startLine": 58,
+                "orgLineEnd": 54,
+                "probedLineEnd": 62,
+                "orgLineStart": 54
+            },
+            {
+                "endLine": 67,
+                "offset": 12,
+                "startLine": 63,
+                "orgLineEnd": 55,
+                "probedLineEnd": 67,
+                "orgLineStart": 55
+            },
+            {
+                "endLine": 72,
+                "offset": 16,
+                "startLine": 68,
+                "orgLineEnd": 56,
+                "probedLineEnd": 72,
+                "orgLineStart": 56
+            },
+            {
+                "endLine": 77,
+                "offset": 20,
+                "startLine": 73,
+                "orgLineEnd": 57,
+                "probedLineEnd": 77,
+                "orgLineStart": 57
+            },
+            {
+                "endLine": 82,
+                "offset": 24,
+                "startLine": 78,
+                "orgLineEnd": 58,
+                "probedLineEnd": 82,
+                "orgLineStart": 58
+            },
+            {
+                "endLine": 87,
+                "offset": 28,
+                "startLine": 83,
+                "orgLineEnd": 59,
+                "probedLineEnd": 87,
+                "orgLineStart": 59
+            },
+            {
+                "endLine": 92,
+                "offset": 32,
+                "startLine": 88,
+                "orgLineEnd": 60,
+                "probedLineEnd": 92,
+                "orgLineStart": 60
+            },
+            {
+                "endLine": 97,
+                "offset": 36,
+                "startLine": 93,
+                "orgLineEnd": 61,
+                "probedLineEnd": 97,
+                "orgLineStart": 61
+            },
+            {
+                "endLine": 102,
+                "offset": 40,
+                "startLine": 98,
+                "orgLineEnd": 62,
+                "probedLineEnd": 102,
+                "orgLineStart": 62
+            }
+        ],
+        "classId": "mutable_object_test_1"
+    }
+]}

@@ -1,0 +1,1033 @@
+Faulty Code:
+com.fasterxml.jackson.databind.AnnotationIntrospector:41 `public abstract class AnnotationIntrospector`
+com.fasterxml.jackson.databind.AnnotationIntrospector:54 `    public static class ReferenceProperty`
+com.fasterxml.jackson.databind.AnnotationIntrospector:1336 `        return annotated.getAnnotation(annoClass);`
+com.fasterxml.jackson.databind.BeanDescription:36 `    protected BeanDescription(JavaType type) {`
+com.fasterxml.jackson.databind.BeanDescription:37 `        _type = type;`
+com.fasterxml.jackson.databind.BeanDescription:38 `    }`
+com.fasterxml.jackson.databind.DatabindContext:26 `public abstract class DatabindContext`
+com.fasterxml.jackson.databind.DeserializationConfig:103 `        super(base, str, mixins, rootNames, configOverrides);`
+com.fasterxml.jackson.databind.DeserializationConfig:104 `        _deserFeatures = collectFeatureDefaults(DeserializationFeature.class);`
+com.fasterxml.jackson.databind.DeserializationConfig:105 `        _nodeFactory = JsonNodeFactory.instance;`
+com.fasterxml.jackson.databind.DeserializationConfig:106 `        _problemHandlers = null;`
+com.fasterxml.jackson.databind.DeserializationConfig:107 `        _parserFeatures = 0;`
+com.fasterxml.jackson.databind.DeserializationConfig:108 `        _parserFeaturesToChange = 0;`
+com.fasterxml.jackson.databind.DeserializationConfig:109 `        _formatReadFeatures = 0;`
+com.fasterxml.jackson.databind.DeserializationConfig:110 `        _formatReadFeaturesToChange = 0;`
+com.fasterxml.jackson.databind.DeserializationConfig:111 `    }`
+com.fasterxml.jackson.databind.DeserializationContext:155 `    {`
+com.fasterxml.jackson.databind.DeserializationContext:156 `        if (df == null) {`
+com.fasterxml.jackson.databind.DeserializationContext:159 `        _factory = df;`
+com.fasterxml.jackson.databind.DeserializationContext:160 `        if (cache == null) {`
+com.fasterxml.jackson.databind.DeserializationContext:161 `            cache = new DeserializerCache();`
+com.fasterxml.jackson.databind.DeserializationContext:163 `        _cache = cache;`
+com.fasterxml.jackson.databind.DeserializationContext:164 `        _featureFlags = 0;`
+com.fasterxml.jackson.databind.DeserializationContext:165 `        _config = null;`
+com.fasterxml.jackson.databind.DeserializationContext:166 `        _injectableValues = null;`
+com.fasterxml.jackson.databind.DeserializationContext:167 `        _view = null;`
+com.fasterxml.jackson.databind.DeserializationContext:168 `        _attributes = null;`
+com.fasterxml.jackson.databind.DeserializationContext:169 `    }`
+com.fasterxml.jackson.databind.DeserializationFeature:20 `public enum DeserializationFeature implements ConfigFeature`
+com.fasterxml.jackson.databind.DeserializationFeature:42 `    USE_BIG_DECIMAL_FOR_FLOATS(false),`
+com.fasterxml.jackson.databind.DeserializationFeature:60 `    USE_BIG_INTEGER_FOR_INTS(false),`
+com.fasterxml.jackson.databind.DeserializationFeature:83 `    USE_LONG_FOR_INTS(false),`
+com.fasterxml.jackson.databind.DeserializationFeature:94 `    USE_JAVA_ARRAY_FOR_JSON_ARRAY(false),`
+com.fasterxml.jackson.databind.DeserializationFeature:116 `    FAIL_ON_UNKNOWN_PROPERTIES(true),`
+com.fasterxml.jackson.databind.DeserializationFeature:127 `    FAIL_ON_NULL_FOR_PRIMITIVES(false),`
+com.fasterxml.jackson.databind.DeserializationFeature:141 `    FAIL_ON_NUMBERS_FOR_ENUMS(false),`
+com.fasterxml.jackson.databind.DeserializationFeature:154 `    FAIL_ON_INVALID_SUBTYPE(true),`
+com.fasterxml.jackson.databind.DeserializationFeature:171 `    FAIL_ON_READING_DUP_TREE_KEY(false),`
+com.fasterxml.jackson.databind.DeserializationFeature:182 `    FAIL_ON_IGNORED_PROPERTIES(false),`
+com.fasterxml.jackson.databind.DeserializationFeature:198 `    FAIL_ON_UNRESOLVED_OBJECT_IDS(true),`
+com.fasterxml.jackson.databind.DeserializationFeature:219 `    FAIL_ON_MISSING_CREATOR_PROPERTIES(false),`
+com.fasterxml.jackson.databind.DeserializationFeature:232 `    FAIL_ON_NULL_CREATOR_PROPERTIES(false),`
+com.fasterxml.jackson.databind.DeserializationFeature:246 `    FAIL_ON_MISSING_EXTERNAL_TYPE_ID_PROPERTY(true),`
+com.fasterxml.jackson.databind.DeserializationFeature:263 `    WRAP_EXCEPTIONS(true),`
+com.fasterxml.jackson.databind.DeserializationFeature:282 `    ACCEPT_SINGLE_VALUE_AS_ARRAY(false),`
+com.fasterxml.jackson.databind.DeserializationFeature:293 `    UNWRAP_SINGLE_VALUE_ARRAYS(false),`
+com.fasterxml.jackson.databind.DeserializationFeature:305 `    UNWRAP_ROOT_VALUE(false),`
+com.fasterxml.jackson.databind.DeserializationFeature:329 `    ACCEPT_EMPTY_STRING_AS_NULL_OBJECT(false),`
+com.fasterxml.jackson.databind.DeserializationFeature:345 `    ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT(false),`
+com.fasterxml.jackson.databind.DeserializationFeature:359 `    ACCEPT_FLOAT_AS_INT(true),`
+com.fasterxml.jackson.databind.DeserializationFeature:372 `    READ_ENUMS_USING_TO_STRING(false),`
+com.fasterxml.jackson.databind.DeserializationFeature:387 `    READ_UNKNOWN_ENUM_VALUES_AS_NULL(false),`
+com.fasterxml.jackson.databind.DeserializationFeature:399 `    READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE(false),`
+com.fasterxml.jackson.databind.DeserializationFeature:416 `    READ_DATE_TIMESTAMPS_AS_NANOSECONDS(true),`
+com.fasterxml.jackson.databind.DeserializationFeature:440 `    ADJUST_DATES_TO_CONTEXT_TIME_ZONE(true),`
+com.fasterxml.jackson.databind.DeserializationFeature:462 `    EAGER_DESERIALIZER_FETCH(true)`
+com.fasterxml.jackson.databind.DeserializationFeature:469 `    private DeserializationFeature(boolean defaultState) {`
+com.fasterxml.jackson.databind.DeserializationFeature:470 `        _defaultState = defaultState;`
+com.fasterxml.jackson.databind.DeserializationFeature:471 `        _mask = (1 << ordinal());`
+com.fasterxml.jackson.databind.DeserializationFeature:472 `    }`
+com.fasterxml.jackson.databind.DeserializationFeature:475 `    public boolean enabledByDefault() { return _defaultState; }`
+com.fasterxml.jackson.databind.DeserializationFeature:478 `    public int getMask() { return _mask; }`
+com.fasterxml.jackson.databind.JavaType:78 `    {`
+com.fasterxml.jackson.databind.JavaType:79 `        _class = raw;`
+com.fasterxml.jackson.databind.JavaType:80 `        _hash = raw.getName().hashCode() + additionalHash;`
+com.fasterxml.jackson.databind.JavaType:81 `        _valueHandler = valueHandler;`
+com.fasterxml.jackson.databind.JavaType:82 `        _typeHandler = typeHandler;`
+com.fasterxml.jackson.databind.JavaType:83 `        _asStatic = asStatic;`
+com.fasterxml.jackson.databind.JavaType:84 `    }`
+com.fasterxml.jackson.databind.JavaType:227 `    public final Class<?> getRawClass() { return _class; }`
+com.fasterxml.jackson.databind.JavaType:482 `        return (_typeHandler != null) || (_valueHandler != null);`
+com.fasterxml.jackson.databind.JsonSerializer:53 `public abstract class JsonSerializer<T>`
+com.fasterxml.jackson.databind.JsonSerializer:292 `    public abstract static class None`
+com.fasterxml.jackson.databind.MapperFeature:17 `public enum MapperFeature implements ConfigFeature`
+com.fasterxml.jackson.databind.MapperFeature:33 `    USE_ANNOTATIONS(true),`
+com.fasterxml.jackson.databind.MapperFeature:51 `    USE_GETTERS_AS_SETTERS(true),`
+com.fasterxml.jackson.databind.MapperFeature:64 `    PROPAGATE_TRANSIENT_MARKER(false),`
+com.fasterxml.jackson.databind.MapperFeature:86 `    AUTO_DETECT_CREATORS(true),`
+com.fasterxml.jackson.databind.MapperFeature:101 `    AUTO_DETECT_FIELDS(true),`
+com.fasterxml.jackson.databind.MapperFeature:120 `    AUTO_DETECT_GETTERS(true),`
+com.fasterxml.jackson.databind.MapperFeature:136 `    AUTO_DETECT_IS_GETTERS(true),`
+com.fasterxml.jackson.databind.MapperFeature:152 `    AUTO_DETECT_SETTERS(true),`
+com.fasterxml.jackson.databind.MapperFeature:163 `    REQUIRE_SETTERS_FOR_GETTERS(false),`
+com.fasterxml.jackson.databind.MapperFeature:177 `    ALLOW_FINAL_FIELDS_AS_MUTATORS(true),`
+com.fasterxml.jackson.databind.MapperFeature:195 `    INFER_PROPERTY_MUTATORS(true),`
+com.fasterxml.jackson.databind.MapperFeature:214 `    INFER_CREATOR_FROM_CONSTRUCTOR_PROPERTIES(true),`
+com.fasterxml.jackson.databind.MapperFeature:245 `    CAN_OVERRIDE_ACCESS_MODIFIERS(true),`
+com.fasterxml.jackson.databind.MapperFeature:264 `    OVERRIDE_PUBLIC_ACCESS_MODIFIERS(true),`
+com.fasterxml.jackson.databind.MapperFeature:287 `    USE_STATIC_TYPING(false),`
+com.fasterxml.jackson.databind.MapperFeature:311 `    DEFAULT_VIEW_INCLUSION(true),`
+com.fasterxml.jackson.databind.MapperFeature:334 `    SORT_PROPERTIES_ALPHABETICALLY(false),`
+com.fasterxml.jackson.databind.MapperFeature:356 `    ACCEPT_CASE_INSENSITIVE_PROPERTIES(false),`
+com.fasterxml.jackson.databind.MapperFeature:369 `    ACCEPT_CASE_INSENSITIVE_ENUMS(false),`
+com.fasterxml.jackson.databind.MapperFeature:383 `    USE_WRAPPER_NAME_AS_PROPERTY_NAME(false),`
+com.fasterxml.jackson.databind.MapperFeature:399 `    USE_STD_BEAN_NAMING(false),`
+com.fasterxml.jackson.databind.MapperFeature:410 `    ALLOW_EXPLICIT_PROPERTY_RENAMING(false),`
+com.fasterxml.jackson.databind.MapperFeature:438 `    ALLOW_COERCION_OF_SCALARS(true),`
+com.fasterxml.jackson.databind.MapperFeature:463 `    IGNORE_DUPLICATE_MODULE_REGISTRATIONS(true),`
+com.fasterxml.jackson.databind.MapperFeature:477 `    IGNORE_MERGE_FOR_UNMERGEABLE(true)`
+com.fasterxml.jackson.databind.MapperFeature:484 `    private MapperFeature(boolean defaultState) {`
+com.fasterxml.jackson.databind.MapperFeature:485 `        _defaultState = defaultState;`
+com.fasterxml.jackson.databind.MapperFeature:486 `        _mask = (1 << ordinal());`
+com.fasterxml.jackson.databind.MapperFeature:487 `    }`
+com.fasterxml.jackson.databind.MapperFeature:490 `    public boolean enabledByDefault() { return _defaultState; }`
+com.fasterxml.jackson.databind.MapperFeature:493 `    public int getMask() { return _mask; }`
+com.fasterxml.jackson.databind.MappingJsonFactory:29 `        super(mapper);`
+com.fasterxml.jackson.databind.MappingJsonFactory:30 `        if (mapper == null) {`
+com.fasterxml.jackson.databind.MappingJsonFactory:33 `    }`
+com.fasterxml.jackson.databind.ObjectMapper:286 `    private final static JavaType JSON_NODE_TYPE =`
+com.fasterxml.jackson.databind.ObjectMapper:291 `    protected final static AnnotationIntrospector DEFAULT_ANNOTATION_INTROSPECTOR = new JacksonAnnotationIntrospector();`
+com.fasterxml.jackson.databind.ObjectMapper:297 `    protected final static BaseSettings DEFAULT_BASE = new BaseSettings(`
+com.fasterxml.jackson.databind.ObjectMapper:458 `    final protected ConcurrentHashMap<JavaType, JsonDeserializer<Object>> _rootDeserializers`
+com.fasterxml.jackson.databind.ObjectMapper:480 `        this(null, null, null);`
+com.fasterxml.jackson.databind.ObjectMapper:481 `    }`
+com.fasterxml.jackson.databind.ObjectMapper:541 `    {`
+com.fasterxml.jackson.databind.ObjectMapper:548 `        if (jf == null) {`
+com.fasterxml.jackson.databind.ObjectMapper:549 `            _jsonFactory = new MappingJsonFactory(this);`
+com.fasterxml.jackson.databind.ObjectMapper:556 `        _subtypeResolver = new StdSubtypeResolver();`
+com.fasterxml.jackson.databind.ObjectMapper:557 `        RootNameLookup rootNames = new RootNameLookup();`
+com.fasterxml.jackson.databind.ObjectMapper:559 `        _typeFactory = TypeFactory.defaultInstance();`
+com.fasterxml.jackson.databind.ObjectMapper:561 `        SimpleMixInResolver mixins = new SimpleMixInResolver(null);`
+com.fasterxml.jackson.databind.ObjectMapper:562 `        _mixIns = mixins;`
+com.fasterxml.jackson.databind.ObjectMapper:563 `        BaseSettings base = DEFAULT_BASE.withClassIntrospector(defaultClassIntrospector());`
+com.fasterxml.jackson.databind.ObjectMapper:564 `        _configOverrides = new ConfigOverrides();`
+com.fasterxml.jackson.databind.ObjectMapper:565 `        _serializationConfig = new SerializationConfig(base,`
+com.fasterxml.jackson.databind.ObjectMapper:567 `        _deserializationConfig = new DeserializationConfig(base,`
+com.fasterxml.jackson.databind.ObjectMapper:571 `        final boolean needOrder = _jsonFactory.requiresPropertyOrdering();`
+com.fasterxml.jackson.databind.ObjectMapper:572 `        if (needOrder ^ _serializationConfig.isEnabled(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY)) {`
+com.fasterxml.jackson.databind.ObjectMapper:576 `        _serializerProvider = (sp == null) ? new DefaultSerializerProvider.Impl() : sp;`
+com.fasterxml.jackson.databind.ObjectMapper:577 `        _deserializationContext = (dc == null) ?`
+com.fasterxml.jackson.databind.ObjectMapper:581 `        _serializerFactory = BeanSerializerFactory.instance;`
+com.fasterxml.jackson.databind.ObjectMapper:582 `    }`
+com.fasterxml.jackson.databind.ObjectMapper:591 `        return new BasicClassIntrospector();`
+com.fasterxml.jackson.databind.ObjectMapper:1042 `        return _deserializationConfig;`
+com.fasterxml.jackson.databind.ObjectMapper:1663 `        return _typeFactory.constructType(t);`
+com.fasterxml.jackson.databind.PropertyName:29 `    public final static PropertyName USE_DEFAULT = new PropertyName(_USE_DEFAULT, null);`
+com.fasterxml.jackson.databind.PropertyName:36 `    public final static PropertyName NO_NAME = new PropertyName(new String(_NO_NAME), null);`
+com.fasterxml.jackson.databind.PropertyName:61 `        this(simpleName, null);`
+com.fasterxml.jackson.databind.PropertyName:62 `    }`
+com.fasterxml.jackson.databind.PropertyName:65 `    {`
+com.fasterxml.jackson.databind.PropertyName:66 `        _simpleName = ClassUtil.nonNullString(simpleName);`
+com.fasterxml.jackson.databind.PropertyName:67 `        _namespace = namespace;`
+com.fasterxml.jackson.databind.PropertyName:68 `    }`
+com.fasterxml.jackson.databind.SerializationConfig:37 `    protected final static PrettyPrinter DEFAULT_PRETTY_PRINTER = new DefaultPrettyPrinter();`
+com.fasterxml.jackson.databind.SerializationConfig:114 `        super(base, str, mixins, rootNames, configOverrides);`
+com.fasterxml.jackson.databind.SerializationConfig:115 `        _serFeatures = collectFeatureDefaults(SerializationFeature.class);`
+com.fasterxml.jackson.databind.SerializationConfig:116 `        _filterProvider = null;`
+com.fasterxml.jackson.databind.SerializationConfig:117 `        _defaultPrettyPrinter = DEFAULT_PRETTY_PRINTER;`
+com.fasterxml.jackson.databind.SerializationConfig:118 `        _generatorFeatures = 0;`
+com.fasterxml.jackson.databind.SerializationConfig:119 `        _generatorFeaturesToChange = 0;`
+com.fasterxml.jackson.databind.SerializationConfig:120 `        _formatWriteFeatures = 0;`
+com.fasterxml.jackson.databind.SerializationConfig:121 `        _formatWriteFeaturesToChange = 0;`
+com.fasterxml.jackson.databind.SerializationConfig:122 `    }`
+com.fasterxml.jackson.databind.SerializationFeature:16 `public enum SerializationFeature implements ConfigFeature`
+com.fasterxml.jackson.databind.SerializationFeature:35 `    WRAP_ROOT_VALUE(false),`
+com.fasterxml.jackson.databind.SerializationFeature:49 `    INDENT_OUTPUT(false),`
+com.fasterxml.jackson.databind.SerializationFeature:72 `    FAIL_ON_EMPTY_BEANS(true),`
+com.fasterxml.jackson.databind.SerializationFeature:84 `    FAIL_ON_SELF_REFERENCES(true),`
+com.fasterxml.jackson.databind.SerializationFeature:102 `    WRAP_EXCEPTIONS(true),`
+com.fasterxml.jackson.databind.SerializationFeature:116 `    FAIL_ON_UNWRAPPED_TYPE_IDENTIFIERS(true),`
+com.fasterxml.jackson.databind.SerializationFeature:140 `    CLOSE_CLOSEABLE(false),`
+com.fasterxml.jackson.databind.SerializationFeature:154 `    FLUSH_AFTER_WRITE_VALUE(true),`
+com.fasterxml.jackson.databind.SerializationFeature:184 `    WRITE_DATES_AS_TIMESTAMPS(true),`
+com.fasterxml.jackson.databind.SerializationFeature:197 `    WRITE_DATE_KEYS_AS_TIMESTAMPS(false),`
+com.fasterxml.jackson.databind.SerializationFeature:218 `    WRITE_DATES_WITH_ZONE_ID(false), `
+com.fasterxml.jackson.databind.SerializationFeature:235 `    WRITE_DURATIONS_AS_TIMESTAMPS(true),`
+com.fasterxml.jackson.databind.SerializationFeature:245 `    WRITE_CHAR_ARRAYS_AS_JSON_ARRAYS(false),`
+com.fasterxml.jackson.databind.SerializationFeature:257 `    WRITE_ENUMS_USING_TO_STRING(false),`
+com.fasterxml.jackson.databind.SerializationFeature:272 `    WRITE_ENUMS_USING_INDEX(false),`
+com.fasterxml.jackson.databind.SerializationFeature:288 `    @Deprecated // since 2.9`
+com.fasterxml.jackson.databind.SerializationFeature:309 `    @Deprecated // since 2.8`
+com.fasterxml.jackson.databind.SerializationFeature:333 `    WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED(false),`
+com.fasterxml.jackson.databind.SerializationFeature:351 `    @Deprecated // since 2.5`
+com.fasterxml.jackson.databind.SerializationFeature:369 `    WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS(true),`
+com.fasterxml.jackson.databind.SerializationFeature:379 `    ORDER_MAP_ENTRIES_BY_KEYS(false),`
+com.fasterxml.jackson.databind.SerializationFeature:401 `    EAGER_SERIALIZER_FETCH(true),`
+com.fasterxml.jackson.databind.SerializationFeature:422 `    USE_EQUALITY_FOR_OBJECT_ID(false)`
+com.fasterxml.jackson.databind.SerializationFeature:428 `    private SerializationFeature(boolean defaultState) {`
+com.fasterxml.jackson.databind.SerializationFeature:429 `        _defaultState = defaultState;`
+com.fasterxml.jackson.databind.SerializationFeature:430 `        _mask = (1 << ordinal());`
+com.fasterxml.jackson.databind.SerializationFeature:431 `    }`
+com.fasterxml.jackson.databind.SerializationFeature:434 `    public boolean enabledByDefault() { return _defaultState; }`
+com.fasterxml.jackson.databind.SerializationFeature:438 `    public int getMask() { return _mask; }`
+com.fasterxml.jackson.databind.SerializerProvider:56 `    public final static JsonSerializer<Object> DEFAULT_NULL_KEY_SERIALIZER =`
+com.fasterxml.jackson.databind.SerializerProvider:68 `    protected final static JsonSerializer<Object> DEFAULT_UNKNOWN_SERIALIZER = new UnknownSerializer();`
+com.fasterxml.jackson.databind.SerializerProvider:130 `    protected JsonSerializer<Object> _unknownTypeSerializer = DEFAULT_UNKNOWN_SERIALIZER;`
+com.fasterxml.jackson.databind.SerializerProvider:143 `    protected JsonSerializer<Object> _nullValueSerializer = NullSerializer.instance;`
+com.fasterxml.jackson.databind.SerializerProvider:152 `    protected JsonSerializer<Object> _nullKeySerializer = DEFAULT_NULL_KEY_SERIALIZER;`
+com.fasterxml.jackson.databind.SerializerProvider:192 `    {`
+com.fasterxml.jackson.databind.SerializerProvider:193 `        _config = null;`
+com.fasterxml.jackson.databind.SerializerProvider:194 `        _serializerFactory = null;`
+com.fasterxml.jackson.databind.SerializerProvider:195 `        _serializerCache = new SerializerCache();`
+com.fasterxml.jackson.databind.SerializerProvider:197 `        _knownSerializers = null;`
+com.fasterxml.jackson.databind.SerializerProvider:199 `        _serializationView = null;`
+com.fasterxml.jackson.databind.SerializerProvider:200 `        _attributes = null;`
+com.fasterxml.jackson.databind.SerializerProvider:203 `        _stdNullValueSerializer = true;`
+com.fasterxml.jackson.databind.SerializerProvider:204 `    }`
+com.fasterxml.jackson.databind.cfg.BaseSettings:29 `    private static final TimeZone DEFAULT_TIMEZONE = `
+com.fasterxml.jackson.databind.cfg.BaseSettings:137 `    {`
+com.fasterxml.jackson.databind.cfg.BaseSettings:138 `        _classIntrospector = ci;`
+com.fasterxml.jackson.databind.cfg.BaseSettings:139 `        _annotationIntrospector = ai;`
+com.fasterxml.jackson.databind.cfg.BaseSettings:140 `        _propertyNamingStrategy = pns;`
+com.fasterxml.jackson.databind.cfg.BaseSettings:141 `        _typeFactory = tf;`
+com.fasterxml.jackson.databind.cfg.BaseSettings:142 `        _typeResolverBuilder = typer;`
+com.fasterxml.jackson.databind.cfg.BaseSettings:143 `        _dateFormat = dateFormat;`
+com.fasterxml.jackson.databind.cfg.BaseSettings:144 `        _handlerInstantiator = hi;`
+com.fasterxml.jackson.databind.cfg.BaseSettings:145 `        _locale = locale;`
+com.fasterxml.jackson.databind.cfg.BaseSettings:146 `        _timeZone = tz;`
+com.fasterxml.jackson.databind.cfg.BaseSettings:147 `        _defaultBase64 = defaultBase64;`
+com.fasterxml.jackson.databind.cfg.BaseSettings:148 `    }`
+com.fasterxml.jackson.databind.cfg.BaseSettings:157 `        if (_classIntrospector == ci) {`
+com.fasterxml.jackson.databind.cfg.BaseSettings:160 `        return new BaseSettings(ci, _annotationIntrospector, _propertyNamingStrategy, _typeFactory,`
+com.fasterxml.jackson.databind.cfg.BaseSettings:296 `        return _annotationIntrospector;`
+com.fasterxml.jackson.databind.cfg.BaseSettings:304 `        return _typeFactory;`
+com.fasterxml.jackson.databind.cfg.ConfigOverride:64 `    protected ConfigOverride() { }`
+com.fasterxml.jackson.databind.cfg.ConfigOverride:79 `        return Empty.INSTANCE;`
+com.fasterxml.jackson.databind.cfg.ConfigOverride:113 `        final static Empty INSTANCE = new Empty();`
+com.fasterxml.jackson.databind.cfg.ConfigOverrides:53 `        this(null,`
+com.fasterxml.jackson.databind.cfg.ConfigOverrides:60 `    }`
+com.fasterxml.jackson.databind.cfg.ConfigOverrides:66 `            Boolean defMergeable) {`
+com.fasterxml.jackson.databind.cfg.ConfigOverrides:67 `        _overrides = overrides;`
+com.fasterxml.jackson.databind.cfg.ConfigOverrides:68 `        _defaultInclusion = defIncl;`
+com.fasterxml.jackson.databind.cfg.ConfigOverrides:69 `        _defaultSetterInfo = defSetter;`
+com.fasterxml.jackson.databind.cfg.ConfigOverrides:70 `        _visibilityChecker = defVisibility;`
+com.fasterxml.jackson.databind.cfg.ConfigOverrides:71 `        _defaultMergeable = defMergeable;`
+com.fasterxml.jackson.databind.cfg.ConfigOverrides:72 `    }`
+com.fasterxml.jackson.databind.cfg.ContextAttributes:21 `public abstract class ContextAttributes`
+com.fasterxml.jackson.databind.cfg.ContextAttributes:24 `        return Impl.getEmpty();`
+com.fasterxml.jackson.databind.cfg.ContextAttributes:62 `    public static class Impl extends ContextAttributes`
+com.fasterxml.jackson.databind.cfg.ContextAttributes:67 `        protected final static Impl EMPTY = new Impl(Collections.emptyMap());`
+com.fasterxml.jackson.databind.cfg.ContextAttributes:69 `        protected final static Object NULL_SURROGATE = new Object();`
+com.fasterxml.jackson.databind.cfg.ContextAttributes:92 `        protected Impl(Map<?,?> shared) {`
+com.fasterxml.jackson.databind.cfg.ContextAttributes:93 `            _shared = shared;`
+com.fasterxml.jackson.databind.cfg.ContextAttributes:94 `            _nonShared = null;`
+com.fasterxml.jackson.databind.cfg.ContextAttributes:95 `        }`
+com.fasterxml.jackson.databind.cfg.ContextAttributes:103 `            return EMPTY;`
+com.fasterxml.jackson.databind.cfg.DeserializerFactoryConfig:17 `    protected final static Deserializers[] NO_DESERIALIZERS = new Deserializers[0];`
+com.fasterxml.jackson.databind.cfg.DeserializerFactoryConfig:18 `    protected final static BeanDeserializerModifier[] NO_MODIFIERS = new BeanDeserializerModifier[0];`
+com.fasterxml.jackson.databind.cfg.DeserializerFactoryConfig:19 `    protected final static AbstractTypeResolver[] NO_ABSTRACT_TYPE_RESOLVERS = new AbstractTypeResolver[0];`
+com.fasterxml.jackson.databind.cfg.DeserializerFactoryConfig:20 `    protected final static ValueInstantiators[] NO_VALUE_INSTANTIATORS = new ValueInstantiators[0];`
+com.fasterxml.jackson.databind.cfg.DeserializerFactoryConfig:28 `    protected final static KeyDeserializers[] DEFAULT_KEY_DESERIALIZERS = new KeyDeserializers[] {`
+com.fasterxml.jackson.databind.cfg.DeserializerFactoryConfig:71 `        this(null, null, null, null, null);`
+com.fasterxml.jackson.databind.cfg.DeserializerFactoryConfig:72 `    }`
+com.fasterxml.jackson.databind.cfg.DeserializerFactoryConfig:83 `    {`
+com.fasterxml.jackson.databind.cfg.DeserializerFactoryConfig:84 `        _additionalDeserializers = (allAdditionalDeserializers == null) ?`
+com.fasterxml.jackson.databind.cfg.DeserializerFactoryConfig:86 `        _additionalKeyDeserializers = (allAdditionalKeyDeserializers == null) ?`
+com.fasterxml.jackson.databind.cfg.DeserializerFactoryConfig:88 `        _modifiers = (modifiers == null) ? NO_MODIFIERS : modifiers;`
+com.fasterxml.jackson.databind.cfg.DeserializerFactoryConfig:89 `        _abstractTypeResolvers = (atr == null) ? NO_ABSTRACT_TYPE_RESOLVERS : atr;`
+com.fasterxml.jackson.databind.cfg.DeserializerFactoryConfig:90 `        _valueInstantiators = (vi == null) ? NO_VALUE_INSTANTIATORS : vi;`
+com.fasterxml.jackson.databind.cfg.DeserializerFactoryConfig:91 `    }`
+com.fasterxml.jackson.databind.cfg.MapperConfig:45 `    protected final static JsonInclude.Value EMPTY_INCLUDE = JsonInclude.Value.empty();`
+com.fasterxml.jackson.databind.cfg.MapperConfig:50 `    protected final static JsonFormat.Value EMPTY_FORMAT = JsonFormat.Value.empty();`
+com.fasterxml.jackson.databind.cfg.MapperConfig:69 `    {`
+com.fasterxml.jackson.databind.cfg.MapperConfig:70 `        _base = base;`
+com.fasterxml.jackson.databind.cfg.MapperConfig:71 `        _mapperFeatures = mapperFeatures;`
+com.fasterxml.jackson.databind.cfg.MapperConfig:72 `    }`
+com.fasterxml.jackson.databind.cfg.MapperConfig:98 `        int flags = 0;`
+com.fasterxml.jackson.databind.cfg.MapperConfig:99 `        for (F value : enumClass.getEnumConstants()) {`
+com.fasterxml.jackson.databind.cfg.MapperConfig:100 `            if (value.enabledByDefault()) {`
+com.fasterxml.jackson.databind.cfg.MapperConfig:101 `                flags |= value.getMask();`
+com.fasterxml.jackson.databind.cfg.MapperConfig:104 `        return flags;`
+com.fasterxml.jackson.databind.cfg.MapperConfig:141 `        return (_mapperFeatures & f.getMask()) != 0;`
+com.fasterxml.jackson.databind.cfg.MapperConfig:161 `        return isEnabled(MapperFeature.USE_ANNOTATIONS);`
+com.fasterxml.jackson.databind.cfg.MapperConfig:236 `        if (isEnabled(MapperFeature.USE_ANNOTATIONS)) {`
+com.fasterxml.jackson.databind.cfg.MapperConfig:237 `            return _base.getAnnotationIntrospector();`
+com.fasterxml.jackson.databind.cfg.MapperConfig:269 `        return _base.getTypeFactory();`
+com.fasterxml.jackson.databind.cfg.MapperConfigBase:30 `    protected final static ConfigOverride EMPTY_OVERRIDE = ConfigOverride.empty();`
+com.fasterxml.jackson.databind.cfg.MapperConfigBase:32 `    private final static int DEFAULT_MAPPER_FEATURES = collectFeatureDefaults(MapperFeature.class);`
+com.fasterxml.jackson.databind.cfg.MapperConfigBase:37 `    private final static int AUTO_DETECT_MASK =`
+com.fasterxml.jackson.databind.cfg.MapperConfigBase:125 `        super(base, DEFAULT_MAPPER_FEATURES);`
+com.fasterxml.jackson.databind.cfg.MapperConfigBase:126 `        _mixIns = mixins;`
+com.fasterxml.jackson.databind.cfg.MapperConfigBase:127 `        _subtypeResolver = str;`
+com.fasterxml.jackson.databind.cfg.MapperConfigBase:128 `        _rootNames = rootNames;`
+com.fasterxml.jackson.databind.cfg.MapperConfigBase:129 `        _rootName = null;`
+com.fasterxml.jackson.databind.cfg.MapperConfigBase:130 `        _view = null;`
+com.fasterxml.jackson.databind.cfg.MapperConfigBase:132 `        _attributes = ContextAttributes.getEmpty();`
+com.fasterxml.jackson.databind.cfg.MapperConfigBase:133 `        _configOverrides = configOverrides;`
+com.fasterxml.jackson.databind.cfg.MapperConfigBase:134 `    }`
+com.fasterxml.jackson.databind.cfg.MapperConfigBase:743 `        return _mixIns.findMixInClassFor(cls);`
+com.fasterxml.jackson.databind.cfg.SerializerFactoryConfig:19 `    protected final static Serializers[] NO_SERIALIZERS = new Serializers[0];`
+com.fasterxml.jackson.databind.cfg.SerializerFactoryConfig:21 `    protected final static BeanSerializerModifier[] NO_MODIFIERS = new BeanSerializerModifier[0];`
+com.fasterxml.jackson.databind.cfg.SerializerFactoryConfig:42 `        this(null, null, null);`
+com.fasterxml.jackson.databind.cfg.SerializerFactoryConfig:43 `    }`
+com.fasterxml.jackson.databind.cfg.SerializerFactoryConfig:48 `    {`
+com.fasterxml.jackson.databind.cfg.SerializerFactoryConfig:49 `        _additionalSerializers = (allAdditionalSerializers == null) ?`
+com.fasterxml.jackson.databind.cfg.SerializerFactoryConfig:51 `        _additionalKeySerializers = (allAdditionalKeySerializers == null) ?`
+com.fasterxml.jackson.databind.cfg.SerializerFactoryConfig:53 `        _modifiers = (modifiers == null) ? NO_MODIFIERS : modifiers;`
+com.fasterxml.jackson.databind.cfg.SerializerFactoryConfig:54 `    }`
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory:39 `    private final static Class<?> CLASS_OBJECT = Object.class;`
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory:40 `    private final static Class<?> CLASS_STRING = String.class;`
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory:41 `    private final static Class<?> CLASS_CHAR_BUFFER = CharSequence.class;`
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory:42 `    private final static Class<?> CLASS_ITERABLE = Iterable.class;`
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory:43 `    private final static Class<?> CLASS_MAP_ENTRY = Map.Entry.class;`
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory:49 `    protected final static PropertyName UNWRAPPED_CREATOR_PARAM_NAME = new PropertyName("@JsonUnwrapped");`
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory:56 `    final static HashMap<String, Class<? extends Map>> _mapFallbacks =`
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory:59 `        _mapFallbacks.put(Map.class.getName(), LinkedHashMap.class);`
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory:60 `        _mapFallbacks.put(ConcurrentMap.class.getName(), ConcurrentHashMap.class);`
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory:61 `        _mapFallbacks.put(SortedMap.class.getName(), TreeMap.class);`
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory:63 `        _mapFallbacks.put(java.util.NavigableMap.class.getName(), TreeMap.class);`
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory:64 `        _mapFallbacks.put(java.util.concurrent.ConcurrentNavigableMap.class.getName(),`
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory:73 `    final static HashMap<String, Class<? extends Collection>> _collectionFallbacks =`
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory:76 `        _collectionFallbacks.put(Collection.class.getName(), ArrayList.class);`
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory:77 `        _collectionFallbacks.put(List.class.getName(), ArrayList.class);`
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory:78 `        _collectionFallbacks.put(Set.class.getName(), HashSet.class);`
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory:79 `        _collectionFallbacks.put(SortedSet.class.getName(), TreeSet.class);`
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory:80 `        _collectionFallbacks.put(Queue.class.getName(), LinkedList.class);`
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory:87 `        _collectionFallbacks.put("java.util.Deque", LinkedList.class);`
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory:88 `        _collectionFallbacks.put("java.util.NavigableSet", TreeSet.class);`
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory:89 `    }`
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory:109 `    protected BasicDeserializerFactory(DeserializerFactoryConfig config) {`
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory:110 `        _factoryConfig = config;`
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory:111 `    }`
+com.fasterxml.jackson.databind.deser.BeanDeserializerFactory:37 `    private final static Class<?>[] INIT_CAUSE_PARAMS = new Class<?>[] { Throwable.class };`
+com.fasterxml.jackson.databind.deser.BeanDeserializerFactory:47 `        Set<String> s = new HashSet<>();`
+com.fasterxml.jackson.databind.deser.BeanDeserializerFactory:50 `        s.add("org.apache.commons.collections.functors.InvokerTransformer");`
+com.fasterxml.jackson.databind.deser.BeanDeserializerFactory:51 `        s.add("org.apache.commons.collections.functors.InstantiateTransformer");`
+com.fasterxml.jackson.databind.deser.BeanDeserializerFactory:52 `        s.add("org.apache.commons.collections4.functors.InvokerTransformer");`
+com.fasterxml.jackson.databind.deser.BeanDeserializerFactory:53 `        s.add("org.apache.commons.collections4.functors.InstantiateTransformer");`
+com.fasterxml.jackson.databind.deser.BeanDeserializerFactory:54 `        s.add("org.codehaus.groovy.runtime.ConvertedClosure");`
+com.fasterxml.jackson.databind.deser.BeanDeserializerFactory:55 `        s.add("org.codehaus.groovy.runtime.MethodClosure");`
+com.fasterxml.jackson.databind.deser.BeanDeserializerFactory:56 `        s.add("org.springframework.beans.factory.ObjectFactory");`
+com.fasterxml.jackson.databind.deser.BeanDeserializerFactory:57 `        s.add("com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl");`
+com.fasterxml.jackson.databind.deser.BeanDeserializerFactory:58 `        s.add("org.apache.xalan.xsltc.trax.TemplatesImpl");`
+com.fasterxml.jackson.databind.deser.BeanDeserializerFactory:59 `        DEFAULT_NO_DESER_CLASS_NAMES = Collections.unmodifiableSet(s);`
+com.fasterxml.jackson.databind.deser.BeanDeserializerFactory:67 `    protected Set<String> _cfgIllegalClassNames = DEFAULT_NO_DESER_CLASS_NAMES;`
+com.fasterxml.jackson.databind.deser.BeanDeserializerFactory:79 `    public final static BeanDeserializerFactory instance = new BeanDeserializerFactory(`
+com.fasterxml.jackson.databind.deser.BeanDeserializerFactory:83 `        super(config);`
+com.fasterxml.jackson.databind.deser.BeanDeserializerFactory:84 `    }`
+com.fasterxml.jackson.databind.deser.DefaultDeserializationContext:44 `        super(df, cache);`
+com.fasterxml.jackson.databind.deser.DefaultDeserializationContext:45 `    }`
+com.fasterxml.jackson.databind.deser.DefaultDeserializationContext:318 `            super(df, null);`
+com.fasterxml.jackson.databind.deser.DefaultDeserializationContext:319 `        }`
+com.fasterxml.jackson.databind.deser.DeserializerCache:42 `    final protected ConcurrentHashMap<JavaType, JsonDeserializer<Object>> _cachedDeserializers`
+com.fasterxml.jackson.databind.deser.DeserializerCache:50 `    final protected HashMap<JavaType, JsonDeserializer<Object>> _incompleteDeserializers`
+com.fasterxml.jackson.databind.deser.DeserializerCache:59 `    public DeserializerCache() { }`
+com.fasterxml.jackson.databind.deser.DeserializerFactory:41 `public abstract class DeserializerFactory`
+com.fasterxml.jackson.databind.deser.DeserializerFactory:43 `    protected final static Deserializers[] NO_DESERIALIZERS = new Deserializers[0];`
+com.fasterxml.jackson.databind.deser.std.StdKeyDeserializers:28 `public class StdKeyDeserializers`
+com.fasterxml.jackson.databind.ext.Java7Support:17 `public abstract class Java7Support`
+com.fasterxml.jackson.databind.ext.Java7Support:22 `        Java7Support impl = null;`
+com.fasterxml.jackson.databind.ext.Java7Support:24 `            Class<?> cls = Class.forName("com.fasterxml.jackson.databind.ext.Java7SupportImpl");`
+com.fasterxml.jackson.databind.ext.Java7Support:25 `            impl = (Java7Support) ClassUtil.createInstance(cls, false);`
+com.fasterxml.jackson.databind.ext.Java7Support:30 `        }`
+com.fasterxml.jackson.databind.ext.Java7Support:31 `        IMPL = impl;`
+com.fasterxml.jackson.databind.ext.Java7Support:32 `    }`
+com.fasterxml.jackson.databind.ext.Java7Support:35 `        return IMPL;`
+com.fasterxml.jackson.databind.ext.Java7SupportImpl:22 `    public Java7SupportImpl() {`
+com.fasterxml.jackson.databind.ext.Java7SupportImpl:24 `        Class<?> cls = Transient.class;`
+com.fasterxml.jackson.databind.ext.Java7SupportImpl:25 `        cls = ConstructorProperties.class;`
+com.fasterxml.jackson.databind.ext.Java7SupportImpl:26 `        _bogus = cls;`
+com.fasterxml.jackson.databind.ext.Java7SupportImpl:27 `    }`
+com.fasterxml.jackson.databind.introspect.Annotated:17 `    protected Annotated() { }`
+com.fasterxml.jackson.databind.introspect.AnnotatedClass:125 `    {`
+com.fasterxml.jackson.databind.introspect.AnnotatedClass:126 `        _type = type;`
+com.fasterxml.jackson.databind.introspect.AnnotatedClass:127 `        _class = rawType;`
+com.fasterxml.jackson.databind.introspect.AnnotatedClass:128 `        _classAnnotations = classAnnotations;`
+com.fasterxml.jackson.databind.introspect.AnnotatedClass:129 `        _bindings = bindings;`
+com.fasterxml.jackson.databind.introspect.AnnotatedClass:130 `        _superTypes = superTypes;`
+com.fasterxml.jackson.databind.introspect.AnnotatedClass:131 `        _annotationIntrospector = aintr;`
+com.fasterxml.jackson.databind.introspect.AnnotatedClass:132 `        _typeFactory = tf;`
+com.fasterxml.jackson.databind.introspect.AnnotatedClass:133 `        _mixInResolver = mir;`
+com.fasterxml.jackson.databind.introspect.AnnotatedClass:134 `        _primaryMixIn = primaryMixIn;`
+com.fasterxml.jackson.databind.introspect.AnnotatedClass:135 `    }`
+com.fasterxml.jackson.databind.introspect.AnnotatedClass:206 `        return _classAnnotations.get(acls);`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:25 `    private final static Annotations NO_ANNOTATIONS = AnnotationCollector.emptyAnnotations();`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:47 `    AnnotatedClassResolver(MapperConfig<?> config, Class<?> cls, MixInResolver r) {`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:48 `        _config = config;`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:49 `        _type = null;`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:50 `        _class = cls;`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:51 `        _mixInResolver = r;`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:52 `        _bindings = TypeBindings.emptyBindings();`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:53 `        if (config == null) {`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:57 `            _intr = config.isAnnotationProcessingEnabled()`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:59 `            _primaryMixin = _config.findMixInClassFor(_class);`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:61 `    }`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:76 `        return resolveWithoutSuperTypes(config, forType, config);`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:82 `        return new AnnotatedClassResolver(config, forType, r).resolveWithoutSuperTypes();`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:90 `        Annotations noClassAnn = new AnnotationMap();`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:91 `        List<JavaType> superTypes = Collections.emptyList();`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:92 `        return new AnnotatedClass(null, raw, superTypes, null, noClassAnn,`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:105 `        List<JavaType> superTypes = Collections.<JavaType>emptyList();`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:106 `        Annotations classAnn = resolveClassAnnotations(superTypes);`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:107 `        return new AnnotatedClass(null, _class, superTypes, _primaryMixin, classAnn,`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:125 `        if (_intr == null) {`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:128 `        AnnotationCollector resolvedCA = AnnotationCollector.emptyCollector();`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:130 `        if (_primaryMixin != null) {`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:134 `        resolvedCA = _addAnnotationsIfNotPresent(resolvedCA,`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:138 `        for (JavaType type : superTypes) {`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:154 `        if (_mixInResolver != null) {`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:155 `            resolvedCA = _addClassMixIns(resolvedCA, Object.class,`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:158 `        return resolvedCA.asAnnotations();`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:164 `        if (mixin != null) {`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:177 `        return annotations;`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:183 `        if (anns != null) {`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:184 `            for (Annotation ann : anns) { // first: direct annotations`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:186 `                if (!c.isPresent(ann)) {`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:187 `                    c = c.addOrOverride(ann);`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:188 `                    if (_intr.isAnnotationBundle(ann)) {`
+com.fasterxml.jackson.databind.introspect.AnnotatedClassResolver:194 `        return c;`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:18 `    protected final static Annotations NO_ANNOTATIONS = new NoAnnotations();`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:25 `    protected AnnotationCollector(Object d) {`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:26 `        _data = d;`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:27 `    }`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:29 `    public static Annotations emptyAnnotations() { return NO_ANNOTATIONS; }`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:32 `        return EmptyCollector.instance;`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:64 `        public final static EmptyCollector instance = new EmptyCollector(null);`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:66 `        EmptyCollector(Object data) { super(data); }`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:70 `            return NO_ANNOTATIONS;`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:79 `        public boolean isPresent(Annotation ann) { return false; }`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:83 `            return new OneCollector(_data, ann.annotationType(), ann);`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:94 `            super(data);`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:95 `            _type = type;`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:96 `            _value = value;`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:97 `        }`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:101 `            return new OneAnnotation(_type, _value);`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:111 `            return ann.annotationType() == _type;`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:116 `            final Class<?> type = ann.annotationType();`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:118 `            if (_type == type) {`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:122 `            return new NCollector(_data, _type, _value, type, ann);`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:133 `            super(data);`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:134 `            _annotations = new HashMap<>();`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:135 `            _annotations.put(type1, value1);`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:136 `            _annotations.put(type2, value2);`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:137 `        }`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:141 `            if (_annotations.size() == 2) {`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:142 `                Iterator<Map.Entry<Class<?>,Annotation>> it = _annotations.entrySet().iterator();`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:143 `                Map.Entry<Class<?>,Annotation> en1 = it.next(), en2 = it.next();`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:144 `                return new TwoAnnotations(en1.getKey(), en1.getValue(),`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:188 `        NoAnnotations() { }`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:192 `            return null;`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:219 `        public OneAnnotation(Class<?> type, Annotation value) {`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:220 `            _type = type;`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:221 `            _value = value;`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:222 `        }`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:227 `            if (_type == cls) {`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:228 `                return (A) _value;`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:230 `            return null;`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:263 `                Class<?> type2, Annotation value2) {`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:264 `            _type1 = type1;`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:265 `            _value1 = value1;`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:266 `            _type2 = type2;`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:267 `            _value2 = value2;`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:268 `        }`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:273 `            if (_type1 == cls) {`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:274 `                return (A) _value1;`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:276 `            if (_type2 == cls) {`
+com.fasterxml.jackson.databind.introspect.AnnotationCollector:279 `            return null;`
+com.fasterxml.jackson.databind.introspect.AnnotationMap:18 `    public AnnotationMap() { }`
+com.fasterxml.jackson.databind.introspect.BasicBeanDescription:31 `    private final static Class<?>[] NO_VIEWS = new Class<?>[0];`
+com.fasterxml.jackson.databind.introspect.BasicBeanDescription:115 `        super(type);`
+com.fasterxml.jackson.databind.introspect.BasicBeanDescription:116 `        _propCollector = null;`
+com.fasterxml.jackson.databind.introspect.BasicBeanDescription:117 `        _config = config;`
+com.fasterxml.jackson.databind.introspect.BasicBeanDescription:119 `        if (_config == null) {`
+com.fasterxml.jackson.databind.introspect.BasicBeanDescription:120 `            _annotationIntrospector = null;`
+com.fasterxml.jackson.databind.introspect.BasicBeanDescription:124 `        _classInfo = classDef;`
+com.fasterxml.jackson.databind.introspect.BasicBeanDescription:125 `        _properties = props;`
+com.fasterxml.jackson.databind.introspect.BasicBeanDescription:126 `    }`
+com.fasterxml.jackson.databind.introspect.BasicBeanDescription:158 `        return new BasicBeanDescription(config, type,`
+com.fasterxml.jackson.databind.introspect.BasicClassIntrospector:32 `        STRING_DESC = BasicBeanDescription.forOtherUse(null, SimpleType.constructUnsafe(String.class),`
+com.fasterxml.jackson.databind.introspect.BasicClassIntrospector:37 `        BOOLEAN_DESC = BasicBeanDescription.forOtherUse(null, SimpleType.constructUnsafe(Boolean.TYPE),`
+com.fasterxml.jackson.databind.introspect.BasicClassIntrospector:42 `        INT_DESC = BasicBeanDescription.forOtherUse(null, SimpleType.constructUnsafe(Integer.TYPE),`
+com.fasterxml.jackson.databind.introspect.BasicClassIntrospector:47 `        LONG_DESC = BasicBeanDescription.forOtherUse(null, SimpleType.constructUnsafe(Long.TYPE),`
+com.fasterxml.jackson.databind.introspect.BasicClassIntrospector:49 `    }`
+com.fasterxml.jackson.databind.introspect.BasicClassIntrospector:65 `    public BasicClassIntrospector() {`
+com.fasterxml.jackson.databind.introspect.BasicClassIntrospector:67 `        _cachedFCA = new LRUMap<JavaType,BasicBeanDescription>(16, 64);`
+com.fasterxml.jackson.databind.introspect.BasicClassIntrospector:68 `    }`
+com.fasterxml.jackson.databind.introspect.ClassIntrospector:48 `    protected ClassIntrospector() { }`
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector:37 `    private final static Class<? extends Annotation>[] ANNOTATIONS_TO_INFER_SER = (Class<? extends Annotation>[])`
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector:50 `    private final static Class<? extends Annotation>[] ANNOTATIONS_TO_INFER_DESER = (Class<? extends Annotation>[])`
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector:66 `        Java7Support x = null;`
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector:68 `            x = Java7Support.instance();`
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector:69 `        } catch (Throwable t) { }`
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector:70 `        _java7Helper = x;`
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector:71 `    }`
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector:82 `    protected transient LRUMap<Class<?>,Boolean> _annotationsInside = new LRUMap<Class<?>,Boolean>(48, 48);`
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector:98 `    protected boolean _cfgConstructorPropertiesImpliesCreator = true;`
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector:106 `    public JacksonAnnotationIntrospector() { }`
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector:158 `        Class<?> type = ann.annotationType();`
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector:159 `        Boolean b = _annotationsInside.get(type);`
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector:160 `        if (b == null) {`
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector:161 `            b = type.getAnnotation(JacksonAnnotationsInside.class) != null;`
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector:162 `            _annotationsInside.putIfAbsent(type, b);`
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector:164 `        return b.booleanValue();`
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector:556 `        JsonSubTypes t = _findAnnotation(a, JsonSubTypes.class);`
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector:557 `        if (t == null) return null;`
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector:558 `        JsonSubTypes.Type[] types = t.value();`
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector:559 `        ArrayList<NamedType> result = new ArrayList<NamedType>(types.length);`
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector:560 `        for (JsonSubTypes.Type type : types) {`
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector:561 `            result.add(new NamedType(type.value(), type.name()));`
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector:563 `        return result;`
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector:569 `        JsonTypeName tn = _findAnnotation(ac, JsonTypeName.class);`
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector:570 `        return (tn == null) ? null : tn.value();`
+com.fasterxml.jackson.databind.introspect.SimpleMixInResolver:35 `    public SimpleMixInResolver(ClassIntrospector.MixInResolver overrides) {`
+com.fasterxml.jackson.databind.introspect.SimpleMixInResolver:36 `        _overrides = overrides;`
+com.fasterxml.jackson.databind.introspect.SimpleMixInResolver:37 `    }`
+com.fasterxml.jackson.databind.introspect.SimpleMixInResolver:92 `        Class<?> mixin = (_overrides == null) ? null : _overrides.findMixInClassFor(cls);`
+com.fasterxml.jackson.databind.introspect.SimpleMixInResolver:93 `        if (mixin == null && (_localMixIns != null)) {`
+com.fasterxml.jackson.databind.introspect.SimpleMixInResolver:96 `        return mixin;`
+com.fasterxml.jackson.databind.introspect.VisibilityChecker:164 `        protected final static Std DEFAULT = new Std(`
+com.fasterxml.jackson.databind.introspect.VisibilityChecker:178 `        public static Std defaultInstance() { return DEFAULT; }`
+com.fasterxml.jackson.databind.introspect.VisibilityChecker:201 `        {`
+com.fasterxml.jackson.databind.introspect.VisibilityChecker:202 `            _getterMinLevel = getter;`
+com.fasterxml.jackson.databind.introspect.VisibilityChecker:203 `            _isGetterMinLevel = isGetter;`
+com.fasterxml.jackson.databind.introspect.VisibilityChecker:204 `            _setterMinLevel = setter;`
+com.fasterxml.jackson.databind.introspect.VisibilityChecker:205 `            _creatorMinLevel = creator;`
+com.fasterxml.jackson.databind.introspect.VisibilityChecker:206 `            _fieldMinLevel = field;`
+com.fasterxml.jackson.databind.introspect.VisibilityChecker:207 `        }`
+com.fasterxml.jackson.databind.jsontype.NamedType:18 `    public NamedType(Class<?> c, String name) {`
+com.fasterxml.jackson.databind.jsontype.NamedType:19 `        _class = c;`
+com.fasterxml.jackson.databind.jsontype.NamedType:20 `        _hashCode = c.getName().hashCode();`
+com.fasterxml.jackson.databind.jsontype.NamedType:21 `        setName(name);`
+com.fasterxml.jackson.databind.jsontype.NamedType:22 `    }`
+com.fasterxml.jackson.databind.jsontype.NamedType:24 `    public Class<?> getType() { return _class; }`
+com.fasterxml.jackson.databind.jsontype.NamedType:25 `    public String getName() { return _name; }`
+com.fasterxml.jackson.databind.jsontype.NamedType:26 `    public void setName(String name) { _name = (name == null || name.length() == 0) ? null : name; }`
+com.fasterxml.jackson.databind.jsontype.NamedType:28 `    public boolean hasName() { return _name != null; }`
+com.fasterxml.jackson.databind.jsontype.SubtypeResolver:15 `public abstract class SubtypeResolver`
+com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver:24 `    public StdSubtypeResolver() { }`
+com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver:131 `        final AnnotationIntrospector ai = config.getAnnotationIntrospector();`
+com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver:132 `        Class<?> rawBase = baseType.getRawClass();`
+com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver:135 `        Set<Class<?>> typesHandled = new HashSet<Class<?>>();`
+com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver:136 `        Map<String,NamedType> byName = new LinkedHashMap<String,NamedType>();`
+com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver:139 `        NamedType rootType = new NamedType(rawBase, null);`
+com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver:140 `        AnnotatedClass ac = AnnotatedClassResolver.resolveWithoutSuperTypes(config,`
+com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver:142 `        _collectAndResolveByTypeId(ac, rootType, config, typesHandled, byName);`
+com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver:145 `            Collection<NamedType> st = ai.findSubtypes(property);`
+com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver:242 `        final AnnotationIntrospector ai = config.getAnnotationIntrospector();`
+com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver:243 `        if (!namedType.hasName()) {`
+com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver:244 `            String name = ai.findTypeName(annotatedType);`
+com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver:245 `            if (name != null) {`
+com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver:246 `                namedType = new NamedType(namedType.getType(), name);`
+com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver:249 `        if (namedType.hasName()) {`
+com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver:250 `            byName.put(namedType.getName(), namedType);`
+com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver:254 `        if (typesHandled.add(namedType.getType())) {`
+com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver:255 `            Collection<NamedType> st = ai.findSubtypes(annotatedType);`
+com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver:256 `            if (st != null && !st.isEmpty()) {`
+com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver:257 `                for (NamedType subtype : st) {`
+com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver:258 `                    AnnotatedClass subtypeClass = AnnotatedClassResolver.resolveWithoutSuperTypes(config,`
+com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver:260 `                    _collectAndResolveByTypeId(subtypeClass, subtype, config, typesHandled, byName);`
+com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver:261 `                }`
+com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver:264 `    }`
+com.fasterxml.jackson.databind.node.JsonNodeFactory:24 `    private static final JsonNodeFactory decimalsNormalized`
+com.fasterxml.jackson.databind.node.JsonNodeFactory:26 `    private static final JsonNodeFactory decimalsAsIs`
+com.fasterxml.jackson.databind.node.JsonNodeFactory:34 `    public final static JsonNodeFactory instance = decimalsNormalized;`
+com.fasterxml.jackson.databind.node.JsonNodeFactory:62 `    {`
+com.fasterxml.jackson.databind.node.JsonNodeFactory:63 `        _cfgBigDecimalExact = bigDecimalExact;`
+com.fasterxml.jackson.databind.node.JsonNodeFactory:64 `    }`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:61 `        HashMap<String, Class<? extends JsonSerializer<?>>> concLazy`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:63 `        HashMap<String, JsonSerializer<?>> concrete`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:70 `        concrete.put(String.class.getName(), new StringSerializer());`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:71 `        final ToStringSerializer sls = ToStringSerializer.instance;`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:72 `        concrete.put(StringBuffer.class.getName(), sls);`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:73 `        concrete.put(StringBuilder.class.getName(), sls);`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:74 `        concrete.put(Character.class.getName(), sls);`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:75 `        concrete.put(Character.TYPE.getName(), sls);`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:78 `        NumberSerializers.addAll(concrete);`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:79 `        concrete.put(Boolean.TYPE.getName(), new BooleanSerializer(true));`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:80 `        concrete.put(Boolean.class.getName(), new BooleanSerializer(false));`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:83 `        concrete.put(BigInteger.class.getName(), new NumberSerializer(BigInteger.class));`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:84 `        concrete.put(BigDecimal.class.getName(),new NumberSerializer(BigDecimal.class));`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:88 `        concrete.put(Calendar.class.getName(), CalendarSerializer.instance);`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:89 `        concrete.put(java.util.Date.class.getName(), DateSerializer.instance);`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:92 `        for (Map.Entry<Class<?>,Object> en : StdJdkSerializers.all()) {`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:93 `            Object value = en.getValue();`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:94 `            if (value instanceof JsonSerializer<?>) {`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:95 `                concrete.put(en.getKey().getName(), (JsonSerializer<?>) value);`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:98 `                Class<? extends JsonSerializer<?>> cls = (Class<? extends JsonSerializer<?>>) value;`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:99 `                concLazy.put(en.getKey().getName(), cls);`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:101 `        }`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:105 `        concLazy.put(TokenBuffer.class.getName(), TokenBufferSerializer.class);`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:107 `        _concrete = concrete;`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:108 `        _concreteLazy = concLazy;`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:109 `    }`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:134 `    protected BasicSerializerFactory(SerializerFactoryConfig config) {`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:135 `        _factoryConfig = (config == null) ? new SerializerFactoryConfig() : config;`
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory:136 `    }`
+com.fasterxml.jackson.databind.ser.BeanSerializerFactory:69 `    public final static BeanSerializerFactory instance = new BeanSerializerFactory(null);`
+com.fasterxml.jackson.databind.ser.BeanSerializerFactory:82 `        super(config);`
+com.fasterxml.jackson.databind.ser.BeanSerializerFactory:83 `    }`
+com.fasterxml.jackson.databind.ser.DefaultSerializerProvider:66 `    protected DefaultSerializerProvider() { super(); }`
+com.fasterxml.jackson.databind.ser.DefaultSerializerProvider:610 `        public Impl() { super(); }`
+com.fasterxml.jackson.databind.ser.SerializerCache:33 `    private final HashMap<TypeKey, JsonSerializer<Object>> _sharedMap`
+com.fasterxml.jackson.databind.ser.SerializerCache:39 `    private final AtomicReference<ReadOnlyClassToSerializerMap> _readOnlyMap`
+com.fasterxml.jackson.databind.ser.SerializerCache:42 `    public SerializerCache() { }`
+com.fasterxml.jackson.databind.ser.SerializerFactory:11 `public abstract class SerializerFactory`
+com.fasterxml.jackson.databind.ser.impl.FailingSerializer:28 `        super(Object.class);`
+com.fasterxml.jackson.databind.ser.impl.FailingSerializer:29 `        _msg = msg;`
+com.fasterxml.jackson.databind.ser.impl.FailingSerializer:30 `    }`
+com.fasterxml.jackson.databind.ser.impl.UnknownSerializer:17 `        super(Object.class);`
+com.fasterxml.jackson.databind.ser.impl.UnknownSerializer:18 `    }`
+com.fasterxml.jackson.databind.ser.std.BooleanSerializer:42 `        super(forPrimitive ? Boolean.TYPE : Boolean.class, false);`
+com.fasterxml.jackson.databind.ser.std.BooleanSerializer:43 `        _forPrimitive = forPrimitive;`
+com.fasterxml.jackson.databind.ser.std.BooleanSerializer:44 `    }`
+com.fasterxml.jackson.databind.ser.std.CalendarSerializer:21 `    public static final CalendarSerializer instance = new CalendarSerializer();`
+com.fasterxml.jackson.databind.ser.std.CalendarSerializer:23 `    public CalendarSerializer() { this(null, null); }`
+com.fasterxml.jackson.databind.ser.std.CalendarSerializer:26 `        super(Calendar.class, useTimestamp, customFormat);`
+com.fasterxml.jackson.databind.ser.std.CalendarSerializer:27 `    }`
+com.fasterxml.jackson.databind.ser.std.DateSerializer:24 `    public static final DateSerializer instance = new DateSerializer();`
+com.fasterxml.jackson.databind.ser.std.DateSerializer:27 `        this(null, null);`
+com.fasterxml.jackson.databind.ser.std.DateSerializer:28 `    }`
+com.fasterxml.jackson.databind.ser.std.DateSerializer:31 `        super(Date.class, useTimestamp, customFormat);`
+com.fasterxml.jackson.databind.ser.std.DateSerializer:32 `    }`
+com.fasterxml.jackson.databind.ser.std.DateTimeSerializerBase:41 `        super(type);`
+com.fasterxml.jackson.databind.ser.std.DateTimeSerializerBase:42 `        _useTimestamp = useTimestamp;`
+com.fasterxml.jackson.databind.ser.std.DateTimeSerializerBase:43 `        _customFormat = customFormat;`
+com.fasterxml.jackson.databind.ser.std.DateTimeSerializerBase:44 `    }`
+com.fasterxml.jackson.databind.ser.std.NullSerializer:24 `    public final static NullSerializer instance = new NullSerializer();`
+com.fasterxml.jackson.databind.ser.std.NullSerializer:26 `    private NullSerializer() { super(Object.class); }`
+com.fasterxml.jackson.databind.ser.std.NumberSerializer:27 `    public final static NumberSerializer instance = new NumberSerializer(Number.class);`
+com.fasterxml.jackson.databind.ser.std.NumberSerializer:35 `        super(rawType, false);`
+com.fasterxml.jackson.databind.ser.std.NumberSerializer:37 `        _isInt = (rawType == BigInteger.class);`
+com.fasterxml.jackson.databind.ser.std.NumberSerializer:38 `    }`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:26 `        allDeserializers.put(Integer.class.getName(), new IntegerSerializer(Integer.class));`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:27 `        allDeserializers.put(Integer.TYPE.getName(), new IntegerSerializer(Integer.TYPE));`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:28 `        allDeserializers.put(Long.class.getName(), new LongSerializer(Long.class));`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:29 `        allDeserializers.put(Long.TYPE.getName(), new LongSerializer(Long.TYPE));`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:31 `        allDeserializers.put(Byte.class.getName(), IntLikeSerializer.instance);`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:32 `        allDeserializers.put(Byte.TYPE.getName(), IntLikeSerializer.instance);`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:33 `        allDeserializers.put(Short.class.getName(), ShortSerializer.instance);`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:34 `        allDeserializers.put(Short.TYPE.getName(), ShortSerializer.instance);`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:37 `        allDeserializers.put(Double.class.getName(), new DoubleSerializer(Double.class));`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:38 `        allDeserializers.put(Double.TYPE.getName(), new DoubleSerializer(Double.TYPE));`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:39 `        allDeserializers.put(Float.class.getName(), FloatSerializer.instance);`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:40 `        allDeserializers.put(Float.TYPE.getName(), FloatSerializer.instance);`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:41 `    }`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:57 `            super(cls, false);`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:58 `            _numberType = numberType;`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:59 `            _schemaType = schemaType;`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:60 `            _isInt = (numberType == JsonParser.NumberType.INT)`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:63 `        }`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:105 `        final static ShortSerializer instance = new ShortSerializer();`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:108 `            super(Short.class, JsonParser.NumberType.INT, "number");`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:109 `        }`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:131 `            super(type, JsonParser.NumberType.INT, "integer");`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:132 `        }`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:157 `        final static IntLikeSerializer instance = new IntLikeSerializer();`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:160 `            super(Number.class, JsonParser.NumberType.INT, "integer");`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:161 `        }`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:173 `            super(cls, JsonParser.NumberType.LONG, "number");`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:174 `        }`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:185 `        final static FloatSerializer instance = new FloatSerializer();`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:188 `            super(Float.class, JsonParser.NumberType.FLOAT, "number");`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:189 `        }`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:208 `            super(cls, JsonParser.NumberType.DOUBLE, "number");`
+com.fasterxml.jackson.databind.ser.std.NumberSerializers:209 `        }`
+com.fasterxml.jackson.databind.ser.std.StdJdkSerializers:27 `        HashMap<Class<?>,Object> sers = new HashMap<Class<?>,Object>();`
+com.fasterxml.jackson.databind.ser.std.StdJdkSerializers:30 `        sers.put(java.net.URL.class, new ToStringSerializer(java.net.URL.class));`
+com.fasterxml.jackson.databind.ser.std.StdJdkSerializers:31 `        sers.put(java.net.URI.class, new ToStringSerializer(java.net.URI.class));`
+com.fasterxml.jackson.databind.ser.std.StdJdkSerializers:33 `        sers.put(Currency.class, new ToStringSerializer(Currency.class));`
+com.fasterxml.jackson.databind.ser.std.StdJdkSerializers:34 `        sers.put(UUID.class, new UUIDSerializer());`
+com.fasterxml.jackson.databind.ser.std.StdJdkSerializers:35 `        sers.put(java.util.regex.Pattern.class, new ToStringSerializer(java.util.regex.Pattern.class));`
+com.fasterxml.jackson.databind.ser.std.StdJdkSerializers:36 `        sers.put(Locale.class, new ToStringSerializer(Locale.class));`
+com.fasterxml.jackson.databind.ser.std.StdJdkSerializers:39 `        sers.put(AtomicBoolean.class, AtomicBooleanSerializer.class);`
+com.fasterxml.jackson.databind.ser.std.StdJdkSerializers:40 `        sers.put(AtomicInteger.class, AtomicIntegerSerializer.class);`
+com.fasterxml.jackson.databind.ser.std.StdJdkSerializers:41 `        sers.put(AtomicLong.class, AtomicLongSerializer.class);`
+com.fasterxml.jackson.databind.ser.std.StdJdkSerializers:44 `        sers.put(File.class, FileSerializer.class);`
+com.fasterxml.jackson.databind.ser.std.StdJdkSerializers:45 `        sers.put(Class.class, ClassSerializer.class);`
+com.fasterxml.jackson.databind.ser.std.StdJdkSerializers:48 `        sers.put(Void.class, NullSerializer.instance);`
+com.fasterxml.jackson.databind.ser.std.StdJdkSerializers:49 `        sers.put(Void.TYPE, NullSerializer.instance);`
+com.fasterxml.jackson.databind.ser.std.StdJdkSerializers:55 `            sers.put(java.sql.Timestamp.class, DateSerializer.instance);`
+com.fasterxml.jackson.databind.ser.std.StdJdkSerializers:58 `            sers.put(java.sql.Date.class, SqlDateSerializer.class);`
+com.fasterxml.jackson.databind.ser.std.StdJdkSerializers:59 `            sers.put(java.sql.Time.class, SqlTimeSerializer.class);`
+com.fasterxml.jackson.databind.ser.std.StdJdkSerializers:62 `        }`
+com.fasterxml.jackson.databind.ser.std.StdJdkSerializers:64 `        return sers.entrySet();`
+com.fasterxml.jackson.databind.ser.std.StdScalarSerializer:19 `        super(t);`
+com.fasterxml.jackson.databind.ser.std.StdScalarSerializer:20 `    }`
+com.fasterxml.jackson.databind.ser.std.StdScalarSerializer:28 `        super((Class<T>) t);`
+com.fasterxml.jackson.databind.ser.std.StdScalarSerializer:29 `    }`
+com.fasterxml.jackson.databind.ser.std.StdSerializer:44 `    private final static Object KEY_CONTENT_CONVERTER_LOCK = new Object();`
+com.fasterxml.jackson.databind.ser.std.StdSerializer:58 `    protected StdSerializer(Class<T> t) {`
+com.fasterxml.jackson.databind.ser.std.StdSerializer:59 `        _handledType = t;`
+com.fasterxml.jackson.databind.ser.std.StdSerializer:60 `    }`
+com.fasterxml.jackson.databind.ser.std.StdSerializer:72 `    protected StdSerializer(Class<?> t, boolean dummy) {`
+com.fasterxml.jackson.databind.ser.std.StdSerializer:73 `        _handledType = (Class<T>) t;`
+com.fasterxml.jackson.databind.ser.std.StdSerializer:74 `    }`
+com.fasterxml.jackson.databind.ser.std.StringSerializer:31 `    public StringSerializer() { super(String.class, false); }`
+com.fasterxml.jackson.databind.ser.std.ToStringSerializer:28 `    public final static ToStringSerializer instance = new ToStringSerializer();`
+com.fasterxml.jackson.databind.ser.std.ToStringSerializer:38 `    public ToStringSerializer() { super(Object.class); }`
+com.fasterxml.jackson.databind.ser.std.ToStringSerializer:46 `        super(handledType, false);`
+com.fasterxml.jackson.databind.ser.std.ToStringSerializer:47 `    }`
+com.fasterxml.jackson.databind.ser.std.UUIDSerializer:21 `    final static char[] HEX_CHARS = "0123456789abcdef".toCharArray();`
+com.fasterxml.jackson.databind.ser.std.UUIDSerializer:23 `    public UUIDSerializer() { super(UUID.class); }`
+com.fasterxml.jackson.databind.type.ClassStack:21 `        this(null, rootType);`
+com.fasterxml.jackson.databind.type.ClassStack:22 `    }`
+com.fasterxml.jackson.databind.type.ClassStack:24 `    private ClassStack(ClassStack parent, Class<?> curr) {`
+com.fasterxml.jackson.databind.type.ClassStack:25 `        _parent = parent;`
+com.fasterxml.jackson.databind.type.ClassStack:26 `        _current = curr;`
+com.fasterxml.jackson.databind.type.ClassStack:27 `    }`
+com.fasterxml.jackson.databind.type.ClassStack:55 `        if (_selfRefs != null) {`
+com.fasterxml.jackson.databind.type.ClassStack:60 `    }`
+com.fasterxml.jackson.databind.type.SimpleType:33 `        this(cls, TypeBindings.emptyBindings(), null, null);`
+com.fasterxml.jackson.databind.type.SimpleType:34 `    }`
+com.fasterxml.jackson.databind.type.SimpleType:38 `        this(cls, bindings, superClass, superInts, null, null, false);`
+com.fasterxml.jackson.databind.type.SimpleType:39 `    }`
+com.fasterxml.jackson.databind.type.SimpleType:55 `        super(cls, bindings, superClass, superInts,`
+com.fasterxml.jackson.databind.type.SimpleType:57 `    }`
+com.fasterxml.jackson.databind.type.SimpleType:82 `        return new SimpleType(raw, null,`
+com.fasterxml.jackson.databind.type.SimpleType:212 `        return null;`
+com.fasterxml.jackson.databind.type.TypeBase:17 `    private final static TypeBindings NO_BINDINGS = TypeBindings.emptyBindings();`
+com.fasterxml.jackson.databind.type.TypeBase:18 `    private final static JavaType[] NO_TYPES = new JavaType[0];`
+com.fasterxml.jackson.databind.type.TypeBase:45 `        super(raw, hash, valueHandler, typeHandler, asStatic);`
+com.fasterxml.jackson.databind.type.TypeBase:46 `        _bindings = (bindings == null) ? NO_BINDINGS : bindings;`
+com.fasterxml.jackson.databind.type.TypeBase:47 `        _superClass = superClass;`
+com.fasterxml.jackson.databind.type.TypeBase:48 `        _superInterfaces = superInts;`
+com.fasterxml.jackson.databind.type.TypeBase:49 `    }`
+com.fasterxml.jackson.databind.type.TypeBindings:17 `    private final static String[] NO_STRINGS = new String[0];`
+com.fasterxml.jackson.databind.type.TypeBindings:19 `    private final static JavaType[] NO_TYPES = new JavaType[0];`
+com.fasterxml.jackson.databind.type.TypeBindings:21 `    private final static TypeBindings EMPTY = new TypeBindings(NO_STRINGS, NO_TYPES, null);`
+com.fasterxml.jackson.databind.type.TypeBindings:53 `    {`
+com.fasterxml.jackson.databind.type.TypeBindings:54 `        _names = (names == null) ? NO_STRINGS : names;`
+com.fasterxml.jackson.databind.type.TypeBindings:55 `        _types = (types == null) ? NO_TYPES : types;`
+com.fasterxml.jackson.databind.type.TypeBindings:56 `        if (_names.length != _types.length) {`
+com.fasterxml.jackson.databind.type.TypeBindings:59 `        int h = 1;`
+com.fasterxml.jackson.databind.type.TypeBindings:60 `        for (int i = 0, len = _types.length; i < len; ++i) {`
+com.fasterxml.jackson.databind.type.TypeBindings:63 `        _unboundVariables = uvars;`
+com.fasterxml.jackson.databind.type.TypeBindings:64 `        _hashCode = h;`
+com.fasterxml.jackson.databind.type.TypeBindings:65 `    }`
+com.fasterxml.jackson.databind.type.TypeBindings:68 `        return EMPTY;`
+com.fasterxml.jackson.databind.type.TypeBindings:246 `        return (_types.length == 0);`
+com.fasterxml.jackson.databind.type.TypeFactory:39 `    private final static JavaType[] NO_TYPES = new JavaType[0];`
+com.fasterxml.jackson.databind.type.TypeFactory:46 `    protected final static TypeFactory instance = new TypeFactory();`
+com.fasterxml.jackson.databind.type.TypeFactory:48 `    protected final static TypeBindings EMPTY_BINDINGS = TypeBindings.emptyBindings();`
+com.fasterxml.jackson.databind.type.TypeFactory:60 `    private final static Class<?> CLS_STRING = String.class;`
+com.fasterxml.jackson.databind.type.TypeFactory:61 `    private final static Class<?> CLS_OBJECT = Object.class;`
+com.fasterxml.jackson.databind.type.TypeFactory:63 `    private final static Class<?> CLS_COMPARABLE = Comparable.class;`
+com.fasterxml.jackson.databind.type.TypeFactory:64 `    private final static Class<?> CLS_CLASS = Class.class;`
+com.fasterxml.jackson.databind.type.TypeFactory:65 `    private final static Class<?> CLS_ENUM = Enum.class;`
+com.fasterxml.jackson.databind.type.TypeFactory:67 `    private final static Class<?> CLS_BOOL = Boolean.TYPE;`
+com.fasterxml.jackson.databind.type.TypeFactory:68 `    private final static Class<?> CLS_INT = Integer.TYPE;`
+com.fasterxml.jackson.databind.type.TypeFactory:69 `    private final static Class<?> CLS_LONG = Long.TYPE;`
+com.fasterxml.jackson.databind.type.TypeFactory:78 `    protected final static SimpleType CORE_TYPE_BOOL = new SimpleType(CLS_BOOL);`
+com.fasterxml.jackson.databind.type.TypeFactory:79 `    protected final static SimpleType CORE_TYPE_INT = new SimpleType(CLS_INT);`
+com.fasterxml.jackson.databind.type.TypeFactory:80 `    protected final static SimpleType CORE_TYPE_LONG = new SimpleType(CLS_LONG);`
+com.fasterxml.jackson.databind.type.TypeFactory:83 `    protected final static SimpleType CORE_TYPE_STRING = new SimpleType(CLS_STRING);`
+com.fasterxml.jackson.databind.type.TypeFactory:86 `    protected final static SimpleType CORE_TYPE_OBJECT = new SimpleType(CLS_OBJECT);`
+com.fasterxml.jackson.databind.type.TypeFactory:94 `    protected final static SimpleType CORE_TYPE_COMPARABLE = new SimpleType(CLS_COMPARABLE);`
+com.fasterxml.jackson.databind.type.TypeFactory:102 `    protected final static SimpleType CORE_TYPE_ENUM = new SimpleType(CLS_ENUM);`
+com.fasterxml.jackson.databind.type.TypeFactory:110 `    protected final static SimpleType CORE_TYPE_CLASS = new SimpleType(CLS_CLASS);`
+com.fasterxml.jackson.databind.type.TypeFactory:145 `        this(null);`
+com.fasterxml.jackson.databind.type.TypeFactory:146 `    }`
+com.fasterxml.jackson.databind.type.TypeFactory:151 `    protected TypeFactory(LRUMap<Object,JavaType> typeCache) {`
+com.fasterxml.jackson.databind.type.TypeFactory:152 `        if (typeCache == null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:153 `            typeCache = new LRUMap<Object,JavaType>(16, 200);`
+com.fasterxml.jackson.databind.type.TypeFactory:155 `        _typeCache = typeCache;`
+com.fasterxml.jackson.databind.type.TypeFactory:156 `        _parser = new TypeParser(this);`
+com.fasterxml.jackson.databind.type.TypeFactory:157 `        _modifiers = null;`
+com.fasterxml.jackson.databind.type.TypeFactory:158 `        _classLoader = null;`
+com.fasterxml.jackson.databind.type.TypeFactory:159 `    }`
+com.fasterxml.jackson.databind.type.TypeFactory:211 `    public static TypeFactory defaultInstance() { return instance; }`
+com.fasterxml.jackson.databind.type.TypeFactory:616 `        return _fromAny(null, type, EMPTY_BINDINGS);`
+com.fasterxml.jackson.databind.type.TypeFactory:1118 `        return new SimpleType(raw, bindings, superClass, superInterfaces);`
+com.fasterxml.jackson.databind.type.TypeFactory:1138 `        if (clz.isPrimitive()) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1143 `            if (clz == CLS_STRING) return CORE_TYPE_STRING;`
+com.fasterxml.jackson.databind.type.TypeFactory:1144 `            if (clz == CLS_OBJECT) return CORE_TYPE_OBJECT; // since 2.7`
+com.fasterxml.jackson.databind.type.TypeFactory:1146 `        return null;`
+com.fasterxml.jackson.databind.type.TypeFactory:1165 `        if (type instanceof Class<?>) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1167 `            resultType = _fromClass(context, (Class<?>) type, EMPTY_BINDINGS);`
+com.fasterxml.jackson.databind.type.TypeFactory:1192 `        if (_modifiers != null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1207 `        return resultType;`
+com.fasterxml.jackson.databind.type.TypeFactory:1217 `        JavaType result = _findWellKnownSimple(rawType);`
+com.fasterxml.jackson.databind.type.TypeFactory:1218 `        if (result != null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1219 `            return result;`
+com.fasterxml.jackson.databind.type.TypeFactory:1223 `        if ((bindings == null) || bindings.isEmpty()) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1224 `            key = rawType;`
+com.fasterxml.jackson.databind.type.TypeFactory:1228 `        result = _typeCache.get(key); // ok, cache object is synced`
+com.fasterxml.jackson.databind.type.TypeFactory:1229 `        if (result != null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1234 `        if (context == null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1235 `            context = new ClassStack(rawType);`
+com.fasterxml.jackson.databind.type.TypeFactory:1249 `        if (rawType.isArray()) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1258 `            if (rawType.isInterface()) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1263 `                superClass = _resolveSuperClass(context, rawType, bindings);`
+com.fasterxml.jackson.databind.type.TypeFactory:1264 `                superInterfaces = _resolveSuperInterfaces(context, rawType, bindings);`
+com.fasterxml.jackson.databind.type.TypeFactory:1268 `            if (rawType == Properties.class) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1274 `            else if (superClass != null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1275 `                result = superClass.refine(rawType, bindings, superClass, superInterfaces);`
+com.fasterxml.jackson.databind.type.TypeFactory:1278 `            if (result == null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1279 `                result = _fromWellKnownClass(context, rawType, bindings, superClass, superInterfaces); `
+com.fasterxml.jackson.databind.type.TypeFactory:1280 `                if (result == null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1281 `                    result = _fromWellKnownInterface(context, rawType, bindings, superClass, superInterfaces);`
+com.fasterxml.jackson.databind.type.TypeFactory:1282 `                    if (result == null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1284 `                        result = _newSimpleType(rawType, bindings, superClass, superInterfaces);`
+com.fasterxml.jackson.databind.type.TypeFactory:1289 `        context.resolveSelfReferences(result);`
+com.fasterxml.jackson.databind.type.TypeFactory:1292 `        if (!result.hasHandlers()) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1293 `            _typeCache.putIfAbsent(key, result); // cache object syncs`
+com.fasterxml.jackson.databind.type.TypeFactory:1295 `        return result;`
+com.fasterxml.jackson.databind.type.TypeFactory:1300 `        Type parent = ClassUtil.getGenericSuperclass(rawType);`
+com.fasterxml.jackson.databind.type.TypeFactory:1301 `        if (parent == null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1304 `        return _fromAny(context, parent, parentBindings);`
+com.fasterxml.jackson.databind.type.TypeFactory:1309 `        Type[] types = ClassUtil.getGenericInterfaces(rawType);`
+com.fasterxml.jackson.databind.type.TypeFactory:1310 `        if (types == null || types.length == 0) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1311 `            return NO_TYPES;`
+com.fasterxml.jackson.databind.type.TypeFactory:1330 `        if (bindings == null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1335 `        if (rawType == Map.class) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1338 `        if (rawType == Collection.class) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1342 `        if (rawType == AtomicReference.class) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1349 `        return null;`
+com.fasterxml.jackson.databind.type.TypeFactory:1357 `        final int intCount = superInterfaces.length;`
+com.fasterxml.jackson.databind.type.TypeFactory:1359 `        for (int i = 0; i < intCount; ++i) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1365 `        return null;`
+com.fasterxml.jackson.databind.type.TypeParser:19 `    public TypeParser(TypeFactory f) {`
+com.fasterxml.jackson.databind.type.TypeParser:20 `        _factory = f;`
+com.fasterxml.jackson.databind.type.TypeParser:21 `    }`
+com.fasterxml.jackson.databind.util.ClassUtil:17 `    private final static Class<?> CLS_OBJECT = Object.class;`
+com.fasterxml.jackson.databind.util.ClassUtil:19 `    private final static Annotation[] NO_ANNOTATIONS = new Annotation[0];`
+com.fasterxml.jackson.databind.util.ClassUtil:20 `    private final static Ctor[] NO_CTORS = new Ctor[0];`
+com.fasterxml.jackson.databind.util.ClassUtil:22 `    private final static Iterator<?> EMPTY_ITERATOR = Collections.emptyIterator();`
+com.fasterxml.jackson.databind.util.ClassUtil:289 `        return (cls == CLS_OBJECT) || cls.isPrimitive();`
+com.fasterxml.jackson.databind.util.ClassUtil:551 `        Constructor<T> ctor = findConstructor(cls, canFixAccess);`
+com.fasterxml.jackson.databind.util.ClassUtil:552 `        if (ctor == null) {`
+com.fasterxml.jackson.databind.util.ClassUtil:556 `            return ctor.newInstance();`
+com.fasterxml.jackson.databind.util.ClassUtil:567 `            Constructor<T> ctor = cls.getDeclaredConstructor();`
+com.fasterxml.jackson.databind.util.ClassUtil:568 `            if (forceAccess) {`
+com.fasterxml.jackson.databind.util.ClassUtil:572 `                if (!Modifier.isPublic(ctor.getModifiers())) {`
+com.fasterxml.jackson.databind.util.ClassUtil:576 `            return ctor;`
+com.fasterxml.jackson.databind.util.ClassUtil:622 `        if (str == null) {`
+com.fasterxml.jackson.databind.util.ClassUtil:625 `        return str;`
+com.fasterxml.jackson.databind.util.ClassUtil:1036 `        if (isObjectOrPrimitive(cls)) {`
+com.fasterxml.jackson.databind.util.ClassUtil:1039 `        return cls.getDeclaredAnnotations();`
+com.fasterxml.jackson.databind.util.ClassUtil:1104 `        return cls.getGenericSuperclass();`
+com.fasterxml.jackson.databind.util.ClassUtil:1111 `        return cls.getGenericInterfaces();`
+com.fasterxml.jackson.databind.util.LRUMap:33 `    {`
+com.fasterxml.jackson.databind.util.LRUMap:35 `        _map = new ConcurrentHashMap<K,V>(initialEntries, 0.8f, 4);`
+com.fasterxml.jackson.databind.util.LRUMap:36 `        _maxEntries = maxEntries;`
+com.fasterxml.jackson.databind.util.LRUMap:37 `    }`
+com.fasterxml.jackson.databind.util.LRUMap:57 `        if (_map.size() >= _maxEntries) {`
+com.fasterxml.jackson.databind.util.LRUMap:64 `        return _map.putIfAbsent(key, value);`
+com.fasterxml.jackson.databind.util.LRUMap:68 `    public V get(Object key) {  return _map.get(key); }`
+com.fasterxml.jackson.databind.util.RootNameLookup:21 `    public RootNameLookup() {`
+com.fasterxml.jackson.databind.util.RootNameLookup:22 `        _rootNames = new LRUMap<ClassKey,PropertyName>(20, 200);`
+com.fasterxml.jackson.databind.util.RootNameLookup:23 `   }`
+com.fasterxml.jackson.databind.util.StdDateFormat:56 `    protected final static String[] ALL_FORMATS = new String[] {`
+com.fasterxml.jackson.databind.util.StdDateFormat:69 `        DEFAULT_TIMEZONE = TimeZone.getTimeZone("UTC"); // since 2.7`
+com.fasterxml.jackson.databind.util.StdDateFormat:72 `    private final static Locale DEFAULT_LOCALE = Locale.US;`
+com.fasterxml.jackson.databind.util.StdDateFormat:90 `        DATE_FORMAT_RFC1123 = new SimpleDateFormat(DATE_FORMAT_STR_RFC1123, DEFAULT_LOCALE);`
+com.fasterxml.jackson.databind.util.StdDateFormat:91 `        DATE_FORMAT_RFC1123.setTimeZone(DEFAULT_TIMEZONE);`
+com.fasterxml.jackson.databind.util.StdDateFormat:92 `        DATE_FORMAT_ISO8601 = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601, DEFAULT_LOCALE);`
+com.fasterxml.jackson.databind.util.StdDateFormat:93 `        DATE_FORMAT_ISO8601.setTimeZone(DEFAULT_TIMEZONE);`
+com.fasterxml.jackson.databind.util.StdDateFormat:94 `        DATE_FORMAT_ISO8601_Z = new SimpleDateFormat(DATE_FORMAT_STR_ISO8601_Z, DEFAULT_LOCALE);`
+com.fasterxml.jackson.databind.util.StdDateFormat:95 `        DATE_FORMAT_ISO8601_Z.setTimeZone(DEFAULT_TIMEZONE);`
+com.fasterxml.jackson.databind.util.StdDateFormat:96 `        DATE_FORMAT_PLAIN = new SimpleDateFormat(DATE_FORMAT_STR_PLAIN, DEFAULT_LOCALE);`
+com.fasterxml.jackson.databind.util.StdDateFormat:97 `        DATE_FORMAT_PLAIN.setTimeZone(DEFAULT_TIMEZONE);`
+com.fasterxml.jackson.databind.util.StdDateFormat:103 `    public final static StdDateFormat instance = new StdDateFormat();`
+com.fasterxml.jackson.databind.util.StdDateFormat:134 `    public StdDateFormat() {`
+com.fasterxml.jackson.databind.util.StdDateFormat:135 `        _locale = DEFAULT_LOCALE;`
+com.fasterxml.jackson.databind.util.StdDateFormat:136 `    }`
+
+
+Task Description:
+The provided code snippets are part of the Jackson library, which is a popular JSON processing library for Java. Here is a brief description of the key components and their roles:
+
+1. **AnnotationIntrospector**:
+   - `public abstract class AnnotationIntrospector`: This class is used to introspect annotations on classes and members to determine how they should be serialized and deserialized.
+   - `public static class ReferenceProperty`: A nested static class within `AnnotationIntrospector` that represents a reference property.
+   - `return annotated.getAnnotation(annoClass)`: A method that retrieves a specific annotation from an annotated element.
+
+2. **BeanDescription**:
+   - `protected BeanDescription(JavaType type)`: Constructor for `BeanDescription`, which holds information about a Java type.
+   - `_type = type`: Initializes the type field.
+
+3. **DatabindContext**:
+   - `public abstract class DatabindContext`: An abstract class that provides context for data binding operations.
+
+4. **DeserializationConfig**:
+   - `super(base, str, mixins, rootNames, configOverrides)`: Constructor call to initialize the deserialization configuration.
+   - Various fields like `_deserFeatures`, `_nodeFactory`, `_problemHandlers`, etc., are initialized.
+
+5. **DeserializationContext**:
+   - Initialization block that sets up the deserialization context, including the deserializer factory and cache.
+
+6. **DeserializationFeature**:
+   - `public enum DeserializationFeature implements ConfigFeature`: Enum representing various deserialization features.
+   - Each feature has a default state and a mask for bitwise operations.
+
+7. **JavaType**:
+   - Initialization block that sets up the Java type, including its class, hash code, value handler, and type handler.
+   - `public final Class<?> getRawClass()`: Method to get the raw class of the Java type.
+
+8. **JsonSerializer**:
+   - `public abstract class JsonSerializer<T>`: Abstract class for serializing Java objects to JSON.
+   - `public abstract static class None`: A nested static class representing the absence of a serializer.
+
+9. **MapperFeature**:
+   - `public enum MapperFeature implements ConfigFeature`: Enum representing various mapper features.
+   - Each feature has a default state and a mask for bitwise operations.
+
+10. **MappingJsonFactory**:
+    - Constructor that initializes the JSON factory with a given mapper.
+
+11. **ObjectMapper**:
+    - Various fields and methods for configuring and using the `ObjectMapper` for JSON serialization and deserialization.
+
+12. **PropertyName**:
+    - `public final static PropertyName USE_DEFAULT`: A constant representing the default property name.
+    - Initialization block for setting up property names.
+
+13. **SerializationConfig**:
+    - Initialization block for setting up the serialization configuration, including features and default pretty printer.
+
+14. **SerializationFeature**:
+    - `public enum SerializationFeature implements ConfigFeature`: Enum representing various serialization features.
+    - Each feature has a default state and a mask for bitwise operations.
+
+15. **SerializerProvider**:
+    - Initialization block for setting up the serializer provider, including default serializers for null keys and unknown types.
+
+16. **BaseSettings**:
+    - Initialization block for setting up base settings, including class introspector, annotation introspector, and other configurations.
+
+17. **ConfigOverride**:
+    - `protected ConfigOverride()`: Protected constructor for `ConfigOverride`.
+
+18. **ConfigOverrides**:
+    - Initialization block for setting up configuration overrides.
+
+19. **ContextAttributes**:
+    - `public abstract class ContextAttributes`: Abstract class for context attributes.
+    - Nested static class `Impl` representing an implementation of context attributes.
+
+20. **DeserializerFactoryConfig**:
+    - Initialization block for setting up deserializer factory configuration, including additional deserializers and key deserializers.
+
+21. **MapperConfig**:
+    - Initialization block for setting up mapper configuration, including base settings and mapper features.
+
+22. **SerializerFactoryConfig**:
+    - Initialization block for setting up serializer factory configuration, including additional serializers and key serializers.
+
+23. **BasicDeserializerFactory**:
+    - Initialization block for setting up basic deserializer factory, including fallback mappings for collections and maps.
+
+24. **BeanDeserializerFactory**:
+    - Initialization block for setting up bean deserializer factory, including illegal class names for deserialization.
+
+25. **DefaultDeserializationContext**:
+    - Initialization block for setting up default deserialization context.
+
+26. **DeserializerCache**:
+    - Initialization block for setting up deserializer cache.
+
+27. **StdSubtypeResolver**:
+    - Methods for resolving subtypes based on annotations and type information.
+
+28. **JsonNodeFactory**:
+    - Initialization block for setting up JSON node factory.
+
+29. **BasicSerializerFactory**:
+    - Initialization block for setting up basic serializer factory, including concrete serializers for various types.
+
+30. **BeanSerializerFactory**:
+    - Initialization block for setting up bean serializer factory.
+
+31. **DefaultSerializerProvider**:
+    - Initialization block for setting up default serializer provider.
+
+32. **SerializerCache**:
+    - Initialization block for setting up serializer cache.
+
+33. **TypeFactory**:
+    - Initialization block for setting up type factory, including core types and type cache.
+
+34. **ClassUtil**:
+    - Utility methods for working with classes and annotations.
+
+35. **LRUMap**:
+    - Initialization block for setting up an LRU (Least Recently Used) map.
+
+36. **RootNameLookup**:
+    - Initialization block for setting up root name lookup.
+
+37. **StdDateFormat**:
+    - Initialization block for setting up standard date format.
+
+The provided test case `testBaseTypeId1616` verifies that the `StdSubtypeResolver` correctly resolves subtypes for a given base type (`Base1616`) and ensures that the resolved subtypes have the expected names ("A" and "B").
+
+Test Results:
+The provided code is throwing NullPointerException. For examples:
+Here are the tests and error messages of NullPointerExceptions.
+public void testBaseTypeId1616() throws Exception {
+  ObjectMapper mapper=new ObjectMapper();
+  Collection<NamedType> subtypes=new StdSubtypeResolver().collectAndResolveSubtypesByTypeId(mapper.getDeserializationConfig(),null,mapper.constructType(Base1616.class));
+  assertEquals(2,subtypes.size());
+  Set<String> ok=new HashSet<>(Arrays.asList("A","B"));
+  for (  NamedType type : subtypes) {
+    String id=type.getName();
+    if (!ok.contains(id)) {
+      fail("Unexpected id '" + id + "' (mapping to: "+ type.getType()+ "), should be one of: "+ ok);
+    }
+  }
+}
+
+
+
+testBaseTypeId1616(com.fasterxml.jackson.databind.jsontype.TestTypeNames): Cannot invoke "com.fasterxml.jackson.databind.introspect.Annotated.getAnnotation(java.lang.Class)" because "annotated" is null
+Cannot invoke "com.fasterxml.jackson.databind.introspect.Annotated.getAnnotation(java.lang.Class)" because "annotated" is null
+java.lang.NullPointerException: Cannot invoke "com.fasterxml.jackson.databind.introspect.Annotated.getAnnotation(java.lang.Class)" because "annotated" is null
+	at com.fasterxml.jackson.databind.AnnotationIntrospector._findAnnotation(AnnotationIntrospector.java:1336)
+	at com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector.findSubtypes(JacksonAnnotationIntrospector.java:556)
+	at com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver.collectAndResolveSubtypesByTypeId(StdSubtypeResolver.java:145)
+	at com.fasterxml.jackson.databind.jsontype.TestTypeNames.testBaseTypeId1616(TestTypeNames.java:47)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+
+
+
+
+
+Analyze the provided code and utilize task description, test results, and SBFL techniques results to help in identifying potentially faulty lines. Provide the results following this JSON template:
+```json
+{
+  "faultLoc": [
+    {   
+      "faultyLine": (indicating the location of the suspicious code in ClassName:LineNumber format),
+      "code": (displaying the actual code),
+      "explanation": (step by step reasoning on why this location is considered potentially faulty)
+    },  
+    ... 
+   ]   
+}
+```
+Ensure that the objects in the "faultLoc" array are stored in descending order of suspicion.

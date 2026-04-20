@@ -1,0 +1,16 @@
+Fault Localization Results
+NPE at line(writer_output_stream_1, 206) / Null Expression - p_decoder_31[decoder]
+	 can be caused by 
+p_decoder_31[decoder] - line(writer_output_stream_1, 206).
+
+NPE at line(writer_output_stream_1, 206) / Null Expression - p_decoder_31[decoder]
+	 can be caused by 
+p_decoder_29[decoder] - line(writer_output_stream_1, 188).
+
+NPE at line(writer_output_stream_1, 170) / Null Expression - p_charset_25[charset]
+	 can be caused by 
+p_charset_25[charset] - line(writer_output_stream_1, 170).
+
+NPE at line(writer_output_stream_1, 170) / Null Expression - p_charset_25[charset]
+	 can be caused by 
+p_charset_22[charset] - line(writer_output_stream_1, 152).

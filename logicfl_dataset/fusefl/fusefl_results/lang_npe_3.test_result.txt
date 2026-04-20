@@ -1,0 +1,26 @@
+/** 
+ * Tests https://issues.apache.org/jira/browse/LANG-1697
+ */
+@Test public void testGetRawType_LANG_1697() throws NoSuchFieldException {
+  assertEquals(int[].class,TypeUtils.getRawType(TypeUtils.genericArrayType(Integer.TYPE),Integer.TYPE));
+  assertNull(TypeUtils.getRawType(TypeUtils.genericArrayType(TypeUtils.WILDCARD_ALL),null));
+  assertNull(TypeUtils.getRawType(TypeUtils.genericArrayType(TypeUtils.WILDCARD_ALL),TypeUtils.WILDCARD_ALL));
+  assertNull(TypeUtils.getRawType(TypeUtils.genericArrayType(TypeUtils.WILDCARD_ALL),Integer.TYPE));
+}
+
+
+
+  JUnit Jupiter:TypeUtilsTest:testGetRawType_LANG_1697()
+    MethodSource [className = 'org.apache.commons.lang3.reflect.TypeUtilsTest', methodName = 'testGetRawType_LANG_1697', methodParameterTypes = '']
+    => java.lang.NullPointerException
+       java.base/java.lang.reflect.Array.newArray(Native Method)
+       java.base/java.lang.reflect.Array.newInstance(Array.java:78)
+       org.apache.commons.lang3.reflect.TypeUtils.getRawType(TypeUtils.java:805)
+       org.apache.commons.lang3.reflect.TypeUtilsTest.testGetRawType_LANG_1697(TypeUtilsTest.java:371)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727)
+       org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+       [...]

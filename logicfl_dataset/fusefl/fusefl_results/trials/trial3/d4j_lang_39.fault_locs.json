@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3676",
+            "code": "int greater = replacementList[i].length() - searchList[i].length();",
+            "explanation": "The NullPointerException is thrown because `replacementList[i]` is null. The code does not check if `replacementList[i]` is null before calling `length()` on it. Adding a null check for `replacementList[i]` would prevent this exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3645",
+            "code": "if (noMoreMatchesForReplIndex[i] || searchList[i] == null ||",
+            "explanation": "The code checks if `searchList[i]` is null but does not check if `replacementList[i]` is null. This can lead to a NullPointerException later when `replacementList[i]` is accessed without a null check."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3648",
+            "code": "continue;",
+            "explanation": "This line is part of the loop that skips over null values in `searchList`. However, it does not handle null values in `replacementList`, which can cause issues later in the code."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3656",
+            "code": "if (textIndex == -1 || tempIndex < textIndex) {",
+            "explanation": "This condition updates `textIndex` and `replaceIndex` based on `tempIndex`. If `replacementList[i]` is null, it can lead to incorrect updates and potential NullPointerExceptions later."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3712",
+            "code": "if (textIndex == -1 || tempIndex < textIndex) {",
+            "explanation": "Similar to the previous condition, this line updates `textIndex` and `replaceIndex` based on `tempIndex`. If `replacementList[i]` is null, it can lead to incorrect updates and potential NullPointerExceptions later."
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+Fault Localization Results
+NPE at line(default_interval_category_dataset_1, 574) / Null Expression - f_category_keys_28[categoryKeys]
+	 can be caused by 
+f_category_keys_28[categoryKeys] - line(default_interval_category_dataset_1, 574).
+
+NPE at line(default_interval_category_dataset_1, 574) / Null Expression - f_category_keys_28[categoryKeys]
+	 can be caused by 
+default_interval_category_dataset_1_literal8[null] - line(default_interval_category_dataset_1, 208).
+
+NPE at line(default_interval_category_dataset_1, 242) / Null Expression - f_series_keys_27[seriesKeys]
+	 can be caused by 
+f_series_keys_27[seriesKeys] - line(default_interval_category_dataset_1, 242).
+
+NPE at line(default_interval_category_dataset_1, 242) / Null Expression - f_series_keys_27[seriesKeys]
+	 can be caused by 
+default_interval_category_dataset_1_literal7[null] - line(default_interval_category_dataset_1, 207).
+
+NPE at line(default_interval_category_dataset_1, 690) / Null Expression - f_category_keys_28[categoryKeys]
+	 can be caused by 
+f_category_keys_28[categoryKeys] - line(default_interval_category_dataset_1, 690).
+
+NPE at line(default_interval_category_dataset_1, 690) / Null Expression - f_category_keys_28[categoryKeys]
+	 can be caused by 
+default_interval_category_dataset_1_literal8[null] - line(default_interval_category_dataset_1, 208).
+
+NPE at line(default_interval_category_dataset_1, 748) / Null Expression - f_category_keys_28[categoryKeys]
+	 can be caused by 
+f_category_keys_28[categoryKeys] - line(default_interval_category_dataset_1, 748).
+
+NPE at line(default_interval_category_dataset_1, 748) / Null Expression - f_category_keys_28[categoryKeys]
+	 can be caused by 
+default_interval_category_dataset_1_literal8[null] - line(default_interval_category_dataset_1, 208).

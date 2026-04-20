@@ -1,0 +1,157 @@
+Faulty Code:
+org.apache.commons.lang3.StringUtils:3502 `        return replaceEach(text, searchList, replacementList, false, 0);`
+org.apache.commons.lang3.StringUtils:3612 `        if (text == null || text.length() == 0 || searchList == null || `
+org.apache.commons.lang3.StringUtils:3615 `            return text;`
+org.apache.commons.lang3.StringUtils:3619 `        if (timeToLive < 0) {`
+org.apache.commons.lang3.StringUtils:3623 `        int searchLength = searchList.length;`
+org.apache.commons.lang3.StringUtils:3624 `        int replacementLength = replacementList.length;`
+org.apache.commons.lang3.StringUtils:3627 `        if (searchLength != replacementLength) {`
+org.apache.commons.lang3.StringUtils:3635 `        boolean[] noMoreMatchesForReplIndex = new boolean[searchLength];`
+org.apache.commons.lang3.StringUtils:3638 `        int textIndex = -1;`
+org.apache.commons.lang3.StringUtils:3639 `        int replaceIndex = -1;`
+org.apache.commons.lang3.StringUtils:3640 `        int tempIndex = -1;`
+org.apache.commons.lang3.StringUtils:3644 `        for (int i = 0; i < searchLength; i++) {`
+org.apache.commons.lang3.StringUtils:3645 `            if (noMoreMatchesForReplIndex[i] || searchList[i] == null || `
+org.apache.commons.lang3.StringUtils:3648 `                continue;`
+org.apache.commons.lang3.StringUtils:3650 `            tempIndex = text.indexOf(searchList[i]);`
+org.apache.commons.lang3.StringUtils:3653 `            if (tempIndex == -1) {`
+org.apache.commons.lang3.StringUtils:3654 `                noMoreMatchesForReplIndex[i] = true;`
+org.apache.commons.lang3.StringUtils:3656 `                if (textIndex == -1 || tempIndex < textIndex) {`
+org.apache.commons.lang3.StringUtils:3657 `                    textIndex = tempIndex;`
+org.apache.commons.lang3.StringUtils:3658 `                    replaceIndex = i;`
+org.apache.commons.lang3.StringUtils:3665 `        if (textIndex == -1) {`
+org.apache.commons.lang3.StringUtils:3666 `            return text;`
+org.apache.commons.lang3.StringUtils:3669 `        int start = 0;`
+org.apache.commons.lang3.StringUtils:3672 `        int increase = 0;`
+org.apache.commons.lang3.StringUtils:3675 `        for (int i = 0; i < searchList.length; i++) {`
+org.apache.commons.lang3.StringUtils:3676 `            int greater = replacementList[i].length() - searchList[i].length();`
+org.apache.commons.lang3.StringUtils:3677 `            if (greater > 0) {`
+org.apache.commons.lang3.StringUtils:3682 `        increase = Math.min(increase, text.length() / 5);`
+org.apache.commons.lang3.StringUtils:3684 `        StringBuilder buf = new StringBuilder(text.length() + increase);`
+org.apache.commons.lang3.StringUtils:3686 `        while (textIndex != -1) {`
+org.apache.commons.lang3.StringUtils:3688 `            for (int i = start; i < textIndex; i++) {`
+org.apache.commons.lang3.StringUtils:3689 `                buf.append(text.charAt(i));`
+org.apache.commons.lang3.StringUtils:3691 `            buf.append(replacementList[replaceIndex]);`
+org.apache.commons.lang3.StringUtils:3693 `            start = textIndex + searchList[replaceIndex].length();`
+org.apache.commons.lang3.StringUtils:3695 `            textIndex = -1;`
+org.apache.commons.lang3.StringUtils:3696 `            replaceIndex = -1;`
+org.apache.commons.lang3.StringUtils:3697 `            tempIndex = -1;`
+org.apache.commons.lang3.StringUtils:3700 `            for (int i = 0; i < searchLength; i++) {`
+org.apache.commons.lang3.StringUtils:3701 `                if (noMoreMatchesForReplIndex[i] || searchList[i] == null || `
+org.apache.commons.lang3.StringUtils:3706 `                tempIndex = text.indexOf(searchList[i], start);`
+org.apache.commons.lang3.StringUtils:3709 `                if (tempIndex == -1) {`
+org.apache.commons.lang3.StringUtils:3710 `                    noMoreMatchesForReplIndex[i] = true;`
+org.apache.commons.lang3.StringUtils:3712 `                    if (textIndex == -1 || tempIndex < textIndex) {`
+org.apache.commons.lang3.StringUtils:3713 `                        textIndex = tempIndex;`
+org.apache.commons.lang3.StringUtils:3714 `                        replaceIndex = i;`
+org.apache.commons.lang3.StringUtils:3721 `        int textLength = text.length();`
+org.apache.commons.lang3.StringUtils:3722 `        for (int i = start; i < textLength; i++) {`
+org.apache.commons.lang3.StringUtils:3723 `            buf.append(text.charAt(i));`
+org.apache.commons.lang3.StringUtils:3725 `        String result = buf.toString();`
+org.apache.commons.lang3.StringUtils:3726 `        if (!repeat) {`
+org.apache.commons.lang3.StringUtils:3727 `            return result;`
+
+
+Task Description:
+The provided code snippet is part of the `StringUtils` class from the Apache Commons Lang library. It focuses on the `replaceEach` method, which replaces occurrences of specified substrings within a given text with corresponding replacements. Here's a breakdown of the code:
+
+1. **Method Invocation**:
+   - `return replaceEach(text, searchList, replacementList, false, 0);`
+   - This line calls the `replaceEach` method with the provided `text`, `searchList`, and `replacementList`. The `false` parameter indicates that replacements should not be repeated, and `0` is the initial value for `timeToLive`.
+
+2. **Initial Checks**:
+   - The method checks if `text` is `null` or empty, or if `searchList` is `null`. If any of these conditions are true, it returns the original `text`.
+
+3. **Length Checks**:
+   - It checks if `timeToLive` is less than 0, which would indicate an invalid state.
+   - It calculates the lengths of `searchList` and `replacementList` and ensures they are equal. If not, it throws an `IllegalArgumentException`.
+
+4. **Setup for Replacement**:
+   - Initializes a boolean array `noMoreMatchesForReplIndex` to keep track of which search strings have no more matches.
+   - Initializes indices `textIndex`, `replaceIndex`, and `tempIndex` to manage the positions of matches and replacements.
+
+5. **Finding Matches**:
+   - Iterates through `searchList` to find the first occurrence of any search string in `text`.
+   - Updates `textIndex` and `replaceIndex` to the positions of the found match.
+
+6. **Replacement Loop**:
+   - If no matches are found (`textIndex == -1`), it returns the original `text`.
+   - Otherwise, it calculates the required buffer size for the new string and initializes a `StringBuilder`.
+
+7. **Performing Replacements**:
+   - Iterates through `text`, appending characters to the `StringBuilder` and replacing matched substrings with corresponding replacements.
+   - Updates `start`, `textIndex`, and `replaceIndex` for the next iteration.
+
+8. **Finalizing**:
+   - Appends any remaining characters from `text` to the `StringBuilder`.
+   - Converts the `StringBuilder` to a string and returns it if `repeat` is `false`.
+
+9. **Test Cases**:
+   - The provided test cases validate the `replaceEach` method with various inputs, ensuring it handles `null` values, empty strings, and different combinations of search and replacement lists correctly.
+
+In summary, the `replaceEach` method in the `StringUtils` class replaces occurrences of specified substrings in a given text with corresponding replacements, handling edge cases and ensuring efficient string manipulation. The provided test cases ensure the method works as expected for various scenarios.
+
+Test Results:
+The provided code is throwing NullPointerException. For examples:
+Here are the tests and error messages of NullPointerExceptions.
+/** 
+ * Test method for 'StringUtils.replaceEach(String, String[], String[])'
+ */
+public void testReplace_StringStringArrayStringArray(){
+  assertNull(StringUtils.replaceEach(null,new String[]{"a"},new String[]{"b"}));
+  assertEquals(StringUtils.replaceEach("",new String[]{"a"},new String[]{"b"}),"");
+  assertEquals(StringUtils.replaceEach("aba",null,null),"aba");
+  assertEquals(StringUtils.replaceEach("aba",new String[0],null),"aba");
+  assertEquals(StringUtils.replaceEach("aba",null,new String[0]),"aba");
+  assertEquals(StringUtils.replaceEach("aba",new String[]{"a"},null),"aba");
+  assertEquals(StringUtils.replaceEach("aba",new String[]{"a"},new String[]{""}),"b");
+  assertEquals(StringUtils.replaceEach("aba",new String[]{null},new String[]{"a"}),"aba");
+  assertEquals(StringUtils.replaceEach("abcde",new String[]{"ab","d"},new String[]{"w","t"}),"wcte");
+  assertEquals(StringUtils.replaceEach("abcde",new String[]{"ab","d"},new String[]{"d","t"}),"dcte");
+  assertEquals("bcc",StringUtils.replaceEach("abc",new String[]{"a","b"},new String[]{"b","c"}));
+  assertEquals("q651.506bera",StringUtils.replaceEach("d216.102oren",new String[]{"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","1","2","3","4","5","6","7","8","9"},new String[]{"n","o","p","q","r","s","t","u","v","w","x","y","z","a","b","c","d","e","f","g","h","i","j","k","l","m","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","A","B","C","D","E","F","G","H","I","J","K","L","M","5","6","7","8","9","1","2","3","4"}));
+  assertEquals(StringUtils.replaceEach("aba",new String[]{"a"},new String[]{null}),"aba");
+  assertEquals(StringUtils.replaceEach("aba",new String[]{"a","b"},new String[]{"c",null}),"cbc");
+}
+
+
+
+testReplace_StringStringArrayStringArray(org.apache.commons.lang3.StringUtilsTest): Cannot invoke "String.length()" because "replacementList[i]" is null
+Cannot invoke "String.length()" because "replacementList[i]" is null
+java.lang.NullPointerException: Cannot invoke "String.length()" because "replacementList[i]" is null
+	at org.apache.commons.lang3.StringUtils.replaceEach(StringUtils.java:3676)
+	at org.apache.commons.lang3.StringUtils.replaceEach(StringUtils.java:3502)
+	at org.apache.commons.lang3.StringUtilsTest.testReplace_StringStringArrayStringArray(StringUtilsTest.java:1039)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+
+
+
+
+
+Analyze the provided code and utilize task description, test results, and SBFL techniques results to help in identifying potentially faulty lines. Provide the results following this JSON template:
+```json
+{
+  "faultLoc": [
+    {   
+      "faultyLine": (indicating the location of the suspicious code in ClassName:LineNumber format),
+      "code": (displaying the actual code),
+      "explanation": (step by step reasoning on why this location is considered potentially faulty)
+    },  
+    ... 
+   ]   
+}
+```
+Ensure that the objects in the "faultLoc" array are stored in descending order of suspicion.

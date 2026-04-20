@@ -1,0 +1,19 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.lang3.exception.ExceptionUtils:376",
+            "code": "throwable.printStackTrace(pw);",
+            "explanation": "The NullPointerException is thrown because the method `printStackTrace` is called on a `null` throwable. The test case `testNullException` passes `null` to `ExceptionUtils.getStackTrace`, which does not handle the `null` input properly."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.exception.ExceptionUtils:374",
+            "code": "final StringWriter sw = new StringWriter();",
+            "explanation": "While this line itself is not faulty, it is part of the method where the `NullPointerException` occurs. The method should include a check for `null` before attempting to print the stack trace."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.exception.ExceptionUtils:375",
+            "code": "final PrintWriter pw = new PrintWriter(sw, true);",
+            "explanation": "Similar to line 374, this line is part of the method where the `NullPointerException` occurs. The method should include a check for `null` before attempting to print the stack trace."
+        }
+    ]
+}

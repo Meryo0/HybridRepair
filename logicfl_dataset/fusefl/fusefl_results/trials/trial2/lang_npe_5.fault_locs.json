@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.lang3.time.DurationUtils:73",
+            "code": "return duration.getNano() % 1_000_000;",
+            "explanation": "The NullPointerException is thrown because the method attempts to call `getNano()` on a null `duration` object. The check for null is present, but the method should return 0 immediately if `duration` is null."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.Range:76",
+            "code": "return between(fromInclusive, toInclusive, null);",
+            "explanation": "Passing `null` as the comparator might lead to unexpected behavior if the `between` method does not handle null comparators properly. This could cause issues in the `Range` class."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.Range:174",
+            "code": "this.comparator = ComparableComparator.INSTANCE;",
+            "explanation": "If the `ComparableComparator.INSTANCE` is not properly initialized or if it does not handle certain types correctly, it could lead to issues when comparing elements."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.Range:178",
+            "code": "if (this.comparator.compare(element1, element2) < 1) {",
+            "explanation": "If the comparator is not correctly comparing the elements, it could lead to incorrect initialization of the `minimum` and `maximum` fields, causing unexpected behavior in the `Range` class."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.Range:48",
+            "code": "return ((Comparable) obj1).compareTo(obj2);",
+            "explanation": "Casting `obj1` to `Comparable` and calling `compareTo` on it assumes that `obj1` is always a `Comparable`. If `obj1` is not a `Comparable`, this will cause a `ClassCastException`."
+        }
+    ]
+}

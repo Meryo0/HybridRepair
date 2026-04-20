@@ -1,0 +1,74 @@
+Provide a short code description of the following code:
+ org.apache.commons.lang3.StringUtils:3502 `        return replaceEach(text, searchList, replacementList, false, 0);`
+org.apache.commons.lang3.StringUtils:3612 `        if (text == null || text.length() == 0 || searchList == null || `
+org.apache.commons.lang3.StringUtils:3615 `            return text;`
+org.apache.commons.lang3.StringUtils:3619 `        if (timeToLive < 0) {`
+org.apache.commons.lang3.StringUtils:3623 `        int searchLength = searchList.length;`
+org.apache.commons.lang3.StringUtils:3624 `        int replacementLength = replacementList.length;`
+org.apache.commons.lang3.StringUtils:3627 `        if (searchLength != replacementLength) {`
+org.apache.commons.lang3.StringUtils:3635 `        boolean[] noMoreMatchesForReplIndex = new boolean[searchLength];`
+org.apache.commons.lang3.StringUtils:3638 `        int textIndex = -1;`
+org.apache.commons.lang3.StringUtils:3639 `        int replaceIndex = -1;`
+org.apache.commons.lang3.StringUtils:3640 `        int tempIndex = -1;`
+org.apache.commons.lang3.StringUtils:3644 `        for (int i = 0; i < searchLength; i++) {`
+org.apache.commons.lang3.StringUtils:3645 `            if (noMoreMatchesForReplIndex[i] || searchList[i] == null || `
+org.apache.commons.lang3.StringUtils:3648 `                continue;`
+org.apache.commons.lang3.StringUtils:3650 `            tempIndex = text.indexOf(searchList[i]);`
+org.apache.commons.lang3.StringUtils:3653 `            if (tempIndex == -1) {`
+org.apache.commons.lang3.StringUtils:3654 `                noMoreMatchesForReplIndex[i] = true;`
+org.apache.commons.lang3.StringUtils:3656 `                if (textIndex == -1 || tempIndex < textIndex) {`
+org.apache.commons.lang3.StringUtils:3657 `                    textIndex = tempIndex;`
+org.apache.commons.lang3.StringUtils:3658 `                    replaceIndex = i;`
+org.apache.commons.lang3.StringUtils:3665 `        if (textIndex == -1) {`
+org.apache.commons.lang3.StringUtils:3666 `            return text;`
+org.apache.commons.lang3.StringUtils:3669 `        int start = 0;`
+org.apache.commons.lang3.StringUtils:3672 `        int increase = 0;`
+org.apache.commons.lang3.StringUtils:3675 `        for (int i = 0; i < searchList.length; i++) {`
+org.apache.commons.lang3.StringUtils:3676 `            int greater = replacementList[i].length() - searchList[i].length();`
+org.apache.commons.lang3.StringUtils:3677 `            if (greater > 0) {`
+org.apache.commons.lang3.StringUtils:3682 `        increase = Math.min(increase, text.length() / 5);`
+org.apache.commons.lang3.StringUtils:3684 `        StringBuilder buf = new StringBuilder(text.length() + increase);`
+org.apache.commons.lang3.StringUtils:3686 `        while (textIndex != -1) {`
+org.apache.commons.lang3.StringUtils:3688 `            for (int i = start; i < textIndex; i++) {`
+org.apache.commons.lang3.StringUtils:3689 `                buf.append(text.charAt(i));`
+org.apache.commons.lang3.StringUtils:3691 `            buf.append(replacementList[replaceIndex]);`
+org.apache.commons.lang3.StringUtils:3693 `            start = textIndex + searchList[replaceIndex].length();`
+org.apache.commons.lang3.StringUtils:3695 `            textIndex = -1;`
+org.apache.commons.lang3.StringUtils:3696 `            replaceIndex = -1;`
+org.apache.commons.lang3.StringUtils:3697 `            tempIndex = -1;`
+org.apache.commons.lang3.StringUtils:3700 `            for (int i = 0; i < searchLength; i++) {`
+org.apache.commons.lang3.StringUtils:3701 `                if (noMoreMatchesForReplIndex[i] || searchList[i] == null || `
+org.apache.commons.lang3.StringUtils:3706 `                tempIndex = text.indexOf(searchList[i], start);`
+org.apache.commons.lang3.StringUtils:3709 `                if (tempIndex == -1) {`
+org.apache.commons.lang3.StringUtils:3710 `                    noMoreMatchesForReplIndex[i] = true;`
+org.apache.commons.lang3.StringUtils:3712 `                    if (textIndex == -1 || tempIndex < textIndex) {`
+org.apache.commons.lang3.StringUtils:3713 `                        textIndex = tempIndex;`
+org.apache.commons.lang3.StringUtils:3714 `                        replaceIndex = i;`
+org.apache.commons.lang3.StringUtils:3721 `        int textLength = text.length();`
+org.apache.commons.lang3.StringUtils:3722 `        for (int i = start; i < textLength; i++) {`
+org.apache.commons.lang3.StringUtils:3723 `            buf.append(text.charAt(i));`
+org.apache.commons.lang3.StringUtils:3725 `        String result = buf.toString();`
+org.apache.commons.lang3.StringUtils:3726 `        if (!repeat) {`
+org.apache.commons.lang3.StringUtils:3727 `            return result;`
+ 
+The provided code is expected to pass these test cases:
+ /** 
+ * Test method for 'StringUtils.replaceEach(String, String[], String[])'
+ */
+public void testReplace_StringStringArrayStringArray(){
+  assertNull(StringUtils.replaceEach(null,new String[]{"a"},new String[]{"b"}));
+  assertEquals(StringUtils.replaceEach("",new String[]{"a"},new String[]{"b"}),"");
+  assertEquals(StringUtils.replaceEach("aba",null,null),"aba");
+  assertEquals(StringUtils.replaceEach("aba",new String[0],null),"aba");
+  assertEquals(StringUtils.replaceEach("aba",null,new String[0]),"aba");
+  assertEquals(StringUtils.replaceEach("aba",new String[]{"a"},null),"aba");
+  assertEquals(StringUtils.replaceEach("aba",new String[]{"a"},new String[]{""}),"b");
+  assertEquals(StringUtils.replaceEach("aba",new String[]{null},new String[]{"a"}),"aba");
+  assertEquals(StringUtils.replaceEach("abcde",new String[]{"ab","d"},new String[]{"w","t"}),"wcte");
+  assertEquals(StringUtils.replaceEach("abcde",new String[]{"ab","d"},new String[]{"d","t"}),"dcte");
+  assertEquals("bcc",StringUtils.replaceEach("abc",new String[]{"a","b"},new String[]{"b","c"}));
+  assertEquals("q651.506bera",StringUtils.replaceEach("d216.102oren",new String[]{"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","1","2","3","4","5","6","7","8","9"},new String[]{"n","o","p","q","r","s","t","u","v","w","x","y","z","a","b","c","d","e","f","g","h","i","j","k","l","m","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","A","B","C","D","E","F","G","H","I","J","K","L","M","5","6","7","8","9","1","2","3","4"}));
+  assertEquals(StringUtils.replaceEach("aba",new String[]{"a"},new String[]{null}),"aba");
+  assertEquals(StringUtils.replaceEach("aba",new String[]{"a","b"},new String[]{"c",null}),"cbc");
+}
+

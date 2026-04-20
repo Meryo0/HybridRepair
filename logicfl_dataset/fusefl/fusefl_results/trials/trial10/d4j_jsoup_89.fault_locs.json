@@ -1,0 +1,19 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jsoup.nodes.Attribute:88",
+            "code": "String oldVal = parent.get(this.key);",
+            "explanation": "The NullPointerException is thrown because 'parent' is null when 'setValue' is called on an orphan attribute. The code does not check if 'parent' is null before attempting to call 'parent.get(this.key)'."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Attribute:67",
+            "code": "if (parent != null) {",
+            "explanation": "This line starts a conditional block that checks if 'parent' is not null. However, the code inside this block does not handle the case where 'parent' is null, leading to potential NullPointerExceptions when 'parent' is accessed later."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Attribute:73",
+            "code": "}",
+            "explanation": "This closing brace ends the conditional block that checks if 'parent' is not null. The code outside this block does not account for the possibility that 'parent' might be null, which can lead to NullPointerExceptions."
+        }
+    ]
+}

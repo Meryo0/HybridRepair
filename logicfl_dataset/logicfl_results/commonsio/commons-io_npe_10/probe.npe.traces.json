@@ -1,0 +1,42 @@
+{"npe.traces": [{
+    "test.method": "testNullCharset",
+    "traces": [
+        {
+            "is_target": true,
+            "method": "<init>",
+            "line": 76,
+            "class": "org.apache.commons.io.input.CharSequenceInputStream"
+        },
+        {
+            "is_target": true,
+            "method": "<init>",
+            "line": 62,
+            "class": "org.apache.commons.io.input.CharSequenceInputStream"
+        },
+        {
+            "is_target": true,
+            "method": "testNullCharset",
+            "line": 79,
+            "class": "org.apache.commons.io.input.CharSequenceInputStreamTest"
+        },
+        {
+            "is_target": false,
+            "method": "invoke",
+            "line": 569,
+            "class": "java.lang.reflect.Method"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        }
+    ],
+    "test.class": "org.apache.commons.io.input.CharSequenceInputStreamTest"
+}]}

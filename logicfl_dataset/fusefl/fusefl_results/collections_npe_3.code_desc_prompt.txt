@@ -1,0 +1,103 @@
+Provide a short code description of the following code:
+ org.apache.commons.collections4.collection.CompositeCollection:50 `    private final List<Collection<E>> all = new ArrayList<>();`
+org.apache.commons.collections4.collection.CompositeCollection:56 `        super();`
+org.apache.commons.collections4.collection.CompositeCollection:57 `    }`
+org.apache.commons.collections4.collection.CompositeCollection:101 `        int size = 0;`
+org.apache.commons.collections4.collection.CompositeCollection:102 `        for (final Collection<E> item : all) {`
+org.apache.commons.collections4.collection.CompositeCollection:103 `            size += item.size();`
+org.apache.commons.collections4.collection.CompositeCollection:135 `        for (final Collection<E> item : all) {`
+org.apache.commons.collections4.collection.CompositeCollection:136 `            if (item.contains(obj)) {`
+org.apache.commons.collections4.collection.CompositeCollection:137 `                return true;`
+org.apache.commons.collections4.collection.CompositeCollection:139 `        }`
+org.apache.commons.collections4.collection.CompositeCollection:140 `        return false;`
+org.apache.commons.collections4.collection.CompositeCollection:263 `        for (final Object item : coll) {`
+org.apache.commons.collections4.collection.CompositeCollection:264 `            if (contains(item) == false) {`
+org.apache.commons.collections4.collection.CompositeCollection:267 `        }`
+org.apache.commons.collections4.collection.CompositeCollection:268 `        return true;`
+org.apache.commons.collections4.collection.CompositeCollection:303 `        if (coll.size() == 0) {`
+org.apache.commons.collections4.collection.CompositeCollection:306 `        boolean changed = false;`
+org.apache.commons.collections4.collection.CompositeCollection:307 `        for (final Collection<E> item : all) {`
+org.apache.commons.collections4.collection.CompositeCollection:308 `            changed |= item.removeAll(coll);`
+org.apache.commons.collections4.collection.CompositeCollection:309 `        }`
+org.apache.commons.collections4.collection.CompositeCollection:310 `        return changed;`
+org.apache.commons.collections4.collection.CompositeCollection:325 `        boolean changed = false;`
+org.apache.commons.collections4.collection.CompositeCollection:326 `        for (final Collection<E> item : all) {`
+org.apache.commons.collections4.collection.CompositeCollection:327 `            changed |= item.retainAll(coll);`
+org.apache.commons.collections4.collection.CompositeCollection:328 `        }`
+org.apache.commons.collections4.collection.CompositeCollection:329 `        return changed;`
+org.apache.commons.collections4.collection.CompositeCollection:353 `        this.mutator = mutator;`
+org.apache.commons.collections4.collection.CompositeCollection:354 `    }`
+org.apache.commons.collections4.collection.CompositeCollection:362 `        all.add(compositeCollection);`
+org.apache.commons.collections4.collection.CompositeCollection:363 `    }`
+org.apache.commons.collections4.collection.CompositeCollection:373 `        all.add(compositeCollection1);`
+org.apache.commons.collections4.collection.CompositeCollection:374 `        all.add(compositeCollection2);`
+org.apache.commons.collections4.collection.CompositeCollection:375 `    }`
+org.apache.commons.collections4.collection.CompositeCollection:383 `        all.addAll(Arrays.asList(compositeCollections));`
+org.apache.commons.collections4.collection.CompositeCollection:384 `    }`
+ 
+The provided code is expected to pass these test cases:
+ @SuppressWarnings("unchecked") public void testContainsAll(){
+  setUpTest();
+  one.add((E)"1");
+  two.add((E)"1");
+  c.addComposited(one);
+  assertTrue(c.containsAll(two));
+  assertFalse(c.containsAll(null));
+}
+
+public void testAddNullLists2Args(){
+  ArrayList<String> nullList=null;
+  CompositeCollection<String> cc=new CompositeCollection<>();
+  cc.addComposited(nullList,nullList);
+  Assert.assertEquals(0,cc.size());
+}
+
+@SuppressWarnings("unchecked") public void testRemoveAll(){
+  setUpMutatorTest();
+  one.add((E)"1");
+  two.add((E)"2");
+  two.add((E)"1");
+  final Collection<E> removing=new ArrayList<>(one);
+  c.addComposited(one,two);
+  c.removeAll(removing);
+  assertTrue(!c.contains("1"));
+  assertTrue(!one.contains("1"));
+  assertTrue(!two.contains("1"));
+  c.removeAll(null);
+  assertTrue(!c.contains("1"));
+  assertTrue(!one.contains("1"));
+  assertTrue(!two.contains("1"));
+}
+
+@SuppressWarnings("unchecked") public void testRetainAll(){
+  setUpTest();
+  one.add((E)"1");
+  one.add((E)"2");
+  two.add((E)"1");
+  c.addComposited(one);
+  c.retainAll(two);
+  assertTrue(!c.contains("2"));
+  assertTrue(!one.contains("2"));
+  assertTrue(c.contains("1"));
+  assertTrue(one.contains("1"));
+  c.retainAll(null);
+  assertTrue(!c.contains("2"));
+  assertTrue(!one.contains("2"));
+  assertTrue(c.contains("1"));
+  assertTrue(one.contains("1"));
+}
+
+public void testAddNullList(){
+  ArrayList<String> nullList=null;
+  CompositeCollection<String> cc=new CompositeCollection<>();
+  cc.addComposited(nullList);
+  Assert.assertEquals(0,cc.size());
+}
+
+public void testAddNullListsVarArgs(){
+  ArrayList<String> nullList=null;
+  CompositeCollection<String> cc=new CompositeCollection<>();
+  cc.addComposited(nullList,nullList,nullList);
+  Assert.assertEquals(0,cc.size());
+}
+

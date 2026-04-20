@@ -1,0 +1,14 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.lang3.ClassUtils:910",
+            "code": "classes[i] = array[i].getClass();",
+            "explanation": "The NullPointerException is thrown because the code attempts to call `getClass()` on a null element in the array. The test case `assertTrue(Arrays.equals(new Class[]{String.class, null, Double.class}, ClassUtils.toClass(new Object[]{\"Test\", null, 99d})));` includes a null element, which causes this issue."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.ClassUtils:909",
+            "code": "for (int i = 0; i < array.length; i++) {",
+            "explanation": "This line is part of the loop that iterates over the array elements. The loop does not handle null elements, leading to the NullPointerException when `array[i]` is null. A null check should be added before calling `getClass()`."
+        }
+    ]
+}

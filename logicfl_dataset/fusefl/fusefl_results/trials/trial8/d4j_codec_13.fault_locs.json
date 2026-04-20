@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.codec.language.DoubleMetaphone:244",
+            "code": "return doubleMetaphone(value1, alternate).equals(doubleMetaphone(value2, alternate));",
+            "explanation": "The NullPointerException is thrown because the return value of doubleMetaphone(value1, alternate) or doubleMetaphone(value2, alternate) is null. This indicates that the doubleMetaphone method might be returning null for certain inputs, which is not handled properly before calling equals."
+        },
+        {
+            "faultyLine": "org.apache.commons.codec.language.DoubleMetaphone:86",
+            "code": "value = cleanInput(value);",
+            "explanation": "The cleanInput method might be returning null for certain inputs, which is not checked before further processing. This could lead to a null value being passed to other methods, causing a NullPointerException."
+        },
+        {
+            "faultyLine": "org.apache.commons.codec.language.DoubleMetaphone:87",
+            "code": "if (value == null) {",
+            "explanation": "This line checks if the value is null after being cleaned. If cleanInput returns null, this condition is true, and the method returns null. This could be the source of the null value causing the NullPointerException in the isDoubleMetaphoneEqual method."
+        },
+        {
+            "faultyLine": "org.apache.commons.codec.language.DoubleMetaphone:888",
+            "code": "if (input == null) {",
+            "explanation": "This line checks if the input is null. If the input is null, the method returns null. This could be another source of the null value causing the NullPointerException in the isDoubleMetaphoneEqual method."
+        },
+        {
+            "faultyLine": "org.apache.commons.codec.language.DoubleMetaphone:893",
+            "code": "return null;",
+            "explanation": "This line returns null if the input length is 0 after trimming. This could lead to a null value being passed to other methods, causing a NullPointerException."
+        }
+    ]
+}

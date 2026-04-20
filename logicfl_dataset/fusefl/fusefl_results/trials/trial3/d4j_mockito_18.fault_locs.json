@@ -1,0 +1,19 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues:117",
+            "code": "return null;",
+            "explanation": "The method `returnValueFor` in the `ReturnsEmptyValues` class is returning `null` for the `Iterable` type, which causes the NullPointerException when `iterator()` is called on the returned value. This line should be modified to return an empty iterable instead of `null`."
+        },
+        {
+            "faultyLine": "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues:87",
+            "code": "} else if (type == Collection.class) {",
+            "explanation": "The `returnValueFor` method does not handle the `Iterable` type explicitly. It should include a case for `Iterable` to return an empty iterable. This line is part of the conditional checks that determine the return value based on the type."
+        },
+        {
+            "faultyLine": "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues:20",
+            "code": "public class ReturnsEmptyValues implements Answer<Object>, Serializable {",
+            "explanation": "The class `ReturnsEmptyValues` is responsible for providing default return values for various types. The issue lies in its `returnValueFor` method, which does not correctly handle the `Iterable` type, leading to a NullPointerException."
+        }
+    ]
+}

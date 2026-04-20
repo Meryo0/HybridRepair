@@ -1,0 +1,47 @@
+@Test public void testToString_URLClassLoader() throws IOException {
+  final URL url=new URL("http://localhost");
+  try (URLClassLoader urlClassLoader=new URLClassLoader(new URL[]{url})){
+    Assertions.assertEquals(String.format("%s[%s]",urlClassLoader,url),ClassLoaderUtils.toString(urlClassLoader));
+  }
+   assertEquals("null",ClassLoaderUtils.toString((URLClassLoader)null));
+}
+
+@Test public void testToString_ClassLoader() throws IOException {
+  final URL url=new URL("http://localhost");
+  try (URLClassLoader urlClassLoader=new URLClassLoader(new URL[]{url})){
+    @SuppressWarnings("resource") final ClassLoader classLoader=urlClassLoader;
+    Assertions.assertEquals(String.format("%s[%s]",classLoader,url),ClassLoaderUtils.toString(classLoader));
+  }
+   assertEquals("null",ClassLoaderUtils.toString((ClassLoader)null));
+}
+
+
+
+  JUnit Jupiter:ClassLoaderUtilsTest:testToString_URLClassLoader()
+    MethodSource [className = 'org.apache.commons.lang3.ClassLoaderUtilsTest', methodName = 'testToString_URLClassLoader', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.net.URLClassLoader.getURLs()" because "classLoader" is null
+       org.apache.commons.lang3.ClassLoaderUtils.toString(ClassLoaderUtils.java:77)
+       org.apache.commons.lang3.ClassLoaderUtilsTest.testToString_URLClassLoader(ClassLoaderUtilsTest.java:64)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727)
+       org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+       org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+       org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
+       [...]
+  JUnit Jupiter:ClassLoaderUtilsTest:testToString_ClassLoader()
+    MethodSource [className = 'org.apache.commons.lang3.ClassLoaderUtilsTest', methodName = 'testToString_ClassLoader', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "Object.toString()" because "classLoader" is null
+       org.apache.commons.lang3.ClassLoaderUtils.toString(ClassLoaderUtils.java:67)
+       org.apache.commons.lang3.ClassLoaderUtilsTest.testToString_ClassLoader(ClassLoaderUtilsTest.java:55)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727)
+       org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+       org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+       org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
+       [...]

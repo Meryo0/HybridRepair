@@ -1,0 +1,8 @@
+Fault Localization Results
+NPE at line(iocase_1, 180) / Null Expression - p_start_87[start]
+	 can be caused by 
+p_start_87[start] - line(iocase_1, 180).
+
+NPE at line(iocase_1, 196) / Null Expression - p_end_89[end]
+	 can be caused by 
+p_end_89[end] - line(iocase_1, 196).

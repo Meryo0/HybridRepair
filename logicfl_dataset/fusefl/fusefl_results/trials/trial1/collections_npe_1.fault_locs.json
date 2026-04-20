@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.collections4.map.CompositeMap:136",
+            "code": "final Collection<K> intersect = CollectionUtils.intersection(this.composite[i].keySet(), map.keySet());",
+            "explanation": "The NullPointerException is thrown because 'map' is null. The method 'addComposited' does not check if 'map' is null before attempting to access its keySet. Adding a null check before this line can prevent the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.collections4.map.CompositeMap:112",
+            "code": "this.addComposited(composite[i]);",
+            "explanation": "The constructor of CompositeMap calls 'addComposited' without checking if the elements in 'composite' array are null. This can lead to a NullPointerException if any element in 'composite' is null. Adding a null check before calling 'addComposited' can prevent this."
+        },
+        {
+            "faultyLine": "org.apache.commons.collections4.map.CompositeMap:144",
+            "code": "final Map<K, V>[] temp = new Map[this.composite.length + 1];",
+            "explanation": "This line creates a new array 'temp' to hold the composite maps. If 'this.composite' is null, this line will throw a NullPointerException. Ensuring 'this.composite' is initialized before this line can prevent the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.collections4.map.CompositeMap:145",
+            "code": "System.arraycopy(this.composite, 0, temp, 0, this.composite.length);",
+            "explanation": "This line copies the contents of 'this.composite' to 'temp'. If 'this.composite' is null, this line will throw a NullPointerException. Ensuring 'this.composite' is initialized before this line can prevent the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.collections4.map.CompositeMap:147",
+            "code": "this.composite = temp;",
+            "explanation": "This line assigns the new array 'temp' to 'this.composite'. If 'temp' is null, this line will throw a NullPointerException. Ensuring 'temp' is properly initialized before this line can prevent the exception."
+        }
+    ]
+}

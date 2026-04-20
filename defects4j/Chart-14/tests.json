@@ -1,0 +1,31 @@
+{
+ "buggy.hash": "",
+ "fixed_hash": "811",
+ "passed.classes": [],
+ "failed.classes": [
+  "org.jfree.chart.plot.junit.CategoryPlotTests",
+  "org.jfree.chart.plot.junit.XYPlotTests"
+ ],
+ "failed.tests": [
+  {
+   "class": "org.jfree.chart.plot.junit.CategoryPlotTests",
+   "name": "testRemoveRangeMarker",
+   "message": ""
+  },
+  {
+   "class": "org.jfree.chart.plot.junit.CategoryPlotTests",
+   "name": "testRemoveDomainMarker",
+   "message": ""
+  },
+  {
+   "class": "org.jfree.chart.plot.junit.XYPlotTests",
+   "name": "testRemoveRangeMarker",
+   "message": ""
+  },
+  {
+   "class": "org.jfree.chart.plot.junit.XYPlotTests",
+   "name": "testRemoveDomainMarker",
+   "message": ""
+  }
+ ]
+}

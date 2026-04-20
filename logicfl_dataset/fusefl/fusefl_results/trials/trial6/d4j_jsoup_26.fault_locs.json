@@ -1,0 +1,39 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jsoup.safety.Cleaner:73",
+            "code": "List<Node> sourceChildren = source.childNodes();",
+            "explanation": "The error message indicates a NullPointerException at this line, suggesting that 'source' is null. This implies that the 'source' element passed to the 'copySafeNodes' method is not properly initialized or is null."
+        },
+        {
+            "faultyLine": "org.jsoup.safety.Cleaner:43",
+            "code": "copySafeNodes(dirtyDocument.body(), clean.body());",
+            "explanation": "The 'dirtyDocument.body()' might be returning null, which is then passed to 'copySafeNodes'. This would cause 'source' to be null in 'copySafeNodes', leading to the NullPointerException."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Document:59",
+            "code": "return findFirstElementByTagName(\"body\", this);",
+            "explanation": "The 'body()' method in 'Document' might be returning null if the 'body' tag is not found. This could cause the subsequent call to 'childNodes()' to fail."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Document:164",
+            "code": "if (node.nodeName().equals(tag))",
+            "explanation": "The 'findFirstElementByTagName' method might not be finding the 'body' tag, resulting in a null return value. This would cause 'body()' to return null."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Document:167",
+            "code": "for (Node child: node.childNodes) {",
+            "explanation": "If 'node' is null, this loop would not execute, and 'findFirstElementByTagName' would return null. This could cause 'body()' to return null."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Document:194",
+            "code": "return \"#document\";",
+            "explanation": "This line is part of the 'nodeName()' method. If 'nodeName()' is called on a null object, it could lead to unexpected behavior. However, this is less likely the direct cause of the issue."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Document:43",
+            "code": "return doc;",
+            "explanation": "The 'createShell' method might be returning a 'Document' without a 'body' element, causing 'body()' to return null. This is less likely but still a potential issue."
+        }
+    ]
+}

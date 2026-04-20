@@ -1,0 +1,12 @@
+org.apache.commons.io.IOCase 174
+org.apache.commons.io.filefilter.NameFileFilter 166
+org.apache.commons.io.filefilter.AbstractFilterTest 50
+org.apache.commons.io.filefilter.EmptyFileFilter 107
+org.apache.commons.io.filefilter.AbstractFilterTest 50
+org.apache.commons.io.filefilter.FileFileFilter 100
+org.apache.commons.io.filefilter.AbstractFilterTest 50
+org.apache.commons.io.filefilter.CanReadFileFilter 95
+org.apache.commons.io.filefilter.AbstractFilterTest 50
+org.apache.commons.io.filefilter.CanWriteFileFilter 83
+org.apache.commons.io.filefilter.AbstractFilterTest 50
+org.apache.commons.io.filefilter.HiddenFileFilter 117

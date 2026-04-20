@@ -1,0 +1,91 @@
+{
+    "coverage": [
+        {
+            "covered": [ 67, 98, 99, 100, 101, 102, 131, 216, 220, 221, 222, 223, 244, 256, 259, 260, 262, 333 ],
+            "className": "org.jfree.data.ComparableObjectSeries"
+        },
+        {
+            "covered": [ 51 ],
+            "className": "org.jfree.data.xy.AbstractIntervalXYDataset"
+        },
+        {
+            "covered": [ 63, 64, 65 ],
+            "className": "org.jfree.data.general.DatasetGroup"
+        },
+        {
+            "covered": [ 70, 71, 82, 83, 84 ],
+            "className": "org.jfree.data.event.SeriesChangeEvent"
+        },
+        {
+            "covered": [ 64, 65, 97, 98, 99, 112, 113, 114, 127, 128, 129, 142, 143, 144 ],
+            "className": "org.jfree.data.xy.XYIntervalDataItem"
+        },
+        {
+            "covered": [ 49 ],
+            "className": "org.jfree.chart.event.DatasetChangeInfo"
+        },
+        {
+            "covered": [ 104, 113, 114, 1271, 1272, 1273, 1274, 1275, 1276, 1294, 1295, 1296, 1297, 1298, 1299 ],
+            "className": "org.jfree.data.general.junit.DatasetUtilitiesTests"
+        },
+        {
+            "covered": [ 55 ],
+            "className": "org.jfree.data.xy.AbstractXYDataset"
+        },
+        {
+            "covered": [ 73, 74, 75, 84, 87, 88, 89, 91, 99, 113, 116, 147, 173, 174, 187, 188, 215, 216, 229, 230 ],
+            "className": "org.jfree.data.xy.XYIntervalSeriesCollection"
+        },
+        {
+            "covered": [ 104, 105, 113, 114, 117, 118, 119, 120, 121, 122, 297, 298, 315, 316, 318, 328, 329, 336 ],
+            "className": "org.jfree.data.general.Series"
+        },
+        {
+            "covered": [ 72, 73, 76, 77, 78, 95 ],
+            "className": "org.jfree.data.ComparableObjectItem"
+        },
+        {
+            "covered": [ 95, 96, 97, 98, 176, 177, 189, 190, 196 ],
+            "className": "org.jfree.data.general.AbstractDataset"
+        },
+        {
+            "covered": [ 64, 65, 79, 80, 94, 95, 120, 121, 135, 136, 162, 163, 177, 178, 189 ],
+            "className": "org.jfree.data.xy.XYIntervalSeries"
+        },
+        {
+            "covered": [ 66, 67 ],
+            "className": "org.jfree.data.general.AbstractSeriesDataset"
+        },
+        {
+            "covered": [ 87, 88, 91, 92, 93 ],
+            "className": "org.jfree.data.event.DatasetChangeEvent"
+        },
+        {
+            "covered": [ 78, 79, 80, 81, 82, 83, 84, 92, 101, 119, 128 ],
+            "className": "org.jfree.data.xy.XYInterval"
+        },
+        {
+            "covered": [ 726, 742, 745, 746, 747, 750, 751, 752, 753, 754, 755, 756, 757, 760, 765, 779, 780, 1213, 1231, 1232, 1233, 1236, 1238, 1239, 1240, 1241, 1242, 1243, 1244, 1247, 1252, 1283, 1284 ],
+            "className": "org.jfree.data.general.DatasetUtilities"
+        }
+    ],
+    "classes": [
+        "org.jfree.chart.event.DatasetChangeInfo",
+        "org.jfree.data.ComparableObjectItem",
+        "org.jfree.data.ComparableObjectSeries",
+        "org.jfree.data.event.DatasetChangeEvent",
+        "org.jfree.data.event.SeriesChangeEvent",
+        "org.jfree.data.general.AbstractDataset",
+        "org.jfree.data.general.AbstractSeriesDataset",
+        "org.jfree.data.general.DatasetGroup",
+        "org.jfree.data.general.DatasetUtilities",
+        "org.jfree.data.general.Series",
+        "org.jfree.data.general.junit.DatasetUtilitiesTests",
+        "org.jfree.data.xy.AbstractIntervalXYDataset",
+        "org.jfree.data.xy.AbstractXYDataset",
+        "org.jfree.data.xy.XYInterval",
+        "org.jfree.data.xy.XYIntervalDataItem",
+        "org.jfree.data.xy.XYIntervalSeries",
+        "org.jfree.data.xy.XYIntervalSeriesCollection"
+    ]
+}

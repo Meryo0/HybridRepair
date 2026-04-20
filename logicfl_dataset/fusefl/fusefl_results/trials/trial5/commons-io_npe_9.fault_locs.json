@@ -1,0 +1,24 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.output.WriterOutputStream:170",
+            "code": "charset.newDecoder()",
+            "explanation": "The test results indicate a NullPointerException at this line because 'charset' is null. The code attempts to call 'newDecoder()' on a null 'charset', which leads to the exception. A null check should be added before calling 'newDecoder()'."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.output.WriterOutputStream:206",
+            "code": "checkIbmJdkWithBrokenUTF16(decoder.charset());",
+            "explanation": "The test results indicate a NullPointerException at this line because 'decoder' is null. The code attempts to call 'charset()' on a null 'decoder', which leads to the exception. A null check should be added before calling 'charset()'."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.output.WriterOutputStream:152",
+            "code": "this(writer, charset, BUFFER_SIZE, false);",
+            "explanation": "This line is part of the constructor that initializes the WriterOutputStream with a charset. If 'charset' is null, it leads to the NullPointerException at line 170. A null check should be added before passing 'charset' to the constructor."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.output.WriterOutputStream:188",
+            "code": "this(writer, decoder, BUFFER_SIZE, false);",
+            "explanation": "This line is part of the constructor that initializes the WriterOutputStream with a decoder. If 'decoder' is null, it leads to the NullPointerException at line 206. A null check should be added before passing 'decoder' to the constructor."
+        }
+    ]
+}

@@ -1,0 +1,154 @@
+{"classes": [
+    {
+        "probe_ranges": [
+            {
+                "endLine": 70,
+                "offset": 4,
+                "startLine": 67,
+                "orgLineEnd": 66,
+                "probedLineEnd": 70,
+                "orgLineStart": 66
+            },
+            {
+                "endLine": 77,
+                "offset": 10,
+                "startLine": 71,
+                "orgLineEnd": 67,
+                "probedLineEnd": 77,
+                "orgLineStart": 67
+            },
+            {
+                "endLine": 84,
+                "offset": 16,
+                "startLine": 78,
+                "orgLineEnd": 68,
+                "probedLineEnd": 84,
+                "orgLineStart": 68
+            },
+            {
+                "endLine": 91,
+                "offset": 22,
+                "startLine": 85,
+                "orgLineEnd": 69,
+                "probedLineEnd": 91,
+                "orgLineStart": 69
+            },
+            {
+                "endLine": 98,
+                "offset": 28,
+                "startLine": 92,
+                "orgLineEnd": 70,
+                "probedLineEnd": 98,
+                "orgLineStart": 70
+            },
+            {
+                "endLine": 105,
+                "offset": 34,
+                "startLine": 99,
+                "orgLineEnd": 71,
+                "probedLineEnd": 105,
+                "orgLineStart": 71
+            },
+            {
+                "endLine": 112,
+                "offset": 40,
+                "startLine": 106,
+                "orgLineEnd": 72,
+                "probedLineEnd": 112,
+                "orgLineStart": 72
+            },
+            {
+                "endLine": 118,
+                "offset": 45,
+                "startLine": 113,
+                "orgLineEnd": 73,
+                "probedLineEnd": 118,
+                "orgLineStart": 73
+            },
+            {
+                "endLine": 278,
+                "offset": 95,
+                "startLine": 264,
+                "orgLineEnd": 183,
+                "probedLineEnd": 278,
+                "orgLineStart": 183
+            }
+        ],
+        "classId": "charsets_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 49,
+                "offset": 9,
+                "startLine": 40,
+                "orgLineEnd": 40,
+                "probedLineEnd": 49,
+                "orgLineStart": 40
+            },
+            {
+                "endLine": 55,
+                "offset": 13,
+                "startLine": 51,
+                "orgLineEnd": 42,
+                "probedLineEnd": 55,
+                "orgLineStart": 42
+            },
+            {
+                "endLine": 101,
+                "offset": 16,
+                "startLine": 98,
+                "orgLineEnd": 85,
+                "probedLineEnd": 101,
+                "orgLineStart": 85
+            },
+            {
+                "endLine": 109,
+                "offset": 19,
+                "startLine": 106,
+                "orgLineEnd": 90,
+                "probedLineEnd": 109,
+                "orgLineStart": 90
+            },
+            {
+                "endLine": 188,
+                "offset": 27,
+                "startLine": 180,
+                "orgLineEnd": 161,
+                "probedLineEnd": 188,
+                "orgLineStart": 161
+            },
+            {
+                "endLine": 209,
+                "offset": 37,
+                "startLine": 199,
+                "orgLineEnd": 172,
+                "probedLineEnd": 209,
+                "orgLineStart": 172
+            }
+        ],
+        "classId": "writer_output_stream_test_1"
+    },
+    {
+        "probe_ranges": [{
+            "endLine": 52,
+            "offset": 15,
+            "startLine": 37,
+            "orgLineEnd": 37,
+            "probedLineEnd": 52,
+            "orgLineStart": 37
+        }],
+        "classId": "charset_decoders_1"
+    },
+    {
+        "probe_ranges": [{
+            "endLine": 217,
+            "offset": 11,
+            "startLine": 212,
+            "orgLineEnd": 206,
+            "probedLineEnd": 217,
+            "orgLineStart": 206
+        }],
+        "classId": "writer_output_stream_1"
+    }
+]}

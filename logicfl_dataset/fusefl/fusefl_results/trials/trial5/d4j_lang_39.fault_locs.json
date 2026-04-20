@@ -1,0 +1,19 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3676",
+            "code": "int greater = replacementList[i].length() - searchList[i].length();",
+            "explanation": "The NullPointerException occurs because `replacementList[i]` is null. This line attempts to call `length()` on a null object, leading to the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3645",
+            "code": "if (noMoreMatchesForReplIndex[i] || searchList[i] == null ||",
+            "explanation": "This line checks if `searchList[i]` is null but does not check if `replacementList[i]` is null. Adding a null check for `replacementList[i]` here could prevent the NullPointerException."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3701",
+            "code": "if (noMoreMatchesForReplIndex[i] || searchList[i] == null ||",
+            "explanation": "Similar to line 3645, this line checks if `searchList[i]` is null but does not check if `replacementList[i]` is null. Adding a null check for `replacementList[i]` here could prevent the NullPointerException."
+        }
+    ]
+}

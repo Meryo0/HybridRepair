@@ -1,0 +1,22 @@
+org.jsoup.helper.Validate:15 `        if (obj == null)`
+org.jsoup.helper.Validate:17 `    }`
+org.jsoup.helper.Validate:91 `        if (string == null || string.length() == 0)`
+org.jsoup.helper.Validate:93 `    }`
+org.jsoup.nodes.Attribute:15 `    private static final String[] booleanAttributes = {`
+org.jsoup.nodes.Attribute:33 `        this(key, value, null);`
+org.jsoup.nodes.Attribute:34 `    }`
+org.jsoup.nodes.Attribute:42 `    public Attribute(String key, String val, Attributes parent) {`
+org.jsoup.nodes.Attribute:43 `        Validate.notNull(key);`
+org.jsoup.nodes.Attribute:44 `        key = key.trim();`
+org.jsoup.nodes.Attribute:45 `        Validate.notEmpty(key); // trimming could potentially make empty, so validate here`
+org.jsoup.nodes.Attribute:46 `        this.key = key;`
+org.jsoup.nodes.Attribute:47 `        this.val = val;`
+org.jsoup.nodes.Attribute:48 `        this.parent = parent;`
+org.jsoup.nodes.Attribute:49 `    }`
+org.jsoup.nodes.Attribute:64 `        Validate.notNull(key);`
+org.jsoup.nodes.Attribute:65 `        key = key.trim();`
+org.jsoup.nodes.Attribute:66 `        Validate.notEmpty(key); // trimming could potentially make empty, so validate here`
+org.jsoup.nodes.Attribute:67 `        if (parent != null) {`
+org.jsoup.nodes.Attribute:72 `        this.key = key;`
+org.jsoup.nodes.Attribute:73 `    }`
+org.jsoup.nodes.Attribute:88 `        String oldVal = parent.get(this.key);`

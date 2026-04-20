@@ -1,0 +1,8 @@
+Fault Localization Results
+NPE at line(string_array_deserializer_1, 66) / Null Expression - f__element_deserializer_1487['_elementDeserializer']
+	 can be caused by 
+f__element_deserializer_1487['_elementDeserializer'] - line(string_array_deserializer_1, 66).
+
+NPE at line(string_array_deserializer_1, 66) / Null Expression - f__element_deserializer_1487['_elementDeserializer']
+	 can be caused by 
+string_array_deserializer_1_literal1[null] - line(string_array_deserializer_1, 34).

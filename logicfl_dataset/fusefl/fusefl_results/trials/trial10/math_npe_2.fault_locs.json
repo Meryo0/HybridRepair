@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.math.linear.BlockRealMatrix:769",
+            "code": "final int refLength = subMatrix[0].length;",
+            "explanation": "The NullPointerException indicates that 'subMatrix' is null. This line attempts to access the length of 'subMatrix[0]' without checking if 'subMatrix' is null, leading to the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.math.linear.Array2DRowRealMatrix:295",
+            "code": "super.setSubMatrix(subMatrix, row, column);",
+            "explanation": "The NullPointerException indicates that 'subMatrix' is null. This line calls 'super.setSubMatrix' with 'subMatrix' without checking if 'subMatrix' is null, leading to the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.math.linear.BlockFieldMatrix:762",
+            "code": "final int refLength = subMatrix[0].length;",
+            "explanation": "The NullPointerException indicates that 'subMatrix' is null. This line attempts to access the length of 'subMatrix[0]' without checking if 'subMatrix' is null, leading to the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.math.linear.AbstractRealMatrix:389",
+            "code": "final int nRows = subMatrix.length;",
+            "explanation": "The NullPointerException indicates that 'subMatrix' is null. This line attempts to access the length of 'subMatrix' without checking if 'subMatrix' is null, leading to the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.math.linear.AbstractRealMatrix:394",
+            "code": "final int nCols = subMatrix[0].length;",
+            "explanation": "The NullPointerException indicates that 'subMatrix' is null. This line attempts to access the length of 'subMatrix[0]' without checking if 'subMatrix' is null, leading to the exception."
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "StringUtils:4694",
+            "code": "return Pattern.compile(regex, Pattern.DOTALL).matcher(source).replaceAll(replacement);",
+            "explanation": "The method `replacePattern` does not handle the case where `source` or `regex` is `null`. When either of these parameters is `null`, the `Pattern.compile` or `matcher` method will throw a `NullPointerException`. Adding null checks for these parameters before using them will prevent the exception."
+        },
+        {
+            "faultyLine": "StringUtils:4710",
+            "code": "return replacePattern(source, regex, StringUtils.EMPTY);",
+            "explanation": "The method `removePattern` calls `replacePattern` without checking if `source` or `regex` is `null`. This leads to the same `NullPointerException` in `replacePattern`. Adding null checks in `removePattern` before calling `replacePattern` will prevent the exception."
+        }
+    ]
+}

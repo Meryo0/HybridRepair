@@ -1,0 +1,16 @@
+Fault Localization Results
+NPE at line(composite_collection_1, 327) / Null Expression - p_coll_20[coll]
+	 can be caused by 
+p_coll_20[coll] - line(composite_collection_1, 327).
+
+NPE at line(composite_collection_1, 263) / Null Expression - p_coll_14[coll]
+	 can be caused by 
+p_coll_14[coll] - line(composite_collection_1, 263).
+
+NPE at line(composite_collection_1, 103) / Null Expression - v_item_8[item]
+	 can be caused by 
+v_item_8[item] - line(composite_collection_1, 103).
+
+NPE at line(composite_collection_1, 303) / Null Expression - p_coll_17[coll]
+	 can be caused by 
+p_coll_17[coll] - line(composite_collection_1, 303).

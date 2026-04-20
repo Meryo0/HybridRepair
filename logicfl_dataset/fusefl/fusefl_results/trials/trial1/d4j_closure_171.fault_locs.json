@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "com.google.javascript.jscomp.TypedScopeCreator:551",
+            "code": "Var i=globalScope.getVar(\"I\");",
+            "explanation": "The test is failing because `globalScope.getVar(\"I\")` is returning null, which leads to a NullPointerException when `i.getType()` is called. This suggests that the variable `I` is not being correctly added to the scope, or the scope is not being correctly initialized."
+        },
+        {
+            "faultyLine": "com.google.javascript.jscomp.TypedScopeCreator:550",
+            "code": "testSame(\"/** @interface */ var I = function() {};\" + \"I.prototype = {baz: function(){}};\" + \"/** @type {number} */ I.prototype.bar;\");",
+            "explanation": "The test setup code is supposed to define an interface `I` and its prototype properties. If `I` is not correctly defined or added to the scope, subsequent calls to `globalScope.getVar(\"I\")` will return null. This line should be checked to ensure that the interface and its properties are correctly parsed and added to the scope."
+        },
+        {
+            "faultyLine": "com.google.javascript.jscomp.Scope:517",
+            "code": "Var var = vars.get(name);",
+            "explanation": "The method `getVar` in the `Scope` class is responsible for retrieving variables from the scope. If `vars.get(name)` returns null, it indicates that the variable `I` is not present in the scope's `vars` map. This could be due to the variable not being added to the scope correctly during parsing or scope creation."
+        },
+        {
+            "faultyLine": "com.google.javascript.jscomp.Scope:532",
+            "code": "return parent.getVar(name);",
+            "explanation": "If the variable `I` is not found in the current scope, the `getVar` method recursively checks the parent scope. If the variable is not found in any parent scope, it returns null. This suggests that the variable `I` might not be added to any scope in the hierarchy, indicating a potential issue in the scope creation or variable declaration process."
+        },
+        {
+            "faultyLine": "com.google.javascript.jscomp.TypedScopeCreator:228",
+            "code": "newScope = new Scope(parent, root);",
+            "explanation": "The `TypedScopeCreator` class is responsible for creating new scopes. If the scope is not correctly initialized or the parent scope is not correctly set, variables might not be correctly added or retrieved. This line should be checked to ensure that the scope is correctly created and initialized."
+        }
+    ]
+}

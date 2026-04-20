@@ -1,0 +1,41 @@
+@Test @Timeout(value=500,unit=TimeUnit.MILLISECONDS) public void testConstructNullCharset() throws IOException {
+  final Charset charset=Charset.defaultCharset();
+  final Charset encoder=null;
+  try (ReaderInputStream in=new ReaderInputStream(new StringReader("ABC"),encoder,(int)ReaderInputStream.minBufferSize(charset.newEncoder()))){
+    IOUtils.toByteArray(in);
+    assertEquals(Charset.defaultCharset(),in.getCharsetEncoder().charset());
+  }
+ }
+
+@Test @Timeout(value=500,unit=TimeUnit.MILLISECONDS) public void testConstructNullCharsetEncoder() throws IOException {
+  final Charset charset=Charset.defaultCharset();
+  final CharsetEncoder encoder=null;
+  try (ReaderInputStream in=new ReaderInputStream(new StringReader("ABC"),encoder,(int)ReaderInputStream.minBufferSize(charset.newEncoder()))){
+    IOUtils.toByteArray(in);
+    assertEquals(Charset.defaultCharset(),in.getCharsetEncoder().charset());
+  }
+ }
+
+
+
+Failures (2):
+  JUnit Jupiter:ReaderInputStreamTest:testConstructNullCharsetEncoder()
+    MethodSource [className = 'org.apache.commons.io.input.ReaderInputStreamTest', methodName = 'testConstructNullCharsetEncoder', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.nio.charset.CharsetEncoder.maxBytesPerChar()" because "charsetEncoder" is null
+       org.apache.commons.io.input.ReaderInputStream.minBufferSize(ReaderInputStream.java:94)
+       org.apache.commons.io.input.ReaderInputStream.checkMinBufferSize(ReaderInputStream.java:85)
+       org.apache.commons.io.input.ReaderInputStream.<init>(ReaderInputStream.java:178)
+       org.apache.commons.io.input.ReaderInputStreamTest.testConstructNullCharsetEncoder(ReaderInputStreamTest.java:128)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+  JUnit Jupiter:ReaderInputStreamTest:testConstructNullCharset()
+    MethodSource [className = 'org.apache.commons.io.input.ReaderInputStreamTest', methodName = 'testConstructNullCharset', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.nio.charset.Charset.newEncoder()" because "charset" is null
+       org.apache.commons.io.input.ReaderInputStream.<init>(ReaderInputStream.java:149)
+       org.apache.commons.io.input.ReaderInputStreamTest.testConstructNullCharset(ReaderInputStreamTest.java:139)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Store NPE traces to npe.traces.json
+NPE Stack Traces exported to npe.traces.json

@@ -1,0 +1,126 @@
+{
+    "coverage": [
+        {
+            "covered": [ 36, 37, 38, 47, 53, 55, 58, 59, 60, 63, 67 ],
+            "className": "com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory"
+        },
+        {
+            "covered": [ 54, 55, 56, 57, 58 ],
+            "className": "com.google.gson.internal.bind.ReflectiveTypeAdapterFactory"
+        },
+        {
+            "covered": [ 71, 72, 73, 74, 75, 94, 101, 280, 296, 303 ],
+            "className": "com.google.gson.reflect.TypeToken"
+        },
+        {
+            "covered": [ 77 ],
+            "className": "com.google.gson.internal.Streams"
+        },
+        {
+            "covered": [ 51, 52, 53, 56, 57, 62, 63, 73, 75, 83, 84, 85, 99, 100, 101, 103, 107, 108 ],
+            "className": "com.google.gson.internal.ConstructorConstructor"
+        },
+        {
+            "covered": [ 38, 41, 44 ],
+            "className": "com.google.gson.internal.bind.ObjectTypeAdapter"
+        },
+        {
+            "covered": [ 42, 45 ],
+            "className": "com.google.gson.internal.bind.DateTypeAdapter"
+        },
+        {
+            "covered": [ 38, 41, 44, 96, 97, 98, 120, 122 ],
+            "className": "com.google.gson.internal."
+        },
+        {
+            "covered": [ 192, 230, 238, 239, 240, 242, 243, 245, 269, 270, 272, 283, 284, 289, 290, 293, 294, 326, 327, 333, 427, 428, 429, 432, 434, 466, 467, 469, 482, 520, 536, 537, 538, 540, 553, 554, 578, 1282, 1283, 1284, 1288, 1291, 1293, 1294, 1297, 1303, 1304, 1333, 1334, 1335, 1337, 1338, 1339, 1342, 1343, 1346, 1347, 1351, 1355, 1390, 1402, 1403, 1575, 1576, 1578, 1582, 1583, 1584, 1593, 1616 ],
+            "className": "com.google.gson.stream.JsonReader"
+        },
+        {
+            "covered": [ 119, 186 ],
+            "className": "com.google.gson.TypeAdapter"
+        },
+        {
+            "covered": [ 39, 42, 43, 44 ],
+            "className": "com.google.gson.internal.bind.ArrayTypeAdapter"
+        },
+        {
+            "covered": [ 31, 37, 53, 72, 90, 113 ],
+            "className": "com.google.gson.FieldNamingPolicy"
+        },
+        {
+            "covered": [ 39, 40, 41, 45, 47, 48, 49 ],
+            "className": "com.google.gson.internal.bind.CollectionTypeAdapterFactory"
+        },
+        {
+            "covered": [ 25, 31, 37, 43, 49, 56, 61, 67, 72, 77, 84 ],
+            "className": "com.google.gson.stream.JsonToken"
+        },
+        {
+            "covered": [ 27, 34, 45 ],
+            "className": "com.google.gson.LongSerializationPolicy"
+        },
+        {
+            "covered": [ 110, 111, 112, 113, 116, 118, 119, 120 ],
+            "className": "com.google.gson.internal.bind.MapTypeAdapterFactory"
+        },
+        {
+            "covered": [ 25 ],
+            "className": "com.google.gson.internal.JsonReaderInternalAccess"
+        },
+        {
+            "covered": [ 120, 123, 135, 142, 186, 191, 198, 199, 200, 201, 202, 203, 204, 206, 209, 210, 213, 216, 219, 220, 221, 222, 223, 224, 225, 226, 228, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 257, 258, 259, 260, 261, 264, 265, 268, 271, 292, 295, 324, 325, 346, 358, 392, 393, 397, 398, 399, 400, 401, 402, 406, 407, 412, 413, 415, 416, 417, 422, 425, 427, 428, 484, 488, 490, 491, 498, 499, 502, 575, 594, 595, 639, 640, 653, 705, 708, 709, 712, 713, 720, 721, 722, 765, 789, 792, 793, 843, 844, 871, 872, 873, 875, 876, 877, 878, 896, 947 ],
+            "className": "com.google.gson.Gson"
+        },
+        {
+            "covered": [ 50, 52, 54, 55, 56, 58, 59, 112, 113, 114, 116, 117, 192, 197, 201, 205, 206, 212, 216 ],
+            "className": "com.google.gson.internal.Excluder"
+        },
+        {
+            "covered": [ 39, 42 ],
+            "className": "com.google.gson.internal.bind.SqlDateTypeAdapter"
+        },
+        {
+            "covered": [ 69, 90, 92, 149, 151, 177, 191, 194, 214, 217, 236, 239, 257, 260, 272, 275, 283, 286, 314, 317, 336, 351, 366, 386, 388, 407, 410, 430, 448, 466, 468, 483, 486, 501, 504, 520, 522, 542, 544, 560, 563, 578, 580, 590, 592, 595, 596, 613, 678, 681, 716, 718, 790, 828, 854, 857, 867, 870, 871, 882, 885, 886, 901, 904, 905, 906 ],
+            "className": "com.google.gson.internal.bind.TypeAdapters"
+        },
+        {
+            "covered": [ 41, 44 ],
+            "className": "com.google.gson.internal.bind.TimeTypeAdapter"
+        },
+        {
+            "covered": [ 26, 27, 30, 31, 35, 39, 58 ],
+            "className": "com.google.gson.regression.JsonAdapterNullSafeTest"
+        },
+        {
+            "covered": [ 145, 146, 147, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 167, 168, 170, 182, 190, 197, 198, 201, 202, 269, 270, 354, 359, 360 ],
+            "className": "com.google.gson.stream.JsonWriter"
+        }
+    ],
+    "classes": [
+        "com.google.gson.FieldNamingPolicy",
+        "com.google.gson.Gson",
+        "com.google.gson.LongSerializationPolicy",
+        "com.google.gson.TypeAdapter",
+        "com.google.gson.internal.",
+        "com.google.gson.internal.ConstructorConstructor",
+        "com.google.gson.internal.Excluder",
+        "com.google.gson.internal.JsonReaderInternalAccess",
+        "com.google.gson.internal.Streams",
+        "com.google.gson.internal.bind.ArrayTypeAdapter",
+        "com.google.gson.internal.bind.CollectionTypeAdapterFactory",
+        "com.google.gson.internal.bind.DateTypeAdapter",
+        "com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory",
+        "com.google.gson.internal.bind.MapTypeAdapterFactory",
+        "com.google.gson.internal.bind.ObjectTypeAdapter",
+        "com.google.gson.internal.bind.ReflectiveTypeAdapterFactory",
+        "com.google.gson.internal.bind.SqlDateTypeAdapter",
+        "com.google.gson.internal.bind.TimeTypeAdapter",
+        "com.google.gson.internal.bind.TypeAdapters",
+        "com.google.gson.reflect.TypeToken",
+        "com.google.gson.regression.JsonAdapterNullSafeTest",
+        "com.google.gson.stream.JsonReader",
+        "com.google.gson.stream.JsonToken",
+        "com.google.gson.stream.JsonWriter"
+    ]
+}

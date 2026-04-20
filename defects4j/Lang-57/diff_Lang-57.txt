@@ -1,0 +1,16 @@
+diff -U 5 -r defects4j/Lang-57/buggy/src/java/org/apache/commons/lang/LocaleUtils.java defects4j/Lang-57/fixed/src/java/org/apache/commons/lang/LocaleUtils.java
+--- defects4j/Lang-57/buggy/src/java/org/apache/commons/lang/LocaleUtils.java	2024-04-14 01:10:05.000000000 +0900
++++ defects4j/Lang-57/fixed/src/java/org/apache/commons/lang/LocaleUtils.java	2024-04-14 01:10:14.000000000 +0900
+@@ -218,11 +218,11 @@
+      *
+      * @param locale the Locale object to check if it is available
+      * @return true if the locale is a known locale
+      */
+     public static boolean isAvailableLocale(Locale locale) {
+-        return cAvailableLocaleSet.contains(locale);
++        return availableLocaleList().contains(locale);
+     }
+ 
+     //-----------------------------------------------------------------------
+     /**
+      * <p>Obtains the list of languages supported for a given country.</p>

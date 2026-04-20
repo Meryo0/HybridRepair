@@ -1,0 +1,8 @@
+Fault Localization Results
+NPE at line(regex_file_filter_1, 184) / Null Expression - f_path_to_string_375[pathToString]
+	 can be caused by 
+f_path_to_string_375[pathToString] - line(regex_file_filter_1, 184).
+
+NPE at line(regex_file_filter_1, 184) / Null Expression - f_path_to_string_375[pathToString]
+	 can be caused by 
+p_path_to_string_373[pathToString] - line(regex_file_filter_1, 128).

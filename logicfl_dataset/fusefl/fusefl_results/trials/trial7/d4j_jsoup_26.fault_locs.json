@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jsoup.safety.Cleaner:73",
+            "code": "List<Node> sourceChildren = source.childNodes();",
+            "explanation": "The NullPointerException indicates that 'source' is null. This line attempts to access 'source.childNodes()' without checking if 'source' is null. Adding a null check for 'source' before this line can prevent the exception."
+        },
+        {
+            "faultyLine": "org.jsoup.safety.Cleaner:43",
+            "code": "copySafeNodes(dirtyDocument.body(), clean.body());",
+            "explanation": "The method 'copySafeNodes' is called with 'dirtyDocument.body()' as an argument. If 'dirtyDocument.body()' is null, it will cause a NullPointerException inside 'copySafeNodes'. Ensure 'dirtyDocument.body()' is not null before calling 'copySafeNodes'."
+        },
+        {
+            "faultyLine": "org.jsoup.safety.Cleaner:40",
+            "code": "Validate.notNull(dirtyDocument);",
+            "explanation": "While this line checks if 'dirtyDocument' is null, it does not check if 'dirtyDocument.body()' is null. Adding a validation for 'dirtyDocument.body()' can prevent the NullPointerException."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Document:59",
+            "code": "return findFirstElementByTagName(\"body\", this);",
+            "explanation": "The method 'findFirstElementByTagName' might be returning null if the 'body' tag is not found. This can cause subsequent calls on the returned value to throw a NullPointerException. Ensure that the 'body' tag exists in the document."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Document:43",
+            "code": "return doc;",
+            "explanation": "If 'doc' does not have a 'body' element, subsequent calls to 'doc.body()' will return null. Ensure that the 'body' element is always added to the document."
+        }
+    ]
+}

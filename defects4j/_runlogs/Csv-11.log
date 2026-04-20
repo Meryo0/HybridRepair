@@ -1,0 +1,136 @@
+Load configurations from config.properties
+Load configurations from config.properties
+Collecting coverage from failed tests...
+Running Tests...
+Executing command - /usr/bin/java -Xms256m -Xmx1024m -classpath ../../lib/*:lib/* -javaagent:../../lib/jacocoagent.jar=excludes=org.junit.*,append=false,destfile=/home/mario/Desktop/LogicFL/defects4j/Csv-11/result/jacoco.exec logicfl.coverage.JUnit4TestRunner config.properties true /home/mario/Desktop/LogicFL/defects4j/Csv-11/result/npe.traces.json /home/mario/Desktop/LogicFL/defects4j/Csv-11/tests.json
+Load configurations from config.properties
+Loading test information from /home/mario/Desktop/LogicFL/defects4j/Csv-11/tests.json
+Test execution summary:
+Tests executed - 1
+Tests succeeded - 0
+Tests failed - 1
+testHeaderMissingWithNull(org.apache.commons.csv.CSVParserTest): Cannot invoke "String.trim()" because "header" is null
+Cannot invoke "String.trim()" because "header" is null
+java.lang.NullPointerException: Cannot invoke "String.trim()" because "header" is null
+	at org.apache.commons.csv.CSVParser.initializeHeader(CSVParser.java:384)
+	at org.apache.commons.csv.CSVParser.<init>(CSVParser.java:250)
+	at org.apache.commons.csv.CSVFormat.parse(CSVFormat.java:611)
+	at org.apache.commons.csv.CSVParserTest.testHeaderMissingWithNull(CSVParserTest.java:670)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:36)
+
+Store NPE traces to /home/mario/Desktop/LogicFL/defects4j/Csv-11/result/npe.traces.json
+NPE Stack Traces exported to /home/mario/Desktop/LogicFL/defects4j/Csv-11/result/npe.traces.json
+
+Analyzing Coverage Data...
+Covered Classes:[org.apache.commons.csv.CSVParser$2, org.apache.commons.csv.Token, org.apache.commons.csv.Constants, org.apache.commons.csv.Token$Type, org.apache.commons.csv.CSVParser, org.apache.commons.csv.ExtendedBufferedReader, org.apache.commons.csv.Quote, org.apache.commons.csv.Assertions, org.apache.commons.csv.CSVFormat, org.apache.commons.csv.CSVParserTest, org.apache.commons.csv.Lexer, org.apache.commons.csv.CSVRecord]
+Coverage information exported to /home/mario/Desktop/LogicFL/defects4j/Csv-11/coverage.json
+Collecting coverage complete.
+Exec. Time - 00:00:00.555
+coverage.sh executed successfully.
+Getting configurations from config.properties
+Total 10 Target classes.
+Analyzing class - org.apache.commons.csv.Assertions
+Analyzing class - org.apache.commons.csv.CSVFormat
+Analyzing class - org.apache.commons.csv.CSVParser
+Analyzing class - org.apache.commons.csv.CSVParserTest
+Analyzing class - org.apache.commons.csv.CSVRecord
+Analyzing class - org.apache.commons.csv.Constants
+Analyzing class - org.apache.commons.csv.ExtendedBufferedReader
+Analyzing class - org.apache.commons.csv.Lexer
+Analyzing class - org.apache.commons.csv.Quote
+Analyzing class - org.apache.commons.csv.Token
+Compilation successful!
+FL Facts are exported to /home/mario/Desktop/LogicFL/defects4j/Csv-11/result/logic-fl.pl
+Code Facts are exported to /home/mario/Desktop/LogicFL/defects4j/Csv-11/result/code-facts.pl
+Line matching information exported to /home/mario/Desktop/LogicFL/defects4j/Csv-11/result/line.info.json
+Exec. Time - 00:00:03.591
+static_analyzer.sh executed successfully.
+Getting configurations from config.properties
+Load configurations from config.properties
+Executing command - /usr/bin/java -Xms256m -Xmx1024m -classpath /home/mario/Desktop/LogicFL/defects4j/Csv-11/result/classes:../../lib/*:lib/* logicfl.coverage.JUnit4TestRunner config.properties true /home/mario/Desktop/LogicFL/defects4j/Csv-11/result/probe.npe.traces.json /home/mario/Desktop/LogicFL/defects4j/Csv-11/tests.json
+Load configurations from config.properties
+Loading test information from /home/mario/Desktop/LogicFL/defects4j/Csv-11/tests.json
+Test execution summary:
+Tests executed - 1
+Tests succeeded - 0
+Tests failed - 1
+testHeaderMissingWithNull(org.apache.commons.csv.CSVParserTest): Cannot invoke "String.trim()" because "v_header_86_line_384" is null
+Cannot invoke "String.trim()" because "v_header_86_line_384" is null
+java.lang.NullPointerException: Cannot invoke "String.trim()" because "v_header_86_line_384" is null
+	at org.apache.commons.csv.CSVParser.initializeHeader(CSVParser.java:471)
+	at org.apache.commons.csv.CSVParser.<init>(CSVParser.java:264)
+	at org.apache.commons.csv.CSVFormat.parse(CSVFormat.java:742)
+	at org.apache.commons.csv.CSVParserTest.testHeaderMissingWithNull(CSVParserTest.java:679)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:36)
+
+Store NPE traces to /home/mario/Desktop/LogicFL/defects4j/Csv-11/result/probe.npe.traces.json
+NPE Stack Traces exported to /home/mario/Desktop/LogicFL/defects4j/Csv-11/result/probe.npe.traces.json
+
+
+val(csvparser_1_expr47, null, line(csvparser_1, 382)).
+val(v_header_86, null, line(csvparser_1, 383)).
+val(v_header_86, null, line(csvparser_1, 384)).
+
+
+Exec. Time - 00:00:00.983
+dynamic_analyzer.sh executed successfully.
+Getting configurations from config.properties
+Running Fault Localizer with
+Rules: ../../lib/npe-rules.pl
+Facts: /home/mario/Desktop/LogicFL/defects4j/Csv-11/result/logic-fl.pl
+Code Facts: /home/mario/Desktop/LogicFL/defects4j/Csv-11/result/code-facts.pl
+consult Succeeded
+NPE at line(csvparser_1, 384) / Null Expression v_header_86[header]
+	can be caused by 
+v_header_86[header] at line(csvparser_1, 384).
+
+NPE at line(csvparser_1, 384) / Null Expression v_header_86[header]
+	can be caused by 
+csvparser_1_expr47['headerRecord[i]'] at line(csvparser_1, 382).
+
+Total 2 Identified Fault Locations for NPE.
+Exec. Time - 00:00:00.108
+localizer.sh executed successfully.
+All scripts executed successfully.

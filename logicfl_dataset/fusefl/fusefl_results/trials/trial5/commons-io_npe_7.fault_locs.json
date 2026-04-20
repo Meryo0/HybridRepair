@@ -1,0 +1,24 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.input.ReaderInputStream:140",
+            "code": "super.setCharset(charsetEncoder.charset());",
+            "explanation": "The test case `testResetCharsetEncoder` sets the `charsetEncoder` to null, which leads to a NullPointerException when `charsetEncoder.charset()` is called. This line should handle the case where `charsetEncoder` is null."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.input.ReaderInputStream:103",
+            "code": "private CharsetEncoder charsetEncoder = super.getCharset().newEncoder();",
+            "explanation": "The `charsetEncoder` is initialized using `super.getCharset().newEncoder()`. If `super.getCharset()` returns null, this will cause issues. Ensure that `super.getCharset()` never returns null or handle the null case appropriately."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.build.AbstractStreamBuilder:103",
+            "code": "return charset;",
+            "explanation": "The `getCharset()` method in `AbstractStreamBuilder` returns the `charset` field. If `charset` is null, it will cause issues when `newEncoder()` is called on it. Ensure that `charset` is never null or handle the null case appropriately."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.input.ReaderInputStream:139",
+            "code": "this.charsetEncoder = charsetEncoder;",
+            "explanation": "This line sets `charsetEncoder` to the provided value, which can be null. The subsequent line does not check for null before using `charsetEncoder`. Add a null check before setting `charsetEncoder` or handle the null case appropriately."
+        }
+    ]
+}

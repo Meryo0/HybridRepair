@@ -1,0 +1,545 @@
+{"classes": [
+    {
+        "probe_ranges": [
+            {
+                "endLine": 172,
+                "offset": 3,
+                "startLine": 169,
+                "orgLineEnd": 169,
+                "probedLineEnd": 172,
+                "orgLineStart": 169
+            },
+            {
+                "endLine": 176,
+                "offset": 6,
+                "startLine": 173,
+                "orgLineEnd": 170,
+                "probedLineEnd": 176,
+                "orgLineStart": 170
+            },
+            {
+                "endLine": 182,
+                "offset": 10,
+                "startLine": 178,
+                "orgLineEnd": 172,
+                "probedLineEnd": 182,
+                "orgLineStart": 172
+            },
+            {
+                "endLine": 251,
+                "offset": 13,
+                "startLine": 248,
+                "orgLineEnd": 238,
+                "probedLineEnd": 251,
+                "orgLineStart": 238
+            },
+            {
+                "endLine": 255,
+                "offset": 16,
+                "startLine": 252,
+                "orgLineEnd": 239,
+                "probedLineEnd": 255,
+                "orgLineStart": 239
+            },
+            {
+                "endLine": 260,
+                "offset": 19,
+                "startLine": 257,
+                "orgLineEnd": 241,
+                "probedLineEnd": 260,
+                "orgLineStart": 241
+            },
+            {
+                "endLine": 264,
+                "offset": 22,
+                "startLine": 261,
+                "orgLineEnd": 242,
+                "probedLineEnd": 264,
+                "orgLineStart": 242
+            },
+            {
+                "endLine": 269,
+                "offset": 26,
+                "startLine": 265,
+                "orgLineEnd": 243,
+                "probedLineEnd": 269,
+                "orgLineStart": 243
+            },
+            {
+                "endLine": 273,
+                "offset": 29,
+                "startLine": 270,
+                "orgLineEnd": 244,
+                "probedLineEnd": 273,
+                "orgLineStart": 244
+            },
+            {
+                "endLine": 320,
+                "offset": 32,
+                "startLine": 317,
+                "orgLineEnd": 288,
+                "probedLineEnd": 320,
+                "orgLineStart": 288
+            },
+            {
+                "endLine": 362,
+                "offset": 36,
+                "startLine": 358,
+                "orgLineEnd": 326,
+                "probedLineEnd": 362,
+                "orgLineStart": 326
+            },
+            {
+                "endLine": 367,
+                "offset": 40,
+                "startLine": 363,
+                "orgLineEnd": 350,
+                "probedLineEnd": 390,
+                "orgLineStart": 327
+            },
+            {
+                "endLine": 394,
+                "offset": 43,
+                "startLine": 391,
+                "orgLineEnd": 351,
+                "probedLineEnd": 394,
+                "orgLineStart": 351
+            }
+        ],
+        "classId": "csvparser_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 276,
+                "offset": 38,
+                "startLine": 264,
+                "orgLineEnd": 238,
+                "probedLineEnd": 276,
+                "orgLineStart": 238
+            },
+            {
+                "endLine": 299,
+                "offset": 49,
+                "startLine": 288,
+                "orgLineEnd": 250,
+                "probedLineEnd": 299,
+                "orgLineStart": 250
+            },
+            {
+                "endLine": 350,
+                "offset": 53,
+                "startLine": 346,
+                "orgLineEnd": 299,
+                "probedLineEnd": 352,
+                "orgLineStart": 297
+            },
+            {
+                "endLine": 356,
+                "offset": 56,
+                "startLine": 353,
+                "orgLineEnd": 300,
+                "probedLineEnd": 356,
+                "orgLineStart": 300
+            },
+            {
+                "endLine": 360,
+                "offset": 59,
+                "startLine": 357,
+                "orgLineEnd": 301,
+                "probedLineEnd": 360,
+                "orgLineStart": 301
+            },
+            {
+                "endLine": 364,
+                "offset": 62,
+                "startLine": 361,
+                "orgLineEnd": 302,
+                "probedLineEnd": 364,
+                "orgLineStart": 302
+            },
+            {
+                "endLine": 368,
+                "offset": 65,
+                "startLine": 365,
+                "orgLineEnd": 303,
+                "probedLineEnd": 368,
+                "orgLineStart": 303
+            },
+            {
+                "endLine": 372,
+                "offset": 68,
+                "startLine": 369,
+                "orgLineEnd": 304,
+                "probedLineEnd": 372,
+                "orgLineStart": 304
+            },
+            {
+                "endLine": 376,
+                "offset": 71,
+                "startLine": 373,
+                "orgLineEnd": 305,
+                "probedLineEnd": 376,
+                "orgLineStart": 305
+            },
+            {
+                "endLine": 380,
+                "offset": 74,
+                "startLine": 377,
+                "orgLineEnd": 306,
+                "probedLineEnd": 380,
+                "orgLineStart": 306
+            },
+            {
+                "endLine": 384,
+                "offset": 77,
+                "startLine": 381,
+                "orgLineEnd": 307,
+                "probedLineEnd": 384,
+                "orgLineStart": 307
+            },
+            {
+                "endLine": 388,
+                "offset": 80,
+                "startLine": 385,
+                "orgLineEnd": 308,
+                "probedLineEnd": 388,
+                "orgLineStart": 308
+            },
+            {
+                "endLine": 399,
+                "offset": 90,
+                "startLine": 389,
+                "orgLineEnd": 309,
+                "probedLineEnd": 399,
+                "orgLineStart": 309
+            },
+            {
+                "endLine": 403,
+                "offset": 93,
+                "startLine": 400,
+                "orgLineEnd": 310,
+                "probedLineEnd": 403,
+                "orgLineStart": 310
+            },
+            {
+                "endLine": 492,
+                "offset": 96,
+                "startLine": 489,
+                "orgLineEnd": 396,
+                "probedLineEnd": 492,
+                "orgLineStart": 396
+            },
+            {
+                "endLine": 504,
+                "offset": 99,
+                "startLine": 501,
+                "orgLineEnd": 405,
+                "probedLineEnd": 504,
+                "orgLineStart": 405
+            },
+            {
+                "endLine": 516,
+                "offset": 102,
+                "startLine": 513,
+                "orgLineEnd": 414,
+                "probedLineEnd": 516,
+                "orgLineStart": 414
+            },
+            {
+                "endLine": 535,
+                "offset": 112,
+                "startLine": 525,
+                "orgLineEnd": 423,
+                "probedLineEnd": 535,
+                "orgLineStart": 423
+            },
+            {
+                "endLine": 548,
+                "offset": 115,
+                "startLine": 545,
+                "orgLineEnd": 433,
+                "probedLineEnd": 548,
+                "orgLineStart": 433
+            },
+            {
+                "endLine": 561,
+                "offset": 118,
+                "startLine": 558,
+                "orgLineEnd": 443,
+                "probedLineEnd": 561,
+                "orgLineStart": 443
+            },
+            {
+                "endLine": 590,
+                "offset": 121,
+                "startLine": 587,
+                "orgLineEnd": 469,
+                "probedLineEnd": 590,
+                "orgLineStart": 469
+            },
+            {
+                "endLine": 749,
+                "offset": 133,
+                "startLine": 737,
+                "orgLineEnd": 619,
+                "probedLineEnd": 752,
+                "orgLineStart": 616
+            },
+            {
+                "endLine": 766,
+                "offset": 145,
+                "startLine": 754,
+                "orgLineEnd": 624,
+                "probedLineEnd": 769,
+                "orgLineStart": 621
+            },
+            {
+                "endLine": 783,
+                "offset": 157,
+                "startLine": 771,
+                "orgLineEnd": 629,
+                "probedLineEnd": 786,
+                "orgLineStart": 626
+            },
+            {
+                "endLine": 799,
+                "offset": 168,
+                "startLine": 788,
+                "orgLineEnd": 634,
+                "probedLineEnd": 802,
+                "orgLineStart": 631
+            },
+            {
+                "endLine": 815,
+                "offset": 179,
+                "startLine": 804,
+                "orgLineEnd": 639,
+                "probedLineEnd": 818,
+                "orgLineStart": 636
+            },
+            {
+                "endLine": 831,
+                "offset": 190,
+                "startLine": 820,
+                "orgLineEnd": 643,
+                "probedLineEnd": 833,
+                "orgLineStart": 641
+            },
+            {
+                "endLine": 839,
+                "offset": 194,
+                "startLine": 835,
+                "orgLineEnd": 651,
+                "probedLineEnd": 845,
+                "orgLineStart": 645
+            },
+            {
+                "endLine": 896,
+                "offset": 198,
+                "startLine": 892,
+                "orgLineEnd": 700,
+                "probedLineEnd": 898,
+                "orgLineStart": 698
+            },
+            {
+                "endLine": 906,
+                "offset": 205,
+                "startLine": 899,
+                "orgLineEnd": 702,
+                "probedLineEnd": 907,
+                "orgLineStart": 701
+            },
+            {
+                "endLine": 925,
+                "offset": 210,
+                "startLine": 920,
+                "orgLineEnd": 715,
+                "probedLineEnd": 925,
+                "orgLineStart": 715
+            },
+            {
+                "endLine": 942,
+                "offset": 214,
+                "startLine": 938,
+                "orgLineEnd": 730,
+                "probedLineEnd": 944,
+                "orgLineStart": 728
+            },
+            {
+                "endLine": 952,
+                "offset": 221,
+                "startLine": 945,
+                "orgLineEnd": 732,
+                "probedLineEnd": 953,
+                "orgLineStart": 731
+            },
+            {
+                "endLine": 994,
+                "offset": 228,
+                "startLine": 987,
+                "orgLineEnd": 767,
+                "probedLineEnd": 995,
+                "orgLineStart": 766
+            },
+            {
+                "endLine": 1014,
+                "offset": 235,
+                "startLine": 1007,
+                "orgLineEnd": 780,
+                "probedLineEnd": 1015,
+                "orgLineStart": 779
+            },
+            {
+                "endLine": 1065,
+                "offset": 239,
+                "startLine": 1061,
+                "orgLineEnd": 828,
+                "probedLineEnd": 1067,
+                "orgLineStart": 826
+            },
+            {
+                "endLine": 1075,
+                "offset": 246,
+                "startLine": 1068,
+                "orgLineEnd": 830,
+                "probedLineEnd": 1076,
+                "orgLineStart": 829
+            },
+            {
+                "endLine": 1106,
+                "offset": 251,
+                "startLine": 1101,
+                "orgLineEnd": 855,
+                "probedLineEnd": 1106,
+                "orgLineStart": 855
+            },
+            {
+                "endLine": 1125,
+                "offset": 258,
+                "startLine": 1118,
+                "orgLineEnd": 868,
+                "probedLineEnd": 1126,
+                "orgLineStart": 867
+            }
+        ],
+        "classId": "csvformat_1"
+    },
+    {
+        "probe_ranges": [],
+        "classId": "constants_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 673,
+                "offset": 4,
+                "startLine": 669,
+                "orgLineEnd": 669,
+                "probedLineEnd": 673,
+                "orgLineStart": 669
+            },
+            {
+                "endLine": 678,
+                "offset": 8,
+                "startLine": 674,
+                "orgLineEnd": 670,
+                "probedLineEnd": 678,
+                "orgLineStart": 670
+            }
+        ],
+        "classId": "csvparser_test_1"
+    },
+    {
+        "probe_ranges": [],
+        "classId": "quote_1"
+    },
+    {
+        "probe_ranges": [],
+        "classId": "extended_buffered_reader_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 65,
+                "offset": 3,
+                "startLine": 62,
+                "orgLineEnd": 62,
+                "probedLineEnd": 65,
+                "orgLineStart": 62
+            },
+            {
+                "endLine": 70,
+                "offset": 7,
+                "startLine": 66,
+                "orgLineEnd": 63,
+                "probedLineEnd": 70,
+                "orgLineStart": 63
+            },
+            {
+                "endLine": 76,
+                "offset": 12,
+                "startLine": 71,
+                "orgLineEnd": 64,
+                "probedLineEnd": 76,
+                "orgLineStart": 64
+            },
+            {
+                "endLine": 82,
+                "offset": 17,
+                "startLine": 77,
+                "orgLineEnd": 65,
+                "probedLineEnd": 82,
+                "orgLineStart": 65
+            },
+            {
+                "endLine": 88,
+                "offset": 22,
+                "startLine": 83,
+                "orgLineEnd": 66,
+                "probedLineEnd": 88,
+                "orgLineStart": 66
+            },
+            {
+                "endLine": 93,
+                "offset": 26,
+                "startLine": 89,
+                "orgLineEnd": 67,
+                "probedLineEnd": 93,
+                "orgLineStart": 67
+            },
+            {
+                "endLine": 98,
+                "offset": 30,
+                "startLine": 94,
+                "orgLineEnd": 68,
+                "probedLineEnd": 98,
+                "orgLineStart": 68
+            },
+            {
+                "endLine": 334,
+                "offset": 43,
+                "startLine": 321,
+                "orgLineEnd": 291,
+                "probedLineEnd": 334,
+                "orgLineStart": 291
+            }
+        ],
+        "classId": "lexer_1"
+    },
+    {
+        "probe_ranges": [],
+        "classId": "token_1"
+    },
+    {
+        "probe_ranges": [{
+            "endLine": 36,
+            "offset": 4,
+            "startLine": 32,
+            "orgLineEnd": 34,
+            "probedLineEnd": 38,
+            "orgLineStart": 32
+        }],
+        "classId": "assertions_1"
+    }
+]}

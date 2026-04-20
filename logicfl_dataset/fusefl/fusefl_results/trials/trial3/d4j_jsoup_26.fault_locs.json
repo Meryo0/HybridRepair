@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jsoup.safety.Cleaner:73",
+            "code": "List<Node> sourceChildren = source.childNodes();",
+            "explanation": "The error message indicates that a NullPointerException occurs because 'source' is null. This line attempts to access 'source.childNodes()', which will throw a NullPointerException if 'source' is null. The 'source' variable should be checked for null before attempting to access its child nodes."
+        },
+        {
+            "faultyLine": "org.jsoup.safety.Cleaner:43",
+            "code": "copySafeNodes(dirtyDocument.body(), clean.body());",
+            "explanation": "The error message indicates that the NullPointerException occurs in the 'copySafeNodes' method. This line calls 'copySafeNodes' with 'dirtyDocument.body()' as the 'source' parameter. If 'dirtyDocument.body()' is null, it will cause the NullPointerException in 'copySafeNodes'. A null check should be added before calling 'copySafeNodes'."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Document:59",
+            "code": "return findFirstElementByTagName(\"body\", this);",
+            "explanation": "The 'body()' method in 'Document' class returns the first element with the tag name 'body'. If the document does not contain a 'body' tag, this method will return null. This could be the reason why 'dirtyDocument.body()' is null, leading to the NullPointerException in 'Cleaner'."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Document:164",
+            "code": "if (node.nodeName().equals(tag))",
+            "explanation": "The 'findFirstElementByTagName' method iterates through nodes to find the first element with the specified tag name. If 'node' is null, calling 'node.nodeName()' will throw a NullPointerException. A null check should be added before accessing 'node.nodeName()'."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Document:167",
+            "code": "for (Node child: node.childNodes) {",
+            "explanation": "In the 'findFirstElementByTagName' method, if 'node.childNodes' is null, iterating over it will throw a NullPointerException. A null check should be added before iterating over 'node.childNodes'."
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+diff -U 5 -r ./defects4j/Lang-33/buggy/src/main/java/org/apache/commons/lang3/ClassUtils.java ./defects4j/Lang-33/fixed/src/main/java/org/apache/commons/lang3/ClassUtils.java
+--- ./defects4j/Lang-33/buggy/src/main/java/org/apache/commons/lang3/ClassUtils.java	2024-05-19 19:44:50.582490967 +0900
++++ ./defects4j/Lang-33/fixed/src/main/java/org/apache/commons/lang3/ClassUtils.java	2024-05-19 19:44:50.662492597 +0900
+@@ -905,11 +905,11 @@
+         } else if (array.length == 0) {
+             return ArrayUtils.EMPTY_CLASS_ARRAY;
+         }
+         Class<?>[] classes = new Class[array.length];
+         for (int i = 0; i < array.length; i++) {
+-            classes[i] = array[i].getClass();
++            classes[i] = array[i] == null ? null : array[i].getClass();
+         }
+         return classes;
+     }
+ 
+     // Short canonical name

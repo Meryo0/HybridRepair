@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3676",
+            "code": "int greater = replacementList[i].length() - searchList[i].length();",
+            "explanation": "The code attempts to access the length of elements in `replacementList` without checking if they are null. This can cause a NullPointerException if any element in `replacementList` is null."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3645",
+            "code": "if (noMoreMatchesForReplIndex[i] || searchList[i] == null || replacementList[i] == null) {",
+            "explanation": "The condition checks if elements in `searchList` are null but does not check if elements in `replacementList` are null. This can lead to a NullPointerException later when accessing `replacementList[i]`."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3701",
+            "code": "if (noMoreMatchesForReplIndex[i] || searchList[i] == null || replacementList[i] == null) {",
+            "explanation": "Similar to line 3645, this condition should also check if elements in `replacementList` are null to prevent NullPointerException."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3688",
+            "code": "for (int i = start; i < textIndex; i++) {",
+            "explanation": "This loop iterates over the text but does not handle cases where `replacementList[replaceIndex]` might be null, leading to potential NullPointerException when appending to `buf`."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3691",
+            "code": "buf.append(replacementList[replaceIndex]);",
+            "explanation": "This line appends elements from `replacementList` to `buf` without checking if `replacementList[replaceIndex]` is null, which can cause a NullPointerException."
+        }
+    ]
+}

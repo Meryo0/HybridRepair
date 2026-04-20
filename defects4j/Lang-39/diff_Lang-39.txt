@@ -1,0 +1,17 @@
+diff -U 5 -r ./defects4j/Lang-39/buggy/src/java/org/apache/commons/lang3/StringUtils.java ./defects4j/Lang-39/fixed/src/java/org/apache/commons/lang3/StringUtils.java
+--- ./defects4j/Lang-39/buggy/src/java/org/apache/commons/lang3/StringUtils.java	2024-05-19 19:44:54.650573564 +0900
++++ ./defects4j/Lang-39/fixed/src/java/org/apache/commons/lang3/StringUtils.java	2024-05-19 19:44:54.770575992 +0900
+@@ -3671,10 +3671,13 @@
+         // get a good guess on the size of the result buffer so it doesnt have to double if it goes over a bit
+         int increase = 0;
+ 
+         // count the replacement text elements that are larger than their corresponding text being replaced
+         for (int i = 0; i < searchList.length; i++) {
++            if (searchList[i] == null || replacementList[i] == null) {
++                continue;
++            }
+             int greater = replacementList[i].length() - searchList[i].length();
+             if (greater > 0) {
+                 increase += 3 * greater; // assume 3 matches
+             }
+         }

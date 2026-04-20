@@ -1,0 +1,24 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.collections4.map.CompositeMap:136",
+            "code": "final Collection<K> intersect = CollectionUtils.intersection(this.composite[i].keySet(), map.keySet());",
+            "explanation": "The NullPointerException is thrown because 'map' is null. The test cases indicate that 'map' is being passed as null to the 'addComposited' method. This line attempts to call 'keySet()' on a null 'map', which causes the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.collections4.map.CompositeMap:112",
+            "code": "this.addComposited(composite[i]);",
+            "explanation": "The constructor of CompositeMap is calling 'addComposited' with elements from the 'composite' array. If any element in 'composite' is null, it will lead to a NullPointerException in 'addComposited'. This line should include a null check before calling 'addComposited'."
+        },
+        {
+            "faultyLine": "org.apache.commons.collections4.map.CompositeMap:144",
+            "code": "final Map<K, V>[] temp = new Map[this.composite.length + 1];",
+            "explanation": "This line is part of the 'addComposited' method. If 'map' is null, the subsequent lines that attempt to add 'map' to 'temp' and assign it to 'this.composite' will not handle the null case properly. A null check should be added before this line."
+        },
+        {
+            "faultyLine": "org.apache.commons.collections4.map.CompositeMap:147",
+            "code": "this.composite = temp;",
+            "explanation": "This line assigns the new array 'temp' to 'this.composite'. If 'map' is null, 'temp' will contain a null element, which can cause issues in other parts of the code that assume 'this.composite' does not contain null elements. A null check should be added before modifying 'this.composite'."
+        }
+    ]
+}

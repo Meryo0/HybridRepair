@@ -1,0 +1,86 @@
+{"npe.traces": [
+    {
+        "test.method": "testConstructNullCharsetEncoder",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "minBufferSize",
+                "line": 100,
+                "class": "org.apache.commons.io.input.ReaderInputStream"
+            },
+            {
+                "is_target": true,
+                "method": "checkMinBufferSize",
+                "line": 87,
+                "class": "org.apache.commons.io.input.ReaderInputStream"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 196,
+                "class": "org.apache.commons.io.input.ReaderInputStream"
+            },
+            {
+                "is_target": true,
+                "method": "testConstructNullCharsetEncoder",
+                "line": 128,
+                "class": "org.apache.commons.io.input.ReaderInputStreamTest"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            }
+        ],
+        "test.class": "org.apache.commons.io.input.ReaderInputStreamTest"
+    },
+    {
+        "test.method": "testConstructNullCharset",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 158,
+                "class": "org.apache.commons.io.input.ReaderInputStream"
+            },
+            {
+                "is_target": true,
+                "method": "testConstructNullCharset",
+                "line": 139,
+                "class": "org.apache.commons.io.input.ReaderInputStreamTest"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            }
+        ],
+        "test.class": "org.apache.commons.io.input.ReaderInputStreamTest"
+    }
+]}

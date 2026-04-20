@@ -1,0 +1,39 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jfree.data.general.DatasetUtilities:779",
+            "code": "if (minimum > maximum) {",
+            "explanation": "This line checks if the minimum value is greater than the maximum value, which is a condition that should not normally occur. If this condition is true, the method returns null, which leads to a NullPointerException when the test tries to access the bounds of the range. This suggests that the calculation of minimum and maximum values might be incorrect when NaN values are involved."
+        },
+        {
+            "faultyLine": "org.jfree.data.general.DatasetUtilities:780",
+            "code": "return null;",
+            "explanation": "Returning null here causes the NullPointerException in the test cases when the range bounds are accessed. This indicates that the method is not handling NaN values correctly, leading to an invalid state where minimum is greater than maximum."
+        },
+        {
+            "faultyLine": "org.jfree.data.general.DatasetUtilities:746",
+            "code": "double maximum = Double.NEGATIVE_INFINITY;",
+            "explanation": "The initialization of the maximum value to Double.NEGATIVE_INFINITY might not be appropriate when dealing with NaN values. If all values are NaN, the maximum will remain as Double.NEGATIVE_INFINITY, which can cause the condition minimum > maximum to be true."
+        },
+        {
+            "faultyLine": "org.jfree.data.general.DatasetUtilities:745",
+            "code": "double minimum = Double.POSITIVE_INFINITY;",
+            "explanation": "Similarly, initializing the minimum value to Double.POSITIVE_INFINITY might not be appropriate when dealing with NaN values. If all values are NaN, the minimum will remain as Double.POSITIVE_INFINITY, which can cause the condition minimum > maximum to be true."
+        },
+        {
+            "faultyLine": "org.jfree.data.general.DatasetUtilities:754",
+            "code": "for (int item = 0; item < itemCount; item++) {",
+            "explanation": "The loop iterates over all items in the series, but it does not handle NaN values correctly. If NaN values are present, they should be skipped or handled in a way that does not affect the calculation of minimum and maximum values."
+        },
+        {
+            "faultyLine": "org.jfree.data.general.DatasetUtilities:757",
+            "code": "if (!Double.isNaN(lvalue)) {",
+            "explanation": "This condition checks if the lower value is not NaN, but it does not handle the case where both lvalue and uvalue are NaN. This can lead to incorrect calculations of minimum and maximum values."
+        },
+        {
+            "faultyLine": "org.jfree.data.general.DatasetUtilities:760",
+            "code": "if (!Double.isNaN(uvalue)) {",
+            "explanation": "This condition checks if the upper value is not NaN, but it does not handle the case where both lvalue and uvalue are NaN. This can lead to incorrect calculations of minimum and maximum values."
+        }
+    ]
+}

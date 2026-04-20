@@ -1,0 +1,34 @@
+Provide a short code description of the following code:
+ org.apache.commons.io.Charsets:66 `        final SortedMap<String, Charset> standardCharsetMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);`
+org.apache.commons.io.Charsets:67 `        standardCharsetMap.put(StandardCharsets.ISO_8859_1.name(), StandardCharsets.ISO_8859_1);`
+org.apache.commons.io.Charsets:68 `        standardCharsetMap.put(StandardCharsets.US_ASCII.name(), StandardCharsets.US_ASCII);`
+org.apache.commons.io.Charsets:69 `        standardCharsetMap.put(StandardCharsets.UTF_16.name(), StandardCharsets.UTF_16);`
+org.apache.commons.io.Charsets:70 `        standardCharsetMap.put(StandardCharsets.UTF_16BE.name(), StandardCharsets.UTF_16BE);`
+org.apache.commons.io.Charsets:71 `        standardCharsetMap.put(StandardCharsets.UTF_16LE.name(), StandardCharsets.UTF_16LE);`
+org.apache.commons.io.Charsets:72 `        standardCharsetMap.put(StandardCharsets.UTF_8.name(), StandardCharsets.UTF_8);`
+org.apache.commons.io.Charsets:73 `        STANDARD_CHARSET_MAP = Collections.unmodifiableSortedMap(standardCharsetMap);`
+org.apache.commons.io.Charsets:86 `    public static final Charset ISO_8859_1 = StandardCharsets.ISO_8859_1;`
+org.apache.commons.io.Charsets:100 `    public static final Charset US_ASCII = StandardCharsets.US_ASCII;`
+org.apache.commons.io.Charsets:115 `    public static final Charset UTF_16 = StandardCharsets.UTF_16;`
+org.apache.commons.io.Charsets:129 `    public static final Charset UTF_16BE = StandardCharsets.UTF_16BE;`
+org.apache.commons.io.Charsets:143 `    public static final Charset UTF_16LE = StandardCharsets.UTF_16LE;`
+org.apache.commons.io.Charsets:157 `    public static final Charset UTF_8 = StandardCharsets.UTF_8;`
+org.apache.commons.io.Charsets:183 `        return charset == null ? Charset.defaultCharset() : charset;`
+org.apache.commons.io.charset.CharsetDecoders:37 `        return charsetDecoder != null ? charsetDecoder : Charset.defaultCharset().newDecoder();`
+org.apache.commons.io.output.WriterOutputStream:121 `    private final ByteBuffer decoderIn = ByteBuffer.allocate(128);`
+org.apache.commons.io.output.WriterOutputStream:152 `        this(writer, charset, BUFFER_SIZE, false);`
+org.apache.commons.io.output.WriterOutputStream:169 `        this(writer,`
+org.apache.commons.io.output.WriterOutputStream:170 `             charset.newDecoder()`
+org.apache.commons.io.output.WriterOutputStream:188 `        this(writer, decoder, BUFFER_SIZE, false);`
+org.apache.commons.io.output.WriterOutputStream:205 `                              final boolean writeImmediately) {`
+org.apache.commons.io.output.WriterOutputStream:206 `        checkIbmJdkWithBrokenUTF16( decoder.charset());`
+ 
+The provided code is expected to pass these test cases:
+ @Test public void testNullCharsetWithSingleByteWrite() throws IOException {
+  testWithSingleByteWrite(TEST_STRING,(Charset)null);
+}
+
+@Test public void testNullCharsetDecoderWithSingleByteWrite() throws IOException {
+  testWithSingleByteWrite(TEST_STRING,(CharsetDecoder)null);
+}
+

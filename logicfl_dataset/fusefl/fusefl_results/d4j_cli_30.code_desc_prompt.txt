@@ -1,0 +1,126 @@
+Provide a short code description of the following code:
+ org.apache.commons.cli.BasicParser:28 `public class BasicParser extends Parser`
+org.apache.commons.cli.BasicParser:46 `        return arguments;`
+org.apache.commons.cli.CommandLine:49 `    private List args = new LinkedList();`
+org.apache.commons.cli.CommandLine:52 `    private List options = new ArrayList();`
+org.apache.commons.cli.CommandLine:58 `    {`
+org.apache.commons.cli.CommandLine:60 `    }`
+org.apache.commons.cli.CommandLine:70 `        return options.contains(resolveOption(opt));`
+org.apache.commons.cli.CommandLine:196 `        opt = Util.stripLeadingHyphens(opt);`
+org.apache.commons.cli.CommandLine:197 `        for (Iterator it = options.iterator(); it.hasNext();)`
+org.apache.commons.cli.CommandLine:211 `        return null;`
+org.apache.commons.cli.DefaultParser:33 `public class DefaultParser implements CommandLineParser`
+org.apache.commons.cli.DefaultParser:75 `        return parse(options, arguments, properties, false);`
+org.apache.commons.cli.DefaultParser:100 `        this.options = options;`
+org.apache.commons.cli.DefaultParser:101 `        this.stopAtNonOption = stopAtNonOption;`
+org.apache.commons.cli.DefaultParser:102 `        skipParsing = false;`
+org.apache.commons.cli.DefaultParser:103 `        currentOption = null;`
+org.apache.commons.cli.DefaultParser:104 `        expectedOpts = new ArrayList(options.getRequiredOptions());`
+org.apache.commons.cli.DefaultParser:107 `        for (Iterator it = options.getOptionGroups().iterator(); it.hasNext();)`
+org.apache.commons.cli.DefaultParser:113 `        cmd = new CommandLine();`
+org.apache.commons.cli.DefaultParser:115 `        if (arguments != null)`
+org.apache.commons.cli.DefaultParser:124 `        checkRequiredArgs();`
+org.apache.commons.cli.DefaultParser:127 `        handleProperties(properties);`
+org.apache.commons.cli.DefaultParser:141 `        if (properties == null)`
+org.apache.commons.cli.DefaultParser:146 `        for (Enumeration e = properties.propertyNames(); e.hasMoreElements();)`
+org.apache.commons.cli.DefaultParser:148 `            String option = e.nextElement().toString();`
+org.apache.commons.cli.DefaultParser:150 `            if (!cmd.hasOption(option))`
+org.apache.commons.cli.DefaultParser:152 `                Option opt = options.getOption(option);`
+org.apache.commons.cli.DefaultParser:157 `                String value = properties.getProperty(option);`
+org.apache.commons.cli.DefaultParser:159 `                if (opt.hasArg())`
+org.apache.commons.cli.DefaultParser:202 `        if (currentOption != null && currentOption.requiresArg())`
+org.apache.commons.cli.DefaultParser:206 `    }`
+org.apache.commons.cli.GnuParser:31 `public class GnuParser extends Parser`
+org.apache.commons.cli.GnuParser:52 `        List tokens = new ArrayList();`
+org.apache.commons.cli.GnuParser:54 `        boolean eatTheRest = false;`
+org.apache.commons.cli.GnuParser:56 `        for (int i = 0; i < arguments.length; i++)`
+org.apache.commons.cli.GnuParser:112 `        return (String[]) tokens.toArray(new String[tokens.size()]);`
+org.apache.commons.cli.Option:57 `    private String argName = "arg";`
+org.apache.commons.cli.Option:69 `    private int numberOfArgs = UNINITIALIZED;`
+org.apache.commons.cli.Option:75 `    private List values = new ArrayList();`
+org.apache.commons.cli.Option:122 `    {`
+org.apache.commons.cli.Option:124 `        OptionValidator.validateOption(opt);`
+org.apache.commons.cli.Option:126 `        this.opt = opt;`
+org.apache.commons.cli.Option:127 `        this.longOpt = longOpt;`
+org.apache.commons.cli.Option:130 `        if (hasArg)`
+org.apache.commons.cli.Option:132 `            this.numberOfArgs = 1;`
+org.apache.commons.cli.Option:135 `        this.description = description;`
+org.apache.commons.cli.Option:136 `    }`
+org.apache.commons.cli.Option:158 `        if (opt == null)`
+org.apache.commons.cli.Option:163 `        return opt;`
+org.apache.commons.cli.Option:208 `        return longOpt;`
+org.apache.commons.cli.Option:247 `        return longOpt != null;`
+org.apache.commons.cli.Option:288 `        return required;`
+org.apache.commons.cli.OptionValidator:48 `        if (opt == null)`
+org.apache.commons.cli.OptionValidator:54 `        if (opt.length() == 1)`
+org.apache.commons.cli.OptionValidator:56 `            char ch = opt.charAt(0);`
+org.apache.commons.cli.OptionValidator:58 `            if (!isValidOpt(ch))`
+org.apache.commons.cli.OptionValidator:62 `        }`
+org.apache.commons.cli.OptionValidator:77 `    }`
+org.apache.commons.cli.OptionValidator:87 `        return isValidChar(c) || c == '?' || c == '@';`
+org.apache.commons.cli.OptionValidator:98 `        return Character.isJavaIdentifierPart(c);`
+org.apache.commons.cli.Options:46 `public class Options implements Serializable`
+org.apache.commons.cli.Options:52 `    private Map shortOpts = new HashMap();`
+org.apache.commons.cli.Options:55 `    private Map longOpts = new HashMap();`
+org.apache.commons.cli.Options:58 `    private List requiredOpts = new ArrayList();`
+org.apache.commons.cli.Options:61 `    private Map optionGroups = new HashMap();`
+org.apache.commons.cli.Options:101 `        return new HashSet(optionGroups.values());`
+org.apache.commons.cli.Options:132 `        addOption(new Option(opt, longOpt, hasArg, description));`
+org.apache.commons.cli.Options:134 `        return this;`
+org.apache.commons.cli.Options:145 `        String key = opt.getKey();`
+org.apache.commons.cli.Options:148 `        if (opt.hasLongOpt())`
+org.apache.commons.cli.Options:150 `            longOpts.put(opt.getLongOpt(), opt);`
+org.apache.commons.cli.Options:154 `        if (opt.isRequired())`
+org.apache.commons.cli.Options:163 `        shortOpts.put(key, opt);`
+org.apache.commons.cli.Options:165 `        return this;`
+org.apache.commons.cli.Options:185 `        return new ArrayList(shortOpts.values());`
+org.apache.commons.cli.Options:195 `        return requiredOpts;`
+org.apache.commons.cli.Options:207 `        opt = Util.stripLeadingHyphens(opt);`
+org.apache.commons.cli.Options:209 `        if (shortOpts.containsKey(opt))`
+org.apache.commons.cli.Options:214 `        return (Option) longOpts.get(opt);`
+org.apache.commons.cli.Parser:35 `public abstract class Parser implements CommandLineParser`
+org.apache.commons.cli.Parser:48 `        this.options = options;`
+org.apache.commons.cli.Parser:49 `        this.requiredOptions = new ArrayList(options.getRequiredOptions());`
+org.apache.commons.cli.Parser:50 `    }`
+org.apache.commons.cli.Parser:54 `        return options;`
+org.apache.commons.cli.Parser:103 `        return parse(options, arguments, properties, false);`
+org.apache.commons.cli.Parser:147 `        for (Iterator it = options.helpOptions().iterator(); it.hasNext();)`
+org.apache.commons.cli.Parser:154 `        for (Iterator it = options.getOptionGroups().iterator(); it.hasNext();)`
+org.apache.commons.cli.Parser:161 `        setOptions(options);`
+org.apache.commons.cli.Parser:163 `        cmd = new CommandLine();`
+org.apache.commons.cli.Parser:165 `        boolean eatTheRest = false;`
+org.apache.commons.cli.Parser:167 `        if (arguments == null)`
+org.apache.commons.cli.Parser:169 `            arguments = new String[0];`
+org.apache.commons.cli.Parser:172 `        List tokenList = Arrays.asList(flatten(getOptions(), arguments, stopAtNonOption));`
+org.apache.commons.cli.Parser:174 `        ListIterator iterator = tokenList.listIterator();`
+org.apache.commons.cli.Parser:241 `        processProperties(properties);`
+org.apache.commons.cli.Parser:254 `        if (properties == null)`
+org.apache.commons.cli.Parser:259 `        for (Enumeration e = properties.propertyNames(); e.hasMoreElements();)`
+org.apache.commons.cli.Parser:261 `            String option = e.nextElement().toString();`
+org.apache.commons.cli.Parser:263 `            if (!cmd.hasOption(option))`
+org.apache.commons.cli.Parser:265 `                Option opt = getOptions().getOption(option);`
+org.apache.commons.cli.Parser:270 `                String value = properties.getProperty(option);`
+org.apache.commons.cli.Parser:272 `                if (opt.hasArg())`
+org.apache.commons.cli.ParserTestCase:875 `            return ((Parser) parser).parse(opts, args, properties);`
+org.apache.commons.cli.ParserTestCase:877 `            return ((DefaultParser) parser).parse(opts, args, properties);`
+org.apache.commons.cli.ParserTestCase:1010 `            parse(parser, opts, null, properties);`
+org.apache.commons.cli.PosixParser:33 `public class PosixParser extends Parser`
+org.apache.commons.cli.PosixParser:36 `    private List tokens = new ArrayList();`
+org.apache.commons.cli.PosixParser:54 `        eatTheRest = false;`
+org.apache.commons.cli.PosixParser:55 `        tokens.clear();`
+org.apache.commons.cli.PosixParser:56 `    }`
+org.apache.commons.cli.PosixParser:98 `        init();`
+org.apache.commons.cli.PosixParser:99 `        this.options = options;`
+org.apache.commons.cli.PosixParser:102 `        Iterator iter = Arrays.asList(arguments).iterator();`
+org.apache.commons.cli.PosixParser:105 `        while (iter.hasNext())`
+org.apache.commons.cli.PosixParser:177 `        return (String[]) tokens.toArray(new String[tokens.size()]);`
+org.apache.commons.cli.Util:38 `        if (str == null)`
+org.apache.commons.cli.Util:42 `        if (str.startsWith("--"))`
+org.apache.commons.cli.Util:46 `        else if (str.startsWith("-"))`
+org.apache.commons.cli.Util:51 `        return str;`
+ 
+The provided code is expected to pass these test cases:
+ null
+null
+null
+null

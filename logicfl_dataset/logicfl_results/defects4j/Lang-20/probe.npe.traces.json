@@ -1,0 +1,230 @@
+{"npe.traces": [
+    {
+        "test.method": "testJoin_Objectarray",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "join",
+                "line": 3567,
+                "class": "org.apache.commons.lang3.StringUtils"
+            },
+            {
+                "is_target": true,
+                "method": "join",
+                "line": 3484,
+                "class": "org.apache.commons.lang3.StringUtils"
+            },
+            {
+                "is_target": true,
+                "method": "join",
+                "line": 3274,
+                "class": "org.apache.commons.lang3.StringUtils"
+            },
+            {
+                "is_target": true,
+                "method": "testJoin_Objectarray",
+                "line": 271,
+                "class": "org.apache.commons.lang3.StringUtilsTest"
+            },
+            {
+                "is_target": false,
+                "method": "invoke0",
+                "line": -2,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 77,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 43,
+                "class": "jdk.internal.reflect.DelegatingMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 177,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 142,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.apache.commons.lang3.StringUtilsTest"
+    },
+    {
+        "test.method": "testJoin_ArrayChar",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "join",
+                "line": 3384,
+                "class": "org.apache.commons.lang3.StringUtils"
+            },
+            {
+                "is_target": true,
+                "method": "testJoin_ArrayChar",
+                "line": 331,
+                "class": "org.apache.commons.lang3.StringUtilsTest"
+            },
+            {
+                "is_target": false,
+                "method": "invoke0",
+                "line": -2,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 77,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 43,
+                "class": "jdk.internal.reflect.DelegatingMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 177,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 142,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.apache.commons.lang3.StringUtilsTest"
+    }
+]}

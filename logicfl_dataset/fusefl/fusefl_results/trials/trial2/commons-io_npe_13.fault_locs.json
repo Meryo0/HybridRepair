@@ -1,0 +1,19 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.IOCase:180",
+            "code": "return str.regionMatches(!sensitive, 0, start, 0, start.length());",
+            "explanation": "The NullPointerException occurs because the 'start' parameter is null. The method 'checkStartsWith' should handle null values for 'start' and 'str' to avoid NPE."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.IOCase:196",
+            "code": "final int endLen = end.length();",
+            "explanation": "The NullPointerException occurs because the 'end' parameter is null. The method 'checkEndsWith' should handle null values for 'end' and 'str' to avoid NPE."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.IOCase:197",
+            "code": "return str.regionMatches(!sensitive, str.length() - endLen, end, 0, endLen);",
+            "explanation": "This line depends on the 'end' parameter, which can be null, causing a NullPointerException. Proper null checks should be added before using 'end'."
+        }
+    ]
+}

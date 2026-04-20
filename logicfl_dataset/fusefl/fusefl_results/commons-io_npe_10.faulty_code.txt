@@ -1,0 +1,3 @@
+org.apache.commons.io.input.CharSequenceInputStream:62 `        this(cs, charset, BUFFER_SIZE);`
+org.apache.commons.io.input.CharSequenceInputStream:73 `    public CharSequenceInputStream(final CharSequence cs, final Charset charset, final int bufferSize) {`
+org.apache.commons.io.input.CharSequenceInputStream:75 `        this.charsetEncoder = charset.newEncoder()`

@@ -1,0 +1,8 @@
+Fault Localization Results
+NPE at line(math_utils_1, 2324) / Null Expression - v_y_520[y]
+	 can be caused by 
+v_y_520[y] - line(math_utils_1, 2324).
+
+NPE at line(math_utils_1, 2324) / Null Expression - v_y_520[y]
+	 can be caused by 
+math_utils_1_expr14['yList[j]'] - line(math_utils_1, 2323).

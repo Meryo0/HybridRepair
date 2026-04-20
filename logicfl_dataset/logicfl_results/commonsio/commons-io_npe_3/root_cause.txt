@@ -1,0 +1,48 @@
+Fault Localization Results
+NPE at line(iocase_1, 174) / Null Expression - p_str_2_141[str2]
+	 can be caused by 
+p_str_2_141[str2] - line(iocase_1, 174).
+
+NPE at line(name_file_filter_1, 166) / Null Expression - p_file_899[file]
+	 can be caused by 
+p_file_899[file] - line(name_file_filter_1, 166).
+
+NPE at line(name_file_filter_1, 166) / Null Expression - p_file_899[file]
+	 can be caused by 
+p_file_746[file] - line(abstract_filter_test_1, 50).
+
+NPE at line(empty_file_filter_1, 107) / Null Expression - p_file_789[file]
+	 can be caused by 
+p_file_789[file] - line(empty_file_filter_1, 107).
+
+NPE at line(empty_file_filter_1, 107) / Null Expression - p_file_789[file]
+	 can be caused by 
+p_file_746[file] - line(abstract_filter_test_1, 50).
+
+NPE at line(file_file_filter_1, 100) / Null Expression - p_file_796[file]
+	 can be caused by 
+p_file_796[file] - line(file_file_filter_1, 100).
+
+NPE at line(file_file_filter_1, 100) / Null Expression - p_file_796[file]
+	 can be caused by 
+p_file_746[file] - line(abstract_filter_test_1, 50).
+
+NPE at line(can_read_file_filter_1, 95) / Null Expression - p_file_774[file]
+	 can be caused by 
+p_file_774[file] - line(can_read_file_filter_1, 95).
+
+NPE at line(can_read_file_filter_1, 95) / Null Expression - p_file_774[file]
+	 can be caused by 
+p_file_746[file] - line(abstract_filter_test_1, 50).
+
+NPE at line(can_write_file_filter_1, 83) / Null Expression - p_file_779[file]
+	 can be caused by 
+p_file_779[file] - line(can_write_file_filter_1, 83).
+
+NPE at line(can_write_file_filter_1, 83) / Null Expression - p_file_779[file]
+	 can be caused by 
+p_file_746[file] - line(abstract_filter_test_1, 50).
+
+NPE at line(hidden_file_filter_1, 117) / Null Expression - p_file_877[file]
+	 can be caused by 
+p_file_877[file] - line(hidden_file_filter_1, 117).

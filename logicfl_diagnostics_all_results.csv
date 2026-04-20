@@ -1,0 +1,756 @@
+bug_id,category,relevant_excerpt
+Chart-2,Prova causale completa,"STDOUT | java.lang.NullPointerException: Cannot invoke ""org.jfree.data.Range.getLowerBound()"" because ""r"" is null
+STDOUT | 	at org.jfree.data.general.junit.DatasetUtilitiesTests.testBug2849731_2(DatasetUtilitiesTests.java:1276)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | java.lang.NullPointerException: Cannot invoke ""org.jfree.data.Range.getLowerBound()"" because ""r"" is null
+STDOUT | 	at org.jfree.data.general.junit.DatasetUtilitiesTests.testBug2849731_3(DatasetUtilitiesTests.java:1299)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | java.lang.NullPointerException: Cannot invoke ""org.jfree.data.Range.getLowerBound()"" because ""v_r_207_line_1276"" is null
+STDOUT | 	at org.jfree.data.general.junit.DatasetUtilitiesTests.testBug2849731_2(DatasetUtilitiesTests.java:1293)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)"
+Chart-4,Prova causale completa,"STDOUT | 	at org.jfree.chart.ChartFactory.createScatterPlot(ChartFactory.java:1490)
+STDOUT | 	at org.jfree.chart.axis.junit.ValueAxisTests.testAxisMargins(ValueAxisTests.java:234)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.jfree.chart.ChartFactory.createTimeSeriesChart(ChartFactory.java:1893)
+STDOUT | 	at org.jfree.chart.junit.JFreeChartTests.testSerialization4(JFreeChartTests.java:448)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.jfree.chart.ChartFactory.createScatterPlot(ChartFactory.java:1490)
+STDOUT | 	at org.jfree.chart.axis.junit.LogAxisTests.testXYAutoRange1(LogAxisTests.java:260)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)"
+Chart-14,Prova causale completa,"STDOUT | 	at org.jfree.chart.plot.XYPlot.removeRangeMarker(XYPlot.java:2465)
+STDOUT | 	at org.jfree.chart.plot.junit.XYPlotTests.testRemoveRangeMarker(XYPlotTests.java:1037)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.jfree.chart.plot.XYPlot.removeDomainMarker(XYPlot.java:2232)
+STDOUT | 	at org.jfree.chart.plot.junit.XYPlotTests.testRemoveDomainMarker(XYPlotTests.java:1028)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.jfree.chart.plot.CategoryPlot.removeRangeMarker(CategoryPlot.java:2378)
+STDOUT | 	at org.jfree.chart.plot.junit.CategoryPlotTests.testRemoveRangeMarker(CategoryPlotTests.java:780)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)"
+Chart-16,Prova causale completa,"STDOUT | 	at org.jfree.data.category.DefaultIntervalCategoryDataset.getCategoryIndex(DefaultIntervalCategoryDataset.java:574)
+STDOUT | 	at org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests.testGetCategoryIndex(DefaultIntervalCategoryDatasetTests.java:415)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.jfree.data.category.DefaultIntervalCategoryDataset.getSeriesIndex(DefaultIntervalCategoryDataset.java:242)
+STDOUT | 	at org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests.testGetSeriesIndex(DefaultIntervalCategoryDatasetTests.java:375)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.jfree.data.category.DefaultIntervalCategoryDataset.getColumnCount(DefaultIntervalCategoryDataset.java:690)
+STDOUT | 	at org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests.testGetRowCount(DefaultIntervalCategoryDatasetTests.java:490)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)"
+Cli-5,Prova causale completa,"STDOUT | 	at org.apache.commons.cli.CommandLine.hasOption(CommandLine.java:68)
+STDOUT | 	at org.apache.commons.cli.bug.BugCLI133Test.testOrder(BugCLI133Test.java:32)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.apache.commons.cli.Util.stripLeadingHyphens(Util.java:36)
+STDOUT | 	at org.apache.commons.cli.UtilTest.testStripLeadingHyphens(UtilTest.java:28)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.apache.commons.cli.CommandLine.hasOption(CommandLine.java:71)
+STDOUT | 	at org.apache.commons.cli.bug.BugCLI133Test.testOrder(BugCLI133Test.java:47)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)"
+Cli-30,Prova causale completa,"STDOUT | 	at org.apache.commons.cli.ParserTestCase.parse(ParserTestCase.java:875)
+STDOUT | 	at org.apache.commons.cli.ParserTestCase.testPropertyOptionUnexpected(ParserTestCase.java:1010)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.apache.commons.cli.ParserTestCase.parse(ParserTestCase.java:875)
+STDOUT | 	at org.apache.commons.cli.ParserTestCase.testPropertyOptionUnexpected(ParserTestCase.java:1010)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.apache.commons.cli.ParserTestCase.parse(ParserTestCase.java:875)
+STDOUT | 	at org.apache.commons.cli.ParserTestCase.testPropertyOptionUnexpected(ParserTestCase.java:1010)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)"
+Closure-2,Prova causale completa,"STDOUT | 	at com.google.javascript.jscomp.TypeCheckTest.testTypes(TypeCheckTest.java:11530)
+STDOUT | 	at com.google.javascript.jscomp.TypeCheckTest.testBadInterfaceExtendsNonExistentInterfaces(TypeCheckTest.java:3780)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at com.google.javascript.jscomp.TypeCheckTest.testTypes(TypeCheckTest.java:11565)
+STDOUT | 	at com.google.javascript.jscomp.TypeCheckTest.testBadInterfaceExtendsNonExistentInterfaces(TypeCheckTest.java:3794)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | consult Succeeded
+STDOUT | NPE at line(type_check_1, 1574) / Null Expression v_implicit_proto_2660[implicitProto]
+STDOUT | 	can be caused by 
+STDOUT | v_implicit_proto_2660[implicitProto] at line(type_check_1, 1574).
+STDOUT | 
+STDOUT | NPE at line(type_check_1, 1574) / Null Expression v_implicit_proto_2660[implicitProto]
+STDOUT | 	can be caused by 
+STDOUT | type_check_1_expr128['interfaceType.getImplicitPrototype()'] at line(type_check_1, 1570).
+STDOUT | "
+Closure-171,Prova causale completa,"STDOUT | java.lang.NullPointerException: Cannot invoke ""com.google.javascript.jscomp.Scope$Var.getType()"" because the return value of ""com.google.javascript.jscomp.Scope.getVar(String)"" is null
+STDOUT | 	at com.google.javascript.jscomp.TypedScopeCreatorTest.testPropertiesOnInterface2(TypedScopeCreatorTest.java:551)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | java.lang.NullPointerException: Cannot invoke ""com.google.javascript.jscomp.Scope$Var.getType()"" because ""typed_scope_creator_test_1_expr27_line_551"" is null
+STDOUT | 	at com.google.javascript.jscomp.TypedScopeCreatorTest.testPropertiesOnInterface2(TypedScopeCreatorTest.java:592)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | consult Succeeded
+STDOUT | NPE at line(typed_scope_creator_test_1, 551) / Null Expression typed_scope_creator_test_1_expr27['globalScope.getVar(""I.prototype"")']
+STDOUT | 	can be caused by 
+STDOUT | scope_1_literal19[null] at line(scope_1, 535).
+STDOUT | 
+STDOUT | NPE at line(typed_scope_creator_test_1, 551) / Null Expression typed_scope_creator_test_1_expr27['globalScope.getVar(""I.prototype"")']
+STDOUT | 	can be caused by 
+STDOUT | scope_1_expr98['parent.getVar(name)'] at line(scope_1, 533).
+STDOUT | "
+Codec-5,Prova causale completa,"STDOUT | 	at org.apache.commons.codec.binary.Base64OutputStream.close(Base64OutputStream.java:192)
+STDOUT | 	at org.apache.commons.codec.binary.Base64OutputStreamTest.testCodec98NPE(Base64OutputStreamTest.java:62)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.apache.commons.codec.binary.Base64TestData.streamToBytes(Base64TestData.java:148)
+STDOUT | 	at org.apache.commons.codec.binary.Base64InputStreamTest.testCodec98NPE(Base64InputStreamTest.java:61)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.apache.commons.codec.binary.Base64OutputStream.close(Base64OutputStream.java:281)
+STDOUT | 	at org.apache.commons.codec.binary.Base64OutputStreamTest.testCodec98NPE(Base64OutputStreamTest.java:82)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)"
+Codec-13,Prova causale completa,"STDOUT | 	at org.apache.commons.codec.language.DoubleMetaphoneTest.doubleMetaphoneEqualTest(DoubleMetaphoneTest.java:1039)
+STDOUT | 	at org.apache.commons.codec.language.DoubleMetaphoneTest.testIsDoubleMetaphoneEqualBasic(DoubleMetaphoneTest.java:1136)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.apache.commons.codec.language.DoubleMetaphone.isDoubleMetaphoneEqual(DoubleMetaphone.java:244)
+STDOUT | 	at org.apache.commons.codec.language.DoubleMetaphoneTest.testCodec184(DoubleMetaphoneTest.java:1065)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.apache.commons.codec.language.DoubleMetaphoneTest.doubleMetaphoneEqualTest(DoubleMetaphoneTest.java:1068)
+STDOUT | 	at org.apache.commons.codec.language.DoubleMetaphoneTest.testIsDoubleMetaphoneEqualBasic(DoubleMetaphoneTest.java:1174)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)"
+Codec-17,Prova causale completa,"STDOUT | 	at org.apache.commons.codec.binary.StringUtils.newStringIso8859_1(StringUtils.java:339)
+STDOUT | 	at org.apache.commons.codec.binary.StringUtilsTest.testNewStringNullInput_CODEC229(StringUtilsTest.java:151)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.apache.commons.codec.binary.StringUtils.newStringIso8859_1(StringUtils.java:354)
+STDOUT | 	at org.apache.commons.codec.binary.StringUtilsTest.testNewStringNullInput_CODEC229(StringUtilsTest.java:155)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | consult Succeeded
+STDOUT | NPE at line(string_utils_1, 339) / Null Expression p_bytes_30[bytes]
+STDOUT | 	can be caused by 
+STDOUT | p_bytes_30[bytes] at line(string_utils_1, 339).
+STDOUT | 
+STDOUT | Total 1 Identified Fault Locations for NPE.
+STDOUT | Exec. Time - 00:00:00.067
+STDOUT | localizer.sh executed successfully."
+Csv-4,Prova causale completa,"STDOUT | 	at org.apache.commons.csv.CSVParser.getHeaderMap(CSVParser.java:288)
+STDOUT | 	at org.apache.commons.csv.CSVParserTest.testNoHeaderMap(CSVParserTest.java:670)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.apache.commons.csv.CSVParser.getHeaderMap(CSVParser.java:320)
+STDOUT | 	at org.apache.commons.csv.CSVParserTest.testNoHeaderMap(CSVParserTest.java:676)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | consult Succeeded
+STDOUT | NPE at line(csvparser_1, 288) / Null Expression f_header_map_69[headerMap]
+STDOUT | 	can be caused by 
+STDOUT | f_header_map_69[headerMap] at line(csvparser_1, 288).
+STDOUT | 
+STDOUT | NPE at line(csvparser_1, 288) / Null Expression f_header_map_69[headerMap]
+STDOUT | 	can be caused by 
+STDOUT | v_hdr_map_70[hdrMap] at line(csvparser_1, 351).
+STDOUT | "
+Csv-9,Prova causale completa,"STDOUT | 	at org.apache.commons.csv.CSVRecord.toMap(CSVRecord.java:214)
+STDOUT | 	at org.apache.commons.csv.CSVRecordTest.testToMapWithNoHeader(CSVRecordTest.java:175)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.apache.commons.csv.CSVRecord.toMap(CSVRecord.java:245)
+STDOUT | 	at org.apache.commons.csv.CSVRecordTest.testToMapWithNoHeader(CSVRecordTest.java:206)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | consult Succeeded
+STDOUT | NPE at line(csvrecord_1, 180) / Null Expression f_mapping_92[mapping]
+STDOUT | 	can be caused by 
+STDOUT | v_hdr_map_74[hdrMap] at line(csvparser_1, 388).
+STDOUT | 
+STDOUT | NPE at line(csvrecord_1, 180) / Null Expression f_mapping_92[mapping]
+STDOUT | 	can be caused by 
+STDOUT | f_mapping_92[mapping] at line(csvrecord_1, 180).
+STDOUT | "
+Csv-11,Prova causale completa,"STDOUT | 	at org.apache.commons.csv.CSVFormat.parse(CSVFormat.java:611)
+STDOUT | 	at org.apache.commons.csv.CSVParserTest.testHeaderMissingWithNull(CSVParserTest.java:670)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.apache.commons.csv.CSVFormat.parse(CSVFormat.java:742)
+STDOUT | 	at org.apache.commons.csv.CSVParserTest.testHeaderMissingWithNull(CSVParserTest.java:679)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | consult Succeeded
+STDOUT | NPE at line(csvparser_1, 384) / Null Expression v_header_86[header]
+STDOUT | 	can be caused by 
+STDOUT | v_header_86[header] at line(csvparser_1, 384).
+STDOUT | 
+STDOUT | NPE at line(csvparser_1, 384) / Null Expression v_header_86[header]
+STDOUT | 	can be caused by 
+STDOUT | csvparser_1_expr47['headerRecord[i]'] at line(csvparser_1, 382).
+STDOUT | "
+Gson-6,Prova causale completa,"STDOUT | 	at com.google.gson.Gson.toJson(Gson.java:575)
+STDOUT | 	at com.google.gson.regression.JsonAdapterNullSafeTest.testNullSafeBugSerialize(JsonAdapterNullSafeTest.java:31)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at com.google.gson.Gson.fromJson(Gson.java:765)
+STDOUT | 	at com.google.gson.regression.JsonAdapterNullSafeTest.testNullSafeBugDeserialize(JsonAdapterNullSafeTest.java:35)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at com.google.gson.Gson.toJson(Gson.java:892)
+STDOUT | 	at com.google.gson.regression.JsonAdapterNullSafeTest.testNullSafeBugSerialize(JsonAdapterNullSafeTest.java:35)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)"
+Gson-9,Punti ciechi / Deduzione frammentaria,"STDOUT | testBoxedBooleans(com.google.gson.stream.JsonWriterTest): 'com.google.gson.stream.JsonWriter com.google.gson.stream.JsonWriter.value(java.lang.Boolean)'
+STDOUT | 'com.google.gson.stream.JsonWriter com.google.gson.stream.JsonWriter.value(java.lang.Boolean)'
+STDOUT | java.lang.NoSuchMethodError: 'com.google.gson.stream.JsonWriter com.google.gson.stream.JsonWriter.value(java.lang.Boolean)'
+STDOUT | 	at com.google.gson.stream.JsonWriterTest.testBoxedBooleans(JsonWriterTest.java:290)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | java.lang.NullPointerException: Cannot invoke ""java.lang.Boolean.booleanValue()"" because ""null"" is null
+STDOUT | 	at com.google.gson.stream.JsonWriterTest.testBoxedBooleans(JsonWriterTest.java:298)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | Code Facts: /home/mario/Desktop/LogicFL/defects4j/Gson-9/result/code-facts.pl
+STDOUT | consult Succeeded
+STDOUT | Total 0 Identified Fault Locations for NPE.
+STDOUT | Exec. Time - 00:00:00.063
+STDOUT | localizer.sh executed successfully."
+JacksonCore-8,Prova causale completa,"STDOUT | java.lang.NullPointerException: Cannot read the array length because the return value of ""com.fasterxml.jackson.core.util.TextBuffer.getTextBuffer()"" is null
+STDOUT | 	at com.fasterxml.jackson.core.util.TestTextBuffer.testEmpty(TestTextBuffer.java:83)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | java.lang.NullPointerException: Cannot read the array length because ""test_text_buffer_1_expr7_line_83"" is null
+STDOUT | 	at com.fasterxml.jackson.core.util.TestTextBuffer.testEmpty(TestTextBuffer.java:89)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | consult Succeeded
+STDOUT | NPE at line(test_text_buffer_1, 83) / Null Expression test_text_buffer_1_expr7['tb.getTextBuffer()']
+STDOUT | 	can be caused by 
+STDOUT | f__current_segment_41['_currentSegment'] at line(text_buffer_1, 307).
+STDOUT | 
+STDOUT | NPE at line(test_text_buffer_1, 83) / Null Expression test_text_buffer_1_expr7['tb.getTextBuffer()']
+STDOUT | 	can be caused by 
+STDOUT | f__input_buffer_30['_inputBuffer'] at line(text_buffer_1, 301).
+STDOUT | "
+JacksonDatabind-3,Prova causale completa,"STDOUT | 	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:2146)
+STDOUT | 	at com.fasterxml.jackson.databind.deser.TestArrayDeserialization.testStringArray(TestArrayDeserialization.java:266)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:2239)
+STDOUT | 	at com.fasterxml.jackson.databind.deser.TestArrayDeserialization.testStringArray(TestArrayDeserialization.java:326)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | consult Succeeded
+STDOUT | NPE at line(string_array_deserializer_1, 66) / Null Expression f__element_deserializer_1487['_elementDeserializer']
+STDOUT | 	can be caused by 
+STDOUT | f__element_deserializer_1487['_elementDeserializer'] at line(string_array_deserializer_1, 66).
+STDOUT | 
+STDOUT | NPE at line(string_array_deserializer_1, 66) / Null Expression f__element_deserializer_1487['_elementDeserializer']
+STDOUT | 	can be caused by 
+STDOUT | string_array_deserializer_1_literal1[null] at line(string_array_deserializer_1, 34).
+STDOUT | "
+JacksonDatabind-13,Prova causale completa,"STDOUT | 	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:2578)
+STDOUT | 	at com.fasterxml.jackson.databind.struct.TestObjectIdDeserialization.testNullObjectId(TestObjectIdDeserialization.java:464)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:2662)
+STDOUT | 	at com.fasterxml.jackson.databind.struct.TestObjectIdDeserialization.testNullObjectId(TestObjectIdDeserialization.java:470)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | consult Succeeded
+STDOUT | NPE at line(default_deserialization_context_1, 88) / Null Expression p_id_1810[id]
+STDOUT | 	can be caused by 
+STDOUT | v_id_2275[id] at line(object_id_value_property_1, 93).
+STDOUT | 
+STDOUT | NPE at line(default_deserialization_context_1, 88) / Null Expression p_id_1810[id]
+STDOUT | 	can be caused by 
+STDOUT | p_id_1810[id] at line(default_deserialization_context_1, 88).
+STDOUT | "
+JacksonDatabind-80,Prova causale completa,"STDOUT | 	at com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver.collectAndResolveSubtypesByTypeId(StdSubtypeResolver.java:145)
+STDOUT | 	at com.fasterxml.jackson.databind.jsontype.TestTypeNames.testBaseTypeId1616(TestTypeNames.java:47)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver.collectAndResolveSubtypesByTypeId(StdSubtypeResolver.java:176)
+STDOUT | 	at com.fasterxml.jackson.databind.jsontype.TestTypeNames.testBaseTypeId1616(TestTypeNames.java:56)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | consult Succeeded
+STDOUT | NPE at line(annotation_introspector_1, 1336) / Null Expression p_annotated_115[annotated]
+STDOUT | 	can be caused by 
+STDOUT | p_property_2230[property] at line(std_subtype_resolver_1, 145).
+STDOUT | 
+STDOUT | NPE at line(annotation_introspector_1, 1336) / Null Expression p_annotated_115[annotated]
+STDOUT | 	can be caused by 
+STDOUT | p_a_2026[a] at line(jackson_annotation_introspector_1, 556).
+STDOUT | "
+JacksonDatabind-93,Prova causale completa,"STDOUT | 	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:2858)
+STDOUT | 	at com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest.testJDKTypes1872(IllegalTypesCheckTest.java:112)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3032)
+STDOUT | 	at com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest.testJDKTypes1872(IllegalTypesCheckTest.java:134)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | consult Succeeded
+STDOUT | NPE at line(sub_type_validator_1, 85) / Null Expression v_cls_3684[cls]
+STDOUT | 	can be caused by 
+STDOUT | v_cls_3684[cls] at line(sub_type_validator_1, 85).
+STDOUT | 
+STDOUT | NPE at line(sub_type_validator_1, 85) / Null Expression v_cls_3684[cls]
+STDOUT | 	can be caused by 
+STDOUT | v_raw_3681[raw] at line(sub_type_validator_1, 84).
+STDOUT | "
+JacksonDatabind-95,Prova causale completa,"STDOUT | 	at com.fasterxml.jackson.databind.type.TypeFactory.constructFromCanonical(TypeFactory.java:536)
+STDOUT | 	at com.fasterxml.jackson.databind.type.TestTypeFactory.testCanonicalNames(TestTypeFactory.java:237)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at com.fasterxml.jackson.databind.type.TypeFactory.constructFromCanonical(TypeFactory.java:663)
+STDOUT | 	at com.fasterxml.jackson.databind.type.TestTypeFactory.testCanonicalNames(TestTypeFactory.java:316)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | consult Succeeded
+STDOUT | NPE at line(type_factory_1, 1413) / Null Expression p_bindings_513[bindings]
+STDOUT | 	can be caused by 
+STDOUT | p_bindings_513[bindings] at line(type_factory_1, 1425).
+STDOUT | 
+STDOUT | NPE at line(type_factory_1, 1413) / Null Expression p_bindings_513[bindings]
+STDOUT | 	can be caused by 
+STDOUT | p_bindings_513[bindings] at line(type_factory_1, 1413).
+STDOUT | "
+JacksonDatabind-107,Prova causale completa,"STDOUT | 	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3004)
+STDOUT | 	at com.fasterxml.jackson.databind.deser.filter.ProblemHandlerUnknownTypeId2221Test.testWithDeserializationProblemHandler(ProblemHandlerUnknownTypeId2221Test.java:95)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3167)
+STDOUT | 	at com.fasterxml.jackson.databind.deser.filter.ProblemHandlerUnknownTypeId2221Test.testWithDeserializationProblemHandler(ProblemHandlerUnknownTypeId2221Test.java:112)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | consult Succeeded
+STDOUT | NPE at line(as_array_type_deserializer_1, 116) / Null Expression v_deser_4547[deser]
+STDOUT | 	can be caused by 
+STDOUT | v_deser_4547[deser] at line(as_array_type_deserializer_1, 116).
+STDOUT | 
+STDOUT | NPE at line(as_array_type_deserializer_1, 116) / Null Expression v_deser_4547[deser]
+STDOUT | 	can be caused by 
+STDOUT | type_deserializer_base_1_literal9[null] at line(type_deserializer_base_1, 165).
+STDOUT | "
+Jsoup-8,Prova causale completa,"STDOUT | 	at org.jsoup.nodes.Element.toString(Element.java:1022)
+STDOUT | 	at org.jsoup.nodes.ElementTest.parentlessToString(ElementTest.java:422)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.jsoup.nodes.Element.toString(Element.java:1140)
+STDOUT | 	at org.jsoup.nodes.ElementTest.parentlessToString(ElementTest.java:439)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | consult Succeeded
+STDOUT | NPE at line(node_1, 363) / Null Expression node_1_expr68['ownerDocument()']
+STDOUT | 	can be caused by 
+STDOUT | node_1_literal3[null] at line(node_1, 218).
+STDOUT | 
+STDOUT | NPE at line(node_1, 363) / Null Expression node_1_expr68['ownerDocument()']
+STDOUT | 	can be caused by 
+STDOUT | node_1_expr68['ownerDocument()'] at line(node_1, 363).
+STDOUT | "
+Jsoup-22,Prova causale completa,"STDOUT | 	at org.jsoup.nodes.Node.siblingNodes(Node.java:445)
+STDOUT | 	at org.jsoup.nodes.NodeTest.orphanNodeReturnsNullForSiblingElements(NodeTest.java:190)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.jsoup.nodes.Node.siblingNodes(Node.java:460)
+STDOUT | 	at org.jsoup.nodes.NodeTest.orphanNodeReturnsNullForSiblingElements(NodeTest.java:202)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | consult Succeeded
+STDOUT | NPE at line(node_1, 445) / Null Expression node_1_expr13['parent()']
+STDOUT | 	can be caused by 
+STDOUT | node_1_expr13['parent()'] at line(node_1, 445).
+STDOUT | 
+STDOUT | Total 1 Identified Fault Locations for NPE.
+STDOUT | Exec. Time - 00:00:00.089
+STDOUT | localizer.sh executed successfully."
+Jsoup-26,Prova causale completa,"STDOUT | 	at org.jsoup.safety.Cleaner.clean(Cleaner.java:43)
+STDOUT | 	at org.jsoup.safety.CleanerTest.handlesFramesets(CleanerTest.java:176)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.jsoup.safety.Cleaner.clean(Cleaner.java:66)
+STDOUT | 	at org.jsoup.safety.CleanerTest.handlesFramesets(CleanerTest.java:192)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | consult Succeeded
+STDOUT | NPE at line(cleaner_1, 73) / Null Expression p_source_898[source]
+STDOUT | 	can be caused by 
+STDOUT | document_1_literal7[null] at line(document_1, 173).
+STDOUT | 
+STDOUT | NPE at line(cleaner_1, 73) / Null Expression p_source_898[source]
+STDOUT | 	can be caused by 
+STDOUT | v_found_110[found] at line(document_1, 170).
+STDOUT | "
+Jsoup-66,Prova causale completa,"STDOUT | java.lang.NullPointerException: Cannot invoke ""org.jsoup.nodes.Element.text()"" because ""cloneNextElementSibling"" is null
+STDOUT | 	at org.jsoup.nodes.ElementTest.testNextElementSiblingAfterClone(ElementTest.java:1235)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | java.lang.NullPointerException: Cannot invoke ""org.jsoup.nodes.Element.text()"" because ""v_clone_next_element_sibling_340_line_1235"" is null
+STDOUT | 	at org.jsoup.nodes.ElementTest.testNextElementSiblingAfterClone(ElementTest.java:1292)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | consult Succeeded
+STDOUT | NPE at line(element_test_1, 1235) / Null Expression v_clone_next_element_sibling_340[cloneNextElementSibling]
+STDOUT | 	can be caused by 
+STDOUT | element_1_literal12[null] at line(element_1, 683).
+STDOUT | 
+STDOUT | NPE at line(element_test_1, 1235) / Null Expression v_clone_next_element_sibling_340[cloneNextElementSibling]
+STDOUT | 	can be caused by 
+STDOUT | element_1_literal15[null] at line(element_1, 690).
+STDOUT | "
+Jsoup-89,Prova causale completa,"STDOUT | 	at org.jsoup.nodes.Attribute.setValue(Attribute.java:88)
+STDOUT | 	at org.jsoup.nodes.AttributeTest.settersOnOrphanAttribute(AttributeTest.java:44)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.jsoup.nodes.Attribute.setValue(Attribute.java:127)
+STDOUT | 	at org.jsoup.nodes.AttributeTest.settersOnOrphanAttribute(AttributeTest.java:49)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | consult Succeeded
+STDOUT | NPE at line(attribute_1, 88) / Null Expression f_parent_25[parent]
+STDOUT | 	can be caused by 
+STDOUT | f_parent_25[parent] at line(attribute_1, 88).
+STDOUT | 
+STDOUT | NPE at line(attribute_1, 88) / Null Expression f_parent_25[parent]
+STDOUT | 	can be caused by 
+STDOUT | attribute_1_literal1[null] at line(attribute_1, 33).
+STDOUT | "
+Lang-20,Prova causale completa,"STDOUT | 	at org.apache.commons.lang3.StringUtils.join(StringUtils.java:3230)
+STDOUT | 	at org.apache.commons.lang3.StringUtilsTest.testJoin_Objectarray(StringUtilsTest.java:193)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.apache.commons.lang3.StringUtils.join(StringUtils.java:3298)
+STDOUT | 	at org.apache.commons.lang3.StringUtilsTest.testJoin_ArrayChar(StringUtilsTest.java:209)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.apache.commons.lang3.StringUtils.join(StringUtils.java:3274)
+STDOUT | 	at org.apache.commons.lang3.StringUtilsTest.testJoin_Objectarray(StringUtilsTest.java:271)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)"
+Lang-33,Prova causale completa,"STDOUT | 	at org.apache.commons.lang3.ClassUtils.toClass(ClassUtils.java:910)
+STDOUT | 	at org.apache.commons.lang3.ClassUtilsTest.testToClass_object(ClassUtilsTest.java:910)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.apache.commons.lang3.ClassUtils.toClass(ClassUtils.java:1026)
+STDOUT | 	at org.apache.commons.lang3.ClassUtilsTest.testToClass_object(ClassUtilsTest.java:924)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | consult Succeeded
+STDOUT | NPE at line(class_utils_1, 910) / Null Expression class_utils_1_expr48['array[i]']
+STDOUT | 	can be caused by 
+STDOUT | class_utils_1_expr48['array[i]'] at line(class_utils_1, 910).
+STDOUT | 
+STDOUT | NPE at line(class_utils_1, 910) / Null Expression p_array_446[array]
+STDOUT | 	can be caused by 
+STDOUT | p_array_446[array] at line(class_utils_1, 910).
+STDOUT | "
+Lang-39,Prova causale completa,"STDOUT | 	at org.apache.commons.lang3.StringUtils.replaceEach(StringUtils.java:3502)
+STDOUT | 	at org.apache.commons.lang3.StringUtilsTest.testReplace_StringStringArrayStringArray(StringUtilsTest.java:1039)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.apache.commons.lang3.StringUtils.replaceEach(StringUtils.java:3506)
+STDOUT | 	at org.apache.commons.lang3.StringUtilsTest.testReplace_StringStringArrayStringArray(StringUtilsTest.java:1145)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | consult Succeeded
+STDOUT | NPE at line(string_utils_1, 3676) / Null Expression string_utils_1_expr46['replacementList[i]']
+STDOUT | 	can be caused by 
+STDOUT | string_utils_1_expr46['replacementList[i]'] at line(string_utils_1, 3676).
+STDOUT | 
+STDOUT | NPE at line(string_utils_1, 3676) / Null Expression p_replacement_list_199[replacementList]
+STDOUT | 	can be caused by 
+STDOUT | p_replacement_list_199[replacementList] at line(string_utils_1, 3676).
+STDOUT | "
+Lang-47,Prova causale completa,"STDOUT | 	at org.apache.commons.lang.text.StrBuilder.appendFixedWidthPadLeft(StrBuilder.java:1186)
+STDOUT | 	at org.apache.commons.lang.text.StrBuilderTest.testLang412Left(StrBuilderTest.java:1761)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.apache.commons.lang.text.StrBuilder.appendFixedWidthPadRight(StrBuilder.java:1230)
+STDOUT | 	at org.apache.commons.lang.text.StrBuilderTest.testLang412Right(StrBuilderTest.java:1755)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.apache.commons.lang.text.StrBuilder.appendFixedWidthPadLeft(StrBuilder.java:1229)
+STDOUT | 	at org.apache.commons.lang.text.StrBuilderTest.testLang412Left(StrBuilderTest.java:1773)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)"
+Lang-57,Prova causale completa,"STDOUT | consult Succeeded
+STDOUT | NPE at line(locale_utils_1, 223) / Null Expression f_c_available_locale_set_10[cAvailableLocaleSet]
+STDOUT | 	can be caused by 
+STDOUT | f_c_available_locale_set_10[cAvailableLocaleSet] at line(locale_utils_1, 223).
+STDOUT | 
+STDOUT | Total 1 Identified Fault Locations for NPE.
+STDOUT | Exec. Time - 00:00:00.069
+STDOUT | localizer.sh executed successfully.
+STDOUT | All scripts executed successfully."
+Math-4,Prova causale completa,"STDOUT | 	at org.apache.commons.math3.geometry.euclidean.twod.SubLine.intersection(SubLine.java:120)
+STDOUT | 	at org.apache.commons.math3.geometry.euclidean.twod.SubLineTest.testIntersectionParallel(SubLineTest.java:151)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.apache.commons.math3.geometry.euclidean.threed.SubLine.intersection(SubLine.java:116)
+STDOUT | 	at org.apache.commons.math3.geometry.euclidean.threed.SubLineTest.testIntersectionNotIntersecting(SubLineTest.java:160)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.apache.commons.math3.geometry.euclidean.twod.SubLine.intersection(SubLine.java:137)
+STDOUT | 	at org.apache.commons.math3.geometry.euclidean.twod.SubLineTest.testIntersectionParallel(SubLineTest.java:155)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)"
+Math-70,Prova causale completa,"STDOUT | 	at org.apache.commons.math.analysis.solvers.BisectionSolver.solve(BisectionSolver.java:72)
+STDOUT | 	at org.apache.commons.math.analysis.solvers.BisectionSolverTest.testMath369(BisectionSolverTest.java:101)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.apache.commons.math.analysis.solvers.BisectionSolver.solve(BisectionSolver.java:81)
+STDOUT | 	at org.apache.commons.math.analysis.solvers.BisectionSolverTest.testMath369(BisectionSolverTest.java:105)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | consult Succeeded
+STDOUT | NPE at line(bisection_solver_1, 88) / Null Expression p_f_26[f]
+STDOUT | 	can be caused by 
+STDOUT | p_f_26[f] at line(bisection_solver_1, 88).
+STDOUT | 
+STDOUT | Total 1 Identified Fault Locations for NPE.
+STDOUT | Exec. Time - 00:00:00.070
+STDOUT | localizer.sh executed successfully."
+Math-79,Prova causale completa,"STDOUT | 	at org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer.cluster(KMeansPlusPlusClusterer.java:57)
+STDOUT | 	at org.apache.commons.math.stat.clustering.KMeansPlusPlusClustererTest.testPerformClusterAnalysisDegenerate(KMeansPlusPlusClustererTest.java:109)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer.cluster(KMeansPlusPlusClusterer.java:71)
+STDOUT | 	at org.apache.commons.math.stat.clustering.KMeansPlusPlusClustererTest.testPerformClusterAnalysisDegenerate(KMeansPlusPlusClustererTest.java:115)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | consult Succeeded
+STDOUT | NPE at line(kmeans_plus_plus_clusterer_1, 91) / Null Expression v_cluster_19[cluster]
+STDOUT | 	can be caused by 
+STDOUT | v_cluster_19[cluster] at line(kmeans_plus_plus_clusterer_1, 91).
+STDOUT | 
+STDOUT | NPE at line(kmeans_plus_plus_clusterer_1, 91) / Null Expression v_cluster_19[cluster]
+STDOUT | 	can be caused by 
+STDOUT | v_min_cluster_30[minCluster] at line(kmeans_plus_plus_clusterer_1, 162).
+STDOUT | "
+Mockito-18,Punti ciechi / Deduzione frammentaria,"STDOUT | 	at org.mockito.internal.creation.bytebuddy.CachingMockBytecodeGenerator.<init>(CachingMockBytecodeGenerator.java:20)
+STDOUT | 	at org.mockito.internal.creation.bytebuddy.ByteBuddyMockMaker.<init>(ByteBuddyMockMaker.java:18)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+STDOUT | 	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+STDOUT | 	at java.base/java.lang.reflect.ReflectAccess.newInstance(ReflectAccess.java:128)
+STDOUT | 	at java.base/jdk.internal.reflect.ReflectionFactory.newInstance(ReflectionFactory.java:347)
+STDOUT | 	at java.base/java.lang.Class.newInstance(Class.java:647)
+STDOUT | 	at org.mockito.internal.configuration.plugins.PluginLoader.loadPlugin(PluginLoader.java:33)
+STDOUT | 	at org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues.<init>(ReturnsEmptyValues.java:57)
+STDOUT | 	at org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValuesTest.<init>(ReturnsEmptyValuesTest.java:31)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+STDOUT | 	at org.mockito.internal.creation.bytebuddy.CachingMockBytecodeGenerator.<init>(CachingMockBytecodeGenerator.java:20)
+STDOUT | 	at org.mockito.internal.creation.bytebuddy.ByteBuddyMockMaker.<init>(ByteBuddyMockMaker.java:18)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+STDOUT | 	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+STDOUT | 	at java.base/java.lang.reflect.ReflectAccess.newInstance(ReflectAccess.java:128)
+STDOUT | 	at java.base/jdk.internal.reflect.ReflectionFactory.newInstance(ReflectionFactory.java:347)
+STDOUT | 	at java.base/java.lang.Class.newInstance(Class.java:647)
+STDOUT | 	at org.mockito.internal.configuration.plugins.PluginLoader.loadPlugin(PluginLoader.java:45)
+STDOUT | 	at org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues.<init>(ReturnsEmptyValues.java:57)
+STDOUT | 	at org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValuesTest.<init>(ReturnsEmptyValuesTest.java:31)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)"
+Mockito-38,Prova causale completa,"STDOUT | 	at org.mockito.internal.verification.argumentmatching.ArgumentMatchingTool.getSuspiciouslyNotMatchingArgsIndexes(ArgumentMatchingTool.java:28)
+STDOUT | 	at org.mockito.internal.verification.argumentmatching.ArgumentMatchingToolTest.shouldWorkFineWhenGivenArgIsNull(ArgumentMatchingToolTest.java:82)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | shouldAllowPassingNullArgument(org.mockitousage.bugs.ActualInvocationHasNullArgumentNPEBugTest): null
+STDOUT | null
+STDOUT | java.lang.ExceptionInInitializerError
+STDOUT | 	at org.mockito.cglib.core.KeyFactory$Generator.generateClass(KeyFactory.java:167)
+STDOUT | 	at org.mockito.cglib.core.DefaultGeneratorStrategy.generate(DefaultGeneratorStrategy.java:25)
+STDOUT | 	at org.mockito.Mockito.mock(Mockito.java:671)
+STDOUT | 	at org.mockitousage.bugs.ActualInvocationHasNullArgumentNPEBugTest.shouldAllowPassingNullArgument(ActualInvocationHasNullArgumentNPEBugTest.java:22)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+STDOUT | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+STDOUT | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+STDOUT | 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+STDOUT | 	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+STDOUT | 	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:36)
+STDOUT | Caused by: java.lang.reflect.InaccessibleObjectException: Unable to make protected final java.lang.Class java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain) throws java.lang.ClassFormatError accessible: module java.base does not ""opens java.lang"" to unnamed module @78186a70
+STDOUT | 	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:354)
+STDOUT | 	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:297)"

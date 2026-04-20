@@ -1,0 +1,519 @@
+Faulty Code:
+org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet:47 `        super(buildTree(lower, upper));`
+org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet:48 `    }`
+org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet:94 `        if (Double.isInfinite(lower) && (lower < 0)) {`
+org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet:107 `        final SubHyperplane<Euclidean1D> lowerCut =`
+org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet:109 `        if (Double.isInfinite(upper) && (upper > 0)) {`
+org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet:118 `        final SubHyperplane<Euclidean1D> upperCut =`
+org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet:120 `        return new BSPTree<Euclidean1D>(lowerCut,`
+org.apache.commons.math3.geometry.euclidean.oned.OrientedPoint:42 `    public OrientedPoint(final Vector1D location, final boolean direct) {`
+org.apache.commons.math3.geometry.euclidean.oned.OrientedPoint:43 `        this.location = location;`
+org.apache.commons.math3.geometry.euclidean.oned.OrientedPoint:44 `        this.direct   = direct;`
+org.apache.commons.math3.geometry.euclidean.oned.OrientedPoint:45 `    }`
+org.apache.commons.math3.geometry.euclidean.oned.OrientedPoint:74 `        return new SubOrientedPoint(this, null);`
+org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint:39 `        super(hyperplane, remainingRegion);`
+org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint:40 `    }`
+org.apache.commons.math3.geometry.euclidean.oned.Vector1D:36 `    public static final Vector1D ZERO = new Vector1D(0.0);`
+org.apache.commons.math3.geometry.euclidean.oned.Vector1D:39 `    public static final Vector1D ONE  = new Vector1D(1.0);`
+org.apache.commons.math3.geometry.euclidean.oned.Vector1D:43 `    public static final Vector1D NaN = new Vector1D(Double.NaN);`
+org.apache.commons.math3.geometry.euclidean.oned.Vector1D:47 `    public static final Vector1D POSITIVE_INFINITY =`
+org.apache.commons.math3.geometry.euclidean.oned.Vector1D:51 `    public static final Vector1D NEGATIVE_INFINITY =`
+org.apache.commons.math3.geometry.euclidean.oned.Vector1D:65 `    public Vector1D(double x) {`
+org.apache.commons.math3.geometry.euclidean.oned.Vector1D:66 `        this.x = x;`
+org.apache.commons.math3.geometry.euclidean.oned.Vector1D:67 `    }`
+org.apache.commons.math3.geometry.euclidean.oned.Vector1D:128 `        return x;`
+org.apache.commons.math3.geometry.euclidean.threed.Line:54 `    public Line(final Vector3D p1, final Vector3D p2) throws MathIllegalArgumentException {`
+org.apache.commons.math3.geometry.euclidean.threed.Line:55 `        reset(p1, p2);`
+org.apache.commons.math3.geometry.euclidean.threed.Line:56 `    }`
+org.apache.commons.math3.geometry.euclidean.threed.Line:74 `        final Vector3D delta = p2.subtract(p1);`
+org.apache.commons.math3.geometry.euclidean.threed.Line:75 `        final double norm2 = delta.getNormSq();`
+org.apache.commons.math3.geometry.euclidean.threed.Line:76 `        if (norm2 == 0.0) {`
+org.apache.commons.math3.geometry.euclidean.threed.Line:79 `        this.direction = new Vector3D(1.0 / FastMath.sqrt(norm2), delta);`
+org.apache.commons.math3.geometry.euclidean.threed.Line:80 `        zero = new Vector3D(1.0, p1, -p1.dotProduct(delta) / norm2, delta);`
+org.apache.commons.math3.geometry.euclidean.threed.Line:81 `    }`
+org.apache.commons.math3.geometry.euclidean.threed.Line:114 `        return point.subtract(zero).dotProduct(direction);`
+org.apache.commons.math3.geometry.euclidean.threed.Line:129 `        return new Vector1D(getAbscissa((Vector3D) point));`
+org.apache.commons.math3.geometry.euclidean.threed.Line:156 `        return distance(p) < 1.0e-10;`
+org.apache.commons.math3.geometry.euclidean.threed.Line:164 `        final Vector3D d = p.subtract(zero);`
+org.apache.commons.math3.geometry.euclidean.threed.Line:165 `        final Vector3D n = new Vector3D(1.0, d, -d.dotProduct(direction), direction);`
+org.apache.commons.math3.geometry.euclidean.threed.Line:166 `        return n.getNorm();`
+org.apache.commons.math3.geometry.euclidean.threed.Line:195 `        final double cos = direction.dotProduct(line.direction);`
+org.apache.commons.math3.geometry.euclidean.threed.Line:196 `        final double n = 1 - cos * cos;`
+org.apache.commons.math3.geometry.euclidean.threed.Line:197 `        if (n < Precision.EPSILON) {`
+org.apache.commons.math3.geometry.euclidean.threed.Line:202 `        final Vector3D delta0 = line.zero.subtract(zero);`
+org.apache.commons.math3.geometry.euclidean.threed.Line:203 `        final double a        = delta0.dotProduct(direction);`
+org.apache.commons.math3.geometry.euclidean.threed.Line:204 `        final double b        = delta0.dotProduct(line.direction);`
+org.apache.commons.math3.geometry.euclidean.threed.Line:206 `        return new Vector3D(1, zero, (a - b * cos) / n, direction);`
+org.apache.commons.math3.geometry.euclidean.threed.Line:216 `        final Vector3D closest = closestPoint(line);`
+org.apache.commons.math3.geometry.euclidean.threed.Line:217 `        return line.contains(closest) ? closest : null;`
+org.apache.commons.math3.geometry.euclidean.threed.SubLine:44 `    public SubLine(final Line line, final IntervalsSet remainingRegion) {`
+org.apache.commons.math3.geometry.euclidean.threed.SubLine:45 `        this.line            = line;`
+org.apache.commons.math3.geometry.euclidean.threed.SubLine:46 `        this.remainingRegion = remainingRegion;`
+org.apache.commons.math3.geometry.euclidean.threed.SubLine:47 `    }`
+org.apache.commons.math3.geometry.euclidean.threed.SubLine:56 `        this(new Line(start, end), buildIntervalSet(start, end));`
+org.apache.commons.math3.geometry.euclidean.threed.SubLine:57 `    }`
+org.apache.commons.math3.geometry.euclidean.threed.SubLine:113 `        Vector3D v1D = line.intersection(subLine.line);`
+org.apache.commons.math3.geometry.euclidean.threed.SubLine:116 `        Location loc1 = remainingRegion.checkPoint(line.toSubSpace(v1D));`
+org.apache.commons.math3.geometry.euclidean.threed.SubLine:137 `        final Line line = new Line(start, end);`
+org.apache.commons.math3.geometry.euclidean.threed.SubLine:138 `        return new IntervalsSet(line.toSubSpace(start).getX(),`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:41 `    public static final Vector3D ZERO   = new Vector3D(0, 0, 0);`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:44 `    public static final Vector3D PLUS_I = new Vector3D(1, 0, 0);`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:47 `    public static final Vector3D MINUS_I = new Vector3D(-1, 0, 0);`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:50 `    public static final Vector3D PLUS_J = new Vector3D(0, 1, 0);`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:53 `    public static final Vector3D MINUS_J = new Vector3D(0, -1, 0);`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:56 `    public static final Vector3D PLUS_K = new Vector3D(0, 0, 1);`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:59 `    public static final Vector3D MINUS_K = new Vector3D(0, 0, -1);`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:63 `    public static final Vector3D NaN = new Vector3D(Double.NaN, Double.NaN, Double.NaN);`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:67 `    public static final Vector3D POSITIVE_INFINITY =`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:71 `    public static final Vector3D NEGATIVE_INFINITY =`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:95 `    public Vector3D(double x, double y, double z) {`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:96 `        this.x = x;`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:97 `        this.y = y;`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:98 `        this.z = z;`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:99 `    }`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:137 `    public Vector3D(double a, Vector3D u) {`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:138 `        this.x = a * u.x;`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:139 `        this.y = a * u.y;`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:140 `        this.z = a * u.z;`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:141 `    }`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:151 `    public Vector3D(double a1, Vector3D u1, double a2, Vector3D u2) {`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:152 `        this.x = MathArrays.linearCombination(a1, u1.x, a2, u2.x);`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:153 `        this.y = MathArrays.linearCombination(a1, u1.y, a2, u2.y);`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:154 `        this.z = MathArrays.linearCombination(a1, u1.z, a2, u2.z);`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:155 `    }`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:243 `        return FastMath.sqrt (x * x + y * y + z * z);`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:249 `        return x * x + y * y + z * z;`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:286 `        final Vector3D v3 = (Vector3D) v;`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:287 `        return new Vector3D(x - v3.x, y - v3.y, z - v3.z);`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:453 `        final Vector3D v3 = (Vector3D) v;`
+org.apache.commons.math3.geometry.euclidean.threed.Vector3D:454 `        return MathArrays.linearCombination(x, v3.x, y, v3.y, z, v3.z);`
+org.apache.commons.math3.geometry.euclidean.twod.Line:81 `    public Line(final Vector2D p1, final Vector2D p2) {`
+org.apache.commons.math3.geometry.euclidean.twod.Line:82 `        reset(p1, p2);`
+org.apache.commons.math3.geometry.euclidean.twod.Line:83 `    }`
+org.apache.commons.math3.geometry.euclidean.twod.Line:129 `        final double dx = p2.getX() - p1.getX();`
+org.apache.commons.math3.geometry.euclidean.twod.Line:130 `        final double dy = p2.getY() - p1.getY();`
+org.apache.commons.math3.geometry.euclidean.twod.Line:131 `        final double d = FastMath.hypot(dx, dy);`
+org.apache.commons.math3.geometry.euclidean.twod.Line:132 `        if (d == 0.0) {`
+org.apache.commons.math3.geometry.euclidean.twod.Line:138 `            angle        = FastMath.PI + FastMath.atan2(-dy, -dx);`
+org.apache.commons.math3.geometry.euclidean.twod.Line:139 `            cos          = FastMath.cos(angle);`
+org.apache.commons.math3.geometry.euclidean.twod.Line:140 `            sin          = FastMath.sin(angle);`
+org.apache.commons.math3.geometry.euclidean.twod.Line:141 `            originOffset = (p2.getX() * p1.getY() - p1.getX() * p2.getY()) / d;`
+org.apache.commons.math3.geometry.euclidean.twod.Line:143 `    }`
+org.apache.commons.math3.geometry.euclidean.twod.Line:181 `        Vector2D p2 = (Vector2D) point;`
+org.apache.commons.math3.geometry.euclidean.twod.Line:182 `        return new Vector1D(cos * p2.getX() + sin * p2.getY());`
+org.apache.commons.math3.geometry.euclidean.twod.Line:198 `        final double d = sin * other.cos - other.sin * cos;`
+org.apache.commons.math3.geometry.euclidean.twod.Line:199 `        if (FastMath.abs(d) < 1.0e-10) {`
+org.apache.commons.math3.geometry.euclidean.twod.Line:200 `            return null;`
+org.apache.commons.math3.geometry.euclidean.twod.SubLine:56 `        super(new Line(start, end), buildIntervalSet(start, end));`
+org.apache.commons.math3.geometry.euclidean.twod.SubLine:57 `    }`
+org.apache.commons.math3.geometry.euclidean.twod.SubLine:113 `        Line line1 = (Line) getHyperplane();`
+org.apache.commons.math3.geometry.euclidean.twod.SubLine:114 `        Line line2 = (Line) subLine.getHyperplane();`
+org.apache.commons.math3.geometry.euclidean.twod.SubLine:117 `        Vector2D v2D = line1.intersection(line2);`
+org.apache.commons.math3.geometry.euclidean.twod.SubLine:120 `        Location loc1 = getRemainingRegion().checkPoint(line1.toSubSpace(v2D));`
+org.apache.commons.math3.geometry.euclidean.twod.SubLine:139 `        final Line line = new Line(start, end);`
+org.apache.commons.math3.geometry.euclidean.twod.SubLine:140 `        return new IntervalsSet(line.toSubSpace(start).getX(),`
+org.apache.commons.math3.geometry.euclidean.twod.Vector2D:37 `    public static final Vector2D ZERO   = new Vector2D(0, 0);`
+org.apache.commons.math3.geometry.euclidean.twod.Vector2D:41 `    public static final Vector2D NaN = new Vector2D(Double.NaN, Double.NaN);`
+org.apache.commons.math3.geometry.euclidean.twod.Vector2D:45 `    public static final Vector2D POSITIVE_INFINITY =`
+org.apache.commons.math3.geometry.euclidean.twod.Vector2D:49 `    public static final Vector2D NEGATIVE_INFINITY =`
+org.apache.commons.math3.geometry.euclidean.twod.Vector2D:68 `    public Vector2D(double x, double y) {`
+org.apache.commons.math3.geometry.euclidean.twod.Vector2D:69 `        this.x = x;`
+org.apache.commons.math3.geometry.euclidean.twod.Vector2D:70 `        this.y = y;`
+org.apache.commons.math3.geometry.euclidean.twod.Vector2D:71 `    }`
+org.apache.commons.math3.geometry.euclidean.twod.Vector2D:150 `        return x;`
+org.apache.commons.math3.geometry.euclidean.twod.Vector2D:158 `        return y;`
+org.apache.commons.math3.geometry.partitioning.AbstractRegion:67 `    protected AbstractRegion(final BSPTree<S> tree) {`
+org.apache.commons.math3.geometry.partitioning.AbstractRegion:68 `        this.tree = tree;`
+org.apache.commons.math3.geometry.partitioning.AbstractRegion:69 `    }`
+org.apache.commons.math3.geometry.partitioning.AbstractSubHyperplane:50 `                                    final Region<T> remainingRegion) {`
+org.apache.commons.math3.geometry.partitioning.AbstractSubHyperplane:51 `        this.hyperplane      = hyperplane;`
+org.apache.commons.math3.geometry.partitioning.AbstractSubHyperplane:52 `        this.remainingRegion = remainingRegion;`
+org.apache.commons.math3.geometry.partitioning.AbstractSubHyperplane:53 `    }`
+org.apache.commons.math3.geometry.partitioning.AbstractSubHyperplane:72 `        return hyperplane;`
+org.apache.commons.math3.geometry.partitioning.AbstractSubHyperplane:83 `        return remainingRegion;`
+org.apache.commons.math3.geometry.partitioning.BSPTree:93 `    public BSPTree(final Object attribute) {`
+org.apache.commons.math3.geometry.partitioning.BSPTree:94 `        cut    = null;`
+org.apache.commons.math3.geometry.partitioning.BSPTree:95 `        plus   = null;`
+org.apache.commons.math3.geometry.partitioning.BSPTree:96 `        minus  = null;`
+org.apache.commons.math3.geometry.partitioning.BSPTree:97 `        parent = null;`
+org.apache.commons.math3.geometry.partitioning.BSPTree:98 `        this.attribute = attribute;`
+org.apache.commons.math3.geometry.partitioning.BSPTree:99 `    }`
+org.apache.commons.math3.geometry.partitioning.BSPTree:115 `                   final Object attribute) {`
+org.apache.commons.math3.geometry.partitioning.BSPTree:116 `        this.cut       = cut;`
+org.apache.commons.math3.geometry.partitioning.BSPTree:117 `        this.plus      = plus;`
+org.apache.commons.math3.geometry.partitioning.BSPTree:118 `        this.minus     = minus;`
+org.apache.commons.math3.geometry.partitioning.BSPTree:119 `        this.parent    = null;`
+org.apache.commons.math3.geometry.partitioning.BSPTree:120 `        this.attribute = attribute;`
+org.apache.commons.math3.geometry.partitioning.BSPTree:121 `        plus.parent    = this;`
+org.apache.commons.math3.geometry.partitioning.BSPTree:122 `        minus.parent   = this;`
+org.apache.commons.math3.geometry.partitioning.BSPTree:123 `    }`
+org.apache.commons.math3.util.FastMath:97 `    private static final double LOG_MAX_VALUE = StrictMath.log(Double.MAX_VALUE);`
+org.apache.commons.math3.util.FastMath:115 `    private static final double LN_QUICK_COEF[][] = {`
+org.apache.commons.math3.util.FastMath:128 `    private static final double LN_HI_PREC_COEF[][] = {`
+org.apache.commons.math3.util.FastMath:141 `    private static final double SINE_TABLE_A[] =`
+org.apache.commons.math3.util.FastMath:160 `    private static final double SINE_TABLE_B[] =`
+org.apache.commons.math3.util.FastMath:179 `    private static final double COSINE_TABLE_A[] =`
+org.apache.commons.math3.util.FastMath:198 `    private static final double COSINE_TABLE_B[] =`
+org.apache.commons.math3.util.FastMath:218 `    private static final double TANGENT_TABLE_A[] =`
+org.apache.commons.math3.util.FastMath:237 `    private static final double TANGENT_TABLE_B[] =`
+org.apache.commons.math3.util.FastMath:256 `    private static final long RECIP_2PI[] = new long[] {`
+org.apache.commons.math3.util.FastMath:277 `    private static final long PI_O_4_BITS[] = new long[] {`
+org.apache.commons.math3.util.FastMath:285 `    private static final double EIGHTHS[] = {0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1.0, 1.125, 1.25, 1.375, 1.5, 1.625};`
+org.apache.commons.math3.util.FastMath:288 `    private static final double CBRTTWO[] = { 0.6299605249474366,`
+org.apache.commons.math3.util.FastMath:385 `        return Math.sqrt(a);`
+org.apache.commons.math3.util.FastMath:1680 `        double x2 = x*x;`
+org.apache.commons.math3.util.FastMath:1682 `        double p = 2.7553817452272217E-6;`
+org.apache.commons.math3.util.FastMath:1683 `        p = p * x2 + -1.9841269659586505E-4;`
+org.apache.commons.math3.util.FastMath:1684 `        p = p * x2 + 0.008333333333329196;`
+org.apache.commons.math3.util.FastMath:1685 `        p = p * x2 + -0.16666666666666666;`
+org.apache.commons.math3.util.FastMath:1688 `        p = p * x2 * x;`
+org.apache.commons.math3.util.FastMath:1690 `        return p;`
+org.apache.commons.math3.util.FastMath:1700 `        double x2 = x*x;`
+org.apache.commons.math3.util.FastMath:1702 `        double p = 2.479773539153719E-5;`
+org.apache.commons.math3.util.FastMath:1703 `        p = p * x2 + -0.0013888888689039883;`
+org.apache.commons.math3.util.FastMath:1704 `        p = p * x2 + 0.041666666666621166;`
+org.apache.commons.math3.util.FastMath:1705 `        p = p * x2 + -0.49999999999999994;`
+org.apache.commons.math3.util.FastMath:1706 `        p *= x2;`
+org.apache.commons.math3.util.FastMath:1708 `        return p;`
+org.apache.commons.math3.util.FastMath:1719 `        int idx = (int) ((xa * 8.0) + 0.5);`
+org.apache.commons.math3.util.FastMath:1720 `        final double epsilon = xa - EIGHTHS[idx]; //idx*0.125;`
+org.apache.commons.math3.util.FastMath:1723 `        final double sintA = SINE_TABLE_A[idx];`
+org.apache.commons.math3.util.FastMath:1724 `        final double sintB = SINE_TABLE_B[idx];`
+org.apache.commons.math3.util.FastMath:1725 `        final double costA = COSINE_TABLE_A[idx];`
+org.apache.commons.math3.util.FastMath:1726 `        final double costB = COSINE_TABLE_B[idx];`
+org.apache.commons.math3.util.FastMath:1729 `        double sinEpsA = epsilon;`
+org.apache.commons.math3.util.FastMath:1730 `        double sinEpsB = polySine(epsilon);`
+org.apache.commons.math3.util.FastMath:1731 `        final double cosEpsA = 1.0;`
+org.apache.commons.math3.util.FastMath:1732 `        final double cosEpsB = polyCosine(epsilon);`
+org.apache.commons.math3.util.FastMath:1735 `        final double temp = sinEpsA * HEX_40000000;`
+org.apache.commons.math3.util.FastMath:1736 `        double temp2 = (sinEpsA + temp) - temp;`
+org.apache.commons.math3.util.FastMath:1737 `        sinEpsB +=  sinEpsA - temp2;`
+org.apache.commons.math3.util.FastMath:1738 `        sinEpsA = temp2;`
+org.apache.commons.math3.util.FastMath:1764 `        double a = 0;`
+org.apache.commons.math3.util.FastMath:1765 `        double b = 0;`
+org.apache.commons.math3.util.FastMath:1767 `        double t = sintA;`
+org.apache.commons.math3.util.FastMath:1768 `        double c = a + t;`
+org.apache.commons.math3.util.FastMath:1769 `        double d = -(c - a - t);`
+org.apache.commons.math3.util.FastMath:1770 `        a = c;`
+org.apache.commons.math3.util.FastMath:1771 `        b = b + d;`
+org.apache.commons.math3.util.FastMath:1773 `        t = costA * sinEpsA;`
+org.apache.commons.math3.util.FastMath:1774 `        c = a + t;`
+org.apache.commons.math3.util.FastMath:1775 `        d = -(c - a - t);`
+org.apache.commons.math3.util.FastMath:1776 `        a = c;`
+org.apache.commons.math3.util.FastMath:1777 `        b = b + d;`
+org.apache.commons.math3.util.FastMath:1779 `        b = b + sintA * cosEpsB + costA * sinEpsB;`
+org.apache.commons.math3.util.FastMath:1794 `        b = b + sintB + costB * sinEpsA + sintB * cosEpsB + costB * sinEpsB;`
+org.apache.commons.math3.util.FastMath:1821 `        if (xb != 0.0) {`
+org.apache.commons.math3.util.FastMath:1822 `            t = ((costA + costB) * (cosEpsA + cosEpsB) -`
+org.apache.commons.math3.util.FastMath:1824 `            c = a + t;`
+org.apache.commons.math3.util.FastMath:1825 `            d = -(c - a - t);`
+org.apache.commons.math3.util.FastMath:1826 `            a = c;`
+org.apache.commons.math3.util.FastMath:1827 `            b = b + d;`
+org.apache.commons.math3.util.FastMath:1830 `        result = a + b;`
+org.apache.commons.math3.util.FastMath:1832 `        return result;`
+org.apache.commons.math3.util.FastMath:1843 `        final double pi2a = 1.5707963267948966;`
+org.apache.commons.math3.util.FastMath:1844 `        final double pi2b = 6.123233995736766E-17;`
+org.apache.commons.math3.util.FastMath:1846 `        final double a = pi2a - xa;`
+org.apache.commons.math3.util.FastMath:1847 `        double b = -(a - pi2a + xa);`
+org.apache.commons.math3.util.FastMath:1848 `        b += pi2b - xb;`
+org.apache.commons.math3.util.FastMath:1850 `        return sinQ(a, b);`
+org.apache.commons.math3.util.FastMath:2228 `        boolean negative = false;`
+org.apache.commons.math3.util.FastMath:2229 `        int quadrant = 0;`
+org.apache.commons.math3.util.FastMath:2231 `        double xb = 0.0;`
+org.apache.commons.math3.util.FastMath:2234 `        xa = x;`
+org.apache.commons.math3.util.FastMath:2235 `        if (x < 0) {`
+org.apache.commons.math3.util.FastMath:2241 `        if (xa == 0.0) {`
+org.apache.commons.math3.util.FastMath:2249 `        if (xa != xa || xa == Double.POSITIVE_INFINITY) {`
+org.apache.commons.math3.util.FastMath:2254 `        if (xa > 3294198.0) {`
+org.apache.commons.math3.util.FastMath:2263 `        } else if (xa > 1.5707963267948966) {`
+org.apache.commons.math3.util.FastMath:2270 `        if (negative) {`
+org.apache.commons.math3.util.FastMath:2274 `        switch (quadrant) {`
+org.apache.commons.math3.util.FastMath:2276 `                return sinQ(xa, xb);`
+org.apache.commons.math3.util.FastMath:2295 `        int quadrant = 0;`
+org.apache.commons.math3.util.FastMath:2298 `        double xa = x;`
+org.apache.commons.math3.util.FastMath:2299 `        if (x < 0) {`
+org.apache.commons.math3.util.FastMath:2303 `        if (xa != xa || xa == Double.POSITIVE_INFINITY) {`
+org.apache.commons.math3.util.FastMath:2308 `        double xb = 0;`
+org.apache.commons.math3.util.FastMath:2309 `        if (xa > 3294198.0) {`
+org.apache.commons.math3.util.FastMath:2318 `        } else if (xa > 1.5707963267948966) {`
+org.apache.commons.math3.util.FastMath:2328 `        switch (quadrant) {`
+org.apache.commons.math3.util.FastMath:2330 `                return cosQ(xa, xb);`
+org.apache.commons.math3.util.FastMath:2582 `        if (x != x || y != y) {`
+org.apache.commons.math3.util.FastMath:2586 `        if (y == 0) {`
+org.apache.commons.math3.util.FastMath:2612 `        if (y == Double.POSITIVE_INFINITY) {`
+org.apache.commons.math3.util.FastMath:2624 `        if (y == Double.NEGATIVE_INFINITY) {`
+org.apache.commons.math3.util.FastMath:2636 `        if (x == Double.POSITIVE_INFINITY) {`
+org.apache.commons.math3.util.FastMath:2646 `        if (x == Double.NEGATIVE_INFINITY)`
+org.apache.commons.math3.util.FastMath:2659 `        if (x == 0) {`
+org.apache.commons.math3.util.FastMath:2660 `            if (y > 0 || 1 / y > 0) {`
+org.apache.commons.math3.util.FastMath:2664 `            if (y < 0 || 1 / y < 0) {`
+org.apache.commons.math3.util.FastMath:2665 `                return -Math.PI * F_1_2;`
+org.apache.commons.math3.util.FastMath:3025 `        return Double.longBitsToDouble(MASK_NON_SIGN_LONG & Double.doubleToRawLongBits(x));`
+org.apache.commons.math3.util.FastMath:3574 `        if (Double.isInfinite(x) || Double.isInfinite(y)) {`
+org.apache.commons.math3.util.FastMath:3576 `        } else if (Double.isNaN(x) || Double.isNaN(y)) {`
+org.apache.commons.math3.util.FastMath:3580 `            final int expX = getExponent(x);`
+org.apache.commons.math3.util.FastMath:3581 `            final int expY = getExponent(y);`
+org.apache.commons.math3.util.FastMath:3582 `            if (expX > expY + 27) {`
+org.apache.commons.math3.util.FastMath:3585 `            } else if (expY > expX + 27) {`
+org.apache.commons.math3.util.FastMath:3587 `                return abs(y);`
+org.apache.commons.math3.util.FastMath:3685 `        return (int) ((Double.doubleToRawLongBits(d) >>> 52) & 0x7ff) - 1023;`
+org.apache.commons.math3.util.MathArrays:896 `        final double ca1        = SPLIT_FACTOR * a1;`
+org.apache.commons.math3.util.MathArrays:897 `        final double a1High     = ca1 - (ca1 - a1);`
+org.apache.commons.math3.util.MathArrays:898 `        final double a1Low      = a1 - a1High;`
+org.apache.commons.math3.util.MathArrays:899 `        final double cb1        = SPLIT_FACTOR * b1;`
+org.apache.commons.math3.util.MathArrays:900 `        final double b1High     = cb1 - (cb1 - b1);`
+org.apache.commons.math3.util.MathArrays:901 `        final double b1Low      = b1 - b1High;`
+org.apache.commons.math3.util.MathArrays:904 `        final double prod1High  = a1 * b1;`
+org.apache.commons.math3.util.MathArrays:905 `        final double prod1Low   = a1Low * b1Low - (((prod1High - a1High * b1High) - a1Low * b1High) - a1High * b1Low);`
+org.apache.commons.math3.util.MathArrays:908 `        final double ca2        = SPLIT_FACTOR * a2;`
+org.apache.commons.math3.util.MathArrays:909 `        final double a2High     = ca2 - (ca2 - a2);`
+org.apache.commons.math3.util.MathArrays:910 `        final double a2Low      = a2 - a2High;`
+org.apache.commons.math3.util.MathArrays:911 `        final double cb2        = SPLIT_FACTOR * b2;`
+org.apache.commons.math3.util.MathArrays:912 `        final double b2High     = cb2 - (cb2 - b2);`
+org.apache.commons.math3.util.MathArrays:913 `        final double b2Low      = b2 - b2High;`
+org.apache.commons.math3.util.MathArrays:916 `        final double prod2High  = a2 * b2;`
+org.apache.commons.math3.util.MathArrays:917 `        final double prod2Low   = a2Low * b2Low - (((prod2High - a2High * b2High) - a2Low * b2High) - a2High * b2Low);`
+org.apache.commons.math3.util.MathArrays:920 `        final double s12High    = prod1High + prod2High;`
+org.apache.commons.math3.util.MathArrays:921 `        final double s12Prime   = s12High - prod2High;`
+org.apache.commons.math3.util.MathArrays:922 `        final double s12Low     = (prod2High - (s12High - s12Prime)) + (prod1High - s12Prime);`
+org.apache.commons.math3.util.MathArrays:926 `        double result = s12High + (prod1Low + prod2Low + s12Low);`
+org.apache.commons.math3.util.MathArrays:928 `        if (Double.isNaN(result)) {`
+org.apache.commons.math3.util.MathArrays:934 `        return result;`
+org.apache.commons.math3.util.MathArrays:976 `        final double ca1        = SPLIT_FACTOR * a1;`
+org.apache.commons.math3.util.MathArrays:977 `        final double a1High     = ca1 - (ca1 - a1);`
+org.apache.commons.math3.util.MathArrays:978 `        final double a1Low      = a1 - a1High;`
+org.apache.commons.math3.util.MathArrays:979 `        final double cb1        = SPLIT_FACTOR * b1;`
+org.apache.commons.math3.util.MathArrays:980 `        final double b1High     = cb1 - (cb1 - b1);`
+org.apache.commons.math3.util.MathArrays:981 `        final double b1Low      = b1 - b1High;`
+org.apache.commons.math3.util.MathArrays:984 `        final double prod1High  = a1 * b1;`
+org.apache.commons.math3.util.MathArrays:985 `        final double prod1Low   = a1Low * b1Low - (((prod1High - a1High * b1High) - a1Low * b1High) - a1High * b1Low);`
+org.apache.commons.math3.util.MathArrays:988 `        final double ca2        = SPLIT_FACTOR * a2;`
+org.apache.commons.math3.util.MathArrays:989 `        final double a2High     = ca2 - (ca2 - a2);`
+org.apache.commons.math3.util.MathArrays:990 `        final double a2Low      = a2 - a2High;`
+org.apache.commons.math3.util.MathArrays:991 `        final double cb2        = SPLIT_FACTOR * b2;`
+org.apache.commons.math3.util.MathArrays:992 `        final double b2High     = cb2 - (cb2 - b2);`
+org.apache.commons.math3.util.MathArrays:993 `        final double b2Low      = b2 - b2High;`
+org.apache.commons.math3.util.MathArrays:996 `        final double prod2High  = a2 * b2;`
+org.apache.commons.math3.util.MathArrays:997 `        final double prod2Low   = a2Low * b2Low - (((prod2High - a2High * b2High) - a2Low * b2High) - a2High * b2Low);`
+org.apache.commons.math3.util.MathArrays:1000 `        final double ca3        = SPLIT_FACTOR * a3;`
+org.apache.commons.math3.util.MathArrays:1001 `        final double a3High     = ca3 - (ca3 - a3);`
+org.apache.commons.math3.util.MathArrays:1002 `        final double a3Low      = a3 - a3High;`
+org.apache.commons.math3.util.MathArrays:1003 `        final double cb3        = SPLIT_FACTOR * b3;`
+org.apache.commons.math3.util.MathArrays:1004 `        final double b3High     = cb3 - (cb3 - b3);`
+org.apache.commons.math3.util.MathArrays:1005 `        final double b3Low      = b3 - b3High;`
+org.apache.commons.math3.util.MathArrays:1008 `        final double prod3High  = a3 * b3;`
+org.apache.commons.math3.util.MathArrays:1009 `        final double prod3Low   = a3Low * b3Low - (((prod3High - a3High * b3High) - a3Low * b3High) - a3High * b3Low);`
+org.apache.commons.math3.util.MathArrays:1012 `        final double s12High    = prod1High + prod2High;`
+org.apache.commons.math3.util.MathArrays:1013 `        final double s12Prime   = s12High - prod2High;`
+org.apache.commons.math3.util.MathArrays:1014 `        final double s12Low     = (prod2High - (s12High - s12Prime)) + (prod1High - s12Prime);`
+org.apache.commons.math3.util.MathArrays:1017 `        final double s123High   = s12High + prod3High;`
+org.apache.commons.math3.util.MathArrays:1018 `        final double s123Prime  = s123High - prod3High;`
+org.apache.commons.math3.util.MathArrays:1019 `        final double s123Low    = (prod3High - (s123High - s123Prime)) + (s12High - s123Prime);`
+org.apache.commons.math3.util.MathArrays:1023 `        double result = s123High + (prod1Low + prod2Low + prod3Low + s12Low + s123Low);`
+org.apache.commons.math3.util.MathArrays:1025 `        if (Double.isNaN(result)) {`
+org.apache.commons.math3.util.MathArrays:1031 `        return result;`
+org.apache.commons.math3.util.Precision:70 `        EPSILON = Double.longBitsToDouble((EXPONENT_OFFSET - 53l) << 52);`
+org.apache.commons.math3.util.Precision:77 `        SAFE_MIN = Double.longBitsToDouble((EXPONENT_OFFSET - 1022l) << 52);`
+org.apache.commons.math3.util.Precision:78 `    }`
+
+
+Task Description:
+The provided code snippets are part of the Apache Commons Math library, specifically dealing with geometric computations in one-dimensional (1D), two-dimensional (2D), and three-dimensional (3D) Euclidean spaces. Below is a brief description of the relevant parts of the code:
+
+1. **IntervalsSet Class (1D Geometry)**:
+   - **Line 47**: Calls the superclass constructor with a tree built from the given lower and upper bounds.
+   - **Line 94**: Checks if the lower bound is negative infinity.
+   - **Line 107**: Creates a lower cut sub-hyperplane.
+   - **Line 109**: Checks if the upper bound is positive infinity.
+   - **Line 118**: Creates an upper cut sub-hyperplane.
+   - **Line 120**: Returns a new BSPTree constructed with the lower and upper cuts.
+
+2. **OrientedPoint Class (1D Geometry)**:
+   - **Line 42-45**: Constructor initializes the location and direction of the oriented point.
+   - **Line 74**: Returns a new sub-oriented point based on the current oriented point.
+
+3. **SubOrientedPoint Class (1D Geometry)**:
+   - **Line 39-40**: Constructor calls the superclass constructor with the given hyperplane and remaining region.
+
+4. **Vector1D Class (1D Geometry)**:
+   - **Line 36, 39, 43, 47, 51**: Defines constants for zero, one, NaN, positive infinity, and negative infinity vectors.
+   - **Line 65-67**: Constructor initializes the vector with a given x-coordinate.
+   - **Line 128**: Returns the x-coordinate of the vector.
+
+5. **Line Class (3D Geometry)**:
+   - **Line 54-56**: Constructor initializes the line with two points and resets the line.
+   - **Line 74-81**: Computes the direction and zero point of the line.
+   - **Line 114**: Returns the abscissa of a point relative to the line.
+   - **Line 129**: Converts a 3D point to a 1D vector.
+   - **Line 156**: Checks if the distance to a point is less than a small threshold.
+   - **Line 164-166**: Computes the norm of a vector relative to the line.
+   - **Line 195-204**: Computes the closest point on the line to another line.
+   - **Line 216-217**: Returns the closest point on the line if it is contained within the line.
+
+6. **SubLine Class (3D Geometry)**:
+   - **Line 44-47**: Constructor initializes the sub-line with a line and remaining region.
+   - **Line 56-57**: Constructor initializes the sub-line with start and end points.
+   - **Line 113-120**: Computes the intersection of two sub-lines.
+   - **Line 137-138**: Returns a new interval set based on the sub-space of the line.
+
+7. **Vector3D Class (3D Geometry)**:
+   - **Line 41, 44, 47, 50, 53, 56, 59, 63**: Defines constants for zero, unit vectors along axes, NaN, positive infinity, and negative infinity vectors.
+   - **Line 95-99**: Constructor initializes the vector with x, y, and z coordinates.
+   - **Line 137-141**: Constructor initializes the vector by scaling another vector.
+   - **Line 151-155**: Constructor initializes the vector by linear combination of two vectors.
+   - **Line 243**: Computes the Euclidean norm of the vector.
+   - **Line 249**: Computes the squared norm of the vector.
+   - **Line 286-287**: Subtracts another vector from the current vector.
+   - **Line 453-454**: Computes the dot product of two vectors.
+
+8. **Line Class (2D Geometry)**:
+   - **Line 81-83**: Constructor initializes the line with two points and resets the line.
+   - **Line 129-143**: Computes the angle, cosine, sine, and origin offset of the line.
+   - **Line 181-182**: Converts a 2D point to a 1D vector.
+   - **Line 198-200**: Checks if two lines are parallel.
+
+9. **SubLine Class (2D Geometry)**:
+   - **Line 56-57**: Constructor initializes the sub-line with start and end points.
+   - **Line 113-120**: Computes the intersection of two sub-lines.
+   - **Line 139-140**: Returns a new interval set based on the sub-space of the line.
+
+10. **Vector2D Class (2D Geometry)**:
+    - **Line 37, 41, 45, 49**: Defines constants for zero, NaN, positive infinity, and negative infinity vectors.
+    - **Line 68-71**: Constructor initializes the vector with x and y coordinates.
+    - **Line 150**: Returns the x-coordinate of the vector.
+    - **Line 158**: Returns the y-coordinate of the vector.
+
+11. **AbstractRegion Class**:
+    - **Line 67-69**: Constructor initializes the region with a BSP tree.
+
+12. **AbstractSubHyperplane Class**:
+    - **Line 50-53**: Constructor initializes the sub-hyperplane with a hyperplane and remaining region.
+    - **Line 72**: Returns the hyperplane.
+    - **Line 83**: Returns the remaining region.
+
+13. **BSPTree Class**:
+    - **Line 93-99**: Constructor initializes the BSP tree with an attribute.
+    - **Line 115-123**: Constructor initializes the BSP tree with a cut, plus, minus, and attribute.
+
+14. **FastMath Class**:
+    - **Line 97**: Defines a constant for the logarithm of the maximum double value.
+    - **Line 115, 128**: Defines coefficients for logarithm calculations.
+    - **Line 141, 160, 179, 198, 218, 237**: Defines tables for sine, cosine, and tangent calculations.
+    - **Line 256, 277**: Defines constants for reciprocal of 2π and π/4 bits.
+    - **Line 285**: Defines an array of eighths.
+    - **Line 288**: Defines an array for cube root of two.
+    - **Line 385**: Computes the square root of a number.
+    - **Line 1680-1690**: Computes a polynomial approximation for sine.
+    - **Line 1700-1708**: Computes a polynomial approximation for cosine.
+    - **Line 1719-1738**: Computes sine and cosine using tables and polynomial approximations.
+    - **Line 1764-1777**: Computes sine using Kahan summation.
+    - **Line 1794**: Computes cosine using Kahan summation.
+    - **Line 1821-1832**: Computes sine and cosine using high precision.
+    - **Line 1843-1850**: Computes sine of π/2 minus an angle.
+    - **Line 2228-2276**: Computes sine using quadrant reduction.
+    - **Line 2295-2330**: Computes cosine using quadrant reduction.
+    - **Line 2582-2665**: Computes various mathematical operations with special cases.
+    - **Line 3025**: Returns the absolute value of a double.
+    - **Line 3574-3685**: Computes the hypotenuse of two numbers.
+    - **Line 896-934**: Computes a linear combination of two numbers with high precision.
+    - **Line 976-1031**: Computes a linear combination of three numbers with high precision.
+
+15. **Precision Class**:
+    - **Line 70**: Defines a constant for machine epsilon.
+    - **Line 77-78**: Defines a constant for the smallest positive normal value.
+
+The provided test cases check for intersections between sub-lines in 2D and 3D spaces, ensuring that parallel and non-intersecting sub-lines return null for their intersections.
+
+Test Results:
+The provided code is throwing NullPointerException. For examples:
+Here are the tests and error messages of NullPointerExceptions.
+@Test public void testIntersectionParallel(){
+  final SubLine sub1=new SubLine(new Vector2D(0,1),new Vector2D(0,2));
+  final SubLine sub2=new SubLine(new Vector2D(66,3),new Vector2D(66,4));
+  Assert.assertNull(sub1.intersection(sub2,true));
+  Assert.assertNull(sub1.intersection(sub2,false));
+}
+
+@Test public void testIntersectionNotIntersecting() throws MathIllegalArgumentException {
+  SubLine sub1=new SubLine(new Vector3D(1,1,1),new Vector3D(1.5,1,1));
+  SubLine sub2=new SubLine(new Vector3D(2,3,0),new Vector3D(2,3,0.5));
+  Assert.assertNull(sub1.intersection(sub2,true));
+  Assert.assertNull(sub1.intersection(sub2,false));
+}
+
+
+
+testIntersectionParallel(org.apache.commons.math3.geometry.euclidean.twod.SubLineTest): Cannot invoke "org.apache.commons.math3.geometry.euclidean.twod.Vector2D.getX()" because "p2" is null
+Cannot invoke "org.apache.commons.math3.geometry.euclidean.twod.Vector2D.getX()" because "p2" is null
+java.lang.NullPointerException: Cannot invoke "org.apache.commons.math3.geometry.euclidean.twod.Vector2D.getX()" because "p2" is null
+	at org.apache.commons.math3.geometry.euclidean.twod.Line.toSubSpace(Line.java:182)
+	at org.apache.commons.math3.geometry.euclidean.twod.SubLine.intersection(SubLine.java:120)
+	at org.apache.commons.math3.geometry.euclidean.twod.SubLineTest.testIntersectionParallel(SubLineTest.java:151)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testIntersectionNotIntersecting(org.apache.commons.math3.geometry.euclidean.threed.SubLineTest): Cannot invoke "org.apache.commons.math3.geometry.euclidean.threed.Vector3D.subtract(org.apache.commons.math3.geometry.Vector)" because "point" is null
+Cannot invoke "org.apache.commons.math3.geometry.euclidean.threed.Vector3D.subtract(org.apache.commons.math3.geometry.Vector)" because "point" is null
+java.lang.NullPointerException: Cannot invoke "org.apache.commons.math3.geometry.euclidean.threed.Vector3D.subtract(org.apache.commons.math3.geometry.Vector)" because "point" is null
+	at org.apache.commons.math3.geometry.euclidean.threed.Line.getAbscissa(Line.java:114)
+	at org.apache.commons.math3.geometry.euclidean.threed.Line.toSubSpace(Line.java:129)
+	at org.apache.commons.math3.geometry.euclidean.threed.SubLine.intersection(SubLine.java:116)
+	at org.apache.commons.math3.geometry.euclidean.threed.SubLineTest.testIntersectionNotIntersecting(SubLineTest.java:160)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+
+
+
+
+
+Analyze the provided code and utilize task description, test results, and SBFL techniques results to help in identifying potentially faulty lines. Provide the results following this JSON template:
+```json
+{
+  "faultLoc": [
+    {   
+      "faultyLine": (indicating the location of the suspicious code in ClassName:LineNumber format),
+      "code": (displaying the actual code),
+      "explanation": (step by step reasoning on why this location is considered potentially faulty)
+    },  
+    ... 
+   ]   
+}
+```
+Ensure that the objects in the "faultLoc" array are stored in descending order of suspicion.

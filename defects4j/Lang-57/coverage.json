@@ -1,0 +1,16 @@
+{
+    "coverage": [
+        {
+            "covered": [ 43, 44, 45, 46, 47, 48, 49, 57, 58, 73, 74, 75, 79, 82 ],
+            "className": "org.apache.commons.lang.LocaleUtilsTest"
+        },
+        {
+            "covered": [ 47, 49, 51, 52, 53, 223 ],
+            "className": "org.apache.commons.lang.LocaleUtils"
+        }
+    ],
+    "classes": [
+        "org.apache.commons.lang.LocaleUtils",
+        "org.apache.commons.lang.LocaleUtilsTest"
+    ]
+}

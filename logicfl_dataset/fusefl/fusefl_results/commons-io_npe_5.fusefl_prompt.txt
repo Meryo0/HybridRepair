@@ -1,0 +1,194 @@
+Faulty Code:
+org.apache.commons.io.IOUtils:145 `    public static final char DIR_SEPARATOR = File.separatorChar;`
+org.apache.commons.io.IOUtils:162 `    public static final byte[] EMPTY_BYTE_ARRAY = {};`
+org.apache.commons.io.IOUtils:183 `    public static final String LINE_SEPARATOR = System.lineSeparator();`
+org.apache.commons.io.IOUtils:190 `    public static final String LINE_SEPARATOR_UNIX = StandardLineSeparator.LF.getString();`
+org.apache.commons.io.IOUtils:197 `    public static final String LINE_SEPARATOR_WINDOWS = StandardLineSeparator.CRLF.getString();`
+org.apache.commons.io.IOUtils:202 `    private static final ThreadLocal<byte[]> SCRATCH_BYTE_BUFFER_RW = ThreadLocal.withInitial(IOUtils::byteArray);`
+org.apache.commons.io.IOUtils:207 `    private static final byte[] SCRATCH_BYTE_BUFFER_WO = byteArray();`
+org.apache.commons.io.IOUtils:212 `    private static final ThreadLocal<char[]> SCRATCH_CHAR_BUFFER_RW = ThreadLocal.withInitial(IOUtils::charArray);`
+org.apache.commons.io.IOUtils:217 `    private static final char[] SCRATCH_CHAR_BUFFER_WO = charArray();`
+org.apache.commons.io.IOUtils:354 `        return byteArray(DEFAULT_BUFFER_SIZE);`
+org.apache.commons.io.IOUtils:368 `        return new byte[size];`
+org.apache.commons.io.IOUtils:378 `        return charArray(DEFAULT_BUFFER_SIZE);`
+org.apache.commons.io.IOUtils:391 `        return new char[size];`
+org.apache.commons.io.StandardLineSeparator:28 `public enum StandardLineSeparator {`
+org.apache.commons.io.StandardLineSeparator:33 `    CR("\r"),`
+org.apache.commons.io.StandardLineSeparator:38 `    CRLF("\r\n"),`
+org.apache.commons.io.StandardLineSeparator:43 `    LF("\n");`
+org.apache.commons.io.StandardLineSeparator:52 `    StandardLineSeparator(final String lineSeparator) {`
+org.apache.commons.io.StandardLineSeparator:53 `        this.lineSeparator = Objects.requireNonNull(lineSeparator, "lineSeparator");`
+org.apache.commons.io.StandardLineSeparator:54 `    }`
+org.apache.commons.io.StandardLineSeparator:72 `        return lineSeparator;`
+org.apache.commons.io.filefilter.AbstractFileFilter:45 `        return accept ? FileVisitResult.CONTINUE : FileVisitResult.TERMINATE;`
+org.apache.commons.io.filefilter.AbstractFileFilter:62 `        this(FileVisitResult.CONTINUE, FileVisitResult.TERMINATE);`
+org.apache.commons.io.filefilter.AbstractFileFilter:63 `    }`
+org.apache.commons.io.filefilter.AbstractFileFilter:72 `    protected AbstractFileFilter(final FileVisitResult onAccept, final FileVisitResult onReject) {`
+org.apache.commons.io.filefilter.AbstractFileFilter:73 `        this.onAccept = onAccept;`
+org.apache.commons.io.filefilter.AbstractFileFilter:74 `        this.onReject = onReject;`
+org.apache.commons.io.filefilter.AbstractFileFilter:75 `    }`
+org.apache.commons.io.filefilter.AbstractFileFilter:156 `        return accept ? onAccept : onReject;`
+org.apache.commons.io.filefilter.IOFileFilter:39 `    String[] EMPTY_STRING_ARRAY = {};`
+org.apache.commons.io.filefilter.IOFileFilter:98 `        return accept(path, null) != FileVisitResult.TERMINATE;`
+org.apache.commons.io.filefilter.RegexFileFilter:86 `        Objects.requireNonNull(pattern, "pattern");`
+org.apache.commons.io.filefilter.RegexFileFilter:87 `        return Pattern.compile(pattern, flags);`
+org.apache.commons.io.filefilter.RegexFileFilter:114 `        this(pattern, (Function<Path, String> & Serializable) p -> p.getFileName().toString());`
+org.apache.commons.io.filefilter.RegexFileFilter:115 `    }`
+org.apache.commons.io.filefilter.RegexFileFilter:125 `    public RegexFileFilter(final Pattern pattern, final Function<Path, String> pathToString) {`
+org.apache.commons.io.filefilter.RegexFileFilter:126 `        Objects.requireNonNull(pattern, "pattern");`
+org.apache.commons.io.filefilter.RegexFileFilter:127 `        this.pattern = pattern;`
+org.apache.commons.io.filefilter.RegexFileFilter:128 `        this.pathToString = pathToString;`
+org.apache.commons.io.filefilter.RegexFileFilter:129 `    }`
+org.apache.commons.io.filefilter.RegexFileFilter:138 `        this(pattern, 0);`
+org.apache.commons.io.filefilter.RegexFileFilter:139 `    }`
+org.apache.commons.io.filefilter.RegexFileFilter:149 `        this(compile(pattern, flags));`
+org.apache.commons.io.filefilter.RegexFileFilter:150 `    }`
+org.apache.commons.io.filefilter.RegexFileFilter:184 `        return toFileVisitResult(pattern.matcher(pathToString.apply(path)).matches());`
+org.apache.commons.io.filefilter.RegexFileFilter:194 `        return "RegexFileFilter [pattern=" + pattern + "]";`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:60 `public abstract class AbstractByteArrayOutputStream extends OutputStream {`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:85 `    private final List<byte[]> buffers = new ArrayList<>();`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:100 `    private boolean reuseBuffers = true;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:113 `    }`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:122 `        if (currentBufferIndex < buffers.size() - 1) {`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:131 `            if (currentBuffer == null) {`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:132 `                newBufferSize = newCount;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:133 `                filledBufferSum = 0;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:139 `            currentBufferIndex++;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:140 `            currentBuffer = IOUtils.byteArray(newBufferSize);`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:141 `            buffers.add(currentBuffer);`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:143 `    }`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:193 `        int remaining = count;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:194 `        if (remaining == 0) {`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:197 `        final byte[] newBuf = IOUtils.byteArray(remaining);`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:198 `        int pos = 0;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:199 `        for (final byte[] buf : buffers) {`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:200 `            final int c = Math.min(buf.length, remaining);`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:201 `            System.arraycopy(buf, 0, newBuf, pos, c);`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:202 `            pos += c;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:203 `            remaining -= c;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:204 `            if (remaining == 0) {`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:205 `                break;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:208 `        return newBuf;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:323 `        final int newCount = count + len;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:324 `        int remaining = len;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:325 `        int inBufferPos = count - filledBufferSum;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:326 `        while (remaining > 0) {`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:327 `            final int part = Math.min(remaining, currentBuffer.length - inBufferPos);`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:328 `            System.arraycopy(b, off + len - remaining, currentBuffer, inBufferPos, part);`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:329 `            remaining -= part;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:330 `            if (remaining > 0) {`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:334 `        }`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:335 `        count = newCount;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:336 `    }`
+org.apache.commons.io.output.ByteArrayOutputStream:93 `        this(DEFAULT_SIZE);`
+org.apache.commons.io.output.ByteArrayOutputStream:94 `    }`
+org.apache.commons.io.output.ByteArrayOutputStream:103 `    public ByteArrayOutputStream(final int size) {`
+org.apache.commons.io.output.ByteArrayOutputStream:104 `        if (size < 0) {`
+org.apache.commons.io.output.ByteArrayOutputStream:107 `        synchronized (this) {`
+org.apache.commons.io.output.ByteArrayOutputStream:108 `            needNewBuffer(size);`
+org.apache.commons.io.output.ByteArrayOutputStream:109 `        }`
+org.apache.commons.io.output.ByteArrayOutputStream:110 `    }`
+org.apache.commons.io.output.ByteArrayOutputStream:127 `        return toByteArrayImpl();`
+org.apache.commons.io.output.ByteArrayOutputStream:137 `        if (off < 0`
+org.apache.commons.io.output.ByteArrayOutputStream:144 `        if (len == 0) {`
+org.apache.commons.io.output.ByteArrayOutputStream:147 `        synchronized (this) {`
+org.apache.commons.io.output.ByteArrayOutputStream:148 `            writeImpl(b, off, len);`
+org.apache.commons.io.output.ByteArrayOutputStream:149 `        }`
+org.apache.commons.io.output.ByteArrayOutputStream:150 `    }`
+
+
+Task Description:
+The provided code snippets are from the Apache Commons IO library, which offers utility classes for input/output operations. Below is a brief description of the relevant parts of the code:
+
+1. **IOUtils Class:**
+   - **DIR_SEPARATOR (Line 145):** Defines a constant for the directory separator character, which is platform-dependent.
+   - **EMPTY_BYTE_ARRAY (Line 162):** Defines a constant for an empty byte array.
+   - **LINE_SEPARATOR (Line 183):** Defines a constant for the system's line separator string.
+   - **LINE_SEPARATOR_UNIX (Line 190):** Defines a constant for the Unix line separator (`\n`).
+   - **LINE_SEPARATOR_WINDOWS (Line 197):** Defines a constant for the Windows line separator (`\r\n`).
+   - **SCRATCH_BYTE_BUFFER_RW (Line 202):** Defines a thread-local byte buffer for read/write operations.
+   - **SCRATCH_BYTE_BUFFER_WO (Line 207):** Defines a byte buffer for write-only operations.
+   - **SCRATCH_CHAR_BUFFER_RW (Line 212):** Defines a thread-local char buffer for read/write operations.
+   - **SCRATCH_CHAR_BUFFER_WO (Line 217):** Defines a char buffer for write-only operations.
+   - **byteArray and charArray Methods (Lines 354, 368, 378, 391):** Methods to create byte and char arrays of a specified size.
+
+2. **StandardLineSeparator Enum:**
+   - **Enum Constants (Lines 28-43):** Defines constants for different line separators (`CR`, `CRLF`, `LF`).
+   - **Constructor (Lines 52-54):** Initializes the enum with a line separator string.
+   - **getString Method (Line 72):** Returns the line separator string.
+
+3. **AbstractFileFilter Class:**
+   - **accept Method (Line 45):** Determines whether to continue or terminate file visitation based on acceptance.
+   - **Constructors (Lines 62-75):** Initializes the filter with results for acceptance and rejection.
+
+4. **IOFileFilter Interface:**
+   - **EMPTY_STRING_ARRAY (Line 39):** Defines a constant for an empty string array.
+   - **accept Method (Line 98):** Checks if a path is accepted.
+
+5. **RegexFileFilter Class:**
+   - **Constructor and Methods (Lines 86-194):** Implements file filtering based on regex patterns. Ensures the pattern is not null and compiles it. Provides methods to filter paths and convert the filter to a string representation.
+
+6. **AbstractByteArrayOutputStream Class:**
+   - **Class Definition (Line 60):** An abstract class extending `OutputStream`.
+   - **Buffers and Methods (Lines 85-336):** Manages a list of byte buffers, handles buffer reuse, and provides methods to write data and convert to a byte array.
+
+7. **ByteArrayOutputStream Class:**
+   - **Constructors and Methods (Lines 93-150):** Extends `AbstractByteArrayOutputStream`. Initializes with a default size, ensures buffer allocation, and provides synchronized methods to write data.
+
+**Test Case Description:**
+The test case `testRegexFileNameOnly` verifies the functionality of the `RegexFileFilter` class:
+- **Path Definition:** Creates a path `folder/Foo.java`.
+- **Pattern Definition:** Defines a regex pattern `Foo.*`.
+- **Assertions:** 
+  - Checks if the filter correctly accepts the path when serialized.
+  - Checks if the filter correctly rejects the path when using a custom path-to-string function.
+  - Checks if the filter correctly rejects the path when the function is null or returns null.
+
+The test ensures that the `RegexFileFilter` behaves as expected under different conditions.
+
+Test Results:
+The provided code is throwing NullPointerException. For examples:
+Here are the tests and error messages of NullPointerExceptions.
+/** 
+ * Tests https://issues.apache.org/jira/browse/IO-733.
+ * @throws IOException
+ */
+@SuppressWarnings("unchecked") @Test public void testRegexFileNameOnly() throws IOException {
+  final Path path=Paths.get("folder","Foo.java");
+  final String patternStr="Foo.*";
+  assertFiltering(assertSerializable(new RegexFileFilter(patternStr)),path,true);
+  assertFiltering(assertSerializable(new RegexFileFilter(Pattern.compile(patternStr),(Function<Path,String> & Serializable)Path::toString)),path,false);
+  assertFiltering(new RegexFileFilter(Pattern.compile(patternStr),(Function<Path,String> & Serializable)null),path,false);
+  assertFiltering(new RegexFileFilter(Pattern.compile(patternStr),(Function<Path,String> & Serializable)p -> null),path,false);
+}
+
+
+
+Failures (1):
+  JUnit Jupiter:RegexFileFilterTest:testRegexFileNameOnly()
+    MethodSource [className = 'org.apache.commons.io.filefilter.RegexFileFilterTest', methodName = 'testRegexFileNameOnly', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.util.function.Function.apply(Object)" because "this.pathToString" is null
+       org.apache.commons.io.filefilter.RegexFileFilter.accept(RegexFileFilter.java:184)
+       org.apache.commons.io.filefilter.RegexFileFilterTest.assertFiltering(RegexFileFilterTest.java:68)
+       org.apache.commons.io.filefilter.RegexFileFilterTest.testRegexFileNameOnly(RegexFileFilterTest.java:170)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Store NPE traces to npe.traces.json
+NPE Stack Traces exported to npe.traces.json
+
+
+Analyze the provided code and utilize task description, test results, and SBFL techniques results to help in identifying potentially faulty lines. Provide the results following this JSON template:
+```json
+{
+  "faultLoc": [
+    {   
+      "faultyLine": (indicating the location of the suspicious code in ClassName:LineNumber format),
+      "code": (displaying the actual code),
+      "explanation": (step by step reasoning on why this location is considered potentially faulty)
+    },  
+    ... 
+   ]   
+}
+```
+Ensure that the objects in the "faultLoc" array are stored in descending order of suspicion.

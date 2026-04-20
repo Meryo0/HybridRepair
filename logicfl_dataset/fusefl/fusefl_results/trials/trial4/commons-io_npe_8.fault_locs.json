@@ -1,0 +1,24 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.file.PathUtils:371",
+            "code": "parent = linkOption == LinkOption.NOFOLLOW_LINKS ? parent : readIfSymbolicLink(parent);",
+            "explanation": "The NullPointerException occurs because the `parent` variable can be null. When `linkOption` is not `NOFOLLOW_LINKS`, the method `readIfSymbolicLink(parent)` is called, which can lead to a NullPointerException if `parent` is null. This line should include a null check for `parent` before calling `readIfSymbolicLink`."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.file.PathUtils:1215",
+            "code": "return Files.isSymbolicLink(path) ? Files.readSymbolicLink(path) : path;",
+            "explanation": "The method `readIfSymbolicLink` calls `Files.isSymbolicLink(path)`, which can throw a NullPointerException if `path` is null. This line should include a null check for `path` before calling `Files.isSymbolicLink(path)`."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.file.PathUtils:370",
+            "code": "Path parent = getParent(path);",
+            "explanation": "The `getParent(path)` method can return null if the `path` does not have a parent. This null value is then used in subsequent operations without a null check, leading to a potential NullPointerException."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.file.PathUtils:825",
+            "code": "return path == null ? null : path.getParent();",
+            "explanation": "This line correctly handles the case where `path` is null by returning null. However, if `path` is not null but does not have a parent, `path.getParent()` will return null, which can cause issues in subsequent code if not properly checked."
+        }
+    ]
+}

@@ -1,0 +1,56 @@
+{"classes": [
+    {
+        "probe_ranges": [
+            {
+                "endLine": 304,
+                "offset": 11,
+                "startLine": 293,
+                "orgLineEnd": 293,
+                "probedLineEnd": 304,
+                "orgLineStart": 293
+            },
+            {
+                "endLine": 354,
+                "offset": 15,
+                "startLine": 350,
+                "orgLineEnd": 339,
+                "probedLineEnd": 354,
+                "orgLineStart": 339
+            },
+            {
+                "endLine": 439,
+                "offset": 20,
+                "startLine": 434,
+                "orgLineEnd": 419,
+                "probedLineEnd": 439,
+                "orgLineStart": 419
+            }
+        ],
+        "classId": "string_utils_1"
+    },
+    {
+        "probe_ranges": [],
+        "classId": "charsets_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 153,
+                "offset": 3,
+                "startLine": 150,
+                "orgLineEnd": 150,
+                "probedLineEnd": 153,
+                "orgLineStart": 150
+            },
+            {
+                "endLine": 157,
+                "offset": 6,
+                "startLine": 154,
+                "orgLineEnd": 151,
+                "probedLineEnd": 157,
+                "orgLineStart": 151
+            }
+        ],
+        "classId": "string_utils_test_1"
+    }
+]}

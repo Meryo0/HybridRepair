@@ -1,0 +1,15 @@
+{
+ "buggy.hash": "",
+ "fixed_hash": "f3a1798076d9dc71883d317c8e97c4e033fcee98",
+ "passed.classes": [],
+ "failed.classes": [
+  "com.fasterxml.jackson.databind.deser.filter.ProblemHandlerUnknownTypeId2221Test"
+ ],
+ "failed.tests": [
+  {
+   "class": "com.fasterxml.jackson.databind.deser.filter.ProblemHandlerUnknownTypeId2221Test",
+   "name": "testWithDeserializationProblemHandler",
+   "message": ""
+  }
+ ]
+}

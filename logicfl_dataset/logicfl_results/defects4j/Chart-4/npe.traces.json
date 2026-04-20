@@ -1,0 +1,2684 @@
+{"npe.traces": [
+    {
+        "test.method": "testDrawWithNullInfo",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getDataRange",
+                "line": 4493,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "autoAdjustRange",
+                "line": 1286,
+                "class": "org.jfree.chart.axis.DateAxis"
+            },
+            {
+                "is_target": true,
+                "method": "configure",
+                "line": 719,
+                "class": "org.jfree.chart.axis.DateAxis"
+            },
+            {
+                "is_target": true,
+                "method": "setPlot",
+                "line": 1044,
+                "class": "org.jfree.chart.axis.Axis"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 660,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "createXYStepChart",
+                "line": 1792,
+                "class": "org.jfree.chart.ChartFactory"
+            },
+            {
+                "is_target": true,
+                "method": "createChart",
+                "line": 177,
+                "class": "org.jfree.chart.junit.XYStepChartTests"
+            },
+            {
+                "is_target": true,
+                "method": "setUp",
+                "line": 96,
+                "class": "org.jfree.chart.junit.XYStepChartTests"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 140,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.jfree.chart.junit.XYStepChartTests"
+    },
+    {
+        "test.method": "testSetSeriesToolTipGenerator",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getDataRange",
+                "line": 4493,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "autoAdjustRange",
+                "line": 1286,
+                "class": "org.jfree.chart.axis.DateAxis"
+            },
+            {
+                "is_target": true,
+                "method": "configure",
+                "line": 719,
+                "class": "org.jfree.chart.axis.DateAxis"
+            },
+            {
+                "is_target": true,
+                "method": "setPlot",
+                "line": 1044,
+                "class": "org.jfree.chart.axis.Axis"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 660,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "createXYStepChart",
+                "line": 1792,
+                "class": "org.jfree.chart.ChartFactory"
+            },
+            {
+                "is_target": true,
+                "method": "createChart",
+                "line": 177,
+                "class": "org.jfree.chart.junit.XYStepChartTests"
+            },
+            {
+                "is_target": true,
+                "method": "setUp",
+                "line": 96,
+                "class": "org.jfree.chart.junit.XYStepChartTests"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 140,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.jfree.chart.junit.XYStepChartTests"
+    },
+    {
+        "test.method": "testReplaceDataset",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getDataRange",
+                "line": 4493,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "autoAdjustRange",
+                "line": 1286,
+                "class": "org.jfree.chart.axis.DateAxis"
+            },
+            {
+                "is_target": true,
+                "method": "configure",
+                "line": 719,
+                "class": "org.jfree.chart.axis.DateAxis"
+            },
+            {
+                "is_target": true,
+                "method": "setPlot",
+                "line": 1044,
+                "class": "org.jfree.chart.axis.Axis"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 660,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "createXYStepChart",
+                "line": 1792,
+                "class": "org.jfree.chart.ChartFactory"
+            },
+            {
+                "is_target": true,
+                "method": "createChart",
+                "line": 177,
+                "class": "org.jfree.chart.junit.XYStepChartTests"
+            },
+            {
+                "is_target": true,
+                "method": "setUp",
+                "line": 96,
+                "class": "org.jfree.chart.junit.XYStepChartTests"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 140,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.jfree.chart.junit.XYStepChartTests"
+    },
+    {
+        "test.method": "testAxisMargins",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getDataRange",
+                "line": 4493,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "autoAdjustRange",
+                "line": 434,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "configure",
+                "line": 417,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "setPlot",
+                "line": 1044,
+                "class": "org.jfree.chart.axis.Axis"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 660,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "createScatterPlot",
+                "line": 1490,
+                "class": "org.jfree.chart.ChartFactory"
+            },
+            {
+                "is_target": true,
+                "method": "testAxisMargins",
+                "line": 234,
+                "class": "org.jfree.chart.axis.junit.ValueAxisTests"
+            },
+            {
+                "is_target": false,
+                "method": "invoke0",
+                "line": -2,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 77,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 43,
+                "class": "jdk.internal.reflect.DelegatingMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 177,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 142,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.jfree.chart.axis.junit.ValueAxisTests"
+    },
+    {
+        "test.method": "testSerialization4",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getDataRange",
+                "line": 4493,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "autoAdjustRange",
+                "line": 1286,
+                "class": "org.jfree.chart.axis.DateAxis"
+            },
+            {
+                "is_target": true,
+                "method": "configure",
+                "line": 719,
+                "class": "org.jfree.chart.axis.DateAxis"
+            },
+            {
+                "is_target": true,
+                "method": "setPlot",
+                "line": 1044,
+                "class": "org.jfree.chart.axis.Axis"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 660,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "createTimeSeriesChart",
+                "line": 1893,
+                "class": "org.jfree.chart.ChartFactory"
+            },
+            {
+                "is_target": true,
+                "method": "testSerialization4",
+                "line": 448,
+                "class": "org.jfree.chart.junit.JFreeChartTests"
+            },
+            {
+                "is_target": false,
+                "method": "invoke0",
+                "line": -2,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 77,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 43,
+                "class": "jdk.internal.reflect.DelegatingMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 177,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 142,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.jfree.chart.junit.JFreeChartTests"
+    },
+    {
+        "test.method": "testXYAutoRange1",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getDataRange",
+                "line": 4493,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "autoAdjustRange",
+                "line": 434,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "configure",
+                "line": 417,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "setPlot",
+                "line": 1044,
+                "class": "org.jfree.chart.axis.Axis"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 660,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "createScatterPlot",
+                "line": 1490,
+                "class": "org.jfree.chart.ChartFactory"
+            },
+            {
+                "is_target": true,
+                "method": "testXYAutoRange1",
+                "line": 260,
+                "class": "org.jfree.chart.axis.junit.LogAxisTests"
+            },
+            {
+                "is_target": false,
+                "method": "invoke0",
+                "line": -2,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 77,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 43,
+                "class": "jdk.internal.reflect.DelegatingMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 177,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 142,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.jfree.chart.axis.junit.LogAxisTests"
+    },
+    {
+        "test.method": "testXYAutoRange2",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getDataRange",
+                "line": 4493,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "autoAdjustRange",
+                "line": 434,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "configure",
+                "line": 417,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "setPlot",
+                "line": 1044,
+                "class": "org.jfree.chart.axis.Axis"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 660,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "createScatterPlot",
+                "line": 1490,
+                "class": "org.jfree.chart.ChartFactory"
+            },
+            {
+                "is_target": true,
+                "method": "testXYAutoRange2",
+                "line": 288,
+                "class": "org.jfree.chart.axis.junit.LogAxisTests"
+            },
+            {
+                "is_target": false,
+                "method": "invoke0",
+                "line": -2,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 77,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 43,
+                "class": "jdk.internal.reflect.DelegatingMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 177,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 142,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.jfree.chart.axis.junit.LogAxisTests"
+    },
+    {
+        "test.method": "testXYAutoRange1",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getDataRange",
+                "line": 4493,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "autoAdjustRange",
+                "line": 434,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "configure",
+                "line": 417,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "setPlot",
+                "line": 1044,
+                "class": "org.jfree.chart.axis.Axis"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 660,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "createScatterPlot",
+                "line": 1490,
+                "class": "org.jfree.chart.ChartFactory"
+            },
+            {
+                "is_target": true,
+                "method": "testXYAutoRange1",
+                "line": 354,
+                "class": "org.jfree.chart.axis.junit.NumberAxisTests"
+            },
+            {
+                "is_target": false,
+                "method": "invoke0",
+                "line": -2,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 77,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 43,
+                "class": "jdk.internal.reflect.DelegatingMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 177,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 142,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.jfree.chart.axis.junit.NumberAxisTests"
+    },
+    {
+        "test.method": "testXYAutoRange2",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getDataRange",
+                "line": 4493,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "autoAdjustRange",
+                "line": 434,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "configure",
+                "line": 417,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "setPlot",
+                "line": 1044,
+                "class": "org.jfree.chart.axis.Axis"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 660,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "createScatterPlot",
+                "line": 1490,
+                "class": "org.jfree.chart.ChartFactory"
+            },
+            {
+                "is_target": true,
+                "method": "testXYAutoRange2",
+                "line": 382,
+                "class": "org.jfree.chart.axis.junit.NumberAxisTests"
+            },
+            {
+                "is_target": false,
+                "method": "invoke0",
+                "line": -2,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 77,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 43,
+                "class": "jdk.internal.reflect.DelegatingMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 177,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 142,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.jfree.chart.axis.junit.NumberAxisTests"
+    },
+    {
+        "test.method": "testDrawWithNullInfo",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getDataRange",
+                "line": 4493,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "autoAdjustRange",
+                "line": 1286,
+                "class": "org.jfree.chart.axis.DateAxis"
+            },
+            {
+                "is_target": true,
+                "method": "configure",
+                "line": 719,
+                "class": "org.jfree.chart.axis.DateAxis"
+            },
+            {
+                "is_target": true,
+                "method": "setPlot",
+                "line": 1044,
+                "class": "org.jfree.chart.axis.Axis"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 660,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "createTimeSeriesChart",
+                "line": 1893,
+                "class": "org.jfree.chart.ChartFactory"
+            },
+            {
+                "is_target": true,
+                "method": "createChart",
+                "line": 176,
+                "class": "org.jfree.chart.junit.TimeSeriesChartTests"
+            },
+            {
+                "is_target": true,
+                "method": "setUp",
+                "line": 95,
+                "class": "org.jfree.chart.junit.TimeSeriesChartTests"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 140,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.jfree.chart.junit.TimeSeriesChartTests"
+    },
+    {
+        "test.method": "testSetSeriesToolTipGenerator",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getDataRange",
+                "line": 4493,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "autoAdjustRange",
+                "line": 1286,
+                "class": "org.jfree.chart.axis.DateAxis"
+            },
+            {
+                "is_target": true,
+                "method": "configure",
+                "line": 719,
+                "class": "org.jfree.chart.axis.DateAxis"
+            },
+            {
+                "is_target": true,
+                "method": "setPlot",
+                "line": 1044,
+                "class": "org.jfree.chart.axis.Axis"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 660,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "createTimeSeriesChart",
+                "line": 1893,
+                "class": "org.jfree.chart.ChartFactory"
+            },
+            {
+                "is_target": true,
+                "method": "createChart",
+                "line": 176,
+                "class": "org.jfree.chart.junit.TimeSeriesChartTests"
+            },
+            {
+                "is_target": true,
+                "method": "setUp",
+                "line": 95,
+                "class": "org.jfree.chart.junit.TimeSeriesChartTests"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 140,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.jfree.chart.junit.TimeSeriesChartTests"
+    },
+    {
+        "test.method": "testReplaceDataset",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getDataRange",
+                "line": 4493,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "autoAdjustRange",
+                "line": 1286,
+                "class": "org.jfree.chart.axis.DateAxis"
+            },
+            {
+                "is_target": true,
+                "method": "configure",
+                "line": 719,
+                "class": "org.jfree.chart.axis.DateAxis"
+            },
+            {
+                "is_target": true,
+                "method": "setPlot",
+                "line": 1044,
+                "class": "org.jfree.chart.axis.Axis"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 660,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "createTimeSeriesChart",
+                "line": 1893,
+                "class": "org.jfree.chart.ChartFactory"
+            },
+            {
+                "is_target": true,
+                "method": "createChart",
+                "line": 176,
+                "class": "org.jfree.chart.junit.TimeSeriesChartTests"
+            },
+            {
+                "is_target": true,
+                "method": "setUp",
+                "line": 95,
+                "class": "org.jfree.chart.junit.TimeSeriesChartTests"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 140,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.jfree.chart.junit.TimeSeriesChartTests"
+    },
+    {
+        "test.method": "testDrawWithNullInfo",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getDataRange",
+                "line": 4493,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "autoAdjustRange",
+                "line": 434,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "configure",
+                "line": 417,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "setPlot",
+                "line": 1044,
+                "class": "org.jfree.chart.axis.Axis"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 660,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "createXYStepAreaChart",
+                "line": 1848,
+                "class": "org.jfree.chart.ChartFactory"
+            },
+            {
+                "is_target": true,
+                "method": "createChart",
+                "line": 177,
+                "class": "org.jfree.chart.junit.XYStepAreaChartTests"
+            },
+            {
+                "is_target": true,
+                "method": "setUp",
+                "line": 96,
+                "class": "org.jfree.chart.junit.XYStepAreaChartTests"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 140,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.jfree.chart.junit.XYStepAreaChartTests"
+    },
+    {
+        "test.method": "testSetSeriesToolTipGenerator",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getDataRange",
+                "line": 4493,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "autoAdjustRange",
+                "line": 434,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "configure",
+                "line": 417,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "setPlot",
+                "line": 1044,
+                "class": "org.jfree.chart.axis.Axis"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 660,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "createXYStepAreaChart",
+                "line": 1848,
+                "class": "org.jfree.chart.ChartFactory"
+            },
+            {
+                "is_target": true,
+                "method": "createChart",
+                "line": 177,
+                "class": "org.jfree.chart.junit.XYStepAreaChartTests"
+            },
+            {
+                "is_target": true,
+                "method": "setUp",
+                "line": 96,
+                "class": "org.jfree.chart.junit.XYStepAreaChartTests"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 140,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.jfree.chart.junit.XYStepAreaChartTests"
+    },
+    {
+        "test.method": "testReplaceDataset",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getDataRange",
+                "line": 4493,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "autoAdjustRange",
+                "line": 434,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "configure",
+                "line": 417,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "setPlot",
+                "line": 1044,
+                "class": "org.jfree.chart.axis.Axis"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 660,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "createXYStepAreaChart",
+                "line": 1848,
+                "class": "org.jfree.chart.ChartFactory"
+            },
+            {
+                "is_target": true,
+                "method": "createChart",
+                "line": 177,
+                "class": "org.jfree.chart.junit.XYStepAreaChartTests"
+            },
+            {
+                "is_target": true,
+                "method": "setUp",
+                "line": 96,
+                "class": "org.jfree.chart.junit.XYStepAreaChartTests"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 140,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.jfree.chart.junit.XYStepAreaChartTests"
+    },
+    {
+        "test.method": "testDrawWithNullInfo",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getDataRange",
+                "line": 4493,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "autoAdjustRange",
+                "line": 434,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "configure",
+                "line": 417,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "setPlot",
+                "line": 1044,
+                "class": "org.jfree.chart.axis.Axis"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 660,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "createScatterPlot",
+                "line": 1490,
+                "class": "org.jfree.chart.ChartFactory"
+            },
+            {
+                "is_target": true,
+                "method": "createChart",
+                "line": 181,
+                "class": "org.jfree.chart.junit.ScatterPlotTests"
+            },
+            {
+                "is_target": true,
+                "method": "setUp",
+                "line": 98,
+                "class": "org.jfree.chart.junit.ScatterPlotTests"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 140,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.jfree.chart.junit.ScatterPlotTests"
+    },
+    {
+        "test.method": "testSetSeriesToolTipGenerator",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getDataRange",
+                "line": 4493,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "autoAdjustRange",
+                "line": 434,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "configure",
+                "line": 417,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "setPlot",
+                "line": 1044,
+                "class": "org.jfree.chart.axis.Axis"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 660,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "createScatterPlot",
+                "line": 1490,
+                "class": "org.jfree.chart.ChartFactory"
+            },
+            {
+                "is_target": true,
+                "method": "createChart",
+                "line": 181,
+                "class": "org.jfree.chart.junit.ScatterPlotTests"
+            },
+            {
+                "is_target": true,
+                "method": "setUp",
+                "line": 98,
+                "class": "org.jfree.chart.junit.ScatterPlotTests"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 140,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.jfree.chart.junit.ScatterPlotTests"
+    },
+    {
+        "test.method": "testReplaceDataset",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getDataRange",
+                "line": 4493,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "autoAdjustRange",
+                "line": 434,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "configure",
+                "line": 417,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "setPlot",
+                "line": 1044,
+                "class": "org.jfree.chart.axis.Axis"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 660,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "createScatterPlot",
+                "line": 1490,
+                "class": "org.jfree.chart.ChartFactory"
+            },
+            {
+                "is_target": true,
+                "method": "createChart",
+                "line": 181,
+                "class": "org.jfree.chart.junit.ScatterPlotTests"
+            },
+            {
+                "is_target": true,
+                "method": "setUp",
+                "line": 98,
+                "class": "org.jfree.chart.junit.ScatterPlotTests"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 140,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.jfree.chart.junit.ScatterPlotTests"
+    },
+    {
+        "test.method": "testDrawRangeGridlines",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getDataRange",
+                "line": 4493,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "autoAdjustRange",
+                "line": 434,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "configure",
+                "line": 417,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "configureDomainAxes",
+                "line": 972,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "setRenderer",
+                "line": 1644,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "setRenderer",
+                "line": 1620,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "setRenderer",
+                "line": 1607,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "testDrawRangeGridlines",
+                "line": 1056,
+                "class": "org.jfree.chart.plot.junit.XYPlotTests"
+            },
+            {
+                "is_target": false,
+                "method": "invoke0",
+                "line": -2,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 77,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 43,
+                "class": "jdk.internal.reflect.DelegatingMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 177,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 142,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.jfree.chart.plot.junit.XYPlotTests"
+    },
+    {
+        "test.method": "testDrawWithNullInfo",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getDataRange",
+                "line": 4493,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "autoAdjustRange",
+                "line": 434,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "configure",
+                "line": 417,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "setPlot",
+                "line": 1044,
+                "class": "org.jfree.chart.axis.Axis"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 660,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "createXYAreaChart",
+                "line": 1619,
+                "class": "org.jfree.chart.ChartFactory"
+            },
+            {
+                "is_target": true,
+                "method": "createChart",
+                "line": 178,
+                "class": "org.jfree.chart.junit.XYAreaChartTests"
+            },
+            {
+                "is_target": true,
+                "method": "setUp",
+                "line": 96,
+                "class": "org.jfree.chart.junit.XYAreaChartTests"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 140,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.jfree.chart.junit.XYAreaChartTests"
+    },
+    {
+        "test.method": "testSetSeriesToolTipGenerator",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getDataRange",
+                "line": 4493,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "autoAdjustRange",
+                "line": 434,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "configure",
+                "line": 417,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "setPlot",
+                "line": 1044,
+                "class": "org.jfree.chart.axis.Axis"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 660,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "createXYAreaChart",
+                "line": 1619,
+                "class": "org.jfree.chart.ChartFactory"
+            },
+            {
+                "is_target": true,
+                "method": "createChart",
+                "line": 178,
+                "class": "org.jfree.chart.junit.XYAreaChartTests"
+            },
+            {
+                "is_target": true,
+                "method": "setUp",
+                "line": 96,
+                "class": "org.jfree.chart.junit.XYAreaChartTests"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 140,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.jfree.chart.junit.XYAreaChartTests"
+    },
+    {
+        "test.method": "testReplaceDataset",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getDataRange",
+                "line": 4493,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "autoAdjustRange",
+                "line": 434,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "configure",
+                "line": 417,
+                "class": "org.jfree.chart.axis.NumberAxis"
+            },
+            {
+                "is_target": true,
+                "method": "setPlot",
+                "line": 1044,
+                "class": "org.jfree.chart.axis.Axis"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 660,
+                "class": "org.jfree.chart.plot.XYPlot"
+            },
+            {
+                "is_target": true,
+                "method": "createXYAreaChart",
+                "line": 1619,
+                "class": "org.jfree.chart.ChartFactory"
+            },
+            {
+                "is_target": true,
+                "method": "createChart",
+                "line": 178,
+                "class": "org.jfree.chart.junit.XYAreaChartTests"
+            },
+            {
+                "is_target": true,
+                "method": "setUp",
+                "line": 96,
+                "class": "org.jfree.chart.junit.XYAreaChartTests"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 140,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.jfree.chart.junit.XYAreaChartTests"
+    }
+]}

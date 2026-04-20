@@ -1,0 +1,24 @@
+@Test public void testToPrimitive_boolean(){
+  final Boolean[] b=null;
+  assertNull(ArrayUtils.toPrimitive(b));
+  assertSame(ArrayUtils.EMPTY_BOOLEAN_ARRAY,ArrayUtils.toPrimitive(new Boolean[0]));
+  assertArrayEquals(new boolean[]{true,false,true},ArrayUtils.toPrimitive(new Boolean[]{Boolean.TRUE,Boolean.FALSE,Boolean.TRUE}));
+  assertArrayEquals(new boolean[]{true,false},ArrayUtils.toPrimitive(new Boolean[]{Boolean.TRUE,null}));
+}
+
+
+
+  JUnit Jupiter:ArrayUtilsTest:testToPrimitive_boolean()
+    MethodSource [className = 'org.apache.commons.lang3.ArrayUtilsTest', methodName = 'testToPrimitive_boolean', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.lang.Boolean.booleanValue()" because "array[i]" is null
+       org.apache.commons.lang3.ArrayUtils.toPrimitive(ArrayUtils.java:9267)
+       org.apache.commons.lang3.ArrayUtilsTest.testToPrimitive_boolean(ArrayUtilsTest.java:6285)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727)
+       org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+       org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+       org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
+       [...]

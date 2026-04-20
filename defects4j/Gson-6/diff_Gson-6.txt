@@ -1,0 +1,15 @@
+diff -U 5 -r ./defects4j/Gson-6/buggy/gson/src/main/java/com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java ./defects4j/Gson-6/fixed/gson/src/main/java/com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java
+--- ./defects4j/Gson-6/buggy/gson/src/main/java/com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java	2024-05-19 19:44:49.322465265 +0900
++++ ./defects4j/Gson-6/fixed/gson/src/main/java/com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java	2024-05-19 19:44:49.338465592 +0900
+@@ -62,9 +62,11 @@
+           .create(gson, fieldType);
+     } else {
+       throw new IllegalArgumentException(
+           "@JsonAdapter value must be TypeAdapter or TypeAdapterFactory reference.");
+     }
++    if (typeAdapter != null) {
+       typeAdapter = typeAdapter.nullSafe();
++    }
+     return typeAdapter;
+   }
+ }

@@ -1,0 +1,19 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.lang3.exception.ExceptionUtils:376",
+            "code": "throwable.printStackTrace(pw);",
+            "explanation": "The NullPointerException is thrown because the 'throwable' variable is null. The method 'printStackTrace' cannot be invoked on a null object. To handle this, a null check should be added before attempting to print the stack trace."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.exception.ExceptionUtils:374",
+            "code": "final StringWriter sw = new StringWriter();",
+            "explanation": "Although this line itself is not faulty, it is part of the method where the NullPointerException occurs. The method should include a null check for the 'throwable' parameter before initializing the StringWriter and PrintWriter."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.exception.ExceptionUtils:375",
+            "code": "final PrintWriter pw = new PrintWriter(sw, true);",
+            "explanation": "Similar to line 374, this line is part of the method where the NullPointerException occurs. The method should include a null check for the 'throwable' parameter before initializing the PrintWriter."
+        }
+    ]
+}

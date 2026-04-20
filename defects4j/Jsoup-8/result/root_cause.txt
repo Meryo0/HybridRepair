@@ -1,0 +1,12 @@
+Fault Localization Results
+NPE at line(node_1, 363) / Null Expression - node_1_expr68['ownerDocument()']
+	 can be caused by 
+node_1_literal3[null] - line(node_1, 218).
+
+NPE at line(node_1, 363) / Null Expression - node_1_expr68['ownerDocument()']
+	 can be caused by 
+node_1_expr68['ownerDocument()'] - line(node_1, 363).
+
+NPE at line(node_1, 363) / Null Expression - node_1_expr68['ownerDocument()']
+	 can be caused by 
+node_1_expr19['parentNode.ownerDocument()'] - line(node_1, 220).

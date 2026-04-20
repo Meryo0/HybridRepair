@@ -1,0 +1,8 @@
+Fault Localization Results
+NPE at line(ioutils_1, 1160) / Null Expression - p_input_73[input]
+	 can be caused by 
+p_input_73[input] - line(ioutils_1, 1160).
+
+NPE at line(ioutils_1, 1160) / Null Expression - p_input_73[input]
+	 can be caused by 
+p_input_41[input] - line(ioutils_1, 858).

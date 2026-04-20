@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.RegexFileFilter:184",
+            "code": "return toFileVisitResult(pattern.matcher(pathToString.apply(path)).matches());",
+            "explanation": "The NullPointerException occurs because 'pathToString' is null. The test case 'testRegexFileNameOnly' explicitly sets 'pathToString' to null in one of the assertions, leading to this exception. The code should handle the case where 'pathToString' is null."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.RegexFileFilter:125",
+            "code": "public RegexFileFilter(final Pattern pattern, final Function<Path, String> pathToString) {",
+            "explanation": "The constructor does not check if 'pathToString' is null. Adding a null check here and providing a default behavior or throwing an appropriate exception would prevent the NullPointerException."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.RegexFileFilter:126",
+            "code": "Objects.requireNonNull(pattern, \"pattern\");",
+            "explanation": "While the pattern is checked for null, 'pathToString' is not. Adding a similar null check for 'pathToString' would ensure that the object is not null before it is used."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.RegexFileFilter:127",
+            "code": "this.pattern = pattern;",
+            "explanation": "The assignment of 'pattern' is safe due to the null check, but 'pathToString' should also be checked and assigned safely."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.RegexFileFilter:128",
+            "code": "this.pathToString = pathToString;",
+            "explanation": "Directly assigning 'pathToString' without a null check can lead to NullPointerException when 'pathToString' is used later in the code. A null check should be added before this assignment."
+        }
+    ]
+}

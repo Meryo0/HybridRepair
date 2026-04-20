@@ -1,0 +1,32 @@
+org.apache.commons.io.IOUtils:116 `    public static final char DIR_SEPARATOR = File.separatorChar;`
+org.apache.commons.io.IOUtils:171 `        try (final StringBuilderWriter buf = new StringBuilderWriter(4);`
+org.apache.commons.io.IOUtils:172 `                final PrintWriter out = new PrintWriter(buf)) {`
+org.apache.commons.io.IOUtils:173 `            out.println();`
+org.apache.commons.io.IOUtils:174 `            LINE_SEPARATOR = buf.toString();`
+org.apache.commons.io.IOUtils:176 `    }`
+org.apache.commons.io.IOUtils:189 `        if (inputStream == null) { // not checked by BufferedInputStream`
+org.apache.commons.io.IOUtils:190 `            throw new NullPointerException();`
+org.apache.commons.io.IOUtils:192 `        return inputStream instanceof BufferedInputStream ?`
+org.apache.commons.io.IOUtils:347 `        closeQuietly(closeable, (Consumer<IOException>) null);`
+org.apache.commons.io.IOUtils:348 `    }`
+org.apache.commons.io.IOUtils:358 `        if (closeable != null) {`
+org.apache.commons.io.IOUtils:360 `                closeable.close();`
+org.apache.commons.io.IOUtils:365 `            }`
+org.apache.commons.io.IOUtils:367 `    }`
+org.apache.commons.io.IOUtils:533 `        closeQuietly((Closeable) output);`
+org.apache.commons.io.IOUtils:534 `    }`
+org.apache.commons.io.IOUtils:712 `        if (input1 == input2) {`
+org.apache.commons.io.IOUtils:713 `            return true;`
+org.apache.commons.io.IOUtils:715 `        final BufferedInputStream bufferedInput1 = buffer(input1);`
+org.apache.commons.io.IOUtils:716 `        final BufferedInputStream bufferedInput2 = buffer(input2);`
+org.apache.commons.io.output.StringBuilderWriter:50 `    public StringBuilderWriter(final int capacity) {`
+org.apache.commons.io.output.StringBuilderWriter:51 `        this.builder = new StringBuilder(capacity);`
+org.apache.commons.io.output.StringBuilderWriter:52 `    }`
+org.apache.commons.io.output.StringBuilderWriter:109 `    }`
+org.apache.commons.io.output.StringBuilderWriter:127 `        if (value != null) {`
+org.apache.commons.io.output.StringBuilderWriter:128 `            builder.append(value);`
+org.apache.commons.io.output.StringBuilderWriter:130 `    }`
+org.apache.commons.io.output.StringBuilderWriter:162 `        return builder.toString();`
+org.apache.commons.io.testtools.TestUtils:73 `        for (int i = 0; i < size; i++) {`
+org.apache.commons.io.testtools.TestUtils:77 `            out.write((byte) ((i % 127) + 1));`
+org.apache.commons.io.testtools.TestUtils:79 `    }`

@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.RegexFileFilter:184",
+            "code": "return toFileVisitResult(pattern.matcher(pathToString.apply(path)).matches());",
+            "explanation": "The NullPointerException is thrown because 'pathToString' is null. This line attempts to call 'apply' on 'pathToString' without checking if it is null. Adding a null check before using 'pathToString' would prevent the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.RegexFileFilter:125",
+            "code": "public RegexFileFilter(final Pattern pattern, final Function<Path, String> pathToString) {",
+            "explanation": "The constructor does not validate if 'pathToString' is null. Adding a null check and assigning a default function if 'pathToString' is null would prevent the NullPointerException."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.RegexFileFilter:126",
+            "code": "Objects.requireNonNull(pattern, \"pattern\");",
+            "explanation": "While the pattern is checked for null, 'pathToString' is not. Adding a similar null check for 'pathToString' would ensure that it is not null before being used."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.RegexFileFilter:127",
+            "code": "this.pattern = pattern;",
+            "explanation": "The assignment of 'pattern' is done without checking 'pathToString'. Ensuring 'pathToString' is not null before this assignment would prevent potential issues."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.RegexFileFilter:128",
+            "code": "this.pathToString = pathToString;",
+            "explanation": "Directly assigns 'pathToString' without null validation. Adding a null check here and assigning a default function if 'pathToString' is null would prevent the NullPointerException."
+        }
+    ]
+}

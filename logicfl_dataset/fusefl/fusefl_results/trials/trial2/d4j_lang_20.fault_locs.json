@@ -1,0 +1,34 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3298",
+            "code": "StringBuilder buf = new StringBuilder((array[startIndex] == null ? 16 : array[startIndex].toString().length()) + separator.length());",
+            "explanation": "The code attempts to get the length of the string representation of the array element at startIndex. If array[startIndex] is not null but its toString() method returns null, this will cause a NullPointerException when calling length()."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3383",
+            "code": "StringBuilder buf = new StringBuilder((array[startIndex] == null ? 16 : array[startIndex].toString().length()) + separator.length());",
+            "explanation": "Similar to line 3298, this line attempts to get the length of the string representation of the array element at startIndex. If array[startIndex] is not null but its toString() method returns null, this will cause a NullPointerException when calling length()."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3300",
+            "code": "for (int i = startIndex; i < endIndex; i++) {",
+            "explanation": "This loop iterates over the array elements from startIndex to endIndex. If any element's toString() method returns null, subsequent operations on that element could cause a NullPointerException."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3385",
+            "code": "for (int i = startIndex; i < endIndex; i++) {",
+            "explanation": "Similar to line 3300, this loop iterates over the array elements from startIndex to endIndex. If any element's toString() method returns null, subsequent operations on that element could cause a NullPointerException."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3304",
+            "code": "if (array[i] != null) {",
+            "explanation": "This condition checks if the array element is not null before appending it to the StringBuilder. However, it does not handle the case where array[i].toString() returns null, which could cause a NullPointerException."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3389",
+            "code": "if (array[i] != null) {",
+            "explanation": "Similar to line 3304, this condition checks if the array element is not null before appending it to the StringBuilder. However, it does not handle the case where array[i].toString() returns null, which could cause a NullPointerException."
+        }
+    ]
+}

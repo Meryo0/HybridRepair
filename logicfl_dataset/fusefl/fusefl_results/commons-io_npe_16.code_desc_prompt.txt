@@ -1,0 +1,129 @@
+Provide a short code description of the following code:
+ org.apache.commons.io.DirectoryWalker:283 `        this(null, -1);`
+org.apache.commons.io.DirectoryWalker:284 `    }`
+org.apache.commons.io.DirectoryWalker:299 `    protected DirectoryWalker(final FileFilter filter, final int depthLimit) {`
+org.apache.commons.io.DirectoryWalker:300 `        this.filter = filter;`
+org.apache.commons.io.DirectoryWalker:301 `        this.depthLimit = depthLimit;`
+org.apache.commons.io.DirectoryWalker:302 `    }`
+org.apache.commons.io.FileUtils:96 `    public static final BigInteger ONE_KB_BI = BigInteger.valueOf(ONE_KB);`
+org.apache.commons.io.FileUtils:108 `    public static final BigInteger ONE_MB_BI = ONE_KB_BI.multiply(ONE_KB_BI);`
+org.apache.commons.io.FileUtils:120 `    public static final BigInteger ONE_GB_BI = ONE_KB_BI.multiply(ONE_MB_BI);`
+org.apache.commons.io.FileUtils:132 `    public static final BigInteger ONE_TB_BI = ONE_KB_BI.multiply(ONE_GB_BI);`
+org.apache.commons.io.FileUtils:144 `    public static final BigInteger ONE_PB_BI = ONE_KB_BI.multiply(ONE_TB_BI);`
+org.apache.commons.io.FileUtils:156 `    public static final BigInteger ONE_EB_BI = ONE_KB_BI.multiply(ONE_PB_BI);`
+org.apache.commons.io.FileUtils:161 `    public static final BigInteger ONE_ZB = BigInteger.valueOf(ONE_KB).multiply(BigInteger.valueOf(ONE_EB));`
+org.apache.commons.io.FileUtils:166 `    public static final BigInteger ONE_YB = ONE_KB_BI.multiply(ONE_ZB);`
+org.apache.commons.io.FileUtils:171 `    public static final File[] EMPTY_FILE_ARRAY = new File[0];`
+org.apache.commons.io.FileUtils:332 `        final File[] files = verifiedListFiles(directory);`
+org.apache.commons.io.FileUtils:334 `        IOException exception = null;`
+org.apache.commons.io.FileUtils:335 `        for (final File file : files) {`
+org.apache.commons.io.FileUtils:337 `                forceDelete(file);`
+org.apache.commons.io.FileUtils:340 `            }`
+org.apache.commons.io.FileUtils:343 `        if (null != exception) {`
+org.apache.commons.io.FileUtils:346 `    }`
+org.apache.commons.io.FileUtils:448 `        final boolean file1Exists = file1.exists();`
+org.apache.commons.io.FileUtils:1122 `        if (!directory.exists()) {`
+org.apache.commons.io.FileUtils:1126 `        if (!isSymlink(directory)) {`
+org.apache.commons.io.FileUtils:1127 `            cleanDirectory(directory);`
+org.apache.commons.io.FileUtils:1130 `        if (!directory.delete()) {`
+org.apache.commons.io.FileUtils:1135 `    }`
+org.apache.commons.io.FileUtils:1342 `            deleteCounters = PathUtils.delete(file.toPath());`
+org.apache.commons.io.FileUtils:1345 `        }`
+org.apache.commons.io.FileUtils:1347 `        if (deleteCounters.getFileCounter().get() < 1 && deleteCounters.getDirectoryCounter().get() < 1) {`
+org.apache.commons.io.FileUtils:1351 `    }`
+org.apache.commons.io.FileUtils:1726 `        if (file == null) {`
+org.apache.commons.io.FileUtils:1729 `        return Files.isSymbolicLink(file.toPath());`
+org.apache.commons.io.FileUtils:2682 `        if (!directory.exists()) {`
+org.apache.commons.io.FileUtils:2687 `        if (!directory.isDirectory()) {`
+org.apache.commons.io.FileUtils:2692 `        final File[] files = directory.listFiles();`
+org.apache.commons.io.FileUtils:2693 `        if (files == null) {  // null if security restricted`
+org.apache.commons.io.FileUtils:2696 `        return files;`
+org.apache.commons.io.file.Counters:47 `            super();`
+org.apache.commons.io.file.Counters:48 `            this.byteCounter = byteCounter;`
+org.apache.commons.io.file.Counters:49 `            this.directoryCounter = directoryCounter;`
+org.apache.commons.io.file.Counters:50 `            this.fileCounter = fileCounter;`
+org.apache.commons.io.file.Counters:51 `        }`
+org.apache.commons.io.file.Counters:55 `            return byteCounter;`
+org.apache.commons.io.file.Counters:70 `            return this.fileCounter;`
+org.apache.commons.io.file.Counters:183 `            value += add;`
+org.apache.commons.io.file.Counters:185 `        }`
+org.apache.commons.io.file.Counters:189 `            return value;`
+org.apache.commons.io.file.Counters:204 `            value++;`
+org.apache.commons.io.file.Counters:205 `        }`
+org.apache.commons.io.file.Counters:222 `            super(Counters.longCounter(), Counters.longCounter(), Counters.longCounter());`
+org.apache.commons.io.file.Counters:223 `        }`
+org.apache.commons.io.file.Counters:279 `        return new LongCounter();`
+org.apache.commons.io.file.Counters:288 `        return new LongPathCounters();`
+org.apache.commons.io.file.PathUtils:110 `        return Files.isDirectory(path) ? deleteDirectory(path) : deleteFile(path);`
+org.apache.commons.io.file.PathUtils:133 `        if (Files.isDirectory(file)) {`
+org.apache.commons.io.file.PathUtils:136 `        final PathCounters pathCounts = Counters.longPathCounters();`
+org.apache.commons.io.file.PathUtils:137 `        final long size = Files.exists(file) ? Files.size(file) : 0;`
+org.apache.commons.io.file.PathUtils:138 `        if (Files.deleteIfExists(file)) {`
+org.apache.commons.io.file.PathUtils:139 `            pathCounts.getFileCounter().increment();`
+org.apache.commons.io.file.PathUtils:140 `            pathCounts.getByteCounter().add(size);`
+org.apache.commons.io.file.PathUtils:142 `        return pathCounts;`
+org.apache.commons.io.testtools.TestUtils:73 `        for (int i = 0; i < size; i++) {`
+org.apache.commons.io.testtools.TestUtils:79 `    }`
+ 
+The provided code is expected to pass these test cases:
+ @Test public void testContentEqualsIgnoreEOL() throws Exception {
+  final File file1=new File(temporaryFolder,getName());
+  final File file2=new File(temporaryFolder,getName() + "2");
+  assertTrue(FileUtils.contentEqualsIgnoreEOL(null,null,null));
+  assertFalse(FileUtils.contentEqualsIgnoreEOL(null,file1,null));
+  assertFalse(FileUtils.contentEqualsIgnoreEOL(file1,null,null));
+  assertTrue(FileUtils.contentEqualsIgnoreEOL(file1,file1,null));
+  assertTrue(FileUtils.contentEqualsIgnoreEOL(file1,file2,null));
+  assertTrue(FileUtils.contentEqualsIgnoreEOL(file2,file2,null));
+  assertTrue(FileUtils.contentEqualsIgnoreEOL(file2,file1,null));
+  try {
+    FileUtils.contentEqualsIgnoreEOL(temporaryFolder,temporaryFolder,null);
+    fail("Comparing directories should fail with an IOException");
+  }
+ catch (  final IOException ioe) {
+  }
+  final File tfile1=new File(temporaryFolder,getName() + ".txt1");
+  tfile1.deleteOnExit();
+  FileUtils.write(tfile1,"123\r");
+  final File tfile2=new File(temporaryFolder,getName() + ".txt2");
+  tfile1.deleteOnExit();
+  FileUtils.write(tfile2,"123\n");
+  final File tfile3=new File(temporaryFolder,getName() + ".collection");
+  tfile3.deleteOnExit();
+  FileUtils.write(tfile3,"123\r\n2");
+  assertTrue(FileUtils.contentEqualsIgnoreEOL(tfile1,tfile1,null));
+  assertTrue(FileUtils.contentEqualsIgnoreEOL(tfile2,tfile2,null));
+  assertTrue(FileUtils.contentEqualsIgnoreEOL(tfile3,tfile3,null));
+  assertTrue(FileUtils.contentEqualsIgnoreEOL(tfile1,tfile2,null));
+  assertFalse(FileUtils.contentEqualsIgnoreEOL(tfile1,tfile3,null));
+  assertFalse(FileUtils.contentEqualsIgnoreEOL(tfile2,tfile3,null));
+  final URL urlCR=getClass().getResource("FileUtilsTestDataCR.dat");
+  assertNotNull(urlCR);
+  final File cr=new File(urlCR.toURI());
+  assertTrue(cr.exists());
+  final URL urlCRLF=getClass().getResource("FileUtilsTestDataCRLF.dat");
+  assertNotNull(urlCRLF);
+  final File crlf=new File(urlCRLF.toURI());
+  assertTrue(crlf.exists());
+  final URL urlLF=getClass().getResource("FileUtilsTestDataLF.dat");
+  assertNotNull(urlLF);
+  final File lf=new File(urlLF.toURI());
+  assertTrue(lf.exists());
+  assertTrue(FileUtils.contentEqualsIgnoreEOL(cr,cr,null));
+  assertTrue(FileUtils.contentEqualsIgnoreEOL(crlf,crlf,null));
+  assertTrue(FileUtils.contentEqualsIgnoreEOL(lf,lf,null));
+  assertTrue(FileUtils.contentEqualsIgnoreEOL(cr,crlf,null));
+  assertTrue(FileUtils.contentEqualsIgnoreEOL(cr,lf,null));
+  assertTrue(FileUtils.contentEqualsIgnoreEOL(crlf,lf,null));
+  assertTrue(FileUtils.contentEquals(cr,cr));
+  assertTrue(FileUtils.contentEquals(crlf,crlf));
+  assertTrue(FileUtils.contentEquals(lf,lf));
+  assertFalse(FileUtils.contentEquals(cr,crlf));
+  assertFalse(FileUtils.contentEquals(cr,lf));
+  assertFalse(FileUtils.contentEquals(crlf,lf));
+  file1.createNewFile();
+  file2.createNewFile();
+  assertTrue(FileUtils.contentEqualsIgnoreEOL(file1,file1,null));
+  assertTrue(FileUtils.contentEqualsIgnoreEOL(file1,file2,null));
+}
+

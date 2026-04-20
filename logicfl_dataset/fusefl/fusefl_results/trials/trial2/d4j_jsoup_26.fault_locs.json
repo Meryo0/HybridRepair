@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jsoup.safety.Cleaner:73",
+            "code": "List<Node> sourceChildren = source.childNodes();",
+            "explanation": "The error message indicates that a NullPointerException occurs because 'source' is null. This line attempts to access 'source.childNodes()', which will throw an exception if 'source' is null. The 'source' variable should be checked for null before accessing its methods."
+        },
+        {
+            "faultyLine": "org.jsoup.safety.Cleaner:43",
+            "code": "copySafeNodes(dirtyDocument.body(), clean.body());",
+            "explanation": "The method 'copySafeNodes' is called with 'dirtyDocument.body()' as an argument. If 'dirtyDocument.body()' is null, it will cause a NullPointerException in 'copySafeNodes'. This line should ensure that 'dirtyDocument.body()' is not null before calling 'copySafeNodes'."
+        },
+        {
+            "faultyLine": "org.jsoup.safety.Cleaner:40",
+            "code": "Validate.notNull(dirtyDocument);",
+            "explanation": "While this line checks if 'dirtyDocument' is null, it does not check if 'dirtyDocument.body()' is null. Adding a validation for 'dirtyDocument.body()' would prevent the NullPointerException in 'copySafeNodes'."
+        },
+        {
+            "faultyLine": "org.jsoup.Jsoup:195",
+            "code": "Document dirty = parseBodyFragment(bodyHtml, baseUri);",
+            "explanation": "If 'parseBodyFragment' returns a Document with a null body, subsequent operations on 'dirty' will fail. This line should ensure that the returned Document's body is not null."
+        },
+        {
+            "faultyLine": "org.jsoup.Jsoup:196",
+            "code": "Cleaner cleaner = new Cleaner(whitelist);",
+            "explanation": "While this line itself is not directly causing the issue, it is part of the sequence leading to the NullPointerException. Ensuring that the 'whitelist' is properly initialized and used might help in preventing the error."
+        }
+    ]
+}

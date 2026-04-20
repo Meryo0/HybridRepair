@@ -1,0 +1,140 @@
+Faulty Code:
+org.apache.commons.lang3.text.StrBuilder:105 `        this(CAPACITY);`
+org.apache.commons.lang3.text.StrBuilder:106 `    }`
+org.apache.commons.lang3.text.StrBuilder:114 `        super();`
+org.apache.commons.lang3.text.StrBuilder:115 `        if (initialCapacity <= 0) {`
+org.apache.commons.lang3.text.StrBuilder:118 `        buffer = new char[initialCapacity];`
+org.apache.commons.lang3.text.StrBuilder:119 `    }`
+org.apache.commons.lang3.text.StrBuilder:2822 `        if (this.size != other.size) {`
+org.apache.commons.lang3.text.StrMatcher:38 `    private static final StrMatcher COMMA_MATCHER = new CharMatcher(',');`
+org.apache.commons.lang3.text.StrMatcher:42 `    private static final StrMatcher TAB_MATCHER = new CharMatcher('\t');`
+org.apache.commons.lang3.text.StrMatcher:46 `    private static final StrMatcher SPACE_MATCHER = new CharMatcher(' ');`
+org.apache.commons.lang3.text.StrMatcher:51 `    private static final StrMatcher SPLIT_MATCHER = new CharSetMatcher(" \t\n\r\f".toCharArray());`
+org.apache.commons.lang3.text.StrMatcher:55 `    private static final StrMatcher TRIM_MATCHER = new TrimMatcher();`
+org.apache.commons.lang3.text.StrMatcher:59 `    private static final StrMatcher SINGLE_QUOTE_MATCHER = new CharMatcher('\'');`
+org.apache.commons.lang3.text.StrMatcher:63 `    private static final StrMatcher DOUBLE_QUOTE_MATCHER = new CharMatcher('"');`
+org.apache.commons.lang3.text.StrMatcher:67 `    private static final StrMatcher QUOTE_MATCHER = new CharSetMatcher("'\"".toCharArray());`
+org.apache.commons.lang3.text.StrMatcher:71 `    private static final StrMatcher NONE_MATCHER = new NoMatcher();`
+org.apache.commons.lang3.text.StrMatcher:217 `        super();`
+org.apache.commons.lang3.text.StrMatcher:218 `    }`
+org.apache.commons.lang3.text.StrMatcher:285 `            super();`
+org.apache.commons.lang3.text.StrMatcher:286 `            this.chars = chars.clone();`
+org.apache.commons.lang3.text.StrMatcher:287 `            Arrays.sort(this.chars);`
+org.apache.commons.lang3.text.StrMatcher:288 `        }`
+org.apache.commons.lang3.text.StrMatcher:319 `            super();`
+org.apache.commons.lang3.text.StrMatcher:320 `            this.ch = ch;`
+org.apache.commons.lang3.text.StrMatcher:321 `        }`
+org.apache.commons.lang3.text.StrMatcher:390 `            super();`
+org.apache.commons.lang3.text.StrMatcher:391 `        }`
+org.apache.commons.lang3.text.StrMatcher:418 `            super();`
+org.apache.commons.lang3.text.StrMatcher:419 `        }`
+
+
+Task Description:
+The provided code snippets are from the `StrBuilder` and `StrMatcher` classes in the Apache Commons Lang library. Here's a brief description of the relevant parts:
+
+1. **StrBuilder Class:**
+   - **Line 105:** `this(CAPACITY);`
+     - This line calls another constructor of the `StrBuilder` class with a default initial capacity (`CAPACITY`).
+   - **Line 106:** `}`
+     - This closes the constructor.
+   - **Line 114:** `super();`
+     - This calls the constructor of the superclass.
+   - **Line 115:** `if (initialCapacity <= 0) {`
+     - This checks if the provided initial capacity is less than or equal to zero.
+   - **Line 118:** `buffer = new char[initialCapacity];`
+     - This initializes the internal buffer with the specified initial capacity.
+   - **Line 119:** `}`
+     - This closes the if statement.
+   - **Line 2822:** `if (this.size != other.size) {`
+     - This checks if the size of the current `StrBuilder` instance is different from the size of another `StrBuilder` instance.
+
+2. **StrMatcher Class:**
+   - **Line 38:** `private static final StrMatcher COMMA_MATCHER = new CharMatcher(',');`
+     - This defines a static final `StrMatcher` instance that matches commas.
+   - **Line 42:** `private static final StrMatcher TAB_MATCHER = new CharMatcher('\t');`
+     - This defines a static final `StrMatcher` instance that matches tab characters.
+   - **Line 46:** `private static final StrMatcher SPACE_MATCHER = new CharMatcher(' ');`
+     - This defines a static final `StrMatcher` instance that matches space characters.
+   - **Line 51:** `private static final StrMatcher SPLIT_MATCHER = new CharSetMatcher(" \t\n\r\f".toCharArray());`
+     - This defines a static final `StrMatcher` instance that matches any whitespace character.
+   - **Line 55:** `private static final StrMatcher TRIM_MATCHER = new TrimMatcher();`
+     - This defines a static final `StrMatcher` instance that matches characters to be trimmed.
+   - **Line 59:** `private static final StrMatcher SINGLE_QUOTE_MATCHER = new CharMatcher('\'');`
+     - This defines a static final `StrMatcher` instance that matches single quote characters.
+   - **Line 63:** `private static final StrMatcher DOUBLE_QUOTE_MATCHER = new CharMatcher('"');`
+     - This defines a static final `StrMatcher` instance that matches double quote characters.
+   - **Line 67:** `private static final StrMatcher QUOTE_MATCHER = new CharSetMatcher("'\"".toCharArray());`
+     - This defines a static final `StrMatcher` instance that matches either single or double quote characters.
+   - **Line 71:** `private static final StrMatcher NONE_MATCHER = new NoMatcher();`
+     - This defines a static final `StrMatcher` instance that matches no characters.
+   - **Line 217:** `super();`
+     - This calls the constructor of the superclass.
+   - **Line 218:** `}`
+     - This closes the constructor.
+   - **Line 285:** `super();`
+     - This calls the constructor of the superclass.
+   - **Line 286:** `this.chars = chars.clone();`
+     - This clones the provided character array and assigns it to the instance variable `chars`.
+   - **Line 287:** `Arrays.sort(this.chars);`
+     - This sorts the cloned character array.
+   - **Line 288:** `}`
+     - This closes the constructor.
+   - **Line 319:** `super();`
+     - This calls the constructor of the superclass.
+   - **Line 320:** `this.ch = ch;`
+     - This assigns the provided character to the instance variable `ch`.
+   - **Line 321:** `}`
+     - This closes the constructor.
+   - **Line 390:** `super();`
+     - This calls the constructor of the superclass.
+   - **Line 391:** `}`
+     - This closes the constructor.
+   - **Line 418:** `super();`
+     - This calls the constructor of the superclass.
+   - **Line 419:** `}`
+     - This closes the constructor.
+
+The provided test case `test_LANG_1131_EqualsWithNullStrBuilder` checks the `equals` method of the `StrBuilder` class to ensure that it correctly returns `false` when comparing a `StrBuilder` instance with `null`. The test case creates a new `StrBuilder` instance and asserts that it is not equal to `null`.
+
+Test Results:
+The provided code is throwing NullPointerException. For examples:
+Here are the tests and error messages of NullPointerExceptions.
+@Test public void test_LANG_1131_EqualsWithNullStrBuilder() throws Exception {
+  final StrBuilder sb=new StrBuilder();
+  final StrBuilder other=null;
+  assertFalse(sb.equals(other));
+}
+
+
+
+  JUnit Vintage:StrBuilderTest:test_LANG_1131_EqualsWithNullStrBuilder
+    MethodSource [className = 'org.apache.commons.lang3.text.StrBuilderTest', methodName = 'test_LANG_1131_EqualsWithNullStrBuilder', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot read field "size" because "other" is null
+       org.apache.commons.lang3.text.StrBuilder.equals(StrBuilder.java:2822)
+       org.apache.commons.lang3.text.StrBuilderTest.test_LANG_1131_EqualsWithNullStrBuilder(StrBuilderTest.java:1857)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+       org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+       org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+       org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+       [...]
+
+
+Analyze the provided code and utilize task description, test results, and SBFL techniques results to help in identifying potentially faulty lines. Provide the results following this JSON template:
+```json
+{
+  "faultLoc": [
+    {   
+      "faultyLine": (indicating the location of the suspicious code in ClassName:LineNumber format),
+      "code": (displaying the actual code),
+      "explanation": (step by step reasoning on why this location is considered potentially faulty)
+    },  
+    ... 
+   ]   
+}
+```
+Ensure that the objects in the "faultLoc" array are stored in descending order of suspicion.

@@ -1,0 +1,11 @@
+{"classes": [{
+    "probe_ranges": [{
+        "endLine": 82,
+        "offset": 6,
+        "startLine": 74,
+        "orgLineEnd": 77,
+        "probedLineEnd": 83,
+        "orgLineStart": 75
+    }],
+    "classId": "char_sequence_input_stream_1"
+}]}

@@ -1,0 +1,4 @@
+Fault Localization Results
+NPE at line(bisection_solver_1, 88) / Null Expression - p_f_26[f]
+	 can be caused by 
+p_f_26[f] - line(bisection_solver_1, 88).

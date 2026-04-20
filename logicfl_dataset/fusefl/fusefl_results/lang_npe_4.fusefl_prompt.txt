@@ -1,0 +1,116 @@
+Faulty Code:
+org.apache.commons.lang3.exception.ContextedException:123 `        super(cause);`
+org.apache.commons.lang3.exception.ContextedException:124 `        exceptionContext = new DefaultExceptionContext();`
+org.apache.commons.lang3.exception.ContextedException:125 `    }`
+org.apache.commons.lang3.exception.ContextedException:170 `        exceptionContext.addContextValue(label, value);`
+org.apache.commons.lang3.exception.ContextedException:171 `        return this;`
+org.apache.commons.lang3.exception.DefaultExceptionContext:40 `public class DefaultExceptionContext implements ExceptionContext, Serializable {`
+org.apache.commons.lang3.exception.DefaultExceptionContext:46 `    private final List<Pair<String, Object>> contextValues = new ArrayList<>();`
+org.apache.commons.lang3.exception.DefaultExceptionContext:53 `        contextValues.add(new ImmutablePair<>(label, value));`
+org.apache.commons.lang3.exception.DefaultExceptionContext:54 `        return this;`
+org.apache.commons.lang3.exception.ExceptionUtils:48 `    private static final String[] CAUSE_METHOD_NAMES = {`
+org.apache.commons.lang3.exception.ExceptionUtils:374 `        final StringWriter sw = new StringWriter();`
+org.apache.commons.lang3.exception.ExceptionUtils:375 `        final PrintWriter pw = new PrintWriter(sw, true);`
+org.apache.commons.lang3.exception.ExceptionUtils:376 `        throwable.printStackTrace(pw);`
+org.apache.commons.lang3.tuple.ImmutablePair:47 `    public static final ImmutablePair<?, ?>[] EMPTY_ARRAY = {};`
+org.apache.commons.lang3.tuple.ImmutablePair:54 `    private static final ImmutablePair NULL = new ImmutablePair<>(null, null);`
+org.apache.commons.lang3.tuple.ImmutablePair:180 `    public ImmutablePair(final L left, final R right) {`
+org.apache.commons.lang3.tuple.ImmutablePair:181 `        this.left = left;`
+org.apache.commons.lang3.tuple.ImmutablePair:182 `        this.right = right;`
+org.apache.commons.lang3.tuple.ImmutablePair:183 `    }`
+org.apache.commons.lang3.tuple.Pair:41 `public abstract class Pair<L, R> implements Map.Entry<L, R>, Comparable<Pair<L, R>>, Serializable {`
+org.apache.commons.lang3.tuple.Pair:54 `    public static final Pair<?, ?>[] EMPTY_ARRAY = {};`
+
+
+Task Description:
+The provided code snippets are from the Apache Commons Lang library, specifically dealing with exception handling and utility classes. Here's a brief description of the relevant parts:
+
+1. **ContextedException Class**:
+   - **Line 123**: `super(cause);`
+     - This line calls the constructor of the superclass (likely `Exception` or a subclass) with the provided `cause`.
+   - **Line 124**: `exceptionContext = new DefaultExceptionContext();`
+     - This initializes the `exceptionContext` field with a new instance of `DefaultExceptionContext`.
+   - **Line 170**: `exceptionContext.addContextValue(label, value);`
+     - This adds a context value (a label-value pair) to the `exceptionContext`.
+   - **Line 171**: `return this;`
+     - This returns the current instance of `ContextedException`, allowing for method chaining.
+
+2. **DefaultExceptionContext Class**:
+   - **Line 40**: `public class DefaultExceptionContext implements ExceptionContext, Serializable {`
+     - This declares the `DefaultExceptionContext` class, which implements the `ExceptionContext` interface and is serializable.
+   - **Line 46**: `private final List<Pair<String, Object>> contextValues = new ArrayList<>();`
+     - This initializes a list to hold context values as pairs of strings and objects.
+   - **Line 53**: `contextValues.add(new ImmutablePair<>(label, value));`
+     - This adds a new immutable pair (label-value) to the `contextValues` list.
+   - **Line 54**: `return this;`
+     - This returns the current instance of `DefaultExceptionContext`, allowing for method chaining.
+
+3. **ExceptionUtils Class**:
+   - **Line 48**: `private static final String[] CAUSE_METHOD_NAMES = {`
+     - This declares a static final array of strings, likely containing method names used to identify the cause of an exception.
+   - **Line 374**: `final StringWriter sw = new StringWriter();`
+     - This initializes a `StringWriter` to capture the stack trace as a string.
+   - **Line 375**: `final PrintWriter pw = new PrintWriter(sw, true);`
+     - This initializes a `PrintWriter` with the `StringWriter` to write the stack trace.
+   - **Line 376**: `throwable.printStackTrace(pw);`
+     - This prints the stack trace of the provided throwable to the `PrintWriter`.
+
+4. **ImmutablePair Class**:
+   - **Line 47**: `public static final ImmutablePair<?, ?>[] EMPTY_ARRAY = {};`
+     - This declares an empty array of `ImmutablePair` objects.
+   - **Line 54**: `private static final ImmutablePair NULL = new ImmutablePair<>(null, null);`
+     - This declares a static final `ImmutablePair` with both elements set to `null`.
+   - **Line 180-183**: Constructor for `ImmutablePair`:
+     - This initializes the `left` and `right` fields with the provided values.
+
+5. **Pair Class**:
+   - **Line 41**: `public abstract class Pair<L, R> implements Map.Entry<L, R>, Comparable<Pair<L, R>>, Serializable {`
+     - This declares the abstract `Pair` class, which implements `Map.Entry`, `Comparable`, and `Serializable`.
+   - **Line 54**: `public static final Pair<?, ?>[] EMPTY_ARRAY = {};`
+     - This declares an empty array of `Pair` objects.
+
+**Test Case**:
+- The test case `testNullException` checks the behavior of `ExceptionUtils.getStackTrace(null)`.
+  - It asserts that the result is an empty string when `null` is passed, with the message "Empty response."
+
+The provided code snippets and the test case suggest that the `ExceptionUtils.getStackTrace` method should handle `null` input gracefully by returning an empty string.
+
+Test Results:
+The provided code is throwing NullPointerException. For examples:
+Here are the tests and error messages of NullPointerExceptions.
+@Test public void testNullException(){
+  assertEquals("",ExceptionUtils.getStackTrace(null),"Empty response.");
+}
+
+
+
+  JUnit Jupiter:ContextedExceptionTest:testNullException()
+    MethodSource [className = 'org.apache.commons.lang3.exception.ContextedExceptionTest', methodName = 'testNullException', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.lang.Throwable.printStackTrace(java.io.PrintWriter)" because "throwable" is null
+       org.apache.commons.lang3.exception.ExceptionUtils.getStackTrace(ExceptionUtils.java:376)
+       org.apache.commons.lang3.exception.ContextedExceptionTest.testNullException(ContextedExceptionTest.java:53)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727)
+       org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+       org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+       org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
+       [...]
+
+
+Analyze the provided code and utilize task description, test results, and SBFL techniques results to help in identifying potentially faulty lines. Provide the results following this JSON template:
+```json
+{
+  "faultLoc": [
+    {   
+      "faultyLine": (indicating the location of the suspicious code in ClassName:LineNumber format),
+      "code": (displaying the actual code),
+      "explanation": (step by step reasoning on why this location is considered potentially faulty)
+    },  
+    ... 
+   ]   
+}
+```
+Ensure that the objects in the "faultLoc" array are stored in descending order of suspicion.

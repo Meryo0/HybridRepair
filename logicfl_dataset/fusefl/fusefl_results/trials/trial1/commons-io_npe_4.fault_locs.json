@@ -1,0 +1,14 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.file.PathUtils:881",
+            "code": "final Path fileName = path.getFileName();",
+            "explanation": "The NullPointerException is thrown because the `path` variable is null. The method `getFileName` should handle null values for the `path` parameter to avoid this exception. Adding a null check before calling `path.getFileName()` would prevent the NPE."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.file.PathUtils:881",
+            "code": "final Path fileName = path.getFileName();",
+            "explanation": "The test cases indicate that the method `getFileName` is expected to return null when the `path` is null. However, the current implementation does not handle this case, leading to a NullPointerException. The method should be updated to return null if the `path` is null."
+        }
+    ]
+}

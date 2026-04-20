@@ -1,0 +1,506 @@
+{"npe.traces": [
+    {
+        "test.method": "testPropertyOptionUnexpected",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "processProperties",
+                "line": 402,
+                "class": "org.apache.commons.cli.Parser"
+            },
+            {
+                "is_target": true,
+                "method": "parse",
+                "line": 325,
+                "class": "org.apache.commons.cli.Parser"
+            },
+            {
+                "is_target": true,
+                "method": "parse",
+                "line": 118,
+                "class": "org.apache.commons.cli.Parser"
+            },
+            {
+                "is_target": true,
+                "method": "parse",
+                "line": 882,
+                "class": "org.apache.commons.cli.ParserTestCase"
+            },
+            {
+                "is_target": true,
+                "method": "testPropertyOptionUnexpected",
+                "line": 1033,
+                "class": "org.apache.commons.cli.ParserTestCase"
+            },
+            {
+                "is_target": false,
+                "method": "invoke0",
+                "line": -2,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 77,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 43,
+                "class": "jdk.internal.reflect.DelegatingMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 177,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 142,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.apache.commons.cli.PosixParserTest"
+    },
+    {
+        "test.method": "testPropertyOptionUnexpected",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "processProperties",
+                "line": 402,
+                "class": "org.apache.commons.cli.Parser"
+            },
+            {
+                "is_target": true,
+                "method": "parse",
+                "line": 325,
+                "class": "org.apache.commons.cli.Parser"
+            },
+            {
+                "is_target": true,
+                "method": "parse",
+                "line": 118,
+                "class": "org.apache.commons.cli.Parser"
+            },
+            {
+                "is_target": true,
+                "method": "parse",
+                "line": 882,
+                "class": "org.apache.commons.cli.ParserTestCase"
+            },
+            {
+                "is_target": true,
+                "method": "testPropertyOptionUnexpected",
+                "line": 1033,
+                "class": "org.apache.commons.cli.ParserTestCase"
+            },
+            {
+                "is_target": false,
+                "method": "invoke0",
+                "line": -2,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 77,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 43,
+                "class": "jdk.internal.reflect.DelegatingMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 177,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 142,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.apache.commons.cli.GnuParserTest"
+    },
+    {
+        "test.method": "testPropertyOptionUnexpected",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "processProperties",
+                "line": 402,
+                "class": "org.apache.commons.cli.Parser"
+            },
+            {
+                "is_target": true,
+                "method": "parse",
+                "line": 325,
+                "class": "org.apache.commons.cli.Parser"
+            },
+            {
+                "is_target": true,
+                "method": "parse",
+                "line": 118,
+                "class": "org.apache.commons.cli.Parser"
+            },
+            {
+                "is_target": true,
+                "method": "parse",
+                "line": 882,
+                "class": "org.apache.commons.cli.ParserTestCase"
+            },
+            {
+                "is_target": true,
+                "method": "testPropertyOptionUnexpected",
+                "line": 1033,
+                "class": "org.apache.commons.cli.ParserTestCase"
+            },
+            {
+                "is_target": false,
+                "method": "invoke0",
+                "line": -2,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 77,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 43,
+                "class": "jdk.internal.reflect.DelegatingMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 177,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 142,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.apache.commons.cli.BasicParserTest"
+    },
+    {
+        "test.method": "testPropertyOptionUnexpected",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "handleProperties",
+                "line": 252,
+                "class": "org.apache.commons.cli.DefaultParser"
+            },
+            {
+                "is_target": true,
+                "method": "parse",
+                "line": 174,
+                "class": "org.apache.commons.cli.DefaultParser"
+            },
+            {
+                "is_target": true,
+                "method": "parse",
+                "line": 80,
+                "class": "org.apache.commons.cli.DefaultParser"
+            },
+            {
+                "is_target": true,
+                "method": "parse",
+                "line": 893,
+                "class": "org.apache.commons.cli.ParserTestCase"
+            },
+            {
+                "is_target": true,
+                "method": "testPropertyOptionUnexpected",
+                "line": 1033,
+                "class": "org.apache.commons.cli.ParserTestCase"
+            },
+            {
+                "is_target": false,
+                "method": "invoke0",
+                "line": -2,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 77,
+                "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 43,
+                "class": "jdk.internal.reflect.DelegatingMethodAccessorImpl"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 177,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runBare",
+                "line": 142,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "protect",
+                "line": 122,
+                "class": "junit.framework.TestResult$1"
+            },
+            {
+                "is_target": false,
+                "method": "runProtected",
+                "line": 142,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 125,
+                "class": "junit.framework.TestResult"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 130,
+                "class": "junit.framework.TestCase"
+            },
+            {
+                "is_target": false,
+                "method": "runTest",
+                "line": 241,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 236,
+                "class": "junit.framework.TestSuite"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 90,
+                "class": "org.junit.internal.runners.JUnit38ClassRunner"
+            },
+            {
+                "is_target": false,
+                "method": "run",
+                "line": 137,
+                "class": "org.junit.runner.JUnitCore"
+            },
+            {
+                "is_target": false,
+                "method": "main",
+                "line": 36,
+                "class": "logicfl.coverage.JUnit4TestRunner"
+            }
+        ],
+        "test.class": "org.apache.commons.cli.DefaultParserTest"
+    }
+]}

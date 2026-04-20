@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jsoup.nodes.Node:220",
+            "code": "return parentNode.ownerDocument();",
+            "explanation": "The method `ownerDocument()` is called on `parentNode`, which can be null if the node has been removed from the document. This leads to a NullPointerException when trying to access `outputSettings()` on a null `Document`."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:215",
+            "code": "if (this instanceof Document)",
+            "explanation": "This line checks if the current node is an instance of `Document`. If not, it tries to access the parent node's document. However, if the node has been removed from the document, `parentNode` will be null, leading to a NullPointerException."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:217",
+            "code": "else if (parentNode == null)",
+            "explanation": "This line checks if `parentNode` is null. If it is, the method returns null. However, subsequent code does not handle the case where `ownerDocument()` returns null, leading to a NullPointerException."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:363",
+            "code": "new NodeTraversor(new OuterHtmlVisitor(accum, ownerDocument().outputSettings())).traverse(this);",
+            "explanation": "This line calls `ownerDocument().outputSettings()` without checking if `ownerDocument()` is null. If the node has been removed from the document, `ownerDocument()` will return null, causing a NullPointerException."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Element:1022",
+            "code": "return outerHtml();",
+            "explanation": "The `toString()` method calls `outerHtml()`, which in turn calls `ownerDocument().outputSettings()`. If the element has been removed from the document, `ownerDocument()` will return null, leading to a NullPointerException."
+        }
+    ]
+}

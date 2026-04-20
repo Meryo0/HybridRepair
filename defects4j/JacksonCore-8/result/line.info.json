@@ -1,0 +1,105 @@
+{"classes": [
+    {
+        "probe_ranges": [
+            {
+                "endLine": 75,
+                "offset": 3,
+                "startLine": 72,
+                "orgLineEnd": 72,
+                "probedLineEnd": 75,
+                "orgLineStart": 72
+            },
+            {
+                "endLine": 79,
+                "offset": 6,
+                "startLine": 76,
+                "orgLineEnd": 73,
+                "probedLineEnd": 79,
+                "orgLineStart": 73
+            }
+        ],
+        "classId": "buffer_recycler_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 125,
+                "offset": 3,
+                "startLine": 122,
+                "orgLineEnd": 122,
+                "probedLineEnd": 125,
+                "orgLineStart": 122
+            },
+            {
+                "endLine": 162,
+                "offset": 6,
+                "startLine": 159,
+                "orgLineEnd": 156,
+                "probedLineEnd": 162,
+                "orgLineStart": 156
+            },
+            {
+                "endLine": 173,
+                "offset": 9,
+                "startLine": 170,
+                "orgLineEnd": 167,
+                "probedLineEnd": 176,
+                "orgLineStart": 165
+            },
+            {
+                "endLine": 316,
+                "offset": 15,
+                "startLine": 309,
+                "orgLineEnd": 301,
+                "probedLineEnd": 316,
+                "orgLineStart": 301
+            },
+            {
+                "endLine": 324,
+                "offset": 22,
+                "startLine": 318,
+                "orgLineEnd": 302,
+                "probedLineEnd": 324,
+                "orgLineStart": 302
+            },
+            {
+                "endLine": 330,
+                "offset": 27,
+                "startLine": 326,
+                "orgLineEnd": 305,
+                "probedLineEnd": 332,
+                "orgLineStart": 303
+            },
+            {
+                "endLine": 340,
+                "offset": 33,
+                "startLine": 333,
+                "orgLineEnd": 307,
+                "probedLineEnd": 340,
+                "orgLineStart": 307
+            }
+        ],
+        "classId": "text_buffer_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 84,
+                "offset": 3,
+                "startLine": 81,
+                "orgLineEnd": 81,
+                "probedLineEnd": 84,
+                "orgLineStart": 81
+            },
+            {
+                "endLine": 92,
+                "offset": 9,
+                "startLine": 86,
+                "orgLineEnd": 83,
+                "probedLineEnd": 92,
+                "orgLineStart": 83
+            }
+        ],
+        "classId": "test_text_buffer_1"
+    }
+]}

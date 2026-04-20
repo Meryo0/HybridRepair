@@ -1,0 +1,8 @@
+Fault Localization Results
+NPE at line(type_utils_1, 471) / Null Expression - v_to_type_arg_521[toTypeArg]
+	 can be caused by 
+v_to_type_arg_521[toTypeArg] - line(type_utils_1, 471).
+
+NPE at line(type_utils_1, 471) / Null Expression - v_to_type_arg_521[toTypeArg]
+	 can be caused by 
+type_utils_1_expr69['unrollVariableAssignments(var,toTypeVarAssigns)'] - line(type_utils_1, 464).

@@ -1,0 +1,18 @@
+{
+    "coverage_analyzer": {
+        "exec_time": "00:00:00.511",
+        "exec_time_millis": 511
+    },
+    "fault_localizer": {
+        "exec_time": "00:00:00.100",
+        "exec_time_millis": 100
+    },
+    "dynamic_analyzer": {
+        "exec_time": "00:00:01.249",
+        "exec_time_millis": 1249
+    },
+    "static_analyzer": {
+        "exec_time": "00:00:03.517",
+        "exec_time_millis": 3517
+    }
+}

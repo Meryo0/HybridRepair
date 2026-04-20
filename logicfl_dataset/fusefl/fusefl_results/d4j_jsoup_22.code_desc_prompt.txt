@@ -1,0 +1,89 @@
+Provide a short code description of the following code:
+ org.jsoup.helper.Validate:15 `        if (obj == null)`
+org.jsoup.helper.Validate:17 `    }`
+org.jsoup.helper.Validate:91 `        if (string == null || string.length() == 0)`
+org.jsoup.helper.Validate:93 `    }`
+org.jsoup.nodes.Attributes:17 `public class Attributes implements Iterable<Attribute>, Cloneable {`
+org.jsoup.nodes.Attributes:20 `    private LinkedHashMap<String, Attribute> attributes = null;`
+org.jsoup.nodes.Attributes:191 `    private class Dataset extends AbstractMap<String, String> {`
+org.jsoup.nodes.Element:38 `        super(baseUri, attributes);`
+org.jsoup.nodes.Element:40 `        Validate.notNull(tag);    `
+org.jsoup.nodes.Element:41 `        this.tag = tag;`
+org.jsoup.nodes.Element:42 `    }`
+org.jsoup.nodes.Element:53 `        this(tag, baseUri, new Attributes());`
+org.jsoup.nodes.Element:54 `    }`
+org.jsoup.nodes.Element:142 `        return (Element) parentNode;`
+org.jsoup.nodes.Node:31 `    protected Node(String baseUri, Attributes attributes) {`
+org.jsoup.nodes.Node:32 `        Validate.notNull(baseUri);`
+org.jsoup.nodes.Node:33 `        Validate.notNull(attributes);`
+org.jsoup.nodes.Node:35 `        childNodes = new ArrayList<Node>(4);`
+org.jsoup.nodes.Node:36 `        this.baseUri = baseUri.trim();`
+org.jsoup.nodes.Node:37 `        this.attributes = attributes;`
+org.jsoup.nodes.Node:38 `    }`
+org.jsoup.nodes.Node:445 `        return parent().childNodes();`
+org.jsoup.nodes.Node:487 `        return siblingIndex;`
+org.jsoup.parser.Tag:14 `    private static final Map<String, Tag> tags = new HashMap<String, Tag>(); // map of known tags`
+org.jsoup.parser.Tag:17 `    private boolean isBlock = true; // block or inline`
+org.jsoup.parser.Tag:18 `    private boolean formatAsBlock = true; // should be formatted as a block`
+org.jsoup.parser.Tag:19 `    private boolean canContainBlock = true; // Can this tag hold block level tags?`
+org.jsoup.parser.Tag:20 `    private boolean canContainInline = true; // only pcdata if not`
+org.jsoup.parser.Tag:21 `    private boolean empty = false; // can hold nothing; e.g. img`
+org.jsoup.parser.Tag:22 `    private boolean selfClosing = false; // can self close (<foo />). used for unknown tags that self close, without forcing them as empty.`
+org.jsoup.parser.Tag:23 `    private boolean preserveWhitespace = false; // for pre, textarea, script etc`
+org.jsoup.parser.Tag:25 `    private Tag(String tagName) {`
+org.jsoup.parser.Tag:26 `        this.tagName = tagName.toLowerCase();`
+org.jsoup.parser.Tag:27 `    }`
+org.jsoup.parser.Tag:47 `        Validate.notNull(tagName);`
+org.jsoup.parser.Tag:48 `        tagName = tagName.trim().toLowerCase();`
+org.jsoup.parser.Tag:49 `        Validate.notEmpty(tagName);`
+org.jsoup.parser.Tag:51 `        synchronized (tags) {`
+org.jsoup.parser.Tag:52 `            Tag tag = tags.get(tagName);`
+org.jsoup.parser.Tag:53 `            if (tag == null) {`
+org.jsoup.parser.Tag:59 `            return tag;`
+org.jsoup.parser.Tag:197 `    private static final String[] blockTags = {`
+org.jsoup.parser.Tag:204 `    private static final String[] inlineTags = {`
+org.jsoup.parser.Tag:211 `    private static final String[] emptyTags = {`
+org.jsoup.parser.Tag:215 `    private static final String[] formatAsInlineTags = {`
+org.jsoup.parser.Tag:218 `    private static final String[] preserveWhitespaceTags = {"pre", "plaintext", "title"};`
+org.jsoup.parser.Tag:222 `        for (String tagName : blockTags) {`
+org.jsoup.parser.Tag:223 `            Tag tag = new Tag(tagName);`
+org.jsoup.parser.Tag:224 `            register(tag);`
+org.jsoup.parser.Tag:226 `        for (String tagName : inlineTags) {`
+org.jsoup.parser.Tag:227 `            Tag tag = new Tag(tagName);`
+org.jsoup.parser.Tag:228 `            tag.isBlock = false;`
+org.jsoup.parser.Tag:229 `            tag.canContainBlock = false;`
+org.jsoup.parser.Tag:230 `            tag.formatAsBlock = false;`
+org.jsoup.parser.Tag:231 `            register(tag);`
+org.jsoup.parser.Tag:235 `        for (String tagName : emptyTags) {`
+org.jsoup.parser.Tag:236 `            Tag tag = tags.get(tagName);`
+org.jsoup.parser.Tag:237 `            Validate.notNull(tag);`
+org.jsoup.parser.Tag:238 `            tag.canContainBlock = false;`
+org.jsoup.parser.Tag:239 `            tag.canContainInline = false;`
+org.jsoup.parser.Tag:240 `            tag.empty = true;`
+org.jsoup.parser.Tag:243 `        for (String tagName : formatAsInlineTags) {`
+org.jsoup.parser.Tag:244 `            Tag tag = tags.get(tagName);`
+org.jsoup.parser.Tag:245 `            Validate.notNull(tag);`
+org.jsoup.parser.Tag:246 `            tag.formatAsBlock = false;`
+org.jsoup.parser.Tag:249 `        for (String tagName : preserveWhitespaceTags) {`
+org.jsoup.parser.Tag:250 `            Tag tag = tags.get(tagName);`
+org.jsoup.parser.Tag:251 `            Validate.notNull(tag);`
+org.jsoup.parser.Tag:252 `            tag.preserveWhitespace = true;`
+org.jsoup.parser.Tag:254 `    }`
+org.jsoup.parser.Tag:257 `        synchronized (tags) {`
+org.jsoup.parser.Tag:258 `            tags.put(tag.tagName, tag);`
+org.jsoup.parser.Tag:259 `        }`
+org.jsoup.parser.Tag:260 `        return tag;`
+ 
+The provided code is expected to pass these test cases:
+ @Test public void orphanNodeReturnsNullForSiblingElements(){
+  Node node=new Element(Tag.valueOf("p"),"");
+  Element el=new Element(Tag.valueOf("p"),"");
+  assertEquals(0,node.siblingIndex());
+  assertEquals(0,node.siblingNodes().size());
+  assertNull(node.previousSibling());
+  assertNull(node.nextSibling());
+  assertEquals(0,el.siblingElements().size());
+  assertNull(el.previousElementSibling());
+  assertNull(el.nextElementSibling());
+}
+

@@ -1,0 +1,14 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.lang3.CharSequenceUtils:312",
+            "code": "final int sz = cs.length();",
+            "explanation": "The NullPointerException is thrown because the method attempts to call `length()` on a null `CharSequence`. This line does not handle the case where `cs` is null, leading to the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.CharSequenceUtils:309",
+            "code": "if (cs instanceof String) {",
+            "explanation": "This line checks if `cs` is an instance of `String`, but it does not check if `cs` is null before this check. If `cs` is null, the subsequent code will still attempt to access `cs`, leading to a NullPointerException."
+        }
+    ]
+}

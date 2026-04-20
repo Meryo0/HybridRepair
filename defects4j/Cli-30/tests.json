@@ -1,0 +1,33 @@
+{
+ "buggy.hash": "",
+ "fixed_hash": "324b7f901b91614927926a5bab1d9e0e2325f018",
+ "passed.classes": [],
+ "failed.classes": [
+  "org.apache.commons.cli.PosixParserTest",
+  "org.apache.commons.cli.BasicParserTest",
+  "org.apache.commons.cli.GnuParserTest",
+  "org.apache.commons.cli.DefaultParserTest"
+ ],
+ "failed.tests": [
+  {
+   "class": "org.apache.commons.cli.BasicParserTest",
+   "name": "testPropertyOptionUnexpected",
+   "message": ""
+  },
+  {
+   "class": "org.apache.commons.cli.DefaultParserTest",
+   "name": "testPropertyOptionUnexpected",
+   "message": ""
+  },
+  {
+   "class": "org.apache.commons.cli.GnuParserTest",
+   "name": "testPropertyOptionUnexpected",
+   "message": ""
+  },
+  {
+   "class": "org.apache.commons.cli.PosixParserTest",
+   "name": "testPropertyOptionUnexpected",
+   "message": ""
+  }
+ ]
+}

@@ -1,0 +1,28 @@
+Provide a short code description of the following code:
+ org.apache.commons.lang3.exception.ContextedException:123 `        super(cause);`
+org.apache.commons.lang3.exception.ContextedException:124 `        exceptionContext = new DefaultExceptionContext();`
+org.apache.commons.lang3.exception.ContextedException:125 `    }`
+org.apache.commons.lang3.exception.ContextedException:170 `        exceptionContext.addContextValue(label, value);`
+org.apache.commons.lang3.exception.ContextedException:171 `        return this;`
+org.apache.commons.lang3.exception.DefaultExceptionContext:40 `public class DefaultExceptionContext implements ExceptionContext, Serializable {`
+org.apache.commons.lang3.exception.DefaultExceptionContext:46 `    private final List<Pair<String, Object>> contextValues = new ArrayList<>();`
+org.apache.commons.lang3.exception.DefaultExceptionContext:53 `        contextValues.add(new ImmutablePair<>(label, value));`
+org.apache.commons.lang3.exception.DefaultExceptionContext:54 `        return this;`
+org.apache.commons.lang3.exception.ExceptionUtils:48 `    private static final String[] CAUSE_METHOD_NAMES = {`
+org.apache.commons.lang3.exception.ExceptionUtils:374 `        final StringWriter sw = new StringWriter();`
+org.apache.commons.lang3.exception.ExceptionUtils:375 `        final PrintWriter pw = new PrintWriter(sw, true);`
+org.apache.commons.lang3.exception.ExceptionUtils:376 `        throwable.printStackTrace(pw);`
+org.apache.commons.lang3.tuple.ImmutablePair:47 `    public static final ImmutablePair<?, ?>[] EMPTY_ARRAY = {};`
+org.apache.commons.lang3.tuple.ImmutablePair:54 `    private static final ImmutablePair NULL = new ImmutablePair<>(null, null);`
+org.apache.commons.lang3.tuple.ImmutablePair:180 `    public ImmutablePair(final L left, final R right) {`
+org.apache.commons.lang3.tuple.ImmutablePair:181 `        this.left = left;`
+org.apache.commons.lang3.tuple.ImmutablePair:182 `        this.right = right;`
+org.apache.commons.lang3.tuple.ImmutablePair:183 `    }`
+org.apache.commons.lang3.tuple.Pair:41 `public abstract class Pair<L, R> implements Map.Entry<L, R>, Comparable<Pair<L, R>>, Serializable {`
+org.apache.commons.lang3.tuple.Pair:54 `    public static final Pair<?, ?>[] EMPTY_ARRAY = {};`
+ 
+The provided code is expected to pass these test cases:
+ @Test public void testNullException(){
+  assertEquals("",ExceptionUtils.getStackTrace(null),"Empty response.");
+}
+

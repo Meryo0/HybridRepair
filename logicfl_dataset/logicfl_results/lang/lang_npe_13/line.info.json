@@ -1,0 +1,148 @@
+{"classes": [
+    {
+        "probe_ranges": [
+            {
+                "endLine": 4706,
+                "offset": 12,
+                "startLine": 4695,
+                "orgLineEnd": 4694,
+                "probedLineEnd": 4706,
+                "orgLineStart": 4694
+            },
+            {
+                "endLine": 4729,
+                "offset": 19,
+                "startLine": 4722,
+                "orgLineEnd": 4710,
+                "probedLineEnd": 4729,
+                "orgLineStart": 4710
+            }
+        ],
+        "classId": "string_utils_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 62,
+                "offset": 4,
+                "startLine": 58,
+                "orgLineEnd": 58,
+                "probedLineEnd": 62,
+                "orgLineStart": 58
+            },
+            {
+                "endLine": 76,
+                "offset": 36,
+                "startLine": 66,
+                "orgLineEnd": 69,
+                "probedLineEnd": 105,
+                "orgLineStart": 62
+            },
+            {
+                "endLine": 81,
+                "offset": 18,
+                "startLine": 77,
+                "orgLineEnd": 63,
+                "probedLineEnd": 81,
+                "orgLineStart": 63
+            },
+            {
+                "endLine": 86,
+                "offset": 26,
+                "startLine": 82,
+                "orgLineEnd": 66,
+                "probedLineEnd": 92,
+                "orgLineStart": 64
+            },
+            {
+                "endLine": 91,
+                "offset": 26,
+                "startLine": 87,
+                "orgLineEnd": 65,
+                "probedLineEnd": 91,
+                "orgLineStart": 65
+            },
+            {
+                "endLine": 98,
+                "offset": 35,
+                "startLine": 94,
+                "orgLineEnd": 69,
+                "probedLineEnd": 104,
+                "orgLineStart": 67
+            },
+            {
+                "endLine": 103,
+                "offset": 35,
+                "startLine": 99,
+                "orgLineEnd": 68,
+                "probedLineEnd": 103,
+                "orgLineStart": 68
+            },
+            {
+                "endLine": 117,
+                "offset": 45,
+                "startLine": 108,
+                "orgLineEnd": 72,
+                "probedLineEnd": 117,
+                "orgLineStart": 72
+            },
+            {
+                "endLine": 122,
+                "offset": 48,
+                "startLine": 119,
+                "orgLineEnd": 74,
+                "probedLineEnd": 122,
+                "orgLineStart": 74
+            },
+            {
+                "endLine": 126,
+                "offset": 51,
+                "startLine": 123,
+                "orgLineEnd": 75,
+                "probedLineEnd": 126,
+                "orgLineStart": 75
+            },
+            {
+                "endLine": 130,
+                "offset": 54,
+                "startLine": 127,
+                "orgLineEnd": 76,
+                "probedLineEnd": 130,
+                "orgLineStart": 76
+            },
+            {
+                "endLine": 134,
+                "offset": 57,
+                "startLine": 131,
+                "orgLineEnd": 77,
+                "probedLineEnd": 134,
+                "orgLineStart": 77
+            },
+            {
+                "endLine": 138,
+                "offset": 60,
+                "startLine": 135,
+                "orgLineEnd": 78,
+                "probedLineEnd": 138,
+                "orgLineStart": 78
+            },
+            {
+                "endLine": 1261,
+                "offset": 69,
+                "startLine": 1258,
+                "orgLineEnd": 1192,
+                "probedLineEnd": 1261,
+                "orgLineStart": 1192
+            },
+            {
+                "endLine": 1285,
+                "offset": 72,
+                "startLine": 1282,
+                "orgLineEnd": 1213,
+                "probedLineEnd": 1285,
+                "orgLineStart": 1213
+            }
+        ],
+        "classId": "string_utils_test_1"
+    }
+]}

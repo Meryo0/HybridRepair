@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:448",
+            "code": "final boolean file1Exists = file1.exists();",
+            "explanation": "The NullPointerException occurs because 'file1' is null. The method 'contentEqualsIgnoreEOL' should check if 'file1' and 'file2' are null before attempting to call methods on them. Adding a null check for 'file1' and 'file2' before this line would prevent the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:1122",
+            "code": "if (!directory.exists()) {",
+            "explanation": "This line assumes that 'directory' is not null. If 'directory' is null, a NullPointerException will be thrown. Adding a null check for 'directory' before this line would prevent the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:1126",
+            "code": "if (!isSymlink(directory)) {",
+            "explanation": "Similar to the previous line, this line assumes that 'directory' is not null. If 'directory' is null, a NullPointerException will be thrown. Adding a null check for 'directory' before this line would prevent the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:2682",
+            "code": "if (!directory.exists()) {",
+            "explanation": "This line assumes that 'directory' is not null. If 'directory' is null, a NullPointerException will be thrown. Adding a null check for 'directory' before this line would prevent the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:2687",
+            "code": "if (!directory.isDirectory()) {",
+            "explanation": "Similar to the previous line, this line assumes that 'directory' is not null. If 'directory' is null, a NullPointerException will be thrown. Adding a null check for 'directory' before this line would prevent the exception."
+        }
+    ]
+}

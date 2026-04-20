@@ -1,0 +1,83 @@
+/** 
+ * Another test for bug 2849731.
+ */
+public void testBug2849731_2(){
+  XYIntervalSeriesCollection d=new XYIntervalSeriesCollection();
+  XYIntervalSeries s=new XYIntervalSeries("S1");
+  s.add(1.0,Double.NaN,Double.NaN,Double.NaN,1.5,Double.NaN);
+  d.addSeries(s);
+  Range r=DatasetUtilities.iterateDomainBounds(d);
+  assertEquals(1.0,r.getLowerBound(),EPSILON);
+  assertEquals(1.0,r.getUpperBound(),EPSILON);
+  s.add(1.0,1.5,Double.NaN,Double.NaN,1.5,Double.NaN);
+  r=DatasetUtilities.iterateDomainBounds(d);
+  assertEquals(1.0,r.getLowerBound(),EPSILON);
+  assertEquals(1.5,r.getUpperBound(),EPSILON);
+  s.add(1.0,Double.NaN,0.5,Double.NaN,1.5,Double.NaN);
+  r=DatasetUtilities.iterateDomainBounds(d);
+  assertEquals(0.5,r.getLowerBound(),EPSILON);
+  assertEquals(1.5,r.getUpperBound(),EPSILON);
+}
+
+/** 
+ * Yet another test for bug 2849731.
+ */
+public void testBug2849731_3(){
+  XYIntervalSeriesCollection d=new XYIntervalSeriesCollection();
+  XYIntervalSeries s=new XYIntervalSeries("S1");
+  s.add(1.0,Double.NaN,Double.NaN,1.5,Double.NaN,Double.NaN);
+  d.addSeries(s);
+  Range r=DatasetUtilities.iterateRangeBounds(d);
+  assertEquals(1.5,r.getLowerBound(),EPSILON);
+  assertEquals(1.5,r.getUpperBound(),EPSILON);
+  s.add(1.0,1.5,Double.NaN,Double.NaN,Double.NaN,2.5);
+  r=DatasetUtilities.iterateRangeBounds(d);
+  assertEquals(1.5,r.getLowerBound(),EPSILON);
+  assertEquals(2.5,r.getUpperBound(),EPSILON);
+  s.add(1.0,Double.NaN,0.5,Double.NaN,3.5,Double.NaN);
+  r=DatasetUtilities.iterateRangeBounds(d);
+  assertEquals(1.5,r.getLowerBound(),EPSILON);
+  assertEquals(3.5,r.getUpperBound(),EPSILON);
+}
+
+
+
+testBug2849731_2(org.jfree.data.general.junit.DatasetUtilitiesTests): Cannot invoke "org.jfree.data.Range.getLowerBound()" because "r" is null
+Cannot invoke "org.jfree.data.Range.getLowerBound()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.data.Range.getLowerBound()" because "r" is null
+	at org.jfree.data.general.junit.DatasetUtilitiesTests.testBug2849731_2(DatasetUtilitiesTests.java:1276)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testBug2849731_3(org.jfree.data.general.junit.DatasetUtilitiesTests): Cannot invoke "org.jfree.data.Range.getLowerBound()" because "r" is null
+Cannot invoke "org.jfree.data.Range.getLowerBound()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.data.Range.getLowerBound()" because "r" is null
+	at org.jfree.data.general.junit.DatasetUtilitiesTests.testBug2849731_3(DatasetUtilitiesTests.java:1299)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+
+
+

@@ -1,0 +1,55 @@
+Only in defects4j/Codec-13/fixed/src/main/java/org/apache/commons/codec/binary: CharSequenceUtils.java
+diff -U 5 -r defects4j/Codec-13/buggy/src/main/java/org/apache/commons/codec/binary/StringUtils.java defects4j/Codec-13/fixed/src/main/java/org/apache/commons/codec/binary/StringUtils.java
+--- defects4j/Codec-13/buggy/src/main/java/org/apache/commons/codec/binary/StringUtils.java	2024-04-14 01:04:54.000000000 +0900
++++ defects4j/Codec-13/fixed/src/main/java/org/apache/commons/codec/binary/StringUtils.java	2024-04-14 01:04:57.000000000 +0900
+@@ -65,10 +65,22 @@
+      * @param cs2
+      *            the second CharSequence, may be {@code null}
+      * @return {@code true} if the CharSequences are equal (case-sensitive), or both {@code null}
+      * @since 1.10
+      */
++    public static boolean equals(final CharSequence cs1, final CharSequence cs2) {
++        if (cs1 == cs2) {
++            return true;
++        }
++        if (cs1 == null || cs2 == null) {
++            return false;
++        }
++        if (cs1 instanceof String && cs2 instanceof String) {
++            return cs1.equals(cs2);
++        }
++        return CharSequenceUtils.regionMatches(cs1, false, 0, cs2, 0, Math.max(cs1.length(), cs2.length()));
++    }
+ 
+     /**
+      * Calls {@link String#getBytes(Charset)}
+      *
+      * @param string
+diff -U 5 -r defects4j/Codec-13/buggy/src/main/java/org/apache/commons/codec/language/DoubleMetaphone.java defects4j/Codec-13/fixed/src/main/java/org/apache/commons/codec/language/DoubleMetaphone.java
+--- defects4j/Codec-13/buggy/src/main/java/org/apache/commons/codec/language/DoubleMetaphone.java	2024-04-14 01:04:54.000000000 +0900
++++ defects4j/Codec-13/fixed/src/main/java/org/apache/commons/codec/language/DoubleMetaphone.java	2024-04-14 01:04:57.000000000 +0900
+@@ -17,10 +17,11 @@
+ 
+ package org.apache.commons.codec.language;
+ 
+ import org.apache.commons.codec.EncoderException;
+ import org.apache.commons.codec.StringEncoder;
++import org.apache.commons.codec.binary.StringUtils;
+ 
+ /**
+  * Encodes a string into a double metaphone value. This Implementation is based on the algorithm by <CITE>Lawrence
+  * Philips</CITE>.
+  * <p>
+@@ -239,11 +240,11 @@
+      * @param alternate use the alternate value if {@code true}.
+      * @return {@code true} if the encoded <code>String</code>s are equal;
+      *          {@code false} otherwise.
+      */
+     public boolean isDoubleMetaphoneEqual(final String value1, final String value2, final boolean alternate) {
+-        return doubleMetaphone(value1, alternate).equals(doubleMetaphone(value2, alternate));
++        return StringUtils.equals(doubleMetaphone(value1, alternate), doubleMetaphone(value2, alternate));
+     }
+ 
+     /**
+      * Returns the maxCodeLen.
+      * @return int

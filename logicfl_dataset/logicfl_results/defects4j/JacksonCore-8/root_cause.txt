@@ -1,0 +1,20 @@
+Fault Localization Results
+NPE at line(test_text_buffer_1, 83) / Null Expression - test_text_buffer_1_expr7['tb.getTextBuffer()']
+	 can be caused by 
+f__current_segment_41['_currentSegment'] - line(text_buffer_1, 307).
+
+NPE at line(test_text_buffer_1, 83) / Null Expression - test_text_buffer_1_expr7['tb.getTextBuffer()']
+	 can be caused by 
+f__input_buffer_30['_inputBuffer'] - line(text_buffer_1, 301).
+
+NPE at line(test_text_buffer_1, 83) / Null Expression - test_text_buffer_1_expr7['tb.getTextBuffer()']
+	 can be caused by 
+f__result_array_32['_resultArray'] - line(text_buffer_1, 302).
+
+NPE at line(test_text_buffer_1, 83) / Null Expression - test_text_buffer_1_expr7['tb.getTextBuffer()']
+	 can be caused by 
+text_buffer_1_literal6[null] - line(text_buffer_1, 160).
+
+NPE at line(test_text_buffer_1, 83) / Null Expression - test_text_buffer_1_expr7['tb.getTextBuffer()']
+	 can be caused by 
+text_buffer_1_literal8[null] - line(text_buffer_1, 162).

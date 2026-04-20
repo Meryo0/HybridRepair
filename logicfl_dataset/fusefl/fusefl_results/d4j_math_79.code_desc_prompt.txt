@@ -1,0 +1,56 @@
+Provide a short code description of the following code:
+ org.apache.commons.math.stat.clustering.Cluster:45 `    public Cluster(final T center) {`
+org.apache.commons.math.stat.clustering.Cluster:46 `        this.center = center;`
+org.apache.commons.math.stat.clustering.Cluster:47 `        points = new ArrayList<T>();`
+org.apache.commons.math.stat.clustering.Cluster:48 `    }`
+org.apache.commons.math.stat.clustering.Cluster:71 `        return center;`
+org.apache.commons.math.stat.clustering.EuclideanIntegerPoint:43 `    public EuclideanIntegerPoint(final int[] point) {`
+org.apache.commons.math.stat.clustering.EuclideanIntegerPoint:44 `        this.point = point;`
+org.apache.commons.math.stat.clustering.EuclideanIntegerPoint:45 `    }`
+org.apache.commons.math.stat.clustering.EuclideanIntegerPoint:52 `        return point;`
+org.apache.commons.math.stat.clustering.EuclideanIntegerPoint:57 `        return MathUtils.distance(point, p.getPoint());`
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer:40 `    public KMeansPlusPlusClusterer(final Random random) {`
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer:41 `        this.random = random;`
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer:42 `    }`
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer:56 `        List<Cluster<T>> clusters = chooseInitialCenters(points, k, random);`
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer:57 `        assignPointsToClusters(clusters, points);`
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer:89 `        for (final T p : points) {`
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer:90 `            Cluster<T> cluster = getNearestCluster(clusters, p);`
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer:91 `            cluster.addPoint(p);`
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer:107 `        final List<T> pointSet = new ArrayList<T>(points);`
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer:108 `        final List<Cluster<T>> resultSet = new ArrayList<Cluster<T>>();`
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer:111 `        final T firstPoint = pointSet.remove(random.nextInt(pointSet.size()));`
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer:112 `        resultSet.add(new Cluster<T>(firstPoint));`
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer:114 `        final double[] dx2 = new double[pointSet.size()];`
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer:115 `        while (resultSet.size() < k) {`
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer:139 `        return resultSet;`
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer:153 `        double minDistance = Double.MAX_VALUE;`
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer:154 `        Cluster<T> minCluster = null;`
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer:155 `        for (final Cluster<T> c : clusters) {`
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer:156 `            final double distance = point.distanceFrom(c.getCenter());`
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer:157 `            if (distance < minDistance) {`
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer:161 `        }`
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer:162 `        return minCluster;`
+org.apache.commons.math.util.MathUtils:69 `    private static final long[] FACTORIALS = new long[] {`
+org.apache.commons.math.util.MathUtils:1624 `      int sum = 0;`
+org.apache.commons.math.util.MathUtils:1625 `      for (int i = 0; i < p1.length; i++) {`
+org.apache.commons.math.util.MathUtils:1626 `          final int dp = p1[i] - p2[i];`
+org.apache.commons.math.util.MathUtils:1627 `          sum += dp * dp;`
+org.apache.commons.math.util.MathUtils:1629 `      return Math.sqrt(sum);`
+ 
+The provided code is expected to pass these test cases:
+ /** 
+ * JIRA: MATH-305 Two points, one cluster, one iteration
+ */
+@Test public void testPerformClusterAnalysisDegenerate(){
+  KMeansPlusPlusClusterer<EuclideanIntegerPoint> transformer=new KMeansPlusPlusClusterer<EuclideanIntegerPoint>(new Random(1746432956321l));
+  EuclideanIntegerPoint[] points=new EuclideanIntegerPoint[]{new EuclideanIntegerPoint(new int[]{1959,325100}),new EuclideanIntegerPoint(new int[]{1960,373200})};
+  List<Cluster<EuclideanIntegerPoint>> clusters=transformer.cluster(Arrays.asList(points),1,1);
+  assertEquals(1,clusters.size());
+  assertEquals(2,(clusters.get(0).getPoints().size()));
+  EuclideanIntegerPoint pt1=new EuclideanIntegerPoint(new int[]{1959,325100});
+  EuclideanIntegerPoint pt2=new EuclideanIntegerPoint(new int[]{1960,373200});
+  assertTrue(clusters.get(0).getPoints().contains(pt1));
+  assertTrue(clusters.get(0).getPoints().contains(pt2));
+}
+

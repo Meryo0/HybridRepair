@@ -1,0 +1,33 @@
+Provide a short code description of the following code:
+ org.apache.commons.codec.language.DoubleMetaphone:47 `    private static final String[] SILENT_START =`
+org.apache.commons.codec.language.DoubleMetaphone:49 `    private static final String[] L_R_N_M_B_H_F_V_W_SPACE =`
+org.apache.commons.codec.language.DoubleMetaphone:51 `    private static final String[] ES_EP_EB_EL_EY_IB_IL_IN_IE_EI_ER =`
+org.apache.commons.codec.language.DoubleMetaphone:53 `    private static final String[] L_T_K_S_N_M_B_Z =`
+org.apache.commons.codec.language.DoubleMetaphone:59 `    private int maxCodeLen = 4;`
+org.apache.commons.codec.language.DoubleMetaphone:65 `        super();`
+org.apache.commons.codec.language.DoubleMetaphone:66 `    }`
+org.apache.commons.codec.language.DoubleMetaphone:86 `        value = cleanInput(value);`
+org.apache.commons.codec.language.DoubleMetaphone:87 `        if (value == null) {`
+org.apache.commons.codec.language.DoubleMetaphone:88 `            return null;`
+org.apache.commons.codec.language.DoubleMetaphone:244 `        return doubleMetaphone(value1, alternate).equals(doubleMetaphone(value2, alternate));`
+org.apache.commons.codec.language.DoubleMetaphone:888 `        if (input == null) {`
+org.apache.commons.codec.language.DoubleMetaphone:891 `        input = input.trim();`
+org.apache.commons.codec.language.DoubleMetaphone:892 `        if (input.length() == 0) {`
+org.apache.commons.codec.language.DoubleMetaphone:893 `            return null;`
+ 
+The provided code is expected to pass these test cases:
+ @Test public void testIsDoubleMetaphoneEqualBasic(){
+  final String[][] testFixture=new String[][]{{"",""},{"Case","case"},{"CASE","Case"},{"caSe","cAsE"},{"cookie","quick"},{"quick","cookie"},{"Brian","Bryan"},{"Auto","Otto"},{"Steven","Stefan"},{"Philipowitz","Filipowicz"}};
+  doubleMetaphoneEqualTest(testFixture,false);
+  doubleMetaphoneEqualTest(testFixture,true);
+}
+
+@Test public void testCodec184() throws Throwable {
+  assertTrue(new DoubleMetaphone().isDoubleMetaphoneEqual("","",false));
+  assertTrue(new DoubleMetaphone().isDoubleMetaphoneEqual("","",true));
+  assertFalse(new DoubleMetaphone().isDoubleMetaphoneEqual("aa","",false));
+  assertFalse(new DoubleMetaphone().isDoubleMetaphoneEqual("aa","",true));
+  assertFalse(new DoubleMetaphone().isDoubleMetaphoneEqual("","aa",false));
+  assertFalse(new DoubleMetaphone().isDoubleMetaphoneEqual("","aa",true));
+}
+

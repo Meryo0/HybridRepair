@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jsoup.safety.Cleaner:73",
+            "code": "List<Node> sourceChildren = source.childNodes();",
+            "explanation": "The error message indicates a NullPointerException at this line, suggesting that 'source' is null. This implies that the 'source' element passed to the 'copySafeNodes' method is not properly initialized or is null."
+        },
+        {
+            "faultyLine": "org.jsoup.safety.Cleaner:43",
+            "code": "copySafeNodes(dirtyDocument.body(), clean.body());",
+            "explanation": "The 'dirtyDocument.body()' might be returning null, which is then passed to 'copySafeNodes'. This would cause a NullPointerException when 'source.childNodes()' is called. Ensuring 'dirtyDocument.body()' is not null before passing it to 'copySafeNodes' could prevent this issue."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Document:59",
+            "code": "return findFirstElementByTagName(\"body\", this);",
+            "explanation": "If 'findFirstElementByTagName' does not find a 'body' element, it might return null. This null value could then propagate and cause the NullPointerException in 'Cleaner'. Ensuring a 'body' element exists or handling the null case could resolve this."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Document:43",
+            "code": "return doc;",
+            "explanation": "If 'createShell' does not properly initialize the 'body' element, the returned 'doc' might have a null body. This would cause issues when 'dirtyDocument.body()' is called. Ensuring 'createShell' always initializes a 'body' element could prevent this."
+        },
+        {
+            "faultyLine": "org.jsoup.parser.Parser:117",
+            "code": "Document doc = Document.createShell(baseUri);",
+            "explanation": "If 'createShell' does not properly initialize the 'body' element, the 'doc' might have a null body. This would cause issues when 'dirtyDocument.body()' is called. Ensuring 'createShell' always initializes a 'body' element could prevent this."
+        }
+    ]
+}

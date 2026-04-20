@@ -1,0 +1,45 @@
+/** 
+ * Test method for 'StringUtils.replaceEach(String, String[], String[])'
+ */
+public void testReplace_StringStringArrayStringArray(){
+  assertNull(StringUtils.replaceEach(null,new String[]{"a"},new String[]{"b"}));
+  assertEquals(StringUtils.replaceEach("",new String[]{"a"},new String[]{"b"}),"");
+  assertEquals(StringUtils.replaceEach("aba",null,null),"aba");
+  assertEquals(StringUtils.replaceEach("aba",new String[0],null),"aba");
+  assertEquals(StringUtils.replaceEach("aba",null,new String[0]),"aba");
+  assertEquals(StringUtils.replaceEach("aba",new String[]{"a"},null),"aba");
+  assertEquals(StringUtils.replaceEach("aba",new String[]{"a"},new String[]{""}),"b");
+  assertEquals(StringUtils.replaceEach("aba",new String[]{null},new String[]{"a"}),"aba");
+  assertEquals(StringUtils.replaceEach("abcde",new String[]{"ab","d"},new String[]{"w","t"}),"wcte");
+  assertEquals(StringUtils.replaceEach("abcde",new String[]{"ab","d"},new String[]{"d","t"}),"dcte");
+  assertEquals("bcc",StringUtils.replaceEach("abc",new String[]{"a","b"},new String[]{"b","c"}));
+  assertEquals("q651.506bera",StringUtils.replaceEach("d216.102oren",new String[]{"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","1","2","3","4","5","6","7","8","9"},new String[]{"n","o","p","q","r","s","t","u","v","w","x","y","z","a","b","c","d","e","f","g","h","i","j","k","l","m","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","A","B","C","D","E","F","G","H","I","J","K","L","M","5","6","7","8","9","1","2","3","4"}));
+  assertEquals(StringUtils.replaceEach("aba",new String[]{"a"},new String[]{null}),"aba");
+  assertEquals(StringUtils.replaceEach("aba",new String[]{"a","b"},new String[]{"c",null}),"cbc");
+}
+
+
+
+testReplace_StringStringArrayStringArray(org.apache.commons.lang3.StringUtilsTest): Cannot invoke "String.length()" because "replacementList[i]" is null
+Cannot invoke "String.length()" because "replacementList[i]" is null
+java.lang.NullPointerException: Cannot invoke "String.length()" because "replacementList[i]" is null
+	at org.apache.commons.lang3.StringUtils.replaceEach(StringUtils.java:3676)
+	at org.apache.commons.lang3.StringUtils.replaceEach(StringUtils.java:3502)
+	at org.apache.commons.lang3.StringUtilsTest.testReplace_StringStringArrayStringArray(StringUtilsTest.java:1039)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+
+
+

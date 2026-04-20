@@ -1,0 +1,1005 @@
+Provide a short code description of the following code:
+ org.jsoup.Jsoup:58 `        return Parser.parse(html, "");`
+org.jsoup.Jsoup:148 `        return Parser.parseBodyFragment(bodyHtml, baseUri);`
+org.jsoup.Jsoup:195 `        Document dirty = parseBodyFragment(bodyHtml, baseUri);`
+org.jsoup.Jsoup:196 `        Cleaner cleaner = new Cleaner(whitelist);`
+org.jsoup.Jsoup:197 `        Document clean = cleaner.clean(dirty);`
+org.jsoup.Jsoup:198 `        return clean.body().html();`
+org.jsoup.Jsoup:212 `        return clean(bodyHtml, "", whitelist);`
+org.jsoup.helper.DescendableLinkedList:16 `        super();`
+org.jsoup.helper.DescendableLinkedList:17 `    }`
+org.jsoup.helper.DescendableLinkedList:24 `        addFirst(e);`
+org.jsoup.helper.DescendableLinkedList:25 `    }`
+org.jsoup.helper.DescendableLinkedList:32 `        return size() == 0 ? null : getLast();`
+org.jsoup.helper.DescendableLinkedList:40 `        return size() == 0 ? null : removeLast();`
+org.jsoup.helper.DescendableLinkedList:48 `        return new DescendingIterator<E>(size());`
+org.jsoup.helper.DescendableLinkedList:55 `        private DescendingIterator(int index) {`
+org.jsoup.helper.DescendableLinkedList:56 `            iter = (ListIterator<E>) listIterator(index);`
+org.jsoup.helper.DescendableLinkedList:57 `        }`
+org.jsoup.helper.DescendableLinkedList:64 `            return iter.hasPrevious();`
+org.jsoup.helper.DescendableLinkedList:72 `            return iter.previous();`
+org.jsoup.helper.DescendableLinkedList:79 `            iter.remove();`
+org.jsoup.helper.DescendableLinkedList:80 `        }`
+org.jsoup.helper.StringUtil:11 `    private static final String[] padding = {"", " ", "  ", "   ", "    ", "     ", "      ", "       ", "        ", "         ", "          "};`
+org.jsoup.helper.StringUtil:134 `        for (String hay : haystack) {`
+org.jsoup.helper.StringUtil:135 `            if (hay.equals(needle))`
+org.jsoup.helper.StringUtil:136 `            return true;`
+org.jsoup.helper.StringUtil:138 `        return false;`
+org.jsoup.helper.Validate:15 `        if (obj == null)`
+org.jsoup.helper.Validate:17 `    }`
+org.jsoup.helper.Validate:25 `        if (obj == null)`
+org.jsoup.helper.Validate:27 `    }`
+org.jsoup.helper.Validate:34 `        if (!val)`
+org.jsoup.helper.Validate:36 `    }`
+org.jsoup.helper.Validate:44 `        if (!val)`
+org.jsoup.helper.Validate:46 `    }`
+org.jsoup.helper.Validate:53 `        if (val)`
+org.jsoup.helper.Validate:55 `    }`
+org.jsoup.helper.Validate:63 `        if (val)`
+org.jsoup.helper.Validate:65 `    }`
+org.jsoup.helper.Validate:91 `        if (string == null || string.length() == 0)`
+org.jsoup.helper.Validate:93 `    }`
+org.jsoup.nodes.Attribute:21 `    public Attribute(String key, String value) {`
+org.jsoup.nodes.Attribute:22 `        Validate.notEmpty(key);`
+org.jsoup.nodes.Attribute:23 `        Validate.notNull(value);`
+org.jsoup.nodes.Attribute:24 `        this.key = key.trim().toLowerCase();`
+org.jsoup.nodes.Attribute:25 `        this.value = value;`
+org.jsoup.nodes.Attribute:26 `    }`
+org.jsoup.nodes.Attribute:33 `        return key;`
+org.jsoup.nodes.Attributes:17 `public class Attributes implements Iterable<Attribute>, Cloneable {`
+org.jsoup.nodes.Attributes:20 `    private LinkedHashMap<String, Attribute> attributes = null;`
+org.jsoup.nodes.Attributes:55 `        Validate.notNull(attribute);`
+org.jsoup.nodes.Attributes:56 `        if (attributes == null)`
+org.jsoup.nodes.Attributes:57 `             attributes = new LinkedHashMap<String, Attribute>(2);`
+org.jsoup.nodes.Attributes:58 `        attributes.put(attribute.getKey(), attribute);`
+org.jsoup.nodes.Attributes:59 `    }`
+org.jsoup.nodes.Attributes:104 `        return asList().iterator();`
+org.jsoup.nodes.Attributes:113 `        if (attributes == null)`
+org.jsoup.nodes.Attributes:114 `            return Collections.emptyList();`
+org.jsoup.nodes.Attributes:191 `    private class Dataset extends AbstractMap<String, String> {`
+org.jsoup.nodes.Document:17 `    private OutputSettings outputSettings = new OutputSettings();`
+org.jsoup.nodes.Document:18 `    private QuirksMode quirksMode = QuirksMode.noQuirks;`
+org.jsoup.nodes.Document:27 `        super(Tag.valueOf("#root"), baseUri);`
+org.jsoup.nodes.Document:28 `    }`
+org.jsoup.nodes.Document:36 `        Validate.notNull(baseUri);`
+org.jsoup.nodes.Document:38 `        Document doc = new Document(baseUri);`
+org.jsoup.nodes.Document:39 `        Element html = doc.appendElement("html");`
+org.jsoup.nodes.Document:40 `        html.appendElement("head");`
+org.jsoup.nodes.Document:41 `        html.appendElement("body");`
+org.jsoup.nodes.Document:43 `        return doc;`
+org.jsoup.nodes.Document:59 `        return findFirstElementByTagName("body", this);`
+org.jsoup.nodes.Document:164 `        if (node.nodeName().equals(tag))`
+org.jsoup.nodes.Document:165 `            return (Element) node;`
+org.jsoup.nodes.Document:167 `            for (Node child: node.childNodes) {`
+org.jsoup.nodes.Document:168 `                Element found = findFirstElementByTagName(tag, child);`
+org.jsoup.nodes.Document:169 `                if (found != null)`
+org.jsoup.nodes.Document:170 `                    return found;`
+org.jsoup.nodes.Document:171 `            }`
+org.jsoup.nodes.Document:173 `        return null;`
+org.jsoup.nodes.Document:194 `        return "#document";`
+org.jsoup.nodes.Document:208 `        private Entities.EscapeMode escapeMode = Entities.EscapeMode.base;`
+org.jsoup.nodes.Document:209 `        private Charset charset = Charset.forName("UTF-8");`
+org.jsoup.nodes.Document:210 `        private CharsetEncoder charsetEncoder = charset.newEncoder();`
+org.jsoup.nodes.Document:211 `        private boolean prettyPrint = true;`
+org.jsoup.nodes.Document:212 `        private int indentAmount = 1;`
+org.jsoup.nodes.Document:214 `        public OutputSettings() {}`
+org.jsoup.nodes.Document:348 `    public enum QuirksMode {`
+org.jsoup.nodes.Document:349 `        noQuirks, quirks, limitedQuirks;`
+org.jsoup.nodes.Document:353 `        return quirksMode;`
+org.jsoup.nodes.Document:357 `        this.quirksMode = quirksMode;`
+org.jsoup.nodes.Document:358 `        return this;`
+org.jsoup.nodes.Element:38 `        super(baseUri, attributes);`
+org.jsoup.nodes.Element:40 `        Validate.notNull(tag);    `
+org.jsoup.nodes.Element:41 `        this.tag = tag;`
+org.jsoup.nodes.Element:42 `    }`
+org.jsoup.nodes.Element:53 `        this(tag, baseUri, new Attributes());`
+org.jsoup.nodes.Element:54 `    }`
+org.jsoup.nodes.Element:58 `        return tag.getName();`
+org.jsoup.nodes.Element:67 `        return tag.getName();`
+org.jsoup.nodes.Element:265 `        Validate.notNull(child);`
+org.jsoup.nodes.Element:267 `        addChildren(child);`
+org.jsoup.nodes.Element:268 `        return this;`
+org.jsoup.nodes.Element:292 `        Element child = new Element(Tag.valueOf(tagName), baseUri());`
+org.jsoup.nodes.Element:293 `        appendChild(child);`
+org.jsoup.nodes.Element:294 `        return child;`
+org.jsoup.nodes.Element:1074 `        StringBuilder accum = new StringBuilder();`
+org.jsoup.nodes.Element:1075 `        html(accum); `
+org.jsoup.nodes.Element:1076 `        return accum.toString().trim();`
+org.jsoup.nodes.Element:1080 `        for (Node node : childNodes)`
+org.jsoup.nodes.Element:1082 `    }`
+org.jsoup.nodes.Entities:16 `    public enum EscapeMode {`
+org.jsoup.nodes.Entities:18 `        xhtml(xhtmlByVal),`
+org.jsoup.nodes.Entities:20 `        base(baseByVal),`
+org.jsoup.nodes.Entities:22 `        extended(fullByVal);`
+org.jsoup.nodes.Entities:26 `        EscapeMode(Map<Character, String> map) {`
+org.jsoup.nodes.Entities:27 `            this.map = map;`
+org.jsoup.nodes.Entities:28 `        }`
+org.jsoup.nodes.Entities:39 `    private static final Pattern unescapePattern = Pattern.compile("&(#(x|X)?([0-9a-fA-F]+)|[a-zA-Z]+\\d*);?");`
+org.jsoup.nodes.Entities:40 `    private static final Pattern strictUnescapePattern = Pattern.compile("&(#(x|X)?([0-9a-fA-F]+)|[a-zA-Z]+\\d*);");`
+org.jsoup.nodes.Entities:129 `    private static final Object[][] xhtmlArray = {`
+org.jsoup.nodes.Entities:138 `        xhtmlByVal = new HashMap<Character, String>();`
+org.jsoup.nodes.Entities:139 `        baseByVal = toCharacterKey(loadEntities("entities-base.properties")); // most common / default`
+org.jsoup.nodes.Entities:140 `        full = loadEntities("entities-full.properties"); // extended and overblown.`
+org.jsoup.nodes.Entities:141 `        fullByVal = toCharacterKey(full);`
+org.jsoup.nodes.Entities:143 `        for (Object[] entity : xhtmlArray) {`
+org.jsoup.nodes.Entities:144 `            Character c = Character.valueOf((char) ((Integer) entity[1]).intValue());`
+org.jsoup.nodes.Entities:145 `            xhtmlByVal.put(c, ((String) entity[0]));`
+org.jsoup.nodes.Entities:147 `    }`
+org.jsoup.nodes.Entities:150 `        Properties properties = new Properties();`
+org.jsoup.nodes.Entities:151 `        Map<String, Character> entities = new HashMap<String, Character>();`
+org.jsoup.nodes.Entities:153 `            InputStream in = Entities.class.getResourceAsStream(filename);`
+org.jsoup.nodes.Entities:154 `            properties.load(in);`
+org.jsoup.nodes.Entities:155 `            in.close();`
+org.jsoup.nodes.Entities:158 `        }`
+org.jsoup.nodes.Entities:160 `        for (Map.Entry entry: properties.entrySet()) {`
+org.jsoup.nodes.Entities:161 `            Character val = Character.valueOf((char) Integer.parseInt((String) entry.getValue(), 16));`
+org.jsoup.nodes.Entities:162 `            String name = (String) entry.getKey();`
+org.jsoup.nodes.Entities:163 `            entities.put(name, val);`
+org.jsoup.nodes.Entities:164 `        }`
+org.jsoup.nodes.Entities:165 `        return entities;`
+org.jsoup.nodes.Entities:169 `        Map<Character, String> outMap = new HashMap<Character, String>();`
+org.jsoup.nodes.Entities:170 `        for (Map.Entry<String, Character> entry: inMap.entrySet()) {`
+org.jsoup.nodes.Entities:171 `            Character character = entry.getValue();`
+org.jsoup.nodes.Entities:172 `            String name = entry.getKey();`
+org.jsoup.nodes.Entities:174 `            if (outMap.containsKey(character)) {`
+org.jsoup.nodes.Entities:176 `                if (name.toLowerCase().equals(name))`
+org.jsoup.nodes.Entities:177 `                    outMap.put(character, name);`
+org.jsoup.nodes.Entities:179 `                outMap.put(character, name);`
+org.jsoup.nodes.Entities:181 `        }`
+org.jsoup.nodes.Entities:182 `        return outMap;`
+org.jsoup.nodes.Node:31 `    protected Node(String baseUri, Attributes attributes) {`
+org.jsoup.nodes.Node:32 `        Validate.notNull(baseUri);`
+org.jsoup.nodes.Node:33 `        Validate.notNull(attributes);`
+org.jsoup.nodes.Node:35 `        childNodes = new ArrayList<Node>(4);`
+org.jsoup.nodes.Node:36 `        this.baseUri = baseUri.trim();`
+org.jsoup.nodes.Node:37 `        this.attributes = attributes;`
+org.jsoup.nodes.Node:38 `    }`
+org.jsoup.nodes.Node:131 `        return baseUri;`
+org.jsoup.nodes.Node:215 `        return childNodes;`
+org.jsoup.nodes.Node:235 `        if (this instanceof Document)`
+org.jsoup.nodes.Node:236 `            return (Document) this;`
+org.jsoup.nodes.Node:237 `        else if (parentNode == null)`
+org.jsoup.nodes.Node:240 `            return parentNode.ownerDocument();`
+org.jsoup.nodes.Node:383 `        if (this.parentNode != null)`
+org.jsoup.nodes.Node:385 `        this.parentNode = parentNode;`
+org.jsoup.nodes.Node:386 `    }`
+org.jsoup.nodes.Node:402 `        Validate.isTrue(out.parentNode == this);`
+org.jsoup.nodes.Node:403 `        int index = out.siblingIndex();`
+org.jsoup.nodes.Node:404 `        childNodes.remove(index);`
+org.jsoup.nodes.Node:405 `        reindexChildren();`
+org.jsoup.nodes.Node:406 `        out.parentNode = null;`
+org.jsoup.nodes.Node:407 `    }`
+org.jsoup.nodes.Node:411 `        for (Node child: children) {`
+org.jsoup.nodes.Node:412 `            reparentChild(child);`
+org.jsoup.nodes.Node:413 `            childNodes.add(child);`
+org.jsoup.nodes.Node:414 `            child.setSiblingIndex(childNodes.size()-1);`
+org.jsoup.nodes.Node:416 `    }`
+org.jsoup.nodes.Node:429 `        if (child.parentNode != null)`
+org.jsoup.nodes.Node:430 `            child.parentNode.removeChild(child);`
+org.jsoup.nodes.Node:431 `        child.setParentNode(this);`
+org.jsoup.nodes.Node:432 `    }`
+org.jsoup.nodes.Node:435 `        for (int i = 0; i < childNodes.size(); i++) {`
+org.jsoup.nodes.Node:436 `            childNodes.get(i).setSiblingIndex(i);`
+org.jsoup.nodes.Node:438 `    }`
+org.jsoup.nodes.Node:498 `        return siblingIndex;`
+org.jsoup.nodes.Node:502 `        this.siblingIndex = siblingIndex;`
+org.jsoup.nodes.Node:503 `    }`
+org.jsoup.parser.CharacterReader:15 `    private int pos = 0;`
+org.jsoup.parser.CharacterReader:16 `    private int mark = 0;`
+org.jsoup.parser.CharacterReader:18 `    CharacterReader(String input) {`
+org.jsoup.parser.CharacterReader:19 `        Validate.notNull(input);`
+org.jsoup.parser.CharacterReader:20 `        this.input = input.toCharArray();`
+org.jsoup.parser.CharacterReader:21 `        this.length = this.input.length;`
+org.jsoup.parser.CharacterReader:22 `    }`
+org.jsoup.parser.CharacterReader:29 `        return pos >= length;`
+org.jsoup.parser.CharacterReader:33 `        return isEmpty() ? EOF : input[pos];`
+org.jsoup.parser.CharacterReader:37 `        char val = isEmpty() ? EOF : input[pos];`
+org.jsoup.parser.CharacterReader:38 `        pos++;`
+org.jsoup.parser.CharacterReader:39 `        return val;`
+org.jsoup.parser.CharacterReader:43 `        pos--;`
+org.jsoup.parser.CharacterReader:44 `    }`
+org.jsoup.parser.CharacterReader:47 `        pos++;`
+org.jsoup.parser.CharacterReader:48 `    }`
+org.jsoup.parser.CharacterReader:123 `        int start = pos;`
+org.jsoup.parser.CharacterReader:125 `        OUTER: while (pos < length) {`
+org.jsoup.parser.CharacterReader:126 `            for (int i = 0; i < chars.length; i++) {`
+org.jsoup.parser.CharacterReader:127 `                if (input[pos] == chars[i])`
+org.jsoup.parser.CharacterReader:128 `                    break OUTER;`
+org.jsoup.parser.CharacterReader:130 `            pos++;`
+org.jsoup.parser.CharacterReader:133 `        return pos > start ? new String(input, start, pos-start) : "";`
+org.jsoup.parser.CharacterReader:143 `        int start = pos;`
+org.jsoup.parser.CharacterReader:144 `        while (pos < length) {`
+org.jsoup.parser.CharacterReader:145 `            char c = input[pos];`
+org.jsoup.parser.CharacterReader:146 `            if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))`
+org.jsoup.parser.CharacterReader:147 `                pos++;`
+org.jsoup.parser.CharacterReader:150 `        }`
+org.jsoup.parser.CharacterReader:152 `        return new String(input, start, pos - start);`
+org.jsoup.parser.CharacterReader:242 `        if (isEmpty())`
+org.jsoup.parser.CharacterReader:244 `        char c = input[pos];`
+org.jsoup.parser.CharacterReader:245 `        return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');`
+org.jsoup.parser.HtmlTreeBuilder:16 `class HtmlTreeBuilder extends TreeBuilder {`
+org.jsoup.parser.HtmlTreeBuilder:21 `    private boolean baseUriSetFromDoc = false;`
+org.jsoup.parser.HtmlTreeBuilder:25 `    private DescendableLinkedList<Element> formattingElements = new DescendableLinkedList<Element>(); // active (open) formatting elements`
+org.jsoup.parser.HtmlTreeBuilder:26 `    private List<Token.Character> pendingTableCharacters = new ArrayList<Token.Character>(); // chars in table to be shifted out`
+org.jsoup.parser.HtmlTreeBuilder:28 `    private boolean framesetOk = true; // if ok to go into frameset`
+org.jsoup.parser.HtmlTreeBuilder:29 `    private boolean fosterInserts = false; // if next inserts should be fostered`
+org.jsoup.parser.HtmlTreeBuilder:30 `    private boolean fragmentParsing = false; // if parsing a fragment of html`
+org.jsoup.parser.HtmlTreeBuilder:32 `    HtmlTreeBuilder() {}`
+org.jsoup.parser.HtmlTreeBuilder:36 `        state = HtmlTreeBuilderState.Initial;`
+org.jsoup.parser.HtmlTreeBuilder:37 `        return super.parse(input, baseUri, errors);`
+org.jsoup.parser.HtmlTreeBuilder:42 `        state = HtmlTreeBuilderState.Initial;`
+org.jsoup.parser.HtmlTreeBuilder:43 `        initialiseParse(inputFragment, baseUri, errors);`
+org.jsoup.parser.HtmlTreeBuilder:44 `        contextElement = context;`
+org.jsoup.parser.HtmlTreeBuilder:45 `        fragmentParsing = true;`
+org.jsoup.parser.HtmlTreeBuilder:46 `        Element root = null;`
+org.jsoup.parser.HtmlTreeBuilder:48 `        if (context != null) {`
+org.jsoup.parser.HtmlTreeBuilder:49 `            if (context.ownerDocument() != null) // quirks setup:`
+org.jsoup.parser.HtmlTreeBuilder:50 `                doc.quirksMode(context.ownerDocument().quirksMode());`
+org.jsoup.parser.HtmlTreeBuilder:53 `            String contextTag = context.tagName();`
+org.jsoup.parser.HtmlTreeBuilder:54 `            if (StringUtil.in(contextTag, "title", "textarea"))`
+org.jsoup.parser.HtmlTreeBuilder:56 `            else if (StringUtil.in(contextTag, "iframe", "noembed", "noframes", "style", "xmp"))`
+org.jsoup.parser.HtmlTreeBuilder:58 `            else if (contextTag.equals("script"))`
+org.jsoup.parser.HtmlTreeBuilder:60 `            else if (contextTag.equals(("noscript")))`
+org.jsoup.parser.HtmlTreeBuilder:62 `            else if (contextTag.equals("plaintext"))`
+org.jsoup.parser.HtmlTreeBuilder:65 `                tokeniser.transition(TokeniserState.Data); // default`
+org.jsoup.parser.HtmlTreeBuilder:67 `            root = new Element(Tag.valueOf("html"), baseUri);`
+org.jsoup.parser.HtmlTreeBuilder:68 `            doc.appendChild(root);`
+org.jsoup.parser.HtmlTreeBuilder:69 `            stack.push(root);`
+org.jsoup.parser.HtmlTreeBuilder:70 `            resetInsertionMode();`
+org.jsoup.parser.HtmlTreeBuilder:74 `        runParser();`
+org.jsoup.parser.HtmlTreeBuilder:75 `        if (context != null)`
+org.jsoup.parser.HtmlTreeBuilder:76 `            return root.childNodes();`
+org.jsoup.parser.HtmlTreeBuilder:83 `        currentToken = token;`
+org.jsoup.parser.HtmlTreeBuilder:84 `        return this.state.process(token, this);`
+org.jsoup.parser.HtmlTreeBuilder:88 `        currentToken = token;`
+org.jsoup.parser.HtmlTreeBuilder:89 `        return state.process(token, this);`
+org.jsoup.parser.HtmlTreeBuilder:93 `        this.state = state;`
+org.jsoup.parser.HtmlTreeBuilder:94 `    }`
+org.jsoup.parser.HtmlTreeBuilder:101 `        originalState = state;`
+org.jsoup.parser.HtmlTreeBuilder:102 `    }`
+org.jsoup.parser.HtmlTreeBuilder:105 `        return originalState;`
+org.jsoup.parser.HtmlTreeBuilder:137 `        return fragmentParsing;`
+org.jsoup.parser.HtmlTreeBuilder:141 `        if (errors.canAddError())`
+org.jsoup.parser.HtmlTreeBuilder:143 `    }`
+org.jsoup.parser.HtmlTreeBuilder:148 `        if (startTag.isSelfClosing() && !Tag.isKnownTag(startTag.name())) {`
+org.jsoup.parser.HtmlTreeBuilder:154 `        Element el = new Element(Tag.valueOf(startTag.name()), baseUri, startTag.attributes);`
+org.jsoup.parser.HtmlTreeBuilder:155 `        insert(el);`
+org.jsoup.parser.HtmlTreeBuilder:156 `        return el;`
+org.jsoup.parser.HtmlTreeBuilder:166 `        insertNode(el);`
+org.jsoup.parser.HtmlTreeBuilder:167 `        stack.add(el);`
+org.jsoup.parser.HtmlTreeBuilder:168 `    }`
+org.jsoup.parser.HtmlTreeBuilder:171 `        Tag tag = Tag.valueOf(startTag.name());`
+org.jsoup.parser.HtmlTreeBuilder:172 `        Element el = new Element(tag, baseUri, startTag.attributes);`
+org.jsoup.parser.HtmlTreeBuilder:173 `        insertNode(el);`
+org.jsoup.parser.HtmlTreeBuilder:174 `        if (startTag.isSelfClosing()) {`
+org.jsoup.parser.HtmlTreeBuilder:175 `            tokeniser.acknowledgeSelfClosingFlag();`
+org.jsoup.parser.HtmlTreeBuilder:176 `            if (!tag.isKnownTag()) // unknown tag, remember this is self closing for output`
+org.jsoup.parser.HtmlTreeBuilder:179 `        return el;`
+org.jsoup.parser.HtmlTreeBuilder:199 `        if (stack.size() == 0)`
+org.jsoup.parser.HtmlTreeBuilder:200 `            doc.appendChild(node);`
+org.jsoup.parser.HtmlTreeBuilder:201 `        else if (isFosterInserts())`
+org.jsoup.parser.HtmlTreeBuilder:204 `            currentElement().appendChild(node);`
+org.jsoup.parser.HtmlTreeBuilder:205 `    }`
+org.jsoup.parser.HtmlTreeBuilder:209 `        if (stack.peekLast().nodeName().equals("td") && !state.name().equals("InCell"))`
+org.jsoup.parser.HtmlTreeBuilder:211 `        if (stack.peekLast().nodeName().equals("html"))`
+org.jsoup.parser.HtmlTreeBuilder:213 `        return stack.pollLast();`
+org.jsoup.parser.HtmlTreeBuilder:221 `        return stack;`
+org.jsoup.parser.HtmlTreeBuilder:263 `        Iterator<Element> it = stack.descendingIterator();`
+org.jsoup.parser.HtmlTreeBuilder:264 `        while (it.hasNext()) {`
+org.jsoup.parser.HtmlTreeBuilder:265 `            Element next = it.next();`
+org.jsoup.parser.HtmlTreeBuilder:266 `            if (next.nodeName().equals(elName)) {`
+org.jsoup.parser.HtmlTreeBuilder:267 `                it.remove();`
+org.jsoup.parser.HtmlTreeBuilder:268 `                break;`
+org.jsoup.parser.HtmlTreeBuilder:273 `    }`
+org.jsoup.parser.HtmlTreeBuilder:353 `        boolean last = false;`
+org.jsoup.parser.HtmlTreeBuilder:354 `        Iterator<Element> it = stack.descendingIterator();`
+org.jsoup.parser.HtmlTreeBuilder:355 `        while (it.hasNext()) {`
+org.jsoup.parser.HtmlTreeBuilder:356 `            Element node = it.next();`
+org.jsoup.parser.HtmlTreeBuilder:357 `            if (!it.hasNext()) {`
+org.jsoup.parser.HtmlTreeBuilder:358 `                last = true;`
+org.jsoup.parser.HtmlTreeBuilder:359 `                node = contextElement;`
+org.jsoup.parser.HtmlTreeBuilder:361 `            String name = node.nodeName();`
+org.jsoup.parser.HtmlTreeBuilder:362 `            if ("select".equals(name)) {`
+org.jsoup.parser.HtmlTreeBuilder:365 `            } else if (("td".equals(name) || "td".equals(name) && !last)) {`
+org.jsoup.parser.HtmlTreeBuilder:368 `            } else if ("tr".equals(name)) {`
+org.jsoup.parser.HtmlTreeBuilder:371 `            } else if ("tbody".equals(name) || "thead".equals(name) || "tfoot".equals(name)) {`
+org.jsoup.parser.HtmlTreeBuilder:374 `            } else if ("caption".equals(name)) {`
+org.jsoup.parser.HtmlTreeBuilder:377 `            } else if ("colgroup".equals(name)) {`
+org.jsoup.parser.HtmlTreeBuilder:380 `            } else if ("table".equals(name)) {`
+org.jsoup.parser.HtmlTreeBuilder:383 `            } else if ("head".equals(name)) {`
+org.jsoup.parser.HtmlTreeBuilder:386 `            } else if ("body".equals(name)) {`
+org.jsoup.parser.HtmlTreeBuilder:387 `                transition(HtmlTreeBuilderState.InBody);`
+org.jsoup.parser.HtmlTreeBuilder:388 `                break;`
+org.jsoup.parser.HtmlTreeBuilder:400 `    }`
+org.jsoup.parser.HtmlTreeBuilder:404 `        return inSpecificScope(new String[]{targetName}, baseTypes, extraTypes);`
+org.jsoup.parser.HtmlTreeBuilder:408 `        Iterator<Element> it = stack.descendingIterator();`
+org.jsoup.parser.HtmlTreeBuilder:409 `        while (it.hasNext()) {`
+org.jsoup.parser.HtmlTreeBuilder:410 `            Element el = it.next();`
+org.jsoup.parser.HtmlTreeBuilder:411 `            String elName = el.nodeName();`
+org.jsoup.parser.HtmlTreeBuilder:412 `            if (StringUtil.in(elName, targetNames))`
+org.jsoup.parser.HtmlTreeBuilder:414 `            if (StringUtil.in(elName, baseTypes))`
+org.jsoup.parser.HtmlTreeBuilder:415 `                return false;`
+org.jsoup.parser.HtmlTreeBuilder:428 `        return inScope(targetName, null);`
+org.jsoup.parser.HtmlTreeBuilder:432 `        return inSpecificScope(targetName, new String[]{"applet", "caption", "html", "table", "td", "th", "marquee", "object"}, extras);`
+org.jsoup.parser.HtmlTreeBuilder:464 `        this.headElement = headElement;`
+org.jsoup.parser.HtmlTreeBuilder:465 `    }`
+org.jsoup.parser.HtmlTreeBuilder:472 `        return fosterInserts;`
+org.jsoup.parser.HtmlTreeBuilder:509 `        while ((excludeTag != null && !currentElement().nodeName().equals(excludeTag)) &&`
+org.jsoup.parser.HtmlTreeBuilder:512 `    }`
+org.jsoup.parser.HtmlTreeBuilder:521 `        String name = el.nodeName();`
+org.jsoup.parser.HtmlTreeBuilder:522 `        return StringUtil.in(name, "address", "applet", "area", "article", "aside", "base", "basefont", "bgsound",`
+org.jsoup.parser.HtmlTreeBuilder:561 `        int size = formattingElements.size();`
+org.jsoup.parser.HtmlTreeBuilder:562 `        if (size == 0 || formattingElements.getLast() == null || onStack(formattingElements.getLast()))`
+org.jsoup.parser.HtmlTreeBuilder:563 `            return;`
+org.jsoup.parser.HtmlTreeBuilderState:13 `enum HtmlTreeBuilderState {`
+org.jsoup.parser.HtmlTreeBuilderState:14 `    Initial {`
+org.jsoup.parser.HtmlTreeBuilderState:16 `            if (isWhitespace(t)) {`
+org.jsoup.parser.HtmlTreeBuilderState:18 `            } else if (t.isComment()) {`
+org.jsoup.parser.HtmlTreeBuilderState:20 `            } else if (t.isDoctype()) {`
+org.jsoup.parser.HtmlTreeBuilderState:31 `                tb.transition(BeforeHtml);`
+org.jsoup.parser.HtmlTreeBuilderState:32 `                return tb.process(t); // re-process token`
+org.jsoup.parser.HtmlTreeBuilderState:37 `    BeforeHtml {`
+org.jsoup.parser.HtmlTreeBuilderState:39 `            if (t.isDoctype()) {`
+org.jsoup.parser.HtmlTreeBuilderState:42 `            } else if (t.isComment()) {`
+org.jsoup.parser.HtmlTreeBuilderState:44 `            } else if (isWhitespace(t)) {`
+org.jsoup.parser.HtmlTreeBuilderState:46 `            } else if (t.isStartTag() && t.asStartTag().name().equals("html")) {`
+org.jsoup.parser.HtmlTreeBuilderState:47 `                tb.insert(t.asStartTag());`
+org.jsoup.parser.HtmlTreeBuilderState:48 `                tb.transition(BeforeHead);`
+org.jsoup.parser.HtmlTreeBuilderState:57 `            return true;`
+org.jsoup.parser.HtmlTreeBuilderState:66 `    BeforeHead {`
+org.jsoup.parser.HtmlTreeBuilderState:68 `            if (isWhitespace(t)) {`
+org.jsoup.parser.HtmlTreeBuilderState:70 `            } else if (t.isComment()) {`
+org.jsoup.parser.HtmlTreeBuilderState:72 `            } else if (t.isDoctype()) {`
+org.jsoup.parser.HtmlTreeBuilderState:75 `            } else if (t.isStartTag() && t.asStartTag().name().equals("html")) {`
+org.jsoup.parser.HtmlTreeBuilderState:77 `            } else if (t.isStartTag() && t.asStartTag().name().equals("head")) {`
+org.jsoup.parser.HtmlTreeBuilderState:78 `                Element head = tb.insert(t.asStartTag());`
+org.jsoup.parser.HtmlTreeBuilderState:79 `                tb.setHeadElement(head);`
+org.jsoup.parser.HtmlTreeBuilderState:80 `                tb.transition(InHead);`
+org.jsoup.parser.HtmlTreeBuilderState:81 `            } else if (t.isEndTag() && (StringUtil.in(t.asEndTag().name(), "head", "body", "html", "br"))) {`
+org.jsoup.parser.HtmlTreeBuilderState:91 `            return true;`
+org.jsoup.parser.HtmlTreeBuilderState:94 `    InHead {`
+org.jsoup.parser.HtmlTreeBuilderState:96 `            if (isWhitespace(t)) {`
+org.jsoup.parser.HtmlTreeBuilderState:100 `            switch (t.type) {`
+org.jsoup.parser.HtmlTreeBuilderState:108 `                    Token.StartTag start = t.asStartTag();`
+org.jsoup.parser.HtmlTreeBuilderState:109 `                    String name = start.name();`
+org.jsoup.parser.HtmlTreeBuilderState:110 `                    if (name.equals("html")) {`
+org.jsoup.parser.HtmlTreeBuilderState:112 `                    } else if (StringUtil.in(name, "base", "basefont", "bgsound", "command", "link")) {`
+org.jsoup.parser.HtmlTreeBuilderState:117 `                    } else if (name.equals("meta")) {`
+org.jsoup.parser.HtmlTreeBuilderState:120 `                    } else if (name.equals("title")) {`
+org.jsoup.parser.HtmlTreeBuilderState:122 `                    } else if (StringUtil.in(name, "noframes", "style")) {`
+org.jsoup.parser.HtmlTreeBuilderState:124 `                    } else if (name.equals("noscript")) {`
+org.jsoup.parser.HtmlTreeBuilderState:126 `                        tb.insert(start);`
+org.jsoup.parser.HtmlTreeBuilderState:127 `                        tb.transition(InHeadNoscript);`
+org.jsoup.parser.HtmlTreeBuilderState:128 `                    } else if (name.equals("script")) {`
+org.jsoup.parser.HtmlTreeBuilderState:130 `                        tb.insert(start);`
+org.jsoup.parser.HtmlTreeBuilderState:131 `                        tb.tokeniser.transition(TokeniserState.ScriptData);`
+org.jsoup.parser.HtmlTreeBuilderState:132 `                        tb.markInsertionMode();`
+org.jsoup.parser.HtmlTreeBuilderState:133 `                        tb.transition(Text);`
+org.jsoup.parser.HtmlTreeBuilderState:142 `                    Token.EndTag end = t.asEndTag();`
+org.jsoup.parser.HtmlTreeBuilderState:143 `                    name = end.name();`
+org.jsoup.parser.HtmlTreeBuilderState:144 `                    if (name.equals("head")) {`
+org.jsoup.parser.HtmlTreeBuilderState:145 `                        tb.pop();`
+org.jsoup.parser.HtmlTreeBuilderState:146 `                        tb.transition(AfterHead);`
+org.jsoup.parser.HtmlTreeBuilderState:157 `            return true;`
+org.jsoup.parser.HtmlTreeBuilderState:165 `    InHeadNoscript {`
+org.jsoup.parser.HtmlTreeBuilderState:167 `            if (t.isDoctype()) {`
+org.jsoup.parser.HtmlTreeBuilderState:169 `            } else if (t.isStartTag() && t.asStartTag().name().equals("html")) {`
+org.jsoup.parser.HtmlTreeBuilderState:171 `            } else if (t.isEndTag() && t.asEndTag().name().equals("noscript")) {`
+org.jsoup.parser.HtmlTreeBuilderState:172 `                tb.pop();`
+org.jsoup.parser.HtmlTreeBuilderState:173 `                tb.transition(InHead);`
+org.jsoup.parser.HtmlTreeBuilderState:185 `            return true;`
+org.jsoup.parser.HtmlTreeBuilderState:194 `    AfterHead {`
+org.jsoup.parser.HtmlTreeBuilderState:196 `            if (isWhitespace(t)) {`
+org.jsoup.parser.HtmlTreeBuilderState:198 `            } else if (t.isComment()) {`
+org.jsoup.parser.HtmlTreeBuilderState:200 `            } else if (t.isDoctype()) {`
+org.jsoup.parser.HtmlTreeBuilderState:202 `            } else if (t.isStartTag()) {`
+org.jsoup.parser.HtmlTreeBuilderState:203 `                Token.StartTag startTag = t.asStartTag();`
+org.jsoup.parser.HtmlTreeBuilderState:204 `                String name = startTag.name();`
+org.jsoup.parser.HtmlTreeBuilderState:205 `                if (name.equals("html")) {`
+org.jsoup.parser.HtmlTreeBuilderState:207 `                } else if (name.equals("body")) {`
+org.jsoup.parser.HtmlTreeBuilderState:211 `                } else if (name.equals("frameset")) {`
+org.jsoup.parser.HtmlTreeBuilderState:212 `                    tb.insert(startTag);`
+org.jsoup.parser.HtmlTreeBuilderState:213 `                    tb.transition(InFrameset);`
+org.jsoup.parser.HtmlTreeBuilderState:226 `            } else if (t.isEndTag()) {`
+org.jsoup.parser.HtmlTreeBuilderState:236 `            return true;`
+org.jsoup.parser.HtmlTreeBuilderState:245 `    InBody {`
+org.jsoup.parser.HtmlTreeBuilderState:247 `            switch (t.type) {`
+org.jsoup.parser.HtmlTreeBuilderState:273 `                    Token.StartTag startTag = t.asStartTag();`
+org.jsoup.parser.HtmlTreeBuilderState:274 `                    String name = startTag.name();`
+org.jsoup.parser.HtmlTreeBuilderState:275 `                    if (name.equals("html")) {`
+org.jsoup.parser.HtmlTreeBuilderState:276 `                        tb.error(this);`
+org.jsoup.parser.HtmlTreeBuilderState:278 `                        Element html = tb.getStack().getFirst();`
+org.jsoup.parser.HtmlTreeBuilderState:279 `                        for (Attribute attribute : startTag.getAttributes()) {`
+org.jsoup.parser.HtmlTreeBuilderState:283 `                    } else if (StringUtil.in(name, "base", "basefont", "bgsound", "command", "link", "meta", "noframes", "script", "style", "title")) {`
+org.jsoup.parser.HtmlTreeBuilderState:284 `                        return tb.process(t, InHead);`
+org.jsoup.parser.HtmlTreeBuilderState:285 `                    } else if (name.equals("body")) {`
+org.jsoup.parser.HtmlTreeBuilderState:299 `                    } else if (name.equals("frameset")) {`
+org.jsoup.parser.HtmlTreeBuilderState:300 `                        tb.error(this);`
+org.jsoup.parser.HtmlTreeBuilderState:301 `                        LinkedList<Element> stack = tb.getStack();`
+org.jsoup.parser.HtmlTreeBuilderState:302 `                        if (stack.size() == 1 || (stack.size() > 2 && !stack.get(1).nodeName().equals("body"))) {`
+org.jsoup.parser.HtmlTreeBuilderState:304 `                            return false; // ignore`
+org.jsoup.parser.HtmlTreeBuilderState:317 `                    } else if (StringUtil.in(name,`
+org.jsoup.parser.HtmlTreeBuilderState:325 `                    } else if (StringUtil.in(name, "h1", "h2", "h3", "h4", "h5", "h6")) {`
+org.jsoup.parser.HtmlTreeBuilderState:334 `                    } else if (StringUtil.in(name, "pre", "listing")) {`
+org.jsoup.parser.HtmlTreeBuilderState:341 `                    } else if (name.equals("form")) {`
+org.jsoup.parser.HtmlTreeBuilderState:351 `                    } else if (name.equals("li")) {`
+org.jsoup.parser.HtmlTreeBuilderState:367 `                    } else if (StringUtil.in(name, "dd", "dt")) {`
+org.jsoup.parser.HtmlTreeBuilderState:383 `                    } else if (name.equals("plaintext")) {`
+org.jsoup.parser.HtmlTreeBuilderState:389 `                    } else if (name.equals("button")) {`
+org.jsoup.parser.HtmlTreeBuilderState:400 `                    } else if (name.equals("a")) {`
+org.jsoup.parser.HtmlTreeBuilderState:415 `                    } else if (StringUtil.in(name,`
+org.jsoup.parser.HtmlTreeBuilderState:420 `                    } else if (name.equals("nobr")) {`
+org.jsoup.parser.HtmlTreeBuilderState:429 `                    } else if (StringUtil.in(name, "applet", "marquee", "object")) {`
+org.jsoup.parser.HtmlTreeBuilderState:434 `                    } else if (name.equals("table")) {`
+org.jsoup.parser.HtmlTreeBuilderState:441 `                    } else if (StringUtil.in(name, "area", "br", "embed", "img", "keygen", "wbr")) {`
+org.jsoup.parser.HtmlTreeBuilderState:445 `                    } else if (name.equals("input")) {`
+org.jsoup.parser.HtmlTreeBuilderState:450 `                    } else if (StringUtil.in(name, "param", "source", "track")) {`
+org.jsoup.parser.HtmlTreeBuilderState:452 `                    } else if (name.equals("hr")) {`
+org.jsoup.parser.HtmlTreeBuilderState:458 `                    } else if (name.equals("image")) {`
+org.jsoup.parser.HtmlTreeBuilderState:462 `                    } else if (name.equals("isindex")) {`
+org.jsoup.parser.HtmlTreeBuilderState:494 `                    } else if (name.equals("textarea")) {`
+org.jsoup.parser.HtmlTreeBuilderState:501 `                    } else if (name.equals("xmp")) {`
+org.jsoup.parser.HtmlTreeBuilderState:508 `                    } else if (name.equals("iframe")) {`
+org.jsoup.parser.HtmlTreeBuilderState:511 `                    } else if (name.equals("noembed")) {`
+org.jsoup.parser.HtmlTreeBuilderState:514 `                    } else if (name.equals("select")) {`
+org.jsoup.parser.HtmlTreeBuilderState:524 `                    } else if (StringUtil.in("optgroup", "option")) {`
+org.jsoup.parser.HtmlTreeBuilderState:529 `                    } else if (StringUtil.in("rp", "rt")) {`
+org.jsoup.parser.HtmlTreeBuilderState:538 `                    } else if (name.equals("math")) {`
+org.jsoup.parser.HtmlTreeBuilderState:543 `                    } else if (name.equals("svg")) {`
+org.jsoup.parser.HtmlTreeBuilderState:548 `                    } else if (StringUtil.in(name,`
+org.jsoup.parser.HtmlTreeBuilderState:550 `                        tb.error(this);`
+org.jsoup.parser.HtmlTreeBuilderState:551 `                        return false;`
+org.jsoup.parser.HtmlTreeBuilderState:553 `                        tb.reconstructFormattingElements();`
+org.jsoup.parser.HtmlTreeBuilderState:554 `                        tb.insert(startTag);`
+org.jsoup.parser.HtmlTreeBuilderState:556 `                    break;`
+org.jsoup.parser.HtmlTreeBuilderState:559 `                    Token.EndTag endTag = t.asEndTag();`
+org.jsoup.parser.HtmlTreeBuilderState:560 `                    name = endTag.name();`
+org.jsoup.parser.HtmlTreeBuilderState:561 `                    if (name.equals("body")) {`
+org.jsoup.parser.HtmlTreeBuilderState:562 `                        if (!tb.inScope("body")) {`
+org.jsoup.parser.HtmlTreeBuilderState:563 `                            tb.error(this);`
+org.jsoup.parser.HtmlTreeBuilderState:564 `                            return false;`
+org.jsoup.parser.HtmlTreeBuilderState:569 `                    } else if (name.equals("html")) {`
+org.jsoup.parser.HtmlTreeBuilderState:570 `                        boolean notIgnored = tb.process(new Token.EndTag("body"));`
+org.jsoup.parser.HtmlTreeBuilderState:571 `                        if (notIgnored)`
+org.jsoup.parser.HtmlTreeBuilderState:573 `                    } else if (StringUtil.in(name,`
+org.jsoup.parser.HtmlTreeBuilderState:588 `                    } else if (name.equals("form")) {`
+org.jsoup.parser.HtmlTreeBuilderState:601 `                    } else if (name.equals("p")) {`
+org.jsoup.parser.HtmlTreeBuilderState:612 `                    } else if (name.equals("li")) {`
+org.jsoup.parser.HtmlTreeBuilderState:622 `                    } else if (StringUtil.in(name, "dd", "dt")) {`
+org.jsoup.parser.HtmlTreeBuilderState:632 `                    } else if (StringUtil.in(name, "h1", "h2", "h3", "h4", "h5", "h6")) {`
+org.jsoup.parser.HtmlTreeBuilderState:642 `                    } else if (name.equals("sarcasm")) {`
+org.jsoup.parser.HtmlTreeBuilderState:645 `                    } else if (StringUtil.in(name,`
+org.jsoup.parser.HtmlTreeBuilderState:734 `                    } else if (StringUtil.in(name, "applet", "marquee", "object")) {`
+org.jsoup.parser.HtmlTreeBuilderState:746 `                    } else if (name.equals("br")) {`
+org.jsoup.parser.HtmlTreeBuilderState:751 `                        return anyOtherEndTag(t, tb);`
+org.jsoup.parser.HtmlTreeBuilderState:760 `            return true;`
+org.jsoup.parser.HtmlTreeBuilderState:764 `            String name = t.asEndTag().name();`
+org.jsoup.parser.HtmlTreeBuilderState:765 `            DescendableLinkedList<Element> stack = tb.getStack();`
+org.jsoup.parser.HtmlTreeBuilderState:766 `            Iterator<Element> it = stack.descendingIterator();`
+org.jsoup.parser.HtmlTreeBuilderState:767 `            while (it.hasNext()) {`
+org.jsoup.parser.HtmlTreeBuilderState:768 `                Element node = it.next();`
+org.jsoup.parser.HtmlTreeBuilderState:769 `                if (node.nodeName().equals(name)) {`
+org.jsoup.parser.HtmlTreeBuilderState:770 `                    tb.generateImpliedEndTags(name);`
+org.jsoup.parser.HtmlTreeBuilderState:771 `                    if (!name.equals(tb.currentElement().nodeName()))`
+org.jsoup.parser.HtmlTreeBuilderState:773 `                    tb.popStackToClose(name);`
+org.jsoup.parser.HtmlTreeBuilderState:774 `                    break;`
+org.jsoup.parser.HtmlTreeBuilderState:776 `                    if (tb.isSpecial(node)) {`
+org.jsoup.parser.HtmlTreeBuilderState:777 `                        tb.error(this);`
+org.jsoup.parser.HtmlTreeBuilderState:778 `                        return false;`
+org.jsoup.parser.HtmlTreeBuilderState:782 `            return true;`
+org.jsoup.parser.HtmlTreeBuilderState:785 `    Text {`
+org.jsoup.parser.HtmlTreeBuilderState:788 `            if (t.isCharacter()) {`
+org.jsoup.parser.HtmlTreeBuilderState:790 `            } else if (t.isEOF()) {`
+org.jsoup.parser.HtmlTreeBuilderState:796 `            } else if (t.isEndTag()) {`
+org.jsoup.parser.HtmlTreeBuilderState:798 `                tb.pop();`
+org.jsoup.parser.HtmlTreeBuilderState:799 `                tb.transition(tb.originalState());`
+org.jsoup.parser.HtmlTreeBuilderState:801 `            return true;`
+org.jsoup.parser.HtmlTreeBuilderState:804 `    InTable {`
+org.jsoup.parser.HtmlTreeBuilderState:903 `    InTableText {`
+org.jsoup.parser.HtmlTreeBuilderState:939 `    InCaption {`
+org.jsoup.parser.HtmlTreeBuilderState:974 `    InColumnGroup {`
+org.jsoup.parser.HtmlTreeBuilderState:1029 `    InTableBody {`
+org.jsoup.parser.HtmlTreeBuilderState:1089 `    InRow {`
+org.jsoup.parser.HtmlTreeBuilderState:1150 `    InCell {`
+org.jsoup.parser.HtmlTreeBuilderState:1207 `    InSelect {`
+org.jsoup.parser.HtmlTreeBuilderState:1295 `    InSelectInTable {`
+org.jsoup.parser.HtmlTreeBuilderState:1313 `    AfterBody {`
+org.jsoup.parser.HtmlTreeBuilderState:1341 `    InFrameset {`
+org.jsoup.parser.HtmlTreeBuilderState:1343 `            if (isWhitespace(t)) {`
+org.jsoup.parser.HtmlTreeBuilderState:1345 `            } else if (t.isComment()) {`
+org.jsoup.parser.HtmlTreeBuilderState:1347 `            } else if (t.isDoctype()) {`
+org.jsoup.parser.HtmlTreeBuilderState:1350 `            } else if (t.isStartTag()) {`
+org.jsoup.parser.HtmlTreeBuilderState:1351 `                Token.StartTag start = t.asStartTag();`
+org.jsoup.parser.HtmlTreeBuilderState:1352 `                String name = start.name();`
+org.jsoup.parser.HtmlTreeBuilderState:1353 `                if (name.equals("html")) {`
+org.jsoup.parser.HtmlTreeBuilderState:1355 `                } else if (name.equals("frameset")) {`
+org.jsoup.parser.HtmlTreeBuilderState:1357 `                } else if (name.equals("frame")) {`
+org.jsoup.parser.HtmlTreeBuilderState:1358 `                    tb.insertEmpty(start);`
+org.jsoup.parser.HtmlTreeBuilderState:1365 `            } else if (t.isEndTag() && t.asEndTag().name().equals("frameset")) {`
+org.jsoup.parser.HtmlTreeBuilderState:1366 `                if (tb.currentElement().nodeName().equals("html")) { // frag`
+org.jsoup.parser.HtmlTreeBuilderState:1370 `                    tb.pop();`
+org.jsoup.parser.HtmlTreeBuilderState:1371 `                    if (!tb.isFragmentParsing() && !tb.currentElement().nodeName().equals("frameset")) {`
+org.jsoup.parser.HtmlTreeBuilderState:1372 `                        tb.transition(AfterFrameset);`
+org.jsoup.parser.HtmlTreeBuilderState:1384 `            return true;`
+org.jsoup.parser.HtmlTreeBuilderState:1387 `    AfterFrameset {`
+org.jsoup.parser.HtmlTreeBuilderState:1389 `            if (isWhitespace(t)) {`
+org.jsoup.parser.HtmlTreeBuilderState:1391 `            } else if (t.isComment()) {`
+org.jsoup.parser.HtmlTreeBuilderState:1393 `            } else if (t.isDoctype()) {`
+org.jsoup.parser.HtmlTreeBuilderState:1396 `            } else if (t.isStartTag() && t.asStartTag().name().equals("html")) {`
+org.jsoup.parser.HtmlTreeBuilderState:1398 `            } else if (t.isEndTag() && t.asEndTag().name().equals("html")) {`
+org.jsoup.parser.HtmlTreeBuilderState:1399 `                tb.transition(AfterAfterFrameset);`
+org.jsoup.parser.HtmlTreeBuilderState:1408 `            return true;`
+org.jsoup.parser.HtmlTreeBuilderState:1411 `    AfterAfterBody {`
+org.jsoup.parser.HtmlTreeBuilderState:1427 `    AfterAfterFrameset {`
+org.jsoup.parser.HtmlTreeBuilderState:1429 `            if (t.isComment()) {`
+org.jsoup.parser.HtmlTreeBuilderState:1431 `            } else if (t.isDoctype() || isWhitespace(t) || (t.isStartTag() && t.asStartTag().name().equals("html"))) {`
+org.jsoup.parser.HtmlTreeBuilderState:1433 `            } else if (t.isEOF()) {`
+org.jsoup.parser.HtmlTreeBuilderState:1441 `            return true;`
+org.jsoup.parser.HtmlTreeBuilderState:1444 `    ForeignContent {`
+org.jsoup.parser.HtmlTreeBuilderState:1451 `    private static String nullString = String.valueOf('\u0000');`
+org.jsoup.parser.HtmlTreeBuilderState:1456 `        if (t.isCharacter()) {`
+org.jsoup.parser.HtmlTreeBuilderState:1466 `        return false;`
+org.jsoup.parser.ParseErrorList:15 `        super(initialCapacity);`
+org.jsoup.parser.ParseErrorList:16 `        this.maxSize = maxSize;`
+org.jsoup.parser.ParseErrorList:17 `    }`
+org.jsoup.parser.ParseErrorList:20 `        return size() < maxSize;`
+org.jsoup.parser.ParseErrorList:28 `        return new ParseErrorList(0, 0);`
+org.jsoup.parser.Parser:89 `        TreeBuilder treeBuilder = new HtmlTreeBuilder();`
+org.jsoup.parser.Parser:90 `        return treeBuilder.parse(html, baseUri, ParseErrorList.noTracking());`
+org.jsoup.parser.Parser:104 `        HtmlTreeBuilder treeBuilder = new HtmlTreeBuilder();`
+org.jsoup.parser.Parser:105 `        return treeBuilder.parseFragment(fragmentHtml, context, baseUri, ParseErrorList.noTracking());`
+org.jsoup.parser.Parser:117 `        Document doc = Document.createShell(baseUri);`
+org.jsoup.parser.Parser:118 `        Element body = doc.body();`
+org.jsoup.parser.Parser:119 `        List<Node> nodeList = parseFragment(bodyHtml, body, baseUri);`
+org.jsoup.parser.Parser:120 `        Node[] nodes = nodeList.toArray(new Node[nodeList.size()]); // the node list gets modified when re-parented`
+org.jsoup.parser.Parser:121 `        for (Node node : nodes) {`
+org.jsoup.parser.Parser:122 `            body.appendChild(node);`
+org.jsoup.parser.Parser:124 `        return doc;`
+org.jsoup.parser.Tag:14 `    private static final Map<String, Tag> tags = new HashMap<String, Tag>(); // map of known tags`
+org.jsoup.parser.Tag:17 `    private boolean isBlock = true; // block or inline`
+org.jsoup.parser.Tag:18 `    private boolean formatAsBlock = true; // should be formatted as a block`
+org.jsoup.parser.Tag:19 `    private boolean canContainBlock = true; // Can this tag hold block level tags?`
+org.jsoup.parser.Tag:20 `    private boolean canContainInline = true; // only pcdata if not`
+org.jsoup.parser.Tag:21 `    private boolean empty = false; // can hold nothing; e.g. img`
+org.jsoup.parser.Tag:22 `    private boolean selfClosing = false; // can self close (<foo />). used for unknown tags that self close, without forcing them as empty.`
+org.jsoup.parser.Tag:23 `    private boolean preserveWhitespace = false; // for pre, textarea, script etc`
+org.jsoup.parser.Tag:25 `    private Tag(String tagName) {`
+org.jsoup.parser.Tag:26 `        this.tagName = tagName.toLowerCase();`
+org.jsoup.parser.Tag:27 `    }`
+org.jsoup.parser.Tag:35 `        return tagName;`
+org.jsoup.parser.Tag:47 `        Validate.notNull(tagName);`
+org.jsoup.parser.Tag:48 `        tagName = tagName.trim().toLowerCase();`
+org.jsoup.parser.Tag:49 `        Validate.notEmpty(tagName);`
+org.jsoup.parser.Tag:51 `        synchronized (tags) {`
+org.jsoup.parser.Tag:52 `            Tag tag = tags.get(tagName);`
+org.jsoup.parser.Tag:53 `            if (tag == null) {`
+org.jsoup.parser.Tag:55 `                tag = new Tag(tagName);`
+org.jsoup.parser.Tag:56 `                tag.isBlock = false;`
+org.jsoup.parser.Tag:57 `                tag.canContainBlock = true;`
+org.jsoup.parser.Tag:59 `            return tag;`
+org.jsoup.parser.Tag:132 `        return tags.containsKey(tagName);`
+org.jsoup.parser.Tag:197 `    private static final String[] blockTags = {`
+org.jsoup.parser.Tag:204 `    private static final String[] inlineTags = {`
+org.jsoup.parser.Tag:211 `    private static final String[] emptyTags = {`
+org.jsoup.parser.Tag:215 `    private static final String[] formatAsInlineTags = {`
+org.jsoup.parser.Tag:218 `    private static final String[] preserveWhitespaceTags = {"pre", "plaintext", "title", "textarea"};`
+org.jsoup.parser.Tag:222 `        for (String tagName : blockTags) {`
+org.jsoup.parser.Tag:223 `            Tag tag = new Tag(tagName);`
+org.jsoup.parser.Tag:224 `            register(tag);`
+org.jsoup.parser.Tag:226 `        for (String tagName : inlineTags) {`
+org.jsoup.parser.Tag:227 `            Tag tag = new Tag(tagName);`
+org.jsoup.parser.Tag:228 `            tag.isBlock = false;`
+org.jsoup.parser.Tag:229 `            tag.canContainBlock = false;`
+org.jsoup.parser.Tag:230 `            tag.formatAsBlock = false;`
+org.jsoup.parser.Tag:231 `            register(tag);`
+org.jsoup.parser.Tag:235 `        for (String tagName : emptyTags) {`
+org.jsoup.parser.Tag:236 `            Tag tag = tags.get(tagName);`
+org.jsoup.parser.Tag:237 `            Validate.notNull(tag);`
+org.jsoup.parser.Tag:238 `            tag.canContainBlock = false;`
+org.jsoup.parser.Tag:239 `            tag.canContainInline = false;`
+org.jsoup.parser.Tag:240 `            tag.empty = true;`
+org.jsoup.parser.Tag:243 `        for (String tagName : formatAsInlineTags) {`
+org.jsoup.parser.Tag:244 `            Tag tag = tags.get(tagName);`
+org.jsoup.parser.Tag:245 `            Validate.notNull(tag);`
+org.jsoup.parser.Tag:246 `            tag.formatAsBlock = false;`
+org.jsoup.parser.Tag:249 `        for (String tagName : preserveWhitespaceTags) {`
+org.jsoup.parser.Tag:250 `            Tag tag = tags.get(tagName);`
+org.jsoup.parser.Tag:251 `            Validate.notNull(tag);`
+org.jsoup.parser.Tag:252 `            tag.preserveWhitespace = true;`
+org.jsoup.parser.Tag:254 `    }`
+org.jsoup.parser.Tag:257 `        synchronized (tags) {`
+org.jsoup.parser.Tag:258 `            tags.put(tag.tagName, tag);`
+org.jsoup.parser.Tag:259 `        }`
+org.jsoup.parser.Tag:260 `        return tag;`
+org.jsoup.parser.Token:47 `    static abstract class Tag extends Token {`
+org.jsoup.parser.Token:52 `        boolean selfClosing = false;`
+org.jsoup.parser.Token:56 `            if (attributes == null)`
+org.jsoup.parser.Token:59 `            if (pendingAttributeName != null) {`
+org.jsoup.parser.Token:61 `                if (pendingAttributeValue == null)`
+org.jsoup.parser.Token:64 `                    attribute = new Attribute(pendingAttributeName, pendingAttributeValue.toString());`
+org.jsoup.parser.Token:65 `                attributes.put(attribute);`
+org.jsoup.parser.Token:67 `            pendingAttributeName = null;`
+org.jsoup.parser.Token:68 `            if (pendingAttributeValue != null)`
+org.jsoup.parser.Token:69 `                pendingAttributeValue.delete(0, pendingAttributeValue.length());`
+org.jsoup.parser.Token:70 `        }`
+org.jsoup.parser.Token:74 `            if (pendingAttributeName != null) {`
+org.jsoup.parser.Token:76 `                newAttribute();`
+org.jsoup.parser.Token:78 `        }`
+org.jsoup.parser.Token:81 `            Validate.isFalse(tagName.length() == 0);`
+org.jsoup.parser.Token:82 `            return tagName;`
+org.jsoup.parser.Token:91 `            return selfClosing;`
+org.jsoup.parser.Token:96 `            return attributes;`
+org.jsoup.parser.Token:101 `            tagName = tagName == null ? append : tagName.concat(append);`
+org.jsoup.parser.Token:102 `        }`
+org.jsoup.parser.Token:109 `            pendingAttributeName = pendingAttributeName == null ? append : pendingAttributeName.concat(append);`
+org.jsoup.parser.Token:110 `        }`
+org.jsoup.parser.Token:117 `            pendingAttributeValue = pendingAttributeValue == null ? new StringBuilder(append) : pendingAttributeValue.append(append);`
+org.jsoup.parser.Token:118 `        }`
+org.jsoup.parser.Token:127 `            super();`
+org.jsoup.parser.Token:128 `            attributes = new Attributes();`
+org.jsoup.parser.Token:129 `            type = TokenType.StartTag;`
+org.jsoup.parser.Token:130 `        }`
+org.jsoup.parser.Token:154 `            super();`
+org.jsoup.parser.Token:155 `            type = TokenType.EndTag;`
+org.jsoup.parser.Token:156 `        }`
+org.jsoup.parser.Token:159 `            this();`
+org.jsoup.parser.Token:160 `            this.tagName = name;`
+org.jsoup.parser.Token:161 `        }`
+org.jsoup.parser.Token:205 `        EOF() {`
+org.jsoup.parser.Token:206 `            type = Token.TokenType.EOF;`
+org.jsoup.parser.Token:207 `        }`
+org.jsoup.parser.Token:211 `        return type == TokenType.Doctype;`
+org.jsoup.parser.Token:219 `        return type == TokenType.StartTag;`
+org.jsoup.parser.Token:223 `        return (StartTag) this;`
+org.jsoup.parser.Token:227 `        return type == TokenType.EndTag;`
+org.jsoup.parser.Token:231 `        return (EndTag) this;`
+org.jsoup.parser.Token:235 `        return type == TokenType.Comment;`
+org.jsoup.parser.Token:243 `        return type == TokenType.Character;`
+org.jsoup.parser.Token:251 `        return type == TokenType.EOF;`
+org.jsoup.parser.Token:254 `    enum TokenType {`
+org.jsoup.parser.Token:255 `        Doctype,`
+org.jsoup.parser.Token:256 `        StartTag,`
+org.jsoup.parser.Token:257 `        EndTag,`
+org.jsoup.parser.Token:258 `        Comment,`
+org.jsoup.parser.Token:259 `        Character,`
+org.jsoup.parser.Token:260 `        EOF`
+org.jsoup.parser.Tokeniser:18 `    private TokeniserState state = TokeniserState.Data; // current tokenisation state`
+org.jsoup.parser.Tokeniser:20 `    private boolean isEmitPending = false;`
+org.jsoup.parser.Tokeniser:21 `    private StringBuilder charBuffer = new StringBuilder(); // buffers characters to output as one token`
+org.jsoup.parser.Tokeniser:28 `    private boolean selfClosingFlagAcknowledged = true;`
+org.jsoup.parser.Tokeniser:30 `    Tokeniser(CharacterReader reader, ParseErrorList errors) {`
+org.jsoup.parser.Tokeniser:31 `        this.reader = reader;`
+org.jsoup.parser.Tokeniser:32 `        this.errors = errors;`
+org.jsoup.parser.Tokeniser:33 `    }`
+org.jsoup.parser.Tokeniser:36 `        if (!selfClosingFlagAcknowledged) {`
+org.jsoup.parser.Tokeniser:37 `            error("Self closing flag not acknowledged");`
+org.jsoup.parser.Tokeniser:38 `            selfClosingFlagAcknowledged = true;`
+org.jsoup.parser.Tokeniser:41 `        while (!isEmitPending)`
+org.jsoup.parser.Tokeniser:42 `            state.read(this, reader);`
+org.jsoup.parser.Tokeniser:45 `        if (charBuffer.length() > 0) {`
+org.jsoup.parser.Tokeniser:50 `            isEmitPending = false;`
+org.jsoup.parser.Tokeniser:51 `            return emitPending;`
+org.jsoup.parser.Tokeniser:56 `        Validate.isFalse(isEmitPending, "There is an unread token pending!");`
+org.jsoup.parser.Tokeniser:58 `        emitPending = token;`
+org.jsoup.parser.Tokeniser:59 `        isEmitPending = true;`
+org.jsoup.parser.Tokeniser:61 `        if (token.type == Token.TokenType.StartTag) {`
+org.jsoup.parser.Tokeniser:62 `            Token.StartTag startTag = (Token.StartTag) token;`
+org.jsoup.parser.Tokeniser:63 `            lastStartTag = startTag;`
+org.jsoup.parser.Tokeniser:64 `            if (startTag.selfClosing)`
+org.jsoup.parser.Tokeniser:65 `                selfClosingFlagAcknowledged = false;`
+org.jsoup.parser.Tokeniser:66 `        } else if (token.type == Token.TokenType.EndTag) {`
+org.jsoup.parser.Tokeniser:67 `            Token.EndTag endTag = (Token.EndTag) token;`
+org.jsoup.parser.Tokeniser:68 `            if (endTag.attributes != null)`
+org.jsoup.parser.Tokeniser:71 `    }`
+org.jsoup.parser.Tokeniser:88 `        this.state = state;`
+org.jsoup.parser.Tokeniser:89 `    }`
+org.jsoup.parser.Tokeniser:92 `        reader.advance();`
+org.jsoup.parser.Tokeniser:93 `        this.state = state;`
+org.jsoup.parser.Tokeniser:94 `    }`
+org.jsoup.parser.Tokeniser:97 `        selfClosingFlagAcknowledged = true;`
+org.jsoup.parser.Tokeniser:98 `    }`
+org.jsoup.parser.Tokeniser:165 `        tagPending = start ? new Token.StartTag() : new Token.EndTag();`
+org.jsoup.parser.Tokeniser:166 `        return tagPending;`
+org.jsoup.parser.Tokeniser:170 `        tagPending.finaliseTag();`
+org.jsoup.parser.Tokeniser:171 `        emit(tagPending);`
+org.jsoup.parser.Tokeniser:172 `    }`
+org.jsoup.parser.Tokeniser:191 `        dataBuffer = new StringBuilder();`
+org.jsoup.parser.Tokeniser:192 `    }`
+org.jsoup.parser.Tokeniser:195 `        if (lastStartTag == null)`
+org.jsoup.parser.Tokeniser:197 `        return tagPending.tagName.equals(lastStartTag.tagName);`
+org.jsoup.parser.Tokeniser:220 `        if (errors.canAddError())`
+org.jsoup.parser.Tokeniser:222 `    }`
+org.jsoup.parser.TokeniserState:6 `enum TokeniserState {`
+org.jsoup.parser.TokeniserState:7 `    Data {`
+org.jsoup.parser.TokeniserState:10 `            switch (r.current()) {`
+org.jsoup.parser.TokeniserState:15 `                    t.advanceTransition(TagOpen);`
+org.jsoup.parser.TokeniserState:16 `                    break;`
+org.jsoup.parser.TokeniserState:22 `                    t.emit(new Token.EOF());`
+org.jsoup.parser.TokeniserState:23 `                    break;`
+org.jsoup.parser.TokeniserState:29 `        }`
+org.jsoup.parser.TokeniserState:31 `    CharacterReferenceInData {`
+org.jsoup.parser.TokeniserState:42 `    Rcdata {`
+org.jsoup.parser.TokeniserState:67 `    CharacterReferenceInRcdata {`
+org.jsoup.parser.TokeniserState:77 `    Rawtext {`
+org.jsoup.parser.TokeniserState:98 `    ScriptData {`
+org.jsoup.parser.TokeniserState:100 `            switch (r.current()) {`
+org.jsoup.parser.TokeniserState:102 `                    t.advanceTransition(ScriptDataLessthanSign);`
+org.jsoup.parser.TokeniserState:103 `                    break;`
+org.jsoup.parser.TokeniserState:117 `        }`
+org.jsoup.parser.TokeniserState:119 `    PLAINTEXT {`
+org.jsoup.parser.TokeniserState:137 `    TagOpen {`
+org.jsoup.parser.TokeniserState:140 `            switch (r.current()) {`
+org.jsoup.parser.TokeniserState:145 `                    t.advanceTransition(EndTagOpen);`
+org.jsoup.parser.TokeniserState:146 `                    break;`
+org.jsoup.parser.TokeniserState:151 `                    if (r.matchesLetter()) {`
+org.jsoup.parser.TokeniserState:152 `                        t.createTagPending(true);`
+org.jsoup.parser.TokeniserState:153 `                        t.transition(TagName);`
+org.jsoup.parser.TokeniserState:161 `        }`
+org.jsoup.parser.TokeniserState:163 `    EndTagOpen {`
+org.jsoup.parser.TokeniserState:165 `            if (r.isEmpty()) {`
+org.jsoup.parser.TokeniserState:169 `            } else if (r.matchesLetter()) {`
+org.jsoup.parser.TokeniserState:170 `                t.createTagPending(false);`
+org.jsoup.parser.TokeniserState:171 `                t.transition(TagName);`
+org.jsoup.parser.TokeniserState:179 `        }`
+org.jsoup.parser.TokeniserState:181 `    TagName {`
+org.jsoup.parser.TokeniserState:185 `            String tagName = r.consumeToAny('\t', '\n', '\r', '\f', ' ', '/', '>', nullChar).toLowerCase();`
+org.jsoup.parser.TokeniserState:186 `            t.tagPending.appendTagName(tagName);`
+org.jsoup.parser.TokeniserState:188 `            switch (r.consume()) {`
+org.jsoup.parser.TokeniserState:194 `                    t.transition(BeforeAttributeName);`
+org.jsoup.parser.TokeniserState:195 `                    break;`
+org.jsoup.parser.TokeniserState:200 `                    t.emitTagPending();`
+org.jsoup.parser.TokeniserState:201 `                    t.transition(Data);`
+org.jsoup.parser.TokeniserState:202 `                    break;`
+org.jsoup.parser.TokeniserState:211 `        }`
+org.jsoup.parser.TokeniserState:213 `    RcdataLessthanSign {`
+org.jsoup.parser.TokeniserState:232 `    RCDATAEndTagOpen {`
+org.jsoup.parser.TokeniserState:245 `    RCDATAEndTagName {`
+org.jsoup.parser.TokeniserState:290 `    RawtextLessthanSign {`
+org.jsoup.parser.TokeniserState:301 `    RawtextEndTagOpen {`
+org.jsoup.parser.TokeniserState:312 `    RawtextEndTagName {`
+org.jsoup.parser.TokeniserState:351 `    ScriptDataLessthanSign {`
+org.jsoup.parser.TokeniserState:353 `            switch (r.consume()) {`
+org.jsoup.parser.TokeniserState:355 `                    t.createTempBuffer();`
+org.jsoup.parser.TokeniserState:356 `                    t.transition(ScriptDataEndTagOpen);`
+org.jsoup.parser.TokeniserState:357 `                    break;`
+org.jsoup.parser.TokeniserState:367 `        }`
+org.jsoup.parser.TokeniserState:369 `    ScriptDataEndTagOpen {`
+org.jsoup.parser.TokeniserState:371 `            if (r.matchesLetter()) {`
+org.jsoup.parser.TokeniserState:372 `                t.createTagPending(false);`
+org.jsoup.parser.TokeniserState:373 `                t.transition(ScriptDataEndTagName);`
+org.jsoup.parser.TokeniserState:379 `        }`
+org.jsoup.parser.TokeniserState:381 `    ScriptDataEndTagName {`
+org.jsoup.parser.TokeniserState:383 `            if (r.matchesLetter()) {`
+org.jsoup.parser.TokeniserState:384 `                String name = r.consumeLetterSequence();`
+org.jsoup.parser.TokeniserState:385 `                t.tagPending.appendTagName(name.toLowerCase());`
+org.jsoup.parser.TokeniserState:386 `                t.dataBuffer.append(name);`
+org.jsoup.parser.TokeniserState:387 `                return;`
+org.jsoup.parser.TokeniserState:390 `            if (t.isAppropriateEndTagToken() && !r.isEmpty()) {`
+org.jsoup.parser.TokeniserState:391 `                char c = r.consume();`
+org.jsoup.parser.TokeniserState:392 `                switch (c) {`
+org.jsoup.parser.TokeniserState:404 `                        t.emitTagPending();`
+org.jsoup.parser.TokeniserState:405 `                        t.transition(Data);`
+org.jsoup.parser.TokeniserState:406 `                        break;`
+org.jsoup.parser.TokeniserState:411 `            } else {`
+org.jsoup.parser.TokeniserState:414 `        }`
+org.jsoup.parser.TokeniserState:421 `    ScriptDataEscapeStart {`
+org.jsoup.parser.TokeniserState:431 `    ScriptDataEscapeStartDash {`
+org.jsoup.parser.TokeniserState:441 `    ScriptDataEscaped {`
+org.jsoup.parser.TokeniserState:468 `    ScriptDataEscapedDash {`
+org.jsoup.parser.TokeniserState:496 `    ScriptDataEscapedDashDash {`
+org.jsoup.parser.TokeniserState:527 `    ScriptDataEscapedLessthanSign {`
+org.jsoup.parser.TokeniserState:543 `    ScriptDataEscapedEndTagOpen {`
+org.jsoup.parser.TokeniserState:556 `    ScriptDataEscapedEndTagName {`
+org.jsoup.parser.TokeniserState:597 `    ScriptDataDoubleEscapeStart {`
+org.jsoup.parser.TokeniserState:627 `    ScriptDataDoubleEscaped {`
+org.jsoup.parser.TokeniserState:654 `    ScriptDataDoubleEscapedDash {`
+org.jsoup.parser.TokeniserState:681 `    ScriptDataDoubleEscapedDashDash {`
+org.jsoup.parser.TokeniserState:711 `    ScriptDataDoubleEscapedLessthanSign {`
+org.jsoup.parser.TokeniserState:722 `    ScriptDataDoubleEscapeEnd {`
+org.jsoup.parser.TokeniserState:752 `    BeforeAttributeName {`
+org.jsoup.parser.TokeniserState:755 `            char c = r.consume();`
+org.jsoup.parser.TokeniserState:756 `            switch (c) {`
+org.jsoup.parser.TokeniserState:764 `                    t.transition(SelfClosingStartTag);`
+org.jsoup.parser.TokeniserState:765 `                    break;`
+org.jsoup.parser.TokeniserState:790 `                    t.tagPending.newAttribute();`
+org.jsoup.parser.TokeniserState:791 `                    r.unconsume();`
+org.jsoup.parser.TokeniserState:792 `                    t.transition(AttributeName);`
+org.jsoup.parser.TokeniserState:794 `        }`
+org.jsoup.parser.TokeniserState:796 `    AttributeName {`
+org.jsoup.parser.TokeniserState:799 `            String name = r.consumeToAny('\t', '\n', '\r', '\f', ' ', '/', '=', '>', nullChar, '"', '\'', '<');`
+org.jsoup.parser.TokeniserState:800 `            t.tagPending.appendAttributeName(name.toLowerCase());`
+org.jsoup.parser.TokeniserState:802 `            char c = r.consume();`
+org.jsoup.parser.TokeniserState:803 `            switch (c) {`
+org.jsoup.parser.TokeniserState:815 `                    t.transition(BeforeAttributeValue);`
+org.jsoup.parser.TokeniserState:816 `                    break;`
+org.jsoup.parser.TokeniserState:836 `        }`
+org.jsoup.parser.TokeniserState:838 `    AfterAttributeName {`
+org.jsoup.parser.TokeniserState:883 `    BeforeAttributeValue {`
+org.jsoup.parser.TokeniserState:885 `            char c = r.consume();`
+org.jsoup.parser.TokeniserState:886 `            switch (c) {`
+org.jsoup.parser.TokeniserState:895 `                    t.transition(AttributeValue_doubleQuoted);`
+org.jsoup.parser.TokeniserState:896 `                    break;`
+org.jsoup.parser.TokeniserState:929 `        }`
+org.jsoup.parser.TokeniserState:931 `    AttributeValue_doubleQuoted {`
+org.jsoup.parser.TokeniserState:933 `            String value = r.consumeToAny('"', '&', nullChar);`
+org.jsoup.parser.TokeniserState:934 `            if (value.length() > 0)`
+org.jsoup.parser.TokeniserState:935 `                t.tagPending.appendAttributeValue(value);`
+org.jsoup.parser.TokeniserState:937 `            char c = r.consume();`
+org.jsoup.parser.TokeniserState:938 `            switch (c) {`
+org.jsoup.parser.TokeniserState:940 `                    t.transition(AfterAttributeValue_quoted);`
+org.jsoup.parser.TokeniserState:941 `                    break;`
+org.jsoup.parser.TokeniserState:959 `        }`
+org.jsoup.parser.TokeniserState:961 `    AttributeValue_singleQuoted {`
+org.jsoup.parser.TokeniserState:991 `    AttributeValue_unquoted {`
+org.jsoup.parser.TokeniserState:1039 `    AfterAttributeValue_quoted {`
+org.jsoup.parser.TokeniserState:1041 `            char c = r.consume();`
+org.jsoup.parser.TokeniserState:1042 `            switch (c) {`
+org.jsoup.parser.TokeniserState:1048 `                    t.transition(BeforeAttributeName);`
+org.jsoup.parser.TokeniserState:1049 `                    break;`
+org.jsoup.parser.TokeniserState:1067 `        }`
+org.jsoup.parser.TokeniserState:1069 `    SelfClosingStartTag {`
+org.jsoup.parser.TokeniserState:1071 `            char c = r.consume();`
+org.jsoup.parser.TokeniserState:1072 `            switch (c) {`
+org.jsoup.parser.TokeniserState:1074 `                    t.tagPending.selfClosing = true;`
+org.jsoup.parser.TokeniserState:1075 `                    t.emitTagPending();`
+org.jsoup.parser.TokeniserState:1076 `                    t.transition(Data);`
+org.jsoup.parser.TokeniserState:1077 `                    break;`
+org.jsoup.parser.TokeniserState:1086 `        }`
+org.jsoup.parser.TokeniserState:1088 `    BogusComment {`
+org.jsoup.parser.TokeniserState:1100 `    MarkupDeclarationOpen {`
+org.jsoup.parser.TokeniserState:1118 `    CommentStart {`
+org.jsoup.parser.TokeniserState:1146 `    CommentStartDash {`
+org.jsoup.parser.TokeniserState:1174 `    Comment {`
+org.jsoup.parser.TokeniserState:1196 `    CommentEndDash {`
+org.jsoup.parser.TokeniserState:1219 `    CommentEnd {`
+org.jsoup.parser.TokeniserState:1252 `    CommentEndBang {`
+org.jsoup.parser.TokeniserState:1280 `    Doctype {`
+org.jsoup.parser.TokeniserState:1304 `    BeforeDoctypeName {`
+org.jsoup.parser.TokeniserState:1338 `    DoctypeName {`
+org.jsoup.parser.TokeniserState:1373 `    AfterDoctypeName {`
+org.jsoup.parser.TokeniserState:1399 `    AfterDoctypePublicKeyword {`
+org.jsoup.parser.TokeniserState:1439 `    BeforeDoctypePublicIdentifier {`
+org.jsoup.parser.TokeniserState:1476 `    DoctypePublicIdentifier_doubleQuoted {`
+org.jsoup.parser.TokeniserState:1504 `    DoctypePublicIdentifier_singleQuoted {`
+org.jsoup.parser.TokeniserState:1532 `    AfterDoctypePublicIdentifier {`
+org.jsoup.parser.TokeniserState:1570 `    BetweenDoctypePublicAndSystemIdentifiers {`
+org.jsoup.parser.TokeniserState:1607 `    AfterDoctypeSystemKeyword {`
+org.jsoup.parser.TokeniserState:1647 `    BeforeDoctypeSystemIdentifier {`
+org.jsoup.parser.TokeniserState:1684 `    DoctypeSystemIdentifier_doubleQuoted {`
+org.jsoup.parser.TokeniserState:1712 `    DoctypeSystemIdentifier_singleQuoted {`
+org.jsoup.parser.TokeniserState:1740 `    AfterDoctypeSystemIdentifier {`
+org.jsoup.parser.TokeniserState:1767 `    BogusDoctype {`
+org.jsoup.parser.TokeniserState:1785 `    CdataSection {`
+org.jsoup.parser.TokeniserState:1799 `    private static final String replacementStr = String.valueOf(Tokeniser.replacementChar);`
+org.jsoup.parser.TreeBuilder:14 `abstract class TreeBuilder {`
+org.jsoup.parser.TreeBuilder:24 `        Validate.notNull(input, "String input must not be null");`
+org.jsoup.parser.TreeBuilder:25 `        Validate.notNull(baseUri, "BaseURI must not be null");`
+org.jsoup.parser.TreeBuilder:27 `        doc = new Document(baseUri);`
+org.jsoup.parser.TreeBuilder:28 `        reader = new CharacterReader(input);`
+org.jsoup.parser.TreeBuilder:29 `        this.errors = errors;`
+org.jsoup.parser.TreeBuilder:30 `        tokeniser = new Tokeniser(reader, errors);`
+org.jsoup.parser.TreeBuilder:31 `        stack = new DescendableLinkedList<Element>();`
+org.jsoup.parser.TreeBuilder:32 `        this.baseUri = baseUri;`
+org.jsoup.parser.TreeBuilder:33 `    }`
+org.jsoup.parser.TreeBuilder:40 `        initialiseParse(input, baseUri, errors);`
+org.jsoup.parser.TreeBuilder:41 `        runParser();`
+org.jsoup.parser.TreeBuilder:42 `        return doc;`
+org.jsoup.parser.TreeBuilder:47 `            Token token = tokeniser.read();`
+org.jsoup.parser.TreeBuilder:48 `            process(token);`
+org.jsoup.parser.TreeBuilder:50 `            if (token.type == Token.TokenType.EOF)`
+org.jsoup.parser.TreeBuilder:51 `                break;`
+org.jsoup.parser.TreeBuilder:52 `        }`
+org.jsoup.parser.TreeBuilder:53 `    }`
+org.jsoup.parser.TreeBuilder:58 `        return stack.getLast();`
+org.jsoup.safety.Cleaner:28 `    public Cleaner(Whitelist whitelist) {`
+org.jsoup.safety.Cleaner:29 `        Validate.notNull(whitelist);`
+org.jsoup.safety.Cleaner:30 `        this.whitelist = whitelist;`
+org.jsoup.safety.Cleaner:31 `    }`
+org.jsoup.safety.Cleaner:40 `        Validate.notNull(dirtyDocument);`
+org.jsoup.safety.Cleaner:42 `        Document clean = Document.createShell(dirtyDocument.baseUri());`
+org.jsoup.safety.Cleaner:43 `            copySafeNodes(dirtyDocument.body(), clean.body());`
+org.jsoup.safety.Cleaner:45 `        return clean;`
+org.jsoup.safety.Cleaner:73 `        List<Node> sourceChildren = source.childNodes();`
+org.jsoup.safety.Cleaner:74 `        int numDiscarded = 0;`
+org.jsoup.safety.Cleaner:76 `        for (Node sourceChild : sourceChildren) {`
+org.jsoup.safety.Cleaner:77 `            if (sourceChild instanceof Element) {`
+org.jsoup.safety.Cleaner:78 `                Element sourceEl = (Element) sourceChild;`
+org.jsoup.safety.Cleaner:80 `                if (whitelist.isSafeTag(sourceEl.tagName())) { // safe, clone and copy safe attrs`
+org.jsoup.safety.Cleaner:88 `                    numDiscarded++;`
+org.jsoup.safety.Cleaner:89 `                    numDiscarded += copySafeNodes(sourceEl, dest);`
+org.jsoup.safety.Cleaner:91 `            } else if (sourceChild instanceof TextNode) {`
+org.jsoup.safety.Cleaner:96 `        }`
+org.jsoup.safety.Cleaner:97 `        return numDiscarded;`
+org.jsoup.safety.Whitelist:90 `        return new Whitelist()`
+org.jsoup.safety.Whitelist:170 `    public Whitelist() {`
+org.jsoup.safety.Whitelist:171 `        tagNames = new HashSet<TagName>();`
+org.jsoup.safety.Whitelist:172 `        attributes = new HashMap<TagName, Set<AttributeKey>>();`
+org.jsoup.safety.Whitelist:173 `        enforcedAttributes = new HashMap<TagName, Map<AttributeKey, AttributeValue>>();`
+org.jsoup.safety.Whitelist:174 `        protocols = new HashMap<TagName, Map<AttributeKey, Set<Protocol>>>();`
+org.jsoup.safety.Whitelist:175 `        preserveRelativeLinks = false;`
+org.jsoup.safety.Whitelist:176 `    }`
+org.jsoup.safety.Whitelist:185 `        Validate.notNull(tags);`
+org.jsoup.safety.Whitelist:187 `        for (String tagName : tags) {`
+org.jsoup.safety.Whitelist:188 `            Validate.notEmpty(tagName);`
+org.jsoup.safety.Whitelist:189 `            tagNames.add(TagName.valueOf(tagName));`
+org.jsoup.safety.Whitelist:191 `        return this;`
+org.jsoup.safety.Whitelist:208 `        Validate.notEmpty(tag);`
+org.jsoup.safety.Whitelist:209 `        Validate.notNull(keys);`
+org.jsoup.safety.Whitelist:210 `        Validate.isTrue(keys.length > 0, "No attributes supplied.");`
+org.jsoup.safety.Whitelist:212 `        TagName tagName = TagName.valueOf(tag);`
+org.jsoup.safety.Whitelist:213 `        if (!tagNames.contains(tagName))`
+org.jsoup.safety.Whitelist:215 `        Set<AttributeKey> attributeSet = new HashSet<AttributeKey>();`
+org.jsoup.safety.Whitelist:216 `        for (String key : keys) {`
+org.jsoup.safety.Whitelist:217 `            Validate.notEmpty(key);`
+org.jsoup.safety.Whitelist:218 `            attributeSet.add(AttributeKey.valueOf(key));`
+org.jsoup.safety.Whitelist:220 `        if (attributes.containsKey(tagName)) {`
+org.jsoup.safety.Whitelist:224 `            attributes.put(tagName, attributeSet);`
+org.jsoup.safety.Whitelist:226 `        return this;`
+org.jsoup.safety.Whitelist:242 `        Validate.notEmpty(tag);`
+org.jsoup.safety.Whitelist:243 `        Validate.notEmpty(key);`
+org.jsoup.safety.Whitelist:244 `        Validate.notEmpty(value);`
+org.jsoup.safety.Whitelist:246 `        TagName tagName = TagName.valueOf(tag);`
+org.jsoup.safety.Whitelist:247 `        if (!tagNames.contains(tagName))`
+org.jsoup.safety.Whitelist:249 `        AttributeKey attrKey = AttributeKey.valueOf(key);`
+org.jsoup.safety.Whitelist:250 `        AttributeValue attrVal = AttributeValue.valueOf(value);`
+org.jsoup.safety.Whitelist:252 `        if (enforcedAttributes.containsKey(tagName)) {`
+org.jsoup.safety.Whitelist:255 `            Map<AttributeKey, AttributeValue> attrMap = new HashMap<AttributeKey, AttributeValue>();`
+org.jsoup.safety.Whitelist:256 `            attrMap.put(attrKey, attrVal);`
+org.jsoup.safety.Whitelist:257 `            enforcedAttributes.put(tagName, attrMap);`
+org.jsoup.safety.Whitelist:259 `        return this;`
+org.jsoup.safety.Whitelist:293 `        Validate.notEmpty(tag);`
+org.jsoup.safety.Whitelist:294 `        Validate.notEmpty(key);`
+org.jsoup.safety.Whitelist:295 `        Validate.notNull(protocols);`
+org.jsoup.safety.Whitelist:297 `        TagName tagName = TagName.valueOf(tag);`
+org.jsoup.safety.Whitelist:298 `        AttributeKey attrKey = AttributeKey.valueOf(key);`
+org.jsoup.safety.Whitelist:302 `        if (this.protocols.containsKey(tagName)) {`
+org.jsoup.safety.Whitelist:305 `            attrMap = new HashMap<AttributeKey, Set<Protocol>>();`
+org.jsoup.safety.Whitelist:306 `            this.protocols.put(tagName, attrMap);`
+org.jsoup.safety.Whitelist:308 `        if (attrMap.containsKey(attrKey)) {`
+org.jsoup.safety.Whitelist:311 `            protSet = new HashSet<Protocol>();`
+org.jsoup.safety.Whitelist:312 `            attrMap.put(attrKey, protSet);`
+org.jsoup.safety.Whitelist:314 `        for (String protocol : protocols) {`
+org.jsoup.safety.Whitelist:315 `            Validate.notEmpty(protocol);`
+org.jsoup.safety.Whitelist:316 `            Protocol prot = Protocol.valueOf(protocol);`
+org.jsoup.safety.Whitelist:317 `            protSet.add(prot);`
+org.jsoup.safety.Whitelist:319 `        return this;`
+org.jsoup.safety.Whitelist:323 `        return tagNames.contains(TagName.valueOf(tag));`
+org.jsoup.safety.Whitelist:379 `            super(value);`
+org.jsoup.safety.Whitelist:380 `        }`
+org.jsoup.safety.Whitelist:383 `            return new TagName(value);`
+org.jsoup.safety.Whitelist:389 `            super(value);`
+org.jsoup.safety.Whitelist:390 `        }`
+org.jsoup.safety.Whitelist:393 `            return new AttributeKey(value);`
+org.jsoup.safety.Whitelist:399 `            super(value);`
+org.jsoup.safety.Whitelist:400 `        }`
+org.jsoup.safety.Whitelist:403 `            return new AttributeValue(value);`
+org.jsoup.safety.Whitelist:409 `            super(value);`
+org.jsoup.safety.Whitelist:410 `        }`
+org.jsoup.safety.Whitelist:413 `            return new Protocol(value);`
+org.jsoup.safety.Whitelist:420 `        TypedValue(String value) {`
+org.jsoup.safety.Whitelist:421 `            Validate.notNull(value);`
+org.jsoup.safety.Whitelist:422 `            this.value = value;`
+org.jsoup.safety.Whitelist:423 `        }`
+org.jsoup.safety.Whitelist:427 `            final int prime = 31;`
+org.jsoup.safety.Whitelist:428 `            int result = 1;`
+org.jsoup.safety.Whitelist:429 `            result = prime * result + ((value == null) ? 0 : value.hashCode());`
+org.jsoup.safety.Whitelist:430 `            return result;`
+org.jsoup.safety.Whitelist:435 `            if (this == obj) return true;`
+org.jsoup.safety.Whitelist:436 `            if (obj == null) return false;`
+org.jsoup.safety.Whitelist:437 `            if (getClass() != obj.getClass()) return false;`
+org.jsoup.safety.Whitelist:438 `            TypedValue other = (TypedValue) obj;`
+org.jsoup.safety.Whitelist:439 `            if (value == null) {`
+org.jsoup.safety.Whitelist:441 `            } else if (!value.equals(other.value)) return false;`
+org.jsoup.safety.Whitelist:442 `            return true;`
+ 
+The provided code is expected to pass these test cases:
+ @Test public void handlesFramesets(){
+  String dirty="<html><head><script></script><noscript></noscript></head><frameset><frame src=\"foo\" /><frame src=\"foo\" /></frameset></html>";
+  String clean=Jsoup.clean(dirty,Whitelist.basic());
+  assertEquals("",clean);
+  Document dirtyDoc=Jsoup.parse(dirty);
+  Document cleanDoc=new Cleaner(Whitelist.basic()).clean(dirtyDoc);
+  assertFalse(cleanDoc == null);
+  assertEquals(0,cleanDoc.body().childNodes().size());
+}
+

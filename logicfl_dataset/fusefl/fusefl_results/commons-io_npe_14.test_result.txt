@@ -1,0 +1,42 @@
+@Test public void testContentEquals_InputStream_InputStream() throws Exception {
+{
+    final ByteArrayInputStream input1=new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8));
+    assertTrue(IOUtils.contentEquals((InputStream)null,null));
+  }
+{
+    final ByteArrayInputStream input1=new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8));
+    assertFalse(IOUtils.contentEquals(input1,null));
+  }
+{
+    final ByteArrayInputStream input1=new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8));
+    assertFalse(IOUtils.contentEquals(null,input1));
+  }
+{
+    final ByteArrayInputStream input1=new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8));
+    assertTrue(IOUtils.contentEquals(input1,input1));
+  }
+{
+    final ByteArrayInputStream input1=new ByteArrayInputStream("ABC".getBytes(StandardCharsets.UTF_8));
+    assertTrue(IOUtils.contentEquals(input1,input1));
+  }
+  assertTrue(IOUtils.contentEquals(new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8)),new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8))));
+  assertTrue(IOUtils.contentEquals(new BufferedInputStream(new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8))),new BufferedInputStream(new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8)))));
+  assertTrue(IOUtils.contentEquals(new ByteArrayInputStream("ABC".getBytes(StandardCharsets.UTF_8)),new ByteArrayInputStream("ABC".getBytes(StandardCharsets.UTF_8))));
+  assertFalse(IOUtils.contentEquals(new ByteArrayInputStream("ABCD".getBytes(StandardCharsets.UTF_8)),new ByteArrayInputStream("ABC".getBytes(StandardCharsets.UTF_8))));
+  assertFalse(IOUtils.contentEquals(new ByteArrayInputStream("ABC".getBytes(StandardCharsets.UTF_8)),new ByteArrayInputStream("ABCD".getBytes(StandardCharsets.UTF_8))));
+}
+
+
+
+Failures (1):
+  JUnit Jupiter:IOUtilsTestCase:testContentEquals_InputStream_InputStream()
+    MethodSource [className = 'org.apache.commons.io.IOUtilsTestCase', methodName = 'testContentEquals_InputStream_InputStream', methodParameterTypes = '']
+    => java.lang.NullPointerException
+       org.apache.commons.io.IOUtils.buffer(IOUtils.java:190)
+       org.apache.commons.io.IOUtils.contentEquals(IOUtils.java:716)
+       org.apache.commons.io.IOUtilsTestCase.testContentEquals_InputStream_InputStream(IOUtilsTestCase.java:238)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Store NPE traces to npe.traces.json
+NPE Stack Traces exported to npe.traces.json

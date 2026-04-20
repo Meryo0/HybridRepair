@@ -1,0 +1,36 @@
+{"npe.traces": [{
+    "test.method": "testGetFileName",
+    "traces": [
+        {
+            "is_target": true,
+            "method": "getFileName",
+            "line": 905,
+            "class": "org.apache.commons.io.file.PathUtils"
+        },
+        {
+            "is_target": true,
+            "method": "testGetFileName",
+            "line": 264,
+            "class": "org.apache.commons.io.file.PathUtilsTest"
+        },
+        {
+            "is_target": false,
+            "method": "invoke",
+            "line": 569,
+            "class": "java.lang.reflect.Method"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        }
+    ],
+    "test.class": "org.apache.commons.io.file.PathUtilsTest"
+}]}

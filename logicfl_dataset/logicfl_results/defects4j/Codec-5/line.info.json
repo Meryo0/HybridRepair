@@ -1,0 +1,749 @@
+{"classes": [
+    {
+        "probe_ranges": [
+            {
+                "endLine": 77,
+                "offset": 3,
+                "startLine": 74,
+                "orgLineEnd": 74,
+                "probedLineEnd": 77,
+                "orgLineStart": 74
+            },
+            {
+                "endLine": 139,
+                "offset": 54,
+                "startLine": 135,
+                "orgLineEnd": 145,
+                "probedLineEnd": 199,
+                "orgLineStart": 132
+            },
+            {
+                "endLine": 153,
+                "offset": 53,
+                "startLine": 142,
+                "orgLineEnd": 145,
+                "probedLineEnd": 198,
+                "orgLineStart": 134
+            },
+            {
+                "endLine": 173,
+                "offset": 52,
+                "startLine": 156,
+                "orgLineEnd": 145,
+                "probedLineEnd": 197,
+                "orgLineStart": 136
+            },
+            {
+                "endLine": 180,
+                "offset": 51,
+                "startLine": 176,
+                "orgLineEnd": 145,
+                "probedLineEnd": 196,
+                "orgLineStart": 138
+            },
+            {
+                "endLine": 184,
+                "offset": 51,
+                "startLine": 181,
+                "orgLineEnd": 143,
+                "probedLineEnd": 194,
+                "orgLineStart": 139
+            },
+            {
+                "endLine": 193,
+                "offset": 51,
+                "startLine": 187,
+                "orgLineEnd": 142,
+                "probedLineEnd": 193,
+                "orgLineStart": 142
+            },
+            {
+                "endLine": 216,
+                "offset": 58,
+                "startLine": 212,
+                "orgLineEnd": 158,
+                "probedLineEnd": 216,
+                "orgLineStart": 158
+            },
+            {
+                "endLine": 221,
+                "offset": 81,
+                "startLine": 217,
+                "orgLineEnd": 165,
+                "probedLineEnd": 246,
+                "orgLineStart": 159
+            },
+            {
+                "endLine": 225,
+                "offset": 65,
+                "startLine": 222,
+                "orgLineEnd": 160,
+                "probedLineEnd": 225,
+                "orgLineStart": 160
+            },
+            {
+                "endLine": 233,
+                "offset": 72,
+                "startLine": 226,
+                "orgLineEnd": 161,
+                "probedLineEnd": 233,
+                "orgLineStart": 161
+            },
+            {
+                "endLine": 238,
+                "offset": 81,
+                "startLine": 234,
+                "orgLineEnd": 164,
+                "probedLineEnd": 245,
+                "orgLineStart": 162
+            },
+            {
+                "endLine": 244,
+                "offset": 81,
+                "startLine": 239,
+                "orgLineEnd": 163,
+                "probedLineEnd": 244,
+                "orgLineStart": 163
+            },
+            {
+                "endLine": 250,
+                "offset": 84,
+                "startLine": 247,
+                "orgLineEnd": 168,
+                "probedLineEnd": 252,
+                "orgLineStart": 166
+            },
+            {
+                "endLine": 281,
+                "offset": 89,
+                "startLine": 276,
+                "orgLineEnd": 192,
+                "probedLineEnd": 281,
+                "orgLineStart": 192
+            }
+        ],
+        "classId": "base64_output_stream_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 135,
+                "offset": 6,
+                "startLine": 129,
+                "orgLineEnd": 129,
+                "probedLineEnd": 135,
+                "orgLineStart": 129
+            },
+            {
+                "endLine": 162,
+                "offset": 10,
+                "startLine": 158,
+                "orgLineEnd": 154,
+                "probedLineEnd": 164,
+                "orgLineStart": 152
+            },
+            {
+                "endLine": 171,
+                "offset": 15,
+                "startLine": 166,
+                "orgLineEnd": 156,
+                "probedLineEnd": 171,
+                "orgLineStart": 156
+            }
+        ],
+        "classId": "string_utils_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 337,
+                "offset": 4,
+                "startLine": 333,
+                "orgLineEnd": 336,
+                "probedLineEnd": 340,
+                "orgLineStart": 333
+            },
+            {
+                "endLine": 353,
+                "offset": 16,
+                "startLine": 341,
+                "orgLineEnd": 337,
+                "probedLineEnd": 353,
+                "orgLineStart": 337
+            },
+            {
+                "endLine": 358,
+                "offset": 20,
+                "startLine": 354,
+                "orgLineEnd": 338,
+                "probedLineEnd": 358,
+                "orgLineStart": 338
+            },
+            {
+                "endLine": 365,
+                "offset": 26,
+                "startLine": 359,
+                "orgLineEnd": 339,
+                "probedLineEnd": 365,
+                "orgLineStart": 339
+            },
+            {
+                "endLine": 370,
+                "offset": 35,
+                "startLine": 366,
+                "orgLineEnd": 344,
+                "probedLineEnd": 379,
+                "orgLineStart": 340
+            },
+            {
+                "endLine": 376,
+                "offset": 35,
+                "startLine": 371,
+                "orgLineEnd": 341,
+                "probedLineEnd": 376,
+                "orgLineStart": 341
+            },
+            {
+                "endLine": 384,
+                "offset": 39,
+                "startLine": 380,
+                "orgLineEnd": 345,
+                "probedLineEnd": 384,
+                "orgLineStart": 345
+            },
+            {
+                "endLine": 389,
+                "offset": 43,
+                "startLine": 385,
+                "orgLineEnd": 349,
+                "probedLineEnd": 392,
+                "orgLineStart": 346
+            },
+            {
+                "endLine": 406,
+                "offset": 56,
+                "startLine": 393,
+                "orgLineEnd": 350,
+                "probedLineEnd": 406,
+                "orgLineStart": 350
+            },
+            {
+                "endLine": 429,
+                "offset": 60,
+                "startLine": 425,
+                "orgLineEnd": 369,
+                "probedLineEnd": 429,
+                "orgLineStart": 369
+            },
+            {
+                "endLine": 449,
+                "offset": 71,
+                "startLine": 438,
+                "orgLineEnd": 378,
+                "probedLineEnd": 449,
+                "orgLineStart": 378
+            },
+            {
+                "endLine": 458,
+                "offset": 78,
+                "startLine": 454,
+                "orgLineEnd": 391,
+                "probedLineEnd": 469,
+                "orgLineStart": 383
+            },
+            {
+                "endLine": 462,
+                "offset": 78,
+                "startLine": 459,
+                "orgLineEnd": 384,
+                "probedLineEnd": 462,
+                "orgLineStart": 384
+            },
+            {
+                "endLine": 489,
+                "offset": 110,
+                "startLine": 485,
+                "orgLineEnd": 421,
+                "probedLineEnd": 531,
+                "orgLineStart": 407
+            },
+            {
+                "endLine": 495,
+                "offset": 87,
+                "startLine": 490,
+                "orgLineEnd": 408,
+                "probedLineEnd": 495,
+                "orgLineStart": 408
+            },
+            {
+                "endLine": 501,
+                "offset": 107,
+                "startLine": 496,
+                "orgLineEnd": 419,
+                "probedLineEnd": 526,
+                "orgLineStart": 409
+            },
+            {
+                "endLine": 509,
+                "offset": 99,
+                "startLine": 502,
+                "orgLineEnd": 410,
+                "probedLineEnd": 509,
+                "orgLineStart": 410
+            },
+            {
+                "endLine": 513,
+                "offset": 102,
+                "startLine": 510,
+                "orgLineEnd": 411,
+                "probedLineEnd": 513,
+                "orgLineStart": 411
+            },
+            {
+                "endLine": 519,
+                "offset": 107,
+                "startLine": 514,
+                "orgLineEnd": 414,
+                "probedLineEnd": 521,
+                "orgLineStart": 412
+            },
+            {
+                "endLine": 530,
+                "offset": 110,
+                "startLine": 527,
+                "orgLineEnd": 420,
+                "probedLineEnd": 530,
+                "orgLineStart": 420
+            },
+            {
+                "endLine": 559,
+                "offset": 131,
+                "startLine": 547,
+                "orgLineEnd": 443,
+                "probedLineEnd": 574,
+                "orgLineStart": 439
+            },
+            {
+                "endLine": 565,
+                "offset": 125,
+                "startLine": 562,
+                "orgLineEnd": 440,
+                "probedLineEnd": 565,
+                "orgLineStart": 440
+            },
+            {
+                "endLine": 569,
+                "offset": 128,
+                "startLine": 566,
+                "orgLineEnd": 441,
+                "probedLineEnd": 569,
+                "orgLineStart": 441
+            },
+            {
+                "endLine": 573,
+                "offset": 131,
+                "startLine": 570,
+                "orgLineEnd": 442,
+                "probedLineEnd": 573,
+                "orgLineStart": 442
+            },
+            {
+                "endLine": 685,
+                "offset": 134,
+                "startLine": 682,
+                "orgLineEnd": 553,
+                "probedLineEnd": 687,
+                "orgLineStart": 551
+            },
+            {
+                "endLine": 692,
+                "offset": 138,
+                "startLine": 688,
+                "orgLineEnd": 556,
+                "probedLineEnd": 694,
+                "orgLineStart": 554
+            },
+            {
+                "endLine": 716,
+                "offset": 158,
+                "startLine": 696,
+                "orgLineEnd": 560,
+                "probedLineEnd": 718,
+                "orgLineStart": 558
+            },
+            {
+                "endLine": 723,
+                "offset": 162,
+                "startLine": 719,
+                "orgLineEnd": 561,
+                "probedLineEnd": 723,
+                "orgLineStart": 561
+            },
+            {
+                "endLine": 729,
+                "offset": 228,
+                "startLine": 724,
+                "orgLineEnd": 579,
+                "probedLineEnd": 807,
+                "orgLineStart": 562
+            },
+            {
+                "endLine": 746,
+                "offset": 228,
+                "startLine": 734,
+                "orgLineEnd": 578,
+                "probedLineEnd": 806,
+                "orgLineStart": 567
+            },
+            {
+                "endLine": 752,
+                "offset": 184,
+                "startLine": 747,
+                "orgLineEnd": 568,
+                "probedLineEnd": 752,
+                "orgLineStart": 568
+            },
+            {
+                "endLine": 757,
+                "offset": 228,
+                "startLine": 753,
+                "orgLineEnd": 577,
+                "probedLineEnd": 805,
+                "orgLineStart": 569
+            },
+            {
+                "endLine": 762,
+                "offset": 192,
+                "startLine": 758,
+                "orgLineEnd": 570,
+                "probedLineEnd": 762,
+                "orgLineStart": 570
+            },
+            {
+                "endLine": 770,
+                "offset": 199,
+                "startLine": 763,
+                "orgLineEnd": 571,
+                "probedLineEnd": 770,
+                "orgLineStart": 571
+            },
+            {
+                "endLine": 775,
+                "offset": 228,
+                "startLine": 771,
+                "orgLineEnd": 576,
+                "probedLineEnd": 804,
+                "orgLineStart": 572
+            },
+            {
+                "endLine": 785,
+                "offset": 212,
+                "startLine": 776,
+                "orgLineEnd": 573,
+                "probedLineEnd": 785,
+                "orgLineStart": 573
+            },
+            {
+                "endLine": 795,
+                "offset": 221,
+                "startLine": 786,
+                "orgLineEnd": 574,
+                "probedLineEnd": 795,
+                "orgLineStart": 574
+            },
+            {
+                "endLine": 803,
+                "offset": 228,
+                "startLine": 796,
+                "orgLineEnd": 575,
+                "probedLineEnd": 803,
+                "orgLineStart": 575
+            },
+            {
+                "endLine": 819,
+                "offset": 246,
+                "startLine": 810,
+                "orgLineEnd": 598,
+                "probedLineEnd": 844,
+                "orgLineStart": 585
+            },
+            {
+                "endLine": 840,
+                "offset": 246,
+                "startLine": 831,
+                "orgLineEnd": 594,
+                "probedLineEnd": 840,
+                "orgLineStart": 594
+            },
+            {
+                "endLine": 885,
+                "offset": 275,
+                "startLine": 856,
+                "orgLineEnd": 610,
+                "probedLineEnd": 885,
+                "orgLineStart": 610
+            },
+            {
+                "endLine": 928,
+                "offset": 288,
+                "startLine": 915,
+                "orgLineEnd": 642,
+                "probedLineEnd": 930,
+                "orgLineStart": 640
+            }
+        ],
+        "classId": "base64_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 60,
+                "offset": 4,
+                "startLine": 56,
+                "orgLineEnd": 56,
+                "probedLineEnd": 60,
+                "orgLineStart": 56
+            },
+            {
+                "endLine": 68,
+                "offset": 10,
+                "startLine": 62,
+                "orgLineEnd": 58,
+                "probedLineEnd": 68,
+                "orgLineStart": 58
+            },
+            {
+                "endLine": 73,
+                "offset": 13,
+                "startLine": 70,
+                "orgLineEnd": 60,
+                "probedLineEnd": 73,
+                "orgLineStart": 60
+            },
+            {
+                "endLine": 78,
+                "offset": 17,
+                "startLine": 74,
+                "orgLineEnd": 61,
+                "probedLineEnd": 78,
+                "orgLineStart": 61
+            },
+            {
+                "endLine": 82,
+                "offset": 20,
+                "startLine": 79,
+                "orgLineEnd": 62,
+                "probedLineEnd": 82,
+                "orgLineStart": 62
+            }
+        ],
+        "classId": "base64_output_stream_test_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 153,
+                "offset": 5,
+                "startLine": 148,
+                "orgLineEnd": 148,
+                "probedLineEnd": 153,
+                "orgLineStart": 148
+            },
+            {
+                "endLine": 172,
+                "offset": 8,
+                "startLine": 169,
+                "orgLineEnd": 164,
+                "probedLineEnd": 172,
+                "orgLineStart": 164
+            },
+            {
+                "endLine": 190,
+                "offset": 19,
+                "startLine": 179,
+                "orgLineEnd": 171,
+                "probedLineEnd": 190,
+                "orgLineStart": 171
+            },
+            {
+                "endLine": 194,
+                "offset": 22,
+                "startLine": 191,
+                "orgLineEnd": 172,
+                "probedLineEnd": 194,
+                "orgLineStart": 172
+            },
+            {
+                "endLine": 200,
+                "offset": 27,
+                "startLine": 195,
+                "orgLineEnd": 175,
+                "probedLineEnd": 202,
+                "orgLineStart": 173
+            },
+            {
+                "endLine": 223,
+                "offset": 47,
+                "startLine": 204,
+                "orgLineEnd": 176,
+                "probedLineEnd": 223,
+                "orgLineStart": 176
+            },
+            {
+                "endLine": 238,
+                "offset": 61,
+                "startLine": 223,
+                "orgLineEnd": 177,
+                "probedLineEnd": 238,
+                "orgLineStart": 177
+            }
+        ],
+        "classId": "base64_test_data_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 78,
+                "offset": 3,
+                "startLine": 75,
+                "orgLineEnd": 75,
+                "probedLineEnd": 78,
+                "orgLineStart": 75
+            },
+            {
+                "endLine": 146,
+                "offset": 93,
+                "startLine": 142,
+                "orgLineEnd": 163,
+                "probedLineEnd": 256,
+                "orgLineStart": 139
+            },
+            {
+                "endLine": 160,
+                "offset": 92,
+                "startLine": 149,
+                "orgLineEnd": 163,
+                "probedLineEnd": 255,
+                "orgLineStart": 141
+            },
+            {
+                "endLine": 180,
+                "offset": 91,
+                "startLine": 163,
+                "orgLineEnd": 163,
+                "probedLineEnd": 254,
+                "orgLineStart": 143
+            },
+            {
+                "endLine": 187,
+                "offset": 90,
+                "startLine": 183,
+                "orgLineEnd": 163,
+                "probedLineEnd": 253,
+                "orgLineStart": 145
+            },
+            {
+                "endLine": 195,
+                "offset": 82,
+                "startLine": 190,
+                "orgLineEnd": 161,
+                "probedLineEnd": 243,
+                "orgLineStart": 148
+            },
+            {
+                "endLine": 200,
+                "offset": 51,
+                "startLine": 196,
+                "orgLineEnd": 149,
+                "probedLineEnd": 200,
+                "orgLineStart": 149
+            },
+            {
+                "endLine": 206,
+                "offset": 56,
+                "startLine": 201,
+                "orgLineEnd": 150,
+                "probedLineEnd": 206,
+                "orgLineStart": 150
+            },
+            {
+                "endLine": 220,
+                "offset": 74,
+                "startLine": 207,
+                "orgLineEnd": 155,
+                "probedLineEnd": 229,
+                "orgLineStart": 153
+            },
+            {
+                "endLine": 227,
+                "offset": 74,
+                "startLine": 221,
+                "orgLineEnd": 154,
+                "probedLineEnd": 228,
+                "orgLineStart": 154
+            },
+            {
+                "endLine": 233,
+                "offset": 82,
+                "startLine": 230,
+                "orgLineEnd": 160,
+                "probedLineEnd": 242,
+                "orgLineStart": 156
+            },
+            {
+                "endLine": 241,
+                "offset": 82,
+                "startLine": 236,
+                "orgLineEnd": 159,
+                "probedLineEnd": 241,
+                "orgLineStart": 159
+            },
+            {
+                "endLine": 252,
+                "offset": 90,
+                "startLine": 244,
+                "orgLineEnd": 162,
+                "probedLineEnd": 252,
+                "orgLineStart": 162
+            }
+        ],
+        "classId": "base64_input_stream_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 60,
+                "offset": 4,
+                "startLine": 56,
+                "orgLineEnd": 56,
+                "probedLineEnd": 60,
+                "orgLineStart": 56
+            },
+            {
+                "endLine": 64,
+                "offset": 7,
+                "startLine": 61,
+                "orgLineEnd": 57,
+                "probedLineEnd": 64,
+                "orgLineStart": 57
+            },
+            {
+                "endLine": 68,
+                "offset": 10,
+                "startLine": 65,
+                "orgLineEnd": 58,
+                "probedLineEnd": 68,
+                "orgLineStart": 58
+            },
+            {
+                "endLine": 75,
+                "offset": 15,
+                "startLine": 70,
+                "orgLineEnd": 61,
+                "probedLineEnd": 76,
+                "orgLineStart": 61
+            }
+        ],
+        "classId": "base64_input_stream_test_1"
+    }
+]}

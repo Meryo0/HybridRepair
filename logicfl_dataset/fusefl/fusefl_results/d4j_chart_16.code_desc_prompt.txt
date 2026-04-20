@@ -1,0 +1,112 @@
+Provide a short code description of the following code:
+ org.jfree.data.DataUtilities:125 `        if (data == null) {`
+org.jfree.data.DataUtilities:128 `        int l1 = data.length;`
+org.jfree.data.DataUtilities:129 `        Number[][] result = new Number[l1][];`
+org.jfree.data.DataUtilities:130 `        for (int i = 0; i < l1; i++) {`
+org.jfree.data.DataUtilities:133 `        return result;`
+org.jfree.data.category.DefaultIntervalCategoryDataset:91 `        this(DataUtilities.createNumberArray2D(starts),`
+org.jfree.data.category.DefaultIntervalCategoryDataset:93 `    }`
+org.jfree.data.category.DefaultIntervalCategoryDataset:107 `        this(null, null, starts, ends);`
+org.jfree.data.category.DefaultIntervalCategoryDataset:108 `    }`
+org.jfree.data.category.DefaultIntervalCategoryDataset:145 `                                          Number[][] ends) {`
+org.jfree.data.category.DefaultIntervalCategoryDataset:147 `        this.startData = starts;`
+org.jfree.data.category.DefaultIntervalCategoryDataset:148 `        this.endData = ends;`
+org.jfree.data.category.DefaultIntervalCategoryDataset:150 `        if (starts != null && ends != null) {`
+org.jfree.data.category.DefaultIntervalCategoryDataset:152 `            String baseName = "org.jfree.data.resources.DataPackageResources";`
+org.jfree.data.category.DefaultIntervalCategoryDataset:153 `            ResourceBundle resources = ResourceBundle.getBundle(baseName);`
+org.jfree.data.category.DefaultIntervalCategoryDataset:155 `            int seriesCount = starts.length;`
+org.jfree.data.category.DefaultIntervalCategoryDataset:156 `            if (seriesCount != ends.length) {`
+org.jfree.data.category.DefaultIntervalCategoryDataset:163 `            if (seriesCount > 0) {`
+org.jfree.data.category.DefaultIntervalCategoryDataset:207 `                this.seriesKeys = null;`
+org.jfree.data.category.DefaultIntervalCategoryDataset:208 `                this.categoryKeys = null;`
+org.jfree.data.category.DefaultIntervalCategoryDataset:212 `    }`
+org.jfree.data.category.DefaultIntervalCategoryDataset:241 `        int result = -1;`
+org.jfree.data.category.DefaultIntervalCategoryDataset:242 `        for (int i = 0; i < this.seriesKeys.length; i++) {`
+org.jfree.data.category.DefaultIntervalCategoryDataset:573 `        int result = -1;`
+org.jfree.data.category.DefaultIntervalCategoryDataset:574 `        for (int i = 0; i < this.categoryKeys.length; i++) {`
+org.jfree.data.category.DefaultIntervalCategoryDataset:628 `        return getCategoryIndex(columnKey);`
+org.jfree.data.category.DefaultIntervalCategoryDataset:641 `        return getSeriesIndex(rowKey);`
+org.jfree.data.category.DefaultIntervalCategoryDataset:690 `        return this.categoryKeys.length;`
+org.jfree.data.category.DefaultIntervalCategoryDataset:746 `        DefaultIntervalCategoryDataset clone `
+org.jfree.data.category.DefaultIntervalCategoryDataset:748 `        clone.categoryKeys = (Comparable[]) this.categoryKeys.clone();`
+org.jfree.data.general.AbstractDataset:94 `    protected AbstractDataset() {`
+org.jfree.data.general.AbstractDataset:95 `        this.group = new DatasetGroup();`
+org.jfree.data.general.AbstractDataset:96 `        this.listenerList = new EventListenerList();`
+org.jfree.data.general.AbstractDataset:97 `    }`
+org.jfree.data.general.AbstractDataset:205 `        AbstractDataset clone = (AbstractDataset) super.clone();`
+org.jfree.data.general.AbstractDataset:206 `        clone.listenerList = new EventListenerList();`
+org.jfree.data.general.AbstractDataset:207 `        return clone;    `
+org.jfree.data.general.AbstractSeriesDataset:65 `        super();`
+org.jfree.data.general.AbstractSeriesDataset:66 `    }`
+org.jfree.data.general.DatasetGroup:63 `        super();`
+org.jfree.data.general.DatasetGroup:64 `        this.id = "NOID";`
+org.jfree.data.general.DatasetGroup:65 `    }`
+org.jfree.data.resources.DataPackageResources:50 `public class DataPackageResources extends ListResourceBundle {`
+org.jfree.data.resources.DataPackageResources:62 `    private static final Object[][] CONTENTS = {`
+ 
+The provided code is expected to pass these test cases:
+ /** 
+ * Some checks for the getRowCount() method.
+ */
+public void testGetRowCount(){
+  DefaultIntervalCategoryDataset empty=new DefaultIntervalCategoryDataset(new double[0][0],new double[0][0]);
+  assertEquals(0,empty.getColumnCount());
+}
+
+/** 
+ * Some checks for the getRowIndex() method.
+ */
+public void testGetRowIndex(){
+  DefaultIntervalCategoryDataset empty=new DefaultIntervalCategoryDataset(new double[0][0],new double[0][0]);
+  assertEquals(-1,empty.getRowIndex("ABC"));
+}
+
+/** 
+ * A check to ensure that an empty dataset can be cloned.
+ */
+public void testCloning2(){
+  DefaultIntervalCategoryDataset d1=new DefaultIntervalCategoryDataset(new double[0][0],new double[0][0]);
+  DefaultIntervalCategoryDataset d2=null;
+  try {
+    d2=(DefaultIntervalCategoryDataset)d1.clone();
+  }
+ catch (  CloneNotSupportedException e) {
+    e.printStackTrace();
+  }
+  assertTrue(d1 != d2);
+  assertTrue(d1.getClass() == d2.getClass());
+  assertTrue(d1.equals(d2));
+}
+
+/** 
+ * Some checks for the getCategoryIndex() method.
+ */
+public void testGetCategoryIndex(){
+  DefaultIntervalCategoryDataset empty=new DefaultIntervalCategoryDataset(new double[0][0],new double[0][0]);
+  assertEquals(-1,empty.getCategoryIndex("ABC"));
+}
+
+/** 
+ * Some checks for the getColumnCount() method.
+ */
+public void testGetColumnCount(){
+  DefaultIntervalCategoryDataset empty=new DefaultIntervalCategoryDataset(new double[0][0],new double[0][0]);
+  assertEquals(0,empty.getColumnCount());
+}
+
+/** 
+ * Some checks for the getColumnIndex() method.
+ */
+public void testGetColumnIndex(){
+  DefaultIntervalCategoryDataset empty=new DefaultIntervalCategoryDataset(new double[0][0],new double[0][0]);
+  assertEquals(-1,empty.getColumnIndex("ABC"));
+}
+
+/** 
+ * Some checks for the getSeriesIndex() method.
+ */
+public void testGetSeriesIndex(){
+  DefaultIntervalCategoryDataset empty=new DefaultIntervalCategoryDataset(new double[0][0],new double[0][0]);
+  assertEquals(-1,empty.getSeriesIndex("ABC"));
+}
+

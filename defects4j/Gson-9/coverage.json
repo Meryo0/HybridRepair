@@ -1,0 +1,16 @@
+{
+    "coverage": [
+        {
+            "covered": [ 26, 287, 288, 289 ],
+            "className": "com.google.gson.stream.JsonWriterTest"
+        },
+        {
+            "covered": [ 145, 146, 147, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 167, 168, 170, 182, 190, 197, 198, 201, 202, 287, 288, 325, 326, 327, 328, 354, 359, 360, 366, 369, 376, 377, 400, 405, 620, 628, 629, 649 ],
+            "className": "com.google.gson.stream.JsonWriter"
+        }
+    ],
+    "classes": [
+        "com.google.gson.stream.JsonWriter",
+        "com.google.gson.stream.JsonWriterTest"
+    ]
+}

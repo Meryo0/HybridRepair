@@ -1,0 +1,24 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.lang3.time.DurationUtils:73",
+            "code": "return duration.getNano() % 1_000_000;",
+            "explanation": "The NullPointerException is thrown because the method attempts to call `getNano()` on a null `duration` object. The check for null is not correctly preventing this call."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.time.DurationUtils:40",
+            "code": "static final Range<Long> LONG_TO_INT_RANGE = Range.between(NumberUtils.LONG_INT_MIN_VALUE, NumberUtils.LONG_INT_MAX_VALUE);",
+            "explanation": "While this line is not directly causing the NullPointerException, it is part of the initialization that could potentially be involved in other issues. However, the primary issue is with the null check in the `getNanosOfMiili` method."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.Range:76",
+            "code": "return between(fromInclusive, toInclusive, null);",
+            "explanation": "This line calls the `between` method with a null comparator, which might lead to issues if the comparator is expected to be non-null. However, this is not directly related to the NullPointerException in the `DurationUtils` class."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.Range:48",
+            "code": "return ((Comparable) obj1).compareTo(obj2);",
+            "explanation": "This line involves casting and comparing objects, which could lead to ClassCastException if the objects are not comparable. This is not directly related to the NullPointerException in the `DurationUtils` class but is a potential source of issues."
+        }
+    ]
+}

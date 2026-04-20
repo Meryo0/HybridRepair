@@ -1,0 +1,19 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.lang.text.StrBuilder:1185",
+            "code": "String str = (obj == null ? getNullText() : obj.toString());",
+            "explanation": "The NullPointerException is thrown because `getNullText()` returns `null`, and the subsequent call to `str.length()` on line 1186 fails. This line should ensure that `str` is not `null` before proceeding."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang.text.StrBuilder:1229",
+            "code": "String str = (obj == null ? getNullText() : obj.toString());",
+            "explanation": "Similar to line 1185, this line can also cause a NullPointerException if `getNullText()` returns `null`. The code should ensure that `str` is not `null` before proceeding."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang.text.StrBuilder:158",
+            "code": "return nullText;",
+            "explanation": "The `getNullText()` method likely returns `null`, which is causing the NullPointerException when `str.length()` is called. This method should return a non-null default value if `nullText` is `null`."
+        }
+    ]
+}

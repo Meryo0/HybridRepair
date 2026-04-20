@@ -1,0 +1,105 @@
+{"classes": [
+    {
+        "probe_ranges": [{
+            "endLine": 85,
+            "offset": 12,
+            "startLine": 80,
+            "orgLineEnd": 73,
+            "probedLineEnd": 85,
+            "orgLineStart": 73
+        }],
+        "classId": "duration_utils_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 54,
+                "offset": 6,
+                "startLine": 48,
+                "orgLineEnd": 48,
+                "probedLineEnd": 54,
+                "orgLineStart": 48
+            },
+            {
+                "endLine": 87,
+                "offset": 11,
+                "startLine": 82,
+                "orgLineEnd": 76,
+                "probedLineEnd": 87,
+                "orgLineStart": 76
+            },
+            {
+                "endLine": 113,
+                "offset": 16,
+                "startLine": 108,
+                "orgLineEnd": 97,
+                "probedLineEnd": 113,
+                "orgLineStart": 97
+            },
+            {
+                "endLine": 195,
+                "offset": 26,
+                "startLine": 185,
+                "orgLineEnd": 172,
+                "probedLineEnd": 198,
+                "orgLineStart": 169
+            },
+            {
+                "endLine": 203,
+                "offset": 33,
+                "startLine": 199,
+                "orgLineEnd": 177,
+                "probedLineEnd": 210,
+                "orgLineStart": 173
+            },
+            {
+                "endLine": 207,
+                "offset": 33,
+                "startLine": 204,
+                "orgLineEnd": 174,
+                "probedLineEnd": 207,
+                "orgLineStart": 174
+            },
+            {
+                "endLine": 219,
+                "offset": 47,
+                "startLine": 211,
+                "orgLineEnd": 184,
+                "probedLineEnd": 231,
+                "orgLineStart": 178
+            },
+            {
+                "endLine": 223,
+                "offset": 44,
+                "startLine": 220,
+                "orgLineEnd": 179,
+                "probedLineEnd": 223,
+                "orgLineStart": 179
+            },
+            {
+                "endLine": 227,
+                "offset": 47,
+                "startLine": 224,
+                "orgLineEnd": 180,
+                "probedLineEnd": 227,
+                "orgLineStart": 180
+            }
+        ],
+        "classId": "range_1"
+    },
+    {
+        "probe_ranges": [{
+            "endLine": 40,
+            "offset": 3,
+            "startLine": 37,
+            "orgLineEnd": 37,
+            "probedLineEnd": 40,
+            "orgLineStart": 37
+        }],
+        "classId": "duration_utils_test_1"
+    },
+    {
+        "probe_ranges": [],
+        "classId": "number_utils_1"
+    }
+]}

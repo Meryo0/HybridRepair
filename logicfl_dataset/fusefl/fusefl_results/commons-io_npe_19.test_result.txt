@@ -1,0 +1,45 @@
+@Test public void testContentEquals_Reader_Reader() throws Exception {
+{
+    final StringReader input1=new StringReader("");
+    assertTrue(IOUtils.contentEquals((Reader)null,null));
+  }
+{
+    final StringReader input1=new StringReader("");
+    assertFalse(IOUtils.contentEquals(null,input1));
+  }
+{
+    final StringReader input1=new StringReader("");
+    assertFalse(IOUtils.contentEquals(input1,null));
+  }
+{
+    final StringReader input1=new StringReader("");
+    assertTrue(IOUtils.contentEquals(input1,input1));
+  }
+{
+    final StringReader input1=new StringReader("ABC");
+    assertTrue(IOUtils.contentEquals(input1,input1));
+  }
+  assertTrue(IOUtils.contentEquals(new StringReader(""),new StringReader("")));
+  assertTrue(IOUtils.contentEquals(new BufferedReader(new StringReader("")),new BufferedReader(new StringReader(""))));
+  assertTrue(IOUtils.contentEquals(new StringReader("ABC"),new StringReader("ABC")));
+  assertFalse(IOUtils.contentEquals(new StringReader("ABCD"),new StringReader("ABC")));
+  assertFalse(IOUtils.contentEquals(new StringReader("ABC"),new StringReader("ABCD")));
+}
+
+
+
+Failures (1):
+  JUnit Jupiter:IOUtilsTestCase:testContentEquals_Reader_Reader()
+    MethodSource [className = 'org.apache.commons.io.IOUtilsTestCase', methodName = 'testContentEquals_Reader_Reader', methodParameterTypes = '']
+    => java.lang.NullPointerException
+       java.base/java.io.Reader.<init>(Reader.java:168)
+       java.base/java.io.BufferedReader.<init>(BufferedReader.java:102)
+       java.base/java.io.BufferedReader.<init>(BufferedReader.java:117)
+       org.apache.commons.io.IOUtils.toBufferedReader(IOUtils.java:2174)
+       org.apache.commons.io.IOUtils.contentEquals(IOUtils.java:753)
+       org.apache.commons.io.IOUtilsTestCase.testContentEquals_Reader_Reader(IOUtilsTestCase.java:271)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Store NPE traces to npe.traces.json
+NPE Stack Traces exported to npe.traces.json

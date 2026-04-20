@@ -1,0 +1,47 @@
+public void testNullObjectId() throws Exception {
+  Identifiable value=MAPPER.readValue(aposToQuotes("{'value':3, 'next':null, 'id':null}"),Identifiable.class);
+  assertNotNull(value);
+  assertEquals(3,value.value);
+}
+
+
+
+testNullObjectId(com.fasterxml.jackson.databind.struct.TestObjectIdDeserialization): Cannot invoke "Object.hashCode()" because "key" is null (through reference chain: com.fasterxml.jackson.databind.struct.Identifiable["id"])
+Cannot invoke "Object.hashCode()" because "key" is null (through reference chain: com.fasterxml.jackson.databind.struct.Identifiable["id"])
+com.fasterxml.jackson.databind.JsonMappingException: Cannot invoke "Object.hashCode()" because "key" is null (through reference chain: com.fasterxml.jackson.databind.struct.Identifiable["id"])
+	at com.fasterxml.jackson.databind.JsonMappingException.wrapWithPath(JsonMappingException.java:210)
+	at com.fasterxml.jackson.databind.JsonMappingException.wrapWithPath(JsonMappingException.java:177)
+	at com.fasterxml.jackson.databind.deser.impl.BeanPropertyMap.wrapAndThrow(BeanPropertyMap.java:439)
+	at com.fasterxml.jackson.databind.deser.impl.BeanPropertyMap._findDeserializeAndSet2(BeanPropertyMap.java:315)
+	at com.fasterxml.jackson.databind.deser.impl.BeanPropertyMap.findDeserializeAndSet(BeanPropertyMap.java:291)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserializeFromObject(BeanDeserializer.java:335)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializerBase.deserializeWithObjectId(BeanDeserializerBase.java:1045)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:140)
+	at com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:3562)
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:2578)
+	at com.fasterxml.jackson.databind.struct.TestObjectIdDeserialization.testNullObjectId(TestObjectIdDeserialization.java:464)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:176)
+	at junit.framework.TestCase.runBare(TestCase.java:141)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:129)
+	at junit.framework.TestSuite.runTest(TestSuite.java:255)
+	at junit.framework.TestSuite.run(TestSuite.java:250)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:84)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:160)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+Caused by: java.lang.NullPointerException: Cannot invoke "Object.hashCode()" because "key" is null
+	at com.fasterxml.jackson.annotation.ObjectIdGenerator$IdKey.<init>(ObjectIdGenerator.java:158)
+	at com.fasterxml.jackson.annotation.ObjectIdGenerators$IntSequenceGenerator.key(ObjectIdGenerators.java:95)
+	at com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.findObjectId(DefaultDeserializationContext.java:88)
+	at com.fasterxml.jackson.databind.deser.impl.ObjectIdValueProperty.deserializeSetAndReturn(ObjectIdValueProperty.java:93)
+	at com.fasterxml.jackson.databind.deser.impl.ObjectIdValueProperty.deserializeAndSet(ObjectIdValueProperty.java:77)
+	at com.fasterxml.jackson.databind.deser.impl.BeanPropertyMap._findDeserializeAndSet2(BeanPropertyMap.java:313)
+	... 20 more
+
+
+
+

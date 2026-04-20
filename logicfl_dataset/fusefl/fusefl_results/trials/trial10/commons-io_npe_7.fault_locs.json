@@ -1,0 +1,19 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.input.ReaderInputStream:140",
+            "code": "super.setCharset(charsetEncoder.charset());",
+            "explanation": "The test case `testResetCharsetEncoder` sets the charset encoder to null, which leads to a NullPointerException when `charsetEncoder.charset()` is called. This line does not handle the case where `charsetEncoder` is null."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.input.ReaderInputStream:103",
+            "code": "private CharsetEncoder charsetEncoder = super.getCharset().newEncoder();",
+            "explanation": "The `charsetEncoder` is initialized using the default charset encoder. However, there is no null check when it is later set to null in the test case. This initialization does not prevent the NullPointerException when `charsetEncoder` is explicitly set to null."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.input.ReaderInputStream:139",
+            "code": "this.charsetEncoder = charsetEncoder;",
+            "explanation": "This line sets the `charsetEncoder` to the provided value, which can be null. There should be a null check or a default assignment to prevent the NullPointerException."
+        }
+    ]
+}

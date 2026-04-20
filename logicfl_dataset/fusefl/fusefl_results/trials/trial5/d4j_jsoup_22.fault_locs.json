@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jsoup.nodes.Node:445",
+            "code": "return parent().childNodes();",
+            "explanation": "The NullPointerException is thrown because `parent()` returns null for orphan nodes, and calling `childNodes()` on null causes the exception. This line should handle the case where `parent()` is null."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:487",
+            "code": "return siblingIndex;",
+            "explanation": "While this line itself does not directly cause the NullPointerException, it is part of the sibling-related methods that need to handle the case where the node is orphaned. Ensuring `siblingIndex` is correctly managed for orphan nodes is crucial."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:31",
+            "code": "protected Node(String baseUri, Attributes attributes) {",
+            "explanation": "The constructor initializes the node but does not set a parent. This is expected behavior, but it highlights the need for sibling-related methods to handle nodes without parents."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Element:38",
+            "code": "super(baseUri, attributes);",
+            "explanation": "This line calls the Node constructor, which initializes the node without a parent. Similar to the Node constructor, it emphasizes the need for handling orphan nodes in sibling-related methods."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Element:53",
+            "code": "this(tag, baseUri, new Attributes());",
+            "explanation": "This constructor creates a new Element with a new Attributes object but does not set a parent. This reinforces the need for sibling-related methods to handle orphan nodes."
+        }
+    ]
+}

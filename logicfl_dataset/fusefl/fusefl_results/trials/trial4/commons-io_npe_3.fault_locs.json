@@ -1,0 +1,39 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.IOCase:174",
+            "code": "Objects.requireNonNull(str2, \"str2\");",
+            "explanation": "The test `test_checkEquals_functionality` fails with a NullPointerException at this line. This indicates that `str2` is null in some test cases. The method should handle null values gracefully instead of throwing an exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.NameFileFilter:166",
+            "code": "return acceptBaseName(file.getName());",
+            "explanation": "The test `testNameFilter` fails with a NullPointerException at this line. This indicates that `file` is null in some test cases. The method should check if `file` is null before attempting to call `getName()`."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.EmptyFileFilter:107",
+            "code": "if (file.isDirectory()) {",
+            "explanation": "The test `testEmpty` fails with a NullPointerException at this line. This indicates that `file` is null in some test cases. The method should check if `file` is null before attempting to call `isDirectory()`."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.FileFileFilter:100",
+            "code": "return file.isFile();",
+            "explanation": "The test `testFiles` fails with a NullPointerException at this line. This indicates that `file` is null in some test cases. The method should check if `file` is null before attempting to call `isFile()`."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.CanReadFileFilter:95",
+            "code": "return file.canRead();",
+            "explanation": "The test `testCanRead` fails with a NullPointerException at this line. This indicates that `file` is null in some test cases. The method should check if `file` is null before attempting to call `canRead()`."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.CanWriteFileFilter:83",
+            "code": "return file.canWrite();",
+            "explanation": "The test `testCanWrite` fails with a NullPointerException at this line. This indicates that `file` is null in some test cases. The method should check if `file` is null before attempting to call `canWrite()`."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.HiddenFileFilter:117",
+            "code": "return get(() -> toFileVisitResult(Files.isHidden(file)));",
+            "explanation": "The test `testHidden` fails with a NullPointerException at this line. This indicates that `file` is null in some test cases. The method should check if `file` is null before attempting to call `Files.isHidden(file)`."
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+Fault Localization Results
+NPE at line(default_deserialization_context_1, 88) / Null Expression - p_id_1810[id]
+	 can be caused by 
+v_id_2275[id] - line(object_id_value_property_1, 93).
+
+NPE at line(default_deserialization_context_1, 88) / Null Expression - p_id_1810[id]
+	 can be caused by 
+p_id_1810[id] - line(default_deserialization_context_1, 88).
+
+NPE at line(default_deserialization_context_1, 88) / Null Expression - p_id_1810[id]
+	 can be caused by 
+object_id_value_property_1_expr7['_valueDeserializer.deserialize(jp,ctxt)'] - line(object_id_value_property_1, 85).

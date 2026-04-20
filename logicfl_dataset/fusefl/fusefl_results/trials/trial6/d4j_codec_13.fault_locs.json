@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.codec.language.DoubleMetaphone:244",
+            "code": "return doubleMetaphone(value1, alternate).equals(doubleMetaphone(value2, alternate));",
+            "explanation": "The NullPointerException occurs because the return value of doubleMetaphone(value1, alternate) or doubleMetaphone(value2, alternate) is null. This indicates that the doubleMetaphone method might be returning null for certain inputs, which is not handled properly before calling equals."
+        },
+        {
+            "faultyLine": "org.apache.commons.codec.language.DoubleMetaphone:86",
+            "code": "value = cleanInput(value);",
+            "explanation": "The cleanInput method might be returning null for certain inputs, which is then passed to subsequent methods without null checks. This could lead to the NullPointerException observed in the tests."
+        },
+        {
+            "faultyLine": "org.apache.commons.codec.language.DoubleMetaphone:87",
+            "code": "if (value == null) {",
+            "explanation": "This line checks if the value is null after being cleaned. If value is null, it returns null, which might propagate to other methods causing the NullPointerException."
+        },
+        {
+            "faultyLine": "org.apache.commons.codec.language.DoubleMetaphone:888",
+            "code": "if (input == null) {",
+            "explanation": "This line checks if the input is null before processing it. If input is null, it returns null, which might propagate to other methods causing the NullPointerException."
+        },
+        {
+            "faultyLine": "org.apache.commons.codec.language.DoubleMetaphone:893",
+            "code": "return null;",
+            "explanation": "Returning null here might cause issues if the calling method does not handle null values properly, leading to the NullPointerException observed in the tests."
+        }
+    ]
+}

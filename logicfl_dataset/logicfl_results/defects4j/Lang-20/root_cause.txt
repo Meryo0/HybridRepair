@@ -1,0 +1,32 @@
+Fault Localization Results
+NPE at line(string_utils_1, 3383) / Null Expression - p_separator_193[separator]
+	 can be caused by 
+p_separator_193[separator] - line(string_utils_1, 3383).
+
+NPE at line(string_utils_1, 3383) / Null Expression - p_array_192[array]
+	 can be caused by 
+p_array_192[array] - line(string_utils_1, 3383).
+
+NPE at line(string_utils_1, 3383) / Null Expression - p_array_192[array]
+	 can be caused by 
+p_array_190[array] - line(string_utils_1, 3338).
+
+NPE at line(string_utils_1, 3383) / Null Expression - string_utils_1_expr61['array[startIndex].toString()']
+	 can be caused by 
+string_utils_1_expr61['array[startIndex].toString()'] - line(string_utils_1, 3383).
+
+NPE at line(string_utils_1, 3383) / Null Expression - p_separator_193[separator]
+	 can be caused by 
+p_separator_191[separator] - line(string_utils_1, 3338).
+
+NPE at line(string_utils_1, 3298) / Null Expression - p_array_182[array]
+	 can be caused by 
+p_array_182[array] - line(string_utils_1, 3298).
+
+NPE at line(string_utils_1, 3298) / Null Expression - p_array_182[array]
+	 can be caused by 
+p_array_180[array] - line(string_utils_1, 3260).
+
+NPE at line(string_utils_1, 3298) / Null Expression - string_utils_1_expr34['array[startIndex].toString()']
+	 can be caused by 
+string_utils_1_expr34['array[startIndex].toString()'] - line(string_utils_1, 3298).

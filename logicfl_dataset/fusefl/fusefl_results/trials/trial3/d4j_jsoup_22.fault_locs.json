@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jsoup.nodes.Node:445",
+            "code": "return parent().childNodes();",
+            "explanation": "The NullPointerException is thrown because the method `parent()` returns null for orphan nodes, and calling `childNodes()` on null causes the exception. This line should handle the case where `parent()` is null."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:487",
+            "code": "return siblingIndex;",
+            "explanation": "The `siblingIndex` method should ensure that it is not returning an invalid index for orphan nodes. It should check if the node has a parent before returning the index."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Element:142",
+            "code": "return (Element) parentNode;",
+            "explanation": "This line assumes that `parentNode` is not null. For orphan nodes, `parentNode` will be null, and this should be handled to avoid returning null or causing a cast exception."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Element:38",
+            "code": "super(baseUri, attributes);",
+            "explanation": "While this line itself is not directly faulty, the constructor of the superclass `Node` should ensure that `attributes` is properly initialized to avoid null pointer issues in subsequent operations."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Element:40",
+            "code": "Validate.notNull(tag);",
+            "explanation": "This validation ensures `tag` is not null, but it should also ensure that `tag` is properly initialized to avoid null pointer issues in subsequent operations."
+        }
+    ]
+}

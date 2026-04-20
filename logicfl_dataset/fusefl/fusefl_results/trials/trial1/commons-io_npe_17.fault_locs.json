@@ -1,0 +1,54 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:391",
+            "code": "final boolean file1Exists = file1.exists();",
+            "explanation": "The NullPointerException indicates that 'file1' is null when 'exists()' is called. This suggests that 'file1' is not properly checked for null before this line. Adding a null check for 'file1' before this line would prevent the NPE."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:1116",
+            "code": "if (!directory.exists()) {",
+            "explanation": "Similar to the previous issue, if 'directory' is null, calling 'exists()' will throw a NullPointerException. A null check should be added before this line to ensure 'directory' is not null."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:1120",
+            "code": "if (!isSymlink(directory)) {",
+            "explanation": "If 'directory' is null, passing it to 'isSymlink()' will cause a NullPointerException. A null check should be added before this line to ensure 'directory' is not null."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:1121",
+            "code": "cleanDirectory(directory);",
+            "explanation": "If 'directory' is null, passing it to 'cleanDirectory()' will cause a NullPointerException. A null check should be added before this line to ensure 'directory' is not null."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:1124",
+            "code": "if (!directory.delete()) {",
+            "explanation": "If 'directory' is null, calling 'delete()' on it will cause a NullPointerException. A null check should be added before this line to ensure 'directory' is not null."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:1720",
+            "code": "if (file == null) {",
+            "explanation": "This line correctly checks if 'file' is null. However, the subsequent lines should ensure that 'file' is not null before performing operations on it."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:1723",
+            "code": "return Files.isSymbolicLink(file.toPath());",
+            "explanation": "If 'file' is null, calling 'toPath()' on it will cause a NullPointerException. The null check on line 1720 should prevent this, but it's important to ensure that 'file' is not modified between these lines."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:2676",
+            "code": "if (!directory.exists()) {",
+            "explanation": "If 'directory' is null, calling 'exists()' on it will cause a NullPointerException. A null check should be added before this line to ensure 'directory' is not null."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:2681",
+            "code": "if (!directory.isDirectory()) {",
+            "explanation": "If 'directory' is null, calling 'isDirectory()' on it will cause a NullPointerException. A null check should be added before this line to ensure 'directory' is not null."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:2686",
+            "code": "final File[] files = directory.listFiles();",
+            "explanation": "If 'directory' is null, calling 'listFiles()' on it will cause a NullPointerException. A null check should be added before this line to ensure 'directory' is not null."
+        }
+    ]
+}

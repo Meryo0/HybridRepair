@@ -1,0 +1,285 @@
+@Test public void testSetSubMatrix() throws Exception {
+  BlockRealMatrix m=new BlockRealMatrix(testData);
+  m.setSubMatrix(detData2,1,1);
+  RealMatrix expected=new BlockRealMatrix(new double[][]{{1.0,2.0,3.0},{2.0,1.0,3.0},{1.0,2.0,4.0}});
+  Assert.assertEquals(expected,m);
+  m.setSubMatrix(detData2,0,0);
+  expected=new BlockRealMatrix(new double[][]{{1.0,3.0,3.0},{2.0,4.0,3.0},{1.0,2.0,4.0}});
+  Assert.assertEquals(expected,m);
+  m.setSubMatrix(testDataPlus2,0,0);
+  expected=new BlockRealMatrix(new double[][]{{3.0,4.0,5.0},{4.0,7.0,5.0},{3.0,2.0,10.0}});
+  Assert.assertEquals(expected,m);
+  BlockRealMatrix matrix=new BlockRealMatrix(new double[][]{{1,2,3,4},{5,6,7,8},{9,0,1,2}});
+  matrix.setSubMatrix(new double[][]{{3,4},{5,6}},1,1);
+  expected=new BlockRealMatrix(new double[][]{{1,2,3,4},{5,3,4,8},{9,5,6,2}});
+  Assert.assertEquals(expected,matrix);
+  try {
+    m.setSubMatrix(testData,1,1);
+    Assert.fail("expecting OutOfRangeException");
+  }
+ catch (  OutOfRangeException e) {
+  }
+  try {
+    m.setSubMatrix(testData,-1,1);
+    Assert.fail("expecting OutOfRangeException");
+  }
+ catch (  OutOfRangeException e) {
+  }
+  try {
+    m.setSubMatrix(testData,1,-1);
+    Assert.fail("expecting OutOfRangeException");
+  }
+ catch (  OutOfRangeException e) {
+  }
+  try {
+    m.setSubMatrix(null,1,1);
+    Assert.fail("expecting NullArgumentException");
+  }
+ catch (  NullArgumentException e) {
+  }
+  try {
+    m.setSubMatrix(new double[][]{{1},{2,3}},0,0);
+    Assert.fail("expecting MathIllegalArgumentException");
+  }
+ catch (  MathIllegalArgumentException e) {
+  }
+  try {
+    m.setSubMatrix(new double[][]{{}},0,0);
+    Assert.fail("expecting MathIllegalArgumentException");
+  }
+ catch (  MathIllegalArgumentException e) {
+  }
+}
+
+@Test public void testSetSubMatrix() throws Exception {
+  BlockFieldMatrix<Fraction> m=new BlockFieldMatrix<Fraction>(testData);
+  m.setSubMatrix(detData2,1,1);
+  FieldMatrix<Fraction> expected=new BlockFieldMatrix<Fraction>(new Fraction[][]{{new Fraction(1),new Fraction(2),new Fraction(3)},{new Fraction(2),new Fraction(1),new Fraction(3)},{new Fraction(1),new Fraction(2),new Fraction(4)}});
+  Assert.assertEquals(expected,m);
+  m.setSubMatrix(detData2,0,0);
+  expected=new BlockFieldMatrix<Fraction>(new Fraction[][]{{new Fraction(1),new Fraction(3),new Fraction(3)},{new Fraction(2),new Fraction(4),new Fraction(3)},{new Fraction(1),new Fraction(2),new Fraction(4)}});
+  Assert.assertEquals(expected,m);
+  m.setSubMatrix(testDataPlus2,0,0);
+  expected=new BlockFieldMatrix<Fraction>(new Fraction[][]{{new Fraction(3),new Fraction(4),new Fraction(5)},{new Fraction(4),new Fraction(7),new Fraction(5)},{new Fraction(3),new Fraction(2),new Fraction(10)}});
+  Assert.assertEquals(expected,m);
+  BlockFieldMatrix<Fraction> matrix=new BlockFieldMatrix<Fraction>(new Fraction[][]{{new Fraction(1),new Fraction(2),new Fraction(3),new Fraction(4)},{new Fraction(5),new Fraction(6),new Fraction(7),new Fraction(8)},{new Fraction(9),new Fraction(0),new Fraction(1),new Fraction(2)}});
+  matrix.setSubMatrix(new Fraction[][]{{new Fraction(3),new Fraction(4)},{new Fraction(5),new Fraction(6)}},1,1);
+  expected=new BlockFieldMatrix<Fraction>(new Fraction[][]{{new Fraction(1),new Fraction(2),new Fraction(3),new Fraction(4)},{new Fraction(5),new Fraction(3),new Fraction(4),new Fraction(8)},{new Fraction(9),new Fraction(5),new Fraction(6),new Fraction(2)}});
+  Assert.assertEquals(expected,matrix);
+  try {
+    m.setSubMatrix(testData,1,1);
+    Assert.fail("expecting OutOfRangeException");
+  }
+ catch (  OutOfRangeException e) {
+  }
+  try {
+    m.setSubMatrix(testData,-1,1);
+    Assert.fail("expecting OutOfRangeException");
+  }
+ catch (  OutOfRangeException e) {
+  }
+  try {
+    m.setSubMatrix(testData,1,-1);
+    Assert.fail("expecting OutOfRangeException");
+  }
+ catch (  OutOfRangeException e) {
+  }
+  try {
+    m.setSubMatrix(null,1,1);
+    Assert.fail("expecting NullArgumentException");
+  }
+ catch (  NullArgumentException e) {
+  }
+  try {
+    m.setSubMatrix(new Fraction[][]{{new Fraction(1)},{new Fraction(2),new Fraction(3)}},0,0);
+    Assert.fail("expecting MathIllegalArgumentException");
+  }
+ catch (  MathIllegalArgumentException e) {
+  }
+  try {
+    m.setSubMatrix(new Fraction[][]{{}},0,0);
+    Assert.fail("expecting MathIllegalArgumentException");
+  }
+ catch (  MathIllegalArgumentException e) {
+  }
+}
+
+@Test public void testSetSubMatrix(){
+  OpenMapRealMatrix m=createSparseMatrix(testData);
+  m.setSubMatrix(detData2,1,1);
+  RealMatrix expected=createSparseMatrix(new double[][]{{1.0,2.0,3.0},{2.0,1.0,3.0},{1.0,2.0,4.0}});
+  Assert.assertEquals(expected,m);
+  m.setSubMatrix(detData2,0,0);
+  expected=createSparseMatrix(new double[][]{{1.0,3.0,3.0},{2.0,4.0,3.0},{1.0,2.0,4.0}});
+  Assert.assertEquals(expected,m);
+  m.setSubMatrix(testDataPlus2,0,0);
+  expected=createSparseMatrix(new double[][]{{3.0,4.0,5.0},{4.0,7.0,5.0},{3.0,2.0,10.0}});
+  Assert.assertEquals(expected,m);
+  OpenMapRealMatrix matrix=createSparseMatrix(new double[][]{{1,2,3,4},{5,6,7,8},{9,0,1,2}});
+  matrix.setSubMatrix(new double[][]{{3,4},{5,6}},1,1);
+  expected=createSparseMatrix(new double[][]{{1,2,3,4},{5,3,4,8},{9,5,6,2}});
+  Assert.assertEquals(expected,matrix);
+  try {
+    m.setSubMatrix(testData,1,1);
+    Assert.fail("expecting OutOfRangeException");
+  }
+ catch (  OutOfRangeException e) {
+  }
+  try {
+    m.setSubMatrix(testData,-1,1);
+    Assert.fail("expecting OutOfRangeException");
+  }
+ catch (  OutOfRangeException e) {
+  }
+  try {
+    m.setSubMatrix(testData,1,-1);
+    Assert.fail("expecting OutOfRangeException");
+  }
+ catch (  OutOfRangeException e) {
+  }
+  try {
+    m.setSubMatrix(null,1,1);
+    Assert.fail("expecting NullArgumentException");
+  }
+ catch (  NullArgumentException e) {
+  }
+  try {
+    new OpenMapRealMatrix(0,0);
+    Assert.fail("expecting MathIllegalArgumentException");
+  }
+ catch (  MathIllegalArgumentException e) {
+  }
+  try {
+    m.setSubMatrix(new double[][]{{1},{2,3}},0,0);
+    Assert.fail("expecting MathIllegalArgumentException");
+  }
+ catch (  MathIllegalArgumentException e) {
+  }
+  try {
+    m.setSubMatrix(new double[][]{{}},0,0);
+    Assert.fail("expecting MathIllegalArgumentException");
+  }
+ catch (  MathIllegalArgumentException e) {
+  }
+}
+
+@Test public void testSetSubMatrix() throws Exception {
+  Array2DRowRealMatrix m=new Array2DRowRealMatrix(testData);
+  m.setSubMatrix(detData2,1,1);
+  RealMatrix expected=MatrixUtils.createRealMatrix(new double[][]{{1.0,2.0,3.0},{2.0,1.0,3.0},{1.0,2.0,4.0}});
+  Assert.assertEquals(expected,m);
+  m.setSubMatrix(detData2,0,0);
+  expected=MatrixUtils.createRealMatrix(new double[][]{{1.0,3.0,3.0},{2.0,4.0,3.0},{1.0,2.0,4.0}});
+  Assert.assertEquals(expected,m);
+  m.setSubMatrix(testDataPlus2,0,0);
+  expected=MatrixUtils.createRealMatrix(new double[][]{{3.0,4.0,5.0},{4.0,7.0,5.0},{3.0,2.0,10.0}});
+  Assert.assertEquals(expected,m);
+  try {
+    m.setSubMatrix(testData,1,1);
+    Assert.fail("expecting OutOfRangeException");
+  }
+ catch (  OutOfRangeException e) {
+  }
+  try {
+    m.setSubMatrix(testData,-1,1);
+    Assert.fail("expecting OutOfRangeException");
+  }
+ catch (  OutOfRangeException e) {
+  }
+  try {
+    m.setSubMatrix(testData,1,-1);
+    Assert.fail("expecting OutOfRangeException");
+  }
+ catch (  OutOfRangeException e) {
+  }
+  try {
+    m.setSubMatrix(null,1,1);
+    Assert.fail("expecting NullArgumentException");
+  }
+ catch (  NullArgumentException e) {
+  }
+  Array2DRowRealMatrix m2=new Array2DRowRealMatrix();
+  try {
+    m2.setSubMatrix(testData,0,1);
+    Assert.fail("expecting MathIllegalStateException");
+  }
+ catch (  MathIllegalStateException e) {
+  }
+  try {
+    m2.setSubMatrix(testData,1,0);
+    Assert.fail("expecting MathIllegalStateException");
+  }
+ catch (  MathIllegalStateException e) {
+  }
+  try {
+    m.setSubMatrix(new double[][]{{1},{2,3}},0,0);
+    Assert.fail("expecting MathIllegalArgumentException");
+  }
+ catch (  MathIllegalArgumentException e) {
+  }
+  try {
+    m.setSubMatrix(new double[][]{{}},0,0);
+    Assert.fail("expecting MathIllegalArgumentException");
+  }
+ catch (  MathIllegalArgumentException e) {
+  }
+}
+
+
+
+  JUnit Vintage:BlockRealMatrixTest:testSetSubMatrix
+    MethodSource [className = 'org.apache.commons.math.linear.BlockRealMatrixTest', methodName = 'testSetSubMatrix', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot load from object array because "subMatrix" is null
+       org.apache.commons.math.linear.BlockRealMatrix.setSubMatrix(BlockRealMatrix.java:769)
+       org.apache.commons.math.linear.BlockRealMatrixTest.testSetSubMatrix(BlockRealMatrixTest.java:1116)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+       org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+       org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+       org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+       [...]
+  JUnit Vintage:Array2DRowRealMatrixTest:testSetSubMatrix
+    MethodSource [className = 'org.apache.commons.math.linear.Array2DRowRealMatrixTest', methodName = 'testSetSubMatrix', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot read the array length because "subMatrix" is null
+       org.apache.commons.math.linear.AbstractRealMatrix.setSubMatrix(AbstractRealMatrix.java:389)
+       org.apache.commons.math.linear.Array2DRowRealMatrix.setSubMatrix(Array2DRowRealMatrix.java:295)
+       org.apache.commons.math.linear.Array2DRowRealMatrixTest.testSetSubMatrix(Array2DRowRealMatrixTest.java:933)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+       org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+       org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+       [...]
+  JUnit Vintage:BlockFieldMatrixTest:testSetSubMatrix
+    MethodSource [className = 'org.apache.commons.math.linear.BlockFieldMatrixTest', methodName = 'testSetSubMatrix', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot load from object array because "subMatrix" is null
+       org.apache.commons.math.linear.BlockFieldMatrix.setSubMatrix(BlockFieldMatrix.java:762)
+       org.apache.commons.math.linear.BlockFieldMatrixTest.testSetSubMatrix(BlockFieldMatrixTest.java:1216)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+       org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+       org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+       org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+       [...]
+  JUnit Vintage:SparseRealMatrixTest:testSetSubMatrix
+    MethodSource [className = 'org.apache.commons.math.linear.SparseRealMatrixTest', methodName = 'testSetSubMatrix', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot read the array length because "subMatrix" is null
+       org.apache.commons.math.linear.AbstractRealMatrix.setSubMatrix(AbstractRealMatrix.java:389)
+       org.apache.commons.math.linear.SparseRealMatrixTest.testSetSubMatrix(SparseRealMatrixTest.java:632)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+       org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+       org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+       org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+       [...]

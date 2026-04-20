@@ -1,0 +1,23 @@
+@Test public void testGetFileName(){
+  assertNull(PathUtils.getFileName(null,null));
+  assertNull(PathUtils.getFileName(null,Path::toString));
+  assertNull(PathUtils.getFileName(Paths.get("/"),Path::toString));
+  assertNull(PathUtils.getFileName(Paths.get("/"),Path::toString));
+  assertEquals("",PathUtils.getFileName(Paths.get(""),Path::toString));
+  assertEquals("a",PathUtils.getFileName(Paths.get("a"),Path::toString));
+  assertEquals("a",PathUtils.getFileName(Paths.get("p","a"),Path::toString));
+}
+
+
+
+Failures (1):
+  JUnit Jupiter:PathUtilsTest:testGetFileName()
+    MethodSource [className = 'org.apache.commons.io.file.PathUtilsTest', methodName = 'testGetFileName', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.nio.file.Path.getFileName()" because "path" is null
+       org.apache.commons.io.file.PathUtils.getFileName(PathUtils.java:881)
+       org.apache.commons.io.file.PathUtilsTest.testGetFileName(PathUtilsTest.java:251)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Store NPE traces to npe.traces.json
+NPE Stack Traces exported to npe.traces.json

@@ -1,0 +1,39 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jsoup.nodes.Node:220",
+            "code": "return parentNode.ownerDocument();",
+            "explanation": "The method `ownerDocument()` is called on `parentNode`, which might be null. This can lead to a NullPointerException when trying to access the `outputSettings()` method in the `parentlessToString` test case."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:215",
+            "code": "if (this instanceof Document)",
+            "explanation": "The check for `this instanceof Document` might not be sufficient to handle cases where `parentNode` is null. This can cause the subsequent call to `parentNode.ownerDocument()` to fail."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:216",
+            "code": "return (Document) this;",
+            "explanation": "This line assumes that the current node is a `Document`, but it does not handle the case where `parentNode` is null, leading to potential NullPointerException."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:217",
+            "code": "else if (parentNode == null)",
+            "explanation": "This condition checks if `parentNode` is null but does not provide a fallback mechanism for when `parentNode` is indeed null, leading to potential issues in subsequent code."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:218",
+            "code": "return null;",
+            "explanation": "Returning null here can cause issues in other parts of the code that expect a non-null `Document` object, leading to NullPointerException when methods like `outputSettings()` are called."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:363",
+            "code": "new NodeTraversor(new OuterHtmlVisitor(accum, ownerDocument().outputSettings())).traverse(this);",
+            "explanation": "This line calls `ownerDocument().outputSettings()` without checking if `ownerDocument()` returns null, leading to a NullPointerException."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:364",
+            "code": "}",
+            "explanation": "The method `outerHtml` does not handle the case where `ownerDocument()` might return null, leading to potential NullPointerException."
+        }
+    ]
+}

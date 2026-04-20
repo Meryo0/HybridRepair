@@ -1,0 +1,146 @@
+Provide a short code description of the following code:
+ org.apache.commons.lang3.builder.ToStringStyle:84 `    public static final ToStringStyle DEFAULT_STYLE = new DefaultToStringStyle();`
+org.apache.commons.lang3.builder.ToStringStyle:98 `    public static final ToStringStyle MULTI_LINE_STYLE = new MultiLineToStringStyle();`
+org.apache.commons.lang3.builder.ToStringStyle:109 `    public static final ToStringStyle NO_FIELD_NAMES_STYLE = new NoFieldNameToStringStyle();`
+org.apache.commons.lang3.builder.ToStringStyle:121 `    public static final ToStringStyle SHORT_PREFIX_STYLE = new ShortPrefixToStringStyle();`
+org.apache.commons.lang3.builder.ToStringStyle:131 `    public static final ToStringStyle SIMPLE_STYLE = new SimpleToStringStyle();`
+org.apache.commons.lang3.builder.ToStringStyle:143 `    public static final ToStringStyle NO_CLASS_NAME_STYLE = new NoClassNameToStringStyle();`
+org.apache.commons.lang3.builder.ToStringStyle:162 `    public static final ToStringStyle JSON_STYLE = new JsonToStringStyle();`
+org.apache.commons.lang3.builder.ToStringStyle:169 `    private static final ThreadLocal<WeakHashMap<Object, Object>> REGISTRY = new ThreadLocal<>();`
+org.apache.commons.lang3.builder.ToStringStyle:187 `        return REGISTRY.get();`
+org.apache.commons.lang3.builder.ToStringStyle:246 `    private boolean useFieldNames = true;`
+org.apache.commons.lang3.builder.ToStringStyle:251 `    private boolean useClassName = true;`
+org.apache.commons.lang3.builder.ToStringStyle:261 `    private boolean useIdentityHashCode = true;`
+org.apache.commons.lang3.builder.ToStringStyle:266 `    private String contentStart = "[";`
+org.apache.commons.lang3.builder.ToStringStyle:271 `    private String contentEnd = "]";`
+org.apache.commons.lang3.builder.ToStringStyle:276 `    private String fieldNameValueSeparator = "=";`
+org.apache.commons.lang3.builder.ToStringStyle:291 `    private String fieldSeparator = ",";`
+org.apache.commons.lang3.builder.ToStringStyle:296 `    private String arrayStart = "{";`
+org.apache.commons.lang3.builder.ToStringStyle:301 `    private String arraySeparator = ",";`
+org.apache.commons.lang3.builder.ToStringStyle:306 `    private boolean arrayContentDetail = true;`
+org.apache.commons.lang3.builder.ToStringStyle:311 `    private String arrayEnd = "}";`
+org.apache.commons.lang3.builder.ToStringStyle:317 `    private boolean defaultFullDetail = true;`
+org.apache.commons.lang3.builder.ToStringStyle:322 `    private String nullText = "<null>";`
+org.apache.commons.lang3.builder.ToStringStyle:327 `    private String sizeStartText = "<size=";`
+org.apache.commons.lang3.builder.ToStringStyle:332 `    private String sizeEndText = ">";`
+org.apache.commons.lang3.builder.ToStringStyle:337 `    private String summaryObjectStartText = "<";`
+org.apache.commons.lang3.builder.ToStringStyle:342 `    private String summaryObjectEndText = ">";`
+org.apache.commons.lang3.builder.ToStringStyle:347 `    protected ToStringStyle() {`
+org.apache.commons.lang3.builder.ToStringStyle:348 `    }`
+org.apache.commons.lang3.builder.ToStringStyle:1581 `        this.useClassName = useClassName;`
+org.apache.commons.lang3.builder.ToStringStyle:1582 `    }`
+org.apache.commons.lang3.builder.ToStringStyle:1601 `        this.useShortClassName = useShortClassName;`
+org.apache.commons.lang3.builder.ToStringStyle:1602 `    }`
+org.apache.commons.lang3.builder.ToStringStyle:1619 `        this.useIdentityHashCode = useIdentityHashCode;`
+org.apache.commons.lang3.builder.ToStringStyle:1620 `    }`
+org.apache.commons.lang3.builder.ToStringStyle:1637 `        this.useFieldNames = useFieldNames;`
+org.apache.commons.lang3.builder.ToStringStyle:1638 `    }`
+org.apache.commons.lang3.builder.ToStringStyle:1696 `        if (arrayStart == null) {`
+org.apache.commons.lang3.builder.ToStringStyle:1699 `        this.arrayStart = arrayStart;`
+org.apache.commons.lang3.builder.ToStringStyle:1700 `    }`
+org.apache.commons.lang3.builder.ToStringStyle:1720 `        if (arrayEnd == null) {`
+org.apache.commons.lang3.builder.ToStringStyle:1723 `        this.arrayEnd = arrayEnd;`
+org.apache.commons.lang3.builder.ToStringStyle:1724 `    }`
+org.apache.commons.lang3.builder.ToStringStyle:1768 `        if (contentStart == null) {`
+org.apache.commons.lang3.builder.ToStringStyle:1771 `        this.contentStart = contentStart;`
+org.apache.commons.lang3.builder.ToStringStyle:1772 `    }`
+org.apache.commons.lang3.builder.ToStringStyle:1792 `        if (contentEnd == null) {`
+org.apache.commons.lang3.builder.ToStringStyle:1795 `        this.contentEnd = contentEnd;`
+org.apache.commons.lang3.builder.ToStringStyle:1796 `    }`
+org.apache.commons.lang3.builder.ToStringStyle:1816 `        if (fieldNameValueSeparator == null) {`
+org.apache.commons.lang3.builder.ToStringStyle:1819 `        this.fieldNameValueSeparator = fieldNameValueSeparator;`
+org.apache.commons.lang3.builder.ToStringStyle:1820 `    }`
+org.apache.commons.lang3.builder.ToStringStyle:1840 `        if (fieldSeparator == null) {`
+org.apache.commons.lang3.builder.ToStringStyle:1843 `        this.fieldSeparator = fieldSeparator;`
+org.apache.commons.lang3.builder.ToStringStyle:1844 `    }`
+org.apache.commons.lang3.builder.ToStringStyle:1865 `        this.fieldSeparatorAtStart = fieldSeparatorAtStart;`
+org.apache.commons.lang3.builder.ToStringStyle:1866 `    }`
+org.apache.commons.lang3.builder.ToStringStyle:1908 `        if (nullText == null) {`
+org.apache.commons.lang3.builder.ToStringStyle:1911 `        this.nullText = nullText;`
+org.apache.commons.lang3.builder.ToStringStyle:1912 `    }`
+org.apache.commons.lang3.builder.ToStringStyle:1938 `        if (sizeStartText == null) {`
+org.apache.commons.lang3.builder.ToStringStyle:1941 `        this.sizeStartText = sizeStartText;`
+org.apache.commons.lang3.builder.ToStringStyle:1942 `    }`
+org.apache.commons.lang3.builder.ToStringStyle:1968 `        if (sizeEndText == null) {`
+org.apache.commons.lang3.builder.ToStringStyle:1971 `        this.sizeEndText = sizeEndText;`
+org.apache.commons.lang3.builder.ToStringStyle:1972 `    }`
+org.apache.commons.lang3.builder.ToStringStyle:1998 `        if (summaryObjectStartText == null) {`
+org.apache.commons.lang3.builder.ToStringStyle:2001 `        this.summaryObjectStartText = summaryObjectStartText;`
+org.apache.commons.lang3.builder.ToStringStyle:2002 `    }`
+org.apache.commons.lang3.builder.ToStringStyle:2028 `        if (summaryObjectEndText == null) {`
+org.apache.commons.lang3.builder.ToStringStyle:2031 `        this.summaryObjectEndText = summaryObjectEndText;`
+org.apache.commons.lang3.builder.ToStringStyle:2032 `    }`
+org.apache.commons.lang3.builder.ToStringStyle:2054 `        DefaultToStringStyle() {`
+org.apache.commons.lang3.builder.ToStringStyle:2055 `        }`
+org.apache.commons.lang3.builder.ToStringStyle:2084 `        NoFieldNameToStringStyle() {`
+org.apache.commons.lang3.builder.ToStringStyle:2085 `            this.setUseFieldNames(false);`
+org.apache.commons.lang3.builder.ToStringStyle:2086 `        }`
+org.apache.commons.lang3.builder.ToStringStyle:2115 `        ShortPrefixToStringStyle() {`
+org.apache.commons.lang3.builder.ToStringStyle:2116 `            this.setUseShortClassName(true);`
+org.apache.commons.lang3.builder.ToStringStyle:2117 `            this.setUseIdentityHashCode(false);`
+org.apache.commons.lang3.builder.ToStringStyle:2118 `        }`
+org.apache.commons.lang3.builder.ToStringStyle:2146 `        SimpleToStringStyle() {`
+org.apache.commons.lang3.builder.ToStringStyle:2147 `            this.setUseClassName(false);`
+org.apache.commons.lang3.builder.ToStringStyle:2148 `            this.setUseIdentityHashCode(false);`
+org.apache.commons.lang3.builder.ToStringStyle:2149 `            this.setUseFieldNames(false);`
+org.apache.commons.lang3.builder.ToStringStyle:2150 `            this.setContentStart(StringUtils.EMPTY);`
+org.apache.commons.lang3.builder.ToStringStyle:2151 `            this.setContentEnd(StringUtils.EMPTY);`
+org.apache.commons.lang3.builder.ToStringStyle:2152 `        }`
+org.apache.commons.lang3.builder.ToStringStyle:2179 `        MultiLineToStringStyle() {`
+org.apache.commons.lang3.builder.ToStringStyle:2180 `            this.setContentStart("[");`
+org.apache.commons.lang3.builder.ToStringStyle:2181 `            this.setFieldSeparator(System.lineSeparator() + "  ");`
+org.apache.commons.lang3.builder.ToStringStyle:2182 `            this.setFieldSeparatorAtStart(true);`
+org.apache.commons.lang3.builder.ToStringStyle:2183 `            this.setContentEnd(System.lineSeparator() + "]");`
+org.apache.commons.lang3.builder.ToStringStyle:2184 `        }`
+org.apache.commons.lang3.builder.ToStringStyle:2213 `        NoClassNameToStringStyle() {`
+org.apache.commons.lang3.builder.ToStringStyle:2214 `            this.setUseClassName(false);`
+org.apache.commons.lang3.builder.ToStringStyle:2215 `            this.setUseIdentityHashCode(false);`
+org.apache.commons.lang3.builder.ToStringStyle:2216 `        }`
+org.apache.commons.lang3.builder.ToStringStyle:2253 `        JsonToStringStyle() {`
+org.apache.commons.lang3.builder.ToStringStyle:2254 `            this.setUseClassName(false);`
+org.apache.commons.lang3.builder.ToStringStyle:2255 `            this.setUseIdentityHashCode(false);`
+org.apache.commons.lang3.builder.ToStringStyle:2257 `            this.setContentStart("{");`
+org.apache.commons.lang3.builder.ToStringStyle:2258 `            this.setContentEnd("}");`
+org.apache.commons.lang3.builder.ToStringStyle:2260 `            this.setArrayStart("[");`
+org.apache.commons.lang3.builder.ToStringStyle:2261 `            this.setArrayEnd("]");`
+org.apache.commons.lang3.builder.ToStringStyle:2263 `            this.setFieldSeparator(",");`
+org.apache.commons.lang3.builder.ToStringStyle:2264 `            this.setFieldNameValueSeparator(":");`
+org.apache.commons.lang3.builder.ToStringStyle:2266 `            this.setNullText("null");`
+org.apache.commons.lang3.builder.ToStringStyle:2268 `            this.setSummaryObjectStartText("\"<");`
+org.apache.commons.lang3.builder.ToStringStyle:2269 `            this.setSummaryObjectEndText(">\"");`
+org.apache.commons.lang3.builder.ToStringStyle:2271 `            this.setSizeStartText("\"<size=");`
+org.apache.commons.lang3.builder.ToStringStyle:2272 `            this.setSizeEndText(">\"");`
+org.apache.commons.lang3.builder.ToStringStyle:2273 `        }`
+org.apache.commons.lang3.mutable.MutableObject:52 `    public MutableObject(final T value) {`
+org.apache.commons.lang3.mutable.MutableObject:53 `        this.value = value;`
+org.apache.commons.lang3.mutable.MutableObject:54 `    }`
+org.apache.commons.lang3.mutable.MutableObject:88 `        if (obj == null) {`
+org.apache.commons.lang3.mutable.MutableObject:91 `        if (this == obj) {`
+org.apache.commons.lang3.mutable.MutableObject:92 `            return true;`
+org.apache.commons.lang3.mutable.MutableObject:94 `        if (this.getClass() == obj.getClass()) {`
+org.apache.commons.lang3.mutable.MutableObject:95 `            final MutableObject<?> that = (MutableObject<?>) obj;`
+org.apache.commons.lang3.mutable.MutableObject:96 `            return this.value.equals(that.value);`
+ 
+The provided code is expected to pass these test cases:
+ @Test public void testEquals(){
+  final MutableObject<String> mutNumA=new MutableObject<>("ALPHA");
+  final MutableObject<String> mutNumB=new MutableObject<>("ALPHA");
+  final MutableObject<String> mutNumC=new MutableObject<>("BETA");
+  final MutableObject<String> mutNumNull1=new MutableObject<>(null);
+  final MutableObject<String> mutNumNull2=new MutableObject<>(null);
+  assertEquals(mutNumA,mutNumA);
+  assertEquals(mutNumA,mutNumB);
+  assertEquals(mutNumB,mutNumA);
+  assertEquals(mutNumB,mutNumB);
+  assertNotEquals(mutNumA,mutNumC);
+  assertNotEquals(mutNumB,mutNumC);
+  assertEquals(mutNumC,mutNumC);
+  assertNotEquals(mutNumA,mutNumNull1);
+  assertEquals(mutNumNull1,mutNumNull1);
+  assertEquals(mutNumNull1,mutNumNull2);
+  assertEquals(mutNumNull2,mutNumNull1);
+  assertNotEquals(null,mutNumA);
+  assertNotEquals(mutNumA,new Object());
+  assertNotEquals("0",mutNumA);
+}
+

@@ -1,0 +1,8 @@
+Fault Localization Results
+NPE at line(char_sequence_input_stream_1, 75) / Null Expression - p_charset_5[charset]
+	 can be caused by 
+p_charset_5[charset] - line(char_sequence_input_stream_1, 75).
+
+NPE at line(char_sequence_input_stream_1, 75) / Null Expression - p_charset_5[charset]
+	 can be caused by 
+p_charset_2[charset] - line(char_sequence_input_stream_1, 62).

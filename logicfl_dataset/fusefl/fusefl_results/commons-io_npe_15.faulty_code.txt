@@ -1,0 +1,71 @@
+org.apache.commons.io.IOUtils:109 `    private static final byte[] EMPTY_BYTE_ARRAY = new byte[0];`
+org.apache.commons.io.IOUtils:119 `    public static final char DIR_SEPARATOR = File.separatorChar;`
+org.apache.commons.io.IOUtils:174 `        try (final StringBuilderWriter buf = new StringBuilderWriter(4);`
+org.apache.commons.io.IOUtils:175 `                final PrintWriter out = new PrintWriter(buf)) {`
+org.apache.commons.io.IOUtils:176 `            out.println();`
+org.apache.commons.io.IOUtils:177 `            LINE_SEPARATOR = buf.toString();`
+org.apache.commons.io.IOUtils:179 `    }`
+org.apache.commons.io.IOUtils:858 `        final long count = copyLarge(input, output);`
+org.apache.commons.io.IOUtils:882 `        return copyLarge(input, output, new byte[bufferSize]);`
+org.apache.commons.io.IOUtils:1137 `        return copy(input, output, DEFAULT_BUFFER_SIZE);`
+org.apache.commons.io.IOUtils:1158 `        long count = 0;`
+org.apache.commons.io.IOUtils:1160 `        while (EOF != (n = input.read(buffer))) {`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:59 `public abstract class AbstractByteArrayOutputStream extends OutputStream {`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:64 `    private static final byte[] EMPTY_BYTE_ARRAY = new byte[0];`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:67 `    private final List<byte[]> buffers = new ArrayList<>();`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:77 `    private boolean reuseBuffers = true;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:86 `        if (currentBufferIndex < buffers.size() - 1) {`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:95 `            if (currentBuffer == null) {`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:96 `                newBufferSize = newcount;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:97 `                filledBufferSum = 0;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:99 `                newBufferSize = Math.max(`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:102 `                filledBufferSum += currentBuffer.length;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:105 `            currentBufferIndex++;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:106 `            currentBuffer = new byte[newBufferSize];`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:107 `            buffers.add(currentBuffer);`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:109 `    }`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:154 `        int inBufferPos = count - filledBufferSum;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:155 `        if (inBufferPos == currentBuffer.length) {`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:156 `            needNewBuffer(count + 1);`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:157 `            inBufferPos = 0;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:159 `        currentBuffer[inBufferPos] = (byte) b;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:160 `        count++;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:161 `    }`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:362 `        int remaining = count;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:363 `        if (remaining == 0) {`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:366 `        final byte[] newbuf = new byte[remaining];`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:367 `        int pos = 0;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:368 `        for (final byte[] buf : buffers) {`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:369 `            final int c = Math.min(buf.length, remaining);`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:370 `            System.arraycopy(buf, 0, newbuf, pos, c);`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:371 `            pos += c;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:372 `            remaining -= c;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:373 `            if (remaining == 0) {`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:374 `                break;`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:376 `        }`
+org.apache.commons.io.output.AbstractByteArrayOutputStream:377 `        return newbuf;`
+org.apache.commons.io.output.ByteArrayOutputStream:34 `        this(DEFAULT_SIZE);`
+org.apache.commons.io.output.ByteArrayOutputStream:35 `    }`
+org.apache.commons.io.output.ByteArrayOutputStream:44 `    public ByteArrayOutputStream(final int size) {`
+org.apache.commons.io.output.ByteArrayOutputStream:45 `        if (size < 0) {`
+org.apache.commons.io.output.ByteArrayOutputStream:49 `        synchronized (this) {`
+org.apache.commons.io.output.ByteArrayOutputStream:50 `            needNewBuffer(size);`
+org.apache.commons.io.output.ByteArrayOutputStream:51 `        }`
+org.apache.commons.io.output.ByteArrayOutputStream:52 `    }`
+org.apache.commons.io.output.ByteArrayOutputStream:72 `        writeImpl(b);`
+org.apache.commons.io.output.ByteArrayOutputStream:73 `    }`
+org.apache.commons.io.output.ByteArrayOutputStream:163 `        return toByteArrayImpl();`
+org.apache.commons.io.output.StringBuilderWriter:50 `    public StringBuilderWriter(final int capacity) {`
+org.apache.commons.io.output.StringBuilderWriter:51 `        this.builder = new StringBuilder(capacity);`
+org.apache.commons.io.output.StringBuilderWriter:52 `    }`
+org.apache.commons.io.output.StringBuilderWriter:109 `    }`
+org.apache.commons.io.output.StringBuilderWriter:127 `        if (value != null) {`
+org.apache.commons.io.output.StringBuilderWriter:128 `            builder.append(value);`
+org.apache.commons.io.output.StringBuilderWriter:130 `    }`
+org.apache.commons.io.output.StringBuilderWriter:162 `        return builder.toString();`
+org.apache.commons.io.test.TestUtils:63 `            final ByteArrayOutputStream baout = new ByteArrayOutputStream();`
+org.apache.commons.io.test.TestUtils:64 `            generateTestData(baout, size);`
+org.apache.commons.io.test.TestUtils:65 `            return baout.toByteArray();`
+org.apache.commons.io.test.TestUtils:73 `        for (int i = 0; i < size; i++) {`
+org.apache.commons.io.test.TestUtils:77 `            out.write((byte) ((i % 127) + 1));`
+org.apache.commons.io.test.TestUtils:79 `    }`

@@ -1,0 +1,14 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.lang3.ClassUtils:910",
+            "code": "classes[i] = array[i].getClass();",
+            "explanation": "The NullPointerException is thrown because the code attempts to call `getClass()` on a null element in the array. This line does not handle the case where `array[i]` is null, which leads to the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.ClassUtils:909",
+            "code": "for (int i = 0; i < array.length; i++) {",
+            "explanation": "This line initializes the loop that iterates over the array elements. The loop does not check if `array[i]` is null before attempting to call `getClass()` on it in the next line."
+        }
+    ]
+}

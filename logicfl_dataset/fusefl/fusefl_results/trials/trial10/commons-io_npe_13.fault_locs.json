@@ -1,0 +1,19 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.IOCase:180",
+            "code": "return str.regionMatches(!sensitive, 0, start, 0, start.length());",
+            "explanation": "The method `checkStartsWith` is throwing a NullPointerException because it does not handle the case where the `start` parameter is null. The `start.length()` call will throw a NullPointerException if `start` is null."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.IOCase:196",
+            "code": "final int endLen = end.length();",
+            "explanation": "The method `checkEndsWith` is throwing a NullPointerException because it does not handle the case where the `end` parameter is null. The `end.length()` call will throw a NullPointerException if `end` is null."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.IOCase:197",
+            "code": "return str.regionMatches(!sensitive, str.length() - endLen, end, 0, endLen);",
+            "explanation": "Similar to line 196, this line will also throw a NullPointerException if `end` is null. The `endLen` variable is derived from `end.length()`, which will be null if `end` is null."
+        }
+    ]
+}

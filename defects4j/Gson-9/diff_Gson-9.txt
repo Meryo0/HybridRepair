@@ -1,0 +1,62 @@
+diff -U 5 -r ./defects4j/Gson-9/buggy/gson/src/main/java/com/google/gson/internal/bind/JsonTreeWriter.java ./defects4j/Gson-9/fixed/gson/src/main/java/com/google/gson/internal/bind/JsonTreeWriter.java
+--- ./defects4j/Gson-9/buggy/gson/src/main/java/com/google/gson/internal/bind/JsonTreeWriter.java	2024-05-19 19:44:49.530469511 +0900
++++ ./defects4j/Gson-9/fixed/gson/src/main/java/com/google/gson/internal/bind/JsonTreeWriter.java	2024-05-19 19:44:49.542469756 +0900
+@@ -157,10 +157,17 @@
+   @Override public JsonWriter value(boolean value) throws IOException {
+     put(new JsonPrimitive(value));
+     return this;
+   }
+ 
++  @Override public JsonWriter value(Boolean value) throws IOException {
++    if (value == null) {
++      return nullValue();
++    }
++    put(new JsonPrimitive(value));
++    return this;
++  }
+ 
+   @Override public JsonWriter value(double value) throws IOException {
+     if (!isLenient() && (Double.isNaN(value) || Double.isInfinite(value))) {
+       throw new IllegalArgumentException("JSON forbids NaN and infinities: " + value);
+     }
+diff -U 5 -r ./defects4j/Gson-9/buggy/gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java ./defects4j/Gson-9/fixed/gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java
+--- ./defects4j/Gson-9/buggy/gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java	2024-05-19 19:44:49.530469511 +0900
++++ ./defects4j/Gson-9/fixed/gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java	2024-05-19 19:44:49.542469756 +0900
+@@ -160,14 +160,10 @@
+       }
+       return in.nextBoolean();
+     }
+     @Override
+     public void write(JsonWriter out, Boolean value) throws IOException {
+-      if (value == null) {
+-        out.nullValue();
+-        return;
+-      }
+       out.value(value);
+     }
+   };
+ 
+   /**
+diff -U 5 -r ./defects4j/Gson-9/buggy/gson/src/main/java/com/google/gson/stream/JsonWriter.java ./defects4j/Gson-9/fixed/gson/src/main/java/com/google/gson/stream/JsonWriter.java
+--- ./defects4j/Gson-9/buggy/gson/src/main/java/com/google/gson/stream/JsonWriter.java	2024-05-19 19:44:49.530469511 +0900
++++ ./defects4j/Gson-9/fixed/gson/src/main/java/com/google/gson/stream/JsonWriter.java	2024-05-19 19:44:49.542469756 +0900
+@@ -471,10 +471,19 @@
+   /**
+    * Encodes {@code value}.
+    *
+    * @return this writer.
+    */
++  public JsonWriter value(Boolean value) throws IOException {
++    if (value == null) {
++      return nullValue();
++    }
++    writeDeferredName();
++    beforeValue();
++    out.write(value ? "true" : "false");
++    return this;
++  }
+ 
+   /**
+    * Encodes {@code value}.
+    *
+    * @param value a finite value. May not be {@link Double#isNaN() NaNs} or

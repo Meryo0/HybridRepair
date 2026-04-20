@@ -1,0 +1,15 @@
+{
+ "buggy.hash": "",
+ "fixed_hash": "fa1d99255915f21c868f28307fd6e3adb2029ea0",
+ "passed.classes": [],
+ "failed.classes": [
+  "com.fasterxml.jackson.databind.deser.TestArrayDeserialization"
+ ],
+ "failed.tests": [
+  {
+   "class": "com.fasterxml.jackson.databind.deser.TestArrayDeserialization",
+   "name": "testStringArray",
+   "message": ""
+  }
+ ]
+}

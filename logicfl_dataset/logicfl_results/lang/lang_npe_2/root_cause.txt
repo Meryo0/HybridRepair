@@ -1,0 +1,8 @@
+Fault Localization Results
+NPE at line(mutable_object_1, 96) / Null Expression - f_value_305[value]
+	 can be caused by 
+f_value_305[value] - line(mutable_object_1, 96).
+
+NPE at line(mutable_object_1, 96) / Null Expression - f_value_305[value]
+	 can be caused by 
+p_value_304[value] - line(mutable_object_1, 53).

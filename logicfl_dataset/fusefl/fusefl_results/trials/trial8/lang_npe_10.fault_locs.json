@@ -1,0 +1,24 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.lang3.builder.ReflectionToStringBuilder:535",
+            "code": "super(Objects.requireNonNull(object, \"obj\"), style, buffer);",
+            "explanation": "This line calls the superclass constructor with a non-null object check. If the object is null, it throws a NullPointerException. This is directly causing the test `testConstructorWithNullObject` to fail."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.builder.ReflectionToStringBuilder:560",
+            "code": "super(Objects.requireNonNull(object, \"obj\"), style, buffer);",
+            "explanation": "Similar to line 535, this line also calls the superclass constructor with a non-null object check. If the object is null, it throws a NullPointerException. This is directly causing the test `testReflectionNull` to fail."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.builder.ReflectionToStringBuilder:386",
+            "code": "return new ReflectionToStringBuilder(object, style, null, reflectUpToClass, outputTransients, outputStatics);",
+            "explanation": "This line creates a new instance of `ReflectionToStringBuilder` with the given object. If the object is null, it will eventually lead to the constructor call at line 560, causing a NullPointerException."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.builder.ReflectionToStringBuilder:156",
+            "code": "return toString(object, null, false, false, null);",
+            "explanation": "This line calls the `toString` method with the given object. If the object is null, it will eventually lead to the constructor call at line 386, causing a NullPointerException."
+        }
+    ]
+}

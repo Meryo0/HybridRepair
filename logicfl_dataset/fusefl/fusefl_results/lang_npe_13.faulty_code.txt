@@ -1,0 +1,2 @@
+org.apache.commons.lang3.StringUtils:4694 `        return Pattern.compile(regex, Pattern.DOTALL).matcher(source).replaceAll(replacement);`
+org.apache.commons.lang3.StringUtils:4710 `        return replacePattern(source, regex, StringUtils.EMPTY);`

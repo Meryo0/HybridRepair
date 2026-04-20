@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.collections4.set.CompositeSet:255",
+            "code": "for (final Object item : coll) {",
+            "explanation": "The method `containsAll` in `CompositeSet` does not check if `coll` is null before iterating over it. This leads to a NullPointerException when `coll` is null."
+        },
+        {
+            "faultyLine": "org.apache.commons.collections4.set.CompositeSet:294",
+            "code": "if (coll.size() == 0) {",
+            "explanation": "The method `removeAll` in `CompositeSet` does not check if `coll` is null before calling `coll.size()`. This leads to a NullPointerException when `coll` is null."
+        },
+        {
+            "faultyLine": "org.apache.commons.collections4.CollectionUtils:469",
+            "code": "for (final O obj : coll) {",
+            "explanation": "The method `getCardinalityMap` in `CollectionUtils` does not check if `coll` is null before iterating over it. This leads to a NullPointerException when `coll` is null."
+        },
+        {
+            "faultyLine": "org.apache.commons.collections4.CollectionUtils:254",
+            "code": "final SetOperationCardinalityHelper<O> helper = new SetOperationCardinalityHelper<>(a, b);",
+            "explanation": "The method `intersection` in `CollectionUtils` does not check if `a` or `b` are null before passing them to the `SetOperationCardinalityHelper` constructor. This leads to a NullPointerException when either `a` or `b` is null."
+        },
+        {
+            "faultyLine": "org.apache.commons.collections4.CollectionUtils:141",
+            "code": "super(a, b);",
+            "explanation": "The constructor of `SetOperationCardinalityHelper` does not check if `a` or `b` are null before calling the superclass constructor. This leads to a NullPointerException when either `a` or `b` is null."
+        }
+    ]
+}

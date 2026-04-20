@@ -1,0 +1,1256 @@
+{
+  "lang_npe_1": [
+    {
+      "class_name": "org.apache.commons.lang3.ClassLoaderUtils",
+      "line": 67,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.lang3.ClassLoaderUtils",
+      "line": 77,
+      "flag": "faulty"
+    }
+  ],
+  "lang_npe_2": [
+    {
+      "class_name": "org.apache.commons.lang3.mutable.MutableObject",
+      "line": 96,
+      "flag": "faulty"
+    }
+  ],
+  "lang_npe_3": [
+    {
+      "class_name": "org.apache.commons.lang3.reflect.TypeUtils",
+      "line": 805,
+      "flag": "faulty"
+    }
+  ],
+  "lang_npe_4": [
+    {
+      "class_name": "org.apache.commons.lang3.exception.ExceptionUtils",
+      "line": 376,
+      "flag": "faulty"
+    }
+  ],
+  "lang_npe_5": [
+    {
+      "class_name": "org.apache.commons.lang3.time.DurationUtils",
+      "line": 73,
+      "flag": "faulty"
+    }
+  ],
+  "lang_npe_6": [
+    {
+      "class_name": "org.apache.commons.lang3.ArrayUtils",
+      "line": 9267,
+      "flag": "faulty"
+    }
+  ],
+  "lang_npe_7": [
+    {
+      "class_name": "org.apache.commons.lang3.stream.Streams",
+      "line": 479,
+      "flag": "faulty"
+    }
+  ],
+  "lang_npe_8": [
+    {
+      "class_name": "org.apache.commons.lang3.CharSequenceUtils",
+      "line": 312,
+      "flag": "faulty"
+    }
+  ],
+  "lang_npe_9": [
+    {
+      "class_name": "org.apache.commons.lang3.reflect.MemberUtils",
+      "line": 165,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.lang3.reflect.MemberUtils",
+      "line": 231,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.lang3.reflect.MethodUtils",
+      "line": 465,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.lang3.reflect.MethodUtils",
+      "line": 706,
+      "flag": "faulty"
+    }
+  ],
+  "lang_npe_10": [
+    {
+      "class_name": "org.apache.commons.lang3.builder.ReflectionToStringBuilder",
+      "line": 493,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.lang3.builder.ReflectionToStringBuilder",
+      "line": 511,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.lang3.builder.ReflectionToStringBuilder",
+      "line": 535,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.lang3.builder.ReflectionToStringBuilder",
+      "line": 560,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.lang3.builder.ReflectionToStringBuilder",
+      "line": 591,
+      "flag": "fixed"
+    }
+  ],
+  "lang_npe_11": [
+    {
+      "class_name": "org.apache.commons.lang3.text.StrBuilder",
+      "line": 2822,
+      "flag": "faulty"
+    }
+  ],
+  "lang_npe_12": [
+    {
+      "class_name": "org.apache.commons.lang3.reflect.TypeUtils",
+      "line": 471,
+      "flag": "faulty"
+    }
+  ],
+  "lang_npe_13": [
+    {
+      "class_name": "org.apache.commons.lang3.StringUtils",
+      "line": 4694,
+      "flag": "faulty"
+    }
+  ],
+  "math_npe_1": [
+    {
+      "class_name": "org.apache.commons.math.util.MathUtils",
+      "line": 2324,
+      "flag": "faulty"
+    }
+  ],
+  "math_npe_2": [
+    {
+      "class_name": "org.apache.commons.math.analysis.polynomials.PolynomialFunction",
+      "line": 65,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.analysis.polynomials.PolynomialFunction",
+      "line": 123,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.analysis.polynomials.PolynomialFunction",
+      "line": 230,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.complex.Complex",
+      "line": 150,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.complex.Complex",
+      "line": 211,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.complex.Complex",
+      "line": 358,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.complex.Complex",
+      "line": 443,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.complex.Complex",
+      "line": 680,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.fraction.BigFraction",
+      "line": 465,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.linear.AbstractRealMatrix",
+      "line": 389,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.math.linear.Array2DRowFieldMatrix",
+      "line": 155,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.linear.Array2DRowRealMatrix",
+      "line": 278,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.linear.BlockFieldMatrix",
+      "line": 762,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.math.linear.BlockRealMatrix",
+      "line": 769,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.math.random.EmpiricalDistributionImpl",
+      "line": 139,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.random.EmpiricalDistributionImpl",
+      "line": 166,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.random.EmpiricalDistributionImpl",
+      "line": 294,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.stat.descriptive.DescriptiveStatistics",
+      "line": 706,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.stat.descriptive.moment.FirstMoment",
+      "line": 154,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.stat.descriptive.moment.FourthMoment",
+      "line": 140,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.stat.descriptive.moment.GeometricMean",
+      "line": 189,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.stat.descriptive.moment.GeometricMean",
+      "line": 189,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.stat.descriptive.moment.Kurtosis",
+      "line": 217,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.stat.descriptive.moment.Mean",
+      "line": 268,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.stat.descriptive.moment.SecondMoment",
+      "line": 120,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.stat.descriptive.moment.SemiVariance",
+      "line": 162,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.stat.descriptive.moment.Skewness",
+      "line": 209,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.stat.descriptive.moment.StandardDeviation",
+      "line": 267,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.stat.descriptive.moment.ThirdMoment",
+      "line": 134,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.stat.descriptive.moment.Variance",
+      "line": 605,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.stat.descriptive.moment.Variance",
+      "line": 605,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.stat.descriptive.rank.Max",
+      "line": 159,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.stat.descriptive.rank.Min",
+      "line": 159,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.stat.descriptive.rank.Percentile",
+      "line": 488,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.stat.descriptive.summary.Product",
+      "line": 216,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.stat.descriptive.summary.Sum",
+      "line": 212,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.stat.descriptive.summary.SumOfLogs",
+      "line": 158,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.stat.descriptive.summary.SumOfSquares",
+      "line": 146,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.stat.descriptive.SummaryStatistics",
+      "line": 658,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.stat.descriptive.SynchronizedDescriptiveStatistics",
+      "line": 168,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.stat.descriptive.SynchronizedSummaryStatistics",
+      "line": 328,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.stat.inference.ChiSquareTestImpl",
+      "line": 344,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.util.ResizableDoubleArray",
+      "line": 287,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.math.util.ResizableDoubleArray",
+      "line": 837,
+      "flag": "fixed"
+    }
+  ],
+  "math_npe_3": [
+    {
+      "class_name": "org.apache.commons.math.exception.util.MessageFactory",
+      "line": 66,
+      "flag": "faulty"
+    }
+  ],
+  "collections_npe_1": [
+    {
+      "class_name": "org.apache.commons.collections4.map.CompositeMap",
+      "line": 136,
+      "flag": "faulty"
+    }
+  ],
+  "collections_npe_2": [
+    {
+      "class_name": "org.apache.commons.collections4.set.CompositeSet",
+      "line": 255,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.collections4.set.CompositeSet",
+      "line": 294,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.collections4.set.CompositeSet",
+      "line": 358,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.collections4.set.CompositeSet",
+      "line": 391,
+      "flag": "fixed"
+    }
+  ],
+  "collections_npe_3": [
+    {
+      "class_name": "org.apache.commons.collections4.collection.CompositeCollection",
+      "line": 263,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.collections4.collection.CompositeCollection",
+      "line": 303,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.collections4.collection.CompositeCollection",
+      "line": 327,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.collections4.collection.CompositeCollection",
+      "line": 362,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.collections4.collection.CompositeCollection",
+      "line": 373,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.collections4.collection.CompositeCollection",
+      "line": 374,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.collections4.collection.CompositeCollection",
+      "line": 383,
+      "flag": "faulty"
+    }
+  ],
+  "commonsio_npe_1": [
+    {
+      "class_name": "org.apache.commons.io.IOCase",
+      "line": 218,
+      "flag": "faulty"
+    }
+  ],
+  "commonsio_npe_2": [
+    {
+      "class_name": "org.apache.commons.io.IOCase",
+      "line": 192,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.io.IOCase",
+      "line": 192,
+      "flag": "faulty"
+    }
+  ],
+  "commonsio_npe_3": [
+    {
+      "class_name": "org.apache.commons.io.filefilter.CanExecuteFileFilter",
+      "line": 85,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.filefilter.CanExecuteFileFilter",
+      "line": 97,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.filefilter.CanReadFileFilter",
+      "line": 95,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.io.filefilter.CanReadFileFilter",
+      "line": 107,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.filefilter.CanWriteFileFilter",
+      "line": 83,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.io.filefilter.CanWriteFileFilter",
+      "line": 95,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.filefilter.DirectoryFileFilter",
+      "line": 100,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.filefilter.DirectoryFileFilter",
+      "line": 112,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.filefilter.EmptyFileFilter",
+      "line": 107,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.io.filefilter.EmptyFileFilter",
+      "line": 124,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.filefilter.FileFileFilter",
+      "line": 100,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.io.filefilter.FileFileFilter",
+      "line": 112,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.filefilter.HiddenFileFilter",
+      "line": 104,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.filefilter.HiddenFileFilter",
+      "line": 117,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.io.filefilter.NameFileFilter",
+      "line": 166,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.io.filefilter.SizeFileFilter",
+      "line": 123,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.IOCase",
+      "line": 173,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.IOCase",
+      "line": 174,
+      "flag": "faulty"
+    }
+  ],
+  "commonsio_npe_4": [
+    {
+      "class_name": "org.apache.commons.io.file.PathUtils",
+      "line": 881,
+      "flag": "faulty"
+    }
+  ],
+  "commonsio_npe_5": [
+    {
+      "class_name": "org.apache.commons.io.filefilter.RegexFileFilter",
+      "line": 114,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.io.filefilter.RegexFileFilter",
+      "line": 128,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.io.filefilter.RegexFileFilter",
+      "line": 184,
+      "flag": "faulty"
+    }
+  ],
+  "commonsio_npe_6": [
+    {
+      "class_name": "org.apache.commons.io.input.ReaderInputStream",
+      "line": 132,
+      "flag": "faulty"
+    }
+  ],
+  "commonsio_npe_7": [
+    {
+      "class_name": "org.apache.commons.io.input.ReaderInputStream",
+      "line": 140,
+      "flag": "faulty"
+    }
+  ],
+  "commonsio_npe_8": [
+    {
+      "class_name": "org.apache.commons.io.file.PathUtils",
+      "line": 1215,
+      "flag": "faulty"
+    }
+  ],
+  "commonsio_npe_9": [
+    {
+      "class_name": "org.apache.commons.io.output.WriterOutputStream",
+      "line": 170,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.io.output.WriterOutputStream",
+      "line": 206,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.io.output.WriterOutputStream",
+      "line": 208,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.output.WriterOutputStream",
+      "line": 239,
+      "flag": "fixed"
+    }
+  ],
+  "commonsio_npe_10": [
+    {
+      "class_name": "org.apache.commons.io.input.CharSequenceInputStream",
+      "line": 75,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.io.input.CharSequenceInputStream",
+      "line": 107,
+      "flag": "fixed"
+    }
+  ],
+  "commonsio_npe_11": [
+    {
+      "class_name": "org.apache.commons.io.input.ReaderInputStream",
+      "line": 149,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.io.input.ReaderInputStream",
+      "line": 177,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.io.input.ReaderInputStream",
+      "line": 178,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.io.input.ReaderInputStream",
+      "line": 203,
+      "flag": "fixed"
+    }
+  ],
+  "commonsio_npe_12": [
+    {
+      "class_name": "org.apache.commons.io.output.FileWriterWithEncoding",
+      "line": 226,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.io.output.FileWriterWithEncoding",
+      "line": 231,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.output.FileWriterWithEncoding",
+      "line": 232,
+      "flag": "fixed"
+    }
+  ],
+  "commonsio_npe_13": [
+    {
+      "class_name": "org.apache.commons.io.filefilter.NameFileFilter",
+      "line": 180,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.filefilter.PrefixFileFilter",
+      "line": 171,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.filefilter.PrefixFileFilter",
+      "line": 195,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.filefilter.SuffixFileFilter",
+      "line": 196,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.filefilter.WildcardFileFilter",
+      "line": 198,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.filefilter.WildcardFilter",
+      "line": 161,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.IOCase",
+      "line": 180,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.io.IOCase",
+      "line": 180,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.IOCase",
+      "line": 196,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.io.IOCase",
+      "line": 197,
+      "flag": "fixed"
+    }
+  ],
+  "commonsio_npe_14": [
+    {
+      "class_name": "org.apache.commons.io.IOUtils",
+      "line": 716,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.io.IOUtils",
+      "line": 715,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.IOUtils",
+      "line": 749,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.IOUtils",
+      "line": 750,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.IOUtils",
+      "line": 752,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.IOUtils",
+      "line": 754,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.IOUtils",
+      "line": 758,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.apache.commons.io.IOUtils",
+      "line": 761,
+      "flag": "fixed"
+    }
+  ],
+  "commonsio_npe_15": [
+    {
+      "class_name": "org.apache.commons.io.IOUtils",
+      "line": 1160,
+      "flag": "faulty"
+    }
+  ],
+  "commonsio_npe_16": [
+    {
+      "class_name": "org.apache.commons.io.FileUtils",
+      "line": 448,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.io.FileUtils",
+      "line": 449,
+      "flag": "fixed"
+    }
+  ],
+  "commonsio_npe_17": [
+    {
+      "class_name": "org.apache.commons.io.FileUtils",
+      "line": 391,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.io.FileUtils",
+      "line": 392,
+      "flag": "fixed"
+    }
+  ],
+  "commonsio_npe_18": [
+    {
+      "class_name": "org.apache.commons.io.IOUtils",
+      "line": 792,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.io.IOUtils",
+      "line": 793,
+      "flag": "fixed"
+    }
+  ],
+  "commonsio_npe_19": [
+    {
+      "class_name": "org.apache.commons.io.IOUtils",
+      "line": 753,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.io.IOUtils",
+      "line": 754,
+      "flag": "fixed"
+    }
+  ],
+  "d4j_chart_2": [
+    {
+      "class_name": "org.jfree.data.general.DatasetUtilities",
+      "line": 779,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.jfree.data.general.DatasetUtilities",
+      "line": 779,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.jfree.data.general.DatasetUtilities",
+      "line": 1283,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.jfree.data.general.DatasetUtilities",
+      "line": 754,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.jfree.data.general.DatasetUtilities",
+      "line": 757,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.jfree.data.general.DatasetUtilities",
+      "line": 760,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.jfree.data.general.DatasetUtilities",
+      "line": 1241,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.jfree.data.general.DatasetUtilities",
+      "line": 1244,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.jfree.data.general.DatasetUtilities",
+      "line": 1247,
+      "flag": "fixed"
+    }
+  ],
+  "d4j_chart_4": [
+    {
+      "class_name": "org.jfree.chart.plot.XYPlot",
+      "line": 4493,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_chart_14": [
+    {
+      "class_name": "org.jfree.chart.plot.CategoryPlot",
+      "line": 2166,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.jfree.chart.plot.CategoryPlot",
+      "line": 2448,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.jfree.chart.plot.XYPlot",
+      "line": 2293,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.jfree.chart.plot.XYPlot",
+      "line": 2529,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_chart_16": [
+    {
+      "class_name": "org.jfree.data.category.DefaultIntervalCategoryDataset",
+      "line": 207,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.jfree.data.category.DefaultIntervalCategoryDataset",
+      "line": 208,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.jfree.data.category.DefaultIntervalCategoryDataset",
+      "line": 338,
+      "flag": "fixed"
+    }
+  ],
+  "d4j_cli_5": [
+    {
+      "class_name": "org.apache.commons.cli.Util",
+      "line": 36,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_cli_30": [
+    {
+      "class_name": "org.apache.commons.cli.DefaultParser",
+      "line": 159,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.cli.Parser",
+      "line": 272,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_closure_2": [
+    {
+      "class_name": "com.google.javascript.jscomp.TypeCheck",
+      "line": 1574,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_closure_171": [
+    {
+      "class_name": "com.google.javascript.jscomp.TypedScopeCreator",
+      "line": 1670,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "com.google.javascript.jscomp.TypeInference",
+      "line": 736,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_codec_5": [
+    {
+      "class_name": "org.apache.commons.codec.binary.Base64",
+      "line": 594,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_codec_13": [
+    {
+      "class_name": "org.apache.commons.codec.language.DoubleMetaphone",
+      "line": 244,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_codec_17": [
+    {
+      "class_name": "org.apache.commons.codec.binary.StringUtils",
+      "line": 339,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_csv_4": [
+    {
+      "class_name": "org.apache.commons.csv.CSVParser",
+      "line": 288,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_csv_9": [
+    {
+      "class_name": "org.apache.commons.csv.CSVRecord",
+      "line": 180,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_csv_11": [
+    {
+      "class_name": "org.apache.commons.csv.CSVParser",
+      "line": 384,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_gson_6": [
+    {
+      "class_name": "com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory",
+      "line": 67,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_gson_9": [
+    {
+      "class_name": "com.google.gson.stream.JsonWriter",
+      "line": 464,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "com.google.gson.internal.bind.JsonTreeWriter",
+      "line": 157,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_jacksoncore_8": [
+    {
+      "class_name": "com.fasterxml.jackson.core.util.TextBuffer",
+      "line": 307,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_jacksondatabind_3": [
+    {
+      "class_name": "com.fasterxml.jackson.databind.deser.std.StringArrayDeserializer",
+      "line": 66,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "com.fasterxml.jackson.databind.deser.std.StringArrayDeserializer",
+      "line": 95,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_jacksondatabind_13": [
+    {
+      "class_name": "com.fasterxml.jackson.databind.deser.DefaultDeserializationContext",
+      "line": 88,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "com.fasterxml.jackson.databind.deser.impl.ObjectIdValueProperty",
+      "line": 93,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_jacksondatabind_36": [
+    {
+      "class_name": "com.fasterxml.jackson.databind.util.StdDateFormat",
+      "line": 243,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "com.fasterxml.jackson.databind.util.StdDateFormat",
+      "line": 555,
+      "flag": "fixed"
+    }
+  ],
+  "d4j_jacksondatabind_80": [
+    {
+      "class_name": "com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver",
+      "line": 145,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver",
+      "line": 79,
+      "flag": "fixed"
+    }
+  ],
+  "d4j_jacksondatabind_93": [
+    {
+      "class_name": "com.fasterxml.jackson.databind.jsontype.impl.SubTypeValidator",
+      "line": 85,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_jacksondatabind_95": [
+    {
+      "class_name": "com.fasterxml.jackson.databind.type.TypeFactory",
+      "line": 355,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "com.fasterxml.jackson.databind.type.TypeFactory",
+      "line": 366,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "com.fasterxml.jackson.databind.type.TypeFactory",
+      "line": 896,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "com.fasterxml.jackson.databind.type.TypeParser",
+      "line": 59,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_jacksondatabind_107": [
+    {
+      "class_name": "com.fasterxml.jackson.databind.jsontype.impl.TypeDeserializerBase",
+      "line": 165,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_jsoup_8": [
+    {
+      "class_name": "org.jsoup.nodes.Node",
+      "line": 363,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_jsoup_22": [
+    {
+      "class_name": "org.jsoup.nodes.Node",
+      "line": 445,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.jsoup.nodes.Node",
+      "line": 471,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.jsoup.nodes.Element",
+      "line": 435,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.jsoup.nodes.Element",
+      "line": 447,
+      "flag": "fixed"
+    },
+    {
+      "class_name": "org.jsoup.nodes.Element",
+      "line": 462,
+      "flag": "fixed"
+    }
+  ],
+  "d4j_jsoup_26": [
+    {
+      "class_name": "org.jsoup.safety.Cleaner",
+      "line": 43,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_jsoup_66": [
+    {
+      "class_name": "org.jsoup.nodes.Element",
+      "line": 89,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.jsoup.nodes.Element",
+      "line": 1402,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.jsoup.nodes.Element",
+      "line": 1414,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_jsoup_89": [
+    {
+      "class_name": "org.jsoup.nodes.Attribute",
+      "line": 88,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_lang_20": [
+    {
+      "class_name": "org.apache.commons.lang3.StringUtils",
+      "line": 3298,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.lang3.StringUtils",
+      "line": 3383,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_lang_33": [
+    {
+      "class_name": "org.apache.commons.lang3.ClassUtils",
+      "line": 910,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_lang_39": [
+    {
+      "class_name": "org.apache.commons.lang3.StringUtils",
+      "line": 3676,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.lang3.StringUtils",
+      "line": 3676,
+      "flag": "fixed"
+    }
+  ],
+  "d4j_lang_47": [
+    {
+      "class_name": "org.apache.commons.lang.text.StrBuilder",
+      "line": 1186,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.lang.text.StrBuilder",
+      "line": 1230,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_lang_57": [
+    {
+      "class_name": "org.apache.commons.lang.LocaleUtils",
+      "line": 223,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_math_4": [
+    {
+      "class_name": "org.apache.commons.math3.geometry.euclidean.threed.SubLine",
+      "line": 116,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.math3.geometry.euclidean.twod.SubLine",
+      "line": 120,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_math_70": [
+    {
+      "class_name": "org.apache.commons.math.analysis.solvers.BisectionSolver",
+      "line": 72,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_math_79": [
+    {
+      "class_name": "org.apache.commons.math.util.MathUtils",
+      "line": 1624,
+      "flag": "faulty"
+    },
+    {
+      "class_name": "org.apache.commons.math.util.MathUtils",
+      "line": 1626,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_mockito_18": [
+    {
+      "class_name": "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues",
+      "line": 117,
+      "flag": "faulty"
+    }
+  ],
+  "d4j_mockito_38": [
+    {
+      "class_name": "org.mockito.internal.verification.argumentmatching.ArgumentMatchingTool",
+      "line": 48,
+      "flag": "faulty"
+    }
+  ]
+}

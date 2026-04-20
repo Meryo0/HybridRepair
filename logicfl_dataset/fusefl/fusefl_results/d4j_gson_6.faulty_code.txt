@@ -1,0 +1,404 @@
+com.google.gson.FieldNamingPolicy:31 `public enum FieldNamingPolicy implements FieldNamingStrategy {`
+com.google.gson.FieldNamingPolicy:37 `  IDENTITY() {`
+com.google.gson.FieldNamingPolicy:53 `  UPPER_CAMEL_CASE() {`
+com.google.gson.FieldNamingPolicy:72 `  UPPER_CAMEL_CASE_WITH_SPACES() {`
+com.google.gson.FieldNamingPolicy:90 `  LOWER_CASE_WITH_UNDERSCORES() {`
+com.google.gson.FieldNamingPolicy:113 `  LOWER_CASE_WITH_DASHES() {`
+com.google.gson.Gson:120 `  private final ThreadLocal<Map<TypeToken<?>, FutureTypeAdapter<?>>> calls`
+com.google.gson.Gson:123 `  private final Map<TypeToken<?>, TypeAdapter<?>> typeTokenCache`
+com.google.gson.Gson:135 `  final JsonDeserializationContext deserializationContext = new JsonDeserializationContext() {`
+com.google.gson.Gson:142 `  final JsonSerializationContext serializationContext = new JsonSerializationContext() {`
+com.google.gson.Gson:186 `    this(Excluder.DEFAULT, FieldNamingPolicy.IDENTITY,`
+com.google.gson.Gson:191 `  }`
+com.google.gson.Gson:198 `      List<TypeAdapterFactory> typeAdapterFactories) {`
+com.google.gson.Gson:199 `    this.constructorConstructor = new ConstructorConstructor(instanceCreators);`
+com.google.gson.Gson:200 `    this.serializeNulls = serializeNulls;`
+com.google.gson.Gson:201 `    this.generateNonExecutableJson = generateNonExecutableGson;`
+com.google.gson.Gson:202 `    this.htmlSafe = htmlSafe;`
+com.google.gson.Gson:203 `    this.prettyPrinting = prettyPrinting;`
+com.google.gson.Gson:204 `    this.lenient = lenient;`
+com.google.gson.Gson:206 `    List<TypeAdapterFactory> factories = new ArrayList<TypeAdapterFactory>();`
+com.google.gson.Gson:209 `    factories.add(TypeAdapters.JSON_ELEMENT_FACTORY);`
+com.google.gson.Gson:210 `    factories.add(ObjectTypeAdapter.FACTORY);`
+com.google.gson.Gson:213 `    factories.add(excluder);`
+com.google.gson.Gson:216 `    factories.addAll(typeAdapterFactories);`
+com.google.gson.Gson:219 `    factories.add(TypeAdapters.STRING_FACTORY);`
+com.google.gson.Gson:220 `    factories.add(TypeAdapters.INTEGER_FACTORY);`
+com.google.gson.Gson:221 `    factories.add(TypeAdapters.BOOLEAN_FACTORY);`
+com.google.gson.Gson:222 `    factories.add(TypeAdapters.BYTE_FACTORY);`
+com.google.gson.Gson:223 `    factories.add(TypeAdapters.SHORT_FACTORY);`
+com.google.gson.Gson:224 `    TypeAdapter<Number> longAdapter = longAdapter(longSerializationPolicy);`
+com.google.gson.Gson:225 `    factories.add(TypeAdapters.newFactory(long.class, Long.class, longAdapter));`
+com.google.gson.Gson:226 `    factories.add(TypeAdapters.newFactory(double.class, Double.class,`
+com.google.gson.Gson:228 `    factories.add(TypeAdapters.newFactory(float.class, Float.class,`
+com.google.gson.Gson:230 `    factories.add(TypeAdapters.NUMBER_FACTORY);`
+com.google.gson.Gson:231 `    factories.add(TypeAdapters.ATOMIC_INTEGER_FACTORY);`
+com.google.gson.Gson:232 `    factories.add(TypeAdapters.ATOMIC_BOOLEAN_FACTORY);`
+com.google.gson.Gson:233 `    factories.add(TypeAdapters.newFactory(AtomicLong.class, atomicLongAdapter(longAdapter)));`
+com.google.gson.Gson:234 `    factories.add(TypeAdapters.newFactory(AtomicLongArray.class, atomicLongArrayAdapter(longAdapter)));`
+com.google.gson.Gson:235 `    factories.add(TypeAdapters.ATOMIC_INTEGER_ARRAY_FACTORY);`
+com.google.gson.Gson:236 `    factories.add(TypeAdapters.CHARACTER_FACTORY);`
+com.google.gson.Gson:237 `    factories.add(TypeAdapters.STRING_BUILDER_FACTORY);`
+com.google.gson.Gson:238 `    factories.add(TypeAdapters.STRING_BUFFER_FACTORY);`
+com.google.gson.Gson:239 `    factories.add(TypeAdapters.newFactory(BigDecimal.class, TypeAdapters.BIG_DECIMAL));`
+com.google.gson.Gson:240 `    factories.add(TypeAdapters.newFactory(BigInteger.class, TypeAdapters.BIG_INTEGER));`
+com.google.gson.Gson:241 `    factories.add(TypeAdapters.URL_FACTORY);`
+com.google.gson.Gson:242 `    factories.add(TypeAdapters.URI_FACTORY);`
+com.google.gson.Gson:243 `    factories.add(TypeAdapters.UUID_FACTORY);`
+com.google.gson.Gson:244 `    factories.add(TypeAdapters.CURRENCY_FACTORY);`
+com.google.gson.Gson:245 `    factories.add(TypeAdapters.LOCALE_FACTORY);`
+com.google.gson.Gson:246 `    factories.add(TypeAdapters.INET_ADDRESS_FACTORY);`
+com.google.gson.Gson:247 `    factories.add(TypeAdapters.BIT_SET_FACTORY);`
+com.google.gson.Gson:248 `    factories.add(DateTypeAdapter.FACTORY);`
+com.google.gson.Gson:249 `    factories.add(TypeAdapters.CALENDAR_FACTORY);`
+com.google.gson.Gson:250 `    factories.add(TimeTypeAdapter.FACTORY);`
+com.google.gson.Gson:251 `    factories.add(SqlDateTypeAdapter.FACTORY);`
+com.google.gson.Gson:252 `    factories.add(TypeAdapters.TIMESTAMP_FACTORY);`
+com.google.gson.Gson:253 `    factories.add(ArrayTypeAdapter.FACTORY);`
+com.google.gson.Gson:254 `    factories.add(TypeAdapters.CLASS_FACTORY);`
+com.google.gson.Gson:257 `    factories.add(new CollectionTypeAdapterFactory(constructorConstructor));`
+com.google.gson.Gson:258 `    factories.add(new MapTypeAdapterFactory(constructorConstructor, complexMapKeySerialization));`
+com.google.gson.Gson:259 `    factories.add(new JsonAdapterAnnotationTypeAdapterFactory(constructorConstructor));`
+com.google.gson.Gson:260 `    factories.add(TypeAdapters.ENUM_FACTORY);`
+com.google.gson.Gson:261 `    factories.add(new ReflectiveTypeAdapterFactory(`
+com.google.gson.Gson:264 `    this.factories = Collections.unmodifiableList(factories);`
+com.google.gson.Gson:265 `  }`
+com.google.gson.Gson:268 `    if (serializeSpecialFloatingPointValues) {`
+com.google.gson.Gson:271 `    return new TypeAdapter<Number>() {`
+com.google.gson.Gson:292 `    if (serializeSpecialFloatingPointValues) {`
+com.google.gson.Gson:295 `    return new TypeAdapter<Number>() {`
+com.google.gson.Gson:324 `    if (longSerializationPolicy == LongSerializationPolicy.DEFAULT) {`
+com.google.gson.Gson:325 `      return TypeAdapters.LONG;`
+com.google.gson.Gson:346 `    return new TypeAdapter<AtomicLong>() {`
+com.google.gson.Gson:358 `    return new TypeAdapter<AtomicLongArray>() {`
+com.google.gson.Gson:392 `    TypeAdapter<?> cached = typeTokenCache.get(type);`
+com.google.gson.Gson:393 `    if (cached != null) {`
+com.google.gson.Gson:397 `    Map<TypeToken<?>, FutureTypeAdapter<?>> threadCalls = calls.get();`
+com.google.gson.Gson:398 `    boolean requiresThreadLocalCleanup = false;`
+com.google.gson.Gson:399 `    if (threadCalls == null) {`
+com.google.gson.Gson:400 `      threadCalls = new HashMap<TypeToken<?>, FutureTypeAdapter<?>>();`
+com.google.gson.Gson:401 `      calls.set(threadCalls);`
+com.google.gson.Gson:402 `      requiresThreadLocalCleanup = true;`
+com.google.gson.Gson:406 `    FutureTypeAdapter<T> ongoingCall = (FutureTypeAdapter<T>) threadCalls.get(type);`
+com.google.gson.Gson:407 `    if (ongoingCall != null) {`
+com.google.gson.Gson:412 `      FutureTypeAdapter<T> call = new FutureTypeAdapter<T>();`
+com.google.gson.Gson:413 `      threadCalls.put(type, call);`
+com.google.gson.Gson:415 `      for (TypeAdapterFactory factory : factories) {`
+com.google.gson.Gson:416 `        TypeAdapter<T> candidate = factory.create(this, type);`
+com.google.gson.Gson:417 `        if (candidate != null) {`
+com.google.gson.Gson:422 `      }`
+com.google.gson.Gson:425 `      threadCalls.remove(type);`
+com.google.gson.Gson:427 `      if (requiresThreadLocalCleanup) {`
+com.google.gson.Gson:428 `        calls.remove();`
+com.google.gson.Gson:484 `    boolean skipPastFound = false;`
+com.google.gson.Gson:488 `    if (!factories.contains(skipPast)) skipPastFound = true;`
+com.google.gson.Gson:490 `    for (TypeAdapterFactory factory : factories) {`
+com.google.gson.Gson:491 `      if (!skipPastFound) {`
+com.google.gson.Gson:498 `      TypeAdapter<T> candidate = factory.create(this, type);`
+com.google.gson.Gson:499 `      if (candidate != null) {`
+com.google.gson.Gson:502 `    }`
+com.google.gson.Gson:575 `    return toJson(src, src.getClass());`
+com.google.gson.Gson:594 `    StringWriter writer = new StringWriter();`
+com.google.gson.Gson:595 `    toJson(src, typeOfSrc, writer);`
+com.google.gson.Gson:639 `      JsonWriter jsonWriter = newJsonWriter(Streams.writerForAppendable(writer));`
+com.google.gson.Gson:640 `      toJson(src, typeOfSrc, jsonWriter);`
+com.google.gson.Gson:653 `    TypeAdapter<?> adapter = getAdapter(TypeToken.get(typeOfSrc));`
+com.google.gson.Gson:705 `    if (generateNonExecutableJson) {`
+com.google.gson.Gson:708 `    JsonWriter jsonWriter = new JsonWriter(writer);`
+com.google.gson.Gson:709 `    if (prettyPrinting) {`
+com.google.gson.Gson:712 `    jsonWriter.setSerializeNulls(serializeNulls);`
+com.google.gson.Gson:713 `    return jsonWriter;`
+com.google.gson.Gson:720 `    JsonReader jsonReader = new JsonReader(reader);`
+com.google.gson.Gson:721 `    jsonReader.setLenient(lenient);`
+com.google.gson.Gson:722 `    return jsonReader;`
+com.google.gson.Gson:765 `    Object object = fromJson(json, (Type) classOfT);`
+com.google.gson.Gson:789 `    if (json == null) {`
+com.google.gson.Gson:792 `    StringReader reader = new StringReader(json);`
+com.google.gson.Gson:793 `    T target = (T) fromJson(reader, typeOfT);`
+com.google.gson.Gson:843 `    JsonReader jsonReader = newJsonReader(json);`
+com.google.gson.Gson:844 `    T object = (T) fromJson(jsonReader, typeOfT);`
+com.google.gson.Gson:871 `    boolean isEmpty = true;`
+com.google.gson.Gson:872 `    boolean oldLenient = reader.isLenient();`
+com.google.gson.Gson:873 `    reader.setLenient(true);`
+com.google.gson.Gson:875 `      reader.peek();`
+com.google.gson.Gson:876 `      isEmpty = false;`
+com.google.gson.Gson:877 `      TypeToken<T> typeToken = (TypeToken<T>) TypeToken.get(typeOfT);`
+com.google.gson.Gson:878 `      TypeAdapter<T> typeAdapter = getAdapter(typeToken);`
+com.google.gson.Gson:896 `      reader.setLenient(oldLenient);`
+com.google.gson.Gson:947 `  static class FutureTypeAdapter<T> extends TypeAdapter<T> {`
+com.google.gson.LongSerializationPolicy:27 `public enum LongSerializationPolicy {`
+com.google.gson.LongSerializationPolicy:34 `  DEFAULT() {`
+com.google.gson.LongSerializationPolicy:45 `  STRING() {`
+com.google.gson.TypeAdapter:119 `public abstract class TypeAdapter<T> {`
+com.google.gson.TypeAdapter:186 `    return new TypeAdapter<T>() {`
+com.google.gson.internal.ConstructorConstructor:51 `  public ConstructorConstructor(Map<Type, InstanceCreator<?>> instanceCreators) {`
+com.google.gson.internal.ConstructorConstructor:52 `    this.instanceCreators = instanceCreators;`
+com.google.gson.internal.ConstructorConstructor:53 `  }`
+com.google.gson.internal.ConstructorConstructor:56 `    final Type type = typeToken.getType();`
+com.google.gson.internal.ConstructorConstructor:57 `    final Class<? super T> rawType = typeToken.getRawType();`
+com.google.gson.internal.ConstructorConstructor:62 `    final InstanceCreator<T> typeCreator = (InstanceCreator<T>) instanceCreators.get(type);`
+com.google.gson.internal.ConstructorConstructor:63 `    if (typeCreator != null) {`
+com.google.gson.internal.ConstructorConstructor:73 `    final InstanceCreator<T> rawTypeCreator =`
+com.google.gson.internal.ConstructorConstructor:75 `    if (rawTypeCreator != null) {`
+com.google.gson.internal.ConstructorConstructor:83 `    ObjectConstructor<T> defaultConstructor = newDefaultConstructor(rawType);`
+com.google.gson.internal.ConstructorConstructor:84 `    if (defaultConstructor != null) {`
+com.google.gson.internal.ConstructorConstructor:85 `      return defaultConstructor;`
+com.google.gson.internal.ConstructorConstructor:99 `      final Constructor<? super T> constructor = rawType.getDeclaredConstructor();`
+com.google.gson.internal.ConstructorConstructor:100 `      if (!constructor.isAccessible()) {`
+com.google.gson.internal.ConstructorConstructor:101 `        constructor.setAccessible(true);`
+com.google.gson.internal.ConstructorConstructor:103 `      return new ObjectConstructor<T>() {`
+com.google.gson.internal.ConstructorConstructor:107 `            Object[] args = null;`
+com.google.gson.internal.ConstructorConstructor:108 `            return (T) constructor.newInstance(args);`
+com.google.gson.internal.Excluder:50 `public final class Excluder implements TypeAdapterFactory, Cloneable {`
+com.google.gson.internal.Excluder:52 `  public static final Excluder DEFAULT = new Excluder();`
+com.google.gson.internal.Excluder:54 `  private double version = IGNORE_VERSIONS;`
+com.google.gson.internal.Excluder:55 `  private int modifiers = Modifier.TRANSIENT | Modifier.STATIC;`
+com.google.gson.internal.Excluder:56 `  private boolean serializeInnerClasses = true;`
+com.google.gson.internal.Excluder:58 `  private List<ExclusionStrategy> serializationStrategies = Collections.emptyList();`
+com.google.gson.internal.Excluder:59 `  private List<ExclusionStrategy> deserializationStrategies = Collections.emptyList();`
+com.google.gson.internal.Excluder:112 `    Class<?> rawType = type.getRawType();`
+com.google.gson.internal.Excluder:113 `    final boolean skipSerialize = excludeClass(rawType, true);`
+com.google.gson.internal.Excluder:114 `    final boolean skipDeserialize = excludeClass(rawType, false);`
+com.google.gson.internal.Excluder:116 `    if (!skipSerialize && !skipDeserialize) {`
+com.google.gson.internal.Excluder:117 `      return null;`
+com.google.gson.internal.Excluder:192 `    if (version != Excluder.IGNORE_VERSIONS`
+com.google.gson.internal.Excluder:197 `    if (!serializeInnerClasses && isInnerClass(clazz)) {`
+com.google.gson.internal.Excluder:201 `    if (isAnonymousOrLocal(clazz)) {`
+com.google.gson.internal.Excluder:205 `    List<ExclusionStrategy> list = serialize ? serializationStrategies : deserializationStrategies;`
+com.google.gson.internal.Excluder:206 `    for (ExclusionStrategy exclusionStrategy : list) {`
+com.google.gson.internal.Excluder:212 `    return false;`
+com.google.gson.internal.Excluder:216 `    return !Enum.class.isAssignableFrom(clazz)`
+com.google.gson.internal.JsonReaderInternalAccess:25 `public abstract class JsonReaderInternalAccess {`
+com.google.gson.internal.Streams:77 `    return appendable instanceof Writer ? (Writer) appendable : new AppendableWriter(appendable);`
+com.google.gson.internal.bind.ArrayTypeAdapter:39 `  public static final TypeAdapterFactory FACTORY = new TypeAdapterFactory() {`
+com.google.gson.internal.bind.ArrayTypeAdapter:42 `      Type type = typeToken.getType();`
+com.google.gson.internal.bind.ArrayTypeAdapter:43 `      if (!(type instanceof GenericArrayType || type instanceof Class && ((Class<?>) type).isArray())) {`
+com.google.gson.internal.bind.ArrayTypeAdapter:44 `        return null;`
+com.google.gson.internal.bind.CollectionTypeAdapterFactory:39 `  public CollectionTypeAdapterFactory(ConstructorConstructor constructorConstructor) {`
+com.google.gson.internal.bind.CollectionTypeAdapterFactory:40 `    this.constructorConstructor = constructorConstructor;`
+com.google.gson.internal.bind.CollectionTypeAdapterFactory:41 `  }`
+com.google.gson.internal.bind.CollectionTypeAdapterFactory:45 `    Type type = typeToken.getType();`
+com.google.gson.internal.bind.CollectionTypeAdapterFactory:47 `    Class<? super T> rawType = typeToken.getRawType();`
+com.google.gson.internal.bind.CollectionTypeAdapterFactory:48 `    if (!Collection.class.isAssignableFrom(rawType)) {`
+com.google.gson.internal.bind.CollectionTypeAdapterFactory:49 `      return null;`
+com.google.gson.internal.bind.DateTypeAdapter:42 `  public static final TypeAdapterFactory FACTORY = new TypeAdapterFactory() {`
+com.google.gson.internal.bind.DateTypeAdapter:45 `      return typeToken.getRawType() == Date.class ? (TypeAdapter<T>) new DateTypeAdapter() : null;`
+com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory:36 `  public JsonAdapterAnnotationTypeAdapterFactory(ConstructorConstructor constructorConstructor) {`
+com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory:37 `    this.constructorConstructor = constructorConstructor;`
+com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory:38 `  }`
+com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory:47 `    return (TypeAdapter<T>) getTypeAdapter(constructorConstructor, gson, targetType, annotation);`
+com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory:53 `    Class<?> value = annotation.value();`
+com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory:55 `    if (TypeAdapter.class.isAssignableFrom(value)) {`
+com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory:58 `    } else if (TypeAdapterFactory.class.isAssignableFrom(value)) {`
+com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory:59 `      Class<TypeAdapterFactory> typeAdapterFactory = (Class<TypeAdapterFactory>) value;`
+com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory:60 `      typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterFactory))`
+com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory:63 `    } else {`
+com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory:67 `      typeAdapter = typeAdapter.nullSafe();`
+com.google.gson.internal.bind.MapTypeAdapterFactory:110 `      boolean complexMapKeySerialization) {`
+com.google.gson.internal.bind.MapTypeAdapterFactory:111 `    this.constructorConstructor = constructorConstructor;`
+com.google.gson.internal.bind.MapTypeAdapterFactory:112 `    this.complexMapKeySerialization = complexMapKeySerialization;`
+com.google.gson.internal.bind.MapTypeAdapterFactory:113 `  }`
+com.google.gson.internal.bind.MapTypeAdapterFactory:116 `    Type type = typeToken.getType();`
+com.google.gson.internal.bind.MapTypeAdapterFactory:118 `    Class<? super T> rawType = typeToken.getRawType();`
+com.google.gson.internal.bind.MapTypeAdapterFactory:119 `    if (!Map.class.isAssignableFrom(rawType)) {`
+com.google.gson.internal.bind.MapTypeAdapterFactory:120 `      return null;`
+com.google.gson.internal.bind.ObjectTypeAdapter:38 `  public static final TypeAdapterFactory FACTORY = new TypeAdapterFactory() {`
+com.google.gson.internal.bind.ObjectTypeAdapter:41 `      if (type.getRawType() == Object.class) {`
+com.google.gson.internal.bind.ObjectTypeAdapter:44 `      return null;`
+com.google.gson.internal.bind.ReflectiveTypeAdapterFactory:54 `      FieldNamingStrategy fieldNamingPolicy, Excluder excluder) {`
+com.google.gson.internal.bind.ReflectiveTypeAdapterFactory:55 `    this.constructorConstructor = constructorConstructor;`
+com.google.gson.internal.bind.ReflectiveTypeAdapterFactory:56 `    this.fieldNamingPolicy = fieldNamingPolicy;`
+com.google.gson.internal.bind.ReflectiveTypeAdapterFactory:57 `    this.excluder = excluder;`
+com.google.gson.internal.bind.ReflectiveTypeAdapterFactory:58 `  }`
+com.google.gson.internal.bind.SqlDateTypeAdapter:39 `  public static final TypeAdapterFactory FACTORY = new TypeAdapterFactory() {`
+com.google.gson.internal.bind.SqlDateTypeAdapter:42 `      return typeToken.getRawType() == java.sql.Date.class`
+com.google.gson.internal.bind.TimeTypeAdapter:41 `  public static final TypeAdapterFactory FACTORY = new TypeAdapterFactory() {`
+com.google.gson.internal.bind.TimeTypeAdapter:44 `      return typeToken.getRawType() == Time.class ? (TypeAdapter<T>) new TimeTypeAdapter() : null;`
+com.google.gson.internal.bind.TypeAdapters:69 `  public static final TypeAdapter<Class> CLASS = new TypeAdapter<Class>() {`
+com.google.gson.internal.bind.TypeAdapters:90 `  public static final TypeAdapterFactory CLASS_FACTORY = newFactory(Class.class, CLASS);`
+com.google.gson.internal.bind.TypeAdapters:92 `  public static final TypeAdapter<BitSet> BIT_SET = new TypeAdapter<BitSet>() {`
+com.google.gson.internal.bind.TypeAdapters:149 `  public static final TypeAdapterFactory BIT_SET_FACTORY = newFactory(BitSet.class, BIT_SET);`
+com.google.gson.internal.bind.TypeAdapters:151 `  public static final TypeAdapter<Boolean> BOOLEAN = new TypeAdapter<Boolean>() {`
+com.google.gson.internal.bind.TypeAdapters:177 `  public static final TypeAdapter<Boolean> BOOLEAN_AS_STRING = new TypeAdapter<Boolean>() {`
+com.google.gson.internal.bind.TypeAdapters:191 `  public static final TypeAdapterFactory BOOLEAN_FACTORY`
+com.google.gson.internal.bind.TypeAdapters:194 `  public static final TypeAdapter<Number> BYTE = new TypeAdapter<Number>() {`
+com.google.gson.internal.bind.TypeAdapters:214 `  public static final TypeAdapterFactory BYTE_FACTORY`
+com.google.gson.internal.bind.TypeAdapters:217 `  public static final TypeAdapter<Number> SHORT = new TypeAdapter<Number>() {`
+com.google.gson.internal.bind.TypeAdapters:236 `  public static final TypeAdapterFactory SHORT_FACTORY`
+com.google.gson.internal.bind.TypeAdapters:239 `  public static final TypeAdapter<Number> INTEGER = new TypeAdapter<Number>() {`
+com.google.gson.internal.bind.TypeAdapters:257 `  public static final TypeAdapterFactory INTEGER_FACTORY`
+com.google.gson.internal.bind.TypeAdapters:260 `  public static final TypeAdapter<AtomicInteger> ATOMIC_INTEGER = new TypeAdapter<AtomicInteger>() {`
+com.google.gson.internal.bind.TypeAdapters:272 `  public static final TypeAdapterFactory ATOMIC_INTEGER_FACTORY =`
+com.google.gson.internal.bind.TypeAdapters:275 `  public static final TypeAdapter<AtomicBoolean> ATOMIC_BOOLEAN = new TypeAdapter<AtomicBoolean>() {`
+com.google.gson.internal.bind.TypeAdapters:283 `  public static final TypeAdapterFactory ATOMIC_BOOLEAN_FACTORY =`
+com.google.gson.internal.bind.TypeAdapters:286 `  public static final TypeAdapter<AtomicIntegerArray> ATOMIC_INTEGER_ARRAY = new TypeAdapter<AtomicIntegerArray>() {`
+com.google.gson.internal.bind.TypeAdapters:314 `  public static final TypeAdapterFactory ATOMIC_INTEGER_ARRAY_FACTORY =`
+com.google.gson.internal.bind.TypeAdapters:317 `  public static final TypeAdapter<Number> LONG = new TypeAdapter<Number>() {`
+com.google.gson.internal.bind.TypeAdapters:336 `  public static final TypeAdapter<Number> FLOAT = new TypeAdapter<Number>() {`
+com.google.gson.internal.bind.TypeAdapters:351 `  public static final TypeAdapter<Number> DOUBLE = new TypeAdapter<Number>() {`
+com.google.gson.internal.bind.TypeAdapters:366 `  public static final TypeAdapter<Number> NUMBER = new TypeAdapter<Number>() {`
+com.google.gson.internal.bind.TypeAdapters:386 `  public static final TypeAdapterFactory NUMBER_FACTORY = newFactory(Number.class, NUMBER);`
+com.google.gson.internal.bind.TypeAdapters:388 `  public static final TypeAdapter<Character> CHARACTER = new TypeAdapter<Character>() {`
+com.google.gson.internal.bind.TypeAdapters:407 `  public static final TypeAdapterFactory CHARACTER_FACTORY`
+com.google.gson.internal.bind.TypeAdapters:410 `  public static final TypeAdapter<String> STRING = new TypeAdapter<String>() {`
+com.google.gson.internal.bind.TypeAdapters:430 `  public static final TypeAdapter<BigDecimal> BIG_DECIMAL = new TypeAdapter<BigDecimal>() {`
+com.google.gson.internal.bind.TypeAdapters:448 `  public static final TypeAdapter<BigInteger> BIG_INTEGER = new TypeAdapter<BigInteger>() {`
+com.google.gson.internal.bind.TypeAdapters:466 `  public static final TypeAdapterFactory STRING_FACTORY = newFactory(String.class, STRING);`
+com.google.gson.internal.bind.TypeAdapters:468 `  public static final TypeAdapter<StringBuilder> STRING_BUILDER = new TypeAdapter<StringBuilder>() {`
+com.google.gson.internal.bind.TypeAdapters:483 `  public static final TypeAdapterFactory STRING_BUILDER_FACTORY =`
+com.google.gson.internal.bind.TypeAdapters:486 `  public static final TypeAdapter<StringBuffer> STRING_BUFFER = new TypeAdapter<StringBuffer>() {`
+com.google.gson.internal.bind.TypeAdapters:501 `  public static final TypeAdapterFactory STRING_BUFFER_FACTORY =`
+com.google.gson.internal.bind.TypeAdapters:504 `  public static final TypeAdapter<URL> URL = new TypeAdapter<URL>() {`
+com.google.gson.internal.bind.TypeAdapters:520 `  public static final TypeAdapterFactory URL_FACTORY = newFactory(URL.class, URL);`
+com.google.gson.internal.bind.TypeAdapters:522 `  public static final TypeAdapter<URI> URI = new TypeAdapter<URI>() {`
+com.google.gson.internal.bind.TypeAdapters:542 `  public static final TypeAdapterFactory URI_FACTORY = newFactory(URI.class, URI);`
+com.google.gson.internal.bind.TypeAdapters:544 `  public static final TypeAdapter<InetAddress> INET_ADDRESS = new TypeAdapter<InetAddress>() {`
+com.google.gson.internal.bind.TypeAdapters:560 `  public static final TypeAdapterFactory INET_ADDRESS_FACTORY =`
+com.google.gson.internal.bind.TypeAdapters:563 `  public static final TypeAdapter<UUID> UUID = new TypeAdapter<UUID>() {`
+com.google.gson.internal.bind.TypeAdapters:578 `  public static final TypeAdapterFactory UUID_FACTORY = newFactory(UUID.class, UUID);`
+com.google.gson.internal.bind.TypeAdapters:580 `  public static final TypeAdapter<Currency> CURRENCY = new TypeAdapter<Currency>() {`
+com.google.gson.internal.bind.TypeAdapters:590 `  public static final TypeAdapterFactory CURRENCY_FACTORY = newFactory(Currency.class, CURRENCY);`
+com.google.gson.internal.bind.TypeAdapters:592 `  public static final TypeAdapterFactory TIMESTAMP_FACTORY = new TypeAdapterFactory() {`
+com.google.gson.internal.bind.TypeAdapters:595 `      if (typeToken.getRawType() != Timestamp.class) {`
+com.google.gson.internal.bind.TypeAdapters:596 `        return null;`
+com.google.gson.internal.bind.TypeAdapters:613 `  public static final TypeAdapter<Calendar> CALENDAR = new TypeAdapter<Calendar>() {`
+com.google.gson.internal.bind.TypeAdapters:678 `  public static final TypeAdapterFactory CALENDAR_FACTORY =`
+com.google.gson.internal.bind.TypeAdapters:681 `  public static final TypeAdapter<Locale> LOCALE = new TypeAdapter<Locale>() {`
+com.google.gson.internal.bind.TypeAdapters:716 `  public static final TypeAdapterFactory LOCALE_FACTORY = newFactory(Locale.class, LOCALE);`
+com.google.gson.internal.bind.TypeAdapters:718 `  public static final TypeAdapter<JsonElement> JSON_ELEMENT = new TypeAdapter<JsonElement>() {`
+com.google.gson.internal.bind.TypeAdapters:790 `  public static final TypeAdapterFactory JSON_ELEMENT_FACTORY`
+com.google.gson.internal.bind.TypeAdapters:828 `  public static final TypeAdapterFactory ENUM_FACTORY = new TypeAdapterFactory() {`
+com.google.gson.internal.bind.TypeAdapters:854 `    return new TypeAdapterFactory() {`
+com.google.gson.internal.bind.TypeAdapters:857 `        return typeToken.getRawType() == type ? (TypeAdapter<T>) typeAdapter : null;`
+com.google.gson.internal.bind.TypeAdapters:867 `    return new TypeAdapterFactory() {`
+com.google.gson.internal.bind.TypeAdapters:870 `        Class<? super T> rawType = typeToken.getRawType();`
+com.google.gson.internal.bind.TypeAdapters:871 `        return (rawType == unboxed || rawType == boxed) ? (TypeAdapter<T>) typeAdapter : null;`
+com.google.gson.internal.bind.TypeAdapters:882 `    return new TypeAdapterFactory() {`
+com.google.gson.internal.bind.TypeAdapters:885 `        Class<? super T> rawType = typeToken.getRawType();`
+com.google.gson.internal.bind.TypeAdapters:886 `        return (rawType == base || rawType == sub) ? (TypeAdapter<T>) typeAdapter : null;`
+com.google.gson.internal.bind.TypeAdapters:901 `    return new TypeAdapterFactory() {`
+com.google.gson.internal.bind.TypeAdapters:904 `        final Class<? super T2> requestedType = typeToken.getRawType();`
+com.google.gson.internal.bind.TypeAdapters:905 `        if (!clazz.isAssignableFrom(requestedType)) {`
+com.google.gson.internal.bind.TypeAdapters:906 `          return null;`
+com.google.gson.reflect.TypeToken:71 `  TypeToken(Type type) {`
+com.google.gson.reflect.TypeToken:72 `    this.type = $Gson$Types.canonicalize($Gson$Preconditions.checkNotNull(type));`
+com.google.gson.reflect.TypeToken:73 `    this.rawType = (Class<? super T>) $Gson$Types.getRawType(this.type);`
+com.google.gson.reflect.TypeToken:74 `    this.hashCode = this.type.hashCode();`
+com.google.gson.reflect.TypeToken:75 `  }`
+com.google.gson.reflect.TypeToken:94 `    return rawType;`
+com.google.gson.reflect.TypeToken:101 `    return type;`
+com.google.gson.reflect.TypeToken:280 `    return this.hashCode;`
+com.google.gson.reflect.TypeToken:296 `    return new TypeToken<Object>(type);`
+com.google.gson.reflect.TypeToken:303 `    return new TypeToken<T>(type);`
+com.google.gson.stream.JsonReader:192 `  private static final char[] NON_EXECUTE_PREFIX = ")]}'\n".toCharArray();`
+com.google.gson.stream.JsonReader:230 `  private boolean lenient = false;`
+com.google.gson.stream.JsonReader:238 `  private final char[] buffer = new char[1024];`
+com.google.gson.stream.JsonReader:239 `  private int pos = 0;`
+com.google.gson.stream.JsonReader:240 `  private int limit = 0;`
+com.google.gson.stream.JsonReader:242 `  private int lineNumber = 0;`
+com.google.gson.stream.JsonReader:243 `  private int lineStart = 0;`
+com.google.gson.stream.JsonReader:245 `  int peeked = PEEKED_NONE;`
+com.google.gson.stream.JsonReader:269 `  private int[] stack = new int[32];`
+com.google.gson.stream.JsonReader:270 `  private int stackSize = 0;`
+com.google.gson.stream.JsonReader:272 `    stack[stackSize++] = JsonScope.EMPTY_DOCUMENT;`
+com.google.gson.stream.JsonReader:283 `  private String[] pathNames = new String[32];`
+com.google.gson.stream.JsonReader:284 `  private int[] pathIndices = new int[32];`
+com.google.gson.stream.JsonReader:289 `  public JsonReader(Reader in) {`
+com.google.gson.stream.JsonReader:290 `    if (in == null) {`
+com.google.gson.stream.JsonReader:293 `    this.in = in;`
+com.google.gson.stream.JsonReader:294 `  }`
+com.google.gson.stream.JsonReader:326 `    this.lenient = lenient;`
+com.google.gson.stream.JsonReader:327 `  }`
+com.google.gson.stream.JsonReader:333 `    return lenient;`
+com.google.gson.stream.JsonReader:427 `    int p = peeked;`
+com.google.gson.stream.JsonReader:428 `    if (p == PEEKED_NONE) {`
+com.google.gson.stream.JsonReader:429 `      p = doPeek();`
+com.google.gson.stream.JsonReader:432 `    switch (p) {`
+com.google.gson.stream.JsonReader:434 `      return JsonToken.BEGIN_OBJECT;`
+com.google.gson.stream.JsonReader:466 `    int peekStack = stack[stackSize - 1];`
+com.google.gson.stream.JsonReader:467 `    if (peekStack == JsonScope.EMPTY_ARRAY) {`
+com.google.gson.stream.JsonReader:469 `    } else if (peekStack == JsonScope.NONEMPTY_ARRAY) {`
+com.google.gson.stream.JsonReader:482 `    } else if (peekStack == JsonScope.EMPTY_OBJECT || peekStack == JsonScope.NONEMPTY_OBJECT) {`
+com.google.gson.stream.JsonReader:520 `    } else if (peekStack == JsonScope.DANGLING_NAME) {`
+com.google.gson.stream.JsonReader:536 `    } else if (peekStack == JsonScope.EMPTY_DOCUMENT) {`
+com.google.gson.stream.JsonReader:537 `      if (lenient) {`
+com.google.gson.stream.JsonReader:538 `        consumeNonExecutePrefix();`
+com.google.gson.stream.JsonReader:540 `      stack[stackSize - 1] = JsonScope.NONEMPTY_DOCUMENT;`
+com.google.gson.stream.JsonReader:553 `    int c = nextNonWhitespace(true);`
+com.google.gson.stream.JsonReader:554 `    switch (c) {`
+com.google.gson.stream.JsonReader:578 `      return peeked = PEEKED_BEGIN_OBJECT;`
+com.google.gson.stream.JsonReader:1282 `    char[] buffer = this.buffer;`
+com.google.gson.stream.JsonReader:1283 `    lineStart -= pos;`
+com.google.gson.stream.JsonReader:1284 `    if (limit != pos) {`
+com.google.gson.stream.JsonReader:1288 `      limit = 0;`
+com.google.gson.stream.JsonReader:1291 `    pos = 0;`
+com.google.gson.stream.JsonReader:1293 `    while ((total = in.read(buffer, limit, buffer.length - limit)) != -1) {`
+com.google.gson.stream.JsonReader:1294 `      limit += total;`
+com.google.gson.stream.JsonReader:1297 `      if (lineNumber == 0 && lineStart == 0 && limit > 0 && buffer[0] == '\ufeff') {`
+com.google.gson.stream.JsonReader:1303 `      if (limit >= minimum) {`
+com.google.gson.stream.JsonReader:1304 `        return true;`
+com.google.gson.stream.JsonReader:1333 `    char[] buffer = this.buffer;`
+com.google.gson.stream.JsonReader:1334 `    int p = pos;`
+com.google.gson.stream.JsonReader:1335 `    int l = limit;`
+com.google.gson.stream.JsonReader:1337 `      if (p == l) {`
+com.google.gson.stream.JsonReader:1338 `        pos = p;`
+com.google.gson.stream.JsonReader:1339 `        if (!fillBuffer(1)) {`
+com.google.gson.stream.JsonReader:1342 `        p = pos;`
+com.google.gson.stream.JsonReader:1343 `        l = limit;`
+com.google.gson.stream.JsonReader:1346 `      int c = buffer[p++];`
+com.google.gson.stream.JsonReader:1347 `      if (c == '\n') {`
+com.google.gson.stream.JsonReader:1351 `      } else if (c == ' ' || c == '\r' || c == '\t') {`
+com.google.gson.stream.JsonReader:1355 `      if (c == '/') {`
+com.google.gson.stream.JsonReader:1390 `      } else if (c == '#') {`
+com.google.gson.stream.JsonReader:1402 `        pos = p;`
+com.google.gson.stream.JsonReader:1403 `        return c;`
+com.google.gson.stream.JsonReader:1575 `    nextNonWhitespace(true);`
+com.google.gson.stream.JsonReader:1576 `    pos--;`
+com.google.gson.stream.JsonReader:1578 `    if (pos + NON_EXECUTE_PREFIX.length > limit && !fillBuffer(NON_EXECUTE_PREFIX.length)) {`
+com.google.gson.stream.JsonReader:1582 `    for (int i = 0; i < NON_EXECUTE_PREFIX.length; i++) {`
+com.google.gson.stream.JsonReader:1583 `      if (buffer[pos + i] != NON_EXECUTE_PREFIX[i]) {`
+com.google.gson.stream.JsonReader:1584 `        return; // not a security token!`
+com.google.gson.stream.JsonReader:1593 `    JsonReaderInternalAccess.INSTANCE = new JsonReaderInternalAccess() {`
+com.google.gson.stream.JsonReader:1616 `  }`
+com.google.gson.stream.JsonToken:25 `public enum JsonToken {`
+com.google.gson.stream.JsonToken:31 `  BEGIN_ARRAY,`
+com.google.gson.stream.JsonToken:37 `  END_ARRAY,`
+com.google.gson.stream.JsonToken:43 `  BEGIN_OBJECT,`
+com.google.gson.stream.JsonToken:49 `  END_OBJECT,`
+com.google.gson.stream.JsonToken:56 `  NAME,`
+com.google.gson.stream.JsonToken:61 `  STRING,`
+com.google.gson.stream.JsonToken:67 `  NUMBER,`
+com.google.gson.stream.JsonToken:72 `  BOOLEAN,`
+com.google.gson.stream.JsonToken:77 `  NULL,`
+com.google.gson.stream.JsonToken:84 `  END_DOCUMENT`
+com.google.gson.stream.JsonWriter:145 `    REPLACEMENT_CHARS = new String[128];`
+com.google.gson.stream.JsonWriter:146 `    for (int i = 0; i <= 0x1f; i++) {`
+com.google.gson.stream.JsonWriter:147 `      REPLACEMENT_CHARS[i] = String.format("\\u%04x", (int) i);`
+com.google.gson.stream.JsonWriter:149 `    REPLACEMENT_CHARS['"'] = "\\\"";`
+com.google.gson.stream.JsonWriter:150 `    REPLACEMENT_CHARS['\\'] = "\\\\";`
+com.google.gson.stream.JsonWriter:151 `    REPLACEMENT_CHARS['\t'] = "\\t";`
+com.google.gson.stream.JsonWriter:152 `    REPLACEMENT_CHARS['\b'] = "\\b";`
+com.google.gson.stream.JsonWriter:153 `    REPLACEMENT_CHARS['\n'] = "\\n";`
+com.google.gson.stream.JsonWriter:154 `    REPLACEMENT_CHARS['\r'] = "\\r";`
+com.google.gson.stream.JsonWriter:155 `    REPLACEMENT_CHARS['\f'] = "\\f";`
+com.google.gson.stream.JsonWriter:156 `    HTML_SAFE_REPLACEMENT_CHARS = REPLACEMENT_CHARS.clone();`
+com.google.gson.stream.JsonWriter:157 `    HTML_SAFE_REPLACEMENT_CHARS['<'] = "\\u003c";`
+com.google.gson.stream.JsonWriter:158 `    HTML_SAFE_REPLACEMENT_CHARS['>'] = "\\u003e";`
+com.google.gson.stream.JsonWriter:159 `    HTML_SAFE_REPLACEMENT_CHARS['&'] = "\\u0026";`
+com.google.gson.stream.JsonWriter:160 `    HTML_SAFE_REPLACEMENT_CHARS['='] = "\\u003d";`
+com.google.gson.stream.JsonWriter:161 `    HTML_SAFE_REPLACEMENT_CHARS['\''] = "\\u0027";`
+com.google.gson.stream.JsonWriter:162 `  }`
+com.google.gson.stream.JsonWriter:167 `  private int[] stack = new int[32];`
+com.google.gson.stream.JsonWriter:168 `  private int stackSize = 0;`
+com.google.gson.stream.JsonWriter:170 `    push(EMPTY_DOCUMENT);`
+com.google.gson.stream.JsonWriter:182 `  private String separator = ":";`
+com.google.gson.stream.JsonWriter:190 `  private boolean serializeNulls = true;`
+com.google.gson.stream.JsonWriter:197 `  public JsonWriter(Writer out) {`
+com.google.gson.stream.JsonWriter:198 `    if (out == null) {`
+com.google.gson.stream.JsonWriter:201 `    this.out = out;`
+com.google.gson.stream.JsonWriter:202 `  }`
+com.google.gson.stream.JsonWriter:269 `    this.serializeNulls = serializeNulls;`
+com.google.gson.stream.JsonWriter:270 `  }`
+com.google.gson.stream.JsonWriter:354 `    if (stackSize == stack.length) {`
+com.google.gson.stream.JsonWriter:359 `    stack[stackSize++] = newTop;`
+com.google.gson.stream.JsonWriter:360 `  }`

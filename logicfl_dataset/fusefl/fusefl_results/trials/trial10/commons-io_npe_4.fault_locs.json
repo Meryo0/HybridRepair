@@ -1,0 +1,9 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.file.PathUtils:881",
+            "code": "final Path fileName = path.getFileName();",
+            "explanation": "The NullPointerException occurs because the `path` parameter is null in some test cases. The method should check if `path` is null before attempting to call `getFileName()` on it."
+        }
+    ]
+}

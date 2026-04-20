@@ -1,0 +1,36 @@
+{
+    "coverage": [
+        {
+            "covered": [ 29, 99, 100, 101 ],
+            "className": "org.apache.commons.math.analysis.solvers.BisectionSolverTest"
+        },
+        {
+            "covered": [ 52, 53, 66, 72, 79, 80, 85, 86, 87, 88 ],
+            "className": "org.apache.commons.math.analysis.solvers.BisectionSolver"
+        },
+        {
+            "covered": [ 41, 93, 94, 95, 96, 165, 166, 167, 208, 213 ],
+            "className": "org.apache.commons.math.analysis.solvers.UnivariateRealSolverImpl"
+        },
+        {
+            "covered": [ 61, 62, 63, 64, 65, 66, 67, 68, 69 ],
+            "className": "org.apache.commons.math.ConvergingAlgorithmImpl"
+        },
+        {
+            "covered": [ 223 ],
+            "className": "org.apache.commons.math.analysis.solvers.UnivariateRealSolverUtils"
+        },
+        {
+            "covered": [ 31 ],
+            "className": "org.apache.commons.math.analysis.SinFunction"
+        }
+    ],
+    "classes": [
+        "org.apache.commons.math.ConvergingAlgorithmImpl",
+        "org.apache.commons.math.analysis.SinFunction",
+        "org.apache.commons.math.analysis.solvers.BisectionSolver",
+        "org.apache.commons.math.analysis.solvers.BisectionSolverTest",
+        "org.apache.commons.math.analysis.solvers.UnivariateRealSolverImpl",
+        "org.apache.commons.math.analysis.solvers.UnivariateRealSolverUtils"
+    ]
+}

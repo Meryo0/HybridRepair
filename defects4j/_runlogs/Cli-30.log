@@ -1,0 +1,288 @@
+Load configurations from config.properties
+Load configurations from config.properties
+Collecting coverage from failed tests...
+Running Tests...
+Executing command - /usr/bin/java -Xms256m -Xmx1024m -classpath ../../lib/*:lib/Cli-30_buggy_src.jar:lib/Cli-30_fixed_test.jar -javaagent:../../lib/jacocoagent.jar=excludes=org.junit.*,append=false,destfile=/home/mario/Desktop/LogicFL/defects4j/Cli-30/result/jacoco.exec logicfl.coverage.JUnit4TestRunner config.properties true /home/mario/Desktop/LogicFL/defects4j/Cli-30/result/npe.traces.json /home/mario/Desktop/LogicFL/defects4j/Cli-30/tests.json
+Load configurations from config.properties
+Loading test information from /home/mario/Desktop/LogicFL/defects4j/Cli-30/tests.json
+Test execution summary:
+Tests executed - 4
+Tests succeeded - 0
+Tests failed - 4
+testPropertyOptionUnexpected(org.apache.commons.cli.PosixParserTest): Cannot invoke "org.apache.commons.cli.Option.hasArg()" because "opt" is null
+Cannot invoke "org.apache.commons.cli.Option.hasArg()" because "opt" is null
+java.lang.NullPointerException: Cannot invoke "org.apache.commons.cli.Option.hasArg()" because "opt" is null
+	at org.apache.commons.cli.Parser.processProperties(Parser.java:272)
+	at org.apache.commons.cli.Parser.parse(Parser.java:241)
+	at org.apache.commons.cli.Parser.parse(Parser.java:103)
+	at org.apache.commons.cli.ParserTestCase.parse(ParserTestCase.java:875)
+	at org.apache.commons.cli.ParserTestCase.testPropertyOptionUnexpected(ParserTestCase.java:1010)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:36)
+
+testPropertyOptionUnexpected(org.apache.commons.cli.GnuParserTest): Cannot invoke "org.apache.commons.cli.Option.hasArg()" because "opt" is null
+Cannot invoke "org.apache.commons.cli.Option.hasArg()" because "opt" is null
+java.lang.NullPointerException: Cannot invoke "org.apache.commons.cli.Option.hasArg()" because "opt" is null
+	at org.apache.commons.cli.Parser.processProperties(Parser.java:272)
+	at org.apache.commons.cli.Parser.parse(Parser.java:241)
+	at org.apache.commons.cli.Parser.parse(Parser.java:103)
+	at org.apache.commons.cli.ParserTestCase.parse(ParserTestCase.java:875)
+	at org.apache.commons.cli.ParserTestCase.testPropertyOptionUnexpected(ParserTestCase.java:1010)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:36)
+
+testPropertyOptionUnexpected(org.apache.commons.cli.BasicParserTest): Cannot invoke "org.apache.commons.cli.Option.hasArg()" because "opt" is null
+Cannot invoke "org.apache.commons.cli.Option.hasArg()" because "opt" is null
+java.lang.NullPointerException: Cannot invoke "org.apache.commons.cli.Option.hasArg()" because "opt" is null
+	at org.apache.commons.cli.Parser.processProperties(Parser.java:272)
+	at org.apache.commons.cli.Parser.parse(Parser.java:241)
+	at org.apache.commons.cli.Parser.parse(Parser.java:103)
+	at org.apache.commons.cli.ParserTestCase.parse(ParserTestCase.java:875)
+	at org.apache.commons.cli.ParserTestCase.testPropertyOptionUnexpected(ParserTestCase.java:1010)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:36)
+
+testPropertyOptionUnexpected(org.apache.commons.cli.DefaultParserTest): Cannot invoke "org.apache.commons.cli.Option.hasArg()" because "opt" is null
+Cannot invoke "org.apache.commons.cli.Option.hasArg()" because "opt" is null
+java.lang.NullPointerException: Cannot invoke "org.apache.commons.cli.Option.hasArg()" because "opt" is null
+	at org.apache.commons.cli.DefaultParser.handleProperties(DefaultParser.java:159)
+	at org.apache.commons.cli.DefaultParser.parse(DefaultParser.java:127)
+	at org.apache.commons.cli.DefaultParser.parse(DefaultParser.java:75)
+	at org.apache.commons.cli.ParserTestCase.parse(ParserTestCase.java:877)
+	at org.apache.commons.cli.ParserTestCase.testPropertyOptionUnexpected(ParserTestCase.java:1010)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:36)
+
+Store NPE traces to /home/mario/Desktop/LogicFL/defects4j/Cli-30/result/npe.traces.json
+NPE Stack Traces exported to /home/mario/Desktop/LogicFL/defects4j/Cli-30/result/npe.traces.json
+
+Analyzing Coverage Data...
+Covered Classes:[org.apache.commons.cli.BasicParserTest, org.apache.commons.cli.GnuParserTest, org.apache.commons.cli.Util, org.apache.commons.cli.CommandLine, org.apache.commons.cli.GnuParser, org.apache.commons.cli.Options, org.apache.commons.cli.Parser, org.apache.commons.cli.PosixParserTest, org.apache.commons.cli.BasicParser, org.apache.commons.cli.Option, org.apache.commons.cli.OptionValidator, org.apache.commons.cli.DefaultParserTest, org.apache.commons.cli.DefaultParser, org.apache.commons.cli.PosixParser]
+Coverage information exported to /home/mario/Desktop/LogicFL/defects4j/Cli-30/coverage.json
+Collecting coverage complete.
+Exec. Time - 00:00:00.749
+coverage.sh executed successfully.
+Getting configurations from config.properties
+Total 15 Target classes.
+Analyzing class - org.apache.commons.cli.BasicParser
+Analyzing class - org.apache.commons.cli.BasicParserTest
+Analyzing class - org.apache.commons.cli.CommandLine
+Analyzing class - org.apache.commons.cli.DefaultParser
+Analyzing class - org.apache.commons.cli.DefaultParserTest
+Analyzing class - org.apache.commons.cli.GnuParser
+Analyzing class - org.apache.commons.cli.GnuParserTest
+Analyzing class - org.apache.commons.cli.Option
+Analyzing class - org.apache.commons.cli.OptionValidator
+Analyzing class - org.apache.commons.cli.Options
+Analyzing class - org.apache.commons.cli.Parser
+Analyzing class - org.apache.commons.cli.ParserTestCase
+Analyzing class - org.apache.commons.cli.PosixParser
+Analyzing class - org.apache.commons.cli.PosixParserTest
+Analyzing class - org.apache.commons.cli.Util
+Compilation successful!
+FL Facts are exported to /home/mario/Desktop/LogicFL/defects4j/Cli-30/result/logic-fl.pl
+Code Facts are exported to /home/mario/Desktop/LogicFL/defects4j/Cli-30/result/code-facts.pl
+Line matching information exported to /home/mario/Desktop/LogicFL/defects4j/Cli-30/result/line.info.json
+Exec. Time - 00:00:03.860
+static_analyzer.sh executed successfully.
+Getting configurations from config.properties
+Load configurations from config.properties
+Executing command - /usr/bin/java -Xms256m -Xmx1024m -classpath /home/mario/Desktop/LogicFL/defects4j/Cli-30/result/classes:../../lib/*:lib/Cli-30_buggy_src.jar:lib/Cli-30_fixed_test.jar logicfl.coverage.JUnit4TestRunner config.properties true /home/mario/Desktop/LogicFL/defects4j/Cli-30/result/probe.npe.traces.json /home/mario/Desktop/LogicFL/defects4j/Cli-30/tests.json
+Load configurations from config.properties
+Loading test information from /home/mario/Desktop/LogicFL/defects4j/Cli-30/tests.json
+Test execution summary:
+Tests executed - 4
+Tests succeeded - 0
+Tests failed - 4
+testPropertyOptionUnexpected(org.apache.commons.cli.PosixParserTest): Cannot invoke "org.apache.commons.cli.Option.hasArg()" because "v_opt_154_line_272" is null
+Cannot invoke "org.apache.commons.cli.Option.hasArg()" because "v_opt_154_line_272" is null
+java.lang.NullPointerException: Cannot invoke "org.apache.commons.cli.Option.hasArg()" because "v_opt_154_line_272" is null
+	at org.apache.commons.cli.Parser.processProperties(Parser.java:402)
+	at org.apache.commons.cli.Parser.parse(Parser.java:325)
+	at org.apache.commons.cli.Parser.parse(Parser.java:118)
+	at org.apache.commons.cli.ParserTestCase.parse(ParserTestCase.java:882)
+	at org.apache.commons.cli.ParserTestCase.testPropertyOptionUnexpected(ParserTestCase.java:1033)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:36)
+
+testPropertyOptionUnexpected(org.apache.commons.cli.GnuParserTest): Cannot invoke "org.apache.commons.cli.Option.hasArg()" because "v_opt_154_line_272" is null
+Cannot invoke "org.apache.commons.cli.Option.hasArg()" because "v_opt_154_line_272" is null
+java.lang.NullPointerException: Cannot invoke "org.apache.commons.cli.Option.hasArg()" because "v_opt_154_line_272" is null
+	at org.apache.commons.cli.Parser.processProperties(Parser.java:402)
+	at org.apache.commons.cli.Parser.parse(Parser.java:325)
+	at org.apache.commons.cli.Parser.parse(Parser.java:118)
+	at org.apache.commons.cli.ParserTestCase.parse(ParserTestCase.java:882)
+	at org.apache.commons.cli.ParserTestCase.testPropertyOptionUnexpected(ParserTestCase.java:1033)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:36)
+
+testPropertyOptionUnexpected(org.apache.commons.cli.BasicParserTest): Cannot invoke "org.apache.commons.cli.Option.hasArg()" because "v_opt_154_line_272" is null
+Cannot invoke "org.apache.commons.cli.Option.hasArg()" because "v_opt_154_line_272" is null
+java.lang.NullPointerException: Cannot invoke "org.apache.commons.cli.Option.hasArg()" because "v_opt_154_line_272" is null
+	at org.apache.commons.cli.Parser.processProperties(Parser.java:402)
+	at org.apache.commons.cli.Parser.parse(Parser.java:325)
+	at org.apache.commons.cli.Parser.parse(Parser.java:118)
+	at org.apache.commons.cli.ParserTestCase.parse(ParserTestCase.java:882)
+	at org.apache.commons.cli.ParserTestCase.testPropertyOptionUnexpected(ParserTestCase.java:1033)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:36)
+
+testPropertyOptionUnexpected(org.apache.commons.cli.DefaultParserTest): Cannot invoke "org.apache.commons.cli.Option.hasArg()" because "v_opt_47_line_159" is null
+Cannot invoke "org.apache.commons.cli.Option.hasArg()" because "v_opt_47_line_159" is null
+java.lang.NullPointerException: Cannot invoke "org.apache.commons.cli.Option.hasArg()" because "v_opt_47_line_159" is null
+	at org.apache.commons.cli.DefaultParser.handleProperties(DefaultParser.java:252)
+	at org.apache.commons.cli.DefaultParser.parse(DefaultParser.java:174)
+	at org.apache.commons.cli.DefaultParser.parse(DefaultParser.java:80)
+	at org.apache.commons.cli.ParserTestCase.parse(ParserTestCase.java:893)
+	at org.apache.commons.cli.ParserTestCase.testPropertyOptionUnexpected(ParserTestCase.java:1033)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:36)
+
+Store NPE traces to /home/mario/Desktop/LogicFL/defects4j/Cli-30/result/probe.npe.traces.json
+NPE Stack Traces exported to /home/mario/Desktop/LogicFL/defects4j/Cli-30/result/probe.npe.traces.json
+
+
+val(p_arguments_28, null, line(default_parser_1, 75)).
+val(p_arguments_34, null, line(default_parser_1, 115)).
+val(default_parser_1_expr30, null, line(default_parser_1, 152)).
+val(v_opt_47, null, line(default_parser_1, 159)).
+val(p_arguments_136, null, line(parser_1, 103)).
+val(p_arguments_142, null, line(parser_1, 167)).
+val(parser_1_expr37, null, line(parser_1, 265)).
+val(v_opt_154, null, line(parser_1, 272)).
+val(p_args_163, null, line(parser_test_case_1, 875)).
+val(p_args_163, null, line(parser_test_case_1, 877)).
+
+
+Exec. Time - 00:00:01.276
+dynamic_analyzer.sh executed successfully.
+Getting configurations from config.properties
+Running Fault Localizer with
+Rules: ../../lib/npe-rules.pl
+Facts: /home/mario/Desktop/LogicFL/defects4j/Cli-30/result/logic-fl.pl
+Code Facts: /home/mario/Desktop/LogicFL/defects4j/Cli-30/result/code-facts.pl
+consult Succeeded
+NPE at line(parser_1, 272) / Null Expression v_opt_154[opt]
+	can be caused by 
+v_opt_154[opt] at line(parser_1, 272).
+
+NPE at line(default_parser_1, 159) / Null Expression v_opt_47[opt]
+	can be caused by 
+v_opt_47[opt] at line(default_parser_1, 159).
+
+NPE at line(parser_1, 272) / Null Expression v_opt_154[opt]
+	can be caused by 
+parser_1_expr37['getOptions().getOption(option)'] at line(parser_1, 265).
+
+NPE at line(default_parser_1, 159) / Null Expression v_opt_47[opt]
+	can be caused by 
+default_parser_1_expr30['options.getOption(option)'] at line(default_parser_1, 152).
+
+Total 4 Identified Fault Locations for NPE.
+Exec. Time - 00:00:00.145
+localizer.sh executed successfully.
+All scripts executed successfully.

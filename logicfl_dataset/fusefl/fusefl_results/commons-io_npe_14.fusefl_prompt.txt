@@ -1,0 +1,187 @@
+Faulty Code:
+org.apache.commons.io.IOUtils:116 `    public static final char DIR_SEPARATOR = File.separatorChar;`
+org.apache.commons.io.IOUtils:171 `        try (final StringBuilderWriter buf = new StringBuilderWriter(4);`
+org.apache.commons.io.IOUtils:172 `                final PrintWriter out = new PrintWriter(buf)) {`
+org.apache.commons.io.IOUtils:173 `            out.println();`
+org.apache.commons.io.IOUtils:174 `            LINE_SEPARATOR = buf.toString();`
+org.apache.commons.io.IOUtils:176 `    }`
+org.apache.commons.io.IOUtils:189 `        if (inputStream == null) { // not checked by BufferedInputStream`
+org.apache.commons.io.IOUtils:190 `            throw new NullPointerException();`
+org.apache.commons.io.IOUtils:192 `        return inputStream instanceof BufferedInputStream ?`
+org.apache.commons.io.IOUtils:347 `        closeQuietly(closeable, (Consumer<IOException>) null);`
+org.apache.commons.io.IOUtils:348 `    }`
+org.apache.commons.io.IOUtils:358 `        if (closeable != null) {`
+org.apache.commons.io.IOUtils:360 `                closeable.close();`
+org.apache.commons.io.IOUtils:365 `            }`
+org.apache.commons.io.IOUtils:367 `    }`
+org.apache.commons.io.IOUtils:533 `        closeQuietly((Closeable) output);`
+org.apache.commons.io.IOUtils:534 `    }`
+org.apache.commons.io.IOUtils:712 `        if (input1 == input2) {`
+org.apache.commons.io.IOUtils:713 `            return true;`
+org.apache.commons.io.IOUtils:715 `        final BufferedInputStream bufferedInput1 = buffer(input1);`
+org.apache.commons.io.IOUtils:716 `        final BufferedInputStream bufferedInput2 = buffer(input2);`
+org.apache.commons.io.output.StringBuilderWriter:50 `    public StringBuilderWriter(final int capacity) {`
+org.apache.commons.io.output.StringBuilderWriter:51 `        this.builder = new StringBuilder(capacity);`
+org.apache.commons.io.output.StringBuilderWriter:52 `    }`
+org.apache.commons.io.output.StringBuilderWriter:109 `    }`
+org.apache.commons.io.output.StringBuilderWriter:127 `        if (value != null) {`
+org.apache.commons.io.output.StringBuilderWriter:128 `            builder.append(value);`
+org.apache.commons.io.output.StringBuilderWriter:130 `    }`
+org.apache.commons.io.output.StringBuilderWriter:162 `        return builder.toString();`
+org.apache.commons.io.testtools.TestUtils:73 `        for (int i = 0; i < size; i++) {`
+org.apache.commons.io.testtools.TestUtils:77 `            out.write((byte) ((i % 127) + 1));`
+org.apache.commons.io.testtools.TestUtils:79 `    }`
+
+
+Task Description:
+The provided code snippets are from the Apache Commons IO library, specifically from the `IOUtils` and `StringBuilderWriter` classes. Below is a brief description of each relevant part of the code:
+
+1. **DIR_SEPARATOR Definition**:
+   ```java
+   public static final char DIR_SEPARATOR = File.separatorChar;
+   ```
+   - This line defines a constant `DIR_SEPARATOR` which holds the platform-specific file separator character (e.g., '/' on Unix and '\' on Windows).
+
+2. **LINE_SEPARATOR Initialization**:
+   ```java
+   try (final StringBuilderWriter buf = new StringBuilderWriter(4);
+        final PrintWriter out = new PrintWriter(buf)) {
+       out.println();
+       LINE_SEPARATOR = buf.toString();
+   }
+   ```
+   - This block initializes the `LINE_SEPARATOR` constant by writing a newline character to a `StringBuilderWriter` and converting it to a string.
+
+3. **Null InputStream Check**:
+   ```java
+   if (inputStream == null) {
+       throw new NullPointerException();
+   }
+   return inputStream instanceof BufferedInputStream ? ...
+   ```
+   - This code checks if the `inputStream` is `null` and throws a `NullPointerException` if it is. Otherwise, it proceeds to check if the `inputStream` is an instance of `BufferedInputStream`.
+
+4. **closeQuietly Method**:
+   ```java
+   closeQuietly(closeable, (Consumer<IOException>) null);
+   ```
+   - This line calls the `closeQuietly` method to close a `Closeable` resource without throwing an exception.
+
+5. **Closeable Check and Close**:
+   ```java
+   if (closeable != null) {
+       closeable.close();
+   }
+   ```
+   - This block checks if the `closeable` resource is not `null` and then closes it.
+
+6. **Buffered Input Streams**:
+   ```java
+   final BufferedInputStream bufferedInput1 = buffer(input1);
+   final BufferedInputStream bufferedInput2 = buffer(input2);
+   ```
+   - These lines wrap the input streams `input1` and `input2` in `BufferedInputStream` objects for efficient reading.
+
+7. **StringBuilderWriter Constructor**:
+   ```java
+   public StringBuilderWriter(final int capacity) {
+       this.builder = new StringBuilder(capacity);
+   }
+   ```
+   - This constructor initializes a `StringBuilderWriter` with a specified initial capacity.
+
+8. **Appending to StringBuilder**:
+   ```java
+   if (value != null) {
+       builder.append(value);
+   }
+   ```
+   - This block appends a non-null value to the internal `StringBuilder`.
+
+9. **StringBuilder to String Conversion**:
+   ```java
+   return builder.toString();
+   ```
+   - This line converts the contents of the `StringBuilder` to a `String`.
+
+10. **TestUtils Loop**:
+    ```java
+    for (int i = 0; i < size; i++) {
+        out.write((byte) ((i % 127) + 1));
+    }
+    ```
+    - This loop writes a sequence of bytes to an output stream, cycling through values from 1 to 127.
+
+### Test Cases
+
+The provided test cases are designed to verify the `contentEquals` method of the `IOUtils` class, which checks if two input streams have the same content. The tests cover various scenarios including:
+
+1. Both input streams are `null`.
+2. One input stream is `null` and the other is not.
+3. Both input streams are the same instance.
+4. Both input streams have the same content.
+5. Input streams have different content.
+
+These tests ensure that the `contentEquals` method behaves correctly under different conditions.
+
+Test Results:
+The provided code is throwing NullPointerException. For examples:
+Here are the tests and error messages of NullPointerExceptions.
+@Test public void testContentEquals_InputStream_InputStream() throws Exception {
+{
+    final ByteArrayInputStream input1=new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8));
+    assertTrue(IOUtils.contentEquals((InputStream)null,null));
+  }
+{
+    final ByteArrayInputStream input1=new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8));
+    assertFalse(IOUtils.contentEquals(input1,null));
+  }
+{
+    final ByteArrayInputStream input1=new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8));
+    assertFalse(IOUtils.contentEquals(null,input1));
+  }
+{
+    final ByteArrayInputStream input1=new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8));
+    assertTrue(IOUtils.contentEquals(input1,input1));
+  }
+{
+    final ByteArrayInputStream input1=new ByteArrayInputStream("ABC".getBytes(StandardCharsets.UTF_8));
+    assertTrue(IOUtils.contentEquals(input1,input1));
+  }
+  assertTrue(IOUtils.contentEquals(new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8)),new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8))));
+  assertTrue(IOUtils.contentEquals(new BufferedInputStream(new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8))),new BufferedInputStream(new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8)))));
+  assertTrue(IOUtils.contentEquals(new ByteArrayInputStream("ABC".getBytes(StandardCharsets.UTF_8)),new ByteArrayInputStream("ABC".getBytes(StandardCharsets.UTF_8))));
+  assertFalse(IOUtils.contentEquals(new ByteArrayInputStream("ABCD".getBytes(StandardCharsets.UTF_8)),new ByteArrayInputStream("ABC".getBytes(StandardCharsets.UTF_8))));
+  assertFalse(IOUtils.contentEquals(new ByteArrayInputStream("ABC".getBytes(StandardCharsets.UTF_8)),new ByteArrayInputStream("ABCD".getBytes(StandardCharsets.UTF_8))));
+}
+
+
+
+Failures (1):
+  JUnit Jupiter:IOUtilsTestCase:testContentEquals_InputStream_InputStream()
+    MethodSource [className = 'org.apache.commons.io.IOUtilsTestCase', methodName = 'testContentEquals_InputStream_InputStream', methodParameterTypes = '']
+    => java.lang.NullPointerException
+       org.apache.commons.io.IOUtils.buffer(IOUtils.java:190)
+       org.apache.commons.io.IOUtils.contentEquals(IOUtils.java:716)
+       org.apache.commons.io.IOUtilsTestCase.testContentEquals_InputStream_InputStream(IOUtilsTestCase.java:238)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Store NPE traces to npe.traces.json
+NPE Stack Traces exported to npe.traces.json
+
+
+Analyze the provided code and utilize task description, test results, and SBFL techniques results to help in identifying potentially faulty lines. Provide the results following this JSON template:
+```json
+{
+  "faultLoc": [
+    {   
+      "faultyLine": (indicating the location of the suspicious code in ClassName:LineNumber format),
+      "code": (displaying the actual code),
+      "explanation": (step by step reasoning on why this location is considered potentially faulty)
+    },  
+    ... 
+   ]   
+}
+```
+Ensure that the objects in the "faultLoc" array are stored in descending order of suspicion.

@@ -1,0 +1,15 @@
+{
+ "buggy.hash": "",
+ "fixed_hash": "c324fabe86c0a59eb635610dc85d8d7a7be25c74",
+ "passed.classes": [],
+ "failed.classes": [
+  "org.jsoup.nodes.ElementTest"
+ ],
+ "failed.tests": [
+  {
+   "class": "org.jsoup.nodes.ElementTest",
+   "name": "testNextElementSiblingAfterClone",
+   "message": ""
+  }
+ ]
+}

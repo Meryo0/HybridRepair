@@ -1,0 +1,412 @@
+{"classes": [
+    {
+        "probe_ranges": [
+            {
+                "endLine": 105,
+                "offset": 7,
+                "startLine": 102,
+                "orgLineEnd": 104,
+                "probedLineEnd": 111,
+                "orgLineStart": 102
+            },
+            {
+                "endLine": 110,
+                "offset": 7,
+                "startLine": 106,
+                "orgLineEnd": 103,
+                "probedLineEnd": 110,
+                "orgLineStart": 103
+            },
+            {
+                "endLine": 145,
+                "offset": 15,
+                "startLine": 142,
+                "orgLineEnd": 139,
+                "probedLineEnd": 154,
+                "orgLineStart": 135
+            },
+            {
+                "endLine": 151,
+                "offset": 15,
+                "startLine": 146,
+                "orgLineEnd": 138,
+                "probedLineEnd": 153,
+                "orgLineStart": 136
+            },
+            {
+                "endLine": 281,
+                "offset": 23,
+                "startLine": 278,
+                "orgLineEnd": 267,
+                "probedLineEnd": 290,
+                "orgLineStart": 263
+            },
+            {
+                "endLine": 287,
+                "offset": 23,
+                "startLine": 282,
+                "orgLineEnd": 266,
+                "probedLineEnd": 289,
+                "orgLineStart": 264
+            },
+            {
+                "endLine": 331,
+                "offset": 28,
+                "startLine": 326,
+                "orgLineEnd": 305,
+                "probedLineEnd": 333,
+                "orgLineStart": 303
+            },
+            {
+                "endLine": 338,
+                "offset": 36,
+                "startLine": 335,
+                "orgLineEnd": 309,
+                "probedLineEnd": 345,
+                "orgLineStart": 307
+            },
+            {
+                "endLine": 344,
+                "offset": 36,
+                "startLine": 339,
+                "orgLineEnd": 308,
+                "probedLineEnd": 344,
+                "orgLineStart": 308
+            },
+            {
+                "endLine": 349,
+                "offset": 39,
+                "startLine": 346,
+                "orgLineEnd": 310,
+                "probedLineEnd": 349,
+                "orgLineStart": 310
+            },
+            {
+                "endLine": 368,
+                "offset": 47,
+                "startLine": 365,
+                "orgLineEnd": 328,
+                "probedLineEnd": 375,
+                "orgLineStart": 326
+            },
+            {
+                "endLine": 374,
+                "offset": 47,
+                "startLine": 369,
+                "orgLineEnd": 327,
+                "probedLineEnd": 374,
+                "orgLineStart": 327
+            },
+            {
+                "endLine": 379,
+                "offset": 50,
+                "startLine": 376,
+                "orgLineEnd": 329,
+                "probedLineEnd": 379,
+                "orgLineStart": 329
+            },
+            {
+                "endLine": 406,
+                "offset": 53,
+                "startLine": 403,
+                "orgLineEnd": 353,
+                "probedLineEnd": 406,
+                "orgLineStart": 353
+            },
+            {
+                "endLine": 419,
+                "offset": 57,
+                "startLine": 415,
+                "orgLineEnd": 362,
+                "probedLineEnd": 419,
+                "orgLineStart": 362
+            },
+            {
+                "endLine": 434,
+                "offset": 61,
+                "startLine": 430,
+                "orgLineEnd": 373,
+                "probedLineEnd": 434,
+                "orgLineStart": 373
+            },
+            {
+                "endLine": 439,
+                "offset": 65,
+                "startLine": 435,
+                "orgLineEnd": 374,
+                "probedLineEnd": 439,
+                "orgLineStart": 374
+            },
+            {
+                "endLine": 453,
+                "offset": 70,
+                "startLine": 448,
+                "orgLineEnd": 383,
+                "probedLineEnd": 453,
+                "orgLineStart": 383
+            }
+        ],
+        "classId": "composite_collection_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 115,
+                "offset": 3,
+                "startLine": 112,
+                "orgLineEnd": 139,
+                "probedLineEnd": 142,
+                "orgLineStart": 112
+            },
+            {
+                "endLine": 253,
+                "offset": 6,
+                "startLine": 250,
+                "orgLineEnd": 247,
+                "probedLineEnd": 253,
+                "orgLineStart": 247
+            },
+            {
+                "endLine": 257,
+                "offset": 9,
+                "startLine": 254,
+                "orgLineEnd": 248,
+                "probedLineEnd": 257,
+                "orgLineStart": 248
+            },
+            {
+                "endLine": 262,
+                "offset": 13,
+                "startLine": 258,
+                "orgLineEnd": 249,
+                "probedLineEnd": 262,
+                "orgLineStart": 249
+            },
+            {
+                "endLine": 268,
+                "offset": 18,
+                "startLine": 263,
+                "orgLineEnd": 250,
+                "probedLineEnd": 268,
+                "orgLineStart": 250
+            },
+            {
+                "endLine": 273,
+                "offset": 22,
+                "startLine": 269,
+                "orgLineEnd": 251,
+                "probedLineEnd": 273,
+                "orgLineStart": 251
+            },
+            {
+                "endLine": 283,
+                "offset": 26,
+                "startLine": 279,
+                "orgLineEnd": 257,
+                "probedLineEnd": 283,
+                "orgLineStart": 257
+            },
+            {
+                "endLine": 288,
+                "offset": 30,
+                "startLine": 284,
+                "orgLineEnd": 258,
+                "probedLineEnd": 288,
+                "orgLineStart": 258
+            },
+            {
+                "endLine": 299,
+                "offset": 35,
+                "startLine": 294,
+                "orgLineEnd": 264,
+                "probedLineEnd": 299,
+                "orgLineStart": 264
+            },
+            {
+                "endLine": 304,
+                "offset": 39,
+                "startLine": 300,
+                "orgLineEnd": 265,
+                "probedLineEnd": 304,
+                "orgLineStart": 265
+            },
+            {
+                "endLine": 316,
+                "offset": 45,
+                "startLine": 310,
+                "orgLineEnd": 271,
+                "probedLineEnd": 316,
+                "orgLineStart": 271
+            },
+            {
+                "endLine": 321,
+                "offset": 49,
+                "startLine": 317,
+                "orgLineEnd": 272,
+                "probedLineEnd": 321,
+                "orgLineStart": 272
+            },
+            {
+                "endLine": 384,
+                "offset": 52,
+                "startLine": 381,
+                "orgLineEnd": 332,
+                "probedLineEnd": 384,
+                "orgLineStart": 332
+            },
+            {
+                "endLine": 388,
+                "offset": 55,
+                "startLine": 385,
+                "orgLineEnd": 333,
+                "probedLineEnd": 388,
+                "orgLineStart": 333
+            },
+            {
+                "endLine": 392,
+                "offset": 58,
+                "startLine": 389,
+                "orgLineEnd": 334,
+                "probedLineEnd": 392,
+                "orgLineStart": 334
+            },
+            {
+                "endLine": 396,
+                "offset": 61,
+                "startLine": 393,
+                "orgLineEnd": 336,
+                "probedLineEnd": 397,
+                "orgLineStart": 336
+            },
+            {
+                "endLine": 403,
+                "offset": 66,
+                "startLine": 398,
+                "orgLineEnd": 337,
+                "probedLineEnd": 403,
+                "orgLineStart": 337
+            },
+            {
+                "endLine": 408,
+                "offset": 70,
+                "startLine": 404,
+                "orgLineEnd": 338,
+                "probedLineEnd": 408,
+                "orgLineStart": 338
+            },
+            {
+                "endLine": 414,
+                "offset": 75,
+                "startLine": 409,
+                "orgLineEnd": 339,
+                "probedLineEnd": 414,
+                "orgLineStart": 339
+            },
+            {
+                "endLine": 420,
+                "offset": 80,
+                "startLine": 415,
+                "orgLineEnd": 340,
+                "probedLineEnd": 420,
+                "orgLineStart": 340
+            },
+            {
+                "endLine": 426,
+                "offset": 85,
+                "startLine": 421,
+                "orgLineEnd": 341,
+                "probedLineEnd": 426,
+                "orgLineStart": 341
+            },
+            {
+                "endLine": 430,
+                "offset": 88,
+                "startLine": 427,
+                "orgLineEnd": 342,
+                "probedLineEnd": 430,
+                "orgLineStart": 342
+            },
+            {
+                "endLine": 454,
+                "offset": 91,
+                "startLine": 451,
+                "orgLineEnd": 363,
+                "probedLineEnd": 454,
+                "orgLineStart": 363
+            },
+            {
+                "endLine": 458,
+                "offset": 94,
+                "startLine": 455,
+                "orgLineEnd": 364,
+                "probedLineEnd": 458,
+                "orgLineStart": 364
+            },
+            {
+                "endLine": 462,
+                "offset": 97,
+                "startLine": 459,
+                "orgLineEnd": 365,
+                "probedLineEnd": 462,
+                "orgLineStart": 365
+            },
+            {
+                "endLine": 467,
+                "offset": 101,
+                "startLine": 463,
+                "orgLineEnd": 366,
+                "probedLineEnd": 467,
+                "orgLineStart": 366
+            },
+            {
+                "endLine": 472,
+                "offset": 105,
+                "startLine": 468,
+                "orgLineEnd": 367,
+                "probedLineEnd": 472,
+                "orgLineStart": 367
+            },
+            {
+                "endLine": 478,
+                "offset": 110,
+                "startLine": 473,
+                "orgLineEnd": 368,
+                "probedLineEnd": 478,
+                "orgLineStart": 368
+            },
+            {
+                "endLine": 484,
+                "offset": 115,
+                "startLine": 479,
+                "orgLineEnd": 369,
+                "probedLineEnd": 484,
+                "orgLineStart": 369
+            },
+            {
+                "endLine": 489,
+                "offset": 119,
+                "startLine": 485,
+                "orgLineEnd": 370,
+                "probedLineEnd": 489,
+                "orgLineStart": 370
+            },
+            {
+                "endLine": 494,
+                "offset": 123,
+                "startLine": 490,
+                "orgLineEnd": 371,
+                "probedLineEnd": 494,
+                "orgLineStart": 371
+            },
+            {
+                "endLine": 498,
+                "offset": 126,
+                "startLine": 495,
+                "orgLineEnd": 372,
+                "probedLineEnd": 498,
+                "orgLineStart": 372
+            }
+        ],
+        "classId": "composite_collection_test_1"
+    }
+]}

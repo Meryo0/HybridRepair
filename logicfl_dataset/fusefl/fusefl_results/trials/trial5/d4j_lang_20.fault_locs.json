@@ -1,0 +1,24 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3298",
+            "code": "StringBuilder buf = new StringBuilder((array[startIndex] == null ? 16 : array[startIndex].toString().length()) + separator.length());",
+            "explanation": "The code attempts to get the length of the string representation of the array element at startIndex. If array[startIndex] is not null but its toString() method returns null, this will cause a NullPointerException. This is likely the cause of the error seen in the test results."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3383",
+            "code": "StringBuilder buf = new StringBuilder((array[startIndex] == null ? 16 : array[startIndex].toString().length()) + separator.length());",
+            "explanation": "Similar to the previous line, this line also attempts to get the length of the string representation of the array element at startIndex. If array[startIndex] is not null but its toString() method returns null, this will cause a NullPointerException. This is likely the cause of the error seen in the test results."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3305",
+            "code": "buf.append(array[i]);",
+            "explanation": "If array[i] is not null but its toString() method returns null, appending it to the StringBuilder will cause a NullPointerException. This line should be checked to ensure that array[i].toString() does not return null."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3389",
+            "code": "buf.append(array[i]);",
+            "explanation": "Similar to the previous line, if array[i] is not null but its toString() method returns null, appending it to the StringBuilder will cause a NullPointerException. This line should be checked to ensure that array[i].toString() does not return null."
+        }
+    ]
+}

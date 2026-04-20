@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jsoup.safety.Cleaner:73",
+            "code": "List<Node> sourceChildren = source.childNodes();",
+            "explanation": "The error message indicates that a NullPointerException is thrown because 'source' is null. This line attempts to access 'source.childNodes()' without checking if 'source' is null. Adding a null check for 'source' before this line would prevent the exception."
+        },
+        {
+            "faultyLine": "org.jsoup.safety.Cleaner:43",
+            "code": "copySafeNodes(dirtyDocument.body(), clean.body());",
+            "explanation": "The stack trace shows that the exception occurs within the 'copySafeNodes' method. This line calls 'copySafeNodes' with 'dirtyDocument.body()' as an argument. If 'dirtyDocument.body()' is null, it would cause the NullPointerException. Ensuring 'dirtyDocument.body()' is not null before calling 'copySafeNodes' would prevent the exception."
+        },
+        {
+            "faultyLine": "org.jsoup.safety.Cleaner:40",
+            "code": "Validate.notNull(dirtyDocument);",
+            "explanation": "Although this line checks if 'dirtyDocument' is null, it does not check if 'dirtyDocument.body()' is null. Adding a validation to check 'dirtyDocument.body()' would help catch the null case earlier."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Document:59",
+            "code": "return findFirstElementByTagName(\"body\", this);",
+            "explanation": "This line returns the body element of the document. If the document does not have a body element, it might return null. Ensuring that the document always has a body element or handling the null case would prevent issues."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Document:43",
+            "code": "return doc;",
+            "explanation": "This line returns the document created by 'createShell'. If the document does not have a body element, subsequent calls to 'body()' would return null. Ensuring that 'createShell' always creates a body element would prevent issues."
+        }
+    ]
+}

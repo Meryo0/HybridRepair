@@ -1,0 +1,5 @@
+org.apache.commons.io.output.FileWriterWithEncoding:171 `        this(file, charset, false);`
+org.apache.commons.io.output.FileWriterWithEncoding:183 `    public FileWriterWithEncoding(final File file, final Charset encoding, final boolean append) throws IOException {`
+org.apache.commons.io.output.FileWriterWithEncoding:184 `        this.out = initWriter(file, encoding, append);`
+org.apache.commons.io.output.FileWriterWithEncoding:225 `        Objects.requireNonNull(file, "file");`
+org.apache.commons.io.output.FileWriterWithEncoding:226 `        Objects.requireNonNull(encoding, "encoding");`

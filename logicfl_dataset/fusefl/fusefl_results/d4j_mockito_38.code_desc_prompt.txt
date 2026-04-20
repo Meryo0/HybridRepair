@@ -1,0 +1,216 @@
+Provide a short code description of the following code:
+ org.mockito.ArgumentMatcher:60 `public abstract class ArgumentMatcher<T> extends BaseMatcher<T> {`
+org.mockito.Matchers:104 `    private static MockingProgress mockingProgress = new ThreadSafeMockingProgress();`
+org.mockito.Mockito:570 `    private static final MockitoCore MOCKITO_CORE = new MockitoCore();`
+org.mockito.Mockito:581 `    public static final Answer<Object> RETURNS_DEFAULTS = new GloballyConfiguredAnswer();`
+org.mockito.Mockito:613 `    public static final Answer<Object> RETURNS_SMART_NULLS = new ReturnsSmartNulls();`
+org.mockito.Mockito:626 `    public static final Answer<Object> RETURNS_MOCKS = new ReturnsMocks();`
+org.mockito.Mockito:660 `    public static final Answer<Object> CALLS_REAL_METHODS = new CallsRealMethods();`
+org.mockito.Mockito:1480 `        return new MockSettingsImpl().defaultAnswer(RETURNS_DEFAULTS);`
+org.mockito.MockitoAnnotations:81 `        if (testClass == null) {`
+org.mockito.MockitoAnnotations:85 `        Class<?> clazz = testClass.getClass();`
+org.mockito.MockitoAnnotations:86 `        while (clazz != Object.class) {`
+org.mockito.MockitoAnnotations:87 `            scan(testClass, clazz);`
+org.mockito.MockitoAnnotations:88 `            clazz = clazz.getSuperclass();`
+org.mockito.MockitoAnnotations:90 `    }`
+org.mockito.MockitoAnnotations:93 `        AnnotationEngine annotationEngine = new GlobalConfiguration().getAnnotationEngine();`
+org.mockito.MockitoAnnotations:94 `        Field[] fields = clazz.getDeclaredFields();`
+org.mockito.MockitoAnnotations:95 `        for (Field field : fields) {`
+org.mockito.MockitoAnnotations:96 `            for(Annotation annotation : field.getAnnotations()) {`
+org.mockito.MockitoAnnotations:111 `    }`
+org.mockito.StateMaster:9 `public class StateMaster {`
+org.mockito.StateMaster:11 `    private final ThreadSafeMockingProgress mockingProgress = new ThreadSafeMockingProgress();`
+org.mockito.StateMaster:18 `        mockingProgress.validateState();`
+org.mockito.StateMaster:19 `    }`
+org.mockito.configuration.DefaultMockitoConfiguration:20 `public class DefaultMockitoConfiguration implements IMockitoConfiguration {`
+org.mockito.configuration.MockitoConfiguration:15 `public class MockitoConfiguration extends DefaultMockitoConfiguration implements IMockitoConfiguration {`
+org.mockito.configuration.MockitoConfiguration:17 `    private Answer<Object> overriddenDefaultAnswer = null;`
+org.mockito.configuration.MockitoConfiguration:22 `        this.overriddenDefaultAnswer = defaultAnswer;`
+org.mockito.configuration.MockitoConfiguration:23 `    }`
+org.mockito.configuration.MockitoConfiguration:27 `        this.cleansStackTrace = cleansStackTrace;`
+org.mockito.configuration.MockitoConfiguration:28 `    }`
+org.mockito.configuration.MockitoConfiguration:41 `        return new DefaultAnnotationEngine() {`
+org.mockito.exceptions.Reporter:43 `public class Reporter {`
+org.mockito.internal.MockHandler:44 `    public MockHandler(MockName mockName, MockingProgress mockingProgress, MatchersBinder matchersBinder, MockSettingsImpl mockSettings) {`
+org.mockito.internal.MockHandler:45 `        this.mockName = mockName;`
+org.mockito.internal.MockHandler:46 `        this.mockingProgress = mockingProgress;`
+org.mockito.internal.MockHandler:47 `        this.matchersBinder = matchersBinder;`
+org.mockito.internal.MockHandler:48 `        this.mockSettings = mockSettings;`
+org.mockito.internal.MockHandler:49 `        this.mockitoStubber = new MockitoStubber(mockingProgress);`
+org.mockito.internal.MockHandler:50 `        this.registeredInvocations = new RegisteredInvocations();`
+org.mockito.internal.MockHandler:51 `    }`
+org.mockito.internal.MockitoCore:30 `public class MockitoCore {`
+org.mockito.internal.MockitoCore:32 `    private final Reporter reporter = new Reporter();`
+org.mockito.internal.MockitoCore:33 `    private final MockUtil mockUtil = new MockUtil();`
+org.mockito.internal.MockitoCore:34 `    private final MockingProgress mockingProgress = new ThreadSafeMockingProgress();`
+org.mockito.internal.MockitoCore:37 `        mockingProgress.validateState();`
+org.mockito.internal.MockitoCore:38 `        mockingProgress.resetOngoingStubbing();`
+org.mockito.internal.configuration.ClassPathLoader:10 `public class ClassPathLoader {`
+org.mockito.internal.configuration.ClassPathLoader:18 `        Class configClass = null;`
+org.mockito.internal.configuration.ClassPathLoader:20 `            configClass = (Class) Class.forName("org.mockito.configuration.MockitoConfiguration");`
+org.mockito.internal.configuration.ClassPathLoader:24 `        }`
+org.mockito.internal.configuration.ClassPathLoader:27 `            return (IMockitoConfiguration) configClass.newInstance();`
+org.mockito.internal.configuration.ConfigurationAccess:12 `        return (MockitoConfiguration) new GlobalConfiguration().getIt();`
+org.mockito.internal.configuration.DefaultAnnotationEngine:20 `public class DefaultAnnotationEngine implements AnnotationEngine {`
+org.mockito.internal.configuration.GlobalConfiguration:19 `    private static ThreadLocal<IMockitoConfiguration> globalConfiguration = new ThreadLocal<IMockitoConfiguration>();`
+org.mockito.internal.configuration.GlobalConfiguration:23 `        return globalConfiguration.get();`
+org.mockito.internal.configuration.GlobalConfiguration:26 `    public GlobalConfiguration() {`
+org.mockito.internal.configuration.GlobalConfiguration:28 `        if (globalConfiguration.get() == null) {`
+org.mockito.internal.configuration.GlobalConfiguration:29 `            globalConfiguration.set(createConfig());`
+org.mockito.internal.configuration.GlobalConfiguration:31 `    }`
+org.mockito.internal.configuration.GlobalConfiguration:35 `        IMockitoConfiguration defaultConfiguration = new DefaultMockitoConfiguration();`
+org.mockito.internal.configuration.GlobalConfiguration:36 `        IMockitoConfiguration config = new ClassPathLoader().loadConfiguration();`
+org.mockito.internal.configuration.GlobalConfiguration:37 `        if (config != null) {`
+org.mockito.internal.configuration.GlobalConfiguration:38 `            return config;`
+org.mockito.internal.configuration.GlobalConfiguration:45 `        new GlobalConfiguration();`
+org.mockito.internal.configuration.GlobalConfiguration:46 `    }`
+org.mockito.internal.configuration.GlobalConfiguration:53 `        return globalConfiguration.get().getAnnotationEngine();`
+org.mockito.internal.creation.MethodInterceptorFilter:22 `    public MethodInterceptorFilter(Class toMock, T delegate) {`
+org.mockito.internal.creation.MethodInterceptorFilter:24 `            if (toMock.isInterface()) {`
+org.mockito.internal.creation.MethodInterceptorFilter:25 `                toMock = Object.class;`
+org.mockito.internal.creation.MethodInterceptorFilter:27 `            equalsMethod = toMock.getMethod("equals", new Class[] { Object.class });`
+org.mockito.internal.creation.MethodInterceptorFilter:28 `            hashCodeMethod = toMock.getMethod("hashCode", (Class[]) null);`
+org.mockito.internal.creation.MethodInterceptorFilter:32 `        }`
+org.mockito.internal.creation.MethodInterceptorFilter:33 `        this.delegate = delegate;`
+org.mockito.internal.creation.MethodInterceptorFilter:34 `    }`
+org.mockito.internal.creation.MockSettingsImpl:11 `public class MockSettingsImpl implements MockSettings {`
+org.mockito.internal.creation.MockSettingsImpl:35 `        return name;`
+org.mockito.internal.creation.MockSettingsImpl:39 `        return extraInterfaces;`
+org.mockito.internal.creation.MockSettingsImpl:43 `        return spiedInstance;`
+org.mockito.internal.creation.MockSettingsImpl:58 `        this.defaultAnswer = defaultAnswer;`
+org.mockito.internal.creation.MockSettingsImpl:59 `        return this;`
+org.mockito.internal.creation.cglib.MockitoNamingPolicy:9 `public class MockitoNamingPolicy extends DefaultNamingPolicy {`
+org.mockito.internal.creation.cglib.MockitoNamingPolicy:11 `    public static final MockitoNamingPolicy INSTANCE = new MockitoNamingPolicy(); `
+org.mockito.internal.creation.jmock.ClassImposterizer:30 `    public static final ClassImposterizer INSTANCE = new ClassImposterizer();`
+org.mockito.internal.creation.jmock.ClassImposterizer:32 `    private ClassImposterizer() {}`
+org.mockito.internal.creation.jmock.ClassImposterizer:37 `    private ObjenesisStd objenesis = new ObjenesisStd();`
+org.mockito.internal.creation.jmock.ClassImposterizer:39 `    private static final NamingPolicy NAMING_POLICY_THAT_ALLOWS_IMPOSTERISATION_OF_CLASSES_IN_SIGNED_PACKAGES = new MockitoNamingPolicy() {`
+org.mockito.internal.creation.jmock.ClassImposterizer:46 `    private static final CallbackFilter IGNORE_BRIDGE_METHODS = new CallbackFilter() {`
+org.mockito.internal.creation.jmock.ClassImposterizer:53 `        return !type.isPrimitive() && !Modifier.isFinal(type.getModifiers()) && !type.isAnonymousClass();`
+org.mockito.internal.creation.jmock.ClassImposterizer:58 `            setConstructorsAccessible(mockedType, true);`
+org.mockito.internal.creation.jmock.ClassImposterizer:62 `            setConstructorsAccessible(mockedType, false);`
+org.mockito.internal.creation.jmock.ClassImposterizer:67 `        for (Constructor<?> constructor : mockedType.getDeclaredConstructors()) {`
+org.mockito.internal.creation.jmock.ClassImposterizer:70 `    }`
+org.mockito.internal.creation.jmock.ClassImposterizer:73 `        if (mockedType == Object.class) {`
+org.mockito.internal.debugging.DebuggingInfo:15 `public class DebuggingInfo {`
+org.mockito.internal.debugging.DebuggingInfo:17 `    private final List<Invocation> unusedStubs = new LinkedList<Invocation>();`
+org.mockito.internal.debugging.DebuggingInfo:18 `    private final List<InvocationMatcher> unstubbedInvocations = new LinkedList<InvocationMatcher>();`
+org.mockito.internal.invocation.MatchersBinder:14 `public class MatchersBinder {`
+org.mockito.internal.matchers.Equals:15 `    public Equals(Object wanted) {`
+org.mockito.internal.matchers.Equals:16 `        this.wanted = wanted;`
+org.mockito.internal.matchers.Equals:17 `    }`
+org.mockito.internal.matchers.Equals:20 `        if (this.wanted == null) {`
+org.mockito.internal.matchers.Equals:23 `        return wanted.equals(actual);`
+org.mockito.internal.matchers.Equals:27 `        description.appendText(describe(wanted));`
+org.mockito.internal.matchers.Equals:28 `    }`
+org.mockito.internal.matchers.Equals:31 `        String text = quoting();`
+org.mockito.internal.matchers.Equals:32 `        if (object == null) {`
+org.mockito.internal.matchers.Equals:35 `            text+=object.toString();`
+org.mockito.internal.matchers.Equals:37 `        text+= quoting();`
+org.mockito.internal.matchers.Equals:38 `        return text;`
+org.mockito.internal.matchers.Equals:42 `        if (wanted instanceof String) {`
+org.mockito.internal.matchers.Equals:44 `        } else if (wanted instanceof Character) {`
+org.mockito.internal.matchers.Equals:47 `            return "";`
+org.mockito.internal.progress.ArgumentMatcherStorageImpl:22 `public class ArgumentMatcherStorageImpl implements ArgumentMatcherStorage {`
+org.mockito.internal.progress.ArgumentMatcherStorageImpl:24 `    private Stack<LocalizedMatcher> matcherStack = new Stack<LocalizedMatcher>();`
+org.mockito.internal.progress.ArgumentMatcherStorageImpl:100 `        if (!matcherStack.isEmpty()) {`
+org.mockito.internal.progress.ArgumentMatcherStorageImpl:105 `    }`
+org.mockito.internal.progress.MockingProgressImpl:16 `public class MockingProgressImpl implements MockingProgress {`
+org.mockito.internal.progress.MockingProgressImpl:18 `    private final Reporter reporter = new Reporter();`
+org.mockito.internal.progress.MockingProgressImpl:19 `    private final ArgumentMatcherStorage argumentMatcherStorage = new ArgumentMatcherStorageImpl();`
+org.mockito.internal.progress.MockingProgressImpl:21 `    private final DebuggingInfo debuggingInfo = new DebuggingInfo();`
+org.mockito.internal.progress.MockingProgressImpl:25 `    private Location stubbingInProgress = null;`
+org.mockito.internal.progress.MockingProgressImpl:47 `        iOngoingStubbing = null;`
+org.mockito.internal.progress.MockingProgressImpl:48 `    }`
+org.mockito.internal.progress.MockingProgressImpl:68 `        GlobalConfiguration.validate();`
+org.mockito.internal.progress.MockingProgressImpl:70 `        if (verificationMode != null) {`
+org.mockito.internal.progress.MockingProgressImpl:76 `        if (stubbingInProgress != null) {`
+org.mockito.internal.progress.MockingProgressImpl:82 `        getArgumentMatcherStorage().validateState();`
+org.mockito.internal.progress.MockingProgressImpl:83 `    }`
+org.mockito.internal.progress.MockingProgressImpl:103 `        return argumentMatcherStorage;`
+org.mockito.internal.progress.ThreadSafeMockingProgress:11 `public class ThreadSafeMockingProgress implements MockingProgress {`
+org.mockito.internal.progress.ThreadSafeMockingProgress:13 `    private static ThreadLocal<MockingProgress> mockingProgress = new ThreadLocal<MockingProgress>();`
+org.mockito.internal.progress.ThreadSafeMockingProgress:16 `        if (mockingProgress.get() == null) {`
+org.mockito.internal.progress.ThreadSafeMockingProgress:17 `            mockingProgress.set(new MockingProgressImpl());`
+org.mockito.internal.progress.ThreadSafeMockingProgress:19 `        return mockingProgress.get();`
+org.mockito.internal.progress.ThreadSafeMockingProgress:43 `        threadSafely().validateState();`
+org.mockito.internal.progress.ThreadSafeMockingProgress:44 `    }`
+org.mockito.internal.progress.ThreadSafeMockingProgress:59 `        threadSafely().resetOngoingStubbing();`
+org.mockito.internal.progress.ThreadSafeMockingProgress:60 `    }`
+org.mockito.internal.stubbing.MockitoStubber:17 `@SuppressWarnings("unchecked")`
+org.mockito.internal.stubbing.MockitoStubber:20 `    private final LinkedList<StubbedInvocationMatcher> stubbed = new LinkedList<StubbedInvocationMatcher>();`
+org.mockito.internal.stubbing.MockitoStubber:22 `    private final List<Answer> answersForStubbing = new ArrayList<Answer>();`
+org.mockito.internal.stubbing.MockitoStubber:26 `    public MockitoStubber(MockingProgress mockingProgress) {`
+org.mockito.internal.stubbing.MockitoStubber:27 `        this.mockingProgress = mockingProgress;`
+org.mockito.internal.stubbing.MockitoStubber:28 `    }`
+org.mockito.internal.stubbing.answers.CallsRealMethods:30 `public class CallsRealMethods implements Answer<Object> {`
+org.mockito.internal.stubbing.defaultanswers.GloballyConfiguredAnswer:17 `public class GloballyConfiguredAnswer implements Answer<Object> {`
+org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues:50 `public class ReturnsEmptyValues implements Answer<Object> {`
+org.mockito.internal.stubbing.defaultanswers.ReturnsMocks:13 `public class ReturnsMocks implements Answer<Object> {`
+org.mockito.internal.stubbing.defaultanswers.ReturnsMocks:15 `    private MockitoCore mockitoCore = new MockitoCore();`
+org.mockito.internal.stubbing.defaultanswers.ReturnsMocks:16 `    private Answer<Object> delegate = new ReturnsMoreEmptyValues();`
+org.mockito.internal.stubbing.defaultanswers.ReturnsMoreEmptyValues:43 `public class ReturnsMoreEmptyValues implements Answer<Object> {`
+org.mockito.internal.stubbing.defaultanswers.ReturnsMoreEmptyValues:45 `    private Answer<Object> delegate = new ReturnsEmptyValues();`
+org.mockito.internal.stubbing.defaultanswers.ReturnsSmartNulls:37 `public class ReturnsSmartNulls implements Answer<Object> {`
+org.mockito.internal.stubbing.defaultanswers.ReturnsSmartNulls:57 `    private final Answer<Object> delegate = new ReturnsMoreEmptyValues();`
+org.mockito.internal.util.CreationValidator:11 `public class CreationValidator {`
+org.mockito.internal.util.CreationValidator:14 `        if (!ClassImposterizer.INSTANCE.canImposterise(classToMock)) {`
+org.mockito.internal.util.CreationValidator:17 `    }`
+org.mockito.internal.util.CreationValidator:20 `        if (extraInterfaces == null) {`
+org.mockito.internal.util.CreationValidator:21 `            return;`
+org.mockito.internal.util.MockName:13 `    public MockName(String mockName, Class classToMock) {`
+org.mockito.internal.util.MockName:14 `        if (mockName == null) {`
+org.mockito.internal.util.MockName:15 `            this.mockName = toInstanceName(classToMock);`
+org.mockito.internal.util.MockName:16 `            this.surrogate = true;`
+org.mockito.internal.util.MockName:20 `    }`
+org.mockito.internal.util.MockName:23 `        String className = clazz.getSimpleName();`
+org.mockito.internal.util.MockName:25 `        return className.substring(0, 1).toLowerCase() + className.substring(1);`
+org.mockito.internal.util.MockUtil:23 `    public MockUtil(CreationValidator creationValidator) {`
+org.mockito.internal.util.MockUtil:24 `        this.creationValidator = creationValidator;`
+org.mockito.internal.util.MockUtil:25 `    }`
+org.mockito.internal.util.MockUtil:28 `        this(new CreationValidator());`
+org.mockito.internal.util.MockUtil:29 `    }`
+org.mockito.internal.util.MockUtil:32 `        creationValidator.validateType(classToMock);`
+org.mockito.internal.util.MockUtil:33 `        creationValidator.validateExtraInterfaces(classToMock, settings.getExtraInterfaces());`
+org.mockito.internal.util.MockUtil:35 `        MockName mockName = new MockName(settings.getMockName(), classToMock);`
+org.mockito.internal.util.MockUtil:36 `        MockHandler<T> mockHandler = new MockHandler<T>(mockName, progress, new MatchersBinder(), settings);`
+org.mockito.internal.util.MockUtil:37 `        MethodInterceptorFilter<MockHandler<T>> filter = new MethodInterceptorFilter<MockHandler<T>>(classToMock, mockHandler);`
+org.mockito.internal.util.MockUtil:38 `        Class<?>[] interfaces = settings.getExtraInterfaces();`
+org.mockito.internal.util.MockUtil:39 `        Class<?>[] ancillaryTypes = interfaces == null ? new Class<?>[0] : interfaces;`
+org.mockito.internal.util.MockUtil:40 `        Object spiedInstance = settings.getSpiedInstance();`
+org.mockito.internal.verification.RegisteredInvocations:16 `public class RegisteredInvocations {`
+org.mockito.internal.verification.RegisteredInvocations:18 `    private final List<Invocation> invocations = Collections.synchronizedList(new LinkedList<Invocation>());`
+org.mockito.internal.verification.RegisteredInvocations:32 `    private static class RemoveToString implements Filter<Invocation> {`
+org.mockito.internal.verification.argumentmatching.ArgumentMatchingTool:15 `public class ArgumentMatchingTool {`
+org.mockito.internal.verification.argumentmatching.ArgumentMatchingTool:21 `        if (matchers.size() != arguments.length) {`
+org.mockito.internal.verification.argumentmatching.ArgumentMatchingTool:25 `        List<Integer> suspicious = new LinkedList<Integer>();`
+org.mockito.internal.verification.argumentmatching.ArgumentMatchingTool:26 `        int i = 0;`
+org.mockito.internal.verification.argumentmatching.ArgumentMatchingTool:27 `        for (Matcher m : matchers) {`
+org.mockito.internal.verification.argumentmatching.ArgumentMatchingTool:28 `            if (m instanceof ContainsExtraTypeInformation `
+org.mockito.internal.verification.argumentmatching.ArgumentMatchingTool:41 `            return m.matches(arg);`
+org.mockito.internal.verification.argumentmatching.ArgumentMatchingTool:48 `        return StringDescription.toString(m).equals(arg.toString());`
+org.mockitoutil.TestBase:25 `public class TestBase extends Assert {`
+org.mockitoutil.TestBase:29 `        ConfigurationAccess.getConfig().overrideCleansStackTrace(false);`
+org.mockitoutil.TestBase:30 `        ConfigurationAccess.getConfig().overrideDefaultAnswer(null);`
+org.mockitoutil.TestBase:31 `    }`
+org.mockitoutil.TestBase:35 `        new StateMaster().validate();`
+org.mockitoutil.TestBase:36 `        MockitoAnnotations.initMocks(this);`
+org.mockitoutil.TestBase:37 `    }`
+ 
+The provided code is expected to pass these test cases:
+ @Test public void shouldWorkFineWhenGivenArgIsNull(){
+  Integer[] suspicious=tool.getSuspiciouslyNotMatchingArgsIndexes((List)Arrays.asList(new Equals(20)),new Object[]{null});
+  assertEquals(0,suspicious.length);
+}
+
+@Test public void shouldAllowPassingNullArgument(){
+  Fun mockFun=mock(Fun.class);
+  when(mockFun.doFun((String)anyObject())).thenReturn("value");
+  mockFun.doFun(null);
+  try {
+    verify(mockFun).doFun("hello");
+  }
+ catch (  AssertionError r) {
+  }
+}
+

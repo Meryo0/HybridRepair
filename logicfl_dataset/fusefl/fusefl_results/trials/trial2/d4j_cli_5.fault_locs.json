@@ -1,0 +1,19 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.cli.Util:36",
+            "code": "if (str.startsWith(\"--\"))",
+            "explanation": "The method `stripLeadingHyphens` does not check if the input string `str` is null before calling `startsWith` on it. This leads to a NullPointerException when `str` is null. Adding a null check at the beginning of the method would prevent this exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.cli.CommandLine:166",
+            "code": "opt = Util.stripLeadingHyphens(opt);",
+            "explanation": "The method `resolveOption` in `CommandLine` class calls `stripLeadingHyphens` without checking if `opt` is null. This can propagate the null value to `stripLeadingHyphens`, causing a NullPointerException. A null check should be added before calling `stripLeadingHyphens`."
+        },
+        {
+            "faultyLine": "org.apache.commons.cli.CommandLine:68",
+            "code": "return options.contains(resolveOption(opt));",
+            "explanation": "The method `hasOption` calls `resolveOption` which can return null if `opt` is null. This can lead to a NullPointerException when `contains` is called on the `options` set. Adding a null check for the result of `resolveOption` would prevent this exception."
+        }
+    ]
+}

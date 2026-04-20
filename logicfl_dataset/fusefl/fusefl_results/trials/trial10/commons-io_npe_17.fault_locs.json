@@ -1,0 +1,54 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:391",
+            "code": "final boolean file1Exists = file1.exists();",
+            "explanation": "The NullPointerException occurs because 'file1' is null. The method 'contentEquals' should check if 'file1' and 'file2' are null before attempting to call 'exists()' on them."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:1116",
+            "code": "if (!directory.exists()) {",
+            "explanation": "This line assumes 'directory' is not null. A null check should be added before calling 'exists()' to prevent potential NullPointerExceptions."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:1120",
+            "code": "if (!isSymlink(directory)) {",
+            "explanation": "This line assumes 'directory' is not null. A null check should be added before calling 'isSymlink()' to prevent potential NullPointerExceptions."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:1121",
+            "code": "cleanDirectory(directory);",
+            "explanation": "This line assumes 'directory' is not null. A null check should be added before calling 'cleanDirectory()' to prevent potential NullPointerExceptions."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:1124",
+            "code": "if (!directory.delete()) {",
+            "explanation": "This line assumes 'directory' is not null. A null check should be added before calling 'delete()' to prevent potential NullPointerExceptions."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:1720",
+            "code": "if (file == null) {",
+            "explanation": "This line correctly checks if 'file' is null. However, the method 'contentEquals' should have similar null checks for 'file1' and 'file2' to prevent NullPointerExceptions."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:2676",
+            "code": "if (!directory.exists()) {",
+            "explanation": "This line assumes 'directory' is not null. A null check should be added before calling 'exists()' to prevent potential NullPointerExceptions."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:2681",
+            "code": "if (!directory.isDirectory()) {",
+            "explanation": "This line assumes 'directory' is not null. A null check should be added before calling 'isDirectory()' to prevent potential NullPointerExceptions."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:2686",
+            "code": "final File[] files = directory.listFiles();",
+            "explanation": "This line assumes 'directory' is not null. A null check should be added before calling 'listFiles()' to prevent potential NullPointerExceptions."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:2687",
+            "code": "if (files == null) {  // null if security restricted",
+            "explanation": "This line correctly checks if 'files' is null. However, the method 'contentEquals' should have similar null checks for 'file1' and 'file2' to prevent NullPointerExceptions."
+        }
+    ]
+}

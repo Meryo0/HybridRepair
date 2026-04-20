@@ -1,0 +1,381 @@
+com.fasterxml.jackson.databind.JavaType:78 `    {`
+com.fasterxml.jackson.databind.JavaType:79 `        _class = raw;`
+com.fasterxml.jackson.databind.JavaType:80 `        _hash = raw.getName().hashCode() + additionalHash;`
+com.fasterxml.jackson.databind.JavaType:81 `        _valueHandler = valueHandler;`
+com.fasterxml.jackson.databind.JavaType:82 `        _typeHandler = typeHandler;`
+com.fasterxml.jackson.databind.JavaType:83 `        _asStatic = asStatic;`
+com.fasterxml.jackson.databind.JavaType:84 `    }`
+com.fasterxml.jackson.databind.JavaType:490 `        return (_typeHandler != null) || (_valueHandler != null);`
+com.fasterxml.jackson.databind.JavaType:562 `    public final int hashCode() { return _hash; }`
+com.fasterxml.jackson.databind.type.ClassStack:21 `        this(null, rootType);`
+com.fasterxml.jackson.databind.type.ClassStack:22 `    }`
+com.fasterxml.jackson.databind.type.ClassStack:24 `    private ClassStack(ClassStack parent, Class<?> curr) {`
+com.fasterxml.jackson.databind.type.ClassStack:25 `        _parent = parent;`
+com.fasterxml.jackson.databind.type.ClassStack:26 `        _current = curr;`
+com.fasterxml.jackson.databind.type.ClassStack:27 `    }`
+com.fasterxml.jackson.databind.type.ClassStack:33 `        return new ClassStack(this, cls);`
+com.fasterxml.jackson.databind.type.ClassStack:55 `        if (_selfRefs != null) {`
+com.fasterxml.jackson.databind.type.ClassStack:60 `    }`
+com.fasterxml.jackson.databind.type.ClassStack:64 `        if (_current == cls) return this;`
+com.fasterxml.jackson.databind.type.ClassStack:65 `        for (ClassStack curr = _parent; curr != null; curr = curr._parent) {`
+com.fasterxml.jackson.databind.type.ClassStack:66 `            if (curr._current == cls) {`
+com.fasterxml.jackson.databind.type.ClassStack:70 `        return null;`
+com.fasterxml.jackson.databind.type.CollectionLikeType:34 `        super(collT, bindings, superClass, superInts,`
+com.fasterxml.jackson.databind.type.CollectionLikeType:36 `        _elementType = elemT;`
+com.fasterxml.jackson.databind.type.CollectionLikeType:37 `    }`
+com.fasterxml.jackson.databind.type.CollectionLikeType:194 `        return super.hasHandlers() || _elementType.hasHandlers();`
+com.fasterxml.jackson.databind.type.CollectionLikeType:213 `        StringBuilder sb = new StringBuilder();`
+com.fasterxml.jackson.databind.type.CollectionLikeType:214 `        sb.append(_class.getName());`
+com.fasterxml.jackson.databind.type.CollectionLikeType:215 `        if (_elementType != null) {`
+com.fasterxml.jackson.databind.type.CollectionLikeType:216 `            sb.append('<');`
+com.fasterxml.jackson.databind.type.CollectionLikeType:217 `            sb.append(_elementType.toCanonical());`
+com.fasterxml.jackson.databind.type.CollectionLikeType:218 `            sb.append('>');`
+com.fasterxml.jackson.databind.type.CollectionLikeType:220 `        return sb.toString();`
+com.fasterxml.jackson.databind.type.CollectionLikeType:248 `        if (o == this) return true;`
+com.fasterxml.jackson.databind.type.CollectionLikeType:249 `        if (o == null) return false;`
+com.fasterxml.jackson.databind.type.CollectionLikeType:250 `        if (o.getClass() != getClass()) return false;`
+com.fasterxml.jackson.databind.type.CollectionLikeType:252 `        CollectionLikeType other = (CollectionLikeType) o;`
+com.fasterxml.jackson.databind.type.CollectionLikeType:253 `        return  (_class == other._class) && _elementType.equals(other._elementType);`
+com.fasterxml.jackson.databind.type.CollectionType:25 `        super(collT, bindings, superClass, superInts, elemT, valueHandler, typeHandler, asStatic);`
+com.fasterxml.jackson.databind.type.CollectionType:26 `    }`
+com.fasterxml.jackson.databind.type.CollectionType:40 `        return new CollectionType(rawType, bindings, superClass, superInts, elemT,`
+com.fasterxml.jackson.databind.type.CollectionType:120 `        return new CollectionType(rawType, bindings,`
+com.fasterxml.jackson.databind.type.MapLikeType:39 `        super(mapType, bindings, superClass, superInts, keyT.hashCode()`
+com.fasterxml.jackson.databind.type.MapLikeType:41 `        _keyType = keyT;`
+com.fasterxml.jackson.databind.type.MapLikeType:42 `        _valueType = valueT;`
+com.fasterxml.jackson.databind.type.MapLikeType:43 `    }`
+com.fasterxml.jackson.databind.type.MapLikeType:190 `        StringBuilder sb = new StringBuilder();`
+com.fasterxml.jackson.databind.type.MapLikeType:191 `        sb.append(_class.getName());`
+com.fasterxml.jackson.databind.type.MapLikeType:192 `        if (_keyType != null) {`
+com.fasterxml.jackson.databind.type.MapLikeType:193 `            sb.append('<');`
+com.fasterxml.jackson.databind.type.MapLikeType:194 `            sb.append(_keyType.toCanonical());`
+com.fasterxml.jackson.databind.type.MapLikeType:195 `            sb.append(',');`
+com.fasterxml.jackson.databind.type.MapLikeType:196 `            sb.append(_valueType.toCanonical());`
+com.fasterxml.jackson.databind.type.MapLikeType:197 `            sb.append('>');`
+com.fasterxml.jackson.databind.type.MapLikeType:199 `        return sb.toString();`
+com.fasterxml.jackson.databind.type.MapLikeType:240 `        return super.hasHandlers() || _valueType.hasHandlers()`
+com.fasterxml.jackson.databind.type.MapLikeType:300 `        if (o == this) return true;`
+com.fasterxml.jackson.databind.type.MapLikeType:301 `        if (o == null) return false;`
+com.fasterxml.jackson.databind.type.MapLikeType:302 `        if (o.getClass() != getClass()) return false;`
+com.fasterxml.jackson.databind.type.MapLikeType:304 `        MapLikeType other = (MapLikeType) o;`
+com.fasterxml.jackson.databind.type.MapLikeType:305 `        return (_class == other._class) && _keyType.equals(other._keyType)`
+com.fasterxml.jackson.databind.type.MapType:23 `        super(mapType, bindings, superClass, superInts,`
+com.fasterxml.jackson.databind.type.MapType:25 `    }`
+com.fasterxml.jackson.databind.type.MapType:40 `        return new MapType(rawType, bindings, superClass, superInts, keyT, valueT, null, null, false);`
+com.fasterxml.jackson.databind.type.MapType:126 `        return new MapType(rawType, bindings,`
+com.fasterxml.jackson.databind.type.SimpleType:33 `        this(cls, TypeBindings.emptyBindings(), null, null);`
+com.fasterxml.jackson.databind.type.SimpleType:34 `    }`
+com.fasterxml.jackson.databind.type.SimpleType:38 `        this(cls, bindings, superClass, superInts, null, null, false);`
+com.fasterxml.jackson.databind.type.SimpleType:39 `    }`
+com.fasterxml.jackson.databind.type.SimpleType:55 `        super(cls, bindings, superClass, superInts,`
+com.fasterxml.jackson.databind.type.SimpleType:57 `    }`
+com.fasterxml.jackson.databind.type.SimpleType:212 `        return null;`
+com.fasterxml.jackson.databind.type.SimpleType:218 `        StringBuilder sb = new StringBuilder();`
+com.fasterxml.jackson.databind.type.SimpleType:219 `        sb.append(_class.getName());`
+com.fasterxml.jackson.databind.type.SimpleType:221 `        final int count = _bindings.size();`
+com.fasterxml.jackson.databind.type.SimpleType:222 `        if (count > 0) {`
+com.fasterxml.jackson.databind.type.SimpleType:233 `        return sb.toString();`
+com.fasterxml.jackson.databind.type.SimpleType:312 `        if (o == this) return true;`
+com.fasterxml.jackson.databind.type.TypeBase:17 `    private final static TypeBindings NO_BINDINGS = TypeBindings.emptyBindings();`
+com.fasterxml.jackson.databind.type.TypeBase:18 `    private final static JavaType[] NO_TYPES = new JavaType[0];`
+com.fasterxml.jackson.databind.type.TypeBase:45 `        super(raw, hash, valueHandler, typeHandler, asStatic);`
+com.fasterxml.jackson.databind.type.TypeBase:46 `        _bindings = (bindings == null) ? NO_BINDINGS : bindings;`
+com.fasterxml.jackson.databind.type.TypeBase:47 `        _superClass = superClass;`
+com.fasterxml.jackson.databind.type.TypeBase:48 `        _superInterfaces = superInts;`
+com.fasterxml.jackson.databind.type.TypeBase:49 `    }`
+com.fasterxml.jackson.databind.type.TypeBase:66 `        String str = _canonicalName;`
+com.fasterxml.jackson.databind.type.TypeBase:67 `        if (str == null) {`
+com.fasterxml.jackson.databind.type.TypeBase:68 `            str = buildCanonicalName();`
+com.fasterxml.jackson.databind.type.TypeBase:70 `        return str;`
+com.fasterxml.jackson.databind.type.TypeBindings:16 `    private final static String[] NO_STRINGS = new String[0];`
+com.fasterxml.jackson.databind.type.TypeBindings:18 `    private final static JavaType[] NO_TYPES = new JavaType[0];`
+com.fasterxml.jackson.databind.type.TypeBindings:20 `    private final static TypeBindings EMPTY = new TypeBindings(NO_STRINGS, NO_TYPES, null);`
+com.fasterxml.jackson.databind.type.TypeBindings:52 `    {`
+com.fasterxml.jackson.databind.type.TypeBindings:53 `        _names = (names == null) ? NO_STRINGS : names;`
+com.fasterxml.jackson.databind.type.TypeBindings:54 `        _types = (types == null) ? NO_TYPES : types;`
+com.fasterxml.jackson.databind.type.TypeBindings:55 `        if (_names.length != _types.length) {`
+com.fasterxml.jackson.databind.type.TypeBindings:58 `        int h = 1;`
+com.fasterxml.jackson.databind.type.TypeBindings:59 `        for (int i = 0, len = _types.length; i < len; ++i) {`
+com.fasterxml.jackson.databind.type.TypeBindings:60 `            h += _types[i].hashCode();`
+com.fasterxml.jackson.databind.type.TypeBindings:62 `        _unboundVariables = uvars;`
+com.fasterxml.jackson.databind.type.TypeBindings:63 `        _hashCode = h;`
+com.fasterxml.jackson.databind.type.TypeBindings:64 `    }`
+com.fasterxml.jackson.databind.type.TypeBindings:67 `        return EMPTY;`
+com.fasterxml.jackson.databind.type.TypeBindings:84 `        JavaType[] types = (typeList == null || typeList.isEmpty()) ?`
+com.fasterxml.jackson.databind.type.TypeBindings:86 `        return create(erasedType, types);`
+com.fasterxml.jackson.databind.type.TypeBindings:91 `        if (types == null) {`
+com.fasterxml.jackson.databind.type.TypeBindings:93 `        } else switch (types.length) {`
+com.fasterxml.jackson.databind.type.TypeBindings:95 `            return create(erasedType, types[0]);`
+com.fasterxml.jackson.databind.type.TypeBindings:97 `            return create(erasedType, types[0], types[1]);`
+com.fasterxml.jackson.databind.type.TypeBindings:122 `        TypeVariable<?>[] vars = TypeParamStash.paramsFor1(erasedType);`
+com.fasterxml.jackson.databind.type.TypeBindings:123 `        int varLen = (vars == null) ? 0 : vars.length;`
+com.fasterxml.jackson.databind.type.TypeBindings:124 `        if (varLen != 1) {`
+com.fasterxml.jackson.databind.type.TypeBindings:128 `        return new TypeBindings(new String[] { vars[0].getName() },`
+com.fasterxml.jackson.databind.type.TypeBindings:135 `        TypeVariable<?>[] vars = TypeParamStash.paramsFor2(erasedType);`
+com.fasterxml.jackson.databind.type.TypeBindings:136 `        int varLen = (vars == null) ? 0 : vars.length;`
+com.fasterxml.jackson.databind.type.TypeBindings:137 `        if (varLen != 2) {`
+com.fasterxml.jackson.databind.type.TypeBindings:141 `        return new TypeBindings(new String[] { vars[0].getName(), vars[1].getName() },`
+com.fasterxml.jackson.databind.type.TypeBindings:200 `        int len = (_unboundVariables == null) ? 0 : _unboundVariables.length;`
+com.fasterxml.jackson.databind.type.TypeBindings:201 `        String[] names =  (len == 0)`
+com.fasterxml.jackson.databind.type.TypeBindings:203 `        names[len] = name;`
+com.fasterxml.jackson.databind.type.TypeBindings:204 `        return new TypeBindings(_names, _types, names);`
+com.fasterxml.jackson.databind.type.TypeBindings:218 `        for (int i = 0, len = _names.length; i < len; ++i) {`
+com.fasterxml.jackson.databind.type.TypeBindings:219 `            if (name.equals(_names[i])) {`
+com.fasterxml.jackson.databind.type.TypeBindings:220 `                JavaType t = _types[i];`
+com.fasterxml.jackson.databind.type.TypeBindings:221 `                if (t instanceof ResolvedRecursiveType) {`
+com.fasterxml.jackson.databind.type.TypeBindings:238 `                return t;`
+com.fasterxml.jackson.databind.type.TypeBindings:241 `        return null;`
+com.fasterxml.jackson.databind.type.TypeBindings:245 `        return (_types.length == 0);`
+com.fasterxml.jackson.databind.type.TypeBindings:252 `        return _types.length;`
+com.fasterxml.jackson.databind.type.TypeBindings:276 `        if (_types.length == 0) {`
+com.fasterxml.jackson.databind.type.TypeBindings:279 `        return Arrays.asList(_types);`
+com.fasterxml.jackson.databind.type.TypeBindings:286 `        if (_unboundVariables != null) {`
+com.fasterxml.jackson.databind.type.TypeBindings:293 `        return false;`
+com.fasterxml.jackson.databind.type.TypeBindings:305 `        return new AsKey(rawBase, _types, _hashCode);`
+com.fasterxml.jackson.databind.type.TypeBindings:381 `        private final static TypeVariable<?>[] VARS_ABSTRACT_LIST = AbstractList.class.getTypeParameters();`
+com.fasterxml.jackson.databind.type.TypeBindings:382 `        private final static TypeVariable<?>[] VARS_COLLECTION = Collection.class.getTypeParameters();`
+com.fasterxml.jackson.databind.type.TypeBindings:383 `        private final static TypeVariable<?>[] VARS_ITERABLE = Iterable.class.getTypeParameters();`
+com.fasterxml.jackson.databind.type.TypeBindings:384 `        private final static TypeVariable<?>[] VARS_LIST = List.class.getTypeParameters();`
+com.fasterxml.jackson.databind.type.TypeBindings:385 `        private final static TypeVariable<?>[] VARS_ARRAY_LIST = ArrayList.class.getTypeParameters();`
+com.fasterxml.jackson.databind.type.TypeBindings:387 `        private final static TypeVariable<?>[] VARS_MAP = Map.class.getTypeParameters();`
+com.fasterxml.jackson.databind.type.TypeBindings:388 `        private final static TypeVariable<?>[] VARS_HASH_MAP = HashMap.class.getTypeParameters();`
+com.fasterxml.jackson.databind.type.TypeBindings:389 `        private final static TypeVariable<?>[] VARS_LINKED_HASH_MAP = LinkedHashMap.class.getTypeParameters();`
+com.fasterxml.jackson.databind.type.TypeBindings:393 `            if (erasedType == Collection.class) {`
+com.fasterxml.jackson.databind.type.TypeBindings:394 `                return VARS_COLLECTION;`
+com.fasterxml.jackson.databind.type.TypeBindings:396 `            if (erasedType == List.class) {`
+com.fasterxml.jackson.databind.type.TypeBindings:397 `                return VARS_LIST;`
+com.fasterxml.jackson.databind.type.TypeBindings:399 `            if (erasedType == ArrayList.class) {`
+com.fasterxml.jackson.databind.type.TypeBindings:400 `                return VARS_ARRAY_LIST;`
+com.fasterxml.jackson.databind.type.TypeBindings:402 `            if (erasedType == AbstractList.class) {`
+com.fasterxml.jackson.databind.type.TypeBindings:403 `                return VARS_ABSTRACT_LIST;`
+com.fasterxml.jackson.databind.type.TypeBindings:405 `            if (erasedType == Iterable.class) {`
+com.fasterxml.jackson.databind.type.TypeBindings:406 `                return VARS_ITERABLE;`
+com.fasterxml.jackson.databind.type.TypeBindings:408 `            return erasedType.getTypeParameters();`
+com.fasterxml.jackson.databind.type.TypeBindings:413 `            if (erasedType == Map.class) {`
+com.fasterxml.jackson.databind.type.TypeBindings:414 `                return VARS_MAP;`
+com.fasterxml.jackson.databind.type.TypeBindings:416 `            if (erasedType == HashMap.class) {`
+com.fasterxml.jackson.databind.type.TypeBindings:419 `            if (erasedType == LinkedHashMap.class) {`
+com.fasterxml.jackson.databind.type.TypeBindings:422 `            return erasedType.getTypeParameters();`
+com.fasterxml.jackson.databind.type.TypeBindings:436 `        public AsKey(Class<?> raw, JavaType[] params, int hash) {`
+com.fasterxml.jackson.databind.type.TypeBindings:437 `            _raw = raw ;`
+com.fasterxml.jackson.databind.type.TypeBindings:438 `            _params = params;`
+com.fasterxml.jackson.databind.type.TypeBindings:439 `            _hash = hash;`
+com.fasterxml.jackson.databind.type.TypeBindings:440 `        }`
+com.fasterxml.jackson.databind.type.TypeBindings:443 `        public int hashCode() { return _hash; }`
+com.fasterxml.jackson.databind.type.TypeBindings:447 `            if (o == this) return true;`
+com.fasterxml.jackson.databind.type.TypeBindings:448 `            if (o == null) return false;`
+com.fasterxml.jackson.databind.type.TypeBindings:449 `            if (o.getClass() != getClass()) return false;`
+com.fasterxml.jackson.databind.type.TypeBindings:450 `            AsKey other = (AsKey) o;`
+com.fasterxml.jackson.databind.type.TypeBindings:452 `            if ((_hash == other._hash) && (_raw == other._raw)) {`
+com.fasterxml.jackson.databind.type.TypeBindings:453 `                final JavaType[] otherParams = other._params;`
+com.fasterxml.jackson.databind.type.TypeBindings:454 `                final int len = _params.length;`
+com.fasterxml.jackson.databind.type.TypeBindings:456 `                if (len == otherParams.length) {`
+com.fasterxml.jackson.databind.type.TypeBindings:457 `                    for (int i = 0; i < len; ++i) {`
+com.fasterxml.jackson.databind.type.TypeBindings:458 `                        if (!_params[i].equals(otherParams[i])) {`
+com.fasterxml.jackson.databind.type.TypeBindings:462 `                    return true;`
+com.fasterxml.jackson.databind.type.TypeBindings:465 `            return false;`
+com.fasterxml.jackson.databind.type.TypeFactory:39 `    private final static JavaType[] NO_TYPES = new JavaType[0];`
+com.fasterxml.jackson.databind.type.TypeFactory:46 `    protected final static TypeFactory instance = new TypeFactory();`
+com.fasterxml.jackson.databind.type.TypeFactory:48 `    protected final static TypeBindings EMPTY_BINDINGS = TypeBindings.emptyBindings();`
+com.fasterxml.jackson.databind.type.TypeFactory:60 `    private final static Class<?> CLS_STRING = String.class;`
+com.fasterxml.jackson.databind.type.TypeFactory:61 `    private final static Class<?> CLS_OBJECT = Object.class;`
+com.fasterxml.jackson.databind.type.TypeFactory:63 `    private final static Class<?> CLS_COMPARABLE = Comparable.class;`
+com.fasterxml.jackson.databind.type.TypeFactory:64 `    private final static Class<?> CLS_CLASS = Class.class;`
+com.fasterxml.jackson.databind.type.TypeFactory:65 `    private final static Class<?> CLS_ENUM = Enum.class;`
+com.fasterxml.jackson.databind.type.TypeFactory:67 `    private final static Class<?> CLS_BOOL = Boolean.TYPE;`
+com.fasterxml.jackson.databind.type.TypeFactory:68 `    private final static Class<?> CLS_INT = Integer.TYPE;`
+com.fasterxml.jackson.databind.type.TypeFactory:69 `    private final static Class<?> CLS_LONG = Long.TYPE;`
+com.fasterxml.jackson.databind.type.TypeFactory:78 `    protected final static SimpleType CORE_TYPE_BOOL = new SimpleType(CLS_BOOL);`
+com.fasterxml.jackson.databind.type.TypeFactory:79 `    protected final static SimpleType CORE_TYPE_INT = new SimpleType(CLS_INT);`
+com.fasterxml.jackson.databind.type.TypeFactory:80 `    protected final static SimpleType CORE_TYPE_LONG = new SimpleType(CLS_LONG);`
+com.fasterxml.jackson.databind.type.TypeFactory:83 `    protected final static SimpleType CORE_TYPE_STRING = new SimpleType(CLS_STRING);`
+com.fasterxml.jackson.databind.type.TypeFactory:86 `    protected final static SimpleType CORE_TYPE_OBJECT = new SimpleType(CLS_OBJECT);`
+com.fasterxml.jackson.databind.type.TypeFactory:94 `    protected final static SimpleType CORE_TYPE_COMPARABLE = new SimpleType(CLS_COMPARABLE);`
+com.fasterxml.jackson.databind.type.TypeFactory:102 `    protected final static SimpleType CORE_TYPE_ENUM = new SimpleType(CLS_ENUM);`
+com.fasterxml.jackson.databind.type.TypeFactory:110 `    protected final static SimpleType CORE_TYPE_CLASS = new SimpleType(CLS_CLASS);`
+com.fasterxml.jackson.databind.type.TypeFactory:145 `        this(null);`
+com.fasterxml.jackson.databind.type.TypeFactory:146 `    }`
+com.fasterxml.jackson.databind.type.TypeFactory:151 `    protected TypeFactory(LRUMap<Object,JavaType> typeCache) {`
+com.fasterxml.jackson.databind.type.TypeFactory:152 `        if (typeCache == null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:153 `            typeCache = new LRUMap<Object,JavaType>(16, 200);`
+com.fasterxml.jackson.databind.type.TypeFactory:155 `        _typeCache = typeCache;`
+com.fasterxml.jackson.databind.type.TypeFactory:156 `        _parser = new TypeParser(this);`
+com.fasterxml.jackson.databind.type.TypeFactory:157 `        _modifiers = null;`
+com.fasterxml.jackson.databind.type.TypeFactory:158 `        _classLoader = null;`
+com.fasterxml.jackson.databind.type.TypeFactory:159 `    }`
+com.fasterxml.jackson.databind.type.TypeFactory:211 `    public static TypeFactory defaultInstance() { return instance; }`
+com.fasterxml.jackson.databind.type.TypeFactory:228 `        return _classLoader;`
+com.fasterxml.jackson.databind.type.TypeFactory:274 `        if (className.indexOf('.') < 0) {`
+com.fasterxml.jackson.databind.type.TypeFactory:281 `        Throwable prob = null;`
+com.fasterxml.jackson.databind.type.TypeFactory:282 `        ClassLoader loader = this.getClassLoader();`
+com.fasterxml.jackson.databind.type.TypeFactory:283 `        if (loader == null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:284 `            loader = 	Thread.currentThread().getContextClassLoader();`
+com.fasterxml.jackson.databind.type.TypeFactory:286 `        if (loader != null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:288 `                return classForName(className, true, loader);`
+com.fasterxml.jackson.databind.type.TypeFactory:308 `    	return Class.forName(name, true, loader);`
+com.fasterxml.jackson.databind.type.TypeFactory:536 `        return _parser.parse(canonical);`
+com.fasterxml.jackson.databind.type.TypeFactory:610 `        return _fromAny(null, type, EMPTY_BINDINGS);`
+com.fasterxml.jackson.databind.type.TypeFactory:766 `        if (mapClass == Properties.class) {`
+com.fasterxml.jackson.databind.type.TypeFactory:769 `            kt = _fromClass(null, keyClass, EMPTY_BINDINGS);`
+com.fasterxml.jackson.databind.type.TypeFactory:770 `            vt = _fromClass(null, valueClass, EMPTY_BINDINGS);`
+com.fasterxml.jackson.databind.type.TypeFactory:772 `        return constructMapType(mapClass, kt, vt);`
+com.fasterxml.jackson.databind.type.TypeFactory:782 `        return (MapType) _fromClass(null, mapClass,`
+com.fasterxml.jackson.databind.type.TypeFactory:1030 `        if (rawClass == Properties.class) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1033 `            List<JavaType> typeParams = bindings.getTypeParameters();`
+com.fasterxml.jackson.databind.type.TypeFactory:1035 `            switch (typeParams.size()) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1040 `                kt = typeParams.get(0);`
+com.fasterxml.jackson.databind.type.TypeFactory:1041 `                vt = typeParams.get(1);`
+com.fasterxml.jackson.databind.type.TypeFactory:1042 `                break;`
+com.fasterxml.jackson.databind.type.TypeFactory:1047 `        return MapType.construct(rawClass, bindings, superClass, superInterfaces, kt, vt);`
+com.fasterxml.jackson.databind.type.TypeFactory:1053 `        List<JavaType> typeParams = bindings.getTypeParameters();`
+com.fasterxml.jackson.databind.type.TypeFactory:1056 `        if (typeParams.isEmpty()) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1058 `        } else if (typeParams.size() == 1) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1059 `            ct = typeParams.get(0);`
+com.fasterxml.jackson.databind.type.TypeFactory:1063 `        return CollectionType.construct(rawClass, bindings, superClass, superInterfaces, ct);`
+com.fasterxml.jackson.databind.type.TypeFactory:1112 `        return new SimpleType(raw, bindings, superClass, superInterfaces);`
+com.fasterxml.jackson.databind.type.TypeFactory:1132 `        if (clz.isPrimitive()) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1137 `            if (clz == CLS_STRING) return CORE_TYPE_STRING;`
+com.fasterxml.jackson.databind.type.TypeFactory:1138 `            if (clz == CLS_OBJECT) return CORE_TYPE_OBJECT; // since 2.7`
+com.fasterxml.jackson.databind.type.TypeFactory:1140 `        return null;`
+com.fasterxml.jackson.databind.type.TypeFactory:1159 `        if (type instanceof Class<?>) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1161 `            resultType = _fromClass(context, (Class<?>) type, EMPTY_BINDINGS);`
+com.fasterxml.jackson.databind.type.TypeFactory:1164 `        else if (type instanceof ParameterizedType) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1165 `            resultType = _fromParamType(context, (ParameterizedType) type, bindings);`
+com.fasterxml.jackson.databind.type.TypeFactory:1167 `        else if (type instanceof JavaType) { // [databind#116]`
+com.fasterxml.jackson.databind.type.TypeFactory:1171 `        else if (type instanceof GenericArrayType) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1174 `        else if (type instanceof TypeVariable<?>) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1175 `            resultType = _fromVariable(context, (TypeVariable<?>) type, bindings);`
+com.fasterxml.jackson.databind.type.TypeFactory:1186 `        if (_modifiers != null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1201 `        return resultType;`
+com.fasterxml.jackson.databind.type.TypeFactory:1211 `        JavaType result = _findWellKnownSimple(rawType);`
+com.fasterxml.jackson.databind.type.TypeFactory:1212 `        if (result != null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1213 `            return result;`
+com.fasterxml.jackson.databind.type.TypeFactory:1217 `        if ((bindings == null) || bindings.isEmpty()) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1218 `            key = rawType;`
+com.fasterxml.jackson.databind.type.TypeFactory:1220 `            key = bindings.asKey(rawType);`
+com.fasterxml.jackson.databind.type.TypeFactory:1222 `        result = _typeCache.get(key); // ok, cache object is synced`
+com.fasterxml.jackson.databind.type.TypeFactory:1223 `        if (result != null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1224 `            return result;`
+com.fasterxml.jackson.databind.type.TypeFactory:1228 `        if (context == null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1229 `            context = new ClassStack(rawType);`
+com.fasterxml.jackson.databind.type.TypeFactory:1231 `            ClassStack prev = context.find(rawType);`
+com.fasterxml.jackson.databind.type.TypeFactory:1232 `            if (prev != null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1239 `            context = context.child(rawType);`
+com.fasterxml.jackson.databind.type.TypeFactory:1243 `        if (rawType.isArray()) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1252 `            if (rawType.isInterface()) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1253 `                superClass = null;`
+com.fasterxml.jackson.databind.type.TypeFactory:1254 `                superInterfaces = _resolveSuperInterfaces(context, rawType, bindings);`
+com.fasterxml.jackson.databind.type.TypeFactory:1257 `                superClass = _resolveSuperClass(context, rawType, bindings);`
+com.fasterxml.jackson.databind.type.TypeFactory:1258 `                superInterfaces = _resolveSuperInterfaces(context, rawType, bindings);`
+com.fasterxml.jackson.databind.type.TypeFactory:1262 `            if (rawType == Properties.class) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1268 `            else if (superClass != null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1269 `                result = superClass.refine(rawType, bindings, superClass, superInterfaces);`
+com.fasterxml.jackson.databind.type.TypeFactory:1272 `            if (result == null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1273 `                result = _fromWellKnownClass(context, rawType, bindings, superClass, superInterfaces); `
+com.fasterxml.jackson.databind.type.TypeFactory:1274 `                if (result == null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1275 `                    result = _fromWellKnownInterface(context, rawType, bindings, superClass, superInterfaces);`
+com.fasterxml.jackson.databind.type.TypeFactory:1276 `                    if (result == null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1278 `                        result = _newSimpleType(rawType, bindings, superClass, superInterfaces);`
+com.fasterxml.jackson.databind.type.TypeFactory:1283 `        context.resolveSelfReferences(result);`
+com.fasterxml.jackson.databind.type.TypeFactory:1286 `        if (!result.hasHandlers()) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1287 `            _typeCache.putIfAbsent(key, result); // cache object syncs`
+com.fasterxml.jackson.databind.type.TypeFactory:1289 `        return result;`
+com.fasterxml.jackson.databind.type.TypeFactory:1294 `        Type parent = ClassUtil.getGenericSuperclass(rawType);`
+com.fasterxml.jackson.databind.type.TypeFactory:1295 `        if (parent == null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1298 `        return _fromAny(context, parent, parentBindings);`
+com.fasterxml.jackson.databind.type.TypeFactory:1303 `        Type[] types = ClassUtil.getGenericInterfaces(rawType);`
+com.fasterxml.jackson.databind.type.TypeFactory:1304 `        if (types == null || types.length == 0) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1305 `            return NO_TYPES;`
+com.fasterxml.jackson.databind.type.TypeFactory:1307 `        int len = types.length;`
+com.fasterxml.jackson.databind.type.TypeFactory:1308 `        JavaType[] resolved = new JavaType[len];`
+com.fasterxml.jackson.databind.type.TypeFactory:1309 `        for (int i = 0; i < len; ++i) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1310 `            Type type = types[i];`
+com.fasterxml.jackson.databind.type.TypeFactory:1311 `            resolved[i] = _fromAny(context, type, parentBindings);`
+com.fasterxml.jackson.databind.type.TypeFactory:1313 `        return resolved;`
+com.fasterxml.jackson.databind.type.TypeFactory:1324 `        if (bindings == null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1329 `        if (rawType == Map.class) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1330 `            return _mapType(rawType, bindings, superClass, superInterfaces);`
+com.fasterxml.jackson.databind.type.TypeFactory:1332 `        if (rawType == Collection.class) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1333 `            return _collectionType(rawType, bindings, superClass, superInterfaces);`
+com.fasterxml.jackson.databind.type.TypeFactory:1336 `        if (rawType == AtomicReference.class) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1343 `        return null;`
+com.fasterxml.jackson.databind.type.TypeFactory:1351 `        final int intCount = superInterfaces.length;`
+com.fasterxml.jackson.databind.type.TypeFactory:1353 `        for (int i = 0; i < intCount; ++i) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1354 `            JavaType result = superInterfaces[i].refine(rawType, bindings, superClass, superInterfaces);`
+com.fasterxml.jackson.databind.type.TypeFactory:1355 `            if (result != null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1356 `                return result;`
+com.fasterxml.jackson.databind.type.TypeFactory:1359 `        return null;`
+com.fasterxml.jackson.databind.type.TypeFactory:1370 `        Class<?> rawType = (Class<?>) ptype.getRawType();`
+com.fasterxml.jackson.databind.type.TypeFactory:1374 `        if (rawType == CLS_ENUM) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1375 `            return CORE_TYPE_ENUM;`
+com.fasterxml.jackson.databind.type.TypeFactory:1377 `        if (rawType == CLS_COMPARABLE) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1378 `            return CORE_TYPE_COMPARABLE;`
+com.fasterxml.jackson.databind.type.TypeFactory:1380 `        if (rawType == CLS_CLASS) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1387 `        Type[] args = ptype.getActualTypeArguments();`
+com.fasterxml.jackson.databind.type.TypeFactory:1388 `        int paramCount = (args == null) ? 0 : args.length;`
+com.fasterxml.jackson.databind.type.TypeFactory:1391 `        if (paramCount == 0) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1394 `            JavaType[] pt = new JavaType[paramCount];`
+com.fasterxml.jackson.databind.type.TypeFactory:1395 `            for (int i = 0; i < paramCount; ++i) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1396 `                pt[i] = _fromAny(context, args[i], parentBindings);`
+com.fasterxml.jackson.databind.type.TypeFactory:1398 `            newBindings = TypeBindings.create(rawType, pt);`
+com.fasterxml.jackson.databind.type.TypeFactory:1400 `        return _fromClass(context, rawType, newBindings);`
+com.fasterxml.jackson.databind.type.TypeFactory:1412 `        final String name = var.getName();`
+com.fasterxml.jackson.databind.type.TypeFactory:1413 `        JavaType type = bindings.findBoundType(name);`
+com.fasterxml.jackson.databind.type.TypeFactory:1414 `        if (type != null) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1415 `            return type;`
+com.fasterxml.jackson.databind.type.TypeFactory:1419 `        if (bindings.hasUnbound(name)) {`
+com.fasterxml.jackson.databind.type.TypeFactory:1422 `        bindings = bindings.withUnboundVariable(name);`
+com.fasterxml.jackson.databind.type.TypeFactory:1424 `        Type[] bounds = var.getBounds();`
+com.fasterxml.jackson.databind.type.TypeFactory:1425 `        return _fromAny(context, bounds[0], bindings);`
+com.fasterxml.jackson.databind.type.TypeParser:18 `    public TypeParser(TypeFactory f) {`
+com.fasterxml.jackson.databind.type.TypeParser:19 `        _factory = f;`
+com.fasterxml.jackson.databind.type.TypeParser:20 `    }`
+com.fasterxml.jackson.databind.type.TypeParser:31 `        MyTokenizer tokens = new MyTokenizer(canonical.trim());`
+com.fasterxml.jackson.databind.type.TypeParser:32 `        JavaType type = parseType(tokens);`
+com.fasterxml.jackson.databind.type.TypeParser:34 `        if (tokens.hasMoreTokens()) {`
+com.fasterxml.jackson.databind.type.TypeParser:37 `        return type;`
+com.fasterxml.jackson.databind.type.TypeParser:43 `        if (!tokens.hasMoreTokens()) {`
+com.fasterxml.jackson.databind.type.TypeParser:46 `        Class<?> base = findClass(tokens.nextToken(), tokens);`
+com.fasterxml.jackson.databind.type.TypeParser:49 `        if (tokens.hasMoreTokens()) {`
+com.fasterxml.jackson.databind.type.TypeParser:50 `            String token = tokens.nextToken();`
+com.fasterxml.jackson.databind.type.TypeParser:51 `            if ("<".equals(token)) {`
+com.fasterxml.jackson.databind.type.TypeParser:52 `                List<JavaType> parameterTypes = parseTypes(tokens);`
+com.fasterxml.jackson.databind.type.TypeParser:53 `                TypeBindings b = TypeBindings.create(base, parameterTypes);`
+com.fasterxml.jackson.databind.type.TypeParser:54 `                return _factory._fromClass(null, base, b);`
+com.fasterxml.jackson.databind.type.TypeParser:57 `            tokens.pushBack(token);`
+com.fasterxml.jackson.databind.type.TypeParser:59 `        return _factory._fromClass(null, base, null);`
+com.fasterxml.jackson.databind.type.TypeParser:65 `        ArrayList<JavaType> types = new ArrayList<JavaType>();`
+com.fasterxml.jackson.databind.type.TypeParser:66 `        while (tokens.hasMoreTokens()) {`
+com.fasterxml.jackson.databind.type.TypeParser:67 `            types.add(parseType(tokens));`
+com.fasterxml.jackson.databind.type.TypeParser:68 `            if (!tokens.hasMoreTokens()) break;`
+com.fasterxml.jackson.databind.type.TypeParser:69 `            String token = tokens.nextToken();`
+com.fasterxml.jackson.databind.type.TypeParser:70 `            if (">".equals(token)) return types;`
+com.fasterxml.jackson.databind.type.TypeParser:71 `            if (!",".equals(token)) {`
+com.fasterxml.jackson.databind.type.TypeParser:74 `        }`
+com.fasterxml.jackson.databind.type.TypeParser:81 `            return _factory.findClass(className);`
+com.fasterxml.jackson.databind.type.TypeParser:105 `            super(str, "<,>", true);`
+com.fasterxml.jackson.databind.type.TypeParser:106 `            _input = str;`
+com.fasterxml.jackson.databind.type.TypeParser:107 `        }`
+com.fasterxml.jackson.databind.type.TypeParser:111 `            return (_pushbackToken != null) || super.hasMoreTokens();`
+com.fasterxml.jackson.databind.type.TypeParser:117 `            if (_pushbackToken != null) {`
+com.fasterxml.jackson.databind.type.TypeParser:118 `                token = _pushbackToken;`
+com.fasterxml.jackson.databind.type.TypeParser:119 `                _pushbackToken = null;`
+com.fasterxml.jackson.databind.type.TypeParser:121 `                token = super.nextToken();`
+com.fasterxml.jackson.databind.type.TypeParser:122 `                _index += token.length();`
+com.fasterxml.jackson.databind.type.TypeParser:123 `                token = token.trim();`
+com.fasterxml.jackson.databind.type.TypeParser:125 `            return token;`
+com.fasterxml.jackson.databind.type.TypeParser:129 `            _pushbackToken = token;`
+com.fasterxml.jackson.databind.type.TypeParser:131 `        }`
+com.fasterxml.jackson.databind.util.ClassUtil:15 `    private final static Class<?> CLS_OBJECT = Object.class;`
+com.fasterxml.jackson.databind.util.ClassUtil:17 `    private final static Annotation[] NO_ANNOTATIONS = new Annotation[0];`
+com.fasterxml.jackson.databind.util.ClassUtil:18 `    private final static Ctor[] NO_CTORS = new Ctor[0];`
+com.fasterxml.jackson.databind.util.ClassUtil:36 `    private final static EmptyIterator<?> EMPTY_ITERATOR = new EmptyIterator<Object>();`
+com.fasterxml.jackson.databind.util.ClassUtil:989 `        return cls.getGenericSuperclass();`
+com.fasterxml.jackson.databind.util.ClassUtil:996 `        return cls.getGenericInterfaces();`
+com.fasterxml.jackson.databind.util.LRUMap:33 `    {`
+com.fasterxml.jackson.databind.util.LRUMap:35 `        _map = new ConcurrentHashMap<K,V>(initialEntries, 0.8f, 4);`
+com.fasterxml.jackson.databind.util.LRUMap:36 `        _maxEntries = maxEntries;`
+com.fasterxml.jackson.databind.util.LRUMap:37 `    }`
+com.fasterxml.jackson.databind.util.LRUMap:57 `        if (_map.size() >= _maxEntries) {`
+com.fasterxml.jackson.databind.util.LRUMap:64 `        return _map.putIfAbsent(key, value);`
+com.fasterxml.jackson.databind.util.LRUMap:68 `    public V get(Object key) {  return _map.get(key); }`

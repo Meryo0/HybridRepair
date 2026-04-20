@@ -1,0 +1,347 @@
+Provide a short code description of the following code:
+ org.mockito.MockitoAnnotations:90 `        if (testClass == null) {`
+org.mockito.MockitoAnnotations:94 `        AnnotationEngine annotationEngine = new GlobalConfiguration().getAnnotationEngine();`
+org.mockito.MockitoAnnotations:95 `        Class<?> clazz = testClass.getClass();`
+org.mockito.MockitoAnnotations:98 `        if (annotationEngine.getClass() != new DefaultMockitoConfiguration().getAnnotationEngine().getClass()) {`
+org.mockito.MockitoAnnotations:101 `            while (clazz != Object.class) {`
+org.mockito.MockitoAnnotations:102 `                scanDeprecatedWay(annotationEngine, testClass, clazz);`
+org.mockito.MockitoAnnotations:103 `                clazz = clazz.getSuperclass();`
+org.mockito.MockitoAnnotations:108 `        annotationEngine.process(testClass.getClass(), testClass);`
+org.mockito.MockitoAnnotations:109 `    }`
+org.mockito.MockitoAnnotations:112 `        Field[] fields = clazz.getDeclaredFields();`
+org.mockito.MockitoAnnotations:114 `        for (Field field : fields) {`
+org.mockito.MockitoAnnotations:115 `            processAnnotationDeprecatedWay(annotationEngine, testClass, field);`
+org.mockito.MockitoAnnotations:117 `    }`
+org.mockito.MockitoAnnotations:121 `        boolean alreadyAssigned = false;`
+org.mockito.MockitoAnnotations:122 `        for(Annotation annotation : field.getAnnotations()) {`
+org.mockito.MockitoAnnotations:135 `    }`
+org.mockito.StateMaster:10 `public class StateMaster {`
+org.mockito.StateMaster:12 `    private final ThreadSafeMockingProgress mockingProgress = new ThreadSafeMockingProgress();`
+org.mockito.StateMaster:15 `        mockingProgress.reset();`
+org.mockito.StateMaster:16 `        mockingProgress.resetOngoingStubbing();`
+org.mockito.StateMaster:17 `    }`
+org.mockito.StateMaster:20 `        mockingProgress.validateState();`
+org.mockito.StateMaster:21 `    }`
+org.mockito.configuration.DefaultMockitoConfiguration:20 `public class DefaultMockitoConfiguration implements IMockitoConfiguration {`
+org.mockito.configuration.DefaultMockitoConfiguration:39 `        return new InjectingAnnotationEngine();`
+org.mockito.configuration.MockitoConfiguration:15 `public class MockitoConfiguration extends DefaultMockitoConfiguration implements IMockitoConfiguration {`
+org.mockito.configuration.MockitoConfiguration:17 `    private Answer<Object> overriddenDefaultAnswer = null;`
+org.mockito.configuration.MockitoConfiguration:20 `    private boolean enableClassCache = true;`
+org.mockito.configuration.MockitoConfiguration:24 `        this.overriddenDefaultAnswer = defaultAnswer;`
+org.mockito.configuration.MockitoConfiguration:25 `    }`
+org.mockito.configuration.MockitoConfiguration:29 `        this.cleansStackTrace = cleansStackTrace;`
+org.mockito.configuration.MockitoConfiguration:30 `    }`
+org.mockito.configuration.MockitoConfiguration:53 `        if (this.overriddenEngine != null) {`
+org.mockito.configuration.MockitoConfiguration:56 `        return new InjectingAnnotationEngine() {`
+org.mockito.exceptions.Reporter:54 `public class Reporter {`
+org.mockito.internal.configuration.CaptorAnnotationProcessor:17 `public class CaptorAnnotationProcessor implements FieldAnnotationProcessor<Captor> {`
+org.mockito.internal.configuration.ClassPathLoader:56 `public class ClassPathLoader {`
+org.mockito.internal.configuration.ClassPathLoader:68 `            configClass = (Class) Class.forName(MOCKITO_CONFIGURATION_CLASS_NAME);`
+org.mockito.internal.configuration.ClassPathLoader:72 `        }`
+org.mockito.internal.configuration.ClassPathLoader:75 `            return (IMockitoConfiguration) configClass.newInstance();`
+org.mockito.internal.configuration.ConfigurationAccess:12 `        return (MockitoConfiguration) new GlobalConfiguration().getIt();`
+org.mockito.internal.configuration.DefaultAnnotationEngine:30 `    private final Map<Class<? extends Annotation>, FieldAnnotationProcessor<?>> annotationProcessorMap = new HashMap<Class<? extends Annotation>, FieldAnnotationProcessor<?>>();`
+org.mockito.internal.configuration.DefaultAnnotationEngine:32 `    public DefaultAnnotationEngine() {`
+org.mockito.internal.configuration.DefaultAnnotationEngine:33 `        registerAnnotationProcessor(Mock.class, new MockAnnotationProcessor());`
+org.mockito.internal.configuration.DefaultAnnotationEngine:34 `        registerAnnotationProcessor(MockitoAnnotations.Mock.class, new MockitoAnnotationsMockAnnotationProcessor());`
+org.mockito.internal.configuration.DefaultAnnotationEngine:35 `        registerAnnotationProcessor(Captor.class, new CaptorAnnotationProcessor());`
+org.mockito.internal.configuration.DefaultAnnotationEngine:36 `    }`
+org.mockito.internal.configuration.DefaultAnnotationEngine:58 `        annotationProcessorMap.put(annotationClass, fieldAnnotationProcessor);`
+org.mockito.internal.configuration.DefaultAnnotationEngine:59 `    }`
+org.mockito.internal.configuration.DefaultAnnotationEngine:62 `        Field[] fields = clazz.getDeclaredFields();`
+org.mockito.internal.configuration.DefaultAnnotationEngine:63 `        for (Field field : fields) {`
+org.mockito.internal.configuration.DefaultAnnotationEngine:64 `            boolean alreadyAssigned = false;`
+org.mockito.internal.configuration.DefaultAnnotationEngine:65 `            for(Annotation annotation : field.getAnnotations()) {           `
+org.mockito.internal.configuration.DefaultAnnotationEngine:79 `    }`
+org.mockito.internal.configuration.DefaultInjectionEngine:17 `public class DefaultInjectionEngine {`
+org.mockito.internal.configuration.DefaultInjectionEngine:20 `        MockInjection.onFields(needingInjection, testClassInstance)`
+org.mockito.internal.configuration.DefaultInjectionEngine:21 `                .withMocks(mocks)`
+org.mockito.internal.configuration.DefaultInjectionEngine:22 `                .tryConstructorInjection()`
+org.mockito.internal.configuration.DefaultInjectionEngine:23 `                .tryPropertyOrFieldInjection()`
+org.mockito.internal.configuration.DefaultInjectionEngine:24 `                .handleSpyAnnotation()`
+org.mockito.internal.configuration.DefaultInjectionEngine:25 `                .apply();`
+org.mockito.internal.configuration.DefaultInjectionEngine:26 `    }`
+org.mockito.internal.configuration.GlobalConfiguration:22 `    private static final ThreadLocal<IMockitoConfiguration> GLOBAL_CONFIGURATION = new ThreadLocal<IMockitoConfiguration>();`
+org.mockito.internal.configuration.GlobalConfiguration:26 `        return GLOBAL_CONFIGURATION.get();`
+org.mockito.internal.configuration.GlobalConfiguration:29 `    public GlobalConfiguration() {`
+org.mockito.internal.configuration.GlobalConfiguration:31 `        if (GLOBAL_CONFIGURATION.get() == null) {`
+org.mockito.internal.configuration.GlobalConfiguration:32 `            GLOBAL_CONFIGURATION.set(createConfig());`
+org.mockito.internal.configuration.GlobalConfiguration:34 `    }`
+org.mockito.internal.configuration.GlobalConfiguration:37 `        IMockitoConfiguration defaultConfiguration = new DefaultMockitoConfiguration();`
+org.mockito.internal.configuration.GlobalConfiguration:38 `        IMockitoConfiguration config = new ClassPathLoader().loadConfiguration();`
+org.mockito.internal.configuration.GlobalConfiguration:39 `        if (config != null) {`
+org.mockito.internal.configuration.GlobalConfiguration:40 `            return config;`
+org.mockito.internal.configuration.GlobalConfiguration:47 `        new GlobalConfiguration();`
+org.mockito.internal.configuration.GlobalConfiguration:48 `    }`
+org.mockito.internal.configuration.GlobalConfiguration:55 `        return GLOBAL_CONFIGURATION.get().getAnnotationEngine();`
+org.mockito.internal.configuration.InjectingAnnotationEngine:23 `public class InjectingAnnotationEngine implements AnnotationEngine {`
+org.mockito.internal.configuration.InjectingAnnotationEngine:24 `    private final AnnotationEngine delegate = new DefaultAnnotationEngine();`
+org.mockito.internal.configuration.InjectingAnnotationEngine:25 `    private final AnnotationEngine spyAnnotationEngine = new SpyAnnotationEngine();`
+org.mockito.internal.configuration.InjectingAnnotationEngine:55 `        processIndependentAnnotations(testInstance.getClass(), testInstance);`
+org.mockito.internal.configuration.InjectingAnnotationEngine:56 `        processInjectMocks(testInstance.getClass(), testInstance);`
+org.mockito.internal.configuration.InjectingAnnotationEngine:57 `    }`
+org.mockito.internal.configuration.InjectingAnnotationEngine:60 `        Class<?> classContext = clazz;`
+org.mockito.internal.configuration.InjectingAnnotationEngine:61 `        while (classContext != Object.class) {`
+org.mockito.internal.configuration.InjectingAnnotationEngine:62 `            injectMocks(testInstance);`
+org.mockito.internal.configuration.InjectingAnnotationEngine:63 `            classContext = classContext.getSuperclass();`
+org.mockito.internal.configuration.InjectingAnnotationEngine:65 `    }`
+org.mockito.internal.configuration.InjectingAnnotationEngine:68 `        Class<?> classContext = clazz;`
+org.mockito.internal.configuration.InjectingAnnotationEngine:69 `        while (classContext != Object.class) {`
+org.mockito.internal.configuration.InjectingAnnotationEngine:71 `            delegate.process(classContext, testInstance);`
+org.mockito.internal.configuration.InjectingAnnotationEngine:73 `            spyAnnotationEngine.process(classContext, testInstance);`
+org.mockito.internal.configuration.InjectingAnnotationEngine:75 `            classContext = classContext.getSuperclass();`
+org.mockito.internal.configuration.InjectingAnnotationEngine:77 `    }`
+org.mockito.internal.configuration.InjectingAnnotationEngine:90 `        Class<?> clazz = testClassInstance.getClass();`
+org.mockito.internal.configuration.InjectingAnnotationEngine:91 `        Set<Field> mockDependentFields = new HashSet<Field>();`
+org.mockito.internal.configuration.InjectingAnnotationEngine:92 `        Set<Object> mocks = newMockSafeHashSet();`
+org.mockito.internal.configuration.InjectingAnnotationEngine:94 `        while (clazz != Object.class) {`
+org.mockito.internal.configuration.InjectingAnnotationEngine:95 `            new InjectMocksScanner(clazz).addTo(mockDependentFields);`
+org.mockito.internal.configuration.InjectingAnnotationEngine:96 `            new MockScanner(testClassInstance, clazz).addPreparedMocks(mocks);`
+org.mockito.internal.configuration.InjectingAnnotationEngine:97 `            clazz = clazz.getSuperclass();`
+org.mockito.internal.configuration.InjectingAnnotationEngine:100 `        new DefaultInjectionEngine().injectMocksOnFields(mockDependentFields, mocks, testClassInstance);`
+org.mockito.internal.configuration.InjectingAnnotationEngine:101 `    }`
+org.mockito.internal.configuration.MockAnnotationProcessor:16 `public class MockAnnotationProcessor implements FieldAnnotationProcessor<Mock> {`
+org.mockito.internal.configuration.MockitoAnnotationsMockAnnotationProcessor:16 `public class MockitoAnnotationsMockAnnotationProcessor implements FieldAnnotationProcessor<Mock> {`
+org.mockito.internal.configuration.SpyAnnotationEngine:40 `public class SpyAnnotationEngine implements AnnotationEngine {`
+org.mockito.internal.configuration.SpyAnnotationEngine:48 `        Field[] fields = context.getDeclaredFields();`
+org.mockito.internal.configuration.SpyAnnotationEngine:49 `        for (Field field : fields) {`
+org.mockito.internal.configuration.SpyAnnotationEngine:50 `            if (field.isAnnotationPresent(Spy.class) && !field.isAnnotationPresent(InjectMocks.class)) {`
+org.mockito.internal.configuration.SpyAnnotationEngine:74 `    }`
+org.mockito.internal.configuration.injection.ConstructorInjection:42 `    public ConstructorInjection() { }`
+org.mockito.internal.configuration.injection.MockInjection:48 `        return new OngoingMockInjection(fields, ofInstance);`
+org.mockito.internal.configuration.injection.MockInjection:55 `        private final Set<Field> fields = new HashSet<Field>();`
+org.mockito.internal.configuration.injection.MockInjection:56 `        private final Set<Object> mocks = newMockSafeHashSet();`
+org.mockito.internal.configuration.injection.MockInjection:58 `        private final MockInjectionStrategy injectionStrategies = MockInjectionStrategy.nop();`
+org.mockito.internal.configuration.injection.MockInjection:59 `        private final MockInjectionStrategy postInjectionStrategies = MockInjectionStrategy.nop();`
+org.mockito.internal.configuration.injection.MockInjection:65 `        private OngoingMockInjection(Set<Field> fields, Object fieldOwner) {`
+org.mockito.internal.configuration.injection.MockInjection:66 `            this.fieldOwner = checkNotNull(fieldOwner, "fieldOwner");`
+org.mockito.internal.configuration.injection.MockInjection:67 `            this.fields.addAll(checkItemsNotNull(fields, "fields"));`
+org.mockito.internal.configuration.injection.MockInjection:68 `        }`
+org.mockito.internal.configuration.injection.MockInjection:71 `            this.mocks.addAll(checkNotNull(mocks, "mocks"));`
+org.mockito.internal.configuration.injection.MockInjection:72 `            return this;`
+org.mockito.internal.configuration.injection.MockInjection:76 `            injectionStrategies.thenTry(new ConstructorInjection());`
+org.mockito.internal.configuration.injection.MockInjection:77 `            return this;`
+org.mockito.internal.configuration.injection.MockInjection:81 `            injectionStrategies.thenTry(new PropertyAndSetterInjection());`
+org.mockito.internal.configuration.injection.MockInjection:82 `            return this;`
+org.mockito.internal.configuration.injection.MockInjection:86 `            postInjectionStrategies.thenTry(new SpyOnInjectedFieldsHandler());`
+org.mockito.internal.configuration.injection.MockInjection:87 `            return this;`
+org.mockito.internal.configuration.injection.MockInjection:91 `            for (Field field : fields) {`
+org.mockito.internal.configuration.injection.MockInjection:95 `        }`
+org.mockito.internal.configuration.injection.MockInjectionStrategy:14 `public abstract class MockInjectionStrategy {`
+org.mockito.internal.configuration.injection.MockInjectionStrategy:20 `        return new MockInjectionStrategy() {`
+org.mockito.internal.configuration.injection.MockInjectionStrategy:41 `        if(nextStrategy != null) {`
+org.mockito.internal.configuration.injection.MockInjectionStrategy:42 `            nextStrategy.thenTry(strategy);`
+org.mockito.internal.configuration.injection.MockInjectionStrategy:44 `            nextStrategy = strategy;`
+org.mockito.internal.configuration.injection.MockInjectionStrategy:46 `        return strategy;`
+org.mockito.internal.configuration.injection.PropertyAndSetterInjection:60 `public class PropertyAndSetterInjection extends MockInjectionStrategy {`
+org.mockito.internal.configuration.injection.PropertyAndSetterInjection:62 `    private final MockCandidateFilter mockCandidateFilter = new TypeBasedCandidateFilter(new NameBasedCandidateFilter(new FinalMockCandidateFilter()));`
+org.mockito.internal.configuration.injection.PropertyAndSetterInjection:64 `    private final ListUtil.Filter<Field> notFinalOrStatic = new ListUtil.Filter<Field>() {`
+org.mockito.internal.configuration.injection.SpyOnInjectedFieldsHandler:28 `public class SpyOnInjectedFieldsHandler extends MockInjectionStrategy {`
+org.mockito.internal.configuration.injection.filter.FinalMockCandidateFilter:22 `public class FinalMockCandidateFilter implements MockCandidateFilter {`
+org.mockito.internal.configuration.injection.filter.NameBasedCandidateFilter:16 `    private final MockUtil mockUtil = new MockUtil();`
+org.mockito.internal.configuration.injection.filter.NameBasedCandidateFilter:18 `    public NameBasedCandidateFilter(MockCandidateFilter next) {`
+org.mockito.internal.configuration.injection.filter.NameBasedCandidateFilter:19 `        this.next = next;`
+org.mockito.internal.configuration.injection.filter.NameBasedCandidateFilter:20 `    }`
+org.mockito.internal.configuration.injection.filter.TypeBasedCandidateFilter:16 `    public TypeBasedCandidateFilter(MockCandidateFilter next) {`
+org.mockito.internal.configuration.injection.filter.TypeBasedCandidateFilter:17 `        this.next = next;`
+org.mockito.internal.configuration.injection.filter.TypeBasedCandidateFilter:18 `    }`
+org.mockito.internal.configuration.injection.scanner.InjectMocksScanner:29 `    public InjectMocksScanner(Class<?> clazz) {`
+org.mockito.internal.configuration.injection.scanner.InjectMocksScanner:30 `        this.clazz = clazz;`
+org.mockito.internal.configuration.injection.scanner.InjectMocksScanner:31 `    }`
+org.mockito.internal.configuration.injection.scanner.InjectMocksScanner:40 `        mockDependentFields.addAll(scan());`
+org.mockito.internal.configuration.injection.scanner.InjectMocksScanner:41 `    }`
+org.mockito.internal.configuration.injection.scanner.InjectMocksScanner:49 `        Set<Field> mockDependentFields = new HashSet<Field>();`
+org.mockito.internal.configuration.injection.scanner.InjectMocksScanner:50 `        Field[] fields = clazz.getDeclaredFields();`
+org.mockito.internal.configuration.injection.scanner.InjectMocksScanner:51 `        for (Field field : fields) {`
+org.mockito.internal.configuration.injection.scanner.InjectMocksScanner:52 `            if (null != field.getAnnotation(InjectMocks.class)) {`
+org.mockito.internal.configuration.injection.scanner.InjectMocksScanner:58 `        return mockDependentFields;`
+org.mockito.internal.configuration.injection.scanner.MockScanner:22 `    private final MockUtil mockUtil = new MockUtil();`
+org.mockito.internal.configuration.injection.scanner.MockScanner:32 `    public MockScanner(Object instance, Class<?> clazz) {`
+org.mockito.internal.configuration.injection.scanner.MockScanner:33 `        this.instance = instance;`
+org.mockito.internal.configuration.injection.scanner.MockScanner:34 `        this.clazz = clazz;`
+org.mockito.internal.configuration.injection.scanner.MockScanner:35 `    }`
+org.mockito.internal.configuration.injection.scanner.MockScanner:47 `        mocks.addAll(scan());`
+org.mockito.internal.configuration.injection.scanner.MockScanner:48 `    }`
+org.mockito.internal.configuration.injection.scanner.MockScanner:56 `        Set<Object> mocks = newMockSafeHashSet();`
+org.mockito.internal.configuration.injection.scanner.MockScanner:57 `        for (Field field : clazz.getDeclaredFields()) {`
+org.mockito.internal.configuration.injection.scanner.MockScanner:59 `            FieldReader fieldReader = new FieldReader(instance, field);`
+org.mockito.internal.configuration.injection.scanner.MockScanner:61 `            Object mockInstance = preparedMock(fieldReader.read(), field);`
+org.mockito.internal.configuration.injection.scanner.MockScanner:62 `            if (mockInstance != null) {`
+org.mockito.internal.configuration.injection.scanner.MockScanner:66 `        return mocks;`
+org.mockito.internal.configuration.injection.scanner.MockScanner:70 `        if (isAnnotatedByMockOrSpy(field)) {`
+org.mockito.internal.configuration.injection.scanner.MockScanner:72 `        } else if (isMockOrSpy(instance)) {`
+org.mockito.internal.configuration.injection.scanner.MockScanner:76 `        return null;`
+org.mockito.internal.configuration.injection.scanner.MockScanner:80 `        return null != field.getAnnotation(Spy.class)`
+org.mockito.internal.configuration.injection.scanner.MockScanner:81 `                || null != field.getAnnotation(Mock.class)`
+org.mockito.internal.configuration.injection.scanner.MockScanner:82 `                || null != field.getAnnotation(MockitoAnnotations.Mock.class);`
+org.mockito.internal.configuration.injection.scanner.MockScanner:86 `        return mockUtil.isMock(instance)`
+org.mockito.internal.configuration.injection.scanner.MockScanner:87 `                || mockUtil.isSpy(instance);`
+org.mockito.internal.configuration.plugins.DefaultPluginSwitch:5 `class DefaultPluginSwitch implements PluginSwitch {`
+org.mockito.internal.configuration.plugins.PluginFinder:14 `    public PluginFinder(PluginSwitch pluginSwitch) {`
+org.mockito.internal.configuration.plugins.PluginFinder:15 `        this.pluginSwitch = pluginSwitch;`
+org.mockito.internal.configuration.plugins.PluginFinder:16 `    }`
+org.mockito.internal.configuration.plugins.PluginFinder:19 `        for (URL resource : resources) {`
+org.mockito.internal.configuration.plugins.PluginFinder:39 `        return null;`
+org.mockito.internal.configuration.plugins.PluginLoader:16 `    public PluginLoader(PluginSwitch pluginSwitch) {`
+org.mockito.internal.configuration.plugins.PluginLoader:17 `        this.pluginSwitch = pluginSwitch;`
+org.mockito.internal.configuration.plugins.PluginLoader:18 `    }`
+org.mockito.internal.configuration.plugins.PluginLoader:24 `        T plugin = loadImpl(pluginType);`
+org.mockito.internal.configuration.plugins.PluginLoader:25 `        if (plugin != null) {`
+org.mockito.internal.configuration.plugins.PluginLoader:33 `            return pluginType.cast(Class.forName(defaultPluginClassName).newInstance());`
+org.mockito.internal.configuration.plugins.PluginLoader:46 `        ClassLoader loader = Thread.currentThread().getContextClassLoader();`
+org.mockito.internal.configuration.plugins.PluginLoader:47 `        if (loader == null) {`
+org.mockito.internal.configuration.plugins.PluginLoader:52 `            resources = loader.getResources("mockito-extensions/" + service.getName());`
+org.mockito.internal.configuration.plugins.PluginLoader:55 `        }`
+org.mockito.internal.configuration.plugins.PluginLoader:58 `            String foundPluginClass = new PluginFinder(pluginSwitch).findPluginClass(Iterables.toIterable(resources));`
+org.mockito.internal.configuration.plugins.PluginLoader:59 `            if (foundPluginClass != null) {`
+org.mockito.internal.configuration.plugins.PluginLoader:64 `            return null;`
+org.mockito.internal.configuration.plugins.PluginRegistry:7 `class PluginRegistry {`
+org.mockito.internal.configuration.plugins.PluginRegistry:9 `    private final PluginSwitch pluginSwitch`
+org.mockito.internal.configuration.plugins.PluginRegistry:10 `            = new PluginLoader(new DefaultPluginSwitch()).loadPlugin(PluginSwitch.class, DefaultPluginSwitch.class.getName());`
+org.mockito.internal.configuration.plugins.PluginRegistry:12 `    private final MockMaker mockMaker`
+org.mockito.internal.configuration.plugins.PluginRegistry:13 `            = new PluginLoader(pluginSwitch).loadPlugin(MockMaker.class, "org.mockito.internal.creation.bytebuddy.ByteBuddyMockMaker");`
+org.mockito.internal.configuration.plugins.PluginRegistry:15 `    private final StackTraceCleanerProvider stackTraceCleanerProvider`
+org.mockito.internal.configuration.plugins.PluginRegistry:16 `            = new PluginLoader(pluginSwitch).loadPlugin(StackTraceCleanerProvider.class, "org.mockito.internal.exceptions.stacktrace.DefaultStackTraceCleanerProvider");`
+org.mockito.internal.configuration.plugins.PluginRegistry:33 `        return mockMaker;`
+org.mockito.internal.configuration.plugins.Plugins:11 `    private static PluginRegistry registry = new PluginRegistry();`
+org.mockito.internal.configuration.plugins.Plugins:27 `        return registry.getMockMaker();`
+org.mockito.internal.exceptions.stacktrace.DefaultStackTraceCleanerProvider:9 `public class DefaultStackTraceCleanerProvider implements StackTraceCleanerProvider {`
+org.mockito.internal.progress.ArgumentMatcherStorageImpl:22 `public class ArgumentMatcherStorageImpl implements ArgumentMatcherStorage {`
+org.mockito.internal.progress.ArgumentMatcherStorageImpl:26 `    private final Stack<LocalizedMatcher> matcherStack = new Stack<LocalizedMatcher>();`
+org.mockito.internal.progress.ArgumentMatcherStorageImpl:112 `        if (!matcherStack.isEmpty()) {`
+org.mockito.internal.progress.ArgumentMatcherStorageImpl:117 `    }`
+org.mockito.internal.progress.ArgumentMatcherStorageImpl:123 `        matcherStack.clear();`
+org.mockito.internal.progress.ArgumentMatcherStorageImpl:124 `    }`
+org.mockito.internal.progress.MockingProgressImpl:19 `public class MockingProgressImpl implements MockingProgress {`
+org.mockito.internal.progress.MockingProgressImpl:21 `    private final Reporter reporter = new Reporter();`
+org.mockito.internal.progress.MockingProgressImpl:22 `    private final ArgumentMatcherStorage argumentMatcherStorage = new ArgumentMatcherStorageImpl();`
+org.mockito.internal.progress.MockingProgressImpl:26 `    private Location stubbingInProgress = null;`
+org.mockito.internal.progress.MockingProgressImpl:49 `        iOngoingStubbing = null;`
+org.mockito.internal.progress.MockingProgressImpl:50 `    }`
+org.mockito.internal.progress.MockingProgressImpl:68 `        validateMostStuff();`
+org.mockito.internal.progress.MockingProgressImpl:71 `        if (stubbingInProgress != null) {`
+org.mockito.internal.progress.MockingProgressImpl:76 `    }`
+org.mockito.internal.progress.MockingProgressImpl:81 `        GlobalConfiguration.validate();`
+org.mockito.internal.progress.MockingProgressImpl:83 `        if (verificationMode != null) {`
+org.mockito.internal.progress.MockingProgressImpl:89 `        getArgumentMatcherStorage().validateState();`
+org.mockito.internal.progress.MockingProgressImpl:90 `    }`
+org.mockito.internal.progress.MockingProgressImpl:103 `        stubbingInProgress = null;`
+org.mockito.internal.progress.MockingProgressImpl:104 `        verificationMode = null;`
+org.mockito.internal.progress.MockingProgressImpl:105 `        getArgumentMatcherStorage().reset();`
+org.mockito.internal.progress.MockingProgressImpl:106 `    }`
+org.mockito.internal.progress.MockingProgressImpl:109 `        return argumentMatcherStorage;`
+org.mockito.internal.progress.ThreadSafeMockingProgress:15 `public class ThreadSafeMockingProgress implements MockingProgress, Serializable {`
+org.mockito.internal.progress.ThreadSafeMockingProgress:18 `    private static final ThreadLocal<MockingProgress> mockingProgress = new ThreadLocal<MockingProgress>();`
+org.mockito.internal.progress.ThreadSafeMockingProgress:21 `        if (mockingProgress.get() == null) {`
+org.mockito.internal.progress.ThreadSafeMockingProgress:22 `            mockingProgress.set(new MockingProgressImpl());`
+org.mockito.internal.progress.ThreadSafeMockingProgress:24 `        return mockingProgress.get();`
+org.mockito.internal.progress.ThreadSafeMockingProgress:48 `        threadSafely().validateState();`
+org.mockito.internal.progress.ThreadSafeMockingProgress:49 `    }`
+org.mockito.internal.progress.ThreadSafeMockingProgress:60 `        threadSafely().reset();`
+org.mockito.internal.progress.ThreadSafeMockingProgress:61 `    }`
+org.mockito.internal.progress.ThreadSafeMockingProgress:64 `        threadSafely().resetOngoingStubbing();`
+org.mockito.internal.progress.ThreadSafeMockingProgress:65 `    }`
+org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues:53 `public class ReturnsEmptyValues implements Answer<Object>, Serializable {`
+org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues:56 `    ObjectMethodsGuru methodsGuru = new ObjectMethodsGuru();`
+org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues:57 `    MockUtil mockUtil = new MockUtil();`
+org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues:83 `        if (Primitives.isPrimitiveOrWrapper(type)) {`
+org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues:87 `        } else if (type == Collection.class) {`
+org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues:89 `        } else if (type == Set.class) {`
+org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues:91 `        } else if (type == HashSet.class) {`
+org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues:93 `        } else if (type == SortedSet.class) {`
+org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues:95 `        } else if (type == TreeSet.class) {`
+org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues:97 `        } else if (type == LinkedHashSet.class) {`
+org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues:99 `        } else if (type == List.class) {`
+org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues:101 `        } else if (type == LinkedList.class) {`
+org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues:103 `        } else if (type == ArrayList.class) {`
+org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues:105 `        } else if (type == Map.class) {`
+org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues:107 `        } else if (type == HashMap.class) {`
+org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues:109 `        } else if (type == SortedMap.class) {`
+org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues:111 `        } else if (type == TreeMap.class) {`
+org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues:113 `        } else if (type == LinkedHashMap.class) {`
+org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues:117 `        return null;`
+org.mockito.internal.util.Checks:14 `        if(value == null) {`
+org.mockito.internal.util.Checks:17 `        return value;`
+org.mockito.internal.util.Checks:21 `        checkNotNull(iterable, checkedIterable);`
+org.mockito.internal.util.Checks:22 `        for (Object item : iterable) {`
+org.mockito.internal.util.Checks:25 `        return iterable;`
+org.mockito.internal.util.MockUtil:22 `public class MockUtil {`
+org.mockito.internal.util.MockUtil:24 `    private static final MockMaker mockMaker = Plugins.getMockMaker();`
+org.mockito.internal.util.MockUtil:66 `        return isMockitoMock(mock);`
+org.mockito.internal.util.MockUtil:70 `        return isMockitoMock(mock) && getMockSettings(mock).getDefaultAnswer() == Mockito.CALLS_REAL_METHODS;`
+org.mockito.internal.util.MockUtil:74 `        return mockMaker.getHandler(mock) != null;`
+org.mockito.internal.util.ObjectMethodsGuru:13 `public class ObjectMethodsGuru implements Serializable {`
+org.mockito.internal.util.Primitives:13 `    private static final Map<Class<?>, Class<?>> PRIMITIVE_TYPES = new HashMap<Class<?>, Class<?>>();`
+org.mockito.internal.util.Primitives:14 `    private static final Map<Class<?>, Object> PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES = new HashMap<Class<?>, Object>();`
+org.mockito.internal.util.Primitives:42 `        return PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.containsKey(type);`
+org.mockito.internal.util.Primitives:58 `        PRIMITIVE_TYPES.put(Boolean.class, Boolean.TYPE);`
+org.mockito.internal.util.Primitives:59 `        PRIMITIVE_TYPES.put(Character.class, Character.TYPE);`
+org.mockito.internal.util.Primitives:60 `        PRIMITIVE_TYPES.put(Byte.class, Byte.TYPE);`
+org.mockito.internal.util.Primitives:61 `        PRIMITIVE_TYPES.put(Short.class, Short.TYPE);`
+org.mockito.internal.util.Primitives:62 `        PRIMITIVE_TYPES.put(Integer.class, Integer.TYPE);`
+org.mockito.internal.util.Primitives:63 `        PRIMITIVE_TYPES.put(Long.class, Long.TYPE);`
+org.mockito.internal.util.Primitives:64 `        PRIMITIVE_TYPES.put(Float.class, Float.TYPE);`
+org.mockito.internal.util.Primitives:65 `        PRIMITIVE_TYPES.put(Double.class, Double.TYPE);`
+org.mockito.internal.util.Primitives:69 `        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Boolean.class, false);`
+org.mockito.internal.util.Primitives:70 `        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Character.class, '\u0000');`
+org.mockito.internal.util.Primitives:71 `        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Byte.class, (byte) 0);`
+org.mockito.internal.util.Primitives:72 `        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Short.class, (short) 0);`
+org.mockito.internal.util.Primitives:73 `        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Integer.class, 0);`
+org.mockito.internal.util.Primitives:74 `        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Long.class, 0L);`
+org.mockito.internal.util.Primitives:75 `        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Float.class, 0F);`
+org.mockito.internal.util.Primitives:76 `        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Double.class, 0D);`
+org.mockito.internal.util.Primitives:78 `        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(boolean.class, false);`
+org.mockito.internal.util.Primitives:79 `        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(char.class, '\u0000');`
+org.mockito.internal.util.Primitives:80 `        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(byte.class, (byte) 0);`
+org.mockito.internal.util.Primitives:81 `        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(short.class, (short) 0);`
+org.mockito.internal.util.Primitives:82 `        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(int.class, 0);`
+org.mockito.internal.util.Primitives:83 `        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(long.class, 0L);`
+org.mockito.internal.util.Primitives:84 `        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(float.class, 0F);`
+org.mockito.internal.util.Primitives:85 `        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(double.class, 0D);`
+org.mockito.internal.util.Primitives:86 `    }`
+org.mockito.internal.util.collections.HashCodeAndEqualsSafeSet:32 `public class HashCodeAndEqualsSafeSet implements Set<Object> {`
+org.mockito.internal.util.collections.HashCodeAndEqualsSafeSet:34 `    private final HashSet<HashCodeAndEqualsMockWrapper> backingHashSet = new HashSet<HashCodeAndEqualsMockWrapper>();`
+org.mockito.internal.util.collections.HashCodeAndEqualsSafeSet:37 `        return new Iterator<Object>() {`
+org.mockito.internal.util.collections.HashCodeAndEqualsSafeSet:38 `            private final Iterator<HashCodeAndEqualsMockWrapper> iterator = backingHashSet.iterator();`
+org.mockito.internal.util.collections.HashCodeAndEqualsSafeSet:41 `                return iterator.hasNext();`
+org.mockito.internal.util.collections.HashCodeAndEqualsSafeSet:124 `        return backingHashSet.addAll(asWrappedMocks(mocks));`
+org.mockito.internal.util.collections.HashCodeAndEqualsSafeSet:132 `        Checks.checkNotNull(mocks, "Passed collection should notify() be null");`
+org.mockito.internal.util.collections.HashCodeAndEqualsSafeSet:133 `        HashSet<HashCodeAndEqualsMockWrapper> hashSet = new HashSet<HashCodeAndEqualsMockWrapper>();`
+org.mockito.internal.util.collections.HashCodeAndEqualsSafeSet:134 `        for (Object mock : mocks) {`
+org.mockito.internal.util.collections.HashCodeAndEqualsSafeSet:138 `        return hashSet;`
+org.mockito.internal.util.collections.HashCodeAndEqualsSafeSet:146 `        return of(Arrays.asList(mocks));`
+org.mockito.internal.util.collections.HashCodeAndEqualsSafeSet:150 `        HashCodeAndEqualsSafeSet hashCodeAndEqualsSafeSet = new HashCodeAndEqualsSafeSet();`
+org.mockito.internal.util.collections.HashCodeAndEqualsSafeSet:151 `        if (objects != null) {`
+org.mockito.internal.util.collections.HashCodeAndEqualsSafeSet:152 `            for (Object mock : objects) {`
+org.mockito.internal.util.collections.HashCodeAndEqualsSafeSet:156 `        return hashCodeAndEqualsSafeSet;`
+org.mockito.internal.util.collections.Iterables:16 `        List<T> out = new LinkedList<T>();`
+org.mockito.internal.util.collections.Iterables:17 `        while(in.hasMoreElements()) {`
+org.mockito.internal.util.collections.Iterables:20 `        return out;`
+org.mockito.internal.util.collections.Sets:20 `        return HashCodeAndEqualsSafeSet.of(mocks);`
+org.mockito.internal.util.reflection.AccessibilityChanger:9 `public class AccessibilityChanger {`
+org.mockito.internal.util.reflection.AccessibilityChanger:11 `    private Boolean wasAccessible = null;`
+org.mockito.internal.util.reflection.AccessibilityChanger:29 `        wasAccessible = accessibleObject.isAccessible();`
+org.mockito.internal.util.reflection.AccessibilityChanger:30 `        accessibleObject.setAccessible(true);`
+org.mockito.internal.util.reflection.AccessibilityChanger:31 `    }`
+org.mockito.internal.util.reflection.FieldReader:15 `    final AccessibilityChanger changer = new AccessibilityChanger();`
+org.mockito.internal.util.reflection.FieldReader:17 `    public FieldReader(Object target, Field field) {`
+org.mockito.internal.util.reflection.FieldReader:18 `        this.target = target;`
+org.mockito.internal.util.reflection.FieldReader:19 `        this.field = field;`
+org.mockito.internal.util.reflection.FieldReader:20 `        changer.enableAccess(field);`
+org.mockito.internal.util.reflection.FieldReader:21 `    }`
+org.mockito.internal.util.reflection.FieldReader:29 `            return field.get(target);`
+org.mockitoutil.TestBase:38 `public class TestBase extends Assert {`
+org.mockitoutil.TestBase:42 `        ConfigurationAccess.getConfig().overrideCleansStackTrace(false);`
+org.mockitoutil.TestBase:43 `        ConfigurationAccess.getConfig().overrideDefaultAnswer(null);`
+org.mockitoutil.TestBase:44 `        StateMaster state = new StateMaster();`
+org.mockitoutil.TestBase:47 `        state.validate();`
+org.mockitoutil.TestBase:49 `        state.reset();`
+org.mockitoutil.TestBase:50 `    }`
+org.mockitoutil.TestBase:54 `        MockitoAnnotations.initMocks(this);`
+org.mockitoutil.TestBase:55 `    }`
+ 
+The provided code is expected to pass these test cases:
+ @Test public void should_return_empty_iterable() throws Exception {
+  assertFalse(((Iterable)values.returnValueFor(Iterable.class)).iterator().hasNext());
+}
+

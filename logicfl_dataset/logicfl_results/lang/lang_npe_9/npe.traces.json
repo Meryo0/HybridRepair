@@ -1,0 +1,128 @@
+{"npe.traces": [
+    {
+        "test.method": "testInvokeMethod_VarArgsNotUniqueResolvable",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getTotalTransformationCost",
+                "line": 165,
+                "class": "org.apache.commons.lang3.reflect.MemberUtils"
+            },
+            {
+                "is_target": true,
+                "method": "compareParameterTypes",
+                "line": 136,
+                "class": "org.apache.commons.lang3.reflect.MemberUtils"
+            },
+            {
+                "is_target": true,
+                "method": "compareMethodFit",
+                "line": 120,
+                "class": "org.apache.commons.lang3.reflect.MemberUtils"
+            },
+            {
+                "is_target": true,
+                "method": "getMatchingAccessibleMethod",
+                "line": 690,
+                "class": "org.apache.commons.lang3.reflect.MethodUtils"
+            },
+            {
+                "is_target": true,
+                "method": "invokeMethod",
+                "line": 219,
+                "class": "org.apache.commons.lang3.reflect.MethodUtils"
+            },
+            {
+                "is_target": true,
+                "method": "invokeMethod",
+                "line": 256,
+                "class": "org.apache.commons.lang3.reflect.MethodUtils"
+            },
+            {
+                "is_target": true,
+                "method": "invokeMethod",
+                "line": 148,
+                "class": "org.apache.commons.lang3.reflect.MethodUtils"
+            },
+            {
+                "is_target": true,
+                "method": "testInvokeMethod_VarArgsNotUniqueResolvable",
+                "line": 459,
+                "class": "org.apache.commons.lang3.reflect.MethodUtilsTest"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            }
+        ],
+        "test.class": "org.apache.commons.lang3.reflect.MethodUtilsTest"
+    },
+    {
+        "test.method": "testInvokeMethod_VarArgsWithNullValues",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "getMatchingAccessibleMethod",
+                "line": 706,
+                "class": "org.apache.commons.lang3.reflect.MethodUtils"
+            },
+            {
+                "is_target": true,
+                "method": "invokeMethod",
+                "line": 219,
+                "class": "org.apache.commons.lang3.reflect.MethodUtils"
+            },
+            {
+                "is_target": true,
+                "method": "invokeMethod",
+                "line": 256,
+                "class": "org.apache.commons.lang3.reflect.MethodUtils"
+            },
+            {
+                "is_target": true,
+                "method": "invokeMethod",
+                "line": 148,
+                "class": "org.apache.commons.lang3.reflect.MethodUtils"
+            },
+            {
+                "is_target": true,
+                "method": "testInvokeMethod_VarArgsWithNullValues",
+                "line": 453,
+                "class": "org.apache.commons.lang3.reflect.MethodUtilsTest"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            }
+        ],
+        "test.class": "org.apache.commons.lang3.reflect.MethodUtilsTest"
+    }
+]}

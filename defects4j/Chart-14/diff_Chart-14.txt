@@ -1,0 +1,62 @@
+diff -U 5 -r defects4j/Chart-14/buggy/source/org/jfree/chart/plot/CategoryPlot.java defects4j/Chart-14/fixed/source/org/jfree/chart/plot/CategoryPlot.java
+--- defects4j/Chart-14/buggy/source/org/jfree/chart/plot/CategoryPlot.java	2024-04-14 01:01:59.000000000 +0900
++++ defects4j/Chart-14/fixed/source/org/jfree/chart/plot/CategoryPlot.java	2024-04-14 01:02:34.000000000 +0900
+@@ -2161,10 +2161,13 @@
+         }
+         else {
+             markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(
+                     index));
+         }
++        if (markers == null) {
++            return false;
++        }
+         boolean removed = markers.remove(marker);
+         if (removed && notify) {
+             fireChangeEvent();
+         }
+         return removed;
+@@ -2443,10 +2446,13 @@
+         }
+         else {
+             markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(
+                     index));
+         }
++        if (markers == null) {
++            return false;
++        }
+         boolean removed = markers.remove(marker);
+         if (removed && notify) {
+             fireChangeEvent();
+         }
+         return removed;
+diff -U 5 -r defects4j/Chart-14/buggy/source/org/jfree/chart/plot/XYPlot.java defects4j/Chart-14/fixed/source/org/jfree/chart/plot/XYPlot.java
+--- defects4j/Chart-14/buggy/source/org/jfree/chart/plot/XYPlot.java	2024-04-14 01:01:59.000000000 +0900
++++ defects4j/Chart-14/fixed/source/org/jfree/chart/plot/XYPlot.java	2024-04-14 01:02:34.000000000 +0900
+@@ -2288,10 +2288,13 @@
+         }
+         else {
+             markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(
+                     index));
+         }
++        if (markers == null) {
++            return false;
++        }
+         boolean removed = markers.remove(marker);
+         if (removed && notify) {
+             fireChangeEvent();
+         }
+         return removed;
+@@ -2524,10 +2527,13 @@
+         }
+         else {
+             markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(
+                     index));
+         }
++        if (markers == null) {
++            return false;
++        }
+         boolean removed = markers.remove(marker);
+         if (removed && notify) {
+             fireChangeEvent();
+         }
+         return removed;

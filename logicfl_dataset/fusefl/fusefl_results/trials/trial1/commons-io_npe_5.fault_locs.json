@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.RegexFileFilter:184",
+            "code": "return toFileVisitResult(pattern.matcher(pathToString.apply(path)).matches());",
+            "explanation": "The NullPointerException occurs because 'pathToString' is null. The test case 'testRegexFileNameOnly' explicitly sets 'pathToString' to null, which leads to the exception when 'apply' is called on a null reference."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.RegexFileFilter:125",
+            "code": "public RegexFileFilter(final Pattern pattern, final Function<Path, String> pathToString) {",
+            "explanation": "The constructor does not check if 'pathToString' is null. Adding a null check here and providing a default behavior or throwing an IllegalArgumentException could prevent the NullPointerException."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.RegexFileFilter:126",
+            "code": "Objects.requireNonNull(pattern, \"pattern\");",
+            "explanation": "While the pattern is checked for null, 'pathToString' is not. Adding a similar null check for 'pathToString' would ensure that the object is not null before it is used."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.RegexFileFilter:127",
+            "code": "this.pattern = pattern;",
+            "explanation": "The assignment of 'pattern' is safe due to the null check, but 'pathToString' is assigned without any validation. This could be a point where a null check should be added."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.RegexFileFilter:128",
+            "code": "this.pathToString = pathToString;",
+            "explanation": "Direct assignment of 'pathToString' without null validation. This should be guarded with a null check to ensure that 'pathToString' is not null before it is used in other methods."
+        }
+    ]
+}

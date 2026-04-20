@@ -1,0 +1,40 @@
+Provide a short code description of the following code:
+ org.apache.commons.math.ConvergingAlgorithmImpl:61 `                                      final double defaultAbsoluteAccuracy) {`
+org.apache.commons.math.ConvergingAlgorithmImpl:62 `        this.defaultAbsoluteAccuracy = defaultAbsoluteAccuracy;`
+org.apache.commons.math.ConvergingAlgorithmImpl:63 `        this.defaultRelativeAccuracy = 1.0e-14;`
+org.apache.commons.math.ConvergingAlgorithmImpl:64 `        this.absoluteAccuracy = defaultAbsoluteAccuracy;`
+org.apache.commons.math.ConvergingAlgorithmImpl:65 `        this.relativeAccuracy = defaultRelativeAccuracy;`
+org.apache.commons.math.ConvergingAlgorithmImpl:66 `        this.defaultMaximalIterationCount = defaultMaximalIterationCount;`
+org.apache.commons.math.ConvergingAlgorithmImpl:67 `        this.maximalIterationCount = defaultMaximalIterationCount;`
+org.apache.commons.math.ConvergingAlgorithmImpl:68 `        this.iterationCount = 0;`
+org.apache.commons.math.ConvergingAlgorithmImpl:69 `    }`
+org.apache.commons.math.analysis.SinFunction:31 `public class SinFunction implements DifferentiableUnivariateRealFunction {`
+org.apache.commons.math.analysis.solvers.BisectionSolver:52 `        super(100, 1E-6);`
+org.apache.commons.math.analysis.solvers.BisectionSolver:53 `    }`
+org.apache.commons.math.analysis.solvers.BisectionSolver:66 `        return solve(f, min, max);`
+org.apache.commons.math.analysis.solvers.BisectionSolver:72 `        return solve(min, max);`
+org.apache.commons.math.analysis.solvers.BisectionSolver:79 `        clearResult();`
+org.apache.commons.math.analysis.solvers.BisectionSolver:80 `        verifyInterval(min,max);`
+org.apache.commons.math.analysis.solvers.BisectionSolver:85 `        int i = 0;`
+org.apache.commons.math.analysis.solvers.BisectionSolver:86 `        while (i < maximalIterationCount) {`
+org.apache.commons.math.analysis.solvers.BisectionSolver:87 `            m = UnivariateRealSolverUtils.midpoint(min, max);`
+org.apache.commons.math.analysis.solvers.BisectionSolver:88 `           fmin = f.value(min);`
+org.apache.commons.math.analysis.solvers.UnivariateRealSolverImpl:41 `    protected boolean resultComputed = false;`
+org.apache.commons.math.analysis.solvers.UnivariateRealSolverImpl:93 `        super(defaultMaximalIterationCount, defaultAbsoluteAccuracy);`
+org.apache.commons.math.analysis.solvers.UnivariateRealSolverImpl:94 `        this.defaultFunctionValueAccuracy = 1.0e-15;`
+org.apache.commons.math.analysis.solvers.UnivariateRealSolverImpl:95 `        this.functionValueAccuracy = defaultFunctionValueAccuracy;`
+org.apache.commons.math.analysis.solvers.UnivariateRealSolverImpl:96 `    }`
+org.apache.commons.math.analysis.solvers.UnivariateRealSolverImpl:165 `        this.iterationCount = 0;`
+org.apache.commons.math.analysis.solvers.UnivariateRealSolverImpl:166 `        this.resultComputed = false;`
+org.apache.commons.math.analysis.solvers.UnivariateRealSolverImpl:167 `    }`
+org.apache.commons.math.analysis.solvers.UnivariateRealSolverImpl:208 `        if (lower >= upper) {`
+org.apache.commons.math.analysis.solvers.UnivariateRealSolverImpl:213 `    }`
+org.apache.commons.math.analysis.solvers.UnivariateRealSolverUtils:223 `        return (a + b) * .5;`
+ 
+The provided code is expected to pass these test cases:
+ public void testMath369() throws Exception {
+  UnivariateRealFunction f=new SinFunction();
+  UnivariateRealSolver solver=new BisectionSolver();
+  assertEquals(Math.PI,solver.solve(f,3.0,3.2,3.1),solver.getAbsoluteAccuracy());
+}
+

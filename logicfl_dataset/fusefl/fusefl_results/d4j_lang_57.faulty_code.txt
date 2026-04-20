@@ -1,0 +1,6 @@
+org.apache.commons.lang.LocaleUtils:47 `    private static final Map cLanguagesByCountry = Collections.synchronizedMap(new HashMap());`
+org.apache.commons.lang.LocaleUtils:49 `    private static final Map cCountriesByLanguage = Collections.synchronizedMap(new HashMap());`
+org.apache.commons.lang.LocaleUtils:51 `        List list = Arrays.asList(Locale.getAvailableLocales());`
+org.apache.commons.lang.LocaleUtils:52 `        cAvailableLocaleList = Collections.unmodifiableList(list);`
+org.apache.commons.lang.LocaleUtils:53 `    }`
+org.apache.commons.lang.LocaleUtils:223 `        return cAvailableLocaleSet.contains(locale);`

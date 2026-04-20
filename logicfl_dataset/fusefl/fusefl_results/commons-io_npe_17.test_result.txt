@@ -1,0 +1,50 @@
+@Test public void testContentEquals() throws Exception {
+  final File file=new File(temporaryFolder,getName());
+  final File file2=new File(temporaryFolder,getName() + "2");
+  assertTrue(FileUtils.contentEquals(null,null));
+  assertFalse(FileUtils.contentEquals(null,file));
+  assertFalse(FileUtils.contentEquals(file,null));
+  assertTrue(FileUtils.contentEquals(file,file));
+  assertTrue(FileUtils.contentEquals(file,file2));
+  assertTrue(FileUtils.contentEquals(file2,file2));
+  assertTrue(FileUtils.contentEquals(file2,file));
+  try {
+    FileUtils.contentEquals(temporaryFolder,temporaryFolder);
+    fail("Comparing directories should fail with an IOException");
+  }
+ catch (  final IOException ioe) {
+  }
+  final File objFile1=new File(temporaryFolder,getName() + ".object");
+  objFile1.deleteOnExit();
+  FileUtils.copyURLToFile(getClass().getResource("/java/lang/Object.class"),objFile1);
+  final File objFile1b=new File(temporaryFolder,getName() + ".object2");
+  objFile1.deleteOnExit();
+  FileUtils.copyURLToFile(getClass().getResource("/java/lang/Object.class"),objFile1b);
+  final File objFile2=new File(temporaryFolder,getName() + ".collection");
+  objFile2.deleteOnExit();
+  FileUtils.copyURLToFile(getClass().getResource("/java/util/Collection.class"),objFile2);
+  assertFalse(FileUtils.contentEquals(objFile1,objFile2));
+  assertFalse(FileUtils.contentEquals(objFile1b,objFile2));
+  assertTrue(FileUtils.contentEquals(objFile1,objFile1b));
+  assertTrue(FileUtils.contentEquals(objFile1,objFile1));
+  assertTrue(FileUtils.contentEquals(objFile1b,objFile1b));
+  assertTrue(FileUtils.contentEquals(objFile2,objFile2));
+  file.createNewFile();
+  file2.createNewFile();
+  assertTrue(FileUtils.contentEquals(file,file));
+  assertTrue(FileUtils.contentEquals(file,file2));
+}
+
+
+
+Failures (1):
+  JUnit Jupiter:FileUtilsTestCase:testContentEquals()
+    MethodSource [className = 'org.apache.commons.io.FileUtilsTestCase', methodName = 'testContentEquals', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.io.File.exists()" because "file1" is null
+       org.apache.commons.io.FileUtils.contentEquals(FileUtils.java:391)
+       org.apache.commons.io.FileUtilsTestCase.testContentEquals(FileUtilsTestCase.java:574)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Store NPE traces to npe.traces.json
+NPE Stack Traces exported to npe.traces.json

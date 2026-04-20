@@ -1,0 +1,90 @@
+{"classes": [
+    {
+        "probe_ranges": [],
+        "classId": "abstract_supplier_1"
+    },
+    {
+        "probe_ranges": [],
+        "classId": "path_utils_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 139,
+                "offset": 3,
+                "startLine": 136,
+                "orgLineEnd": 136,
+                "probedLineEnd": 139,
+                "orgLineStart": 136
+            },
+            {
+                "endLine": 259,
+                "offset": 6,
+                "startLine": 256,
+                "orgLineEnd": 253,
+                "probedLineEnd": 259,
+                "orgLineStart": 253
+            },
+            {
+                "endLine": 263,
+                "offset": 9,
+                "startLine": 260,
+                "orgLineEnd": 254,
+                "probedLineEnd": 263,
+                "orgLineStart": 254
+            },
+            {
+                "endLine": 309,
+                "offset": 15,
+                "startLine": 303,
+                "orgLineEnd": 294,
+                "probedLineEnd": 309,
+                "orgLineStart": 294
+            }
+        ],
+        "classId": "abstract_origin_supplier_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 150,
+                "offset": 11,
+                "startLine": 147,
+                "orgLineEnd": 139,
+                "probedLineEnd": 150,
+                "orgLineStart": 139
+            },
+            {
+                "endLine": 155,
+                "offset": 15,
+                "startLine": 151,
+                "orgLineEnd": 140,
+                "probedLineEnd": 155,
+                "orgLineStart": 140
+            }
+        ],
+        "classId": "reader_input_stream_1"
+    },
+    {
+        "probe_ranges": [{
+            "endLine": 142,
+            "offset": 39,
+            "startLine": 139,
+            "orgLineEnd": 103,
+            "probedLineEnd": 142,
+            "orgLineStart": 103
+        }],
+        "classId": "abstract_stream_builder_1"
+    },
+    {
+        "probe_ranges": [{
+            "endLine": 392,
+            "offset": 4,
+            "startLine": 388,
+            "orgLineEnd": 388,
+            "probedLineEnd": 392,
+            "orgLineStart": 388
+        }],
+        "classId": "abstract_origin_1"
+    }
+]}

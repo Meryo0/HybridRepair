@@ -1,0 +1,4 @@
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer 91
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer 162
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer 154
+org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer 90

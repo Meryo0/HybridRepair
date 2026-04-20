@@ -1,0 +1,36 @@
+{"npe.traces": [{
+    "test.method": "testResetCharset",
+    "traces": [
+        {
+            "is_target": true,
+            "method": "setCharset",
+            "line": 142,
+            "class": "org.apache.commons.io.input.ReaderInputStream$Builder"
+        },
+        {
+            "is_target": true,
+            "method": "testResetCharset",
+            "line": 280,
+            "class": "org.apache.commons.io.input.ReaderInputStreamTest"
+        },
+        {
+            "is_target": false,
+            "method": "invoke",
+            "line": 569,
+            "class": "java.lang.reflect.Method"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        }
+    ],
+    "test.class": "org.apache.commons.io.input.ReaderInputStreamTest"
+}]}

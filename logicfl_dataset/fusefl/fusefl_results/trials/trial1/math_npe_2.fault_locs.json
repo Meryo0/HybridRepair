@@ -1,0 +1,39 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.math.linear.BlockRealMatrix:769",
+            "code": "final int refLength = subMatrix[0].length;",
+            "explanation": "The code attempts to access the length of the first element of the subMatrix array without checking if subMatrix is null. This can lead to a NullPointerException if subMatrix is null."
+        },
+        {
+            "faultyLine": "org.apache.commons.math.linear.Array2DRowRealMatrix:295",
+            "code": "super.setSubMatrix(subMatrix, row, column);",
+            "explanation": "The method call to setSubMatrix does not check if subMatrix is null before passing it to the superclass method. This can lead to a NullPointerException if subMatrix is null."
+        },
+        {
+            "faultyLine": "org.apache.commons.math.linear.BlockFieldMatrix:762",
+            "code": "final int refLength = subMatrix[0].length;",
+            "explanation": "Similar to BlockRealMatrix, this line attempts to access the length of the first element of the subMatrix array without checking if subMatrix is null, leading to a NullPointerException."
+        },
+        {
+            "faultyLine": "org.apache.commons.math.linear.AbstractRealMatrix:389",
+            "code": "final int nRows = subMatrix.length;",
+            "explanation": "This line attempts to access the length of the subMatrix array without checking if subMatrix is null, which can cause a NullPointerException."
+        },
+        {
+            "faultyLine": "org.apache.commons.math.linear.AbstractRealMatrix:390",
+            "code": "if (nRows == 0) {",
+            "explanation": "This line is part of the same method as the previous line and will also fail if subMatrix is null. It should be checked if subMatrix is null before accessing its length."
+        },
+        {
+            "faultyLine": "org.apache.commons.math.linear.OpenMapRealMatrix:226",
+            "code": "if (value == 0.0) {",
+            "explanation": "While this line itself is not directly causing the NullPointerException, the method setSubMatrix should include a null check for subMatrix before proceeding with any operations."
+        },
+        {
+            "faultyLine": "org.apache.commons.math.linear.OpenMapRealMatrix:227",
+            "code": "entries.remove(computeKey(row, column));",
+            "explanation": "Similar to the previous line, this line is part of the setSubMatrix method which should include a null check for subMatrix to prevent NullPointerException."
+        }
+    ]
+}

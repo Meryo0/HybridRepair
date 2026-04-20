@@ -1,0 +1,503 @@
+{"classes": [
+    {
+        "probe_ranges": [
+            {
+                "endLine": 37,
+                "offset": 8,
+                "startLine": 33,
+                "orgLineEnd": 29,
+                "probedLineEnd": 37,
+                "orgLineStart": 29
+            },
+            {
+                "endLine": 44,
+                "offset": 13,
+                "startLine": 39,
+                "orgLineEnd": 31,
+                "probedLineEnd": 44,
+                "orgLineStart": 31
+            },
+            {
+                "endLine": 49,
+                "offset": 17,
+                "startLine": 45,
+                "orgLineEnd": 32,
+                "probedLineEnd": 49,
+                "orgLineStart": 32
+            }
+        ],
+        "classId": "bug_cli133test_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 74,
+                "offset": 6,
+                "startLine": 68,
+                "orgLineEnd": 68,
+                "probedLineEnd": 74,
+                "orgLineStart": 68
+            },
+            {
+                "endLine": 176,
+                "offset": 10,
+                "startLine": 172,
+                "orgLineEnd": 166,
+                "probedLineEnd": 176,
+                "orgLineStart": 166
+            }
+        ],
+        "classId": "command_line_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 29,
+                "offset": 3,
+                "startLine": 26,
+                "orgLineEnd": 26,
+                "probedLineEnd": 29,
+                "orgLineStart": 26
+            },
+            {
+                "endLine": 33,
+                "offset": 6,
+                "startLine": 30,
+                "orgLineEnd": 27,
+                "probedLineEnd": 33,
+                "orgLineStart": 27
+            },
+            {
+                "endLine": 37,
+                "offset": 9,
+                "startLine": 34,
+                "orgLineEnd": 28,
+                "probedLineEnd": 37,
+                "orgLineStart": 28
+            }
+        ],
+        "classId": "util_test_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 48,
+                "offset": 4,
+                "startLine": 44,
+                "orgLineEnd": 76,
+                "probedLineEnd": 80,
+                "orgLineStart": 45
+            },
+            {
+                "endLine": 58,
+                "offset": 3,
+                "startLine": 53,
+                "orgLineEnd": 76,
+                "probedLineEnd": 79,
+                "orgLineStart": 51
+            },
+            {
+                "endLine": 63,
+                "offset": 10,
+                "startLine": 59,
+                "orgLineEnd": 53,
+                "probedLineEnd": 63,
+                "orgLineStart": 53
+            },
+            {
+                "endLine": 69,
+                "offset": 12,
+                "startLine": 64,
+                "orgLineEnd": 59,
+                "probedLineEnd": 71,
+                "orgLineStart": 55
+            },
+            {
+                "endLine": 116,
+                "offset": 28,
+                "startLine": 92,
+                "orgLineEnd": 88,
+                "probedLineEnd": 116,
+                "orgLineStart": 88
+            },
+            {
+                "endLine": 131,
+                "offset": 32,
+                "startLine": 127,
+                "orgLineEnd": 99,
+                "probedLineEnd": 131,
+                "orgLineStart": 99
+            }
+        ],
+        "classId": "option_validator_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 57,
+                "offset": 4,
+                "startLine": 54,
+                "orgLineEnd": 53,
+                "probedLineEnd": 57,
+                "orgLineStart": 53
+            },
+            {
+                "endLine": 106,
+                "offset": 7,
+                "startLine": 103,
+                "orgLineEnd": 99,
+                "probedLineEnd": 106,
+                "orgLineStart": 99
+            },
+            {
+                "endLine": 113,
+                "offset": 12,
+                "startLine": 108,
+                "orgLineEnd": 102,
+                "probedLineEnd": 114,
+                "orgLineStart": 102
+            },
+            {
+                "endLine": 127,
+                "offset": 22,
+                "startLine": 120,
+                "orgLineEnd": 106,
+                "probedLineEnd": 128,
+                "orgLineStart": 106
+            },
+            {
+                "endLine": 189,
+                "offset": 26,
+                "startLine": 182,
+                "orgLineEnd": 163,
+                "probedLineEnd": 189,
+                "orgLineStart": 163
+            }
+        ],
+        "classId": "posix_parser_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 136,
+                "offset": 9,
+                "startLine": 133,
+                "orgLineEnd": 128,
+                "probedLineEnd": 137,
+                "orgLineStart": 128
+            },
+            {
+                "endLine": 142,
+                "offset": 12,
+                "startLine": 139,
+                "orgLineEnd": 130,
+                "probedLineEnd": 142,
+                "orgLineStart": 130
+            },
+            {
+                "endLine": 146,
+                "offset": 15,
+                "startLine": 143,
+                "orgLineEnd": 131,
+                "probedLineEnd": 146,
+                "orgLineStart": 131
+            },
+            {
+                "endLine": 151,
+                "offset": 18,
+                "startLine": 148,
+                "orgLineEnd": 137,
+                "probedLineEnd": 155,
+                "orgLineStart": 134
+            },
+            {
+                "endLine": 160,
+                "offset": 21,
+                "startLine": 157,
+                "orgLineEnd": 139,
+                "probedLineEnd": 160,
+                "orgLineStart": 139
+            },
+            {
+                "endLine": 164,
+                "offset": 24,
+                "startLine": 161,
+                "orgLineEnd": 140,
+                "probedLineEnd": 164,
+                "orgLineStart": 140
+            },
+            {
+                "endLine": 190,
+                "offset": 28,
+                "startLine": 186,
+                "orgLineEnd": 166,
+                "probedLineEnd": 194,
+                "orgLineStart": 163
+            },
+            {
+                "endLine": 199,
+                "offset": 31,
+                "startLine": 196,
+                "orgLineEnd": 168,
+                "probedLineEnd": 199,
+                "orgLineStart": 168
+            },
+            {
+                "endLine": 288,
+                "offset": 36,
+                "startLine": 283,
+                "orgLineEnd": 252,
+                "probedLineEnd": 288,
+                "orgLineStart": 252
+            },
+            {
+                "endLine": 331,
+                "offset": 39,
+                "startLine": 328,
+                "orgLineEnd": 292,
+                "probedLineEnd": 331,
+                "orgLineStart": 292
+            },
+            {
+                "endLine": 685,
+                "offset": 42,
+                "startLine": 682,
+                "orgLineEnd": 643,
+                "probedLineEnd": 685,
+                "orgLineStart": 643
+            }
+        ],
+        "classId": "option_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 77,
+                "offset": 6,
+                "startLine": 71,
+                "orgLineEnd": 71,
+                "probedLineEnd": 77,
+                "orgLineStart": 71
+            },
+            {
+                "endLine": 143,
+                "offset": 9,
+                "startLine": 140,
+                "orgLineEnd": 135,
+                "probedLineEnd": 144,
+                "orgLineStart": 135
+            },
+            {
+                "endLine": 149,
+                "offset": 40,
+                "startLine": 146,
+                "orgLineEnd": 137,
+                "probedLineEnd": 177,
+                "orgLineStart": 137
+            },
+            {
+                "endLine": 172,
+                "offset": 33,
+                "startLine": 151,
+                "orgLineEnd": 139,
+                "probedLineEnd": 172,
+                "orgLineStart": 139
+            },
+            {
+                "endLine": 176,
+                "offset": 36,
+                "startLine": 173,
+                "orgLineEnd": 140,
+                "probedLineEnd": 176,
+                "orgLineStart": 140
+            },
+            {
+                "endLine": 183,
+                "offset": 40,
+                "startLine": 179,
+                "orgLineEnd": 143,
+                "probedLineEnd": 183,
+                "orgLineStart": 143
+            },
+            {
+                "endLine": 192,
+                "offset": 44,
+                "startLine": 188,
+                "orgLineEnd": 151,
+                "probedLineEnd": 195,
+                "orgLineStart": 148
+            },
+            {
+                "endLine": 202,
+                "offset": 47,
+                "startLine": 197,
+                "orgLineEnd": 155,
+                "probedLineEnd": 202,
+                "orgLineStart": 153
+            },
+            {
+                "endLine": 208,
+                "offset": 51,
+                "startLine": 204,
+                "orgLineEnd": 157,
+                "probedLineEnd": 208,
+                "orgLineStart": 157
+            },
+            {
+                "endLine": 220,
+                "offset": 60,
+                "startLine": 213,
+                "orgLineEnd": 160,
+                "probedLineEnd": 220,
+                "orgLineStart": 160
+            },
+            {
+                "endLine": 285,
+                "offset": 61,
+                "startLine": 282,
+                "orgLineEnd": 224,
+                "probedLineEnd": 285,
+                "orgLineStart": 224
+            },
+            {
+                "endLine": 291,
+                "offset": 64,
+                "startLine": 288,
+                "orgLineEnd": 227,
+                "probedLineEnd": 291,
+                "orgLineStart": 227
+            },
+            {
+                "endLine": 306,
+                "offset": 68,
+                "startLine": 302,
+                "orgLineEnd": 241,
+                "probedLineEnd": 309,
+                "orgLineStart": 238
+            },
+            {
+                "endLine": 366,
+                "offset": 73,
+                "startLine": 361,
+                "orgLineEnd": 310,
+                "probedLineEnd": 383,
+                "orgLineStart": 295
+            }
+        ],
+        "classId": "parser_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 150,
+                "offset": 4,
+                "startLine": 146,
+                "orgLineEnd": 146,
+                "probedLineEnd": 150,
+                "orgLineStart": 146
+            },
+            {
+                "endLine": 156,
+                "offset": 8,
+                "startLine": 152,
+                "orgLineEnd": 152,
+                "probedLineEnd": 160,
+                "orgLineStart": 149
+            },
+            {
+                "endLine": 166,
+                "offset": 12,
+                "startLine": 162,
+                "orgLineEnd": 161,
+                "probedLineEnd": 173,
+                "orgLineStart": 155
+            },
+            {
+                "endLine": 180,
+                "offset": 17,
+                "startLine": 175,
+                "orgLineEnd": 163,
+                "probedLineEnd": 180,
+                "orgLineStart": 163
+            },
+            {
+                "endLine": 206,
+                "offset": 21,
+                "startLine": 202,
+                "orgLineEnd": 185,
+                "probedLineEnd": 206,
+                "orgLineStart": 185
+            },
+            {
+                "endLine": 213,
+                "offset": 26,
+                "startLine": 208,
+                "orgLineEnd": 189,
+                "probedLineEnd": 215,
+                "orgLineStart": 189
+            },
+            {
+                "endLine": 226,
+                "offset": 35,
+                "startLine": 219,
+                "orgLineEnd": 191,
+                "probedLineEnd": 226,
+                "orgLineStart": 191
+            },
+            {
+                "endLine": 237,
+                "offset": 36,
+                "startLine": 234,
+                "orgLineEnd": 201,
+                "probedLineEnd": 237,
+                "orgLineStart": 201
+            },
+            {
+                "endLine": 251,
+                "offset": 39,
+                "startLine": 248,
+                "orgLineEnd": 212,
+                "probedLineEnd": 251,
+                "orgLineStart": 212
+            }
+        ],
+        "classId": "options_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 40,
+                "offset": 20,
+                "startLine": 36,
+                "orgLineEnd": 43,
+                "probedLineEnd": 63,
+                "orgLineStart": 36
+            },
+            {
+                "endLine": 48,
+                "offset": 10,
+                "startLine": 42,
+                "orgLineEnd": 38,
+                "probedLineEnd": 48,
+                "orgLineStart": 38
+            },
+            {
+                "endLine": 54,
+                "offset": 19,
+                "startLine": 50,
+                "orgLineEnd": 43,
+                "probedLineEnd": 62,
+                "orgLineStart": 40
+            },
+            {
+                "endLine": 61,
+                "offset": 19,
+                "startLine": 55,
+                "orgLineEnd": 42,
+                "probedLineEnd": 61,
+                "orgLineStart": 42
+            }
+        ],
+        "classId": "util_1"
+    }
+]}

@@ -1,0 +1,2 @@
+com.google.javascript.jscomp.Scope 535
+com.google.javascript.jscomp.Scope 533

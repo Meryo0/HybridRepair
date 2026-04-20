@@ -1,0 +1,29 @@
+org.apache.commons.lang3.text.StrBuilder:105 `        this(CAPACITY);`
+org.apache.commons.lang3.text.StrBuilder:106 `    }`
+org.apache.commons.lang3.text.StrBuilder:114 `        super();`
+org.apache.commons.lang3.text.StrBuilder:115 `        if (initialCapacity <= 0) {`
+org.apache.commons.lang3.text.StrBuilder:118 `        buffer = new char[initialCapacity];`
+org.apache.commons.lang3.text.StrBuilder:119 `    }`
+org.apache.commons.lang3.text.StrBuilder:2822 `        if (this.size != other.size) {`
+org.apache.commons.lang3.text.StrMatcher:38 `    private static final StrMatcher COMMA_MATCHER = new CharMatcher(',');`
+org.apache.commons.lang3.text.StrMatcher:42 `    private static final StrMatcher TAB_MATCHER = new CharMatcher('\t');`
+org.apache.commons.lang3.text.StrMatcher:46 `    private static final StrMatcher SPACE_MATCHER = new CharMatcher(' ');`
+org.apache.commons.lang3.text.StrMatcher:51 `    private static final StrMatcher SPLIT_MATCHER = new CharSetMatcher(" \t\n\r\f".toCharArray());`
+org.apache.commons.lang3.text.StrMatcher:55 `    private static final StrMatcher TRIM_MATCHER = new TrimMatcher();`
+org.apache.commons.lang3.text.StrMatcher:59 `    private static final StrMatcher SINGLE_QUOTE_MATCHER = new CharMatcher('\'');`
+org.apache.commons.lang3.text.StrMatcher:63 `    private static final StrMatcher DOUBLE_QUOTE_MATCHER = new CharMatcher('"');`
+org.apache.commons.lang3.text.StrMatcher:67 `    private static final StrMatcher QUOTE_MATCHER = new CharSetMatcher("'\"".toCharArray());`
+org.apache.commons.lang3.text.StrMatcher:71 `    private static final StrMatcher NONE_MATCHER = new NoMatcher();`
+org.apache.commons.lang3.text.StrMatcher:217 `        super();`
+org.apache.commons.lang3.text.StrMatcher:218 `    }`
+org.apache.commons.lang3.text.StrMatcher:285 `            super();`
+org.apache.commons.lang3.text.StrMatcher:286 `            this.chars = chars.clone();`
+org.apache.commons.lang3.text.StrMatcher:287 `            Arrays.sort(this.chars);`
+org.apache.commons.lang3.text.StrMatcher:288 `        }`
+org.apache.commons.lang3.text.StrMatcher:319 `            super();`
+org.apache.commons.lang3.text.StrMatcher:320 `            this.ch = ch;`
+org.apache.commons.lang3.text.StrMatcher:321 `        }`
+org.apache.commons.lang3.text.StrMatcher:390 `            super();`
+org.apache.commons.lang3.text.StrMatcher:391 `        }`
+org.apache.commons.lang3.text.StrMatcher:418 `            super();`
+org.apache.commons.lang3.text.StrMatcher:419 `        }`

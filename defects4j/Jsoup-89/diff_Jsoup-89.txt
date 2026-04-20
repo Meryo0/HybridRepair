@@ -1,0 +1,18 @@
+diff -U 5 -r ./defects4j/Jsoup-89/buggy/src/main/java/org/jsoup/nodes/Attribute.java ./defects4j/Jsoup-89/fixed/src/main/java/org/jsoup/nodes/Attribute.java
+--- ./defects4j/Jsoup-89/buggy/src/main/java/org/jsoup/nodes/Attribute.java	2024-05-19 19:44:53.586552017 +0900
++++ ./defects4j/Jsoup-89/fixed/src/main/java/org/jsoup/nodes/Attribute.java	2024-05-19 19:44:53.614552585 +0900
+@@ -83,12 +83,13 @@
+     /**
+      Set the attribute value.
+      @param val the new attribute value; must not be null
+      */
+     public String setValue(String val) {
+-        String oldVal = parent.get(this.key);
++        String oldVal = this.val;
+         if (parent != null) {
++            oldVal = parent.get(this.key); // trust the container more
+             int i = parent.indexOfKey(this.key);
+             if (i != Attributes.NotFound)
+                 parent.vals[i] = val;
+         }
+         this.val = val;

@@ -1,0 +1,34 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jfree.data.general.DatasetUtilities:779",
+            "code": "if (minimum > maximum) {",
+            "explanation": "This line checks if the minimum value is greater than the maximum value, which is a condition that can lead to returning null. This condition might be causing the NullPointerException when the range object 'r' is expected to be non-null in the test cases."
+        },
+        {
+            "faultyLine": "org.jfree.data.general.DatasetUtilities:780",
+            "code": "return null;",
+            "explanation": "Returning null here can cause the NullPointerException in the test cases when 'r' is used without checking for null. This line is directly responsible for the null return value that leads to the exception."
+        },
+        {
+            "faultyLine": "org.jfree.data.general.DatasetUtilities:1283",
+            "code": "if (minimum == Double.POSITIVE_INFINITY) {",
+            "explanation": "This line checks if the minimum value is still positive infinity, which can happen if no valid data points were found. This condition might be causing the NullPointerException when the range object 'r' is expected to be non-null in the test cases."
+        },
+        {
+            "faultyLine": "org.jfree.data.general.DatasetUtilities:1284",
+            "code": "return null;",
+            "explanation": "Returning null here can cause the NullPointerException in the test cases when 'r' is used without checking for null. This line is directly responsible for the null return value that leads to the exception."
+        },
+        {
+            "faultyLine": "org.jfree.data.general.DatasetUtilities:742",
+            "code": "if (dataset == null) {",
+            "explanation": "This line checks if the dataset is null and might be causing the function to return early without setting the range values properly. This could indirectly lead to the NullPointerException if the range object 'r' is not properly initialized."
+        },
+        {
+            "faultyLine": "org.jfree.data.general.DatasetUtilities:780",
+            "code": "return null;",
+            "explanation": "Returning null here can cause the NullPointerException in the test cases when 'r' is used without checking for null. This line is directly responsible for the null return value that leads to the exception."
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+@Test public void testNullCharsetWithSingleByteWrite() throws IOException {
+  testWithSingleByteWrite(TEST_STRING,(Charset)null);
+}
+
+@Test public void testNullCharsetDecoderWithSingleByteWrite() throws IOException {
+  testWithSingleByteWrite(TEST_STRING,(CharsetDecoder)null);
+}
+
+
+
+Failures (2):
+  JUnit Jupiter:WriterOutputStreamTest:testNullCharsetDecoderWithSingleByteWrite()
+    MethodSource [className = 'org.apache.commons.io.output.WriterOutputStreamTest', methodName = 'testNullCharsetDecoderWithSingleByteWrite', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.nio.charset.CharsetDecoder.charset()" because "decoder" is null
+       org.apache.commons.io.output.WriterOutputStream.<init>(WriterOutputStream.java:206)
+       org.apache.commons.io.output.WriterOutputStream.<init>(WriterOutputStream.java:188)
+       org.apache.commons.io.output.WriterOutputStreamTest.testWithSingleByteWrite(WriterOutputStreamTest.java:174)
+       org.apache.commons.io.output.WriterOutputStreamTest.testNullCharsetDecoderWithSingleByteWrite(WriterOutputStreamTest.java:90)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+  JUnit Jupiter:WriterOutputStreamTest:testNullCharsetWithSingleByteWrite()
+    MethodSource [className = 'org.apache.commons.io.output.WriterOutputStreamTest', methodName = 'testNullCharsetWithSingleByteWrite', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.nio.charset.Charset.newDecoder()" because "charset" is null
+       org.apache.commons.io.output.WriterOutputStream.<init>(WriterOutputStream.java:170)
+       org.apache.commons.io.output.WriterOutputStream.<init>(WriterOutputStream.java:152)
+       org.apache.commons.io.output.WriterOutputStreamTest.testWithSingleByteWrite(WriterOutputStreamTest.java:163)
+       org.apache.commons.io.output.WriterOutputStreamTest.testNullCharsetWithSingleByteWrite(WriterOutputStreamTest.java:85)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Store NPE traces to npe.traces.json
+NPE Stack Traces exported to npe.traces.json

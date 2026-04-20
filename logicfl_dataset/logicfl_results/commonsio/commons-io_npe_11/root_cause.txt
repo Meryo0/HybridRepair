@@ -1,0 +1,16 @@
+Fault Localization Results
+NPE at line(reader_input_stream_1, 94) / Null Expression - p_charset_encoder_4[charsetEncoder]
+	 can be caused by 
+p_charset_encoder_4[charsetEncoder] - line(reader_input_stream_1, 94).
+
+NPE at line(reader_input_stream_1, 94) / Null Expression - p_charset_encoder_4[charsetEncoder]
+	 can be caused by 
+p_charset_encoder_14[charsetEncoder] - line(reader_input_stream_1, 178).
+
+NPE at line(reader_input_stream_1, 94) / Null Expression - p_charset_encoder_4[charsetEncoder]
+	 can be caused by 
+p_charset_encoder_1[charsetEncoder] - line(reader_input_stream_1, 85).
+
+NPE at line(reader_input_stream_1, 149) / Null Expression - p_charset_9[charset]
+	 can be caused by 
+p_charset_9[charset] - line(reader_input_stream_1, 149).

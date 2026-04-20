@@ -1,0 +1,76 @@
+{
+    "coverage": [
+        {
+            "covered": [ 34, 36, 37, 194, 213, 214, 215, 216, 217, 218, 220, 248, 249, 250, 252, 253 ],
+            "className": "com.fasterxml.jackson.databind.type.CollectionLikeType"
+        },
+        {
+            "covered": [ 18, 19, 20, 31, 32, 34, 37, 43, 46, 49, 50, 51, 52, 53, 54, 57, 59, 65, 66, 67, 68, 69, 70, 71, 74, 81, 105, 106, 107, 111, 117, 118, 119, 121, 122, 123, 125, 129, 131 ],
+            "className": "com.fasterxml.jackson.databind.type.TypeParser"
+        },
+        {
+            "covered": [ 17, 18, 45, 46, 47, 48, 49, 66, 67, 68, 70 ],
+            "className": "com.fasterxml.jackson.databind.type.TypeBase"
+        },
+        {
+            "covered": [ 25, 26, 40, 120 ],
+            "className": "com.fasterxml.jackson.databind.type.CollectionType"
+        },
+        {
+            "covered": [ 33, 34, 38, 39, 55, 57, 212, 218, 219, 221, 222, 233, 312 ],
+            "className": "com.fasterxml.jackson.databind.type.SimpleType"
+        },
+        {
+            "covered": [ 21, 22, 24, 25, 26, 27, 33, 55, 60, 64, 65, 66, 70 ],
+            "className": "com.fasterxml.jackson.databind.type.ClassStack"
+        },
+        {
+            "covered": [ 14, 23, 211, 212, 213, 214, 215, 218, 219, 220, 221, 223, 224, 225, 226, 229, 230, 231, 233, 237, 499 ],
+            "className": "com.fasterxml.jackson.databind.type.TestTypeFactory"
+        },
+        {
+            "covered": [ 39, 46, 48, 60, 61, 63, 64, 65, 67, 68, 69, 78, 79, 80, 83, 86, 94, 102, 110, 145, 146, 151, 152, 153, 155, 156, 157, 158, 159, 211, 228, 274, 281, 282, 283, 284, 286, 288, 308, 536, 610, 766, 769, 770, 772, 782, 1030, 1033, 1035, 1040, 1041, 1042, 1047, 1053, 1056, 1058, 1059, 1063, 1112, 1132, 1137, 1138, 1140, 1159, 1161, 1164, 1165, 1167, 1171, 1174, 1175, 1186, 1201, 1211, 1212, 1213, 1217, 1218, 1220, 1222, 1223, 1224, 1228, 1229, 1231, 1232, 1239, 1243, 1252, 1253, 1254, 1257, 1258, 1262, 1268, 1269, 1272, 1273, 1274, 1275, 1276, 1278, 1283, 1286, 1287, 1289, 1294, 1295, 1298, 1303, 1304, 1305, 1307, 1308, 1309, 1310, 1311, 1313, 1324, 1329, 1330, 1332, 1333, 1336, 1343, 1351, 1353, 1354, 1355, 1356, 1359, 1370, 1374, 1375, 1377, 1378, 1380, 1387, 1388, 1391, 1394, 1395, 1396, 1398, 1400, 1412, 1413, 1414, 1415, 1419, 1422, 1424, 1425 ],
+            "className": "com.fasterxml.jackson.databind.type.TypeFactory"
+        },
+        {
+            "covered": [ 16, 18, 20, 52, 53, 54, 55, 58, 59, 60, 62, 63, 64, 67, 84, 86, 91, 93, 95, 97, 122, 123, 124, 128, 135, 136, 137, 141, 200, 201, 203, 204, 218, 219, 220, 221, 238, 241, 245, 252, 276, 279, 286, 293, 305, 381, 382, 383, 384, 385, 387, 388, 389, 393, 394, 396, 397, 399, 400, 402, 403, 405, 406, 408, 413, 414, 416, 419, 422, 436, 437, 438, 439, 440, 443, 447, 448, 449, 450, 452, 453, 454, 456, 457, 458, 462, 465 ],
+            "className": "com.fasterxml.jackson.databind.type.TypeBindings"
+        },
+        {
+            "covered": [ 33, 35, 36, 37, 57, 64, 68 ],
+            "className": "com.fasterxml.jackson.databind.util.LRUMap"
+        },
+        {
+            "covered": [ 15, 17, 18, 36, 989, 996 ],
+            "className": "com.fasterxml.jackson.databind.util.ClassUtil"
+        },
+        {
+            "covered": [ 78, 79, 80, 81, 82, 83, 84, 490, 562 ],
+            "className": "com.fasterxml.jackson.databind.JavaType"
+        },
+        {
+            "covered": [ 39, 41, 42, 43, 190, 191, 192, 193, 194, 195, 196, 197, 199, 240, 300, 301, 302, 304, 305 ],
+            "className": "com.fasterxml.jackson.databind.type.MapLikeType"
+        },
+        {
+            "covered": [ 23, 25, 40, 126 ],
+            "className": "com.fasterxml.jackson.databind.type.MapType"
+        }
+    ],
+    "classes": [
+        "com.fasterxml.jackson.databind.JavaType",
+        "com.fasterxml.jackson.databind.type.ClassStack",
+        "com.fasterxml.jackson.databind.type.CollectionLikeType",
+        "com.fasterxml.jackson.databind.type.CollectionType",
+        "com.fasterxml.jackson.databind.type.MapLikeType",
+        "com.fasterxml.jackson.databind.type.MapType",
+        "com.fasterxml.jackson.databind.type.SimpleType",
+        "com.fasterxml.jackson.databind.type.TestTypeFactory",
+        "com.fasterxml.jackson.databind.type.TypeBase",
+        "com.fasterxml.jackson.databind.type.TypeBindings",
+        "com.fasterxml.jackson.databind.type.TypeFactory",
+        "com.fasterxml.jackson.databind.type.TypeParser",
+        "com.fasterxml.jackson.databind.util.ClassUtil",
+        "com.fasterxml.jackson.databind.util.LRUMap"
+    ]
+}

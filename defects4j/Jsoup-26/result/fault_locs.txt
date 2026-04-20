@@ -1,0 +1,6 @@
+org.jsoup.nodes.Document 173
+org.jsoup.nodes.Document 170
+org.jsoup.safety.Cleaner 73
+org.jsoup.safety.Cleaner 43
+org.jsoup.nodes.Document 59
+org.jsoup.nodes.Document 168

@@ -1,0 +1,98 @@
+{"npe.traces": [
+    {
+        "test.method": "testNullCharsetDecoderWithSingleByteWrite",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 206,
+                "class": "org.apache.commons.io.output.WriterOutputStream"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 188,
+                "class": "org.apache.commons.io.output.WriterOutputStream"
+            },
+            {
+                "is_target": true,
+                "method": "testWithSingleByteWrite",
+                "line": 174,
+                "class": "org.apache.commons.io.output.WriterOutputStreamTest"
+            },
+            {
+                "is_target": true,
+                "method": "testNullCharsetDecoderWithSingleByteWrite",
+                "line": 90,
+                "class": "org.apache.commons.io.output.WriterOutputStreamTest"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            }
+        ],
+        "test.class": "org.apache.commons.io.output.WriterOutputStreamTest"
+    },
+    {
+        "test.method": "testNullCharsetWithSingleByteWrite",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 170,
+                "class": "org.apache.commons.io.output.WriterOutputStream"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 152,
+                "class": "org.apache.commons.io.output.WriterOutputStream"
+            },
+            {
+                "is_target": true,
+                "method": "testWithSingleByteWrite",
+                "line": 163,
+                "class": "org.apache.commons.io.output.WriterOutputStreamTest"
+            },
+            {
+                "is_target": true,
+                "method": "testNullCharsetWithSingleByteWrite",
+                "line": 85,
+                "class": "org.apache.commons.io.output.WriterOutputStreamTest"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            }
+        ],
+        "test.class": "org.apache.commons.io.output.WriterOutputStreamTest"
+    }
+]}

@@ -1,0 +1,439 @@
+Faulty Code:
+org.apache.commons.csv.Assertions:32 `        if (parameter == null) {`
+org.apache.commons.csv.Assertions:35 `    }`
+org.apache.commons.csv.CSVFormat:175 `    public static final CSVFormat DEFAULT = new CSVFormat(COMMA, DOUBLE_QUOTE_CHAR, null, null, null,`
+org.apache.commons.csv.CSVFormat:187 `    public static final CSVFormat RFC4180 = DEFAULT.withIgnoreEmptyLines(false);`
+org.apache.commons.csv.CSVFormat:211 `    public static final CSVFormat EXCEL = DEFAULT.withIgnoreEmptyLines(false);`
+org.apache.commons.csv.CSVFormat:214 `    public static final CSVFormat TDF =`
+org.apache.commons.csv.CSVFormat:227 `    public static final CSVFormat MYSQL =`
+org.apache.commons.csv.CSVFormat:244 `        return c == LF || c == CR;`
+org.apache.commons.csv.CSVFormat:256 `        return c != null && isLineBreak(c.charValue());`
+org.apache.commons.csv.CSVFormat:303 `            final boolean ignoreEmptyHeaders) {`
+org.apache.commons.csv.CSVFormat:304 `        if (isLineBreak(delimiter)) {`
+org.apache.commons.csv.CSVFormat:307 `        this.delimiter = delimiter;`
+org.apache.commons.csv.CSVFormat:308 `        this.quoteChar = quoteChar;`
+org.apache.commons.csv.CSVFormat:309 `        this.quotePolicy = quotePolicy;`
+org.apache.commons.csv.CSVFormat:310 `        this.commentStart = commentStart;`
+org.apache.commons.csv.CSVFormat:311 `        this.escape = escape;`
+org.apache.commons.csv.CSVFormat:312 `        this.ignoreSurroundingSpaces = ignoreSurroundingSpaces;`
+org.apache.commons.csv.CSVFormat:313 `        this.ignoreEmptyHeaders = ignoreEmptyHeaders;`
+org.apache.commons.csv.CSVFormat:314 `        this.ignoreEmptyLines = ignoreEmptyLines;`
+org.apache.commons.csv.CSVFormat:315 `        this.recordSeparator = recordSeparator;`
+org.apache.commons.csv.CSVFormat:316 `        this.nullString = nullString;`
+org.apache.commons.csv.CSVFormat:317 `        if (header == null) {`
+org.apache.commons.csv.CSVFormat:318 `            this.header = null;`
+org.apache.commons.csv.CSVFormat:320 `            final Set<String> dupCheck = new HashSet<String>();`
+org.apache.commons.csv.CSVFormat:321 `            for (final String hdr : header) {`
+org.apache.commons.csv.CSVFormat:327 `            this.header = header.clone();`
+org.apache.commons.csv.CSVFormat:329 `        this.skipHeaderRecord = skipHeaderRecord;`
+org.apache.commons.csv.CSVFormat:330 `        validate();`
+org.apache.commons.csv.CSVFormat:331 `    }`
+org.apache.commons.csv.CSVFormat:426 `        return commentStart;`
+org.apache.commons.csv.CSVFormat:435 `        return delimiter;`
+org.apache.commons.csv.CSVFormat:444 `        return escape;`
+org.apache.commons.csv.CSVFormat:453 `        return header != null ? header.clone() : null;`
+org.apache.commons.csv.CSVFormat:473 `        return ignoreEmptyLines;`
+org.apache.commons.csv.CSVFormat:483 `        return ignoreSurroundingSpaces;`
+org.apache.commons.csv.CSVFormat:500 `        return nullString;`
+org.apache.commons.csv.CSVFormat:509 `        return quoteChar;`
+org.apache.commons.csv.CSVFormat:611 `        return new CSVParser(in, this);`
+org.apache.commons.csv.CSVFormat:675 `        if (quoteChar != null && delimiter == quoteChar.charValue()) {`
+org.apache.commons.csv.CSVFormat:680 `        if (escape != null && delimiter == escape.charValue()) {`
+org.apache.commons.csv.CSVFormat:685 `        if (commentStart != null && delimiter == commentStart.charValue()) {`
+org.apache.commons.csv.CSVFormat:690 `        if (quoteChar != null && quoteChar.equals(commentStart)) {`
+org.apache.commons.csv.CSVFormat:695 `        if (escape != null && escape.equals(commentStart)) {`
+org.apache.commons.csv.CSVFormat:700 `        if (escape == null && quotePolicy == Quote.NONE) {`
+org.apache.commons.csv.CSVFormat:704 `        if(recordSeparator != null &&`
+org.apache.commons.csv.CSVFormat:710 `    }`
+org.apache.commons.csv.CSVFormat:757 `        if (isLineBreak(delimiter)) {`
+org.apache.commons.csv.CSVFormat:760 `        return new CSVFormat(delimiter, quoteChar, quotePolicy, commentStart, escape,`
+org.apache.commons.csv.CSVFormat:775 `        return withEscape(Character.valueOf(escape));`
+org.apache.commons.csv.CSVFormat:788 `        if (isLineBreak(escape)) {`
+org.apache.commons.csv.CSVFormat:791 `        return new CSVFormat(delimiter, quoteChar, quotePolicy, commentStart, escape,`
+org.apache.commons.csv.CSVFormat:814 `        return new CSVFormat(delimiter, quoteChar, quotePolicy, commentStart, escape,`
+org.apache.commons.csv.CSVFormat:828 `        return new CSVFormat(delimiter, quoteChar, quotePolicy, commentStart, escape,`
+org.apache.commons.csv.CSVFormat:842 `        return new CSVFormat(delimiter, quoteChar, quotePolicy, commentStart, escape,`
+org.apache.commons.csv.CSVFormat:856 `        return new CSVFormat(delimiter, quoteChar, quotePolicy, commentStart, escape,`
+org.apache.commons.csv.CSVFormat:877 `        return new CSVFormat(delimiter, quoteChar, quotePolicy, commentStart, escape,`
+org.apache.commons.csv.CSVFormat:905 `        if (isLineBreak(quoteChar)) {`
+org.apache.commons.csv.CSVFormat:908 `        return new CSVFormat(delimiter, quoteChar, quotePolicy, commentStart, escape,`
+org.apache.commons.csv.CSVFormat:940 `        return withRecordSeparator(String.valueOf(recordSeparator));`
+org.apache.commons.csv.CSVFormat:956 `        return new CSVFormat(delimiter, quoteChar, quotePolicy, commentStart, escape,`
+org.apache.commons.csv.CSVParser:221 `    private final List<String> record = new ArrayList<String>();`
+org.apache.commons.csv.CSVParser:225 `    private final Token reusableToken = new Token();`
+org.apache.commons.csv.CSVParser:244 `    public CSVParser(final Reader reader, final CSVFormat format) throws IOException {`
+org.apache.commons.csv.CSVParser:245 `        Assertions.notNull(reader, "reader");`
+org.apache.commons.csv.CSVParser:246 `        Assertions.notNull(format, "format");`
+org.apache.commons.csv.CSVParser:248 `        this.format = format;`
+org.apache.commons.csv.CSVParser:249 `        this.lexer = new Lexer(format, new ExtendedBufferedReader(reader));`
+org.apache.commons.csv.CSVParser:250 `        this.headerMap = this.initializeHeader();`
+org.apache.commons.csv.CSVParser:254 `        final String input = this.reusableToken.content.toString();`
+org.apache.commons.csv.CSVParser:255 `        final String nullString = this.format.getNullString();`
+org.apache.commons.csv.CSVParser:256 `        if (nullString == null) {`
+org.apache.commons.csv.CSVParser:259 `            this.record.add(input.equalsIgnoreCase(nullString) ? null : input);`
+org.apache.commons.csv.CSVParser:261 `    }`
+org.apache.commons.csv.CSVParser:360 `        Map<String, Integer> hdrMap = null;`
+org.apache.commons.csv.CSVParser:361 `        final String[] formatHeader = this.format.getHeader();`
+org.apache.commons.csv.CSVParser:362 `        if (formatHeader != null) {`
+org.apache.commons.csv.CSVParser:363 `            hdrMap = new LinkedHashMap<String, Integer>();`
+org.apache.commons.csv.CSVParser:365 `            String[] headerRecord = null;`
+org.apache.commons.csv.CSVParser:366 `            if (formatHeader.length == 0) {`
+org.apache.commons.csv.CSVParser:368 `                final CSVRecord nextRecord = this.nextRecord();`
+org.apache.commons.csv.CSVParser:369 `                if (nextRecord != null) {`
+org.apache.commons.csv.CSVParser:370 `                    headerRecord = nextRecord.values();`
+org.apache.commons.csv.CSVParser:372 `            } else {`
+org.apache.commons.csv.CSVParser:380 `            if (headerRecord != null) {`
+org.apache.commons.csv.CSVParser:381 `                for (int i = 0; i < headerRecord.length; i++) {`
+org.apache.commons.csv.CSVParser:382 `                    final String header = headerRecord[i];`
+org.apache.commons.csv.CSVParser:383 `                    final boolean containsHeader = hdrMap.containsKey(header);`
+org.apache.commons.csv.CSVParser:384 `                    final boolean emptyHeader = header.trim().isEmpty();`
+org.apache.commons.csv.CSVParser:385 `                    if (containsHeader && (!emptyHeader || (emptyHeader && !this.format.getIgnoreEmptyHeaders()))) {`
+org.apache.commons.csv.CSVParser:389 `                    hdrMap.put(header, Integer.valueOf(i));`
+org.apache.commons.csv.CSVParser:464 `        CSVRecord result = null;`
+org.apache.commons.csv.CSVParser:465 `        this.record.clear();`
+org.apache.commons.csv.CSVParser:466 `        StringBuilder sb = null;`
+org.apache.commons.csv.CSVParser:468 `            this.reusableToken.reset();`
+org.apache.commons.csv.CSVParser:469 `            this.lexer.nextToken(this.reusableToken);`
+org.apache.commons.csv.CSVParser:470 `            switch (this.reusableToken.type) {`
+org.apache.commons.csv.CSVParser:472 `                this.addRecordValue();`
+org.apache.commons.csv.CSVParser:473 `                break;`
+org.apache.commons.csv.CSVParser:475 `                this.addRecordValue();`
+org.apache.commons.csv.CSVParser:476 `                break;`
+org.apache.commons.csv.CSVParser:496 `        } while (this.reusableToken.type == TOKEN);`
+org.apache.commons.csv.CSVParser:498 `        if (!this.record.isEmpty()) {`
+org.apache.commons.csv.CSVParser:499 `            this.recordNumber++;`
+org.apache.commons.csv.CSVParser:500 `            final String comment = sb == null ? null : sb.toString();`
+org.apache.commons.csv.CSVParser:501 `            result = new CSVRecord(this.record.toArray(new String[this.record.size()]), this.headerMap, comment,`
+org.apache.commons.csv.CSVParser:504 `        return result;`
+org.apache.commons.csv.CSVRecord:35 `    private static final String[] EMPTY_STRING_ARRAY = new String[0];`
+org.apache.commons.csv.CSVRecord:52 `            final String comment, final long recordNumber) {`
+org.apache.commons.csv.CSVRecord:53 `        this.recordNumber = recordNumber;`
+org.apache.commons.csv.CSVRecord:54 `        this.values = values != null ? values : EMPTY_STRING_ARRAY;`
+org.apache.commons.csv.CSVRecord:55 `        this.mapping = mapping;`
+org.apache.commons.csv.CSVRecord:56 `        this.comment = comment;`
+org.apache.commons.csv.CSVRecord:57 `    }`
+org.apache.commons.csv.CSVRecord:226 `        return values;`
+org.apache.commons.csv.Constants:36 `    static final Character DOUBLE_QUOTE_CHAR = Character.valueOf('"');`
+org.apache.commons.csv.ExtendedBufferedReader:40 `    private int lastChar = UNDEFINED;`
+org.apache.commons.csv.ExtendedBufferedReader:43 `    private long eolCounter = 0;`
+org.apache.commons.csv.ExtendedBufferedReader:51 `        super(reader);`
+org.apache.commons.csv.ExtendedBufferedReader:52 `    }`
+org.apache.commons.csv.ExtendedBufferedReader:56 `        final int current = super.read();`
+org.apache.commons.csv.ExtendedBufferedReader:57 `        if (current == CR || (current == LF && lastChar != CR)) {`
+org.apache.commons.csv.ExtendedBufferedReader:58 `            eolCounter++;`
+org.apache.commons.csv.ExtendedBufferedReader:60 `        lastChar = current;`
+org.apache.commons.csv.ExtendedBufferedReader:61 `        return lastChar;`
+org.apache.commons.csv.ExtendedBufferedReader:73 `        return lastChar;`
+org.apache.commons.csv.Lexer:62 `    Lexer(final CSVFormat format, final ExtendedBufferedReader reader) {`
+org.apache.commons.csv.Lexer:63 `        this.reader = reader;`
+org.apache.commons.csv.Lexer:64 `        this.delimiter = format.getDelimiter();`
+org.apache.commons.csv.Lexer:65 `        this.escape = mapNullToDisabled(format.getEscape());`
+org.apache.commons.csv.Lexer:66 `        this.quoteChar = mapNullToDisabled(format.getQuoteChar());`
+org.apache.commons.csv.Lexer:67 `        this.commentStart = mapNullToDisabled(format.getCommentStart());`
+org.apache.commons.csv.Lexer:68 `        this.ignoreSurroundingSpaces = format.getIgnoreSurroundingSpaces();`
+org.apache.commons.csv.Lexer:69 `        this.ignoreEmptyLines = format.getIgnoreEmptyLines();`
+org.apache.commons.csv.Lexer:70 `    }`
+org.apache.commons.csv.Lexer:86 `        int lastChar = reader.getLastChar();`
+org.apache.commons.csv.Lexer:89 `        int c = reader.read();`
+org.apache.commons.csv.Lexer:94 `        boolean eol = readEndOfLine(c);`
+org.apache.commons.csv.Lexer:97 `        if (ignoreEmptyLines) {`
+org.apache.commons.csv.Lexer:98 `            while (eol && isStartOfLine(lastChar)) {`
+org.apache.commons.csv.Lexer:113 `        if (isEndOfFile(lastChar) || (!isDelimiter(lastChar) && isEndOfFile(c))) {`
+org.apache.commons.csv.Lexer:119 `        if (isStartOfLine(lastChar) && isCommentStart(c)) {`
+org.apache.commons.csv.Lexer:133 `        while (token.type == INVALID) {`
+org.apache.commons.csv.Lexer:135 `            if (ignoreSurroundingSpaces) {`
+org.apache.commons.csv.Lexer:143 `            if (isDelimiter(c)) {`
+org.apache.commons.csv.Lexer:145 `                token.type = TOKEN;`
+org.apache.commons.csv.Lexer:146 `            } else if (eol) {`
+org.apache.commons.csv.Lexer:150 `            } else if (isQuoteChar(c)) {`
+org.apache.commons.csv.Lexer:153 `            } else if (isEndOfFile(c)) {`
+org.apache.commons.csv.Lexer:161 `                parseSimpleToken(token, c);`
+org.apache.commons.csv.Lexer:164 `        return token;`
+org.apache.commons.csv.Lexer:189 `            if (readEndOfLine(ch)) {`
+org.apache.commons.csv.Lexer:190 `                token.type = EORECORD;`
+org.apache.commons.csv.Lexer:191 `                break;`
+org.apache.commons.csv.Lexer:192 `            } else if (isEndOfFile(ch)) {`
+org.apache.commons.csv.Lexer:196 `            } else if (isDelimiter(ch)) {`
+org.apache.commons.csv.Lexer:197 `                token.type = TOKEN;`
+org.apache.commons.csv.Lexer:198 `                break;`
+org.apache.commons.csv.Lexer:199 `            } else if (isEscape(ch)) {`
+org.apache.commons.csv.Lexer:208 `                token.content.append((char) ch);`
+org.apache.commons.csv.Lexer:209 `                ch = reader.read(); // continue`
+org.apache.commons.csv.Lexer:213 `        if (ignoreSurroundingSpaces) {`
+org.apache.commons.csv.Lexer:217 `        return token;`
+org.apache.commons.csv.Lexer:292 `        return c == null ? DISABLED : c.charValue();`
+org.apache.commons.csv.Lexer:365 `        if (ch == CR && reader.lookAhead() == LF) {`
+org.apache.commons.csv.Lexer:369 `        return ch == LF || ch == CR;`
+org.apache.commons.csv.Lexer:390 `        return ch == LF || ch == CR || ch == UNDEFINED;`
+org.apache.commons.csv.Lexer:397 `        return ch == END_OF_STREAM;`
+org.apache.commons.csv.Lexer:401 `        return ch == delimiter;`
+org.apache.commons.csv.Lexer:405 `        return ch == escape;`
+org.apache.commons.csv.Lexer:409 `        return ch == quoteChar;`
+org.apache.commons.csv.Lexer:413 `        return ch == commentStart;`
+org.apache.commons.csv.Quote:24 `public enum Quote {`
+org.apache.commons.csv.Quote:29 `    ALL,`
+org.apache.commons.csv.Quote:35 `    MINIMAL,`
+org.apache.commons.csv.Quote:40 `    NON_NUMERIC,`
+org.apache.commons.csv.Quote:47 `    NONE`
+org.apache.commons.csv.Token:29 `final class Token {`
+org.apache.commons.csv.Token:34 `    enum Type {`
+org.apache.commons.csv.Token:36 `        INVALID,`
+org.apache.commons.csv.Token:39 `        TOKEN,`
+org.apache.commons.csv.Token:42 `        EOF,`
+org.apache.commons.csv.Token:45 `        EORECORD,`
+org.apache.commons.csv.Token:48 `        COMMENT`
+org.apache.commons.csv.Token:52 `    Token.Type type = INVALID;`
+org.apache.commons.csv.Token:55 `    final StringBuilder content = new StringBuilder(INITIAL_TOKEN_LENGTH);`
+org.apache.commons.csv.Token:61 `        content.setLength(0);`
+org.apache.commons.csv.Token:62 `        type = INVALID;`
+org.apache.commons.csv.Token:63 `        isReady = false;`
+org.apache.commons.csv.Token:64 `    }`
+
+
+Task Description:
+The provided code snippets are part of the Apache Commons CSV library, which is used for reading and writing CSV (Comma-Separated Values) files. Here's a brief description of the key components and their functionality:
+
+1. **Assertions**:
+   - `org.apache.commons.csv.Assertions:32`: Checks if a parameter is null and likely throws an exception if it is.
+
+2. **CSVFormat**:
+   - `org.apache.commons.csv.CSVFormat:175`: Defines the default CSV format with specific settings (e.g., delimiter, quote character).
+   - `org.apache.commons.csv.CSVFormat:187`: Defines the RFC4180 CSV format based on the default format but with specific settings.
+   - `org.apache.commons.csv.CSVFormat:211`: Defines the Excel CSV format.
+   - `org.apache.commons.csv.CSVFormat:214`: Defines the TDF (Tab-Delimited Format).
+   - `org.apache.commons.csv.CSVFormat:227`: Defines the MySQL CSV format.
+   - `org.apache.commons.csv.CSVFormat:244`: Checks if a character is a line break (LF or CR).
+   - `org.apache.commons.csv.CSVFormat:256`: Checks if a character is a line break and not null.
+   - `org.apache.commons.csv.CSVFormat:303`: Constructor for CSVFormat with various parameters.
+   - `org.apache.commons.csv.CSVFormat:426`: Returns the comment start character.
+   - `org.apache.commons.csv.CSVFormat:435`: Returns the delimiter character.
+   - `org.apache.commons.csv.CSVFormat:444`: Returns the escape character.
+   - `org.apache.commons.csv.CSVFormat:453`: Returns a clone of the header array.
+   - `org.apache.commons.csv.CSVFormat:473`: Returns whether empty lines should be ignored.
+   - `org.apache.commons.csv.CSVFormat:483`: Returns whether surrounding spaces should be ignored.
+   - `org.apache.commons.csv.CSVFormat:500`: Returns the null string.
+   - `org.apache.commons.csv.CSVFormat:509`: Returns the quote character.
+   - `org.apache.commons.csv.CSVFormat:611`: Creates a new CSVParser with the given input and format.
+   - `org.apache.commons.csv.CSVFormat:675`: Checks if the quote character is the same as the delimiter.
+   - `org.apache.commons.csv.CSVFormat:680`: Checks if the escape character is the same as the delimiter.
+   - `org.apache.commons.csv.CSVFormat:685`: Checks if the comment start character is the same as the delimiter.
+   - `org.apache.commons.csv.CSVFormat:690`: Checks if the quote character is the same as the comment start character.
+   - `org.apache.commons.csv.CSVFormat:695`: Checks if the escape character is the same as the comment start character.
+   - `org.apache.commons.csv.CSVFormat:700`: Checks if the escape character is null and the quote policy is NONE.
+   - `org.apache.commons.csv.CSVFormat:704`: Checks if the record separator is not null.
+   - `org.apache.commons.csv.CSVFormat:757`: Checks if the delimiter is a line break.
+   - `org.apache.commons.csv.CSVFormat:760`: Creates a new CSVFormat with the given parameters.
+   - `org.apache.commons.csv.CSVFormat:775`: Returns a new CSVFormat with the specified escape character.
+   - `org.apache.commons.csv.CSVFormat:788`: Checks if the escape character is a line break.
+   - `org.apache.commons.csv.CSVFormat:791`: Creates a new CSVFormat with the given parameters.
+   - `org.apache.commons.csv.CSVFormat:814`: Creates a new CSVFormat with the given parameters.
+   - `org.apache.commons.csv.CSVFormat:828`: Creates a new CSVFormat with the given parameters.
+   - `org.apache.commons.csv.CSVFormat:842`: Creates a new CSVFormat with the given parameters.
+   - `org.apache.commons.csv.CSVFormat:856`: Creates a new CSVFormat with the given parameters.
+   - `org.apache.commons.csv.CSVFormat:877`: Creates a new CSVFormat with the given parameters.
+   - `org.apache.commons.csv.CSVFormat:905`: Checks if the quote character is a line break.
+   - `org.apache.commons.csv.CSVFormat:908`: Creates a new CSVFormat with the given parameters.
+   - `org.apache.commons.csv.CSVFormat:940`: Returns a new CSVFormat with the specified record separator.
+   - `org.apache.commons.csv.CSVFormat:956`: Creates a new CSVFormat with the given parameters.
+
+3. **CSVParser**:
+   - `org.apache.commons.csv.CSVParser:221`: Initializes a list to store the record.
+   - `org.apache.commons.csv.CSVParser:225`: Initializes a reusable token.
+   - `org.apache.commons.csv.CSVParser:244`: Constructor for CSVParser with a reader and format.
+   - `org.apache.commons.csv.CSVParser:245`: Asserts that the reader is not null.
+   - `org.apache.commons.csv.CSVParser:246`: Asserts that the format is not null.
+   - `org.apache.commons.csv.CSVParser:248`: Sets the format.
+   - `org.apache.commons.csv.CSVParser:249`: Initializes the lexer with the format and reader.
+   - `org.apache.commons.csv.CSVParser:250`: Initializes the header map.
+   - `org.apache.commons.csv.CSVParser:254`: Gets the input from the reusable token.
+   - `org.apache.commons.csv.CSVParser:255`: Gets the null string from the format.
+   - `org.apache.commons.csv.CSVParser:256`: Checks if the null string is null.
+   - `org.apache.commons.csv.CSVParser:259`: Adds the input to the record, considering the null string.
+   - `org.apache.commons.csv.CSVParser:360`: Initializes a header map.
+   - `org.apache.commons.csv.CSVParser:361`: Gets the header from the format.
+   - `org.apache.commons.csv.CSVParser:362`: Checks if the header is not null.
+   - `org.apache.commons.csv.CSVParser:363`: Initializes a linked hash map for the header.
+   - `org.apache.commons.csv.CSVParser:365`: Initializes a header record.
+   - `org.apache.commons.csv.CSVParser:366`: Checks if the header length is zero.
+   - `org.apache.commons.csv.CSVParser:368`: Gets the next record.
+   - `org.apache.commons.csv.CSVParser:369`: Checks if the next record is not null.
+   - `org.apache.commons.csv.CSVParser:370`: Sets the header record to the values of the next record.
+   - `org.apache.commons.csv.CSVParser:372`: Else block for header length not zero.
+   - `org.apache.commons.csv.CSVParser:380`: Checks if the header record is not null.
+   - `org.apache.commons.csv.CSVParser:381`: Iterates over the header record.
+   - `org.apache.commons.csv.CSVParser:382`: Gets the header value.
+   - `org.apache.commons.csv.CSVParser:383`: Checks if the header map contains the header.
+   - `org.apache.commons.csv.CSVParser:384`: Checks if the header is empty.
+   - `org.apache.commons.csv.CSVParser:385`: Checks if the header is a duplicate or empty and not ignored.
+   - `org.apache.commons.csv.CSVParser:389`: Puts the header in the header map.
+   - `org.apache.commons.csv.CSVParser:464`: Initializes a CSVRecord result.
+   - `org.apache.commons.csv.CSVParser:465`: Clears the current record.
+   - `org.apache.commons.csv.CSVParser:466`: Initializes a StringBuilder for comments.
+   - `org.apache.commons.csv.CSVParser:468`: Resets the reusable token.
+   - `org.apache.commons.csv.CSVParser:469`: Gets the next token from the lexer.
+   - `org.apache.commons.csv.CSVParser:470`: Switches on the token type.
+   - `org.apache.commons.csv.CSVParser:472`: Adds the record value.
+   - `org.apache.commons.csv.CSVParser:473`: Breaks the switch case.
+   - `org.apache.commons.csv.CSVParser:475`: Adds the record value.
+   - `org.apache.commons.csv.CSVParser:476`: Breaks the switch case.
+   - `org.apache.commons.csv.CSVParser:496`: Continues the loop if the token type is TOKEN.
+   - `org.apache.commons.csv.CSVParser:498`: Checks if the record is not empty.
+   - `org.apache.commons.csv.CSVParser:499`: Increments the record number.
+   - `org.apache.commons.csv.CSVParser:500`: Gets the comment from the StringBuilder.
+   - `org.apache.commons.csv.CSVParser:501`: Creates a new CSVRecord with the current record, header map, and comment.
+   - `org.apache.commons.csv.CSVParser:504`: Returns the result.
+
+4. **CSVRecord**:
+   - `org.apache.commons.csv.CSVRecord:35`: Defines an empty string array.
+   - `org.apache.commons.csv.CSVRecord:52`: Constructor for CSVRecord with values, mapping, comment, and record number.
+   - `org.apache.commons.csv.CSVRecord:53`: Sets the record number.
+   - `org.apache.commons.csv.CSVRecord:54`: Sets the values, using the empty string array if null.
+   - `org.apache.commons.csv.CSVRecord:55`: Sets the mapping.
+   - `org.apache.commons.csv.CSVRecord:56`: Sets the comment.
+   - `org.apache.commons.csv.CSVRecord:57`: End of constructor.
+   - `org.apache.commons.csv.CSVRecord:226`: Returns the values array.
+
+5. **Constants**:
+   - `org.apache.commons.csv.Constants:36`: Defines the double quote character.
+
+6. **ExtendedBufferedReader**:
+   - `org.apache.commons.csv.ExtendedBufferedReader:40`: Initializes the last character to undefined.
+   - `org.apache.commons.csv.ExtendedBufferedReader:43`: Initializes the end-of-line counter.
+   - `org.apache.commons.csv.ExtendedBufferedReader:51`: Constructor for ExtendedBufferedReader.
+   - `org.apache.commons.csv.ExtendedBufferedReader:52`: End of constructor.
+   - `org.apache.commons.csv.ExtendedBufferedReader:56`: Reads the next character.
+   - `org.apache.commons.csv.ExtendedBufferedReader:57`: Checks if the character is a line break.
+   - `org.apache.commons.csv.ExtendedBufferedReader:58`: Increments the end-of-line counter.
+   - `org.apache.commons.csv.ExtendedBufferedReader:60`: Sets the last character.
+   - `org.apache.commons.csv.ExtendedBufferedReader:61`: Returns the last character.
+   - `org.apache.commons.csv.ExtendedBufferedReader:73`: Returns the last character.
+
+7. **Lexer**:
+   - `org.apache.commons.csv.Lexer:62`: Constructor for Lexer with format and reader.
+   - `org.apache.commons.csv.Lexer:63`: Sets the reader.
+   - `org.apache.commons.csv.Lexer:64`: Sets the delimiter from the format.
+   - `org.apache.commons.csv.Lexer:65`: Sets the escape character from the format.
+   - `org.apache.commons.csv.Lexer:66`: Sets the quote character from the format.
+   - `org.apache.commons.csv.Lexer:67`: Sets the comment start character from the format.
+   - `org.apache.commons.csv.Lexer:68`: Sets whether to ignore surrounding spaces.
+   - `org.apache.commons.csv.Lexer:69`: Sets whether to ignore empty lines.
+   - `org.apache.commons.csv.Lexer:70`: End of constructor.
+   - `org.apache.commons.csv.Lexer:86`: Gets the last character from the reader.
+   - `org.apache.commons.csv.Lexer:89`: Reads the next character.
+   - `org.apache.commons.csv.Lexer:94`: Checks if the character is an end-of-line.
+   - `org.apache.commons.csv.Lexer:97`: Checks if empty lines should be ignored.
+   - `org.apache.commons.csv.Lexer:98`: Loops while the character is an end-of-line and at the start of a line.
+   - `org.apache.commons.csv.Lexer:113`: Checks if the last character is the end of the file or not a delimiter and the current character is the end of the file.
+   - `org.apache.commons.csv.Lexer:119`: Checks if the last character is the start of a line and the current character is a comment start.
+   - `org.apache.commons.csv.Lexer:133`: Loops while the token type is invalid.
+   - `org.apache.commons.csv.Lexer:135`: Checks if surrounding spaces should be ignored.
+   - `org.apache.commons.csv.Lexer:143`: Checks if the character is a delimiter.
+   - `org.apache.commons.csv.Lexer:145`: Sets the token type to TOKEN.
+   - `org.apache.commons.csv.Lexer:146`: Checks if the character is an end-of-line.
+   - `org.apache.commons.csv.Lexer:150`: Checks if the character is a quote character.
+   - `org.apache.commons.csv.Lexer:153`: Checks if the character is the end of the file.
+   - `org.apache.commons.csv.Lexer:161`: Parses a simple token.
+   - `org.apache.commons.csv.Lexer:164`: Returns the token.
+   - `org.apache.commons.csv.Lexer:189`: Checks if the character is an end-of-line.
+   - `org.apache.commons.csv.Lexer:190`: Sets the token type to EORECORD.
+   - `org.apache.commons.csv.Lexer:191`: Breaks the loop.
+   - `org.apache.commons.csv.Lexer:192`: Checks if the character is the end of the file.
+   - `org.apache.commons.csv.Lexer:196`: Checks if the character is a delimiter.
+   - `org.apache.commons.csv.Lexer:197`: Sets the token type to TOKEN.
+   - `org.apache.commons.csv.Lexer:198`: Breaks the loop.
+   - `org.apache.commons.csv.Lexer:199`: Checks if the character is an escape character.
+   - `org.apache.commons.csv.Lexer:208`: Appends the character to the token content.
+   - `org.apache.commons.csv.Lexer:209`: Reads the next character.
+   - `org.apache.commons.csv.Lexer:213`: Checks if surrounding spaces should be ignored.
+   - `org.apache.commons.csv.Lexer:217`: Returns the token.
+   - `org.apache.commons.csv.Lexer:292`: Maps null to disabled for a character.
+   - `org.apache.commons.csv.Lexer:365`: Checks if the character is CR and the next character is LF.
+   - `org.apache.commons.csv.Lexer:369`: Checks if the character is LF or CR.
+   - `org.apache.commons.csv.Lexer:390`: Checks if the character is LF, CR, or undefined.
+   - `org.apache.commons.csv.Lexer:397`: Checks if the character is the end of the stream.
+   - `org.apache.commons.csv.Lexer:401`: Checks if the character is the delimiter.
+   - `org.apache.commons.csv.Lexer:405`: Checks if the character is the escape character.
+   - `org.apache.commons.csv.Lexer:409`: Checks if the character is the quote character.
+   - `org.apache.commons.csv.Lexer:413`: Checks if the character is the comment start.
+
+8. **Quote**:
+   - `org.apache.commons.csv.Quote:24`: Enum for quote policies.
+   - `org.apache.commons.csv.Quote:29`: ALL quote policy.
+   - `org.apache.commons.csv.Quote:35`: MINIMAL quote policy.
+   - `org.apache.commons.csv.Quote:40`: NON_NUMERIC quote policy.
+   - `org.apache.commons.csv.Quote:47`: NONE quote policy.
+
+9. **Token**:
+   - `org.apache.commons.csv.Token:29`: Class for tokens.
+   - `org.apache.commons.csv.Token:34`: Enum for token types.
+   - `org.apache.commons.csv.Token:36`: INVALID token type.
+   - `org.apache.commons.csv.Token:39`: TOKEN token type.
+   - `org.apache.commons.csv.Token:42`: EOF token type.
+   - `org.apache.commons.csv.Token:45`: EORECORD token type.
+   - `org.apache.commons.csv.Token:48`: COMMENT token type.
+   - `org.apache.commons.csv.Token:52`: Initializes the token type to INVALID.
+   - `org.apache.commons.csv.Token:55`: Initializes the token content.
+   - `org.apache.commons.csv.Token:61`: Resets the token content length.
+   - `org.apache.commons.csv.Token:62`: Resets the token type to INVALID.
+   - `org.apache.commons.csv.Token:63`: Resets the token readiness.
+   - `org.apache.commons.csv.Token:64`: End of reset method.
+
+The provided test case `testHeaderMissingWithNull` checks the parsing of a CSV input with missing headers, null strings, and ignoring empty headers. The test ensures that the CSV parser correctly handles these scenarios using the specified CSV format settings.
+
+Test Results:
+The provided code is throwing NullPointerException. For examples:
+Here are the tests and error messages of NullPointerExceptions.
+@Test public void testHeaderMissingWithNull() throws Exception {
+  final Reader in=new StringReader("a,,c,,d\n1,2,3,4\nx,y,z,zz");
+  CSVFormat.DEFAULT.withHeader().withNullString("").withIgnoreEmptyHeaders(true).parse(in).iterator();
+}
+
+
+
+testHeaderMissingWithNull(org.apache.commons.csv.CSVParserTest): Cannot invoke "String.trim()" because "header" is null
+Cannot invoke "String.trim()" because "header" is null
+java.lang.NullPointerException: Cannot invoke "String.trim()" because "header" is null
+	at org.apache.commons.csv.CSVParser.initializeHeader(CSVParser.java:384)
+	at org.apache.commons.csv.CSVParser.<init>(CSVParser.java:250)
+	at org.apache.commons.csv.CSVFormat.parse(CSVFormat.java:611)
+	at org.apache.commons.csv.CSVParserTest.testHeaderMissingWithNull(CSVParserTest.java:670)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+
+
+
+
+
+Analyze the provided code and utilize task description, test results, and SBFL techniques results to help in identifying potentially faulty lines. Provide the results following this JSON template:
+```json
+{
+  "faultLoc": [
+    {   
+      "faultyLine": (indicating the location of the suspicious code in ClassName:LineNumber format),
+      "code": (displaying the actual code),
+      "explanation": (step by step reasoning on why this location is considered potentially faulty)
+    },  
+    ... 
+   ]   
+}
+```
+Ensure that the objects in the "faultLoc" array are stored in descending order of suspicion.

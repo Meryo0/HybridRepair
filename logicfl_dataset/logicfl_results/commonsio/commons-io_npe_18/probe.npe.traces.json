@@ -1,0 +1,60 @@
+{"npe.traces": [{
+    "test.method": "testContentEqualsIgnoreEOL",
+    "traces": [
+        {
+            "is_target": false,
+            "method": "<init>",
+            "line": 168,
+            "class": "java.io.Reader"
+        },
+        {
+            "is_target": false,
+            "method": "<init>",
+            "line": 102,
+            "class": "java.io.BufferedReader"
+        },
+        {
+            "is_target": false,
+            "method": "<init>",
+            "line": 117,
+            "class": "java.io.BufferedReader"
+        },
+        {
+            "is_target": true,
+            "method": "toBufferedReader",
+            "line": 2224,
+            "class": "org.apache.commons.io.IOUtils"
+        },
+        {
+            "is_target": true,
+            "method": "contentEqualsIgnoreEOL",
+            "line": 825,
+            "class": "org.apache.commons.io.IOUtils"
+        },
+        {
+            "is_target": true,
+            "method": "testContentEqualsIgnoreEOL",
+            "line": 362,
+            "class": "org.apache.commons.io.IOUtilsTestCase"
+        },
+        {
+            "is_target": false,
+            "method": "invoke",
+            "line": 569,
+            "class": "java.lang.reflect.Method"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        }
+    ],
+    "test.class": "org.apache.commons.io.IOUtilsTestCase"
+}]}

@@ -1,0 +1,48 @@
+{"npe.traces": [{
+    "test.method": "testGetRawType_LANG_1697",
+    "traces": [
+        {
+            "is_target": false,
+            "method": "newArray",
+            "line": -2,
+            "class": "java.lang.reflect.Array"
+        },
+        {
+            "is_target": false,
+            "method": "newInstance",
+            "line": 78,
+            "class": "java.lang.reflect.Array"
+        },
+        {
+            "is_target": true,
+            "method": "getRawType",
+            "line": 805,
+            "class": "org.apache.commons.lang3.reflect.TypeUtils"
+        },
+        {
+            "is_target": true,
+            "method": "testGetRawType_LANG_1697",
+            "line": 371,
+            "class": "org.apache.commons.lang3.reflect.TypeUtilsTest"
+        },
+        {
+            "is_target": false,
+            "method": "invoke",
+            "line": 569,
+            "class": "java.lang.reflect.Method"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        }
+    ],
+    "test.class": "org.apache.commons.lang3.reflect.TypeUtilsTest"
+}]}

@@ -1,0 +1,171 @@
+Load configurations from config.properties
+Load configurations from config.properties
+Collecting coverage from failed tests...
+Running Tests...
+Executing command - /usr/bin/java -Xms256m -Xmx1024m -classpath ../../lib/*:lib/Cli-5_buggy_src.jar:lib/Cli-5_fixed_test.jar -javaagent:../../lib/jacocoagent.jar=excludes=org.junit.*,append=false,destfile=/home/mario/Desktop/LogicFL/defects4j/Cli-5/result/jacoco.exec logicfl.coverage.JUnit4TestRunner config.properties true /home/mario/Desktop/LogicFL/defects4j/Cli-5/result/npe.traces.json /home/mario/Desktop/LogicFL/defects4j/Cli-5/tests.json
+Load configurations from config.properties
+Loading test information from /home/mario/Desktop/LogicFL/defects4j/Cli-5/tests.json
+Test execution summary:
+Tests executed - 2
+Tests succeeded - 0
+Tests failed - 2
+testOrder(org.apache.commons.cli.bug.BugCLI133Test): Cannot invoke "String.startsWith(String)" because "str" is null
+Cannot invoke "String.startsWith(String)" because "str" is null
+java.lang.NullPointerException: Cannot invoke "String.startsWith(String)" because "str" is null
+	at org.apache.commons.cli.Util.stripLeadingHyphens(Util.java:36)
+	at org.apache.commons.cli.CommandLine.resolveOption(CommandLine.java:166)
+	at org.apache.commons.cli.CommandLine.hasOption(CommandLine.java:68)
+	at org.apache.commons.cli.bug.BugCLI133Test.testOrder(BugCLI133Test.java:32)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:36)
+
+testStripLeadingHyphens(org.apache.commons.cli.UtilTest): Cannot invoke "String.startsWith(String)" because "str" is null
+Cannot invoke "String.startsWith(String)" because "str" is null
+java.lang.NullPointerException: Cannot invoke "String.startsWith(String)" because "str" is null
+	at org.apache.commons.cli.Util.stripLeadingHyphens(Util.java:36)
+	at org.apache.commons.cli.UtilTest.testStripLeadingHyphens(UtilTest.java:28)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:36)
+
+Store NPE traces to /home/mario/Desktop/LogicFL/defects4j/Cli-5/result/npe.traces.json
+NPE Stack Traces exported to /home/mario/Desktop/LogicFL/defects4j/Cli-5/result/npe.traces.json
+
+Analyzing Coverage Data...
+Covered Classes:[org.apache.commons.cli.Options, org.apache.commons.cli.bug.BugCLI133Test, org.apache.commons.cli.Parser, org.apache.commons.cli.PosixParser, org.apache.commons.cli.Option, org.apache.commons.cli.Util, org.apache.commons.cli.CommandLine, org.apache.commons.cli.OptionValidator, org.apache.commons.cli.UtilTest]
+Coverage information exported to /home/mario/Desktop/LogicFL/defects4j/Cli-5/coverage.json
+Collecting coverage complete.
+Exec. Time - 00:00:00.581
+coverage.sh executed successfully.
+Getting configurations from config.properties
+Total 9 Target classes.
+Analyzing class - org.apache.commons.cli.CommandLine
+Analyzing class - org.apache.commons.cli.Option
+Analyzing class - org.apache.commons.cli.OptionValidator
+Analyzing class - org.apache.commons.cli.Options
+Analyzing class - org.apache.commons.cli.Parser
+Analyzing class - org.apache.commons.cli.PosixParser
+Analyzing class - org.apache.commons.cli.Util
+Analyzing class - org.apache.commons.cli.UtilTest
+Analyzing class - org.apache.commons.cli.bug.BugCLI133Test
+Compilation successful!
+FL Facts are exported to /home/mario/Desktop/LogicFL/defects4j/Cli-5/result/logic-fl.pl
+Code Facts are exported to /home/mario/Desktop/LogicFL/defects4j/Cli-5/result/code-facts.pl
+Line matching information exported to /home/mario/Desktop/LogicFL/defects4j/Cli-5/result/line.info.json
+Exec. Time - 00:00:02.756
+static_analyzer.sh executed successfully.
+Getting configurations from config.properties
+Load configurations from config.properties
+Executing command - /usr/bin/java -Xms256m -Xmx1024m -classpath /home/mario/Desktop/LogicFL/defects4j/Cli-5/result/classes:../../lib/*:lib/Cli-5_buggy_src.jar:lib/Cli-5_fixed_test.jar logicfl.coverage.JUnit4TestRunner config.properties true /home/mario/Desktop/LogicFL/defects4j/Cli-5/result/probe.npe.traces.json /home/mario/Desktop/LogicFL/defects4j/Cli-5/tests.json
+Load configurations from config.properties
+Loading test information from /home/mario/Desktop/LogicFL/defects4j/Cli-5/tests.json
+Test execution summary:
+Tests executed - 2
+Tests succeeded - 0
+Tests failed - 2
+testOrder(org.apache.commons.cli.bug.BugCLI133Test): Cannot invoke "String.startsWith(String)" because "p_str_116_line_36" is null
+Cannot invoke "String.startsWith(String)" because "p_str_116_line_36" is null
+java.lang.NullPointerException: Cannot invoke "String.startsWith(String)" because "p_str_116_line_36" is null
+	at org.apache.commons.cli.Util.stripLeadingHyphens(Util.java:38)
+	at org.apache.commons.cli.CommandLine.resolveOption(CommandLine.java:174)
+	at org.apache.commons.cli.CommandLine.hasOption(CommandLine.java:71)
+	at org.apache.commons.cli.bug.BugCLI133Test.testOrder(BugCLI133Test.java:47)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:36)
+
+testStripLeadingHyphens(org.apache.commons.cli.UtilTest): Cannot invoke "String.startsWith(String)" because "p_str_116_line_36" is null
+Cannot invoke "String.startsWith(String)" because "p_str_116_line_36" is null
+java.lang.NullPointerException: Cannot invoke "String.startsWith(String)" because "p_str_116_line_36" is null
+	at org.apache.commons.cli.Util.stripLeadingHyphens(Util.java:38)
+	at org.apache.commons.cli.UtilTest.testStripLeadingHyphens(UtilTest.java:35)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:36)
+
+Store NPE traces to /home/mario/Desktop/LogicFL/defects4j/Cli-5/result/probe.npe.traces.json
+NPE Stack Traces exported to /home/mario/Desktop/LogicFL/defects4j/Cli-5/result/probe.npe.traces.json
+
+
+val(p_opt_3, null, line(command_line_1, 68)).
+val(p_opt_10, null, line(command_line_1, 166)).
+val(p_str_116, null, line(util_1, 36)).
+
+
+Exec. Time - 00:00:00.852
+dynamic_analyzer.sh executed successfully.
+Getting configurations from config.properties
+Running Fault Localizer with
+Rules: ../../lib/npe-rules.pl
+Facts: /home/mario/Desktop/LogicFL/defects4j/Cli-5/result/logic-fl.pl
+Code Facts: /home/mario/Desktop/LogicFL/defects4j/Cli-5/result/code-facts.pl
+consult Succeeded
+NPE at line(util_1, 36) / Null Expression p_str_116[str]
+	can be caused by 
+p_opt_10[opt] at line(command_line_1, 166).
+
+NPE at line(util_1, 36) / Null Expression p_str_116[str]
+	can be caused by 
+p_str_116[str] at line(util_1, 36).
+
+NPE at line(util_1, 36) / Null Expression p_str_116[str]
+	can be caused by 
+command_line_1_expr6['Util.stripLeadingHyphens(opt)'] at line(command_line_1, 166).
+
+NPE at line(util_1, 36) / Null Expression p_str_116[str]
+	can be caused by 
+p_opt_3[opt] at line(command_line_1, 68).
+
+Total 4 Identified Fault Locations for NPE.
+Exec. Time - 00:00:00.086
+localizer.sh executed successfully.
+All scripts executed successfully.

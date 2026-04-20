@@ -1,0 +1,680 @@
+Faulty Code:
+org.apache.commons.lang.LocaleUtils:47 `    private static final Map cLanguagesByCountry = Collections.synchronizedMap(new HashMap());`
+org.apache.commons.lang.LocaleUtils:49 `    private static final Map cCountriesByLanguage = Collections.synchronizedMap(new HashMap());`
+org.apache.commons.lang.LocaleUtils:51 `        List list = Arrays.asList(Locale.getAvailableLocales());`
+org.apache.commons.lang.LocaleUtils:52 `        cAvailableLocaleList = Collections.unmodifiableList(list);`
+org.apache.commons.lang.LocaleUtils:53 `    }`
+org.apache.commons.lang.LocaleUtils:223 `        return cAvailableLocaleSet.contains(locale);`
+
+
+Task Description:
+The provided code snippet and test cases are part of the `LocaleUtils` class from the Apache Commons Lang library. Here's a brief description of the relevant parts of the code:
+
+1. **Static Maps Initialization**:
+   ```java
+   private static final Map cLanguagesByCountry = Collections.synchronizedMap(new HashMap());
+   private static final Map cCountriesByLanguage = Collections.synchronizedMap(new HashMap());
+   ```
+   These lines initialize two synchronized maps to store languages by country and countries by language, respectively.
+
+2. **Available Locales List Initialization**:
+   ```java
+   List list = Arrays.asList(Locale.getAvailableLocales());
+   cAvailableLocaleList = Collections.unmodifiableList(list);
+   ```
+   This code retrieves all available locales, converts them into a list, and then wraps the list in an unmodifiable list to prevent modifications.
+
+3. **Check if Locale is Available**:
+   ```java
+   return cAvailableLocaleSet.contains(locale);
+   ```
+   This line checks if a given locale is part of the available locales set.
+
+### Test Cases
+
+The provided test cases are designed to validate various functionalities of the `LocaleUtils` class:
+
+1. **Test `languagesByCountry` Method**:
+   ```java
+   public void testLanguagesByCountry(){
+     assertLanguageByCountry(null, new String[0]);
+     assertLanguageByCountry("GB", new String[]{"en"});
+     assertLanguageByCountry("ZZ", new String[0]);
+     assertLanguageByCountry("CH", new String[]{"fr", "de", "it"});
+   }
+   ```
+   This test checks if the `languagesByCountry` method correctly returns the languages spoken in a given country.
+
+2. **Test `localeLookupList` Method**:
+   ```java
+   public void testLocaleLookupList_Locale(){
+     assertLocaleLookupList(null, null, new Locale[0]);
+     assertLocaleLookupList(LOCALE_QQ, null, new Locale[]{LOCALE_QQ});
+     assertLocaleLookupList(LOCALE_EN, null, new Locale[]{LOCALE_EN});
+     assertLocaleLookupList(LOCALE_EN_US, null, new Locale[]{LOCALE_EN_US, LOCALE_EN});
+     assertLocaleLookupList(LOCALE_EN_US_ZZZZ, null, new Locale[]{LOCALE_EN_US_ZZZZ, LOCALE_EN_US, LOCALE_EN});
+   }
+   ```
+   This test verifies the `localeLookupList` method, which returns a list of locales based on a given locale and its fallback locales.
+
+3. **Test `availableLocaleSet` Method**:
+   ```java
+   public void testAvailableLocaleSet(){
+     Set set = LocaleUtils.availableLocaleSet();
+     Set set2 = LocaleUtils.availableLocaleSet();
+     assertNotNull(set);
+     assertSame(set, set2);
+     assertUnmodifiableCollection(set);
+     Locale[] jdkLocaleArray = Locale.getAvailableLocales();
+     List jdkLocaleList = Arrays.asList(jdkLocaleArray);
+     Set jdkLocaleSet = new HashSet(jdkLocaleList);
+     assertEquals(jdkLocaleSet, set);
+   }
+   ```
+   This test ensures that the `availableLocaleSet` method returns a set of available locales and that the set is unmodifiable.
+
+4. **Test `toLocale` Method (3-Part)**:
+   ```java
+   public void testToLocale_3Part(){
+     assertValidToLocale("us_EN_A", "us", "EN", "A");
+     if (SystemUtils.isJavaVersionAtLeast(1.4f)) {
+       assertValidToLocale("us_EN_a", "us", "EN", "a");
+       assertValidToLocale("us_EN_SFsafdFDsdfF", "us", "EN", "SFsafdFDsdfF");
+     } else {
+       assertValidToLocale("us_EN_a", "us", "EN", "A");
+       assertValidToLocale("us_EN_SFsafdFDsdfF", "us", "EN", "SFSAFDFDSDFF");
+     }
+     try {
+       LocaleUtils.toLocale("us_EN-a");
+       fail("Should fail as not underscore");
+     } catch (IllegalArgumentException iae) {
+     }
+     try {
+       LocaleUtils.toLocale("uu_UU_");
+       fail("Must be 3, 5 or 7+ in length");
+     } catch (IllegalArgumentException iae) {
+     }
+   }
+   ```
+   This test validates the `toLocale` method for 3-part locale strings, ensuring correct parsing and error handling.
+
+5. **Test `toLocale` Method (1-Part)**:
+   ```java
+   public void testToLocale_1Part(){
+     assertEquals(null, LocaleUtils.toLocale((String) null));
+     assertValidToLocale("us");
+     assertValidToLocale("fr");
+     assertValidToLocale("de");
+     assertValidToLocale("zh");
+     assertValidToLocale("qq");
+     try {
+       LocaleUtils.toLocale("Us");
+       fail("Should fail if not lowercase");
+     } catch (IllegalArgumentException iae) {
+     }
+     try {
+       LocaleUtils.toLocale("US");
+       fail("Should fail if not lowercase");
+     } catch (IllegalArgumentException iae) {
+     }
+     try {
+       LocaleUtils.toLocale("uS");
+       fail("Should fail if not lowercase");
+     } catch (IllegalArgumentException iae) {
+     }
+     try {
+       LocaleUtils.toLocale("u#");
+       fail("Should fail if not lowercase");
+     } catch (IllegalArgumentException iae) {
+     }
+     try {
+       LocaleUtils.toLocale("u");
+       fail("Must be 2 chars if less than 5");
+     } catch (IllegalArgumentException iae) {
+     }
+     try {
+       LocaleUtils.toLocale("uuu");
+       fail("Must be 2 chars if less than 5");
+     } catch (IllegalArgumentException iae) {
+     }
+     try {
+       LocaleUtils.toLocale("uu_U");
+       fail("Must be 2 chars if less than 5");
+     } catch (IllegalArgumentException iae) {
+     }
+   }
+   ```
+   This test checks the `toLocale` method for 1-part locale strings, ensuring correct parsing and error handling.
+
+6. **Test Constructor**:
+   ```java
+   public void testConstructor(){
+     assertNotNull(new LocaleUtils());
+     Constructor[] cons = LocaleUtils.class.getDeclaredConstructors();
+     assertEquals(1, cons.length);
+     assertEquals(true, Modifier.isPublic(cons[0].getModifiers()));
+     assertEquals(true, Modifier.isPublic(LocaleUtils.class.getModifiers()));
+     assertEquals(false, Modifier.isFinal(LocaleUtils.class.getModifiers()));
+   }
+   ```
+   This test verifies that the `LocaleUtils` class has a public constructor and that the class itself is public and non-final.
+
+7. **Test `localeLookupList` Method (Locale, Locale)**:
+   ```java
+   public void testLocaleLookupList_LocaleLocale(){
+     assertLocaleLookupList(LOCALE_QQ, LOCALE_QQ, new Locale[]{LOCALE_QQ});
+     assertLocaleLookupList(LOCALE_EN, LOCALE_EN, new Locale[]{LOCALE_EN});
+     assertLocaleLookupList(LOCALE_EN_US, LOCALE_EN_US, new Locale[]{LOCALE_EN_US, LOCALE_EN});
+     assertLocaleLookupList(LOCALE_EN_US, LOCALE_QQ, new Locale[]{LOCALE_EN_US, LOCALE_EN, LOCALE_QQ});
+     assertLocaleLookupList(LOCALE_EN_US, LOCALE_QQ_ZZ, new Locale[]{LOCALE_EN_US, LOCALE_EN, LOCALE_QQ_ZZ});
+     assertLocaleLookupList(LOCALE_EN_US_ZZZZ, null, new Locale[]{LOCALE_EN_US_ZZZZ, LOCALE_EN_US, LOCALE_EN});
+     assertLocaleLookupList(LOCALE_EN_US_ZZZZ, LOCALE_EN_US_ZZZZ, new Locale[]{LOCALE_EN_US_ZZZZ, LOCALE_EN_US, LOCALE_EN});
+     assertLocaleLookupList(LOCALE_EN_US_ZZZZ, LOCALE_QQ, new Locale[]{LOCALE_EN_US_ZZZZ, LOCALE_EN_US, LOCALE_EN, LOCALE_QQ});
+     assertLocaleLookupList(LOCALE_EN_US_ZZZZ, LOCALE_QQ_ZZ, new Locale[]{LOCALE_EN_US_ZZZZ, LOCALE_EN_US, LOCALE_EN, LOCALE_QQ_ZZ});
+     assertLocaleLookupList(LOCALE_FR_CA, LOCALE_EN, new Locale[]{LOCALE_FR_CA, LOCALE_FR, LOCALE_EN});
+   }
+   ```
+   This test validates the `localeLookupList` method for two locales, ensuring correct fallback behavior.
+
+8. **Test `toLocale` Method (2-Part)**:
+   ```java
+   public void testToLocale_2Part(){
+     assertValidToLocale("us_EN", "us", "EN");
+     assertValidToLocale("us_ZH", "us", "ZH");
+     try {
+       LocaleUtils.toLocale("us-EN");
+       fail("Should fail as not underscore");
+     } catch (IllegalArgumentException iae) {
+     }
+     try {
+       LocaleUtils.toLocale("us_En");
+       fail("Should fail second part not uppercase");
+     } catch (IllegalArgumentException iae) {
+     }
+     try {
+       LocaleUtils.toLocale("us_en");
+       fail("Should fail second part not uppercase");
+     } catch (IllegalArgumentException iae) {
+     }
+     try {
+       LocaleUtils.toLocale("us_eN");
+       fail("Should fail second part not uppercase");
+     } catch (IllegalArgumentException iae) {
+     }
+     try {
+       LocaleUtils.toLocale("uS_EN");
+       fail("Should fail first part not lowercase");
+     } catch (IllegalArgumentException iae) {
+     }
+     try {
+       LocaleUtils.toLocale("us_E3");
+       fail("Should fail second part not uppercase");
+     } catch (IllegalArgumentException iae) {
+     }
+   }
+   ```
+   This test checks the `toLocale` method for 2-part locale strings, ensuring correct parsing and error handling.
+
+9. **Test `availableLocaleList` Method**:
+   ```java
+   public void testAvailableLocaleList(){
+     List list = LocaleUtils.availableLocaleList();
+     List list2 = LocaleUtils.availableLocaleList();
+     assertNotNull(list);
+     assertSame(list, list2);
+     assertUnmodifiableCollection(list);
+     Locale[] jdkLocaleArray = Locale.getAvailableLocales();
+     List jdkLocaleList = Arrays.asList(jdkLocaleArray);
+     assertEquals(jdkLocaleList, list);
+   }
+   ```
+   This test ensures that the `availableLocaleList` method returns a list of available locales and that the list is unmodifiable.
+
+10. **Test `countriesByLanguage` Method**:
+    ```java
+    public void testCountriesByLanguage(){
+    }
+    ```
+    This test is a placeholder for testing the `countriesByLanguage` method.
+
+11. **Test `isAvailableLocale` Method**:
+    ```java
+    public void testIsAvailableLocale(){
+      Set set = LocaleUtils.availableLocaleSet();
+      assertEquals(set.contains(LOCALE_EN), LocaleUtils.isAvailableLocale(LOCALE_EN));
+      assertEquals(set.contains(LOCALE_EN_US), LocaleUtils.isAvailableLocale(LOCALE_EN_US));
+      assertEquals(set.contains(LOCALE_EN_US_ZZZZ), LocaleUtils.isAvailableLocale(LOCALE_EN_US_ZZZZ));
+      assertEquals(set.contains(LOCALE_FR), LocaleUtils.isAvailableLocale(LOCALE_FR));
+      assertEquals(set.contains(LOCALE_FR_CA), LocaleUtils.isAvailableLocale(LOCALE_FR_CA));
+      assertEquals(set.contains(LOCALE_QQ), LocaleUtils.isAvailableLocale(LOCALE_QQ));
+      assertEquals(set.contains(LOCALE_QQ_ZZ), LocaleUtils.isAvailableLocale(LOCALE_QQ_ZZ));
+    }
+    ```
+    This test verifies that the `isAvailableLocale` method correctly checks if a locale is available.
+
+Overall, these tests ensure that the `LocaleUtils` class correctly handles locale-related operations, including parsing, lookup, and availability checks.
+
+Test Results:
+The provided code is throwing NullPointerException. For examples:
+Here are the tests and error messages of NullPointerExceptions.
+/** 
+ * Test languagesByCountry() method.
+ */
+public void testLanguagesByCountry(){
+  assertLanguageByCountry(null,new String[0]);
+  assertLanguageByCountry("GB",new String[]{"en"});
+  assertLanguageByCountry("ZZ",new String[0]);
+  assertLanguageByCountry("CH",new String[]{"fr","de","it"});
+}
+
+/** 
+ * Test localeLookupList() method.
+ */
+public void testLocaleLookupList_Locale(){
+  assertLocaleLookupList(null,null,new Locale[0]);
+  assertLocaleLookupList(LOCALE_QQ,null,new Locale[]{LOCALE_QQ});
+  assertLocaleLookupList(LOCALE_EN,null,new Locale[]{LOCALE_EN});
+  assertLocaleLookupList(LOCALE_EN,null,new Locale[]{LOCALE_EN});
+  assertLocaleLookupList(LOCALE_EN_US,null,new Locale[]{LOCALE_EN_US,LOCALE_EN});
+  assertLocaleLookupList(LOCALE_EN_US_ZZZZ,null,new Locale[]{LOCALE_EN_US_ZZZZ,LOCALE_EN_US,LOCALE_EN});
+}
+
+/** 
+ * Test availableLocaleSet() method.
+ */
+public void testAvailableLocaleSet(){
+  Set set=LocaleUtils.availableLocaleSet();
+  Set set2=LocaleUtils.availableLocaleSet();
+  assertNotNull(set);
+  assertSame(set,set2);
+  assertUnmodifiableCollection(set);
+  Locale[] jdkLocaleArray=Locale.getAvailableLocales();
+  List jdkLocaleList=Arrays.asList(jdkLocaleArray);
+  Set jdkLocaleSet=new HashSet(jdkLocaleList);
+  assertEquals(jdkLocaleSet,set);
+}
+
+/** 
+ * Test toLocale() method.
+ */
+public void testToLocale_3Part(){
+  assertValidToLocale("us_EN_A","us","EN","A");
+  if (SystemUtils.isJavaVersionAtLeast(1.4f)) {
+    assertValidToLocale("us_EN_a","us","EN","a");
+    assertValidToLocale("us_EN_SFsafdFDsdfF","us","EN","SFsafdFDsdfF");
+  }
+ else {
+    assertValidToLocale("us_EN_a","us","EN","A");
+    assertValidToLocale("us_EN_SFsafdFDsdfF","us","EN","SFSAFDFDSDFF");
+  }
+  try {
+    LocaleUtils.toLocale("us_EN-a");
+    fail("Should fail as not underscore");
+  }
+ catch (  IllegalArgumentException iae) {
+  }
+  try {
+    LocaleUtils.toLocale("uu_UU_");
+    fail("Must be 3, 5 or 7+ in length");
+  }
+ catch (  IllegalArgumentException iae) {
+  }
+}
+
+/** 
+ * Test toLocale() method.
+ */
+public void testToLocale_1Part(){
+  assertEquals(null,LocaleUtils.toLocale((String)null));
+  assertValidToLocale("us");
+  assertValidToLocale("fr");
+  assertValidToLocale("de");
+  assertValidToLocale("zh");
+  assertValidToLocale("qq");
+  try {
+    LocaleUtils.toLocale("Us");
+    fail("Should fail if not lowercase");
+  }
+ catch (  IllegalArgumentException iae) {
+  }
+  try {
+    LocaleUtils.toLocale("US");
+    fail("Should fail if not lowercase");
+  }
+ catch (  IllegalArgumentException iae) {
+  }
+  try {
+    LocaleUtils.toLocale("uS");
+    fail("Should fail if not lowercase");
+  }
+ catch (  IllegalArgumentException iae) {
+  }
+  try {
+    LocaleUtils.toLocale("u#");
+    fail("Should fail if not lowercase");
+  }
+ catch (  IllegalArgumentException iae) {
+  }
+  try {
+    LocaleUtils.toLocale("u");
+    fail("Must be 2 chars if less than 5");
+  }
+ catch (  IllegalArgumentException iae) {
+  }
+  try {
+    LocaleUtils.toLocale("uuu");
+    fail("Must be 2 chars if less than 5");
+  }
+ catch (  IllegalArgumentException iae) {
+  }
+  try {
+    LocaleUtils.toLocale("uu_U");
+    fail("Must be 2 chars if less than 5");
+  }
+ catch (  IllegalArgumentException iae) {
+  }
+}
+
+/** 
+ * Test that constructors are public, and work, etc.
+ */
+public void testConstructor(){
+  assertNotNull(new LocaleUtils());
+  Constructor[] cons=LocaleUtils.class.getDeclaredConstructors();
+  assertEquals(1,cons.length);
+  assertEquals(true,Modifier.isPublic(cons[0].getModifiers()));
+  assertEquals(true,Modifier.isPublic(LocaleUtils.class.getModifiers()));
+  assertEquals(false,Modifier.isFinal(LocaleUtils.class.getModifiers()));
+}
+
+/** 
+ * Test localeLookupList() method.
+ */
+public void testLocaleLookupList_LocaleLocale(){
+  assertLocaleLookupList(LOCALE_QQ,LOCALE_QQ,new Locale[]{LOCALE_QQ});
+  assertLocaleLookupList(LOCALE_EN,LOCALE_EN,new Locale[]{LOCALE_EN});
+  assertLocaleLookupList(LOCALE_EN_US,LOCALE_EN_US,new Locale[]{LOCALE_EN_US,LOCALE_EN});
+  assertLocaleLookupList(LOCALE_EN_US,LOCALE_QQ,new Locale[]{LOCALE_EN_US,LOCALE_EN,LOCALE_QQ});
+  assertLocaleLookupList(LOCALE_EN_US,LOCALE_QQ_ZZ,new Locale[]{LOCALE_EN_US,LOCALE_EN,LOCALE_QQ_ZZ});
+  assertLocaleLookupList(LOCALE_EN_US_ZZZZ,null,new Locale[]{LOCALE_EN_US_ZZZZ,LOCALE_EN_US,LOCALE_EN});
+  assertLocaleLookupList(LOCALE_EN_US_ZZZZ,LOCALE_EN_US_ZZZZ,new Locale[]{LOCALE_EN_US_ZZZZ,LOCALE_EN_US,LOCALE_EN});
+  assertLocaleLookupList(LOCALE_EN_US_ZZZZ,LOCALE_QQ,new Locale[]{LOCALE_EN_US_ZZZZ,LOCALE_EN_US,LOCALE_EN,LOCALE_QQ});
+  assertLocaleLookupList(LOCALE_EN_US_ZZZZ,LOCALE_QQ_ZZ,new Locale[]{LOCALE_EN_US_ZZZZ,LOCALE_EN_US,LOCALE_EN,LOCALE_QQ_ZZ});
+  assertLocaleLookupList(LOCALE_FR_CA,LOCALE_EN,new Locale[]{LOCALE_FR_CA,LOCALE_FR,LOCALE_EN});
+}
+
+/** 
+ * Test toLocale() method.
+ */
+public void testToLocale_2Part(){
+  assertValidToLocale("us_EN","us","EN");
+  assertValidToLocale("us_ZH","us","ZH");
+  try {
+    LocaleUtils.toLocale("us-EN");
+    fail("Should fail as not underscore");
+  }
+ catch (  IllegalArgumentException iae) {
+  }
+  try {
+    LocaleUtils.toLocale("us_En");
+    fail("Should fail second part not uppercase");
+  }
+ catch (  IllegalArgumentException iae) {
+  }
+  try {
+    LocaleUtils.toLocale("us_en");
+    fail("Should fail second part not uppercase");
+  }
+ catch (  IllegalArgumentException iae) {
+  }
+  try {
+    LocaleUtils.toLocale("us_eN");
+    fail("Should fail second part not uppercase");
+  }
+ catch (  IllegalArgumentException iae) {
+  }
+  try {
+    LocaleUtils.toLocale("uS_EN");
+    fail("Should fail first part not lowercase");
+  }
+ catch (  IllegalArgumentException iae) {
+  }
+  try {
+    LocaleUtils.toLocale("us_E3");
+    fail("Should fail second part not uppercase");
+  }
+ catch (  IllegalArgumentException iae) {
+  }
+}
+
+/** 
+ * Test availableLocaleList() method.
+ */
+public void testAvailableLocaleList(){
+  List list=LocaleUtils.availableLocaleList();
+  List list2=LocaleUtils.availableLocaleList();
+  assertNotNull(list);
+  assertSame(list,list2);
+  assertUnmodifiableCollection(list);
+  Locale[] jdkLocaleArray=Locale.getAvailableLocales();
+  List jdkLocaleList=Arrays.asList(jdkLocaleArray);
+  assertEquals(jdkLocaleList,list);
+}
+
+/** 
+ * Test languagesByCountry() method.
+ */
+public void testCountriesByLanguage(){
+}
+
+/** 
+ * Test availableLocaleSet() method.
+ */
+public void testIsAvailableLocale(){
+  Set set=LocaleUtils.availableLocaleSet();
+  assertEquals(set.contains(LOCALE_EN),LocaleUtils.isAvailableLocale(LOCALE_EN));
+  assertEquals(set.contains(LOCALE_EN_US),LocaleUtils.isAvailableLocale(LOCALE_EN_US));
+  assertEquals(set.contains(LOCALE_EN_US_ZZZZ),LocaleUtils.isAvailableLocale(LOCALE_EN_US_ZZZZ));
+  assertEquals(set.contains(LOCALE_FR),LocaleUtils.isAvailableLocale(LOCALE_FR));
+  assertEquals(set.contains(LOCALE_FR_CA),LocaleUtils.isAvailableLocale(LOCALE_FR_CA));
+  assertEquals(set.contains(LOCALE_QQ),LocaleUtils.isAvailableLocale(LOCALE_QQ));
+  assertEquals(set.contains(LOCALE_QQ_ZZ),LocaleUtils.isAvailableLocale(LOCALE_QQ_ZZ));
+}
+
+
+
+testAvailableLocaleSet(org.apache.commons.lang.LocaleUtilsTest): Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+java.lang.NullPointerException: Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+	at org.apache.commons.lang.LocaleUtils.isAvailableLocale(LocaleUtils.java:223)
+	at org.apache.commons.lang.LocaleUtilsTest.setUp(LocaleUtilsTest.java:82)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testIsAvailableLocale(org.apache.commons.lang.LocaleUtilsTest): Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+java.lang.NullPointerException: Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+	at org.apache.commons.lang.LocaleUtils.isAvailableLocale(LocaleUtils.java:223)
+	at org.apache.commons.lang.LocaleUtilsTest.setUp(LocaleUtilsTest.java:82)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testAvailableLocaleList(org.apache.commons.lang.LocaleUtilsTest): Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+java.lang.NullPointerException: Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+	at org.apache.commons.lang.LocaleUtils.isAvailableLocale(LocaleUtils.java:223)
+	at org.apache.commons.lang.LocaleUtilsTest.setUp(LocaleUtilsTest.java:82)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testCountriesByLanguage(org.apache.commons.lang.LocaleUtilsTest): Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+java.lang.NullPointerException: Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+	at org.apache.commons.lang.LocaleUtils.isAvailableLocale(LocaleUtils.java:223)
+	at org.apache.commons.lang.LocaleUtilsTest.setUp(LocaleUtilsTest.java:82)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testLocaleLookupList_LocaleLocale(org.apache.commons.lang.LocaleUtilsTest): Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+java.lang.NullPointerException: Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+	at org.apache.commons.lang.LocaleUtils.isAvailableLocale(LocaleUtils.java:223)
+	at org.apache.commons.lang.LocaleUtilsTest.setUp(LocaleUtilsTest.java:82)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testLanguagesByCountry(org.apache.commons.lang.LocaleUtilsTest): Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+java.lang.NullPointerException: Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+	at org.apache.commons.lang.LocaleUtils.isAvailableLocale(LocaleUtils.java:223)
+	at org.apache.commons.lang.LocaleUtilsTest.setUp(LocaleUtilsTest.java:82)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testToLocale_1Part(org.apache.commons.lang.LocaleUtilsTest): Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+java.lang.NullPointerException: Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+	at org.apache.commons.lang.LocaleUtils.isAvailableLocale(LocaleUtils.java:223)
+	at org.apache.commons.lang.LocaleUtilsTest.setUp(LocaleUtilsTest.java:82)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testToLocale_2Part(org.apache.commons.lang.LocaleUtilsTest): Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+java.lang.NullPointerException: Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+	at org.apache.commons.lang.LocaleUtils.isAvailableLocale(LocaleUtils.java:223)
+	at org.apache.commons.lang.LocaleUtilsTest.setUp(LocaleUtilsTest.java:82)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testToLocale_3Part(org.apache.commons.lang.LocaleUtilsTest): Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+java.lang.NullPointerException: Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+	at org.apache.commons.lang.LocaleUtils.isAvailableLocale(LocaleUtils.java:223)
+	at org.apache.commons.lang.LocaleUtilsTest.setUp(LocaleUtilsTest.java:82)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testLocaleLookupList_Locale(org.apache.commons.lang.LocaleUtilsTest): Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+java.lang.NullPointerException: Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+	at org.apache.commons.lang.LocaleUtils.isAvailableLocale(LocaleUtils.java:223)
+	at org.apache.commons.lang.LocaleUtilsTest.setUp(LocaleUtilsTest.java:82)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testConstructor(org.apache.commons.lang.LocaleUtilsTest): Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+java.lang.NullPointerException: Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+	at org.apache.commons.lang.LocaleUtils.isAvailableLocale(LocaleUtils.java:223)
+	at org.apache.commons.lang.LocaleUtilsTest.setUp(LocaleUtilsTest.java:82)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+
+
+
+
+
+Analyze the provided code and utilize task description, test results, and SBFL techniques results to help in identifying potentially faulty lines. Provide the results following this JSON template:
+```json
+{
+  "faultLoc": [
+    {   
+      "faultyLine": (indicating the location of the suspicious code in ClassName:LineNumber format),
+      "code": (displaying the actual code),
+      "explanation": (step by step reasoning on why this location is considered potentially faulty)
+    },  
+    ... 
+   ]   
+}
+```
+Ensure that the objects in the "faultLoc" array are stored in descending order of suspicion.

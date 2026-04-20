@@ -1,0 +1,12 @@
+Fault Localization Results
+NPE at line(file_writer_with_encoding_1, 226) / Null Expression - p_encoding_33[encoding]
+	 can be caused by 
+p_encoding_33[encoding] - line(file_writer_with_encoding_1, 226).
+
+NPE at line(file_writer_with_encoding_1, 226) / Null Expression - p_encoding_33[encoding]
+	 can be caused by 
+p_charset_22[charset] - line(file_writer_with_encoding_1, 171).
+
+NPE at line(file_writer_with_encoding_1, 226) / Null Expression - p_encoding_33[encoding]
+	 can be caused by 
+p_encoding_24[encoding] - line(file_writer_with_encoding_1, 184).

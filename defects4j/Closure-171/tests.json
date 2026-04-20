@@ -1,0 +1,15 @@
+{
+ "buggy.hash": "",
+ "fixed_hash": "6d38965a1e0a3a61435b9bebc91ff1ba0a64013a",
+ "passed.classes": [],
+ "failed.classes": [
+  "com.google.javascript.jscomp.TypedScopeCreatorTest"
+ ],
+ "failed.tests": [
+  {
+   "class": "com.google.javascript.jscomp.TypedScopeCreatorTest",
+   "name": "testPropertiesOnInterface2",
+   "message": ""
+  }
+ ]
+}

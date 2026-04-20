@@ -1,0 +1,17 @@
+@Test public void testResetCharsetEncoder(){
+  assertNotNull(ReaderInputStream.builder().setReader(new StringReader("\uD800")).setCharsetEncoder(null).getCharsetEncoder());
+}
+
+
+
+Failures (1):
+  JUnit Jupiter:ReaderInputStreamTest:testResetCharsetEncoder()
+    MethodSource [className = 'org.apache.commons.io.input.ReaderInputStreamTest', methodName = 'testResetCharsetEncoder', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.nio.charset.CharsetEncoder.charset()" because "charsetEncoder" is null
+       org.apache.commons.io.input.ReaderInputStream$Builder.setCharsetEncoder(ReaderInputStream.java:140)
+       org.apache.commons.io.input.ReaderInputStreamTest.testResetCharsetEncoder(ReaderInputStreamTest.java:247)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Store NPE traces to npe.traces.json
+NPE Stack Traces exported to npe.traces.json

@@ -1,0 +1,244 @@
+Faulty Code:
+org.apache.commons.codec.binary.Base64:91 `    static final byte[] CHUNK_SEPARATOR = {'\r', '\n'};`
+org.apache.commons.codec.binary.Base64:100 `    private static final byte[] STANDARD_ENCODE_TABLE = {`
+org.apache.commons.codec.binary.Base64:113 `    private static final byte[] URL_SAFE_ENCODE_TABLE = {`
+org.apache.commons.codec.binary.Base64:137 `    private static final byte[] DECODE_TABLE = {`
+org.apache.commons.codec.binary.Base64:256 `        this(MIME_CHUNK_SIZE, CHUNK_SEPARATOR, urlSafe);`
+org.apache.commons.codec.binary.Base64:257 `    }`
+org.apache.commons.codec.binary.Base64:332 `    public Base64(int lineLength, byte[] lineSeparator, boolean urlSafe) {`
+org.apache.commons.codec.binary.Base64:333 `        if (lineSeparator == null) {`
+org.apache.commons.codec.binary.Base64:337 `        this.lineLength = lineLength > 0 ? (lineLength / 4) * 4 : 0;`
+org.apache.commons.codec.binary.Base64:338 `        this.lineSeparator = new byte[lineSeparator.length];`
+org.apache.commons.codec.binary.Base64:339 `        System.arraycopy(lineSeparator, 0, this.lineSeparator, 0, lineSeparator.length);`
+org.apache.commons.codec.binary.Base64:340 `        if (lineLength > 0) {`
+org.apache.commons.codec.binary.Base64:341 `            this.encodeSize = 4 + lineSeparator.length;`
+org.apache.commons.codec.binary.Base64:345 `        this.decodeSize = this.encodeSize - 1;`
+org.apache.commons.codec.binary.Base64:346 `        if (containsBase64Byte(lineSeparator)) {`
+org.apache.commons.codec.binary.Base64:350 `        this.encodeTable = urlSafe ? URL_SAFE_ENCODE_TABLE : STANDARD_ENCODE_TABLE;`
+org.apache.commons.codec.binary.Base64:351 `    }`
+org.apache.commons.codec.binary.Base64:369 `        return this.buffer != null;`
+org.apache.commons.codec.binary.Base64:378 `        return buffer != null ? pos - readPos : 0;`
+org.apache.commons.codec.binary.Base64:383 `        if (buffer == null) {`
+org.apache.commons.codec.binary.Base64:384 `            buffer = new byte[DEFAULT_BUFFER_SIZE];`
+org.apache.commons.codec.binary.Base64:385 `            pos = 0;`
+org.apache.commons.codec.binary.Base64:386 `            readPos = 0;`
+org.apache.commons.codec.binary.Base64:392 `    }`
+org.apache.commons.codec.binary.Base64:407 `        if (buffer != null) {`
+org.apache.commons.codec.binary.Base64:408 `            int len = Math.min(avail(), bAvail);`
+org.apache.commons.codec.binary.Base64:409 `            if (buffer != b) {`
+org.apache.commons.codec.binary.Base64:410 `                System.arraycopy(buffer, readPos, b, bPos, len);`
+org.apache.commons.codec.binary.Base64:411 `                readPos += len;`
+org.apache.commons.codec.binary.Base64:412 `                if (readPos >= pos) {`
+org.apache.commons.codec.binary.Base64:413 `                    buffer = null;`
+org.apache.commons.codec.binary.Base64:418 `                buffer = null;`
+org.apache.commons.codec.binary.Base64:420 `            return len;`
+org.apache.commons.codec.binary.Base64:439 `        if (out != null && out.length == outAvail) {`
+org.apache.commons.codec.binary.Base64:440 `            buffer = out;`
+org.apache.commons.codec.binary.Base64:441 `            pos = outPos;`
+org.apache.commons.codec.binary.Base64:442 `            readPos = outPos;`
+org.apache.commons.codec.binary.Base64:444 `    }`
+org.apache.commons.codec.binary.Base64:551 `        if (eof) {`
+org.apache.commons.codec.binary.Base64:554 `        if (inAvail < 0) {`
+org.apache.commons.codec.binary.Base64:555 `            eof = true;`
+org.apache.commons.codec.binary.Base64:557 `        for (int i = 0; i < inAvail; i++) {`
+org.apache.commons.codec.binary.Base64:558 `            if (buffer == null || buffer.length - pos < decodeSize) {`
+org.apache.commons.codec.binary.Base64:559 `                resizeBuffer();`
+org.apache.commons.codec.binary.Base64:561 `            byte b = in[inPos++];`
+org.apache.commons.codec.binary.Base64:562 `            if (b == PAD) {`
+org.apache.commons.codec.binary.Base64:567 `                if (b >= 0 && b < DECODE_TABLE.length) {`
+org.apache.commons.codec.binary.Base64:568 `                    int result = DECODE_TABLE[b];`
+org.apache.commons.codec.binary.Base64:569 `                    if (result >= 0) {`
+org.apache.commons.codec.binary.Base64:570 `                        modulus = (++modulus) % 4;`
+org.apache.commons.codec.binary.Base64:571 `                        x = (x << 6) + result;`
+org.apache.commons.codec.binary.Base64:572 `                        if (modulus == 0) {`
+org.apache.commons.codec.binary.Base64:573 `                            buffer[pos++] = (byte) ((x >> 16) & MASK_8BITS);`
+org.apache.commons.codec.binary.Base64:574 `                            buffer[pos++] = (byte) ((x >> 8) & MASK_8BITS);`
+org.apache.commons.codec.binary.Base64:575 `                            buffer[pos++] = (byte) (x & MASK_8BITS);`
+org.apache.commons.codec.binary.Base64:585 `        if (eof && modulus != 0) {`
+org.apache.commons.codec.binary.Base64:594 `                    buffer[pos++] = (byte) ((x >> 16) & MASK_8BITS);`
+org.apache.commons.codec.binary.Base64:599 `    }`
+org.apache.commons.codec.binary.Base64:610 `        return octet == PAD || (octet >= 0 && octet < DECODE_TABLE.length && DECODE_TABLE[octet] != -1);`
+org.apache.commons.codec.binary.Base64:639 `        for (int i = 0; i < arrayOctet.length; i++) {`
+org.apache.commons.codec.binary.Base64:640 `            if (isBase64(arrayOctet[i])) {`
+org.apache.commons.codec.binary.Base64:644 `        return false;`
+org.apache.commons.codec.binary.Base64InputStream:52 `    private final byte[] singleByte = new byte[1];`
+org.apache.commons.codec.binary.Base64InputStream:61 `        this(in, false);`
+org.apache.commons.codec.binary.Base64InputStream:62 `    }`
+org.apache.commons.codec.binary.Base64InputStream:74 `        super(in);`
+org.apache.commons.codec.binary.Base64InputStream:75 `        this.doEncode = doEncode;`
+org.apache.commons.codec.binary.Base64InputStream:76 `        this.base64 = new Base64(false);`
+org.apache.commons.codec.binary.Base64InputStream:77 `    }`
+org.apache.commons.codec.binary.Base64InputStream:139 `        if (b == null) {`
+org.apache.commons.codec.binary.Base64InputStream:141 `        } else if (offset < 0 || len < 0) {`
+org.apache.commons.codec.binary.Base64InputStream:143 `        } else if (offset > b.length || offset + len > b.length) {`
+org.apache.commons.codec.binary.Base64InputStream:145 `        } else if (len == 0) {`
+org.apache.commons.codec.binary.Base64InputStream:148 `            if (!base64.hasData()) {`
+org.apache.commons.codec.binary.Base64InputStream:149 `                byte[] buf = new byte[doEncode ? 4096 : 8192];`
+org.apache.commons.codec.binary.Base64InputStream:150 `                int c = in.read(buf);`
+org.apache.commons.codec.binary.Base64InputStream:153 `                if (c > 0 && b.length == len) {`
+org.apache.commons.codec.binary.Base64InputStream:154 `                    base64.setInitialBuffer(b, offset, len);`
+org.apache.commons.codec.binary.Base64InputStream:156 `                if (doEncode) {`
+org.apache.commons.codec.binary.Base64InputStream:159 `                    base64.decode(buf, 0, c);`
+org.apache.commons.codec.binary.Base64InputStream:162 `            return base64.readResults(b, offset, len);`
+org.apache.commons.codec.binary.Base64OutputStream:51 `    private final byte[] singleByte = new byte[1];`
+org.apache.commons.codec.binary.Base64OutputStream:73 `        super(out);`
+org.apache.commons.codec.binary.Base64OutputStream:74 `        this.doEncode = doEncode;`
+org.apache.commons.codec.binary.Base64OutputStream:75 `        this.base64 = new Base64(false);`
+org.apache.commons.codec.binary.Base64OutputStream:76 `    }`
+org.apache.commons.codec.binary.Base64OutputStream:132 `        if (b == null) {`
+org.apache.commons.codec.binary.Base64OutputStream:134 `        } else if (offset < 0 || len < 0) {`
+org.apache.commons.codec.binary.Base64OutputStream:136 `        } else if (offset > b.length || offset + len > b.length) {`
+org.apache.commons.codec.binary.Base64OutputStream:138 `        } else if (len > 0) {`
+org.apache.commons.codec.binary.Base64OutputStream:139 `            if (doEncode) {`
+org.apache.commons.codec.binary.Base64OutputStream:142 `                base64.decode(b, offset, len);`
+org.apache.commons.codec.binary.Base64OutputStream:144 `            flush(false);`
+org.apache.commons.codec.binary.Base64OutputStream:146 `    }`
+org.apache.commons.codec.binary.Base64OutputStream:158 `        int avail = base64.avail();`
+org.apache.commons.codec.binary.Base64OutputStream:159 `        if (avail > 0) {`
+org.apache.commons.codec.binary.Base64OutputStream:160 `            byte[] buf = new byte[avail];`
+org.apache.commons.codec.binary.Base64OutputStream:161 `            int c = base64.readResults(buf, 0, avail);`
+org.apache.commons.codec.binary.Base64OutputStream:162 `            if (c > 0) {`
+org.apache.commons.codec.binary.Base64OutputStream:163 `                out.write(buf, 0, c);`
+org.apache.commons.codec.binary.Base64OutputStream:166 `        if (propogate) {`
+org.apache.commons.codec.binary.Base64OutputStream:169 `    }`
+org.apache.commons.codec.binary.Base64OutputStream:192 `            base64.decode(singleByte, 0, -1);`
+org.apache.commons.codec.binary.Base64TestData:88 `    final static byte[] DECODED`
+org.apache.commons.codec.binary.Base64TestData:148 `            int[] status = fill(buf, 0, in);`
+org.apache.commons.codec.binary.Base64TestData:164 `            in.close();`
+org.apache.commons.codec.binary.Base64TestData:171 `        int read = in.read(buf, offset, buf.length - offset);`
+org.apache.commons.codec.binary.Base64TestData:172 `        int lastRead = read;`
+org.apache.commons.codec.binary.Base64TestData:173 `        if (read == -1) {`
+org.apache.commons.codec.binary.Base64TestData:176 `        while (lastRead != -1 && read + offset < buf.length) {`
+org.apache.commons.codec.binary.Base64TestData:177 `            lastRead = in.read(buf, offset + read, buf.length - read - offset);`
+org.apache.commons.codec.binary.StringUtils:129 `        return StringUtils.getBytesUnchecked(string, CharEncoding.UTF_8);`
+org.apache.commons.codec.binary.StringUtils:152 `        if (string == null) {`
+org.apache.commons.codec.binary.StringUtils:156 `            return string.getBytes(charsetName);`
+
+
+Task Description:
+The provided code snippets are part of the Apache Commons Codec library, specifically dealing with Base64 encoding and decoding. Here's a brief description of the key parts:
+
+1. **Static and Private Constants**:
+   - `CHUNK_SEPARATOR`: Defines the byte sequence used to separate chunks in MIME encoding (`\r\n`).
+   - `STANDARD_ENCODE_TABLE`: The standard Base64 encoding table.
+   - `URL_SAFE_ENCODE_TABLE`: The URL-safe Base64 encoding table.
+   - `DECODE_TABLE`: The Base64 decoding table.
+
+2. **Constructors and Initialization**:
+   - The constructor `Base64(int lineLength, byte[] lineSeparator, boolean urlSafe)` initializes the Base64 encoder/decoder with specified line length, line separator, and URL safety.
+   - It sets up the encoding and decoding tables based on whether URL-safe encoding is required.
+
+3. **Buffer Management**:
+   - Methods handle buffer initialization, resizing, and copying data between buffers.
+   - `resizeBuffer()`, `System.arraycopy()`, and buffer checks ensure efficient data handling during encoding/decoding.
+
+4. **Encoding and Decoding Logic**:
+   - The encoding and decoding processes use the predefined tables to convert data to and from Base64.
+   - Handles padding (`PAD`) and ensures proper alignment of data (`modulus`).
+
+5. **Base64InputStream and Base64OutputStream**:
+   - These classes extend `FilterInputStream` and `FilterOutputStream` respectively to provide Base64 encoding/decoding capabilities for streams.
+   - They manage single-byte operations and buffer data for efficient processing.
+
+6. **Test Cases**:
+   - The test cases `testCodec98NPE` ensure that the Base64 encoding/decoding streams handle specific edge cases without throwing NullPointerExceptions (NPE).
+   - They use `StringUtils` to convert strings to bytes and vice versa, and verify the correctness of the encoded/decoded data against expected results.
+
+The provided code snippets and test cases ensure robust handling of Base64 encoding and decoding, including edge cases that could potentially cause errors. The test cases specifically address a known bug (CODEC-98) to verify that the implementation is resilient against such issues.
+
+Test Results:
+The provided code is throwing NullPointerException. For examples:
+Here are the tests and error messages of NullPointerExceptions.
+/** 
+ * Test the Base64OutputStream implementation against the special NPE inducing input identified in the CODEC-98 bug.
+ * @throws Exception for some failure scenarios.
+ */
+public void testCodec98NPE() throws Exception {
+  byte[] codec98=StringUtils.getBytesUtf8(Base64TestData.CODEC_98_NPE);
+  byte[] codec98_1024=new byte[1024];
+  System.arraycopy(codec98,0,codec98_1024,0,codec98.length);
+  ByteArrayOutputStream data=new ByteArrayOutputStream(1024);
+  Base64OutputStream stream=new Base64OutputStream(data,false);
+  stream.write(codec98_1024,0,1024);
+  stream.close();
+  byte[] decodedBytes=data.toByteArray();
+  String decoded=StringUtils.newStringUtf8(decodedBytes);
+  assertEquals("codec-98 NPE Base64OutputStream",Base64TestData.CODEC_98_NPE_DECODED,decoded);
+}
+
+/** 
+ * Test the Base64InputStream implementation against the special NPE inducing input identified in the CODEC-98 bug.
+ * @throws Exception for some failure scenarios.
+ */
+public void testCodec98NPE() throws Exception {
+  byte[] codec98=StringUtils.getBytesUtf8(Base64TestData.CODEC_98_NPE);
+  ByteArrayInputStream data=new ByteArrayInputStream(codec98);
+  Base64InputStream stream=new Base64InputStream(data);
+  byte[] decodedBytes=Base64TestData.streamToBytes(stream,new byte[1024]);
+  String decoded=StringUtils.newStringUtf8(decodedBytes);
+  assertEquals("codec-98 NPE Base64InputStream",Base64TestData.CODEC_98_NPE_DECODED,decoded);
+}
+
+
+
+testCodec98NPE(org.apache.commons.codec.binary.Base64OutputStreamTest): Cannot store to byte/boolean array because "this.buffer" is null
+Cannot store to byte/boolean array because "this.buffer" is null
+java.lang.NullPointerException: Cannot store to byte/boolean array because "this.buffer" is null
+	at org.apache.commons.codec.binary.Base64.decode(Base64.java:594)
+	at org.apache.commons.codec.binary.Base64OutputStream.close(Base64OutputStream.java:192)
+	at org.apache.commons.codec.binary.Base64OutputStreamTest.testCodec98NPE(Base64OutputStreamTest.java:62)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testCodec98NPE(org.apache.commons.codec.binary.Base64InputStreamTest): Cannot store to byte/boolean array because "this.buffer" is null
+Cannot store to byte/boolean array because "this.buffer" is null
+java.lang.NullPointerException: Cannot store to byte/boolean array because "this.buffer" is null
+	at org.apache.commons.codec.binary.Base64.decode(Base64.java:594)
+	at org.apache.commons.codec.binary.Base64InputStream.read(Base64InputStream.java:159)
+	at org.apache.commons.codec.binary.Base64TestData.fill(Base64TestData.java:177)
+	at org.apache.commons.codec.binary.Base64TestData.streamToBytes(Base64TestData.java:148)
+	at org.apache.commons.codec.binary.Base64InputStreamTest.testCodec98NPE(Base64InputStreamTest.java:61)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+
+
+
+
+
+Analyze the provided code and utilize task description, test results, and SBFL techniques results to help in identifying potentially faulty lines. Provide the results following this JSON template:
+```json
+{
+  "faultLoc": [
+    {   
+      "faultyLine": (indicating the location of the suspicious code in ClassName:LineNumber format),
+      "code": (displaying the actual code),
+      "explanation": (step by step reasoning on why this location is considered potentially faulty)
+    },  
+    ... 
+   ]   
+}
+```
+Ensure that the objects in the "faultLoc" array are stored in descending order of suspicion.

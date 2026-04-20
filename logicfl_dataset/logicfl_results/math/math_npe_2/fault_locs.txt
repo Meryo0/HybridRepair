@@ -1,0 +1,4 @@
+org.apache.commons.math.linear.AbstractRealMatrix 389
+org.apache.commons.math.linear.Array2DRowRealMatrix 295
+org.apache.commons.math.linear.BlockRealMatrix 769
+org.apache.commons.math.linear.BlockFieldMatrix 762

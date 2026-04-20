@@ -1,0 +1,39 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jsoup.nodes.Node:220",
+            "code": "return parentNode.ownerDocument();",
+            "explanation": "The `ownerDocument` method is called on `parentNode`, which might be null. This can cause a NullPointerException when the node is removed from the document."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:215",
+            "code": "if (this instanceof Document)",
+            "explanation": "This line checks if the current node is an instance of `Document`. If not, it proceeds to check the `parentNode`, which might be null, leading to a NullPointerException."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:217",
+            "code": "else if (parentNode == null)",
+            "explanation": "This line checks if `parentNode` is null and returns null if true. However, subsequent code might still attempt to access `parentNode`, causing a NullPointerException."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:218",
+            "code": "return null;",
+            "explanation": "Returning null here might lead to a NullPointerException in the calling code if it does not handle the null case properly."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:216",
+            "code": "return (Document) this;",
+            "explanation": "This line returns the current node cast to `Document`. If the node is not a `Document` and `parentNode` is null, it can lead to a NullPointerException."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:363",
+            "code": "new NodeTraversor(new OuterHtmlVisitor(accum, ownerDocument().outputSettings())).traverse(this);",
+            "explanation": "The `ownerDocument()` method is called without checking if it returns null. If the node is not part of a document, this will cause a NullPointerException."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:364",
+            "code": "}",
+            "explanation": "The closing brace of the method where `ownerDocument()` is called. The method should handle the case where `ownerDocument()` returns null to avoid NullPointerException."
+        }
+    ]
+}

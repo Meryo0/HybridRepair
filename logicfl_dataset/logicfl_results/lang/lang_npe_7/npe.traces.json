@@ -1,0 +1,36 @@
+{"npe.traces": [{
+    "test.method": "testStreamCollectionNull",
+    "traces": [
+        {
+            "is_target": true,
+            "method": "stream",
+            "line": 479,
+            "class": "org.apache.commons.lang3.stream.Streams"
+        },
+        {
+            "is_target": true,
+            "method": "testStreamCollectionNull",
+            "line": 154,
+            "class": "org.apache.commons.lang3.stream.StreamsTest"
+        },
+        {
+            "is_target": false,
+            "method": "invoke",
+            "line": 569,
+            "class": "java.lang.reflect.Method"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        }
+    ],
+    "test.class": "org.apache.commons.lang3.stream.StreamsTest"
+}]}

@@ -1,0 +1,45 @@
+{"classes": [
+    {
+        "probe_ranges": [{
+            "endLine": 72,
+            "offset": 6,
+            "startLine": 66,
+            "orgLineEnd": 66,
+            "probedLineEnd": 72,
+            "orgLineStart": 66
+        }],
+        "classId": "message_factory_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 52,
+                "offset": 5,
+                "startLine": 46,
+                "orgLineEnd": 47,
+                "probedLineEnd": 52,
+                "orgLineStart": 46
+            },
+            {
+                "endLine": 64,
+                "offset": 10,
+                "startLine": 59,
+                "orgLineEnd": 54,
+                "probedLineEnd": 64,
+                "orgLineStart": 54
+            }
+        ],
+        "classId": "message_factory_test_1"
+    },
+    {
+        "probe_ranges": [{
+            "endLine": 42,
+            "offset": 3,
+            "startLine": 39,
+            "orgLineEnd": 39,
+            "probedLineEnd": 42,
+            "orgLineStart": 39
+        }],
+        "classId": "dummy_localizable_1"
+    }
+]}

@@ -1,0 +1,21 @@
+{
+    "coverage": [
+        {
+            "covered": [ 58, 68, 73, 75, 76, 77, 78, 79, 80, 81, 82, 83, 89, 91, 92, 93, 94, 96, 102, 107, 116, 117, 118, 124, 125, 126, 127, 128, 129, 130, 131, 132, 903, 904, 905, 906, 908, 909, 910, 912 ],
+            "className": "org.apache.commons.lang3.ClassUtils"
+        },
+        {
+            "covered": [ 55, 59, 63, 67, 71, 75, 79, 83, 87, 91, 95, 99, 103, 107, 111, 115, 119, 123, 127 ],
+            "className": "org.apache.commons.lang3.ArrayUtils"
+        },
+        {
+            "covered": [ 43, 44, 903, 905, 907, 910 ],
+            "className": "org.apache.commons.lang3.ClassUtilsTest"
+        }
+    ],
+    "classes": [
+        "org.apache.commons.lang3.ArrayUtils",
+        "org.apache.commons.lang3.ClassUtils",
+        "org.apache.commons.lang3.ClassUtilsTest"
+    ]
+}

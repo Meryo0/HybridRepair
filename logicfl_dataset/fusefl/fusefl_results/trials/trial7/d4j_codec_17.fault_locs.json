@@ -1,0 +1,19 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.codec.binary.StringUtils:339",
+            "code": "return new String(bytes, Charsets.ISO_8859_1);",
+            "explanation": "The method `new String(bytes, Charsets.ISO_8859_1)` is called without checking if `bytes` is null. This leads to a NullPointerException when `bytes` is null. The test case `testNewStringNullInput_CODEC229` specifically checks for null input handling, which fails here."
+        },
+        {
+            "faultyLine": "org.apache.commons.codec.binary.StringUtils:419",
+            "code": "return newString(bytes, Charsets.UTF_8);",
+            "explanation": "Similar to the previous case, `newString(bytes, Charsets.UTF_8)` is called without a null check on `bytes`. This will also result in a NullPointerException when `bytes` is null, as indicated by the test failures."
+        },
+        {
+            "faultyLine": "org.apache.commons.codec.binary.StringUtils:293",
+            "code": "return bytes == null ? null : new String(bytes, charset);",
+            "explanation": "This line correctly handles null `bytes` by returning null. However, if `charset` is null, it will still throw a NullPointerException. The test results do not indicate this specific issue, but it's a potential problem."
+        }
+    ]
+}

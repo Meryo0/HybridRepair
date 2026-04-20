@@ -1,0 +1,399 @@
+Faulty Code:
+org.apache.commons.lang3.ClassUtils:63 `    public static final String PACKAGE_SEPARATOR = String.valueOf(PACKAGE_SEPARATOR_CHAR);`
+org.apache.commons.lang3.ClassUtils:73 `    public static final String INNER_CLASS_SEPARATOR = String.valueOf(INNER_CLASS_SEPARATOR_CHAR);`
+org.apache.commons.lang3.ClassUtils:78 `    private static final Map<Class<?>, Class<?>> primitiveWrapperMap = new HashMap<Class<?>, Class<?>>();`
+org.apache.commons.lang3.ClassUtils:80 `         primitiveWrapperMap.put(Boolean.TYPE, Boolean.class);`
+org.apache.commons.lang3.ClassUtils:81 `         primitiveWrapperMap.put(Byte.TYPE, Byte.class);`
+org.apache.commons.lang3.ClassUtils:82 `         primitiveWrapperMap.put(Character.TYPE, Character.class);`
+org.apache.commons.lang3.ClassUtils:83 `         primitiveWrapperMap.put(Short.TYPE, Short.class);`
+org.apache.commons.lang3.ClassUtils:84 `         primitiveWrapperMap.put(Integer.TYPE, Integer.class);`
+org.apache.commons.lang3.ClassUtils:85 `         primitiveWrapperMap.put(Long.TYPE, Long.class);`
+org.apache.commons.lang3.ClassUtils:86 `         primitiveWrapperMap.put(Double.TYPE, Double.class);`
+org.apache.commons.lang3.ClassUtils:87 `         primitiveWrapperMap.put(Float.TYPE, Float.class);`
+org.apache.commons.lang3.ClassUtils:88 `         primitiveWrapperMap.put(Void.TYPE, Void.TYPE);`
+org.apache.commons.lang3.ClassUtils:94 `    private static final Map<Class<?>, Class<?>> wrapperPrimitiveMap = new HashMap<Class<?>, Class<?>>();`
+org.apache.commons.lang3.ClassUtils:96 `        for (final Map.Entry<Class<?>, Class<?>> entry : primitiveWrapperMap.entrySet()) {`
+org.apache.commons.lang3.ClassUtils:97 `            final Class<?> primitiveClass = entry.getKey();`
+org.apache.commons.lang3.ClassUtils:98 `            final Class<?> wrapperClass = entry.getValue();`
+org.apache.commons.lang3.ClassUtils:99 `            if (!primitiveClass.equals(wrapperClass)) {`
+org.apache.commons.lang3.ClassUtils:100 `                wrapperPrimitiveMap.put(wrapperClass, primitiveClass);`
+org.apache.commons.lang3.ClassUtils:102 `        }`
+org.apache.commons.lang3.ClassUtils:119 `        final Map<String, String> m = new HashMap<String, String>();`
+org.apache.commons.lang3.ClassUtils:120 `        m.put("int", "I");`
+org.apache.commons.lang3.ClassUtils:121 `        m.put("boolean", "Z");`
+org.apache.commons.lang3.ClassUtils:122 `        m.put("float", "F");`
+org.apache.commons.lang3.ClassUtils:123 `        m.put("long", "J");`
+org.apache.commons.lang3.ClassUtils:124 `        m.put("short", "S");`
+org.apache.commons.lang3.ClassUtils:125 `        m.put("byte", "B");`
+org.apache.commons.lang3.ClassUtils:126 `        m.put("double", "D");`
+org.apache.commons.lang3.ClassUtils:127 `        m.put("char", "C");`
+org.apache.commons.lang3.ClassUtils:128 `        m.put("void", "V");`
+org.apache.commons.lang3.ClassUtils:129 `        final Map<String, String> r = new HashMap<String, String>();`
+org.apache.commons.lang3.ClassUtils:130 `        for (final Map.Entry<String, String> e : m.entrySet()) {`
+org.apache.commons.lang3.ClassUtils:131 `            r.put(e.getValue(), e.getKey());`
+org.apache.commons.lang3.ClassUtils:132 `        }`
+org.apache.commons.lang3.ClassUtils:133 `        abbreviationMap = Collections.unmodifiableMap(m);`
+org.apache.commons.lang3.ClassUtils:134 `        reverseAbbreviationMap = Collections.unmodifiableMap(r);`
+org.apache.commons.lang3.ClassUtils:135 `    }`
+org.apache.commons.lang3.ClassUtils:675 `        return isAssignable(cls, toClass, SystemUtils.isJavaVersionAtLeast(JavaVersion.JAVA_1_5));`
+org.apache.commons.lang3.ClassUtils:706 `        if (toClass == null) {`
+org.apache.commons.lang3.ClassUtils:710 `        if (cls == null) {`
+org.apache.commons.lang3.ClassUtils:714 `        if (autoboxing) {`
+org.apache.commons.lang3.ClassUtils:715 `            if (cls.isPrimitive() && !toClass.isPrimitive()) {`
+org.apache.commons.lang3.ClassUtils:721 `            if (toClass.isPrimitive() && !cls.isPrimitive()) {`
+org.apache.commons.lang3.ClassUtils:728 `        if (cls.equals(toClass)) {`
+org.apache.commons.lang3.ClassUtils:731 `        if (cls.isPrimitive()) {`
+org.apache.commons.lang3.ClassUtils:775 `        return toClass.isAssignableFrom(cls);`
+org.apache.commons.lang3.JavaVersion:26 `public enum JavaVersion {`
+org.apache.commons.lang3.JavaVersion:31 `    JAVA_0_9(1.5f, "0.9"),`
+org.apache.commons.lang3.JavaVersion:36 `    JAVA_1_1(1.1f, "1.1"),`
+org.apache.commons.lang3.JavaVersion:41 `    JAVA_1_2(1.2f, "1.2"),`
+org.apache.commons.lang3.JavaVersion:46 `    JAVA_1_3(1.3f, "1.3"),`
+org.apache.commons.lang3.JavaVersion:51 `    JAVA_1_4(1.4f, "1.4"),`
+org.apache.commons.lang3.JavaVersion:56 `    JAVA_1_5(1.5f, "1.5"),`
+org.apache.commons.lang3.JavaVersion:61 `    JAVA_1_6(1.6f, "1.6"),`
+org.apache.commons.lang3.JavaVersion:66 `    JAVA_1_7(1.7f, "1.7"),`
+org.apache.commons.lang3.JavaVersion:71 `    JAVA_1_8(1.8f, "1.8"),`
+org.apache.commons.lang3.JavaVersion:76 `    JAVA_1_9(1.9f, "1.9"),`
+org.apache.commons.lang3.JavaVersion:81 `    JAVA_RECENT(maxVersion(), Float.toString(maxVersion()));`
+org.apache.commons.lang3.JavaVersion:98 `    JavaVersion(final float value, final String name) {`
+org.apache.commons.lang3.JavaVersion:99 `        this.value = value;`
+org.apache.commons.lang3.JavaVersion:100 `        this.name = name;`
+org.apache.commons.lang3.JavaVersion:101 `    }`
+org.apache.commons.lang3.JavaVersion:114 `        return this.value >= requiredVersion.value;`
+org.apache.commons.lang3.JavaVersion:141 `        if ("0.9".equals(nom)) {`
+org.apache.commons.lang3.JavaVersion:143 `        } else if ("1.1".equals(nom)) {`
+org.apache.commons.lang3.JavaVersion:145 `        } else if ("1.2".equals(nom)) {`
+org.apache.commons.lang3.JavaVersion:147 `        } else if ("1.3".equals(nom)) {`
+org.apache.commons.lang3.JavaVersion:149 `        } else if ("1.4".equals(nom)) {`
+org.apache.commons.lang3.JavaVersion:151 `        } else if ("1.5".equals(nom)) {`
+org.apache.commons.lang3.JavaVersion:153 `        } else if ("1.6".equals(nom)) {`
+org.apache.commons.lang3.JavaVersion:155 `        } else if ("1.7".equals(nom)) {`
+org.apache.commons.lang3.JavaVersion:157 `        } else if ("1.8".equals(nom)) {`
+org.apache.commons.lang3.JavaVersion:159 `        } else if ("1.9".equals(nom)) {`
+org.apache.commons.lang3.JavaVersion:162 `        if (nom == null) {`
+org.apache.commons.lang3.JavaVersion:165 `        final float v = toFloatVersion(nom);`
+org.apache.commons.lang3.JavaVersion:166 `        if ((v - 1.) < 1.) { // then we need to check decimals > .9`
+org.apache.commons.lang3.JavaVersion:167 `            final int firstComma = Math.max(nom.indexOf('.'), nom.indexOf(','));`
+org.apache.commons.lang3.JavaVersion:168 `            final int end = Math.max(nom.length(), nom.indexOf(',', firstComma));`
+org.apache.commons.lang3.JavaVersion:169 `            if (Float.parseFloat(nom.substring(firstComma + 1, end)) > .9f) {`
+org.apache.commons.lang3.JavaVersion:170 `                return JAVA_RECENT;`
+org.apache.commons.lang3.JavaVersion:195 `        final float v = toFloatVersion(System.getProperty("java.version", "2.0"));`
+org.apache.commons.lang3.JavaVersion:196 `        if (v > 0) {`
+org.apache.commons.lang3.JavaVersion:197 `            return v;`
+org.apache.commons.lang3.JavaVersion:209 `        final String[] toParse = value.split("\\.");`
+org.apache.commons.lang3.JavaVersion:210 `        if (toParse.length >= 2) {`
+org.apache.commons.lang3.JavaVersion:212 `                return Float.parseFloat(toParse[0] + '.' + toParse[1]);`
+org.apache.commons.lang3.JavaVersion:217 `        return -1;`
+org.apache.commons.lang3.ObjectUtils:62 `    public static final Null NULL = new Null();`
+org.apache.commons.lang3.ObjectUtils:95 `        return object != null ? object : defaultValue;`
+org.apache.commons.lang3.ObjectUtils:748 `            super();`
+org.apache.commons.lang3.ObjectUtils:749 `        }`
+org.apache.commons.lang3.SystemUtils:88 `    public static final String AWT_TOOLKIT = getSystemProperty("awt.toolkit");`
+org.apache.commons.lang3.SystemUtils:110 `    public static final String FILE_ENCODING = getSystemProperty("file.encoding");`
+org.apache.commons.lang3.SystemUtils:137 `    public static final String FILE_SEPARATOR = getSystemProperty("file.separator");`
+org.apache.commons.lang3.SystemUtils:155 `    public static final String JAVA_AWT_FONTS = getSystemProperty("java.awt.fonts");`
+org.apache.commons.lang3.SystemUtils:173 `    public static final String JAVA_AWT_GRAPHICSENV = getSystemProperty("java.awt.graphicsenv");`
+org.apache.commons.lang3.SystemUtils:194 `    public static final String JAVA_AWT_HEADLESS = getSystemProperty("java.awt.headless");`
+org.apache.commons.lang3.SystemUtils:212 `    public static final String JAVA_AWT_PRINTERJOB = getSystemProperty("java.awt.printerjob");`
+org.apache.commons.lang3.SystemUtils:230 `    public static final String JAVA_CLASS_PATH = getSystemProperty("java.class.path");`
+org.apache.commons.lang3.SystemUtils:248 `    public static final String JAVA_CLASS_VERSION = getSystemProperty("java.class.version");`
+org.apache.commons.lang3.SystemUtils:267 `    public static final String JAVA_COMPILER = getSystemProperty("java.compiler");`
+org.apache.commons.lang3.SystemUtils:285 `    public static final String JAVA_ENDORSED_DIRS = getSystemProperty("java.endorsed.dirs");`
+org.apache.commons.lang3.SystemUtils:303 `    public static final String JAVA_EXT_DIRS = getSystemProperty("java.ext.dirs");`
+org.apache.commons.lang3.SystemUtils:321 `    public static final String JAVA_HOME = getSystemProperty(JAVA_HOME_KEY);`
+org.apache.commons.lang3.SystemUtils:339 `    public static final String JAVA_IO_TMPDIR = getSystemProperty(JAVA_IO_TMPDIR_KEY);`
+org.apache.commons.lang3.SystemUtils:357 `    public static final String JAVA_LIBRARY_PATH = getSystemProperty("java.library.path");`
+org.apache.commons.lang3.SystemUtils:376 `    public static final String JAVA_RUNTIME_NAME = getSystemProperty("java.runtime.name");`
+org.apache.commons.lang3.SystemUtils:395 `    public static final String JAVA_RUNTIME_VERSION = getSystemProperty("java.runtime.version");`
+org.apache.commons.lang3.SystemUtils:413 `    public static final String JAVA_SPECIFICATION_NAME = getSystemProperty("java.specification.name");`
+org.apache.commons.lang3.SystemUtils:431 `    public static final String JAVA_SPECIFICATION_VENDOR = getSystemProperty("java.specification.vendor");`
+org.apache.commons.lang3.SystemUtils:449 `    public static final String JAVA_SPECIFICATION_VERSION = getSystemProperty("java.specification.version");`
+org.apache.commons.lang3.SystemUtils:450 `    private static final JavaVersion JAVA_SPECIFICATION_VERSION_AS_ENUM = JavaVersion.get(JAVA_SPECIFICATION_VERSION);`
+org.apache.commons.lang3.SystemUtils:469 `    public static final String JAVA_UTIL_PREFS_PREFERENCES_FACTORY =`
+org.apache.commons.lang3.SystemUtils:470 `        getSystemProperty("java.util.prefs.PreferencesFactory");`
+org.apache.commons.lang3.SystemUtils:488 `    public static final String JAVA_VENDOR = getSystemProperty("java.vendor");`
+org.apache.commons.lang3.SystemUtils:506 `    public static final String JAVA_VENDOR_URL = getSystemProperty("java.vendor.url");`
+org.apache.commons.lang3.SystemUtils:524 `    public static final String JAVA_VERSION = getSystemProperty("java.version");`
+org.apache.commons.lang3.SystemUtils:543 `    public static final String JAVA_VM_INFO = getSystemProperty("java.vm.info");`
+org.apache.commons.lang3.SystemUtils:561 `    public static final String JAVA_VM_NAME = getSystemProperty("java.vm.name");`
+org.apache.commons.lang3.SystemUtils:579 `    public static final String JAVA_VM_SPECIFICATION_NAME = getSystemProperty("java.vm.specification.name");`
+org.apache.commons.lang3.SystemUtils:597 `    public static final String JAVA_VM_SPECIFICATION_VENDOR = getSystemProperty("java.vm.specification.vendor");`
+org.apache.commons.lang3.SystemUtils:615 `    public static final String JAVA_VM_SPECIFICATION_VERSION = getSystemProperty("java.vm.specification.version");`
+org.apache.commons.lang3.SystemUtils:633 `    public static final String JAVA_VM_VENDOR = getSystemProperty("java.vm.vendor");`
+org.apache.commons.lang3.SystemUtils:651 `    public static final String JAVA_VM_VERSION = getSystemProperty("java.vm.version");`
+org.apache.commons.lang3.SystemUtils:669 `    public static final String LINE_SEPARATOR = getSystemProperty("line.separator");`
+org.apache.commons.lang3.SystemUtils:687 `    public static final String OS_ARCH = getSystemProperty("os.arch");`
+org.apache.commons.lang3.SystemUtils:705 `    public static final String OS_NAME = getSystemProperty("os.name");`
+org.apache.commons.lang3.SystemUtils:723 `    public static final String OS_VERSION = getSystemProperty("os.version");`
+org.apache.commons.lang3.SystemUtils:744 `    public static final String PATH_SEPARATOR = getSystemProperty("path.separator");`
+org.apache.commons.lang3.SystemUtils:764 `    public static final String USER_COUNTRY = getSystemProperty("user.country") == null ?`
+org.apache.commons.lang3.SystemUtils:765 `            getSystemProperty("user.region") : getSystemProperty("user.country");`
+org.apache.commons.lang3.SystemUtils:783 `    public static final String USER_DIR = getSystemProperty(USER_DIR_KEY);`
+org.apache.commons.lang3.SystemUtils:801 `    public static final String USER_HOME = getSystemProperty(USER_HOME_KEY);`
+org.apache.commons.lang3.SystemUtils:820 `    public static final String USER_LANGUAGE = getSystemProperty("user.language");`
+org.apache.commons.lang3.SystemUtils:838 `    public static final String USER_NAME = getSystemProperty("user.name");`
+org.apache.commons.lang3.SystemUtils:856 `    public static final String USER_TIMEZONE = getSystemProperty("user.timezone");`
+org.apache.commons.lang3.SystemUtils:871 `    public static final boolean IS_JAVA_1_1 = getJavaVersionMatches("1.1");`
+org.apache.commons.lang3.SystemUtils:881 `    public static final boolean IS_JAVA_1_2 = getJavaVersionMatches("1.2");`
+org.apache.commons.lang3.SystemUtils:891 `    public static final boolean IS_JAVA_1_3 = getJavaVersionMatches("1.3");`
+org.apache.commons.lang3.SystemUtils:901 `    public static final boolean IS_JAVA_1_4 = getJavaVersionMatches("1.4");`
+org.apache.commons.lang3.SystemUtils:911 `    public static final boolean IS_JAVA_1_5 = getJavaVersionMatches("1.5");`
+org.apache.commons.lang3.SystemUtils:921 `    public static final boolean IS_JAVA_1_6 = getJavaVersionMatches("1.6");`
+org.apache.commons.lang3.SystemUtils:933 `    public static final boolean IS_JAVA_1_7 = getJavaVersionMatches("1.7");`
+org.apache.commons.lang3.SystemUtils:945 `    public static final boolean IS_JAVA_1_8 = getJavaVersionMatches("1.8");`
+org.apache.commons.lang3.SystemUtils:957 `    public static final boolean IS_JAVA_1_9 = getJavaVersionMatches("1.9");`
+org.apache.commons.lang3.SystemUtils:977 `    public static final boolean IS_OS_AIX = getOSMatchesName("AIX");`
+org.apache.commons.lang3.SystemUtils:989 `    public static final boolean IS_OS_HP_UX = getOSMatchesName("HP-UX");`
+org.apache.commons.lang3.SystemUtils:1001 `    public static final boolean IS_OS_400 = getOSMatchesName("OS/400");`
+org.apache.commons.lang3.SystemUtils:1013 `    public static final boolean IS_OS_IRIX = getOSMatchesName("Irix");`
+org.apache.commons.lang3.SystemUtils:1025 `    public static final boolean IS_OS_LINUX = getOSMatchesName("Linux") || getOSMatchesName("LINUX");`
+org.apache.commons.lang3.SystemUtils:1037 `    public static final boolean IS_OS_MAC = getOSMatchesName("Mac");`
+org.apache.commons.lang3.SystemUtils:1049 `    public static final boolean IS_OS_MAC_OSX = getOSMatchesName("Mac OS X");`
+org.apache.commons.lang3.SystemUtils:1061 `    public static final boolean IS_OS_MAC_OSX_CHEETAH = getOSMatches("Mac OS X", "10.0");`
+org.apache.commons.lang3.SystemUtils:1073 `    public static final boolean IS_OS_MAC_OSX_PUMA = getOSMatches("Mac OS X", "10.1");`
+org.apache.commons.lang3.SystemUtils:1085 `    public static final boolean IS_OS_MAC_OSX_JAGUAR = getOSMatches("Mac OS X", "10.2");`
+org.apache.commons.lang3.SystemUtils:1097 `    public static final boolean IS_OS_MAC_OSX_PANTHER = getOSMatches("Mac OS X", "10.3");`
+org.apache.commons.lang3.SystemUtils:1109 `    public static final boolean IS_OS_MAC_OSX_TIGER = getOSMatches("Mac OS X", "10.4");`
+org.apache.commons.lang3.SystemUtils:1121 `    public static final boolean IS_OS_MAC_OSX_LEOPARD = getOSMatches("Mac OS X", "10.5");`
+org.apache.commons.lang3.SystemUtils:1133 `    public static final boolean IS_OS_MAC_OSX_SNOW_LEOPARD = getOSMatches("Mac OS X", "10.6");`
+org.apache.commons.lang3.SystemUtils:1145 `    public static final boolean IS_OS_MAC_OSX_LION = getOSMatches("Mac OS X", "10.7");`
+org.apache.commons.lang3.SystemUtils:1157 `    public static final boolean IS_OS_MAC_OSX_MOUNTAIN_LION = getOSMatches("Mac OS X", "10.8");`
+org.apache.commons.lang3.SystemUtils:1169 `    public static final boolean IS_OS_MAC_OSX_MAVERICKS = getOSMatches("Mac OS X", "10.9");`
+org.apache.commons.lang3.SystemUtils:1181 `    public static final boolean IS_OS_MAC_OSX_YOSEMITE = getOSMatches("Mac OS X", "10.10");`
+org.apache.commons.lang3.SystemUtils:1193 `    public static final boolean IS_OS_MAC_OSX_EL_CAPITAN = getOSMatches("Mac OS X", "10.11");`
+org.apache.commons.lang3.SystemUtils:1205 `    public static final boolean IS_OS_FREE_BSD = getOSMatchesName("FreeBSD");`
+org.apache.commons.lang3.SystemUtils:1217 `    public static final boolean IS_OS_OPEN_BSD = getOSMatchesName("OpenBSD");`
+org.apache.commons.lang3.SystemUtils:1229 `    public static final boolean IS_OS_NET_BSD = getOSMatchesName("NetBSD");`
+org.apache.commons.lang3.SystemUtils:1241 `    public static final boolean IS_OS_OS2 = getOSMatchesName("OS/2");`
+org.apache.commons.lang3.SystemUtils:1253 `    public static final boolean IS_OS_SOLARIS = getOSMatchesName("Solaris");`
+org.apache.commons.lang3.SystemUtils:1265 `    public static final boolean IS_OS_SUN_OS = getOSMatchesName("SunOS");`
+org.apache.commons.lang3.SystemUtils:1277 `    public static final boolean IS_OS_UNIX = IS_OS_AIX || IS_OS_HP_UX || IS_OS_IRIX || IS_OS_LINUX || IS_OS_MAC_OSX`
+org.apache.commons.lang3.SystemUtils:1290 `    public static final boolean IS_OS_WINDOWS = getOSMatchesName(OS_NAME_WINDOWS_PREFIX);`
+org.apache.commons.lang3.SystemUtils:1302 `    public static final boolean IS_OS_WINDOWS_2000 = getOSMatchesName(OS_NAME_WINDOWS_PREFIX + " 2000");`
+org.apache.commons.lang3.SystemUtils:1314 `    public static final boolean IS_OS_WINDOWS_2003 = getOSMatchesName(OS_NAME_WINDOWS_PREFIX + " 2003");`
+org.apache.commons.lang3.SystemUtils:1326 `    public static final boolean IS_OS_WINDOWS_2008 = getOSMatchesName(OS_NAME_WINDOWS_PREFIX + " Server 2008");`
+org.apache.commons.lang3.SystemUtils:1338 `    public static final boolean IS_OS_WINDOWS_2012 = getOSMatchesName(OS_NAME_WINDOWS_PREFIX + " Server 2012");`
+org.apache.commons.lang3.SystemUtils:1350 `    public static final boolean IS_OS_WINDOWS_95 = getOSMatchesName(OS_NAME_WINDOWS_PREFIX + " 95");`
+org.apache.commons.lang3.SystemUtils:1362 `    public static final boolean IS_OS_WINDOWS_98 = getOSMatchesName(OS_NAME_WINDOWS_PREFIX + " 98");`
+org.apache.commons.lang3.SystemUtils:1374 `    public static final boolean IS_OS_WINDOWS_ME = getOSMatchesName(OS_NAME_WINDOWS_PREFIX + " Me");`
+org.apache.commons.lang3.SystemUtils:1386 `    public static final boolean IS_OS_WINDOWS_NT = getOSMatchesName(OS_NAME_WINDOWS_PREFIX + " NT");`
+org.apache.commons.lang3.SystemUtils:1398 `    public static final boolean IS_OS_WINDOWS_XP = getOSMatchesName(OS_NAME_WINDOWS_PREFIX + " XP");`
+org.apache.commons.lang3.SystemUtils:1411 `    public static final boolean IS_OS_WINDOWS_VISTA = getOSMatchesName(OS_NAME_WINDOWS_PREFIX + " Vista");`
+org.apache.commons.lang3.SystemUtils:1423 `    public static final boolean IS_OS_WINDOWS_7 = getOSMatchesName(OS_NAME_WINDOWS_PREFIX + " 7");`
+org.apache.commons.lang3.SystemUtils:1435 `    public static final boolean IS_OS_WINDOWS_8 = getOSMatchesName(OS_NAME_WINDOWS_PREFIX + " 8");`
+org.apache.commons.lang3.SystemUtils:1447 `    public static final boolean IS_OS_WINDOWS_10 = getOSMatchesName(OS_NAME_WINDOWS_PREFIX + " 10");`
+org.apache.commons.lang3.SystemUtils:1464 `    public static final boolean IS_OS_ZOS = getOSMatchesName("z/OS");`
+org.apache.commons.lang3.SystemUtils:1505 `        return isJavaVersionMatch(JAVA_SPECIFICATION_VERSION, versionPrefix);`
+org.apache.commons.lang3.SystemUtils:1516 `        return isOSMatch(OS_NAME, OS_VERSION, osNamePrefix, osVersionPrefix);`
+org.apache.commons.lang3.SystemUtils:1526 `        return isOSNameMatch(OS_NAME, osNamePrefix);`
+org.apache.commons.lang3.SystemUtils:1544 `            return System.getProperty(property);`
+org.apache.commons.lang3.SystemUtils:1611 `        return JAVA_SPECIFICATION_VERSION_AS_ENUM.atLeast(requiredVersion);`
+org.apache.commons.lang3.SystemUtils:1627 `        if (version == null) {`
+org.apache.commons.lang3.SystemUtils:1630 `        return version.startsWith(versionPrefix);`
+org.apache.commons.lang3.SystemUtils:1646 `        if (osName == null || osVersion == null) {`
+org.apache.commons.lang3.SystemUtils:1649 `        return isOSNameMatch(osName, osNamePrefix) && isOSVersionMatch(osVersion, osVersionPrefix);`
+org.apache.commons.lang3.SystemUtils:1663 `        if (osName == null) {`
+org.apache.commons.lang3.SystemUtils:1666 `        return osName.startsWith(osNamePrefix);`
+org.apache.commons.lang3.Validate:234 `        if (object == null) {`
+org.apache.commons.lang3.Validate:237 `        return object;`
+org.apache.commons.lang3.reflect.TypeUtils:68 `            this.upperBounds = bounds;`
+org.apache.commons.lang3.reflect.TypeUtils:69 `            return this;`
+org.apache.commons.lang3.reflect.TypeUtils:78 `            this.lowerBounds = bounds;`
+org.apache.commons.lang3.reflect.TypeUtils:79 `            return this;`
+org.apache.commons.lang3.reflect.TypeUtils:87 `            return new WildcardTypeImpl(upperBounds, lowerBounds);`
+org.apache.commons.lang3.reflect.TypeUtils:223 `        private static final Type[] EMPTY_BOUNDS = new Type[0];`
+org.apache.commons.lang3.reflect.TypeUtils:233 `        private WildcardTypeImpl(final Type[] upperBounds, final Type[] lowerBounds) {`
+org.apache.commons.lang3.reflect.TypeUtils:234 `            this.upperBounds = ObjectUtils.defaultIfNull(upperBounds, EMPTY_BOUNDS);`
+org.apache.commons.lang3.reflect.TypeUtils:235 `            this.lowerBounds = ObjectUtils.defaultIfNull(lowerBounds, EMPTY_BOUNDS);`
+org.apache.commons.lang3.reflect.TypeUtils:236 `        }`
+org.apache.commons.lang3.reflect.TypeUtils:243 `            return upperBounds.clone();`
+org.apache.commons.lang3.reflect.TypeUtils:251 `            return lowerBounds.clone();`
+org.apache.commons.lang3.reflect.TypeUtils:267 `            return obj == this || obj instanceof WildcardType && TypeUtils.equals(this, (WildcardType) obj);`
+org.apache.commons.lang3.reflect.TypeUtils:287 `    public static final WildcardType WILDCARD_ALL = wildcardType().withUpperBounds(Object.class).build();`
+org.apache.commons.lang3.reflect.TypeUtils:311 `        return isAssignable(type, toType, null);`
+org.apache.commons.lang3.reflect.TypeUtils:325 `        if (toType == null || toType instanceof Class<?>) {`
+org.apache.commons.lang3.reflect.TypeUtils:326 `            return isAssignable(type, (Class<?>) toType);`
+org.apache.commons.lang3.reflect.TypeUtils:329 `        if (toType instanceof ParameterizedType) {`
+org.apache.commons.lang3.reflect.TypeUtils:330 `            return isAssignable(type, (ParameterizedType) toType, typeVarAssigns);`
+org.apache.commons.lang3.reflect.TypeUtils:333 `        if (toType instanceof GenericArrayType) {`
+org.apache.commons.lang3.reflect.TypeUtils:337 `        if (toType instanceof WildcardType) {`
+org.apache.commons.lang3.reflect.TypeUtils:338 `            return isAssignable(type, (WildcardType) toType, typeVarAssigns);`
+org.apache.commons.lang3.reflect.TypeUtils:357 `        if (type == null) {`
+org.apache.commons.lang3.reflect.TypeUtils:359 `            return toClass == null || !toClass.isPrimitive();`
+org.apache.commons.lang3.reflect.TypeUtils:364 `        if (toClass == null) {`
+org.apache.commons.lang3.reflect.TypeUtils:369 `        if (toClass.equals(type)) {`
+org.apache.commons.lang3.reflect.TypeUtils:370 `            return true;`
+org.apache.commons.lang3.reflect.TypeUtils:373 `        if (type instanceof Class<?>) {`
+org.apache.commons.lang3.reflect.TypeUtils:375 `            return ClassUtils.isAssignable((Class<?>) type, toClass);`
+org.apache.commons.lang3.reflect.TypeUtils:378 `        if (type instanceof ParameterizedType) {`
+org.apache.commons.lang3.reflect.TypeUtils:380 `            return isAssignable(getRawType((ParameterizedType) type), toClass);`
+org.apache.commons.lang3.reflect.TypeUtils:425 `        if (type == null) {`
+org.apache.commons.lang3.reflect.TypeUtils:431 `        if (toParameterizedType == null) {`
+org.apache.commons.lang3.reflect.TypeUtils:436 `        if (toParameterizedType.equals(type)) {`
+org.apache.commons.lang3.reflect.TypeUtils:441 `        final Class<?> toClass = getRawType(toParameterizedType);`
+org.apache.commons.lang3.reflect.TypeUtils:444 `        final Map<TypeVariable<?>, Type> fromTypeVarAssigns = getTypeArguments(type, toClass, null);`
+org.apache.commons.lang3.reflect.TypeUtils:447 `        if (fromTypeVarAssigns == null) {`
+org.apache.commons.lang3.reflect.TypeUtils:454 `        if (fromTypeVarAssigns.isEmpty()) {`
+org.apache.commons.lang3.reflect.TypeUtils:459 `        final Map<TypeVariable<?>, Type> toTypeVarAssigns = getTypeArguments(toParameterizedType,`
+org.apache.commons.lang3.reflect.TypeUtils:463 `        for (final TypeVariable<?> var : toTypeVarAssigns.keySet()) {`
+org.apache.commons.lang3.reflect.TypeUtils:464 `            final Type toTypeArg = unrollVariableAssignments(var, toTypeVarAssigns);`
+org.apache.commons.lang3.reflect.TypeUtils:465 `            final Type fromTypeArg = unrollVariableAssignments(var, fromTypeVarAssigns);`
+org.apache.commons.lang3.reflect.TypeUtils:470 `            if (fromTypeArg != null`
+org.apache.commons.lang3.reflect.TypeUtils:471 `                    && !toTypeArg.equals(fromTypeArg)`
+org.apache.commons.lang3.reflect.TypeUtils:491 `            result = typeVarAssigns.get(var);`
+org.apache.commons.lang3.reflect.TypeUtils:492 `            if (result instanceof TypeVariable<?> && !result.equals(var)) {`
+org.apache.commons.lang3.reflect.TypeUtils:493 `                var = (TypeVariable<?>) result;`
+org.apache.commons.lang3.reflect.TypeUtils:494 `                continue;`
+org.apache.commons.lang3.reflect.TypeUtils:498 `        return result;`
+org.apache.commons.lang3.reflect.TypeUtils:589 `        if (type == null) {`
+org.apache.commons.lang3.reflect.TypeUtils:595 `        if (toWildcardType == null) {`
+org.apache.commons.lang3.reflect.TypeUtils:600 `        if (toWildcardType.equals(type)) {`
+org.apache.commons.lang3.reflect.TypeUtils:604 `        final Type[] toUpperBounds = getImplicitUpperBounds(toWildcardType);`
+org.apache.commons.lang3.reflect.TypeUtils:605 `        final Type[] toLowerBounds = getImplicitLowerBounds(toWildcardType);`
+org.apache.commons.lang3.reflect.TypeUtils:607 `        if (type instanceof WildcardType) {`
+org.apache.commons.lang3.reflect.TypeUtils:644 `        for (final Type toBound : toUpperBounds) {`
+org.apache.commons.lang3.reflect.TypeUtils:647 `            if (!isAssignable(type, substituteTypeVariables(toBound, typeVarAssigns),`
+org.apache.commons.lang3.reflect.TypeUtils:653 `        for (final Type toBound : toLowerBounds) {`
+org.apache.commons.lang3.reflect.TypeUtils:656 `            if (!isAssignable(substituteTypeVariables(toBound, typeVarAssigns), type,`
+org.apache.commons.lang3.reflect.TypeUtils:721 `        if (type instanceof TypeVariable<?> && typeVarAssigns != null) {`
+org.apache.commons.lang3.reflect.TypeUtils:730 `        return type;`
+org.apache.commons.lang3.reflect.TypeUtils:796 `        if (type instanceof Class<?>) {`
+org.apache.commons.lang3.reflect.TypeUtils:797 `            return getTypeArguments((Class<?>) type, toClass, subtypeVarAssigns);`
+org.apache.commons.lang3.reflect.TypeUtils:800 `        if (type instanceof ParameterizedType) {`
+org.apache.commons.lang3.reflect.TypeUtils:801 `            return getTypeArguments((ParameterizedType) type, toClass, subtypeVarAssigns);`
+org.apache.commons.lang3.reflect.TypeUtils:846 `        final Class<?> cls = getRawType(parameterizedType);`
+org.apache.commons.lang3.reflect.TypeUtils:849 `        if (!isAssignable(cls, toClass)) {`
+org.apache.commons.lang3.reflect.TypeUtils:853 `        final Type ownerType = parameterizedType.getOwnerType();`
+org.apache.commons.lang3.reflect.TypeUtils:856 `        if (ownerType instanceof ParameterizedType) {`
+org.apache.commons.lang3.reflect.TypeUtils:863 `            typeVarAssigns = subtypeVarAssigns == null ? new HashMap<TypeVariable<?>, Type>()`
+org.apache.commons.lang3.reflect.TypeUtils:864 `                    : new HashMap<TypeVariable<?>, Type>(subtypeVarAssigns);`
+org.apache.commons.lang3.reflect.TypeUtils:868 `        final Type[] typeArgs = parameterizedType.getActualTypeArguments();`
+org.apache.commons.lang3.reflect.TypeUtils:870 `        final TypeVariable<?>[] typeParams = cls.getTypeParameters();`
+org.apache.commons.lang3.reflect.TypeUtils:873 `        for (int i = 0; i < typeParams.length; i++) {`
+org.apache.commons.lang3.reflect.TypeUtils:874 `            final Type typeArg = typeArgs[i];`
+org.apache.commons.lang3.reflect.TypeUtils:875 `            typeVarAssigns.put(typeParams[i], typeVarAssigns.containsKey(typeArg) ? typeVarAssigns`
+org.apache.commons.lang3.reflect.TypeUtils:876 `                    .get(typeArg) : typeArg);`
+org.apache.commons.lang3.reflect.TypeUtils:879 `        if (toClass.equals(cls)) {`
+org.apache.commons.lang3.reflect.TypeUtils:881 `            return typeVarAssigns;`
+org.apache.commons.lang3.reflect.TypeUtils:885 `        return getTypeArguments(getClosestParentType(cls, toClass), toClass, typeVarAssigns);`
+org.apache.commons.lang3.reflect.TypeUtils:899 `        if (!isAssignable(cls, toClass)) {`
+org.apache.commons.lang3.reflect.TypeUtils:904 `        if (cls.isPrimitive()) {`
+org.apache.commons.lang3.reflect.TypeUtils:917 `        final HashMap<TypeVariable<?>, Type> typeVarAssigns = subtypeVarAssigns == null ? new HashMap<TypeVariable<?>, Type>()`
+org.apache.commons.lang3.reflect.TypeUtils:918 `                : new HashMap<TypeVariable<?>, Type>(subtypeVarAssigns);`
+org.apache.commons.lang3.reflect.TypeUtils:921 `        if (toClass.equals(cls)) {`
+org.apache.commons.lang3.reflect.TypeUtils:926 `        return getTypeArguments(getClosestParentType(cls, toClass), toClass, typeVarAssigns);`
+org.apache.commons.lang3.reflect.TypeUtils:1048 `        if (superClass.isInterface()) {`
+org.apache.commons.lang3.reflect.TypeUtils:1050 `            final Type[] interfaceTypes = cls.getGenericInterfaces();`
+org.apache.commons.lang3.reflect.TypeUtils:1052 `            Type genericInterface = null;`
+org.apache.commons.lang3.reflect.TypeUtils:1055 `            for (final Type midType : interfaceTypes) {`
+org.apache.commons.lang3.reflect.TypeUtils:1056 `                Class<?> midClass = null;`
+org.apache.commons.lang3.reflect.TypeUtils:1058 `                if (midType instanceof ParameterizedType) {`
+org.apache.commons.lang3.reflect.TypeUtils:1059 `                    midClass = getRawType((ParameterizedType) midType);`
+org.apache.commons.lang3.reflect.TypeUtils:1060 `                } else if (midType instanceof Class<?>) {`
+org.apache.commons.lang3.reflect.TypeUtils:1061 `                    midClass = (Class<?>) midType;`
+org.apache.commons.lang3.reflect.TypeUtils:1069 `                if (isAssignable(midClass, superClass)`
+org.apache.commons.lang3.reflect.TypeUtils:1070 `                        && isAssignable(genericInterface, (Type) midClass)) {`
+org.apache.commons.lang3.reflect.TypeUtils:1071 `                    genericInterface = midType;`
+org.apache.commons.lang3.reflect.TypeUtils:1076 `            if (genericInterface != null) {`
+org.apache.commons.lang3.reflect.TypeUtils:1077 `                return genericInterface;`
+org.apache.commons.lang3.reflect.TypeUtils:1083 `        return cls.getGenericSuperclass();`
+org.apache.commons.lang3.reflect.TypeUtils:1178 `        Validate.notNull(wildcardType, "wildcardType is null");`
+org.apache.commons.lang3.reflect.TypeUtils:1179 `        final Type[] bounds = wildcardType.getUpperBounds();`
+org.apache.commons.lang3.reflect.TypeUtils:1181 `        return bounds.length == 0 ? new Type[] { Object.class } : normalizeUpperBounds(bounds);`
+org.apache.commons.lang3.reflect.TypeUtils:1194 `        Validate.notNull(wildcardType, "wildcardType is null");`
+org.apache.commons.lang3.reflect.TypeUtils:1195 `        final Type[] bounds = wildcardType.getLowerBounds();`
+org.apache.commons.lang3.reflect.TypeUtils:1197 `        return bounds.length == 0 ? new Type[] { null } : bounds;`
+org.apache.commons.lang3.reflect.TypeUtils:1239 `        final Type rawType = parameterizedType.getRawType();`
+org.apache.commons.lang3.reflect.TypeUtils:1246 `        if (!(rawType instanceof Class<?>)) {`
+org.apache.commons.lang3.reflect.TypeUtils:1250 `        return (Class<?>) rawType;`
+org.apache.commons.lang3.reflect.TypeUtils:1546 `        return new WildcardTypeBuilder();`
+
+
+Task Description:
+The provided code snippets are from the Apache Commons Lang library, specifically from the `ClassUtils`, `JavaVersion`, `ObjectUtils`, `SystemUtils`, and `TypeUtils` classes. Here's a brief description of the key parts of the code:
+
+1. **ClassUtils:**
+   - **Constants:**
+     - `PACKAGE_SEPARATOR` and `INNER_CLASS_SEPARATOR` are string representations of package and inner class separators.
+   - **Primitive and Wrapper Maps:**
+     - `primitiveWrapperMap` maps primitive types to their corresponding wrapper classes.
+     - `wrapperPrimitiveMap` is the reverse map, mapping wrapper classes to their corresponding primitive types.
+   - **Abbreviation Maps:**
+     - `abbreviationMap` maps primitive type names to their single-character abbreviations.
+     - `reverseAbbreviationMap` is the reverse map, mapping abbreviations back to primitive type names.
+   - **Type Assignability:**
+     - Methods to check if one class type is assignable to another, considering autoboxing and primitive types.
+
+2. **JavaVersion:**
+   - **Enum Definition:**
+     - Defines an enum `JavaVersion` with constants for different Java versions.
+   - **Constructor and Methods:**
+     - Constructor initializes the version value and name.
+     - Methods to compare Java versions and parse version strings.
+
+3. **ObjectUtils:**
+   - **Null Object:**
+     - Defines a `Null` object as a singleton instance.
+   - **Default Value:**
+     - Method to return a default value if the provided object is `null`.
+
+4. **SystemUtils:**
+   - **System Properties:**
+     - Defines constants for various system properties like `JAVA_HOME`, `OS_NAME`, etc., using the `getSystemProperty` method.
+   - **Java Version Checks:**
+     - Boolean constants to check if the current Java version matches specific versions.
+   - **OS Checks:**
+     - Boolean constants to check if the current operating system matches specific OS names.
+
+5. **TypeUtils:**
+   - **Wildcard Type:**
+     - Methods to build and manipulate wildcard types with upper and lower bounds.
+   - **Type Assignability:**
+     - Methods to check if one type is assignable to another, considering generic types, parameterized types, and wildcard types.
+   - **Type Arguments:**
+     - Methods to get type arguments and handle type variable assignments.
+
+The provided test case `testLANG1190` checks if a method's return type (which is a generic type) is assignable to a wildcard type with a lower bound. The `TypeUtils.isAssignable` method is used to perform this check, ensuring that the type system correctly handles generic types and wildcard bounds.
+
+Test Results:
+The provided code is throwing NullPointerException. For examples:
+Here are the tests and error messages of NullPointerExceptions.
+@Test public void testLANG1190() throws Exception {
+  Type fromType=ClassWithSuperClassWithGenericType.class.getDeclaredMethod("methodWithGenericReturnType").getGenericReturnType();
+  Type failingToType=TypeUtils.wildcardType().withLowerBounds(ClassWithSuperClassWithGenericType.class).build();
+  Assert.assertTrue(TypeUtils.isAssignable(fromType,failingToType));
+}
+
+
+
+  JUnit Vintage:TypeUtilsTest:testLANG1190
+    MethodSource [className = 'org.apache.commons.lang3.reflect.TypeUtilsTest', methodName = 'testLANG1190', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "Object.equals(Object)" because "toTypeArg" is null
+       org.apache.commons.lang3.reflect.TypeUtils.isAssignable(TypeUtils.java:471)
+       org.apache.commons.lang3.reflect.TypeUtils.isAssignable(TypeUtils.java:330)
+       org.apache.commons.lang3.reflect.TypeUtils.isAssignable(TypeUtils.java:656)
+       org.apache.commons.lang3.reflect.TypeUtils.isAssignable(TypeUtils.java:338)
+       org.apache.commons.lang3.reflect.TypeUtils.isAssignable(TypeUtils.java:311)
+       org.apache.commons.lang3.reflect.TypeUtilsTest.testLANG1190(TypeUtilsTest.java:772)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       [...]
+
+
+Analyze the provided code and utilize task description, test results, and SBFL techniques results to help in identifying potentially faulty lines. Provide the results following this JSON template:
+```json
+{
+  "faultLoc": [
+    {   
+      "faultyLine": (indicating the location of the suspicious code in ClassName:LineNumber format),
+      "code": (displaying the actual code),
+      "explanation": (step by step reasoning on why this location is considered potentially faulty)
+    },  
+    ... 
+   ]   
+}
+```
+Ensure that the objects in the "faultLoc" array are stored in descending order of suspicion.

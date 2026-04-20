@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.csv.CSVParser:288",
+            "code": "return new LinkedHashMap<String, Integer>(this.headerMap);",
+            "explanation": "The test case `testNoHeaderMap` expects `parser.getHeaderMap()` to return null when there is no header. However, this line attempts to create a new `LinkedHashMap` from `this.headerMap` without checking if `this.headerMap` is null, leading to a `NullPointerException`."
+        },
+        {
+            "faultyLine": "org.apache.commons.csv.CSVParser:244",
+            "code": "this.headerMap = this.initializeHeader();",
+            "explanation": "The `initializeHeader` method might be returning null, and this assignment does not handle the case where `headerMap` is null. This can cause issues when `getHeaderMap` is called later."
+        },
+        {
+            "faultyLine": "org.apache.commons.csv.CSVParser:327",
+            "code": "if (formatHeader != null) {",
+            "explanation": "The `initializeHeader` method checks if `formatHeader` is null but does not ensure that `headerMap` is initialized properly when `formatHeader` is null. This can lead to `headerMap` being null."
+        },
+        {
+            "faultyLine": "org.apache.commons.csv.CSVParser:351",
+            "code": "return hdrMap;",
+            "explanation": "The `initializeHeader` method returns `hdrMap`, which might be null if `formatHeader` is null. This can lead to `headerMap` being null in the `CSVParser` constructor."
+        },
+        {
+            "faultyLine": "org.apache.commons.csv.CSVFormat:296",
+            "code": "final String nullString, final String[] header, boolean skipHeaderRecord) {",
+            "explanation": "The constructor of `CSVFormat` initializes various settings, including the header. If the header is null, it might not be handled properly, leading to issues when the header is accessed later."
+        }
+    ]
+}

@@ -1,0 +1,128 @@
+Faulty Code:
+org.apache.commons.lang3.Range:35 `    @SuppressWarnings({"rawtypes", "unchecked"})`
+org.apache.commons.lang3.Range:37 `        INSTANCE;`
+org.apache.commons.lang3.Range:48 `            return ((Comparable) obj1).compareTo(obj2);`
+org.apache.commons.lang3.Range:76 `        return between(fromInclusive, toInclusive, null);`
+org.apache.commons.lang3.Range:97 `        return new Range<>(fromInclusive, toInclusive, comparator);`
+org.apache.commons.lang3.Range:168 `    private Range(final T element1, final T element2, final Comparator<T> comp) {`
+org.apache.commons.lang3.Range:169 `        if (element1 == null || element2 == null) {`
+org.apache.commons.lang3.Range:173 `        if (comp == null) {`
+org.apache.commons.lang3.Range:174 `            this.comparator = ComparableComparator.INSTANCE;`
+org.apache.commons.lang3.Range:178 `        if (this.comparator.compare(element1, element2) < 1) {`
+org.apache.commons.lang3.Range:179 `            this.minimum = element1;`
+org.apache.commons.lang3.Range:180 `            this.maximum = element2;`
+org.apache.commons.lang3.Range:185 `    }`
+org.apache.commons.lang3.math.NumberUtils:35 `    public static final Long LONG_ZERO = Long.valueOf(0L);`
+org.apache.commons.lang3.math.NumberUtils:37 `    public static final Long LONG_ONE = Long.valueOf(1L);`
+org.apache.commons.lang3.math.NumberUtils:39 `    public static final Long LONG_MINUS_ONE = Long.valueOf(-1L);`
+org.apache.commons.lang3.math.NumberUtils:41 `    public static final Integer INTEGER_ZERO = Integer.valueOf(0);`
+org.apache.commons.lang3.math.NumberUtils:43 `    public static final Integer INTEGER_ONE = Integer.valueOf(1);`
+org.apache.commons.lang3.math.NumberUtils:45 `    public static final Integer INTEGER_TWO = Integer.valueOf(2);`
+org.apache.commons.lang3.math.NumberUtils:47 `    public static final Integer INTEGER_MINUS_ONE = Integer.valueOf(-1);`
+org.apache.commons.lang3.math.NumberUtils:49 `    public static final Short SHORT_ZERO = Short.valueOf((short) 0);`
+org.apache.commons.lang3.math.NumberUtils:51 `    public static final Short SHORT_ONE = Short.valueOf((short) 1);`
+org.apache.commons.lang3.math.NumberUtils:53 `    public static final Short SHORT_MINUS_ONE = Short.valueOf((short) -1);`
+org.apache.commons.lang3.math.NumberUtils:55 `    public static final Byte BYTE_ZERO = Byte.valueOf((byte) 0);`
+org.apache.commons.lang3.math.NumberUtils:57 `    public static final Byte BYTE_ONE = Byte.valueOf((byte) 1);`
+org.apache.commons.lang3.math.NumberUtils:59 `    public static final Byte BYTE_MINUS_ONE = Byte.valueOf((byte) -1);`
+org.apache.commons.lang3.math.NumberUtils:61 `    public static final Double DOUBLE_ZERO = Double.valueOf(0.0d);`
+org.apache.commons.lang3.math.NumberUtils:63 `    public static final Double DOUBLE_ONE = Double.valueOf(1.0d);`
+org.apache.commons.lang3.math.NumberUtils:65 `    public static final Double DOUBLE_MINUS_ONE = Double.valueOf(-1.0d);`
+org.apache.commons.lang3.math.NumberUtils:67 `    public static final Float FLOAT_ZERO = Float.valueOf(0.0f);`
+org.apache.commons.lang3.math.NumberUtils:69 `    public static final Float FLOAT_ONE = Float.valueOf(1.0f);`
+org.apache.commons.lang3.math.NumberUtils:71 `    public static final Float FLOAT_MINUS_ONE = Float.valueOf(-1.0f);`
+org.apache.commons.lang3.math.NumberUtils:78 `    public static final Long LONG_INT_MAX_VALUE = Long.valueOf(Integer.MAX_VALUE);`
+org.apache.commons.lang3.math.NumberUtils:85 `    public static final Long LONG_INT_MIN_VALUE = Long.valueOf(Integer.MIN_VALUE);`
+org.apache.commons.lang3.time.DurationUtils:40 `    static final Range<Long> LONG_TO_INT_RANGE = Range.between(NumberUtils.LONG_INT_MIN_VALUE,`
+org.apache.commons.lang3.time.DurationUtils:73 `        return duration.getNano() % 1_000_000;`
+
+
+Task Description:
+The provided code snippets are from the Apache Commons Lang library, specifically from the `Range`, `NumberUtils`, and `DurationUtils` classes. Here's a brief description of each relevant part:
+
+1. **Range Class (org.apache.commons.lang3.Range)**:
+    - **Line 35**: Suppresses unchecked and rawtypes warnings.
+    - **Line 37**: Declares a singleton instance of the `ComparableComparator`.
+    - **Line 48**: Casts `obj1` to `Comparable` and compares it to `obj2`.
+    - **Line 76**: Calls the `between` method with `fromInclusive`, `toInclusive`, and `null` as arguments.
+    - **Line 97**: Creates a new `Range` object with the specified bounds and comparator.
+    - **Line 168-185**: Constructor for the `Range` class. It initializes the range with two elements and a comparator. If the comparator is null, it uses the `ComparableComparator`. It sets the minimum and maximum values based on the comparison of the two elements.
+
+2. **NumberUtils Class (org.apache.commons.lang3.math.NumberUtils)**:
+    - **Lines 35-71**: Defines constants for various number types (Long, Integer, Short, Byte, Double, Float) with values 0, 1, and -1.
+    - **Lines 78, 85**: Defines constants for the maximum and minimum values of an integer, represented as `Long`.
+
+3. **DurationUtils Class (org.apache.commons.lang3.time.DurationUtils)**:
+    - **Line 40**: Defines a static final `Range` of `Long` values, representing the range between `LONG_INT_MIN_VALUE` and `LONG_INT_MAX_VALUE`.
+    - **Line 73**: Returns the nanoseconds part of a duration that is less than one millisecond.
+
+The test cases provided are for the `getNanosOfMilli` method in the `DurationUtils` class. This method is expected to return the nanoseconds part of a given `Duration` object that is less than one millisecond. The test cases check various scenarios, including null duration, zero duration, and durations with different nanosecond values.
+
+Here is a possible implementation of the `getNanosOfMilli` method based on the provided test cases:
+
+```java
+import java.time.Duration;
+
+public class DurationUtils {
+
+    static final Range<Long> LONG_TO_INT_RANGE = Range.between(NumberUtils.LONG_INT_MIN_VALUE, NumberUtils.LONG_INT_MAX_VALUE);
+
+    public static int getNanosOfMiili(Duration duration) {
+        if (duration == null) {
+            return 0;
+        }
+        return (int) (duration.getNano() % 1_000_000);
+    }
+}
+```
+
+This implementation ensures that the method returns the correct nanoseconds part of the duration that is less than one millisecond, as verified by the provided test cases.
+
+Test Results:
+The provided code is throwing NullPointerException. For examples:
+Here are the tests and error messages of NullPointerExceptions.
+@Test public void testGetNanosOfMilli(){
+  assertEquals(0,DurationUtils.getNanosOfMiili(null));
+  assertEquals(0,DurationUtils.getNanosOfMiili(Duration.ZERO));
+  assertEquals(1,DurationUtils.getNanosOfMiili(Duration.ofNanos(1)));
+  assertEquals(10,DurationUtils.getNanosOfMiili(Duration.ofNanos(10)));
+  assertEquals(100,DurationUtils.getNanosOfMiili(Duration.ofNanos(100)));
+  assertEquals(1_000,DurationUtils.getNanosOfMiili(Duration.ofNanos(1_000)));
+  assertEquals(10_000,DurationUtils.getNanosOfMiili(Duration.ofNanos(10_000)));
+  assertEquals(100_000,DurationUtils.getNanosOfMiili(Duration.ofNanos(100_000)));
+  assertEquals(0,DurationUtils.getNanosOfMiili(Duration.ofNanos(1_000_000)));
+  assertEquals(1,DurationUtils.getNanosOfMiili(Duration.ofNanos(1_000_001)));
+}
+
+
+
+  JUnit Jupiter:DurationUtilsTest:testGetNanosOfMilli()
+    MethodSource [className = 'org.apache.commons.lang3.time.DurationUtilsTest', methodName = 'testGetNanosOfMilli', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.time.Duration.getNano()" because "duration" is null
+       org.apache.commons.lang3.time.DurationUtils.getNanosOfMiili(DurationUtils.java:73)
+       org.apache.commons.lang3.time.DurationUtilsTest.testGetNanosOfMilli(DurationUtilsTest.java:37)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727)
+       org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+       org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+       org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
+       [...]
+
+
+Analyze the provided code and utilize task description, test results, and SBFL techniques results to help in identifying potentially faulty lines. Provide the results following this JSON template:
+```json
+{
+  "faultLoc": [
+    {   
+      "faultyLine": (indicating the location of the suspicious code in ClassName:LineNumber format),
+      "code": (displaying the actual code),
+      "explanation": (step by step reasoning on why this location is considered potentially faulty)
+    },  
+    ... 
+   ]   
+}
+```
+Ensure that the objects in the "faultLoc" array are stored in descending order of suspicion.

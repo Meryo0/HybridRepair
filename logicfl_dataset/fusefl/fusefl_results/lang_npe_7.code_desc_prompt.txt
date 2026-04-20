@@ -1,0 +1,9 @@
+Provide a short code description of the following code:
+ org.apache.commons.lang3.stream.Streams:479 `        return stream(stream.stream());`
+ 
+The provided code is expected to pass these test cases:
+ @Test public void testStreamCollectionNull(){
+  final List<String> input=null;
+  assertEquals(0,Streams.stream(input).collect(Collectors.toList()).size());
+}
+

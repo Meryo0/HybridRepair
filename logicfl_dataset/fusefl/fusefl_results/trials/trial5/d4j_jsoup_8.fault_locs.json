@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jsoup.nodes.Node:363",
+            "code": "new NodeTraversor(new OuterHtmlVisitor(accum, ownerDocument().outputSettings())).traverse(this);",
+            "explanation": "The NullPointerException is thrown because `ownerDocument()` returns null when the node is removed from the document. This line attempts to access `outputSettings()` on a null object."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:215",
+            "code": "if (this instanceof Document) return (Document) this;",
+            "explanation": "This line checks if the current node is a Document. If not, it should handle the case where `parentNode` is null to avoid returning null in `ownerDocument()`."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:220",
+            "code": "return parentNode.ownerDocument();",
+            "explanation": "This line recursively calls `ownerDocument()` on the parent node. If `parentNode` is null, it should handle this case to avoid returning null."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Element:1022",
+            "code": "return outerHtml();",
+            "explanation": "This line calls `outerHtml()` which eventually leads to the NullPointerException when `ownerDocument()` is null. It should ensure that `ownerDocument()` is not null before proceeding."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Element:970",
+            "code": "if (out.prettyPrint() && (isBlock() || (parent() != null && parent().tag().canContainBlock() && siblingIndex() == 0)))",
+            "explanation": "This line checks `out.prettyPrint()` which relies on `ownerDocument().outputSettings()`. It should ensure that `ownerDocument()` is not null before accessing `outputSettings()`."
+        }
+    ]
+}

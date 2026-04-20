@@ -1,0 +1,14 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.lang3.text.StrBuilder:2822",
+            "code": "if (this.size != other.size) {",
+            "explanation": "The NullPointerException is thrown because 'other' is null, and the code attempts to access 'other.size'. A null check for 'other' should be added before accessing its fields."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.text.StrBuilder:2821",
+            "code": "public boolean equals(Object obj) {",
+            "explanation": "The equals method should include a null check for the 'obj' parameter before performing any operations on it. This would prevent the NullPointerException when 'obj' is null."
+        }
+    ]
+}

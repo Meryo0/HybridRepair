@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.input.ReaderInputStream:140",
+            "code": "super.setCharset(charsetEncoder.charset());",
+            "explanation": "The test case `testResetCharsetEncoder` sets the charset encoder to null, which leads to a NullPointerException when `charsetEncoder.charset()` is called. This line should handle the case where `charsetEncoder` is null."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.input.ReaderInputStream:103",
+            "code": "private CharsetEncoder charsetEncoder = super.getCharset().newEncoder();",
+            "explanation": "The initialization of `charsetEncoder` assumes that `super.getCharset()` will never be null. If `super.getCharset()` returns null, this will lead to a NullPointerException. This should be checked and handled appropriately."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.build.AbstractStreamBuilder:103",
+            "code": "return charset;",
+            "explanation": "The `getCharset` method in `AbstractStreamBuilder` might be returning null, which would cause the `charsetEncoder` initialization in `ReaderInputStream.Builder` to fail. This method should ensure that it never returns null."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.build.AbstractStreamBuilder:56",
+            "code": "private Charset charset = Charset.defaultCharset();",
+            "explanation": "The default charset is set here, but if it is changed to null somewhere in the code, it could lead to a NullPointerException. Ensure that `charset` is never set to null."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.input.ReaderInputStream:139",
+            "code": "this.charsetEncoder = charsetEncoder;",
+            "explanation": "This line sets `charsetEncoder` to null as per the test case. The subsequent line (140) does not handle the null case, leading to a NullPointerException. This should be checked before assignment."
+        }
+    ]
+}

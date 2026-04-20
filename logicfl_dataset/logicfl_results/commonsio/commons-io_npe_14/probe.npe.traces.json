@@ -1,0 +1,42 @@
+{"npe.traces": [{
+    "test.method": "testContentEquals_InputStream_InputStream",
+    "traces": [
+        {
+            "is_target": true,
+            "method": "buffer",
+            "line": 207,
+            "class": "org.apache.commons.io.IOUtils"
+        },
+        {
+            "is_target": true,
+            "method": "contentEquals",
+            "line": 763,
+            "class": "org.apache.commons.io.IOUtils"
+        },
+        {
+            "is_target": true,
+            "method": "testContentEquals_InputStream_InputStream",
+            "line": 304,
+            "class": "org.apache.commons.io.IOUtilsTestCase"
+        },
+        {
+            "is_target": false,
+            "method": "invoke",
+            "line": 569,
+            "class": "java.lang.reflect.Method"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        }
+    ],
+    "test.class": "org.apache.commons.io.IOUtilsTestCase"
+}]}

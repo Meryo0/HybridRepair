@@ -1,0 +1,36 @@
+Provide a short code description of the following code:
+ com.fasterxml.jackson.core.util.BufferRecycler:45 `    private final static int[] BYTE_BUFFER_LENGTHS = new int[] { 8000, 8000, 2000, 2000 };`
+com.fasterxml.jackson.core.util.BufferRecycler:46 `    private final static int[] CHAR_BUFFER_LENGTHS = new int[] { 4000, 4000, 200, 200 };`
+com.fasterxml.jackson.core.util.BufferRecycler:62 `        this(4, 4);`
+com.fasterxml.jackson.core.util.BufferRecycler:63 `    }`
+com.fasterxml.jackson.core.util.BufferRecycler:71 `    protected BufferRecycler(int bbCount, int cbCount) {`
+com.fasterxml.jackson.core.util.BufferRecycler:72 `        _byteBuffers = new byte[bbCount][];`
+com.fasterxml.jackson.core.util.BufferRecycler:73 `        _charBuffers = new char[cbCount][];`
+com.fasterxml.jackson.core.util.BufferRecycler:74 `    }`
+com.fasterxml.jackson.core.util.TextBuffer:29 `    final static char[] NO_CHARS = new char[0];`
+com.fasterxml.jackson.core.util.TextBuffer:85 `    private boolean _hasSegments = false;`
+com.fasterxml.jackson.core.util.TextBuffer:121 `    public TextBuffer(BufferRecycler allocator) {`
+com.fasterxml.jackson.core.util.TextBuffer:122 `        _allocator = allocator;`
+com.fasterxml.jackson.core.util.TextBuffer:123 `    }`
+com.fasterxml.jackson.core.util.TextBuffer:156 `        _inputStart = -1; // indicates shared buffer not used`
+com.fasterxml.jackson.core.util.TextBuffer:157 `        _currentSize = 0;`
+com.fasterxml.jackson.core.util.TextBuffer:158 `        _inputLen = 0;`
+com.fasterxml.jackson.core.util.TextBuffer:160 `        _inputBuffer = null;`
+com.fasterxml.jackson.core.util.TextBuffer:161 `        _resultString = null;`
+com.fasterxml.jackson.core.util.TextBuffer:162 `        _resultArray = null;`
+com.fasterxml.jackson.core.util.TextBuffer:165 `        if (_hasSegments) {`
+com.fasterxml.jackson.core.util.TextBuffer:168 `    }`
+com.fasterxml.jackson.core.util.TextBuffer:301 `        if (_inputStart >= 0) return _inputBuffer;`
+com.fasterxml.jackson.core.util.TextBuffer:302 `        if (_resultArray != null)  return _resultArray;`
+com.fasterxml.jackson.core.util.TextBuffer:303 `        if (_resultString != null) {`
+com.fasterxml.jackson.core.util.TextBuffer:307 `        if (!_hasSegments)  return _currentSegment;`
+ 
+The provided code is expected to pass these test cases:
+ public void testEmpty(){
+  TextBuffer tb=new TextBuffer(new BufferRecycler());
+  tb.resetWithEmpty();
+  assertTrue(tb.getTextBuffer().length == 0);
+  tb.contentsAsString();
+  assertTrue(tb.getTextBuffer().length == 0);
+}
+

@@ -1,0 +1,12 @@
+Fault Localization Results
+NPE at line(sub_type_validator_1, 85) / Null Expression - v_cls_3684[cls]
+	 can be caused by 
+v_cls_3684[cls] - line(sub_type_validator_1, 85).
+
+NPE at line(sub_type_validator_1, 85) / Null Expression - v_cls_3684[cls]
+	 can be caused by 
+v_raw_3681[raw] - line(sub_type_validator_1, 84).
+
+NPE at line(sub_type_validator_1, 85) / Null Expression - v_cls_3684[cls]
+	 can be caused by 
+sub_type_validator_1_expr30['cls.getSuperclass()'] - line(sub_type_validator_1, 84).

@@ -1,0 +1,220 @@
+@Test public void test_checkEquals_functionality(){
+  assertFalse(IOCase.SENSITIVE.checkEquals("ABC",""));
+  assertFalse(IOCase.SENSITIVE.checkEquals("ABC","A"));
+  assertFalse(IOCase.SENSITIVE.checkEquals("ABC","AB"));
+  assertTrue(IOCase.SENSITIVE.checkEquals("ABC","ABC"));
+  assertFalse(IOCase.SENSITIVE.checkEquals("ABC","BC"));
+  assertFalse(IOCase.SENSITIVE.checkEquals("ABC","C"));
+  assertFalse(IOCase.SENSITIVE.checkEquals("ABC","ABCD"));
+  assertFalse(IOCase.SENSITIVE.checkEquals("","ABC"));
+  assertTrue(IOCase.SENSITIVE.checkEquals("",""));
+  assertFalse(IOCase.SENSITIVE.checkEquals("ABC",null));
+  assertFalse(IOCase.SENSITIVE.checkEquals(null,"ABC"));
+  assertTrue(IOCase.SENSITIVE.checkEquals(null,null));
+}
+
+@Test public void testHidden() throws IOException {
+  final File hiddenDirFile=new File(SVN_DIR_NAME);
+  final Path hiddenDirPath=hiddenDirFile.toPath();
+  if (hiddenDirFile.exists()) {
+    assertFiltering(HiddenFileFilter.HIDDEN,hiddenDirFile,hiddenDirFile.isHidden());
+    assertFiltering(HiddenFileFilter.HIDDEN,hiddenDirPath,hiddenDirFile.isHidden());
+    assertFiltering(HiddenFileFilter.VISIBLE,hiddenDirFile,!hiddenDirFile.isHidden());
+    assertFiltering(HiddenFileFilter.VISIBLE,hiddenDirPath,!hiddenDirFile.isHidden());
+  }
+  final Path path=temporaryFolder.toPath();
+  assertFiltering(HiddenFileFilter.HIDDEN,temporaryFolder,false);
+  assertFiltering(HiddenFileFilter.HIDDEN,path,false);
+  assertFiltering(HiddenFileFilter.HIDDEN,(Path)null,true);
+  assertFiltering(HiddenFileFilter.VISIBLE,temporaryFolder,true);
+  assertFiltering(HiddenFileFilter.VISIBLE,path,true);
+  assertFiltering(HiddenFileFilter.VISIBLE,(Path)null,false);
+}
+
+@Test public void testCanRead() throws Exception {
+  final File readOnlyFile=new File(temporaryFolder,"read-only-file1.txt");
+  final Path readOnlyPath=readOnlyFile.toPath();
+  if (!readOnlyFile.getParentFile().exists()) {
+    fail("Cannot create file " + readOnlyFile + " as the parent directory does not exist");
+  }
+  try (BufferedOutputStream output=new BufferedOutputStream(Files.newOutputStream(readOnlyFile.toPath()))){
+    TestUtils.generateTestData(output,32);
+  }
+   assertTrue(readOnlyFile.setReadOnly());
+  assertFiltering(CanReadFileFilter.CAN_READ,readOnlyFile,true);
+  assertFiltering(CanReadFileFilter.CAN_READ,(File)null,false);
+  assertFiltering(CanReadFileFilter.CAN_READ,readOnlyPath,true);
+  assertFiltering(CanReadFileFilter.CAN_READ,(Path)null,false);
+  assertFiltering(CanReadFileFilter.CANNOT_READ,readOnlyFile,false);
+  assertFiltering(CanReadFileFilter.CANNOT_READ,(File)null,true);
+  assertFiltering(CanReadFileFilter.CANNOT_READ,readOnlyPath,false);
+  assertFiltering(CanReadFileFilter.CANNOT_READ,(Path)null,true);
+  assertFiltering(CanReadFileFilter.READ_ONLY,readOnlyFile,true);
+  assertFiltering(CanReadFileFilter.READ_ONLY,(File)null,false);
+  assertFiltering(CanReadFileFilter.READ_ONLY,readOnlyPath,true);
+  assertFiltering(CanReadFileFilter.READ_ONLY,(Path)null,false);
+  readOnlyFile.delete();
+}
+
+@Test public void testEmpty() throws Exception {
+  final File emptyDirFile=new File(temporaryFolder,"empty-dir");
+  final Path emptyDirPath=emptyDirFile.toPath();
+  emptyDirFile.mkdirs();
+  assertFiltering(EmptyFileFilter.EMPTY,emptyDirFile,true);
+  assertFiltering(EmptyFileFilter.EMPTY,emptyDirPath,true);
+  assertFiltering(EmptyFileFilter.EMPTY,(File)null,true);
+  assertFiltering(EmptyFileFilter.EMPTY,(Path)null,true);
+  assertFiltering(EmptyFileFilter.NOT_EMPTY,emptyDirFile,false);
+  assertFiltering(EmptyFileFilter.NOT_EMPTY,emptyDirPath,false);
+  assertFiltering(EmptyFileFilter.NOT_EMPTY,(File)null,false);
+  assertFiltering(EmptyFileFilter.NOT_EMPTY,(Path)null,false);
+  final File emptyFile=new File(emptyDirFile,"empty-file.txt");
+  final Path emptyPath=emptyFile.toPath();
+  if (!emptyFile.getParentFile().exists()) {
+    fail("Cannot create file " + emptyFile + " as the parent directory does not exist");
+  }
+  try (BufferedOutputStream output1=new BufferedOutputStream(Files.newOutputStream(emptyFile.toPath()))){
+    TestUtils.generateTestData(output1,0);
+  }
+   assertFiltering(EmptyFileFilter.EMPTY,emptyFile,true);
+  assertFiltering(EmptyFileFilter.EMPTY,emptyPath,true);
+  assertFiltering(EmptyFileFilter.NOT_EMPTY,emptyFile,false);
+  assertFiltering(EmptyFileFilter.NOT_EMPTY,emptyPath,false);
+  assertFiltering(EmptyFileFilter.EMPTY,emptyDirFile,false);
+  assertFiltering(EmptyFileFilter.EMPTY,emptyDirPath,false);
+  assertFiltering(EmptyFileFilter.NOT_EMPTY,emptyDirFile,true);
+  assertFiltering(EmptyFileFilter.NOT_EMPTY,emptyDirPath,true);
+  final File notEmptyFile=new File(emptyDirFile,"not-empty-file.txt");
+  final Path notEmptyPath=notEmptyFile.toPath();
+  if (!notEmptyFile.getParentFile().exists()) {
+    fail("Cannot create file " + notEmptyFile + " as the parent directory does not exist");
+  }
+  try (BufferedOutputStream output=new BufferedOutputStream(Files.newOutputStream(notEmptyFile.toPath()))){
+    TestUtils.generateTestData(output,32);
+  }
+   assertFiltering(EmptyFileFilter.EMPTY,notEmptyFile,false);
+  assertFiltering(EmptyFileFilter.EMPTY,notEmptyPath,false);
+  assertFiltering(EmptyFileFilter.NOT_EMPTY,notEmptyFile,true);
+  assertFiltering(EmptyFileFilter.NOT_EMPTY,notEmptyPath,true);
+  FileUtils.forceDelete(emptyDirFile);
+}
+
+@Test public void testFiles() throws IOException {
+  final IOFileFilter filter=FileFileFilter.INSTANCE;
+  assertFiltering(filter,(File)null,false);
+  assertFiltering(filter,new File("src/"),false);
+  assertFiltering(filter,new File("src/").toPath(),false);
+  assertFiltering(filter,new File("src/java/"),false);
+  assertFiltering(filter,new File("src/java/").toPath(),false);
+  assertFiltering(filter,new File("pom.xml"),true);
+  assertFiltering(filter,new File("pom.xml").toPath(),true);
+  assertFiltering(filter,new File("imaginary"),false);
+  assertFiltering(filter,new File("imaginary").toPath(),false);
+  assertFiltering(filter,new File("imaginary/"),false);
+  assertFiltering(filter,new File("imaginary/").toPath(),false);
+  assertFiltering(filter,new File("LICENSE.txt"),true);
+  assertFiltering(filter,new File("LICENSE.txt").toPath(),true);
+}
+
+@Test public void testCanWrite() throws Exception {
+  final File readOnlyFile=new File(temporaryFolder,"read-only-file2.txt");
+  final Path readOnlyPath=readOnlyFile.toPath();
+  if (!readOnlyFile.getParentFile().exists()) {
+    fail("Cannot create file " + readOnlyFile + " as the parent directory does not exist");
+  }
+  try (BufferedOutputStream output=new BufferedOutputStream(Files.newOutputStream(readOnlyFile.toPath()))){
+    TestUtils.generateTestData(output,32);
+  }
+   assertTrue(readOnlyFile.setReadOnly());
+  assertFiltering(CanWriteFileFilter.CAN_WRITE,temporaryFolder,true);
+  assertFiltering(CanWriteFileFilter.CAN_WRITE,readOnlyFile,false);
+  assertFiltering(CanWriteFileFilter.CAN_WRITE,(File)null,false);
+  assertFiltering(CanWriteFileFilter.CAN_WRITE,readOnlyPath,false);
+  assertFiltering(CanWriteFileFilter.CAN_WRITE,(Path)null,false);
+  assertFiltering(CanWriteFileFilter.CANNOT_WRITE,temporaryFolder,false);
+  assertFiltering(CanWriteFileFilter.CANNOT_WRITE,readOnlyFile,true);
+  assertFiltering(CanWriteFileFilter.CANNOT_WRITE,readOnlyPath,true);
+  assertFiltering(CanWriteFileFilter.CANNOT_WRITE,(File)null,true);
+  assertFiltering(CanWriteFileFilter.CANNOT_WRITE,(Path)null,true);
+  readOnlyFile.delete();
+}
+
+@Test public void testNameFilter() throws IOException {
+  final NameFileFilter filter=new NameFileFilter("foo","bar");
+  assertFooBarFileFiltering(filter);
+  assertFiltering(filter,(File)null,false);
+  assertFiltering(filter,(Path)null,false);
+}
+
+
+
+Failures (7):
+  JUnit Jupiter:IOCaseTest:test_checkEquals_functionality()
+    MethodSource [className = 'org.apache.commons.io.IOCaseTest', methodName = 'test_checkEquals_functionality', methodParameterTypes = '']
+    => java.lang.NullPointerException: str2
+       java.base/java.util.Objects.requireNonNull(Objects.java:235)
+       org.apache.commons.io.IOCase.checkEquals(IOCase.java:174)
+       org.apache.commons.io.IOCaseTest.test_checkEquals_functionality(IOCaseTest.java:146)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+  JUnit Jupiter:FileFilterTest:testNameFilter()
+    MethodSource [className = 'org.apache.commons.io.filefilter.FileFilterTest', methodName = 'testNameFilter', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.io.File.getName()" because "file" is null
+       org.apache.commons.io.filefilter.NameFileFilter.accept(NameFileFilter.java:166)
+       org.apache.commons.io.filefilter.AbstractFilterTest.assertFiltering(AbstractFilterTest.java:50)
+       org.apache.commons.io.filefilter.FileFilterTest.testNameFilter(FileFilterTest.java:1066)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+  JUnit Jupiter:FileFilterTest:testEmpty()
+    MethodSource [className = 'org.apache.commons.io.filefilter.FileFilterTest', methodName = 'testEmpty', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.io.File.isDirectory()" because "file" is null
+       org.apache.commons.io.filefilter.EmptyFileFilter.accept(EmptyFileFilter.java:107)
+       org.apache.commons.io.filefilter.AbstractFilterTest.assertFiltering(AbstractFilterTest.java:50)
+       org.apache.commons.io.filefilter.FileFilterTest.testEmpty(FileFilterTest.java:408)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+  JUnit Jupiter:FileFilterTest:testFiles()
+    MethodSource [className = 'org.apache.commons.io.filefilter.FileFilterTest', methodName = 'testFiles', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.io.File.isFile()" because "file" is null
+       org.apache.commons.io.filefilter.FileFileFilter.accept(FileFileFilter.java:100)
+       org.apache.commons.io.filefilter.AbstractFilterTest.assertFiltering(AbstractFilterTest.java:50)
+       org.apache.commons.io.filefilter.FileFilterTest.testFiles(FileFilterTest.java:503)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+  JUnit Jupiter:FileFilterTest:testCanRead()
+    MethodSource [className = 'org.apache.commons.io.filefilter.FileFilterTest', methodName = 'testCanRead', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.io.File.canRead()" because "file" is null
+       org.apache.commons.io.filefilter.CanReadFileFilter.accept(CanReadFileFilter.java:95)
+       org.apache.commons.io.filefilter.AbstractFilterTest.assertFiltering(AbstractFilterTest.java:50)
+       org.apache.commons.io.filefilter.FileFilterTest.testCanRead(FileFilterTest.java:231)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+  JUnit Jupiter:FileFilterTest:testCanWrite()
+    MethodSource [className = 'org.apache.commons.io.filefilter.FileFilterTest', methodName = 'testCanWrite', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.io.File.canWrite()" because "file" is null
+       org.apache.commons.io.filefilter.CanWriteFileFilter.accept(CanWriteFileFilter.java:83)
+       org.apache.commons.io.filefilter.AbstractFilterTest.assertFiltering(AbstractFilterTest.java:50)
+       org.apache.commons.io.filefilter.FileFilterTest.testCanWrite(FileFilterTest.java:258)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+  JUnit Jupiter:FileFilterTest:testHidden()
+    MethodSource [className = 'org.apache.commons.io.filefilter.FileFilterTest', methodName = 'testHidden', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.nio.file.Path.getFileSystem()" because "path" is null
+       java.base/java.nio.file.Files.provider(Files.java:105)
+       java.base/java.nio.file.Files.isHidden(Files.java:1643)
+       org.apache.commons.io.filefilter.HiddenFileFilter.lambda$accept$0(HiddenFileFilter.java:117)
+       org.apache.commons.io.filefilter.AbstractFileFilter.get(AbstractFileFilter.java:122)
+       org.apache.commons.io.filefilter.HiddenFileFilter.accept(HiddenFileFilter.java:117)
+       org.apache.commons.io.filefilter.AbstractFilterTest.assertFiltering(AbstractFilterTest.java:73)
+       org.apache.commons.io.filefilter.FileFilterTest.testHidden(FileFilterTest.java:738)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Store NPE traces to npe.traces.json
+NPE Stack Traces exported to npe.traces.json

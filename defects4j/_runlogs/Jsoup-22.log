@@ -1,0 +1,122 @@
+Load configurations from config.properties
+Load configurations from config.properties
+Collecting coverage from failed tests...
+Running Tests...
+Executing command - /usr/bin/java -Xms256m -Xmx1024m -classpath ../../lib/*:lib/Jsoup-22_buggy_src.jar:lib/Jsoup-22_fixed_test.jar -javaagent:../../lib/jacocoagent.jar=excludes=org.junit.*,append=false,destfile=/home/mario/Desktop/LogicFL/defects4j/Jsoup-22/result/jacoco.exec logicfl.coverage.JUnit4TestRunner config.properties true /home/mario/Desktop/LogicFL/defects4j/Jsoup-22/result/npe.traces.json /home/mario/Desktop/LogicFL/defects4j/Jsoup-22/tests.json
+Load configurations from config.properties
+Loading test information from /home/mario/Desktop/LogicFL/defects4j/Jsoup-22/tests.json
+Test execution summary:
+Tests executed - 1
+Tests succeeded - 0
+Tests failed - 1
+orphanNodeReturnsNullForSiblingElements(org.jsoup.nodes.NodeTest): Cannot invoke "org.jsoup.nodes.Node.childNodes()" because the return value of "org.jsoup.nodes.Node.parent()" is null
+Cannot invoke "org.jsoup.nodes.Node.childNodes()" because the return value of "org.jsoup.nodes.Node.parent()" is null
+java.lang.NullPointerException: Cannot invoke "org.jsoup.nodes.Node.childNodes()" because the return value of "org.jsoup.nodes.Node.parent()" is null
+	at org.jsoup.nodes.Node.siblingNodes(Node.java:445)
+	at org.jsoup.nodes.NodeTest.orphanNodeReturnsNullForSiblingElements(NodeTest.java:190)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:36)
+
+Store NPE traces to /home/mario/Desktop/LogicFL/defects4j/Jsoup-22/result/npe.traces.json
+NPE Stack Traces exported to /home/mario/Desktop/LogicFL/defects4j/Jsoup-22/result/npe.traces.json
+
+Analyzing Coverage Data...
+Covered Classes:[org.jsoup.nodes.Attributes, org.jsoup.helper.Validate, org.jsoup.nodes.Node, org.jsoup.nodes.Element, org.jsoup.parser.Tag, org.jsoup.nodes.NodeTest]
+Coverage information exported to /home/mario/Desktop/LogicFL/defects4j/Jsoup-22/coverage.json
+Collecting coverage complete.
+Exec. Time - 00:00:00.598
+coverage.sh executed successfully.
+Getting configurations from config.properties
+Total 6 Target classes.
+Analyzing class - org.jsoup.helper.Validate
+Analyzing class - org.jsoup.nodes.Attributes
+Analyzing class - org.jsoup.nodes.Element
+Analyzing class - org.jsoup.nodes.Node
+Analyzing class - org.jsoup.nodes.NodeTest
+Analyzing class - org.jsoup.parser.Tag
+Compilation successful!
+FL Facts are exported to /home/mario/Desktop/LogicFL/defects4j/Jsoup-22/result/logic-fl.pl
+Code Facts are exported to /home/mario/Desktop/LogicFL/defects4j/Jsoup-22/result/code-facts.pl
+Line matching information exported to /home/mario/Desktop/LogicFL/defects4j/Jsoup-22/result/line.info.json
+Exec. Time - 00:00:02.924
+static_analyzer.sh executed successfully.
+Getting configurations from config.properties
+Load configurations from config.properties
+Executing command - /usr/bin/java -Xms256m -Xmx1024m -classpath /home/mario/Desktop/LogicFL/defects4j/Jsoup-22/result/classes:../../lib/*:lib/Jsoup-22_buggy_src.jar:lib/Jsoup-22_fixed_test.jar logicfl.coverage.JUnit4TestRunner config.properties true /home/mario/Desktop/LogicFL/defects4j/Jsoup-22/result/probe.npe.traces.json /home/mario/Desktop/LogicFL/defects4j/Jsoup-22/tests.json
+Load configurations from config.properties
+Loading test information from /home/mario/Desktop/LogicFL/defects4j/Jsoup-22/tests.json
+Test execution summary:
+Tests executed - 1
+Tests succeeded - 0
+Tests failed - 1
+orphanNodeReturnsNullForSiblingElements(org.jsoup.nodes.NodeTest): Cannot invoke "org.jsoup.nodes.Node.childNodes()" because "node_1_expr13_line_445" is null
+Cannot invoke "org.jsoup.nodes.Node.childNodes()" because "node_1_expr13_line_445" is null
+java.lang.NullPointerException: Cannot invoke "org.jsoup.nodes.Node.childNodes()" because "node_1_expr13_line_445" is null
+	at org.jsoup.nodes.Node.siblingNodes(Node.java:460)
+	at org.jsoup.nodes.NodeTest.orphanNodeReturnsNullForSiblingElements(NodeTest.java:202)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:36)
+
+Store NPE traces to /home/mario/Desktop/LogicFL/defects4j/Jsoup-22/result/probe.npe.traces.json
+NPE Stack Traces exported to /home/mario/Desktop/LogicFL/defects4j/Jsoup-22/result/probe.npe.traces.json
+
+
+val(node_1_expr13, null, line(node_1, 445)).
+
+
+Exec. Time - 00:00:00.962
+dynamic_analyzer.sh executed successfully.
+Getting configurations from config.properties
+Running Fault Localizer with
+Rules: ../../lib/npe-rules.pl
+Facts: /home/mario/Desktop/LogicFL/defects4j/Jsoup-22/result/logic-fl.pl
+Code Facts: /home/mario/Desktop/LogicFL/defects4j/Jsoup-22/result/code-facts.pl
+consult Succeeded
+NPE at line(node_1, 445) / Null Expression node_1_expr13['parent()']
+	can be caused by 
+node_1_expr13['parent()'] at line(node_1, 445).
+
+Total 1 Identified Fault Locations for NPE.
+Exec. Time - 00:00:00.089
+localizer.sh executed successfully.
+All scripts executed successfully.

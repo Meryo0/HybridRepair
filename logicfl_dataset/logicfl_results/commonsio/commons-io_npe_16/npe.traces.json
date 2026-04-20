@@ -1,0 +1,36 @@
+{"npe.traces": [{
+    "test.method": "testContentEqualsIgnoreEOL",
+    "traces": [
+        {
+            "is_target": true,
+            "method": "contentEqualsIgnoreEOL",
+            "line": 448,
+            "class": "org.apache.commons.io.FileUtils"
+        },
+        {
+            "is_target": true,
+            "method": "testContentEqualsIgnoreEOL",
+            "line": 633,
+            "class": "org.apache.commons.io.FileUtilsTestCase"
+        },
+        {
+            "is_target": false,
+            "method": "invoke",
+            "line": 569,
+            "class": "java.lang.reflect.Method"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        }
+    ],
+    "test.class": "org.apache.commons.io.FileUtilsTestCase"
+}]}

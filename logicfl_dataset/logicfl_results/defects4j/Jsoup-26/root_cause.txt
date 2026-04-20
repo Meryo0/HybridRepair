@@ -1,0 +1,24 @@
+Fault Localization Results
+NPE at line(cleaner_1, 73) / Null Expression - p_source_898[source]
+	 can be caused by 
+document_1_literal7[null] - line(document_1, 173).
+
+NPE at line(cleaner_1, 73) / Null Expression - p_source_898[source]
+	 can be caused by 
+v_found_110[found] - line(document_1, 170).
+
+NPE at line(cleaner_1, 73) / Null Expression - p_source_898[source]
+	 can be caused by 
+p_source_898[source] - line(cleaner_1, 73).
+
+NPE at line(cleaner_1, 73) / Null Expression - p_source_898[source]
+	 can be caused by 
+cleaner_1_expr9['dirtyDocument.body()'] - line(cleaner_1, 43).
+
+NPE at line(cleaner_1, 73) / Null Expression - p_source_898[source]
+	 can be caused by 
+document_1_expr9['findFirstElementByTagName("body",this)'] - line(document_1, 59).
+
+NPE at line(cleaner_1, 73) / Null Expression - p_source_898[source]
+	 can be caused by 
+document_1_expr14['findFirstElementByTagName(tag,child)'] - line(document_1, 168).

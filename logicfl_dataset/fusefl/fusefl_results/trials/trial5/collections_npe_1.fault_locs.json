@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.collections4.map.CompositeMap:136",
+            "code": "final Collection<K> intersect = CollectionUtils.intersection(this.composite[i].keySet(), map.keySet());",
+            "explanation": "The NullPointerException is thrown because 'map' is null. The method 'addComposited' does not check if 'map' is null before attempting to access its keySet. Adding a null check before this line would prevent the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.collections4.map.CompositeMap:112",
+            "code": "this.addComposited(composite[i]);",
+            "explanation": "The constructor of CompositeMap calls 'addComposited' for each map in the 'composite' array. If any of these maps are null, it will lead to a NullPointerException. Adding a null check before calling 'addComposited' would prevent this issue."
+        },
+        {
+            "faultyLine": "org.apache.commons.collections4.map.CompositeMap:144",
+            "code": "final Map<K, V>[] temp = new Map[this.composite.length + 1];",
+            "explanation": "This line creates a new array to hold the composite maps. If 'this.composite' is null, it will cause a NullPointerException. Ensuring 'this.composite' is properly initialized before this line would prevent the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.collections4.map.CompositeMap:110",
+            "code": "this.composite = new Map[0];",
+            "explanation": "This line initializes 'this.composite' to an empty array. If the intention is to initialize it with the provided 'composite' array, this line should be modified accordingly. Otherwise, ensure that 'this.composite' is not null before accessing it."
+        },
+        {
+            "faultyLine": "org.apache.commons.collections4.map.CompositeMap:109",
+            "code": "this.mutator = mutator;",
+            "explanation": "While this line itself is not directly causing the NullPointerException, it is part of the constructor where 'this.composite' is initialized to an empty array. Ensuring proper initialization of 'this.composite' in the constructor would prevent issues in subsequent method calls."
+        }
+    ]
+}

@@ -1,0 +1,51 @@
+{
+    "coverage": [
+        {
+            "covered": [ 45, 51, 53, 55, 60, 77, 88, 99 ],
+            "className": "org.apache.commons.cli.OptionValidator"
+        },
+        {
+            "covered": [ 46, 49, 52, 55, 60, 62, 146, 149, 155, 163, 165, 185, 189, 191, 201, 212 ],
+            "className": "org.apache.commons.cli.Options"
+        },
+        {
+            "covered": [ 44, 47, 56, 58, 68, 166 ],
+            "className": "org.apache.commons.cli.CommandLine"
+        },
+        {
+            "covered": [ 25, 27, 28, 29, 30, 31, 32 ],
+            "className": "org.apache.commons.cli.bug.BugCLI133Test"
+        },
+        {
+            "covered": [ 33, 71, 135, 138, 139, 140, 141, 143, 144, 146, 148, 150, 153, 157, 160, 224, 225, 227, 238, 240, 295, 311 ],
+            "className": "org.apache.commons.cli.Parser"
+        },
+        {
+            "covered": [ 31, 34, 52, 53, 54, 55, 98, 99, 102, 106, 163 ],
+            "className": "org.apache.commons.cli.PosixParser"
+        },
+        {
+            "covered": [ 55, 70, 76, 93, 94, 126, 128, 130, 131, 134, 139, 140, 141, 163, 168, 252, 292, 643, 644 ],
+            "className": "org.apache.commons.cli.Option"
+        },
+        {
+            "covered": [ 24, 26, 27, 28 ],
+            "className": "org.apache.commons.cli.UtilTest"
+        },
+        {
+            "covered": [ 36, 38, 40, 42 ],
+            "className": "org.apache.commons.cli.Util"
+        }
+    ],
+    "classes": [
+        "org.apache.commons.cli.CommandLine",
+        "org.apache.commons.cli.Option",
+        "org.apache.commons.cli.OptionValidator",
+        "org.apache.commons.cli.Options",
+        "org.apache.commons.cli.Parser",
+        "org.apache.commons.cli.PosixParser",
+        "org.apache.commons.cli.Util",
+        "org.apache.commons.cli.UtilTest",
+        "org.apache.commons.cli.bug.BugCLI133Test"
+    ]
+}

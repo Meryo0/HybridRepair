@@ -1,0 +1,16 @@
+Fault Localization Results
+NPE at line(class_loader_utils_1, 77) / Null Expression - p_class_loader_4[classLoader]
+	 can be caused by 
+class_loader_utils_1_expr5['(URLClassLoader)classLoader'] - line(class_loader_utils_1, 65).
+
+NPE at line(class_loader_utils_1, 77) / Null Expression - p_class_loader_4[classLoader]
+	 can be caused by 
+p_class_loader_4[classLoader] - line(class_loader_utils_1, 77).
+
+NPE at line(class_loader_utils_1, 77) / Null Expression - p_class_loader_4[classLoader]
+	 can be caused by 
+p_class_loader_3[classLoader] - line(class_loader_utils_1, 65).
+
+NPE at line(class_loader_utils_1, 67) / Null Expression - p_class_loader_3[classLoader]
+	 can be caused by 
+p_class_loader_3[classLoader] - line(class_loader_utils_1, 67).

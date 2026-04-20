@@ -1,0 +1,462 @@
+{"classes": [
+    {
+        "probe_ranges": [
+            {
+                "endLine": 126,
+                "offset": 16,
+                "startLine": 110,
+                "orgLineEnd": 110,
+                "probedLineEnd": 126,
+                "orgLineStart": 110
+            },
+            {
+                "endLine": 153,
+                "offset": 20,
+                "startLine": 149,
+                "orgLineEnd": 135,
+                "probedLineEnd": 155,
+                "orgLineStart": 133
+            },
+            {
+                "endLine": 159,
+                "offset": 23,
+                "startLine": 156,
+                "orgLineEnd": 136,
+                "probedLineEnd": 159,
+                "orgLineStart": 136
+            },
+            {
+                "endLine": 170,
+                "offset": 33,
+                "startLine": 160,
+                "orgLineEnd": 137,
+                "probedLineEnd": 170,
+                "orgLineStart": 137
+            },
+            {
+                "endLine": 175,
+                "offset": 48,
+                "startLine": 171,
+                "orgLineEnd": 141,
+                "probedLineEnd": 189,
+                "orgLineStart": 138
+            },
+            {
+                "endLine": 181,
+                "offset": 42,
+                "startLine": 176,
+                "orgLineEnd": 139,
+                "probedLineEnd": 181,
+                "orgLineStart": 139
+            },
+            {
+                "endLine": 188,
+                "offset": 48,
+                "startLine": 182,
+                "orgLineEnd": 140,
+                "probedLineEnd": 188,
+                "orgLineStart": 140
+            },
+            {
+                "endLine": 193,
+                "offset": 51,
+                "startLine": 190,
+                "orgLineEnd": 142,
+                "probedLineEnd": 193,
+                "orgLineStart": 142
+            }
+        ],
+        "classId": "path_utils_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 425,
+                "offset": 93,
+                "startLine": 421,
+                "orgLineEnd": 332,
+                "probedLineEnd": 425,
+                "orgLineStart": 332
+            },
+            {
+                "endLine": 431,
+                "offset": 99,
+                "startLine": 428,
+                "orgLineEnd": 341,
+                "probedLineEnd": 440,
+                "orgLineStart": 335
+            },
+            {
+                "endLine": 436,
+                "offset": 99,
+                "startLine": 433,
+                "orgLineEnd": 337,
+                "probedLineEnd": 436,
+                "orgLineStart": 337
+            },
+            {
+                "endLine": 446,
+                "offset": 103,
+                "startLine": 442,
+                "orgLineEnd": 345,
+                "probedLineEnd": 448,
+                "orgLineStart": 343
+            },
+            {
+                "endLine": 555,
+                "offset": 107,
+                "startLine": 551,
+                "orgLineEnd": 448,
+                "probedLineEnd": 555,
+                "orgLineStart": 448
+            },
+            {
+                "endLine": 1234,
+                "offset": 112,
+                "startLine": 1229,
+                "orgLineEnd": 1124,
+                "probedLineEnd": 1236,
+                "orgLineStart": 1122
+            },
+            {
+                "endLine": 1243,
+                "offset": 120,
+                "startLine": 1238,
+                "orgLineEnd": 1128,
+                "probedLineEnd": 1248,
+                "orgLineStart": 1126
+            },
+            {
+                "endLine": 1247,
+                "offset": 120,
+                "startLine": 1244,
+                "orgLineEnd": 1127,
+                "probedLineEnd": 1247,
+                "orgLineStart": 1127
+            },
+            {
+                "endLine": 1255,
+                "offset": 125,
+                "startLine": 1250,
+                "orgLineEnd": 1134,
+                "probedLineEnd": 1259,
+                "orgLineStart": 1130
+            },
+            {
+                "endLine": 1473,
+                "offset": 131,
+                "startLine": 1467,
+                "orgLineEnd": 1342,
+                "probedLineEnd": 1473,
+                "orgLineStart": 1342
+            },
+            {
+                "endLine": 1494,
+                "offset": 147,
+                "startLine": 1478,
+                "orgLineEnd": 1350,
+                "probedLineEnd": 1497,
+                "orgLineStart": 1347
+            },
+            {
+                "endLine": 1877,
+                "offset": 151,
+                "startLine": 1873,
+                "orgLineEnd": 1728,
+                "probedLineEnd": 1879,
+                "orgLineStart": 1726
+            },
+            {
+                "endLine": 1885,
+                "offset": 156,
+                "startLine": 1880,
+                "orgLineEnd": 1729,
+                "probedLineEnd": 1885,
+                "orgLineStart": 1729
+            },
+            {
+                "endLine": 2843,
+                "offset": 161,
+                "startLine": 2838,
+                "orgLineEnd": 2685,
+                "probedLineEnd": 2846,
+                "orgLineStart": 2682
+            },
+            {
+                "endLine": 2853,
+                "offset": 166,
+                "startLine": 2848,
+                "orgLineEnd": 2690,
+                "probedLineEnd": 2856,
+                "orgLineStart": 2687
+            },
+            {
+                "endLine": 2862,
+                "offset": 170,
+                "startLine": 2858,
+                "orgLineEnd": 2692,
+                "probedLineEnd": 2862,
+                "orgLineStart": 2692
+            },
+            {
+                "endLine": 2867,
+                "offset": 174,
+                "startLine": 2863,
+                "orgLineEnd": 2695,
+                "probedLineEnd": 2869,
+                "orgLineStart": 2693
+            },
+            {
+                "endLine": 2873,
+                "offset": 177,
+                "startLine": 2870,
+                "orgLineEnd": 2696,
+                "probedLineEnd": 2873,
+                "orgLineStart": 2696
+            }
+        ],
+        "classId": "file_utils_1"
+    },
+    {
+        "probe_ranges": [{
+            "endLine": 84,
+            "offset": 8,
+            "startLine": 76,
+            "orgLineEnd": 77,
+            "probedLineEnd": 85,
+            "orgLineStart": 77
+        }],
+        "classId": "test_utils_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 303,
+                "offset": 3,
+                "startLine": 300,
+                "orgLineEnd": 300,
+                "probedLineEnd": 303,
+                "orgLineStart": 300
+            },
+            {
+                "endLine": 307,
+                "offset": 6,
+                "startLine": 304,
+                "orgLineEnd": 301,
+                "probedLineEnd": 307,
+                "orgLineStart": 301
+            }
+        ],
+        "classId": "directory_walker_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 122,
+                "offset": 15,
+                "startLine": 119,
+                "orgLineEnd": 107,
+                "probedLineEnd": 122,
+                "orgLineStart": 107
+            },
+            {
+                "endLine": 126,
+                "offset": 18,
+                "startLine": 123,
+                "orgLineEnd": 108,
+                "probedLineEnd": 126,
+                "orgLineStart": 108
+            },
+            {
+                "endLine": 132,
+                "offset": 22,
+                "startLine": 128,
+                "orgLineEnd": 110,
+                "probedLineEnd": 132,
+                "orgLineStart": 110
+            },
+            {
+                "endLine": 137,
+                "offset": 26,
+                "startLine": 133,
+                "orgLineEnd": 111,
+                "probedLineEnd": 137,
+                "orgLineStart": 111
+            },
+            {
+                "endLine": 144,
+                "offset": 32,
+                "startLine": 138,
+                "orgLineEnd": 115,
+                "probedLineEnd": 147,
+                "orgLineStart": 112
+            },
+            {
+                "endLine": 154,
+                "offset": 36,
+                "startLine": 150,
+                "orgLineEnd": 118,
+                "probedLineEnd": 154,
+                "orgLineStart": 118
+            },
+            {
+                "endLine": 162,
+                "offset": 42,
+                "startLine": 156,
+                "orgLineEnd": 123,
+                "probedLineEnd": 165,
+                "orgLineStart": 120
+            },
+            {
+                "endLine": 172,
+                "offset": 46,
+                "startLine": 168,
+                "orgLineEnd": 126,
+                "probedLineEnd": 172,
+                "orgLineStart": 126
+            },
+            {
+                "endLine": 177,
+                "offset": 49,
+                "startLine": 174,
+                "orgLineEnd": 128,
+                "probedLineEnd": 177,
+                "orgLineStart": 128
+            },
+            {
+                "endLine": 181,
+                "offset": 52,
+                "startLine": 178,
+                "orgLineEnd": 129,
+                "probedLineEnd": 181,
+                "orgLineStart": 129
+            },
+            {
+                "endLine": 188,
+                "offset": 58,
+                "startLine": 182,
+                "orgLineEnd": 133,
+                "probedLineEnd": 191,
+                "orgLineStart": 130
+            },
+            {
+                "endLine": 198,
+                "offset": 62,
+                "startLine": 194,
+                "orgLineEnd": 136,
+                "probedLineEnd": 198,
+                "orgLineStart": 136
+            },
+            {
+                "endLine": 206,
+                "offset": 68,
+                "startLine": 200,
+                "orgLineEnd": 141,
+                "probedLineEnd": 209,
+                "orgLineStart": 138
+            },
+            {
+                "endLine": 216,
+                "offset": 72,
+                "startLine": 212,
+                "orgLineEnd": 144,
+                "probedLineEnd": 216,
+                "orgLineStart": 144
+            },
+            {
+                "endLine": 226,
+                "offset": 77,
+                "startLine": 221,
+                "orgLineEnd": 149,
+                "probedLineEnd": 226,
+                "orgLineStart": 149
+            },
+            {
+                "endLine": 711,
+                "offset": 81,
+                "startLine": 707,
+                "orgLineEnd": 631,
+                "probedLineEnd": 712,
+                "orgLineStart": 631
+            },
+            {
+                "endLine": 718,
+                "offset": 86,
+                "startLine": 713,
+                "orgLineEnd": 632,
+                "probedLineEnd": 718,
+                "orgLineStart": 632
+            },
+            {
+                "endLine": 722,
+                "offset": 89,
+                "startLine": 719,
+                "orgLineEnd": 633,
+                "probedLineEnd": 722,
+                "orgLineStart": 633
+            }
+        ],
+        "classId": "file_utils_test_case_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 51,
+                "offset": 3,
+                "startLine": 48,
+                "orgLineEnd": 48,
+                "probedLineEnd": 51,
+                "orgLineStart": 48
+            },
+            {
+                "endLine": 55,
+                "offset": 6,
+                "startLine": 52,
+                "orgLineEnd": 49,
+                "probedLineEnd": 55,
+                "orgLineStart": 49
+            },
+            {
+                "endLine": 59,
+                "offset": 9,
+                "startLine": 56,
+                "orgLineEnd": 50,
+                "probedLineEnd": 59,
+                "orgLineStart": 50
+            },
+            {
+                "endLine": 67,
+                "offset": 12,
+                "startLine": 64,
+                "orgLineEnd": 55,
+                "probedLineEnd": 67,
+                "orgLineStart": 55
+            },
+            {
+                "endLine": 85,
+                "offset": 15,
+                "startLine": 82,
+                "orgLineEnd": 70,
+                "probedLineEnd": 85,
+                "orgLineStart": 70
+            },
+            {
+                "endLine": 201,
+                "offset": 18,
+                "startLine": 198,
+                "orgLineEnd": 183,
+                "probedLineEnd": 201,
+                "orgLineStart": 183
+            },
+            {
+                "endLine": 210,
+                "offset": 21,
+                "startLine": 207,
+                "orgLineEnd": 189,
+                "probedLineEnd": 210,
+                "orgLineStart": 189
+            }
+        ],
+        "classId": "counters_1"
+    }
+]}

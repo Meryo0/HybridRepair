@@ -1,0 +1,21 @@
+{
+ "buggy.hash": "",
+ "fixed_hash": "800f0531068ebaf2f2d257bb1bd805781ddd4760",
+ "passed.classes": [],
+ "failed.classes": [
+  "org.apache.commons.codec.binary.Base64InputStreamTest",
+  "org.apache.commons.codec.binary.Base64OutputStreamTest"
+ ],
+ "failed.tests": [
+  {
+   "class": "org.apache.commons.codec.binary.Base64InputStreamTest",
+   "name": "testCodec98NPE",
+   "message": ""
+  },
+  {
+   "class": "org.apache.commons.codec.binary.Base64OutputStreamTest",
+   "name": "testCodec98NPE",
+   "message": ""
+  }
+ ]
+}

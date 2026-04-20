@@ -1,0 +1,41 @@
+@Test public void testNull(){
+  String message=MessageFactory.buildMessage(Locale.FRENCH,null,null,"nothing");
+  Assert.assertEquals("",message);
+}
+
+@Test public void testNullGeneral(){
+  Localizable specific=new DummyLocalizable("specific {0} - {1} - {2}");
+  String message=MessageFactory.buildMessage(Locale.FRENCH,specific,null,0,1,2);
+  Assert.assertEquals("specific 0 - 1 - 2",message);
+}
+
+
+
+  JUnit Vintage:MessageFactoryTest:testNull
+    MethodSource [className = 'org.apache.commons.math.exception.util.MessageFactoryTest', methodName = 'testNull', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "org.apache.commons.math.exception.util.Localizable.getLocalizedString(java.util.Locale)" because "general" is null
+       org.apache.commons.math.exception.util.MessageFactory.buildMessage(MessageFactory.java:66)
+       org.apache.commons.math.exception.util.MessageFactoryTest.testNull(MessageFactoryTest.java:54)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+       org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+       org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+       org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+       [...]
+  JUnit Vintage:MessageFactoryTest:testNullGeneral
+    MethodSource [className = 'org.apache.commons.math.exception.util.MessageFactoryTest', methodName = 'testNullGeneral', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "org.apache.commons.math.exception.util.Localizable.getLocalizedString(java.util.Locale)" because "general" is null
+       org.apache.commons.math.exception.util.MessageFactory.buildMessage(MessageFactory.java:66)
+       org.apache.commons.math.exception.util.MessageFactoryTest.testNullGeneral(MessageFactoryTest.java:46)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+       org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+       org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+       org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+       [...]

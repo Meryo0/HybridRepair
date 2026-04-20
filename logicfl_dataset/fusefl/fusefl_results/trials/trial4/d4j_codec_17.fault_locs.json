@@ -1,0 +1,19 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.codec.binary.StringUtils:339",
+            "code": "return new String(bytes, Charsets.ISO_8859_1);",
+            "explanation": "The method `newStringIso8859_1` does not check if the `bytes` array is null before attempting to create a new String. This leads to a NullPointerException when `bytes` is null."
+        },
+        {
+            "faultyLine": "org.apache.commons.codec.binary.StringUtils:419",
+            "code": "return newString(bytes, Charsets.UTF_8);",
+            "explanation": "Similar to the previous case, the method `newStringUtf8` does not check if the `bytes` array is null before attempting to create a new String, leading to a NullPointerException."
+        },
+        {
+            "faultyLine": "org.apache.commons.codec.binary.StringUtils:293",
+            "code": "return bytes == null ? null : new String(bytes, charset);",
+            "explanation": "This line correctly handles the null check for `bytes`. However, other methods in the same class do not perform this check, leading to inconsistencies and potential NullPointerExceptions."
+        }
+    ]
+}

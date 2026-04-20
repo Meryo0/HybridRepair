@@ -1,0 +1,15 @@
+{
+ "buggy.hash": "",
+ "fixed_hash": "d2f27093d7d95a07da901902f894d88b4ecc3e95",
+ "passed.classes": [],
+ "failed.classes": [
+  "org.apache.commons.codec.binary.StringUtilsTest"
+ ],
+ "failed.tests": [
+  {
+   "class": "org.apache.commons.codec.binary.StringUtilsTest",
+   "name": "testNewStringNullInput_CODEC229",
+   "message": ""
+  }
+ ]
+}

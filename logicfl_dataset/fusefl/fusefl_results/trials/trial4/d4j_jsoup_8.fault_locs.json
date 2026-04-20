@@ -1,0 +1,34 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jsoup.nodes.Node:220",
+            "code": "return parentNode.ownerDocument();",
+            "explanation": "The method `ownerDocument()` is called on `parentNode`, which can be null if the node has been removed from the document. This leads to a NullPointerException when trying to access `outputSettings()` on a null document."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:215",
+            "code": "if (this instanceof Document)",
+            "explanation": "This check is part of the `ownerDocument()` method. If the node is not a Document and has no parent, the method returns null, which can cause a NullPointerException when `outputSettings()` is called on the result."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:216",
+            "code": "return (Document) this;",
+            "explanation": "This line returns the current node cast to a Document if it is an instance of Document. However, if the node is not a Document and has no parent, the method will return null, leading to a NullPointerException."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:217",
+            "code": "else if (parentNode == null)",
+            "explanation": "This line checks if `parentNode` is null. If it is, the method returns null, which can cause a NullPointerException when `outputSettings()` is called on the result."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:218",
+            "code": "return null;",
+            "explanation": "Returning null here can lead to a NullPointerException when `outputSettings()` is called on the result of `ownerDocument()`."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:363",
+            "code": "new NodeTraversor(new OuterHtmlVisitor(accum, ownerDocument().outputSettings())).traverse(this);",
+            "explanation": "This line calls `ownerDocument().outputSettings()` without checking if `ownerDocument()` returns null, leading to a NullPointerException."
+        }
+    ]
+}

@@ -1,0 +1,179 @@
+Faulty Code:
+org.apache.commons.io.DirectoryWalker:283 `        this(null, -1);`
+org.apache.commons.io.DirectoryWalker:284 `    }`
+org.apache.commons.io.DirectoryWalker:299 `    protected DirectoryWalker(final FileFilter filter, final int depthLimit) {`
+org.apache.commons.io.DirectoryWalker:300 `        this.filter = filter;`
+org.apache.commons.io.DirectoryWalker:301 `        this.depthLimit = depthLimit;`
+org.apache.commons.io.DirectoryWalker:302 `    }`
+org.apache.commons.io.FileUtils:96 `    public static final BigInteger ONE_KB_BI = BigInteger.valueOf(ONE_KB);`
+org.apache.commons.io.FileUtils:108 `    public static final BigInteger ONE_MB_BI = ONE_KB_BI.multiply(ONE_KB_BI);`
+org.apache.commons.io.FileUtils:120 `    public static final BigInteger ONE_GB_BI = ONE_KB_BI.multiply(ONE_MB_BI);`
+org.apache.commons.io.FileUtils:132 `    public static final BigInteger ONE_TB_BI = ONE_KB_BI.multiply(ONE_GB_BI);`
+org.apache.commons.io.FileUtils:144 `    public static final BigInteger ONE_PB_BI = ONE_KB_BI.multiply(ONE_TB_BI);`
+org.apache.commons.io.FileUtils:156 `    public static final BigInteger ONE_EB_BI = ONE_KB_BI.multiply(ONE_PB_BI);`
+org.apache.commons.io.FileUtils:161 `    public static final BigInteger ONE_ZB = BigInteger.valueOf(ONE_KB).multiply(BigInteger.valueOf(ONE_EB));`
+org.apache.commons.io.FileUtils:166 `    public static final BigInteger ONE_YB = ONE_KB_BI.multiply(ONE_ZB);`
+org.apache.commons.io.FileUtils:171 `    public static final File[] EMPTY_FILE_ARRAY = new File[0];`
+org.apache.commons.io.FileUtils:332 `        final File[] files = verifiedListFiles(directory);`
+org.apache.commons.io.FileUtils:334 `        IOException exception = null;`
+org.apache.commons.io.FileUtils:335 `        for (final File file : files) {`
+org.apache.commons.io.FileUtils:337 `                forceDelete(file);`
+org.apache.commons.io.FileUtils:340 `            }`
+org.apache.commons.io.FileUtils:343 `        if (null != exception) {`
+org.apache.commons.io.FileUtils:346 `    }`
+org.apache.commons.io.FileUtils:391 `        final boolean file1Exists = file1.exists();`
+org.apache.commons.io.FileUtils:1116 `        if (!directory.exists()) {`
+org.apache.commons.io.FileUtils:1120 `        if (!isSymlink(directory)) {`
+org.apache.commons.io.FileUtils:1121 `            cleanDirectory(directory);`
+org.apache.commons.io.FileUtils:1124 `        if (!directory.delete()) {`
+org.apache.commons.io.FileUtils:1129 `    }`
+org.apache.commons.io.FileUtils:1336 `            deleteCounters = PathUtils.delete(file.toPath());`
+org.apache.commons.io.FileUtils:1339 `        }`
+org.apache.commons.io.FileUtils:1341 `        if (deleteCounters.getFileCounter().get() < 1 && deleteCounters.getDirectoryCounter().get() < 1) {`
+org.apache.commons.io.FileUtils:1345 `    }`
+org.apache.commons.io.FileUtils:1720 `        if (file == null) {`
+org.apache.commons.io.FileUtils:1723 `        return Files.isSymbolicLink(file.toPath());`
+org.apache.commons.io.FileUtils:2676 `        if (!directory.exists()) {`
+org.apache.commons.io.FileUtils:2681 `        if (!directory.isDirectory()) {`
+org.apache.commons.io.FileUtils:2686 `        final File[] files = directory.listFiles();`
+org.apache.commons.io.FileUtils:2687 `        if (files == null) {  // null if security restricted`
+org.apache.commons.io.FileUtils:2690 `        return files;`
+org.apache.commons.io.file.Counters:47 `            super();`
+org.apache.commons.io.file.Counters:48 `            this.byteCounter = byteCounter;`
+org.apache.commons.io.file.Counters:49 `            this.directoryCounter = directoryCounter;`
+org.apache.commons.io.file.Counters:50 `            this.fileCounter = fileCounter;`
+org.apache.commons.io.file.Counters:51 `        }`
+org.apache.commons.io.file.Counters:55 `            return byteCounter;`
+org.apache.commons.io.file.Counters:70 `            return this.fileCounter;`
+org.apache.commons.io.file.Counters:183 `            value += add;`
+org.apache.commons.io.file.Counters:185 `        }`
+org.apache.commons.io.file.Counters:189 `            return value;`
+org.apache.commons.io.file.Counters:204 `            value++;`
+org.apache.commons.io.file.Counters:205 `        }`
+org.apache.commons.io.file.Counters:222 `            super(Counters.longCounter(), Counters.longCounter(), Counters.longCounter());`
+org.apache.commons.io.file.Counters:223 `        }`
+org.apache.commons.io.file.Counters:279 `        return new LongCounter();`
+org.apache.commons.io.file.Counters:288 `        return new LongPathCounters();`
+org.apache.commons.io.file.PathUtils:110 `        return Files.isDirectory(path) ? deleteDirectory(path) : deleteFile(path);`
+org.apache.commons.io.file.PathUtils:133 `        if (Files.isDirectory(file)) {`
+org.apache.commons.io.file.PathUtils:136 `        final PathCounters pathCounts = Counters.longPathCounters();`
+org.apache.commons.io.file.PathUtils:137 `        final long size = Files.exists(file) ? Files.size(file) : 0;`
+org.apache.commons.io.file.PathUtils:138 `        if (Files.deleteIfExists(file)) {`
+org.apache.commons.io.file.PathUtils:139 `            pathCounts.getFileCounter().increment();`
+org.apache.commons.io.file.PathUtils:140 `            pathCounts.getByteCounter().add(size);`
+org.apache.commons.io.file.PathUtils:142 `        return pathCounts;`
+org.apache.commons.io.testtools.TestUtils:73 `        for (int i = 0; i < size; i++) {`
+org.apache.commons.io.testtools.TestUtils:79 `    }`
+
+
+Task Description:
+The provided code snippets are from the Apache Commons IO library, specifically from the `DirectoryWalker`, `FileUtils`, `Counters`, `PathUtils`, and `TestUtils` classes. Below is a brief description of each relevant part of the code:
+
+1. **DirectoryWalker Class:**
+   - **Lines 283-284:** A no-argument constructor that calls another constructor with `null` as the filter and `-1` as the depth limit.
+   - **Lines 299-302:** A protected constructor that initializes the `DirectoryWalker` with a `FileFilter` and a depth limit.
+
+2. **FileUtils Class:**
+   - **Lines 96, 108, 120, 132, 144, 156, 161, 166:** These lines define constants for various file size units (KB, MB, GB, TB, PB, EB, ZB, YB) using `BigInteger`.
+   - **Line 171:** Defines an empty array of `File` objects.
+   - **Lines 332-346:** A method that verifies and lists files in a directory, then attempts to delete each file, handling exceptions if they occur.
+   - **Line 391:** Checks if a file exists.
+   - **Lines 1116-1129:** Methods that check if a directory exists, is not a symlink, and attempts to clean and delete it.
+   - **Lines 1336-1345:** Methods that delete files and directories, updating counters for deleted files and directories.
+   - **Lines 1720-1723:** Checks if a file is a symbolic link.
+   - **Lines 2676-2690:** Methods that check if a directory exists, is a directory, and lists files in the directory, handling security restrictions.
+
+3. **Counters Class:**
+   - **Lines 47-51:** Constructor for initializing counters for bytes, directories, and files.
+   - **Lines 55, 70:** Methods that return the byte and file counters.
+   - **Lines 183-185, 204-205:** Methods that increment counter values.
+   - **Lines 222-223:** Constructor that initializes counters using long counters.
+   - **Lines 279, 288:** Methods that return new instances of `LongCounter` and `LongPathCounters`.
+
+4. **PathUtils Class:**
+   - **Line 110:** Deletes a directory or file based on whether the path is a directory.
+   - **Lines 133-142:** Methods that handle deletion of files and directories, updating path counters for files and bytes.
+
+5. **TestUtils Class:**
+   - **Lines 73-79:** A loop that iterates a specified number of times.
+
+**Test Case:**
+The provided test case `testContentEquals` verifies the `FileUtils.contentEquals` method, which checks if two files have the same content. The test includes various scenarios:
+- Comparing `null` files.
+- Comparing a `null` file with an existing file.
+- Comparing the same file.
+- Comparing two different files with the same content.
+- Comparing two different files with different content.
+- Ensuring that comparing directories throws an `IOException`.
+
+The test also includes creating temporary files and copying content from resources to these files to verify the `contentEquals` method's correctness.
+
+Test Results:
+The provided code is throwing NullPointerException. For examples:
+Here are the tests and error messages of NullPointerExceptions.
+@Test public void testContentEquals() throws Exception {
+  final File file=new File(temporaryFolder,getName());
+  final File file2=new File(temporaryFolder,getName() + "2");
+  assertTrue(FileUtils.contentEquals(null,null));
+  assertFalse(FileUtils.contentEquals(null,file));
+  assertFalse(FileUtils.contentEquals(file,null));
+  assertTrue(FileUtils.contentEquals(file,file));
+  assertTrue(FileUtils.contentEquals(file,file2));
+  assertTrue(FileUtils.contentEquals(file2,file2));
+  assertTrue(FileUtils.contentEquals(file2,file));
+  try {
+    FileUtils.contentEquals(temporaryFolder,temporaryFolder);
+    fail("Comparing directories should fail with an IOException");
+  }
+ catch (  final IOException ioe) {
+  }
+  final File objFile1=new File(temporaryFolder,getName() + ".object");
+  objFile1.deleteOnExit();
+  FileUtils.copyURLToFile(getClass().getResource("/java/lang/Object.class"),objFile1);
+  final File objFile1b=new File(temporaryFolder,getName() + ".object2");
+  objFile1.deleteOnExit();
+  FileUtils.copyURLToFile(getClass().getResource("/java/lang/Object.class"),objFile1b);
+  final File objFile2=new File(temporaryFolder,getName() + ".collection");
+  objFile2.deleteOnExit();
+  FileUtils.copyURLToFile(getClass().getResource("/java/util/Collection.class"),objFile2);
+  assertFalse(FileUtils.contentEquals(objFile1,objFile2));
+  assertFalse(FileUtils.contentEquals(objFile1b,objFile2));
+  assertTrue(FileUtils.contentEquals(objFile1,objFile1b));
+  assertTrue(FileUtils.contentEquals(objFile1,objFile1));
+  assertTrue(FileUtils.contentEquals(objFile1b,objFile1b));
+  assertTrue(FileUtils.contentEquals(objFile2,objFile2));
+  file.createNewFile();
+  file2.createNewFile();
+  assertTrue(FileUtils.contentEquals(file,file));
+  assertTrue(FileUtils.contentEquals(file,file2));
+}
+
+
+
+Failures (1):
+  JUnit Jupiter:FileUtilsTestCase:testContentEquals()
+    MethodSource [className = 'org.apache.commons.io.FileUtilsTestCase', methodName = 'testContentEquals', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.io.File.exists()" because "file1" is null
+       org.apache.commons.io.FileUtils.contentEquals(FileUtils.java:391)
+       org.apache.commons.io.FileUtilsTestCase.testContentEquals(FileUtilsTestCase.java:574)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Store NPE traces to npe.traces.json
+NPE Stack Traces exported to npe.traces.json
+
+
+Analyze the provided code and utilize task description, test results, and SBFL techniques results to help in identifying potentially faulty lines. Provide the results following this JSON template:
+```json
+{
+  "faultLoc": [
+    {   
+      "faultyLine": (indicating the location of the suspicious code in ClassName:LineNumber format),
+      "code": (displaying the actual code),
+      "explanation": (step by step reasoning on why this location is considered potentially faulty)
+    },  
+    ... 
+   ]   
+}
+```
+Ensure that the objects in the "faultLoc" array are stored in descending order of suspicion.

@@ -1,0 +1,54 @@
+{"npe.traces": [{
+    "test.method": "sameEncoding_null_Charset_constructor",
+    "traces": [
+        {
+            "is_target": false,
+            "method": "requireNonNull",
+            "line": 235,
+            "class": "java.util.Objects"
+        },
+        {
+            "is_target": true,
+            "method": "initWriter",
+            "line": 226,
+            "class": "org.apache.commons.io.output.FileWriterWithEncoding"
+        },
+        {
+            "is_target": true,
+            "method": "<init>",
+            "line": 184,
+            "class": "org.apache.commons.io.output.FileWriterWithEncoding"
+        },
+        {
+            "is_target": true,
+            "method": "<init>",
+            "line": 171,
+            "class": "org.apache.commons.io.output.FileWriterWithEncoding"
+        },
+        {
+            "is_target": true,
+            "method": "sameEncoding_null_Charset_constructor",
+            "line": 124,
+            "class": "org.apache.commons.io.output.FileWriterWithEncodingTest"
+        },
+        {
+            "is_target": false,
+            "method": "invoke",
+            "line": 569,
+            "class": "java.lang.reflect.Method"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        }
+    ],
+    "test.class": "org.apache.commons.io.output.FileWriterWithEncodingTest"
+}]}

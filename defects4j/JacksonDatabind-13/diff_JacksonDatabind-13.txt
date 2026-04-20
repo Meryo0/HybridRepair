@@ -1,0 +1,34 @@
+diff -U 5 -r ./defects4j/JacksonDatabind-13/buggy/src/main/java/com/fasterxml/jackson/databind/deser/DefaultDeserializationContext.java ./defects4j/JacksonDatabind-13/fixed/src/main/java/com/fasterxml/jackson/databind/deser/DefaultDeserializationContext.java
+--- ./defects4j/JacksonDatabind-13/buggy/src/main/java/com/fasterxml/jackson/databind/deser/DefaultDeserializationContext.java	2024-05-19 19:44:53.694554206 +0900
++++ ./defects4j/JacksonDatabind-13/fixed/src/main/java/com/fasterxml/jackson/databind/deser/DefaultDeserializationContext.java	2024-05-19 19:44:53.838557126 +0900
+@@ -82,10 +82,13 @@
+     public ReadableObjectId findObjectId(Object id, ObjectIdGenerator<?> gen, ObjectIdResolver resolverType)
+     {
+         /* 02-Apr-2015, tatu: As per [databind#742] should allow 'null', similar to how
+          *   missing id already works.
+          */
++        if (id == null) {
++            return null;
++        }
+ 
+         final ObjectIdGenerator.IdKey key = gen.key(id);
+ 
+         if (_objectIds == null) {
+             _objectIds = new LinkedHashMap<ObjectIdGenerator.IdKey,ReadableObjectId>();
+diff -U 5 -r ./defects4j/JacksonDatabind-13/buggy/src/main/java/com/fasterxml/jackson/databind/deser/impl/ObjectIdValueProperty.java ./defects4j/JacksonDatabind-13/fixed/src/main/java/com/fasterxml/jackson/databind/deser/impl/ObjectIdValueProperty.java
+--- ./defects4j/JacksonDatabind-13/buggy/src/main/java/com/fasterxml/jackson/databind/deser/impl/ObjectIdValueProperty.java	2024-05-19 19:44:53.698554288 +0900
++++ ./defects4j/JacksonDatabind-13/fixed/src/main/java/com/fasterxml/jackson/databind/deser/impl/ObjectIdValueProperty.java	2024-05-19 19:44:53.842557207 +0900
+@@ -87,10 +87,13 @@
+         /* 02-Apr-2015, tatu: Actually, as per [databind#742], let it be;
+          *  missing or null id is needed for some cases, such as cases where id
+          *  will be generated externally, at a later point, and is not available
+          *  quite yet. Typical use case is with DB inserts.
+          */
++        if (id == null) {
++            return null;
++        }
+         
+         ReadableObjectId roid = ctxt.findObjectId(id, _objectIdReader.generator, _objectIdReader.resolver);
+         roid.bindItem(instance);
+         // also: may need to set a property value as well
+         SettableBeanProperty idProp = _objectIdReader.idProperty;

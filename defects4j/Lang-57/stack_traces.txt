@@ -1,0 +1,179 @@
+testAvailableLocaleSet(org.apache.commons.lang.LocaleUtilsTest): Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+java.lang.NullPointerException: Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+	at org.apache.commons.lang.LocaleUtils.isAvailableLocale(LocaleUtils.java:223)
+	at org.apache.commons.lang.LocaleUtilsTest.setUp(LocaleUtilsTest.java:82)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testIsAvailableLocale(org.apache.commons.lang.LocaleUtilsTest): Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+java.lang.NullPointerException: Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+	at org.apache.commons.lang.LocaleUtils.isAvailableLocale(LocaleUtils.java:223)
+	at org.apache.commons.lang.LocaleUtilsTest.setUp(LocaleUtilsTest.java:82)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testAvailableLocaleList(org.apache.commons.lang.LocaleUtilsTest): Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+java.lang.NullPointerException: Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+	at org.apache.commons.lang.LocaleUtils.isAvailableLocale(LocaleUtils.java:223)
+	at org.apache.commons.lang.LocaleUtilsTest.setUp(LocaleUtilsTest.java:82)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testCountriesByLanguage(org.apache.commons.lang.LocaleUtilsTest): Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+java.lang.NullPointerException: Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+	at org.apache.commons.lang.LocaleUtils.isAvailableLocale(LocaleUtils.java:223)
+	at org.apache.commons.lang.LocaleUtilsTest.setUp(LocaleUtilsTest.java:82)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testLocaleLookupList_LocaleLocale(org.apache.commons.lang.LocaleUtilsTest): Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+java.lang.NullPointerException: Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+	at org.apache.commons.lang.LocaleUtils.isAvailableLocale(LocaleUtils.java:223)
+	at org.apache.commons.lang.LocaleUtilsTest.setUp(LocaleUtilsTest.java:82)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testLanguagesByCountry(org.apache.commons.lang.LocaleUtilsTest): Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+java.lang.NullPointerException: Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+	at org.apache.commons.lang.LocaleUtils.isAvailableLocale(LocaleUtils.java:223)
+	at org.apache.commons.lang.LocaleUtilsTest.setUp(LocaleUtilsTest.java:82)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testToLocale_1Part(org.apache.commons.lang.LocaleUtilsTest): Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+java.lang.NullPointerException: Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+	at org.apache.commons.lang.LocaleUtils.isAvailableLocale(LocaleUtils.java:223)
+	at org.apache.commons.lang.LocaleUtilsTest.setUp(LocaleUtilsTest.java:82)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testToLocale_2Part(org.apache.commons.lang.LocaleUtilsTest): Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+java.lang.NullPointerException: Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+	at org.apache.commons.lang.LocaleUtils.isAvailableLocale(LocaleUtils.java:223)
+	at org.apache.commons.lang.LocaleUtilsTest.setUp(LocaleUtilsTest.java:82)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testToLocale_3Part(org.apache.commons.lang.LocaleUtilsTest): Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+java.lang.NullPointerException: Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+	at org.apache.commons.lang.LocaleUtils.isAvailableLocale(LocaleUtils.java:223)
+	at org.apache.commons.lang.LocaleUtilsTest.setUp(LocaleUtilsTest.java:82)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testLocaleLookupList_Locale(org.apache.commons.lang.LocaleUtilsTest): Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+java.lang.NullPointerException: Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+	at org.apache.commons.lang.LocaleUtils.isAvailableLocale(LocaleUtils.java:223)
+	at org.apache.commons.lang.LocaleUtilsTest.setUp(LocaleUtilsTest.java:82)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testConstructor(org.apache.commons.lang.LocaleUtilsTest): Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+java.lang.NullPointerException: Cannot invoke "java.util.Set.contains(Object)" because "org.apache.commons.lang.LocaleUtils.cAvailableLocaleSet" is null
+	at org.apache.commons.lang.LocaleUtils.isAvailableLocale(LocaleUtils.java:223)
+	at org.apache.commons.lang.LocaleUtilsTest.setUp(LocaleUtilsTest.java:82)
+	at junit.framework.TestCase.runBare(TestCase.java:140)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+
+
+

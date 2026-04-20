@@ -1,0 +1,24 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.lang3.builder.ReflectionToStringBuilder:535",
+            "code": "super(Objects.requireNonNull(object, \"obj\"), style, buffer);",
+            "explanation": "This line calls the superclass constructor with a non-null object check. The test case `testConstructorWithNullObject` fails because it passes a null object, which triggers the `Objects.requireNonNull` check and throws a NullPointerException. This indicates that the constructor does not handle null objects gracefully."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.builder.ReflectionToStringBuilder:560",
+            "code": "super(Objects.requireNonNull(object, \"obj\"), style, buffer);",
+            "explanation": "Similar to line 535, this line also calls the superclass constructor with a non-null object check. The test case `testReflectionNull` fails due to the same reason, indicating that the method does not handle null objects gracefully."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.builder.ReflectionToStringBuilder:156",
+            "code": "return toString(object, null, false, false, null);",
+            "explanation": "This line calls the `toString` method with the given object. If the object is null, it should return `\"<null>\"`, but it seems to proceed with the method call, leading to a NullPointerException. This indicates that the method does not handle null objects properly."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.builder.ReflectionToStringBuilder:386",
+            "code": "return new ReflectionToStringBuilder(object, style, null, reflectUpToClass, outputTransients, outputStatics);",
+            "explanation": "This line creates a new instance of `ReflectionToStringBuilder` with the specified parameters. If the object is null, it should handle it gracefully, but it seems to proceed with the constructor call, leading to a NullPointerException."
+        }
+    ]
+}

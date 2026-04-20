@@ -1,0 +1,162 @@
+{"npe.traces": [{
+    "test.method": "testBadInterfaceExtendsNonExistentInterfaces",
+    "traces": [
+        {
+            "is_target": true,
+            "method": "checkInterfaceConflictProperties",
+            "line": 1783,
+            "class": "com.google.javascript.jscomp.TypeCheck"
+        },
+        {
+            "is_target": true,
+            "method": "visitFunction",
+            "line": 1918,
+            "class": "com.google.javascript.jscomp.TypeCheck"
+        },
+        {
+            "is_target": true,
+            "method": "visit",
+            "line": 959,
+            "class": "com.google.javascript.jscomp.TypeCheck"
+        },
+        {
+            "is_target": true,
+            "method": "traverseBranch",
+            "line": 695,
+            "class": "com.google.javascript.jscomp.NodeTraversal"
+        },
+        {
+            "is_target": true,
+            "method": "traverseBranch",
+            "line": 677,
+            "class": "com.google.javascript.jscomp.NodeTraversal"
+        },
+        {
+            "is_target": true,
+            "method": "traverseWithScope",
+            "line": 435,
+            "class": "com.google.javascript.jscomp.NodeTraversal"
+        },
+        {
+            "is_target": true,
+            "method": "check",
+            "line": 523,
+            "class": "com.google.javascript.jscomp.TypeCheck"
+        },
+        {
+            "is_target": true,
+            "method": "process",
+            "line": 441,
+            "class": "com.google.javascript.jscomp.TypeCheck"
+        },
+        {
+            "is_target": true,
+            "method": "processForTesting",
+            "line": 497,
+            "class": "com.google.javascript.jscomp.TypeCheck"
+        },
+        {
+            "is_target": true,
+            "method": "testTypes",
+            "line": 11565,
+            "class": "com.google.javascript.jscomp.TypeCheckTest"
+        },
+        {
+            "is_target": true,
+            "method": "testBadInterfaceExtendsNonExistentInterfaces",
+            "line": 3794,
+            "class": "com.google.javascript.jscomp.TypeCheckTest"
+        },
+        {
+            "is_target": false,
+            "method": "invoke0",
+            "line": -2,
+            "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+        },
+        {
+            "is_target": false,
+            "method": "invoke",
+            "line": 77,
+            "class": "jdk.internal.reflect.NativeMethodAccessorImpl"
+        },
+        {
+            "is_target": false,
+            "method": "invoke",
+            "line": 43,
+            "class": "jdk.internal.reflect.DelegatingMethodAccessorImpl"
+        },
+        {
+            "is_target": false,
+            "method": "invoke",
+            "line": 569,
+            "class": "java.lang.reflect.Method"
+        },
+        {
+            "is_target": false,
+            "method": "runTest",
+            "line": 177,
+            "class": "junit.framework.TestCase"
+        },
+        {
+            "is_target": false,
+            "method": "runBare",
+            "line": 142,
+            "class": "junit.framework.TestCase"
+        },
+        {
+            "is_target": false,
+            "method": "protect",
+            "line": 122,
+            "class": "junit.framework.TestResult$1"
+        },
+        {
+            "is_target": false,
+            "method": "runProtected",
+            "line": 142,
+            "class": "junit.framework.TestResult"
+        },
+        {
+            "is_target": false,
+            "method": "run",
+            "line": 125,
+            "class": "junit.framework.TestResult"
+        },
+        {
+            "is_target": false,
+            "method": "run",
+            "line": 130,
+            "class": "junit.framework.TestCase"
+        },
+        {
+            "is_target": false,
+            "method": "runTest",
+            "line": 241,
+            "class": "junit.framework.TestSuite"
+        },
+        {
+            "is_target": false,
+            "method": "run",
+            "line": 236,
+            "class": "junit.framework.TestSuite"
+        },
+        {
+            "is_target": false,
+            "method": "run",
+            "line": 90,
+            "class": "org.junit.internal.runners.JUnit38ClassRunner"
+        },
+        {
+            "is_target": false,
+            "method": "run",
+            "line": 137,
+            "class": "org.junit.runner.JUnitCore"
+        },
+        {
+            "is_target": false,
+            "method": "main",
+            "line": 36,
+            "class": "kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner"
+        }
+    ],
+    "test.class": "com.google.javascript.jscomp.TypeCheckTest"
+}]}

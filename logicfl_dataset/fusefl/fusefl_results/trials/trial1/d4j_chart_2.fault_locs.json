@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jfree.data.general.DatasetUtilities:780",
+            "code": "return null;",
+            "explanation": "The method `iterateDomainBounds` and `iterateRangeBounds` return null if the minimum value is greater than the maximum value. This can lead to a NullPointerException when the returned Range object is used without checking for null. The test cases indicate that the Range object is null, leading to the exception."
+        },
+        {
+            "faultyLine": "org.jfree.data.general.DatasetUtilities:779",
+            "code": "if (minimum > maximum) {",
+            "explanation": "This condition checks if the minimum value is greater than the maximum value. If true, it returns null, which is causing the NullPointerException in the test cases. This condition needs to be handled properly to avoid returning null."
+        },
+        {
+            "faultyLine": "org.jfree.data.general.DatasetUtilities:1284",
+            "code": "return null;",
+            "explanation": "Similar to the previous case, the method `iterateRangeBounds` returns null if the minimum value is equal to Double.POSITIVE_INFINITY. This can lead to a NullPointerException when the returned Range object is used without checking for null."
+        },
+        {
+            "faultyLine": "org.jfree.data.general.DatasetUtilities:1283",
+            "code": "if (minimum == Double.POSITIVE_INFINITY) {",
+            "explanation": "This condition checks if the minimum value is equal to Double.POSITIVE_INFINITY. If true, it returns null, which is causing the NullPointerException in the test cases. This condition needs to be handled properly to avoid returning null."
+        },
+        {
+            "faultyLine": "org.jfree.data.general.DatasetUtilities:742",
+            "code": "if (dataset == null) {",
+            "explanation": "This condition checks if the dataset is null. If true, it returns null, which can lead to a NullPointerException when the returned Range object is used without checking for null. This condition needs to be handled properly to avoid returning null."
+        }
+    ]
+}

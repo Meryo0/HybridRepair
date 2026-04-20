@@ -1,0 +1,39 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jsoup.nodes.Node:220",
+            "code": "return parentNode.ownerDocument();",
+            "explanation": "The method `ownerDocument()` is called on `parentNode`, which can be null if the node has been removed from the document. This leads to a NullPointerException when trying to access `outputSettings()` on a null `Document`."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:215",
+            "code": "if (this instanceof Document)",
+            "explanation": "This line checks if the current node is an instance of `Document`. If not, it proceeds to check the `parentNode`, which might be null, leading to a NullPointerException in subsequent lines."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:217",
+            "code": "else if (parentNode == null)",
+            "explanation": "This line checks if `parentNode` is null and returns null if true. However, subsequent code does not handle the case where `parentNode` is null, leading to potential NullPointerExceptions."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:218",
+            "code": "return null;",
+            "explanation": "Returning null here without proper handling in the calling method can lead to NullPointerExceptions when methods are called on the returned value."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:216",
+            "code": "return (Document) this;",
+            "explanation": "This line returns the current node cast to `Document` if it is an instance of `Document`. If the node is not a `Document`, it proceeds to check the `parentNode`, which might be null, leading to potential NullPointerExceptions."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:363",
+            "code": "new NodeTraversor(new OuterHtmlVisitor(accum, ownerDocument().outputSettings())).traverse(this);",
+            "explanation": "This line calls `ownerDocument().outputSettings()` without checking if `ownerDocument()` returns null, leading to a NullPointerException if the node is not part of a document."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:364",
+            "code": "}",
+            "explanation": "This is the closing brace of the method containing the faulty line. The method does not handle the case where `ownerDocument()` returns null, leading to potential NullPointerExceptions."
+        }
+    ]
+}

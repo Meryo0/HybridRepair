@@ -1,0 +1,24 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.lang3.builder.ReflectionToStringBuilder:535",
+            "code": "super(Objects.requireNonNull(object, \"obj\"), style, buffer);",
+            "explanation": "The constructor of ReflectionToStringBuilder is calling Objects.requireNonNull on the object parameter, which throws a NullPointerException if the object is null. This is causing the test testConstructorWithNullObject to fail."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.builder.ReflectionToStringBuilder:560",
+            "code": "super(Objects.requireNonNull(object, \"obj\"), style, buffer);",
+            "explanation": "Similar to line 535, this line in another constructor of ReflectionToStringBuilder is also calling Objects.requireNonNull on the object parameter, leading to a NullPointerException when the object is null. This affects the test testReflectionNull."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.builder.ReflectionToStringBuilder:156",
+            "code": "return toString(object, null, false, false, null);",
+            "explanation": "This line calls the toString method with the object parameter. If the object is null, it should handle it gracefully and return \"<null>\" instead of proceeding to cause a NullPointerException."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.builder.ReflectionToStringBuilder:386",
+            "code": "return new ReflectionToStringBuilder(object, style, null, reflectUpToClass, outputTransients, outputStatics);",
+            "explanation": "This line creates a new instance of ReflectionToStringBuilder with the object parameter. If the object is null, it should handle it gracefully and return \"<null>\" instead of proceeding to cause a NullPointerException."
+        }
+    ]
+}

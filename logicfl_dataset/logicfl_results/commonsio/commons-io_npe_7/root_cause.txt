@@ -1,0 +1,4 @@
+Fault Localization Results
+NPE at line(reader_input_stream_1, 140) / Null Expression - p_charset_encoder_310[charsetEncoder]
+	 can be caused by 
+p_charset_encoder_310[charsetEncoder] - line(reader_input_stream_1, 140).

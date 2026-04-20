@@ -1,0 +1,20 @@
+{
+ "buggy.hash": "",
+ "fixed_hash": "37ba197e62d6b60037d18afc33801e6221f1b8c6",
+ "passed.classes": [],
+ "failed.classes": [
+  "org.apache.commons.codec.language.DoubleMetaphoneTest"
+ ],
+ "failed.tests": [
+  {
+   "class": "org.apache.commons.codec.language.DoubleMetaphoneTest",
+   "name": "testIsDoubleMetaphoneEqualBasic",
+   "message": ""
+  },
+  {
+   "class": "org.apache.commons.codec.language.DoubleMetaphoneTest",
+   "name": "testCodec184",
+   "message": ""
+  }
+ ]
+}

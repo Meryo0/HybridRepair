@@ -1,0 +1,49 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.codec.binary.StringUtils:339",
+            "code": "return new String(bytes, Charsets.ISO_8859_1);",
+            "explanation": "The method `newStringIso8859_1` does not check if `bytes` is null before attempting to create a new String. This leads to a NullPointerException when `bytes` is null."
+        },
+        {
+            "faultyLine": "org.apache.commons.codec.binary.StringUtils:419",
+            "code": "return newString(bytes, Charsets.UTF_8);",
+            "explanation": "The method `newStringUtf8` does not check if `bytes` is null before attempting to create a new String. This leads to a NullPointerException when `bytes` is null."
+        },
+        {
+            "faultyLine": "org.apache.commons.codec.binary.StringUtils:293",
+            "code": "return bytes == null ? null : new String(bytes, charset);",
+            "explanation": "This line correctly handles null `bytes` by returning null. However, other methods in the class do not follow this pattern, leading to inconsistencies and potential NullPointerExceptions."
+        },
+        {
+            "faultyLine": "org.apache.commons.codec.Charsets:101",
+            "code": "public static final Charset ISO_8859_1 = Charset.forName(CharEncoding.ISO_8859_1);",
+            "explanation": "While this line itself is not directly causing the NullPointerException, it is part of the context where the exception occurs. Ensuring that `Charset.forName` does not return null is crucial."
+        },
+        {
+            "faultyLine": "org.apache.commons.codec.Charsets:114",
+            "code": "public static final Charset US_ASCII = Charset.forName(CharEncoding.US_ASCII);",
+            "explanation": "Similar to the previous line, this line is part of the context where the exception occurs. Ensuring that `Charset.forName` does not return null is crucial."
+        },
+        {
+            "faultyLine": "org.apache.commons.codec.Charsets:128",
+            "code": "public static final Charset UTF_16 = Charset.forName(CharEncoding.UTF_16);",
+            "explanation": "Similar to the previous lines, this line is part of the context where the exception occurs. Ensuring that `Charset.forName` does not return null is crucial."
+        },
+        {
+            "faultyLine": "org.apache.commons.codec.Charsets:141",
+            "code": "public static final Charset UTF_16BE = Charset.forName(CharEncoding.UTF_16BE);",
+            "explanation": "Similar to the previous lines, this line is part of the context where the exception occurs. Ensuring that `Charset.forName` does not return null is crucial."
+        },
+        {
+            "faultyLine": "org.apache.commons.codec.Charsets:154",
+            "code": "public static final Charset UTF_16LE = Charset.forName(CharEncoding.UTF_16LE);",
+            "explanation": "Similar to the previous lines, this line is part of the context where the exception occurs. Ensuring that `Charset.forName` does not return null is crucial."
+        },
+        {
+            "faultyLine": "org.apache.commons.codec.Charsets:167",
+            "code": "public static final Charset UTF_8 = Charset.forName(CharEncoding.UTF_8);",
+            "explanation": "Similar to the previous lines, this line is part of the context where the exception occurs. Ensuring that `Charset.forName` does not return null is crucial."
+        }
+    ]
+}

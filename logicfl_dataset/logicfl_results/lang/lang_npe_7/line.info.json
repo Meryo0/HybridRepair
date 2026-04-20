@@ -1,0 +1,24 @@
+{"classes": [
+    {
+        "probe_ranges": [{
+            "endLine": 485,
+            "offset": 6,
+            "startLine": 479,
+            "orgLineEnd": 479,
+            "probedLineEnd": 485,
+            "orgLineStart": 479
+        }],
+        "classId": "streams_1"
+    },
+    {
+        "probe_ranges": [{
+            "endLine": 164,
+            "offset": 10,
+            "startLine": 155,
+            "orgLineEnd": 154,
+            "probedLineEnd": 164,
+            "orgLineStart": 154
+        }],
+        "classId": "streams_test_1"
+    }
+]}

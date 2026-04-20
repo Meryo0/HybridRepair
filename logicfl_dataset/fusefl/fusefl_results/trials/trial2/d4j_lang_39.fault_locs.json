@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3676",
+            "code": "int greater = replacementList[i].length() - searchList[i].length();",
+            "explanation": "The NullPointerException is thrown because `replacementList[i]` is null. The code does not check if `replacementList[i]` is null before calling `length()` on it."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3645",
+            "code": "if (noMoreMatchesForReplIndex[i] || searchList[i] == null ||",
+            "explanation": "The code checks if `searchList[i]` is null but does not check if `replacementList[i]` is null. This can lead to a NullPointerException later when `replacementList[i]` is accessed."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3648",
+            "code": "continue;",
+            "explanation": "This line is part of the loop that skips null values in `searchList`. However, it does not handle null values in `replacementList`, which can cause issues later."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3654",
+            "code": "noMoreMatchesForReplIndex[i] = true;",
+            "explanation": "This line marks that there are no more matches for the current search string. However, it does not account for the possibility that `replacementList[i]` might be null."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:3710",
+            "code": "noMoreMatchesForReplIndex[i] = true;",
+            "explanation": "Similar to line 3654, this line marks that there are no more matches for the current search string but does not handle null values in `replacementList`."
+        }
+    ]
+}

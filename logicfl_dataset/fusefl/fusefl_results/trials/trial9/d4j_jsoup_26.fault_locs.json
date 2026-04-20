@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jsoup.safety.Cleaner:73",
+            "code": "List<Node> sourceChildren = source.childNodes();",
+            "explanation": "The NullPointerException indicates that the 'source' variable is null when 'copySafeNodes' is called. This suggests that the 'source' element is not properly initialized or passed as null. This line is highly suspicious because it directly accesses 'source.childNodes()' without checking if 'source' is null."
+        },
+        {
+            "faultyLine": "org.jsoup.safety.Cleaner:43",
+            "code": "copySafeNodes(dirtyDocument.body(), clean.body());",
+            "explanation": "The 'dirtyDocument.body()' might be returning null, which is then passed to 'copySafeNodes'. This line is suspicious because it directly passes the result of 'dirtyDocument.body()' without checking if it is null."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Document:59",
+            "code": "return findFirstElementByTagName(\"body\", this);",
+            "explanation": "The 'body()' method in 'Document' class might be returning null if the 'body' tag is not found. This line is suspicious because it relies on 'findFirstElementByTagName' to find the 'body' element, which might not exist in the document."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Document:164",
+            "code": "if (node.nodeName().equals(tag))",
+            "explanation": "The 'findFirstElementByTagName' method might be encountering a null 'node'. This line is suspicious because it assumes 'node' is not null when calling 'node.nodeName()'."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Document:167",
+            "code": "for (Node child: node.childNodes) {",
+            "explanation": "The 'node.childNodes' might be null or 'node' itself might be null. This line is suspicious because it iterates over 'node.childNodes' without checking if 'node' or 'node.childNodes' is null."
+        }
+    ]
+}

@@ -1,0 +1,96 @@
+org.apache.commons.csv.Assertions:32 `        if (parameter == null) {`
+org.apache.commons.csv.Assertions:35 `    }`
+org.apache.commons.csv.CSVFormat:174 `    public static final CSVFormat DEFAULT = new CSVFormat(COMMA, DOUBLE_QUOTE_CHAR, null, null, null,`
+org.apache.commons.csv.CSVFormat:186 `    public static final CSVFormat RFC4180 = DEFAULT.withIgnoreEmptyLines(false);`
+org.apache.commons.csv.CSVFormat:205 `    public static final CSVFormat EXCEL = DEFAULT.withIgnoreEmptyLines(false);`
+org.apache.commons.csv.CSVFormat:208 `    public static final CSVFormat TDF =`
+org.apache.commons.csv.CSVFormat:221 `    public static final CSVFormat MYSQL =`
+org.apache.commons.csv.CSVFormat:238 `        return c == LF || c == CR;`
+org.apache.commons.csv.CSVFormat:250 `        return c != null && isLineBreak(c.charValue());`
+org.apache.commons.csv.CSVFormat:296 `            final String nullString, final String[] header, boolean skipHeaderRecord) {`
+org.apache.commons.csv.CSVFormat:297 `        if (isLineBreak(delimiter)) {`
+org.apache.commons.csv.CSVFormat:300 `        this.delimiter = delimiter;`
+org.apache.commons.csv.CSVFormat:301 `        this.quoteChar = quoteChar;`
+org.apache.commons.csv.CSVFormat:302 `        this.quotePolicy = quotePolicy;`
+org.apache.commons.csv.CSVFormat:303 `        this.commentStart = commentStart;`
+org.apache.commons.csv.CSVFormat:304 `        this.escape = escape;`
+org.apache.commons.csv.CSVFormat:305 `        this.ignoreSurroundingSpaces = ignoreSurroundingSpaces;`
+org.apache.commons.csv.CSVFormat:306 `        this.ignoreEmptyLines = ignoreEmptyLines;`
+org.apache.commons.csv.CSVFormat:307 `        this.recordSeparator = recordSeparator;`
+org.apache.commons.csv.CSVFormat:308 `        this.nullString = nullString;`
+org.apache.commons.csv.CSVFormat:309 `        this.header = header == null ? null : header.clone();`
+org.apache.commons.csv.CSVFormat:310 `        this.skipHeaderRecord = skipHeaderRecord;`
+org.apache.commons.csv.CSVFormat:311 `    }`
+org.apache.commons.csv.CSVFormat:396 `        return commentStart;`
+org.apache.commons.csv.CSVFormat:405 `        return delimiter;`
+org.apache.commons.csv.CSVFormat:414 `        return escape;`
+org.apache.commons.csv.CSVFormat:423 `        return header != null ? header.clone() : null;`
+org.apache.commons.csv.CSVFormat:433 `        return ignoreEmptyLines;`
+org.apache.commons.csv.CSVFormat:443 `        return ignoreSurroundingSpaces;`
+org.apache.commons.csv.CSVFormat:469 `        return quoteChar;`
+org.apache.commons.csv.CSVFormat:616 `        if (quoteChar != null && delimiter == quoteChar.charValue()) {`
+org.apache.commons.csv.CSVFormat:621 `        if (escape != null && delimiter == escape.charValue()) {`
+org.apache.commons.csv.CSVFormat:626 `        if (commentStart != null && delimiter == commentStart.charValue()) {`
+org.apache.commons.csv.CSVFormat:631 `        if (quoteChar != null && quoteChar.equals(commentStart)) {`
+org.apache.commons.csv.CSVFormat:636 `        if (escape != null && escape.equals(commentStart)) {`
+org.apache.commons.csv.CSVFormat:641 `        if (escape == null && quotePolicy == Quote.NONE) {`
+org.apache.commons.csv.CSVFormat:645 `        if (header != null) {`
+org.apache.commons.csv.CSVFormat:652 `    }`
+org.apache.commons.csv.CSVFormat:698 `        if (isLineBreak(delimiter)) {`
+org.apache.commons.csv.CSVFormat:701 `        return new CSVFormat(delimiter, quoteChar, quotePolicy, commentStart, escape,`
+org.apache.commons.csv.CSVFormat:715 `        return withEscape(Character.valueOf(escape));`
+org.apache.commons.csv.CSVFormat:728 `        if (isLineBreak(escape)) {`
+org.apache.commons.csv.CSVFormat:731 `        return new CSVFormat(delimiter, quoteChar, quotePolicy, commentStart, escape,`
+org.apache.commons.csv.CSVFormat:766 `        return new CSVFormat(delimiter, quoteChar, quotePolicy, commentStart, escape,`
+org.apache.commons.csv.CSVFormat:779 `        return new CSVFormat(delimiter, quoteChar, quotePolicy, commentStart, escape,`
+org.apache.commons.csv.CSVFormat:826 `        if (isLineBreak(quoteChar)) {`
+org.apache.commons.csv.CSVFormat:829 `        return new CSVFormat(delimiter, quoteChar, quotePolicy, commentStart, escape,`
+org.apache.commons.csv.CSVFormat:855 `        return withRecordSeparator(String.valueOf(recordSeparator));`
+org.apache.commons.csv.CSVFormat:867 `        return new CSVFormat(delimiter, quoteChar, quotePolicy, commentStart, escape,`
+org.apache.commons.csv.CSVParser:169 `        Assertions.notNull(string, "string");`
+org.apache.commons.csv.CSVParser:170 `        Assertions.notNull(format, "format");`
+org.apache.commons.csv.CSVParser:172 `        return new CSVParser(new StringReader(string), format);`
+org.apache.commons.csv.CSVParser:214 `    private final List<String> record = new ArrayList<String>();`
+org.apache.commons.csv.CSVParser:218 `    private final Token reusableToken = new Token();`
+org.apache.commons.csv.CSVParser:237 `    public CSVParser(final Reader reader, final CSVFormat format) throws IOException {`
+org.apache.commons.csv.CSVParser:238 `        Assertions.notNull(reader, "reader");`
+org.apache.commons.csv.CSVParser:239 `        Assertions.notNull(format, "format");`
+org.apache.commons.csv.CSVParser:241 `        format.validate();`
+org.apache.commons.csv.CSVParser:242 `        this.format = format;`
+org.apache.commons.csv.CSVParser:243 `        this.lexer = new Lexer(format, new ExtendedBufferedReader(reader));`
+org.apache.commons.csv.CSVParser:244 `        this.headerMap = this.initializeHeader();`
+org.apache.commons.csv.CSVParser:245 `    }`
+org.apache.commons.csv.CSVParser:288 `        return new LinkedHashMap<String, Integer>(this.headerMap);`
+org.apache.commons.csv.CSVParser:325 `        Map<String, Integer> hdrMap = null;`
+org.apache.commons.csv.CSVParser:326 `        final String[] formatHeader = this.format.getHeader();`
+org.apache.commons.csv.CSVParser:327 `        if (formatHeader != null) {`
+org.apache.commons.csv.CSVParser:351 `        return hdrMap;`
+org.apache.commons.csv.Constants:36 `    static final Character DOUBLE_QUOTE_CHAR = Character.valueOf('"');`
+org.apache.commons.csv.ExtendedBufferedReader:40 `    private int lastChar = UNDEFINED;`
+org.apache.commons.csv.ExtendedBufferedReader:43 `    private long eolCounter = 0;`
+org.apache.commons.csv.ExtendedBufferedReader:51 `        super(reader);`
+org.apache.commons.csv.ExtendedBufferedReader:52 `    }`
+org.apache.commons.csv.Lexer:61 `    Lexer(final CSVFormat format, final ExtendedBufferedReader in) {`
+org.apache.commons.csv.Lexer:62 `        this.in = in;`
+org.apache.commons.csv.Lexer:63 `        this.delimiter = format.getDelimiter();`
+org.apache.commons.csv.Lexer:64 `        this.escape = mapNullToDisabled(format.getEscape());`
+org.apache.commons.csv.Lexer:65 `        this.quoteChar = mapNullToDisabled(format.getQuoteChar());`
+org.apache.commons.csv.Lexer:66 `        this.commentStart = mapNullToDisabled(format.getCommentStart());`
+org.apache.commons.csv.Lexer:67 `        this.ignoreSurroundingSpaces = format.getIgnoreSurroundingSpaces();`
+org.apache.commons.csv.Lexer:68 `        this.ignoreEmptyLines = format.getIgnoreEmptyLines();`
+org.apache.commons.csv.Lexer:69 `    }`
+org.apache.commons.csv.Lexer:291 `        return c == null ? DISABLED : c.charValue();`
+org.apache.commons.csv.Quote:24 `public enum Quote {`
+org.apache.commons.csv.Quote:29 `    ALL,`
+org.apache.commons.csv.Quote:35 `    MINIMAL,`
+org.apache.commons.csv.Quote:40 `    NON_NUMERIC,`
+org.apache.commons.csv.Quote:47 `    NONE`
+org.apache.commons.csv.Token:29 `final class Token {`
+org.apache.commons.csv.Token:34 `    enum Type {`
+org.apache.commons.csv.Token:36 `        INVALID,`
+org.apache.commons.csv.Token:39 `        TOKEN,`
+org.apache.commons.csv.Token:42 `        EOF,`
+org.apache.commons.csv.Token:45 `        EORECORD,`
+org.apache.commons.csv.Token:48 `        COMMENT`
+org.apache.commons.csv.Token:52 `    Token.Type type = INVALID;`
+org.apache.commons.csv.Token:55 `    final StringBuilder content = new StringBuilder(INITIAL_TOKEN_LENGTH);`

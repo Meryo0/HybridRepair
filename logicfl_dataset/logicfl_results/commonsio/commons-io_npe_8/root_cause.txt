@@ -1,0 +1,16 @@
+Fault Localization Results
+NPE at line(path_utils_1, 1215) / Null Expression - p_path_153[path]
+	 can be caused by 
+v_parent_44[parent] - line(path_utils_1, 371).
+
+NPE at line(path_utils_1, 1215) / Null Expression - p_path_153[path]
+	 can be caused by 
+p_path_153[path] - line(path_utils_1, 1215).
+
+NPE at line(path_utils_1, 1215) / Null Expression - p_path_153[path]
+	 can be caused by 
+path_utils_1_expr12['linkOption == LinkOption.NOFOLLOW_LINKS ? parent : readIfSymbolicLink(parent)'] - line(path_utils_1, 371).
+
+NPE at line(path_utils_1, 1215) / Null Expression - p_path_153[path]
+	 can be caused by 
+path_utils_1_expr10['getParent(path)'] - line(path_utils_1, 370).

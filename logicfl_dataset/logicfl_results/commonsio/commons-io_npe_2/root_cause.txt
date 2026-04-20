@@ -1,0 +1,8 @@
+Fault Localization Results
+NPE at line(iocase_1, 192) / Null Expression - p_str_142[str]
+	 can be caused by 
+p_str_142[str] - line(iocase_1, 192).
+
+NPE at line(iocase_1, 192) / Null Expression - p_search_144[search]
+	 can be caused by 
+p_search_144[search] - line(iocase_1, 192).

@@ -1,0 +1,36 @@
+{"npe.traces": [{
+    "test.method": "testToCharArray",
+    "traces": [
+        {
+            "is_target": true,
+            "method": "toCharArray",
+            "line": 323,
+            "class": "org.apache.commons.lang3.CharSequenceUtils"
+        },
+        {
+            "is_target": true,
+            "method": "testToCharArray",
+            "line": 208,
+            "class": "org.apache.commons.lang3.CharSequenceUtilsTest"
+        },
+        {
+            "is_target": false,
+            "method": "invoke",
+            "line": 569,
+            "class": "java.lang.reflect.Method"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        }
+    ],
+    "test.class": "org.apache.commons.lang3.CharSequenceUtilsTest"
+}]}

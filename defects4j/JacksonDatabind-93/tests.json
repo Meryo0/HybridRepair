@@ -1,0 +1,15 @@
+{
+ "buggy.hash": "",
+ "fixed_hash": "755e3bc0cbea30de0102f6a88519a0c34d571bbd",
+ "passed.classes": [],
+ "failed.classes": [
+  "com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest"
+ ],
+ "failed.tests": [
+  {
+   "class": "com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest",
+   "name": "testJDKTypes1872",
+   "message": ""
+  }
+ ]
+}

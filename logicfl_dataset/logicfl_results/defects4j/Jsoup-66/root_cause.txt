@@ -1,0 +1,8 @@
+Fault Localization Results
+NPE at line(element_test_1, 1235) / Null Expression - v_clone_next_element_sibling_340[cloneNextElementSibling]
+	 can be caused by 
+element_1_literal12[null] - line(element_1, 683).
+
+NPE at line(element_test_1, 1235) / Null Expression - v_clone_next_element_sibling_340[cloneNextElementSibling]
+	 can be caused by 
+element_1_literal15[null] - line(element_1, 690).

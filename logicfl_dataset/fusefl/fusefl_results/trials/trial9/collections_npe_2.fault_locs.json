@@ -1,0 +1,19 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.collections4.set.CompositeSet:255",
+            "code": "for (final Object item : coll) {",
+            "explanation": "The test `testContainsAll` fails with a NullPointerException because `coll` is null. The method `containsAll` should check if `coll` is null before attempting to iterate over it."
+        },
+        {
+            "faultyLine": "org.apache.commons.collections4.CollectionUtils:469",
+            "code": "for (final O obj : coll) {",
+            "explanation": "The test `testAddComposited` fails with a NullPointerException because `coll` is null. The method `getCardinalityMap` should check if `coll` is null before attempting to iterate over it."
+        },
+        {
+            "faultyLine": "org.apache.commons.collections4.set.CompositeSet:294",
+            "code": "if (coll.size() == 0) {",
+            "explanation": "The test `testRemoveAll` fails with a NullPointerException because `coll` is null. The method `removeAll` should check if `coll` is null before attempting to access its size."
+        }
+    ]
+}

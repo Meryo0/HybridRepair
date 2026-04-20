@@ -1,0 +1,19 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.lang3.exception.ExceptionUtils:376",
+            "code": "throwable.printStackTrace(pw);",
+            "explanation": "The test case `testNullException` is failing because `ExceptionUtils.getStackTrace(null)` is not handling the `null` input properly. The `throwable` parameter is `null`, leading to a `NullPointerException` when `printStackTrace` is called. This line should include a null check for `throwable` before attempting to print the stack trace."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.exception.ExceptionUtils:374",
+            "code": "final StringWriter sw = new StringWriter();",
+            "explanation": "Although this line itself is not directly causing the `NullPointerException`, it is part of the method where the exception occurs. Ensuring that `throwable` is not null before this point would prevent the subsequent `NullPointerException`."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.exception.ExceptionUtils:375",
+            "code": "final PrintWriter pw = new PrintWriter(sw, true);",
+            "explanation": "Similar to line 374, this line is part of the method where the `NullPointerException` occurs. A null check for `throwable` should be added before this point to ensure that the method does not proceed with a null `throwable`."
+        }
+    ]
+}

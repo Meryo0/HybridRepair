@@ -1,0 +1,22 @@
+@Test public void testLANG1190() throws Exception {
+  Type fromType=ClassWithSuperClassWithGenericType.class.getDeclaredMethod("methodWithGenericReturnType").getGenericReturnType();
+  Type failingToType=TypeUtils.wildcardType().withLowerBounds(ClassWithSuperClassWithGenericType.class).build();
+  Assert.assertTrue(TypeUtils.isAssignable(fromType,failingToType));
+}
+
+
+
+  JUnit Vintage:TypeUtilsTest:testLANG1190
+    MethodSource [className = 'org.apache.commons.lang3.reflect.TypeUtilsTest', methodName = 'testLANG1190', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "Object.equals(Object)" because "toTypeArg" is null
+       org.apache.commons.lang3.reflect.TypeUtils.isAssignable(TypeUtils.java:471)
+       org.apache.commons.lang3.reflect.TypeUtils.isAssignable(TypeUtils.java:330)
+       org.apache.commons.lang3.reflect.TypeUtils.isAssignable(TypeUtils.java:656)
+       org.apache.commons.lang3.reflect.TypeUtils.isAssignable(TypeUtils.java:338)
+       org.apache.commons.lang3.reflect.TypeUtils.isAssignable(TypeUtils.java:311)
+       org.apache.commons.lang3.reflect.TypeUtilsTest.testLANG1190(TypeUtilsTest.java:772)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       [...]

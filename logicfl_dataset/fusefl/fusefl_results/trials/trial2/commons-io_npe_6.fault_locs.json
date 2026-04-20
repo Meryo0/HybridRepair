@@ -1,0 +1,24 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.input.ReaderInputStream:132",
+            "code": "charsetEncoder = charset.newEncoder();",
+            "explanation": "The NullPointerException is thrown because `charset` is null when `newEncoder()` is called. The test case sets the charset to null, and this line does not handle the null case properly."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.input.ReaderInputStream:103",
+            "code": "private CharsetEncoder charsetEncoder = super.getCharset().newEncoder();",
+            "explanation": "This line initializes `charsetEncoder` using `super.getCharset()`, which may return null if the charset is not set. This can lead to a NullPointerException when `newEncoder()` is called."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.build.AbstractStreamBuilder:103",
+            "code": "return charset;",
+            "explanation": "The `getCharset()` method in `AbstractStreamBuilder` returns the `charset` field, which can be null if not properly initialized or set. This can propagate the null value to `ReaderInputStream.Builder`."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.input.ReaderInputStream:157",
+            "code": "return new Builder();",
+            "explanation": "The `Builder` instance returned here may not have its charset properly initialized, leading to potential null values when methods are called on it."
+        }
+    ]
+}

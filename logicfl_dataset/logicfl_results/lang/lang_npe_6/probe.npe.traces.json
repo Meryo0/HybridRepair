@@ -1,0 +1,36 @@
+{"npe.traces": [{
+    "test.method": "testToPrimitive_boolean",
+    "traces": [
+        {
+            "is_target": true,
+            "method": "toPrimitive",
+            "line": 9296,
+            "class": "org.apache.commons.lang3.ArrayUtils"
+        },
+        {
+            "is_target": true,
+            "method": "testToPrimitive_boolean",
+            "line": 6302,
+            "class": "org.apache.commons.lang3.ArrayUtilsTest"
+        },
+        {
+            "is_target": false,
+            "method": "invoke",
+            "line": 569,
+            "class": "java.lang.reflect.Method"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        }
+    ],
+    "test.class": "org.apache.commons.lang3.ArrayUtilsTest"
+}]}

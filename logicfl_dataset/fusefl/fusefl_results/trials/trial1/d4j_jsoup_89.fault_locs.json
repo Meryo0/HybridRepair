@@ -1,0 +1,19 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jsoup.nodes.Attribute:88",
+            "code": "String oldVal = parent.get(this.key);",
+            "explanation": "The test case `settersOnOrphanAttribute` is failing because `parent` is `null` when `setValue` is called. This line attempts to call `get` on `parent` without checking if `parent` is `null`, leading to a `NullPointerException`. A null check should be added before accessing `parent`."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Attribute:67",
+            "code": "if (parent != null) {",
+            "explanation": "This line checks if `parent` is not `null`, but the subsequent code does not handle the case where `parent` is `null`. This suggests that the logic for handling a `null` parent might be incomplete or missing."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Attribute:47",
+            "code": "this.val = val;",
+            "explanation": "While this line itself is not directly causing the `NullPointerException`, it is part of the constructor where `parent` is assigned. Ensuring that `parent` is properly handled throughout the class is crucial to avoid null pointer issues."
+        }
+    ]
+}

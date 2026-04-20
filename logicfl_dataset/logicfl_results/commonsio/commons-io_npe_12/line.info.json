@@ -1,0 +1,92 @@
+{"classes": [
+    {
+        "probe_ranges": [
+            {
+                "endLine": 162,
+                "offset": 3,
+                "startLine": 159,
+                "orgLineEnd": 159,
+                "probedLineEnd": 162,
+                "orgLineStart": 159
+            },
+            {
+                "endLine": 168,
+                "offset": 7,
+                "startLine": 164,
+                "orgLineEnd": 161,
+                "probedLineEnd": 168,
+                "orgLineStart": 161
+            },
+            {
+                "endLine": 173,
+                "offset": 10,
+                "startLine": 170,
+                "orgLineEnd": 163,
+                "probedLineEnd": 173,
+                "orgLineStart": 163
+            },
+            {
+                "endLine": 177,
+                "offset": 13,
+                "startLine": 174,
+                "orgLineEnd": 164,
+                "probedLineEnd": 177,
+                "orgLineStart": 164
+            },
+            {
+                "endLine": 182,
+                "offset": 16,
+                "startLine": 179,
+                "orgLineEnd": 166,
+                "probedLineEnd": 182,
+                "orgLineStart": 166
+            },
+            {
+                "endLine": 201,
+                "offset": 33,
+                "startLine": 184,
+                "orgLineEnd": 168,
+                "probedLineEnd": 201,
+                "orgLineStart": 168
+            },
+            {
+                "endLine": 206,
+                "offset": 36,
+                "startLine": 203,
+                "orgLineEnd": 170,
+                "probedLineEnd": 206,
+                "orgLineStart": 170
+            }
+        ],
+        "classId": "file_writer_with_encoding_test_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 191,
+                "offset": 7,
+                "startLine": 184,
+                "orgLineEnd": 184,
+                "probedLineEnd": 191,
+                "orgLineStart": 184
+            },
+            {
+                "endLine": 235,
+                "offset": 10,
+                "startLine": 232,
+                "orgLineEnd": 225,
+                "probedLineEnd": 235,
+                "orgLineStart": 225
+            },
+            {
+                "endLine": 239,
+                "offset": 13,
+                "startLine": 236,
+                "orgLineEnd": 226,
+                "probedLineEnd": 239,
+                "orgLineStart": 226
+            }
+        ],
+        "classId": "file_writer_with_encoding_1"
+    }
+]}

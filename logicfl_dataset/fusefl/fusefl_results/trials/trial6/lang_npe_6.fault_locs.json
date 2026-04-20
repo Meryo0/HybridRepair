@@ -1,0 +1,14 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.lang3.ArrayUtils:9267",
+            "code": "result[i] = array[i].booleanValue();",
+            "explanation": "The NullPointerException is thrown because the code attempts to call `booleanValue()` on a `null` element in the `array`. The test case `assertArrayEquals(new boolean[]{true,false},ArrayUtils.toPrimitive(new Boolean[]{Boolean.TRUE,null}));` demonstrates this issue. The method does not handle `null` elements in the input array properly."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.ArrayUtils:9266",
+            "code": "for (int i = 0; i < array.length; i++) {",
+            "explanation": "This line initiates the loop that processes each element of the input array. If any element is `null`, the subsequent line (9267) will throw a NullPointerException. The loop should include a check for `null` elements before attempting to call `booleanValue()`."
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+{
+ "buggy.hash": "",
+ "fixed_hash": "1d663eeb1c0d1c08bcfe5d30f05170768bb0438e",
+ "passed.classes": [],
+ "failed.classes": [
+  "org.jsoup.nodes.AttributeTest"
+ ],
+ "failed.tests": [
+  {
+   "class": "org.jsoup.nodes.AttributeTest",
+   "name": "settersOnOrphanAttribute",
+   "message": ""
+  }
+ ]
+}

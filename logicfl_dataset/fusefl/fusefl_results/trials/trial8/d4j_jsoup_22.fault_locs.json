@@ -1,0 +1,19 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jsoup.nodes.Node:445",
+            "code": "return parent().childNodes();",
+            "explanation": "The NullPointerException is thrown because `parent()` returns null for orphan nodes. The method `siblingNodes()` should handle the case where the node has no parent."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:487",
+            "code": "return siblingIndex;",
+            "explanation": "The method `siblingIndex()` should handle the case where the node has no parent. It should return 0 or another appropriate value for orphan nodes."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Element:142",
+            "code": "return (Element) parentNode;",
+            "explanation": "The method `parent()` should handle the case where the node has no parent. It should return null or another appropriate value for orphan nodes."
+        }
+    ]
+}

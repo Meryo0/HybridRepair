@@ -1,0 +1,21 @@
+diff -U 5 -r defects4j/Closure-2/buggy/src/com/google/javascript/jscomp/TypeCheck.java defects4j/Closure-2/fixed/src/com/google/javascript/jscomp/TypeCheck.java
+--- defects4j/Closure-2/buggy/src/com/google/javascript/jscomp/TypeCheck.java	2024-04-14 01:04:05.000000000 +0900
++++ defects4j/Closure-2/fixed/src/com/google/javascript/jscomp/TypeCheck.java	2024-04-14 01:04:19.000000000 +0900
+@@ -1567,13 +1567,17 @@
+       String functionName, HashMap<String, ObjectType> properties,
+       HashMap<String, ObjectType> currentProperties,
+       ObjectType interfaceType) {
+     ObjectType implicitProto = interfaceType.getImplicitPrototype();
+     Set<String> currentPropertyNames;
++    if (implicitProto == null) {
+       // This can be the case if interfaceType is proxy to a non-existent
+       // object (which is a bad type annotation, but shouldn't crash).
++      currentPropertyNames = ImmutableSet.of();
++    } else {
+       currentPropertyNames = implicitProto.getOwnPropertyNames();
++    }
+     for (String name : currentPropertyNames) {
+       ObjectType oType = properties.get(name);
+       if (oType != null) {
+         if (!interfaceType.getPropertyType(name).isEquivalentTo(
+             oType.getPropertyType(name))) {

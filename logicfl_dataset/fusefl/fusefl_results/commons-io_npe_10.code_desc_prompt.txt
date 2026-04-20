@@ -1,0 +1,13 @@
+Provide a short code description of the following code:
+ org.apache.commons.io.input.CharSequenceInputStream:62 `        this(cs, charset, BUFFER_SIZE);`
+org.apache.commons.io.input.CharSequenceInputStream:73 `    public CharSequenceInputStream(final CharSequence cs, final Charset charset, final int bufferSize) {`
+org.apache.commons.io.input.CharSequenceInputStream:75 `        this.charsetEncoder = charset.newEncoder()`
+ 
+The provided code is expected to pass these test cases:
+ @Test public void testNullCharset() throws IOException {
+  try (CharSequenceInputStream in=new CharSequenceInputStream("A",(Charset)null)){
+    IOUtils.toByteArray(in);
+    assertEquals(Charset.defaultCharset(),in.getCharsetEncoder().charset());
+  }
+ }
+

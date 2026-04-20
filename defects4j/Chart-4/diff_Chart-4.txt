@@ -1,0 +1,24 @@
+diff -U 5 -r defects4j/Chart-4/buggy/source/org/jfree/chart/plot/XYPlot.java defects4j/Chart-4/fixed/source/org/jfree/chart/plot/XYPlot.java
+--- defects4j/Chart-4/buggy/source/org/jfree/chart/plot/XYPlot.java	2024-04-14 01:00:57.000000000 +0900
++++ defects4j/Chart-4/fixed/source/org/jfree/chart/plot/XYPlot.java	2024-04-14 01:01:27.000000000 +0900
+@@ -4488,18 +4488,20 @@
+                         result = Range.combine(result,
+                                 DatasetUtilities.findRangeBounds(d));
+                     }
+                 }
+                 
++                if (r != null) {
+                     Collection c = r.getAnnotations();
+                     Iterator i = c.iterator();
+                     while (i.hasNext()) {
+                         XYAnnotation a = (XYAnnotation) i.next();
+                         if (a instanceof XYAnnotationBoundsInfo) {
+                             includedAnnotations.add(a);
+                         }
+                     }
++                }
+             }
+         }
+ 
+         Iterator it = includedAnnotations.iterator();
+         while (it.hasNext()) {

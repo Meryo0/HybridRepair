@@ -1,0 +1,60 @@
+{"npe.traces": [{
+    "test.method": "testCreateDirectoriesForRootsLinkOptionNull",
+    "traces": [
+        {
+            "is_target": false,
+            "method": "provider",
+            "line": 105,
+            "class": "java.nio.file.Files"
+        },
+        {
+            "is_target": false,
+            "method": "readAttributes",
+            "line": 1851,
+            "class": "java.nio.file.Files"
+        },
+        {
+            "is_target": false,
+            "method": "isSymbolicLink",
+            "line": 2277,
+            "class": "java.nio.file.Files"
+        },
+        {
+            "is_target": true,
+            "method": "readIfSymbolicLink",
+            "line": 1215,
+            "class": "org.apache.commons.io.file.PathUtils"
+        },
+        {
+            "is_target": true,
+            "method": "createParentDirectories",
+            "line": 371,
+            "class": "org.apache.commons.io.file.PathUtils"
+        },
+        {
+            "is_target": true,
+            "method": "testCreateDirectoriesForRootsLinkOptionNull",
+            "line": 191,
+            "class": "org.apache.commons.io.file.PathUtilsTest"
+        },
+        {
+            "is_target": false,
+            "method": "invoke",
+            "line": 569,
+            "class": "java.lang.reflect.Method"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        }
+    ],
+    "test.class": "org.apache.commons.io.file.PathUtilsTest"
+}]}

@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jsoup.safety.Cleaner:73",
+            "code": "List<Node> sourceChildren = source.childNodes();",
+            "explanation": "The error message indicates that a NullPointerException occurs because 'source' is null. This line attempts to call 'childNodes()' on 'source', which is null. This suggests that 'source' is not properly initialized or checked before this line."
+        },
+        {
+            "faultyLine": "org.jsoup.safety.Cleaner:43",
+            "code": "copySafeNodes(dirtyDocument.body(), clean.body());",
+            "explanation": "The method 'copySafeNodes' is called with 'dirtyDocument.body()' and 'clean.body()'. If 'dirtyDocument.body()' is null, it will cause a NullPointerException when 'copySafeNodes' tries to access its child nodes. This indicates that 'dirtyDocument.body()' might be null and needs to be checked before calling 'copySafeNodes'."
+        },
+        {
+            "faultyLine": "org.jsoup.safety.Cleaner:40",
+            "code": "Validate.notNull(dirtyDocument);",
+            "explanation": "While this line checks if 'dirtyDocument' is null, it does not check if 'dirtyDocument.body()' is null. Adding a check for 'dirtyDocument.body()' would prevent the NullPointerException in 'copySafeNodes'."
+        },
+        {
+            "faultyLine": "org.jsoup.safety.Cleaner:42",
+            "code": "Document clean = Document.createShell(dirtyDocument.baseUri());",
+            "explanation": "This line creates a new 'Document' object, but it does not ensure that 'dirtyDocument.body()' is not null before proceeding. This could lead to issues when 'copySafeNodes' is called."
+        },
+        {
+            "faultyLine": "org.jsoup.safety.Cleaner:31",
+            "code": "this.whitelist = whitelist;",
+            "explanation": "While this line initializes the 'whitelist', it does not directly relate to the NullPointerException. However, ensuring that 'whitelist' is properly initialized and used might help in understanding the context of the error."
+        }
+    ]
+}

@@ -1,0 +1,145 @@
+{"classes": [
+    {
+        "probe_ranges": [
+            {
+                "endLine": 46,
+                "offset": 3,
+                "startLine": 43,
+                "orgLineEnd": 43,
+                "probedLineEnd": 46,
+                "orgLineStart": 43
+            },
+            {
+                "endLine": 51,
+                "offset": 7,
+                "startLine": 47,
+                "orgLineEnd": 44,
+                "probedLineEnd": 51,
+                "orgLineStart": 44
+            }
+        ],
+        "classId": "attribute_test_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 46,
+                "offset": 3,
+                "startLine": 43,
+                "orgLineEnd": 43,
+                "probedLineEnd": 46,
+                "orgLineStart": 43
+            },
+            {
+                "endLine": 51,
+                "offset": 7,
+                "startLine": 47,
+                "orgLineEnd": 44,
+                "probedLineEnd": 51,
+                "orgLineStart": 44
+            },
+            {
+                "endLine": 55,
+                "offset": 10,
+                "startLine": 52,
+                "orgLineEnd": 45,
+                "probedLineEnd": 55,
+                "orgLineStart": 45
+            },
+            {
+                "endLine": 59,
+                "offset": 13,
+                "startLine": 56,
+                "orgLineEnd": 46,
+                "probedLineEnd": 59,
+                "orgLineStart": 46
+            },
+            {
+                "endLine": 63,
+                "offset": 16,
+                "startLine": 60,
+                "orgLineEnd": 47,
+                "probedLineEnd": 63,
+                "orgLineStart": 47
+            },
+            {
+                "endLine": 67,
+                "offset": 19,
+                "startLine": 64,
+                "orgLineEnd": 48,
+                "probedLineEnd": 67,
+                "orgLineStart": 48
+            },
+            {
+                "endLine": 86,
+                "offset": 22,
+                "startLine": 83,
+                "orgLineEnd": 64,
+                "probedLineEnd": 86,
+                "orgLineStart": 64
+            },
+            {
+                "endLine": 91,
+                "offset": 26,
+                "startLine": 87,
+                "orgLineEnd": 65,
+                "probedLineEnd": 91,
+                "orgLineStart": 65
+            },
+            {
+                "endLine": 95,
+                "offset": 29,
+                "startLine": 92,
+                "orgLineEnd": 66,
+                "probedLineEnd": 95,
+                "orgLineStart": 66
+            },
+            {
+                "endLine": 100,
+                "offset": 33,
+                "startLine": 96,
+                "orgLineEnd": 71,
+                "probedLineEnd": 104,
+                "orgLineStart": 67
+            },
+            {
+                "endLine": 108,
+                "offset": 36,
+                "startLine": 105,
+                "orgLineEnd": 72,
+                "probedLineEnd": 108,
+                "orgLineStart": 72
+            },
+            {
+                "endLine": 129,
+                "offset": 41,
+                "startLine": 124,
+                "orgLineEnd": 88,
+                "probedLineEnd": 129,
+                "orgLineStart": 88
+            }
+        ],
+        "classId": "attribute_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 19,
+                "offset": 4,
+                "startLine": 15,
+                "orgLineEnd": 16,
+                "probedLineEnd": 20,
+                "orgLineStart": 15
+            },
+            {
+                "endLine": 106,
+                "offset": 15,
+                "startLine": 95,
+                "orgLineEnd": 92,
+                "probedLineEnd": 107,
+                "orgLineStart": 91
+            }
+        ],
+        "classId": "validate_1"
+    }
+]}

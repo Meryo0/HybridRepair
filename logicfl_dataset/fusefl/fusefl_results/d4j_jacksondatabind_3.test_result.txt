@@ -1,0 +1,49 @@
+public void testStringArray() throws Exception {
+  final String[] STRS=new String[]{"a","b","abcd","","???","\"quoted\"","lf: \n"};
+  StringWriter sw=new StringWriter();
+  JsonGenerator jg=MAPPER.getFactory().createGenerator(sw);
+  jg.writeStartArray();
+  for (  String str : STRS) {
+    jg.writeString(str);
+  }
+  jg.writeEndArray();
+  jg.close();
+  String[] result=MAPPER.readValue(sw.toString(),String[].class);
+  assertNotNull(result);
+  assertEquals(STRS.length,result.length);
+  for (int i=0; i < STRS.length; ++i) {
+    assertEquals(STRS[i],result[i]);
+  }
+  result=MAPPER.readValue(" [ null ]",String[].class);
+  assertNotNull(result);
+  assertEquals(1,result.length);
+  assertNull(result[0]);
+}
+
+
+
+testStringArray(com.fasterxml.jackson.databind.deser.TestArrayDeserialization): Cannot invoke "com.fasterxml.jackson.databind.JsonDeserializer.getNullValue()" because "this._elementDeserializer" is null
+Cannot invoke "com.fasterxml.jackson.databind.JsonDeserializer.getNullValue()" because "this._elementDeserializer" is null
+java.lang.NullPointerException: Cannot invoke "com.fasterxml.jackson.databind.JsonDeserializer.getNullValue()" because "this._elementDeserializer" is null
+	at com.fasterxml.jackson.databind.deser.std.StringArrayDeserializer.deserialize(StringArrayDeserializer.java:66)
+	at com.fasterxml.jackson.databind.deser.std.StringArrayDeserializer.deserialize(StringArrayDeserializer.java:18)
+	at com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:3051)
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:2146)
+	at com.fasterxml.jackson.databind.deser.TestArrayDeserialization.testStringArray(TestArrayDeserialization.java:266)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+
+
+

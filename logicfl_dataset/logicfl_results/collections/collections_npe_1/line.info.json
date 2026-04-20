@@ -1,0 +1,445 @@
+{"classes": [
+    {
+        "probe_ranges": [
+            {
+                "endLine": 112,
+                "offset": 3,
+                "startLine": 109,
+                "orgLineEnd": 109,
+                "probedLineEnd": 112,
+                "orgLineStart": 109
+            },
+            {
+                "endLine": 117,
+                "offset": 32,
+                "startLine": 114,
+                "orgLineEnd": 110,
+                "probedLineEnd": 142,
+                "orgLineStart": 110
+            },
+            {
+                "endLine": 141,
+                "offset": 29,
+                "startLine": 118,
+                "orgLineEnd": 112,
+                "probedLineEnd": 141,
+                "orgLineStart": 112
+            },
+            {
+                "endLine": 167,
+                "offset": 74,
+                "startLine": 164,
+                "orgLineEnd": 134,
+                "probedLineEnd": 208,
+                "orgLineStart": 134
+            },
+            {
+                "endLine": 196,
+                "offset": 60,
+                "startLine": 168,
+                "orgLineEnd": 136,
+                "probedLineEnd": 196,
+                "orgLineStart": 136
+            },
+            {
+                "endLine": 202,
+                "offset": 65,
+                "startLine": 197,
+                "orgLineEnd": 142,
+                "probedLineEnd": 207,
+                "orgLineStart": 137
+            },
+            {
+                "endLine": 214,
+                "offset": 70,
+                "startLine": 209,
+                "orgLineEnd": 144,
+                "probedLineEnd": 214,
+                "orgLineStart": 144
+            },
+            {
+                "endLine": 221,
+                "offset": 76,
+                "startLine": 215,
+                "orgLineEnd": 145,
+                "probedLineEnd": 221,
+                "orgLineStart": 145
+            },
+            {
+                "endLine": 229,
+                "offset": 83,
+                "startLine": 222,
+                "orgLineEnd": 146,
+                "probedLineEnd": 229,
+                "orgLineStart": 146
+            },
+            {
+                "endLine": 233,
+                "offset": 86,
+                "startLine": 230,
+                "orgLineEnd": 147,
+                "probedLineEnd": 233,
+                "orgLineStart": 147
+            }
+        ],
+        "classId": "composite_map_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 57,
+                "offset": 3,
+                "startLine": 54,
+                "orgLineEnd": 54,
+                "probedLineEnd": 57,
+                "orgLineStart": 54
+            },
+            {
+                "endLine": 61,
+                "offset": 6,
+                "startLine": 58,
+                "orgLineEnd": 55,
+                "probedLineEnd": 61,
+                "orgLineStart": 55
+            },
+            {
+                "endLine": 65,
+                "offset": 9,
+                "startLine": 62,
+                "orgLineEnd": 56,
+                "probedLineEnd": 65,
+                "orgLineStart": 56
+            },
+            {
+                "endLine": 74,
+                "offset": 12,
+                "startLine": 71,
+                "orgLineEnd": 62,
+                "probedLineEnd": 74,
+                "orgLineStart": 62
+            },
+            {
+                "endLine": 78,
+                "offset": 15,
+                "startLine": 75,
+                "orgLineEnd": 63,
+                "probedLineEnd": 78,
+                "orgLineStart": 63
+            },
+            {
+                "endLine": 82,
+                "offset": 18,
+                "startLine": 79,
+                "orgLineEnd": 64,
+                "probedLineEnd": 82,
+                "orgLineStart": 64
+            },
+            {
+                "endLine": 97,
+                "offset": 22,
+                "startLine": 93,
+                "orgLineEnd": 75,
+                "probedLineEnd": 97,
+                "orgLineStart": 75
+            },
+            {
+                "endLine": 102,
+                "offset": 25,
+                "startLine": 99,
+                "orgLineEnd": 77,
+                "probedLineEnd": 102,
+                "orgLineStart": 77
+            },
+            {
+                "endLine": 106,
+                "offset": 28,
+                "startLine": 103,
+                "orgLineEnd": 78,
+                "probedLineEnd": 106,
+                "orgLineStart": 78
+            },
+            {
+                "endLine": 123,
+                "offset": 32,
+                "startLine": 119,
+                "orgLineEnd": 91,
+                "probedLineEnd": 123,
+                "orgLineStart": 91
+            },
+            {
+                "endLine": 128,
+                "offset": 35,
+                "startLine": 125,
+                "orgLineEnd": 93,
+                "probedLineEnd": 128,
+                "orgLineStart": 93
+            },
+            {
+                "endLine": 132,
+                "offset": 38,
+                "startLine": 129,
+                "orgLineEnd": 94,
+                "probedLineEnd": 132,
+                "orgLineStart": 94
+            },
+            {
+                "endLine": 150,
+                "offset": 42,
+                "startLine": 146,
+                "orgLineEnd": 108,
+                "probedLineEnd": 150,
+                "orgLineStart": 108
+            },
+            {
+                "endLine": 155,
+                "offset": 45,
+                "startLine": 152,
+                "orgLineEnd": 110,
+                "probedLineEnd": 155,
+                "orgLineStart": 110
+            },
+            {
+                "endLine": 159,
+                "offset": 48,
+                "startLine": 156,
+                "orgLineEnd": 111,
+                "probedLineEnd": 159,
+                "orgLineStart": 111
+            },
+            {
+                "endLine": 174,
+                "offset": 52,
+                "startLine": 170,
+                "orgLineEnd": 122,
+                "probedLineEnd": 174,
+                "orgLineStart": 122
+            },
+            {
+                "endLine": 179,
+                "offset": 55,
+                "startLine": 176,
+                "orgLineEnd": 124,
+                "probedLineEnd": 179,
+                "orgLineStart": 124
+            },
+            {
+                "endLine": 183,
+                "offset": 58,
+                "startLine": 180,
+                "orgLineEnd": 125,
+                "probedLineEnd": 183,
+                "orgLineStart": 125
+            }
+        ],
+        "classId": "composite_map_test_1"
+    },
+    {
+        "probe_ranges": [],
+        "classId": "abstract_iterable_map_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 78,
+                "offset": 4,
+                "startLine": 74,
+                "orgLineEnd": 74,
+                "probedLineEnd": 78,
+                "orgLineStart": 74
+            },
+            {
+                "endLine": 83,
+                "offset": 8,
+                "startLine": 79,
+                "orgLineEnd": 75,
+                "probedLineEnd": 83,
+                "orgLineStart": 75
+            },
+            {
+                "endLine": 109,
+                "offset": 16,
+                "startLine": 101,
+                "orgLineEnd": 93,
+                "probedLineEnd": 109,
+                "orgLineStart": 93
+            },
+            {
+                "endLine": 123,
+                "offset": 21,
+                "startLine": 118,
+                "orgLineEnd": 102,
+                "probedLineEnd": 123,
+                "orgLineStart": 102
+            },
+            {
+                "endLine": 137,
+                "offset": 26,
+                "startLine": 132,
+                "orgLineEnd": 111,
+                "probedLineEnd": 137,
+                "orgLineStart": 111
+            },
+            {
+                "endLine": 146,
+                "offset": 31,
+                "startLine": 141,
+                "orgLineEnd": 115,
+                "probedLineEnd": 146,
+                "orgLineStart": 115
+            },
+            {
+                "endLine": 151,
+                "offset": 39,
+                "startLine": 147,
+                "orgLineEnd": 118,
+                "probedLineEnd": 157,
+                "orgLineStart": 116
+            },
+            {
+                "endLine": 156,
+                "offset": 39,
+                "startLine": 152,
+                "orgLineEnd": 117,
+                "probedLineEnd": 156,
+                "orgLineStart": 117
+            },
+            {
+                "endLine": 186,
+                "offset": 43,
+                "startLine": 182,
+                "orgLineEnd": 143,
+                "probedLineEnd": 186,
+                "orgLineStart": 143
+            },
+            {
+                "endLine": 191,
+                "offset": 47,
+                "startLine": 187,
+                "orgLineEnd": 144,
+                "probedLineEnd": 191,
+                "orgLineStart": 144
+            },
+            {
+                "endLine": 196,
+                "offset": 51,
+                "startLine": 192,
+                "orgLineEnd": 146,
+                "probedLineEnd": 197,
+                "orgLineStart": 146
+            },
+            {
+                "endLine": 206,
+                "offset": 55,
+                "startLine": 202,
+                "orgLineEnd": 151,
+                "probedLineEnd": 206,
+                "orgLineStart": 151
+            },
+            {
+                "endLine": 224,
+                "offset": 63,
+                "startLine": 216,
+                "orgLineEnd": 161,
+                "probedLineEnd": 224,
+                "orgLineStart": 161
+            },
+            {
+                "endLine": 236,
+                "offset": 66,
+                "startLine": 233,
+                "orgLineEnd": 170,
+                "probedLineEnd": 236,
+                "orgLineStart": 170
+            },
+            {
+                "endLine": 330,
+                "offset": 76,
+                "startLine": 326,
+                "orgLineEnd": 254,
+                "probedLineEnd": 330,
+                "orgLineStart": 254
+            },
+            {
+                "endLine": 334,
+                "offset": 86,
+                "startLine": 331,
+                "orgLineEnd": 257,
+                "probedLineEnd": 343,
+                "orgLineStart": 255
+            },
+            {
+                "endLine": 342,
+                "offset": 86,
+                "startLine": 335,
+                "orgLineEnd": 256,
+                "probedLineEnd": 342,
+                "orgLineStart": 256
+            },
+            {
+                "endLine": 348,
+                "offset": 90,
+                "startLine": 344,
+                "orgLineEnd": 258,
+                "probedLineEnd": 348,
+                "orgLineStart": 258
+            },
+            {
+                "endLine": 562,
+                "offset": 107,
+                "startLine": 559,
+                "orgLineEnd": 476,
+                "probedLineEnd": 583,
+                "orgLineStart": 469
+            },
+            {
+                "endLine": 568,
+                "offset": 98,
+                "startLine": 563,
+                "orgLineEnd": 470,
+                "probedLineEnd": 568,
+                "orgLineStart": 470
+            },
+            {
+                "endLine": 573,
+                "offset": 107,
+                "startLine": 569,
+                "orgLineEnd": 475,
+                "probedLineEnd": 582,
+                "orgLineStart": 471
+            },
+            {
+                "endLine": 579,
+                "offset": 107,
+                "startLine": 574,
+                "orgLineEnd": 472,
+                "probedLineEnd": 579,
+                "orgLineStart": 472
+            },
+            {
+                "endLine": 587,
+                "offset": 110,
+                "startLine": 584,
+                "orgLineEnd": 477,
+                "probedLineEnd": 587,
+                "orgLineStart": 477
+            },
+            {
+                "endLine": 1254,
+                "offset": 120,
+                "startLine": 1250,
+                "orgLineEnd": 1142,
+                "probedLineEnd": 1262,
+                "orgLineStart": 1140
+            },
+            {
+                "endLine": 1261,
+                "offset": 120,
+                "startLine": 1255,
+                "orgLineEnd": 1141,
+                "probedLineEnd": 1261,
+                "orgLineStart": 1141
+            }
+        ],
+        "classId": "collection_utils_1"
+    }
+]}

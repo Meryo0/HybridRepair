@@ -1,0 +1,273 @@
+{
+    "lang_1": [
+        "org.apache.commons.lang3.ClassLoaderUtils.toString(java.lang.ClassLoader):67",
+        "org.apache.commons.lang3.ClassLoaderUtils.toString(java.net.URLClassLoader):77"
+    ],
+    "lang_2": [
+        "org.apache.commons.lang3.mutable.MutableObject.equals(java.lang.Object):96"
+    ],
+    "lang_3": [
+        "org.apache.commons.lang3.reflect.TypeUtils.getRawType(java.lang.reflect.Type, java.lang.reflect.Type):805"
+    ],
+    "lang_4": [
+        "org.apache.commons.lang3.exception.ExceptionUtils.getStackTrace(java.lang.Throwable):376"
+    ],
+    "lang_5": [
+        "org.apache.commons.lang3.time.DurationUtils.getNanosOfMiili(java.time.Duration):73"
+    ],
+    "lang_6": [
+        "org.apache.commons.lang3.ArrayUtils.toPrimitive(java.lang.Boolean[]):9267"
+    ],
+    "lang_7": [
+        "org.apache.commons.lang3.stream.Streams.stream(java.util.Collection<O>):479"
+    ],
+    "lang_8": [
+        "org.apache.commons.lang3.CharSequenceUtils.toCharArray(java.lang.CharSequence):312"
+    ],
+    "lang_9": [
+        "org.apache.commons.lang3.reflect.MemberUtils.getTotalTransformationCost(java.lang.Class<?>[], org.apache.commons.lang3.reflect.MemberUtils.Executable):165",
+        "org.apache.commons.lang3.reflect.MethodUtils.getMatchingAccessibleMethod(java.lang.Class<?>, java.lang.String, java.lang.Class<?>):706"
+    ],
+    "lang_10": [
+        "org.apache.commons.lang3.builder.ReflectionToStringBuilder.ReflectionToStringBuilder(java.lang.Object, org.apache.commons.lang3.builder.ToStringStyle, java.lang.StringBuffer):535",
+        "org.apache.commons.lang3.builder.ReflectionToStringBuilder.ReflectionToStringBuilder(T, org.apache.commons.lang3.builder.ToStringStyle, java.lang.StringBuffer, java.lang.Class<? super T>, boolean, boolean):560"
+    ],
+    "lang_11": [
+        "org.apache.commons.lang3.text.StrBuilder.equals(org.apache.commons.lang3.text.StrBuilder):2822"
+    ],
+    "lang_12": [
+        "org.apache.commons.lang3.reflect.TypeUtils.isAssignable(java.lang.reflect.Type, java.lang.reflect.ParameterizedType, java.util.Map<java.lang.reflect.TypeVariable<?>,java.lang.reflect.Type>):471"
+    ],
+    "lang_13": [
+        "org.apache.commons.lang3.StringUtils.replacePattern(java.lang.String, java.lang.String, java.lang.String):4694"
+    ],
+    "math_1": [
+        "org.apache.commons.math.util.MathUtils.sortInPlace(double[], org.apache.commons.math.util.MathUtils.OrderDirection, double[]):2324"
+    ],
+    "math_2": [
+        "org.apache.commons.math.linear.AbstractRealMatrix.setSubMatrix(double[][], int, int):389",
+        "org.apache.commons.math.linear.BlockFieldMatrix.setSubMatrix(T[][], int, int):762",
+        "org.apache.commons.math.linear.BlockRealMatrix.setSubMatrix(double[][], int, int):769"
+    ],
+    "math_3": [
+        "org.apache.commons.math.exception.util.MessageFactory.buildMessage(java.util.Locale, org.apache.commons.math.exception.util.Localizable, org.apache.commons.math.exception.util.Localizable, java.lang.Object):66"
+    ],
+    "collections_1": [
+        "org.apache.commons.collections4.map.CompositeMap.addComposited(java.util.Map<K,V>):136"
+    ],
+    "collections_2": [
+        "org.apache.commons.collections4.set.CompositeSet.containsAll(java.util.Collection<?>):255",
+        "org.apache.commons.collections4.set.CompositeSet.removeAll(java.util.Collection<?>):294",
+        "org.apache.commons.collections4.set.CompositeSet.addComposited(java.util.Set<E>):358"
+    ],
+    "collections_3": [
+        "org.apache.commons.collections4.collection.CompositeCollection.containsAll(java.util.Collection<?>):263",
+        "org.apache.commons.collections4.collection.CompositeCollection.removeAll(java.util.Collection<?>):303",
+        "org.apache.commons.collections4.collection.CompositeCollection.retainAll(java.util.Collection<?>):327",
+        "org.apache.commons.collections4.collection.CompositeCollection.addComposited(java.util.Collection<E>):362",
+        "org.apache.commons.collections4.collection.CompositeCollection.addComposited(java.util.Collection<E>, java.util.Collection<E>):373",
+        "org.apache.commons.collections4.collection.CompositeCollection.addComposited(java.util.Collection<E>, java.util.Collection<E>):374",
+        "org.apache.commons.collections4.collection.CompositeCollection.addComposited(java.util.Collection<E>):383"
+    ],
+    "commons-io_1": [
+        "org.apache.commons.io.IOCase.checkRegionMatches(java.lang.String, int, java.lang.String):218"
+    ],
+    "commons-io_2": [
+        "org.apache.commons.io.IOCase.checkIndexOf(java.lang.String, int, java.lang.String):192",
+        "org.apache.commons.io.IOCase.checkIndexOf(java.lang.String, int, java.lang.String):192"
+    ],
+    "commons-io_3": [
+        "org.apache.commons.io.filefilter.CanReadFileFilter.accept(java.io.File):95",
+        "org.apache.commons.io.filefilter.CanWriteFileFilter.accept(java.io.File):83",
+        "org.apache.commons.io.filefilter.EmptyFileFilter.accept(java.io.File):107",
+        "org.apache.commons.io.filefilter.FileFileFilter.accept(java.io.File):100",
+        "org.apache.commons.io.filefilter.HiddenFileFilter.accept(java.nio.file.Path, java.nio.file.attribute.BasicFileAttributes):117",
+        "org.apache.commons.io.filefilter.NameFileFilter.accept(java.io.File):166",
+        "org.apache.commons.io.IOCase.checkEquals(java.lang.String, java.lang.String):174"
+    ],
+    "commons-io_4": [
+        "org.apache.commons.io.file.PathUtils.getFileName(java.nio.file.Path, java.util.function.Function<java.nio.file.Path,R>):881"
+    ],
+    "commons-io_5": [
+        "org.apache.commons.io.filefilter.RegexFileFilter.RegexFileFilter(java.util.regex.Pattern):114",
+        "org.apache.commons.io.filefilter.RegexFileFilter.RegexFileFilter(java.util.regex.Pattern, java.util.function.Function<java.nio.file.Path,java.lang.String>):128",
+        "org.apache.commons.io.filefilter.RegexFileFilter.accept(java.nio.file.Path, java.nio.file.attribute.BasicFileAttributes):184"
+    ],
+    "commons-io_6": [
+        "org.apache.commons.io.input.ReaderInputStream.setCharset(java.nio.charset.Charset):132"
+    ],
+    "commons-io_7": [
+        "org.apache.commons.io.input.ReaderInputStream.setCharsetEncoder(java.nio.charset.CharsetEncoder):140"
+    ],
+    "commons-io_8": [
+        "org.apache.commons.io.file.PathUtils.readIfSymbolicLink(java.nio.file.Path):1215"
+    ],
+    "commons-io_9": [
+        "org.apache.commons.io.output.WriterOutputStream.WriterOutputStream(java.io.Writer, java.nio.charset.Charset, int, boolean):170",
+        "org.apache.commons.io.output.WriterOutputStream.WriterOutputStream(java.io.Writer, java.nio.charset.CharsetDecoder, int, boolean):206"
+    ],
+    "commons-io_10": [
+        "org.apache.commons.io.input.CharSequenceInputStream.CharSequenceInputStream(java.lang.CharSequence, java.nio.charset.Charset, int):75"
+    ],
+    "commons-io_11": [
+        "org.apache.commons.io.input.ReaderInputStream.ReaderInputStream(java.io.Reader, java.nio.charset.Charset, int):149",
+        "org.apache.commons.io.input.ReaderInputStream.ReaderInputStream(java.io.Reader, java.nio.charset.CharsetEncoder, int):177",
+        "org.apache.commons.io.input.ReaderInputStream.ReaderInputStream(java.io.Reader, java.nio.charset.CharsetEncoder, int):178"
+    ],
+    "commons-io_12": [
+        "org.apache.commons.io.output.FileWriterWithEncoding.initWriter(java.io.File, java.lang.Object, boolean):226"
+    ],
+    "commons-io_13": [
+        "org.apache.commons.io.IOCase.checkStartsWith(java.lang.String, java.lang.String):180",
+        "org.apache.commons.io.IOCase.checkEndsWith(java.lang.String, java.lang.String):196"
+    ],
+    "commons-io_14": [
+        "org.apache.commons.io.IOUtils.contentEquals(java.io.InputStream, java.io.InputStream):716"
+    ],
+    "commons-io_15": [
+        "org.apache.commons.io.IOUtils.copyLarge(java.io.InputStream, java.io.OutputStream, byte[]):1160"
+    ],
+    "commons-io_16": [
+        "org.apache.commons.io.FileUtils.contentEqualsIgnoreEOL(java.io.File, java.io.File, java.lang.String):448"
+    ],
+    "commons-io_17": [
+        "org.apache.commons.io.FileUtils.contentEquals(java.io.File, java.io.File):391"
+    ],
+    "commons-io_18": [
+        "org.apache.commons.io.IOUtils.contentEqualsIgnoreEOL(java.io.Reader, java.io.Reader):792"
+    ],
+    "commons-io_19": [
+        "org.apache.commons.io.IOUtils.contentEquals(java.io.Reader, java.io.Reader):753"
+    ],
+    "Chart_2": [
+        "org.jfree.data.general.DatasetUtilities.iterateDomainBounds(org.jfree.data.xy.XYDataset, boolean):779",
+        "org.jfree.data.general.DatasetUtilities.iterateDomainBounds(org.jfree.data.xy.XYDataset, boolean):779",
+        "org.jfree.data.general.DatasetUtilities.iterateRangeBounds(org.jfree.data.xy.XYDataset, boolean):1283"
+    ],
+    "Chart_4": [
+        "org.jfree.chart.plot.XYPlot.getDataRange(org.jfree.chart.axis.ValueAxis):4493"
+    ],
+    "Chart_14": [
+        "org.jfree.chart.plot.CategoryPlot.removeDomainMarker(int, org.jfree.chart.plot.Marker, org.jfree.chart.util.Layer, boolean):2166",
+        "org.jfree.chart.plot.CategoryPlot.removeRangeMarker(int, org.jfree.chart.plot.Marker, org.jfree.chart.util.Layer, boolean):2448",
+        "org.jfree.chart.plot.XYPlot.removeDomainMarker(int, org.jfree.chart.plot.Marker, org.jfree.chart.util.Layer, boolean):2293",
+        "org.jfree.chart.plot.XYPlot.removeRangeMarker(int, org.jfree.chart.plot.Marker, org.jfree.chart.util.Layer, boolean):2529"
+    ],
+    "Chart_16": [
+        "org.jfree.data.category.DefaultIntervalCategoryDataset.DefaultIntervalCategoryDataset(java.lang.Comparable[], java.lang.Comparable[], java.lang.Number[][], java.lang.Number[][]):207",
+        "org.jfree.data.category.DefaultIntervalCategoryDataset.DefaultIntervalCategoryDataset(java.lang.Comparable[], java.lang.Comparable[], java.lang.Number[][], java.lang.Number[][]):208"
+    ],
+    "Cli_5": [
+        "org.apache.commons.cli.Util.stripLeadingHyphens(java.lang.String):36"
+    ],
+    "Cli_30": [
+        "org.apache.commons.cli.DefaultParser.handleProperties(java.util.Properties):159",
+        "org.apache.commons.cli.Parser.processProperties(java.util.Properties):272"
+    ],
+    "Closure_2": [
+        "com.google.javascript.jscomp.TypeCheck.checkInterfaceConflictProperties(com.google.javascript.jscomp.NodeTraversal, com.google.javascript.rhino.Node, java.lang.String, java.util.HashMap<java.lang.String,com.google.javascript.rhino.jstype.ObjectType>, java.util.HashMap<java.lang.String,com.google.javascript.rhino.jstype.ObjectType>, com.google.javascript.rhino.jstype.ObjectType):1574"
+    ],
+    "Closure_171": [
+        "com.google.javascript.jscomp.TypedScopeCreator.isQualifiedNameInferred(java.lang.String, com.google.javascript.rhino.Node, com.google.javascript.rhino.JSDocInfo, com.google.javascript.rhino.Node, com.google.javascript.rhino.jstype.JSType):1670",
+        "com.google.javascript.jscomp.TypeInference.traverseObjectLiteral(com.google.javascript.rhino.Node, com.google.javascript.jscomp.type.FlowScope):736"
+    ],
+    "Codec_5": [
+        "org.apache.commons.codec.binary.Base64.decode(byte[], int, int):594"
+    ],
+    "Codec_13": [
+        "org.apache.commons.codec.language.DoubleMetaphone.isDoubleMetaphoneEqual(java.lang.String, java.lang.String, boolean):244"
+    ],
+    "Codec_17": [
+        "org.apache.commons.codec.binary.StringUtils.newStringIso8859_1(byte[]):339"
+    ],
+    "Csv_4": [
+        "org.apache.commons.csv.CSVParser.getHeaderMap():288"
+    ],
+    "Csv_9": [
+        "org.apache.commons.csv.CSVRecord.putIn(M):180"
+    ],
+    "Csv_11": [
+        "org.apache.commons.csv.CSVParser.initializeHeader():384"
+    ],
+    "Gson_6": [
+        "com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.getTypeAdapter(com.google.gson.internal.ConstructorConstructor, com.google.gson.Gson, com.google.gson.reflect.TypeToken<?>, com.google.gson.annotations.JsonAdapter):67"
+    ],
+    "Gson_9": [
+        "com.google.gson.stream.JsonWriter.value(boolean):464"
+    ],
+    "Jacksoncore_8": [
+        "com.fasterxml.jackson.core.util.TextBuffer.getTextBuffer():307"
+    ],
+    "Jacksondatabind_3": [
+        "com.fasterxml.jackson.databind.deser.std.StringArrayDeserializer.deserialize(JsonParser, com.fasterxml.jackson.databind.DeserializationContext):66",
+        "com.fasterxml.jackson.databind.deser.std.StringArrayDeserializer._deserializeCustom(JsonParser, com.fasterxml.jackson.databind.DeserializationContext):95"
+    ],
+    "Jacksondatabind_13": [
+        "com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.findObjectId(java.lang.Object, ObjectIdGenerator<?>, ObjectIdResolver):88",
+        "com.fasterxml.jackson.databind.deser.impl.ObjectIdValueProperty.deserializeSetAndReturn(JsonParser, com.fasterxml.jackson.databind.DeserializationContext, java.lang.Object):93"
+    ],
+    "Jacksondatabind_36": [],
+    "Jacksondatabind_80": [
+        "com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver.collectAndResolveSubtypesByTypeId(com.fasterxml.jackson.databind.cfg.MapperConfig<?>, com.fasterxml.jackson.databind.introspect.AnnotatedMember, com.fasterxml.jackson.databind.JavaType):145"
+    ],
+    "Jacksondatabind_93": [
+        "com.fasterxml.jackson.databind.jsontype.impl.SubTypeValidator.validateSubType(com.fasterxml.jackson.databind.DeserializationContext, com.fasterxml.jackson.databind.JavaType):85"
+    ],
+    "Jacksondatabind_95": [
+        "com.fasterxml.jackson.databind.type.TypeParser.parseType(com.fasterxml.jackson.databind.type.TypeParser.MyTokenizer):59"
+    ],
+    "Jacksondatabind_107": [
+        "com.fasterxml.jackson.databind.jsontype.impl.TypeDeserializerBase._findDeserializer(com.fasterxml.jackson.databind.DeserializationContext, java.lang.String):165"
+    ],
+    "Jsoup_8": [
+        "org.jsoup.nodes.Node.outerHtml(java.lang.StringBuilder):363"
+    ],
+    "Jsoup_22": [
+        "org.jsoup.nodes.Node.siblingNodes():445"
+    ],
+    "Jsoup_26": [
+        "org.jsoup.safety.Cleaner.clean(org.jsoup.nodes.Document):43"
+    ],
+    "Jsoup_66": [
+        "org.jsoup.nodes.Element.ensureChildNodes():89",
+        "org.jsoup.nodes.Element.doClone(org.jsoup.nodes.Node):1402",
+        "org.jsoup.nodes.Element.onContentsChanged():1414"
+    ],
+    "Jsoup_89": [
+        "org.jsoup.nodes.Attribute.setValue(java.lang.String):88"
+    ],
+    "Lang_20": [
+        "org.apache.commons.lang3.StringUtils.join(java.lang.Object[], char, int, int):3298",
+        "org.apache.commons.lang3.StringUtils.join(java.lang.Object[], java.lang.String, int, int):3383"
+    ],
+    "Lang_33": [
+        "org.apache.commons.lang3.ClassUtils.toClass(java.lang.Object[]):910"
+    ],
+    "Lang_39": [
+        "org.apache.commons.lang3.StringUtils.replaceEach(java.lang.String, java.lang.String[], java.lang.String[], boolean, int):3676"
+    ],
+    "Lang_47": [
+        "org.apache.commons.lang.text.StrBuilder.appendFixedWidthPadLeft(java.lang.Object, int, char):1186",
+        "org.apache.commons.lang.text.StrBuilder.appendFixedWidthPadRight(java.lang.Object, int, char):1230"
+    ],
+    "Lang_57": [
+        "org.apache.commons.lang.LocaleUtils.isAvailableLocale(java.util.Locale):223"
+    ],
+    "Math_4": [
+        "org.apache.commons.math3.geometry.euclidean.threed.SubLine.intersection(org.apache.commons.math3.geometry.euclidean.threed.SubLine, boolean):116",
+        "org.apache.commons.math3.geometry.euclidean.twod.SubLine.intersection(org.apache.commons.math3.geometry.euclidean.twod.SubLine, boolean):120"
+    ],
+    "Math_70": [
+        "org.apache.commons.math.analysis.solvers.BisectionSolver.solve(org.apache.commons.math.analysis.UnivariateRealFunction, double, double, double):72"
+    ],
+    "Math_79": [
+        "org.apache.commons.math.util.MathUtils.distance(int[], int[]):1624",
+        "org.apache.commons.math.util.MathUtils.distance(int[], int[]):1626"
+    ],
+    "Mockito_18": [
+        "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues.returnValueFor(java.lang.Class<?>):117"
+    ],
+    "Mockito_38": [
+        "org.mockito.internal.verification.argumentmatching.ArgumentMatchingTool.toStringEquals(Matcher, java.lang.Object):48"
+    ]
+}

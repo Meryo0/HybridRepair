@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jsoup.nodes.Node:363",
+            "code": "new NodeTraversor(new OuterHtmlVisitor(accum, ownerDocument().outputSettings())).traverse(this);",
+            "explanation": "The method `ownerDocument()` is returning null, causing a NullPointerException when `outputSettings()` is called. This indicates that the node does not have a parent document, which is problematic when trying to generate the outer HTML."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:215",
+            "code": "if (this instanceof Document) return (Document) this;",
+            "explanation": "This line checks if the current node is a Document. If the node is not a Document and does not have a parent, `ownerDocument()` will return null. This is likely contributing to the NullPointerException."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:216",
+            "code": "else if (parentNode == null) return null;",
+            "explanation": "If the node does not have a parent, `ownerDocument()` returns null. This is problematic for nodes that are removed from the document, as they will not have a parent node."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Element:1022",
+            "code": "return outerHtml();",
+            "explanation": "The `toString()` method calls `outerHtml()`, which in turn calls `ownerDocument().outputSettings()`. If `ownerDocument()` returns null, this will cause a NullPointerException."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:220",
+            "code": "return parentNode.ownerDocument();",
+            "explanation": "This line attempts to get the owner document from the parent node. If the parent node is null, this will return null, leading to the NullPointerException when `outputSettings()` is called."
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.IOCase:192",
+            "code": "final int endIndex = str.length() - search.length();",
+            "explanation": "The NullPointerException is thrown because either 'str' or 'search' is null. The code does not check for null values before calling the 'length()' method on these strings. Adding null checks before this line would prevent the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.IOCase:193",
+            "code": "if (endIndex >= strStartIndex) {",
+            "explanation": "This line depends on the previous line where 'str' and 'search' are used without null checks. If 'str' or 'search' is null, this line will not be reached, but it is part of the faulty logic that needs to be corrected."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.IOCase:217",
+            "code": "return str.regionMatches(!sensitive, strStartIndex, search, 0, search.length());",
+            "explanation": "Similar to the previous lines, 'str' and 'search' are used without null checks. If either is null, this will cause a NullPointerException. Adding null checks before this line would prevent the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.IOCase:200",
+            "code": "return -1;",
+            "explanation": "This line is part of the method's return logic. While it does not directly cause the NullPointerException, it is part of the method that needs to handle null values properly."
+        }
+    ]
+}

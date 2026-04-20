@@ -1,0 +1,15 @@
+{
+ "buggy.hash": "",
+ "fixed_hash": "da9b977ef99e2595602a964561906a930b4332f3",
+ "passed.classes": [],
+ "failed.classes": [
+  "org.jsoup.nodes.ElementTest"
+ ],
+ "failed.tests": [
+  {
+   "class": "org.jsoup.nodes.ElementTest",
+   "name": "parentlessToString",
+   "message": ""
+  }
+ ]
+}

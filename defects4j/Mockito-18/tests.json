@@ -1,0 +1,15 @@
+{
+ "buggy.hash": "",
+ "fixed_hash": "8ceb04ad7317d8db24476b3b5f56ec9f658bc43a",
+ "passed.classes": [],
+ "failed.classes": [
+  "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValuesTest"
+ ],
+ "failed.tests": [
+  {
+   "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValuesTest",
+   "name": "should_return_empty_iterable",
+   "message": ""
+  }
+ ]
+}

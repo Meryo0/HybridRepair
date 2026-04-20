@@ -1,0 +1,19 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jsoup.nodes.Attribute:88",
+            "code": "String oldVal = parent.get(this.key);",
+            "explanation": "The NullPointerException is thrown because `parent` is `null` when `get` is called. This line should check if `parent` is `null` before attempting to call `get` on it."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Attribute:67",
+            "code": "if (parent != null) {",
+            "explanation": "This line starts a conditional block that handles the case when `parent` is not `null`. However, there is no corresponding handling for when `parent` is `null`, leading to potential issues when `parent` is `null`."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Attribute:73",
+            "code": "}",
+            "explanation": "This closing brace ends the conditional block that checks if `parent` is not `null`. The code does not handle the scenario where `parent` is `null`, which can lead to the NullPointerException observed in the test results."
+        }
+    ]
+}

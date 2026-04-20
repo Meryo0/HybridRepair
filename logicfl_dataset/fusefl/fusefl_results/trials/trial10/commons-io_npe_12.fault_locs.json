@@ -1,0 +1,19 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.output.FileWriterWithEncoding:226",
+            "code": "Objects.requireNonNull(encoding, \"encoding\");",
+            "explanation": "This line explicitly checks if the 'encoding' parameter is null and throws a NullPointerException if it is. Since the test case passes a null Charset, this line will always cause a NullPointerException."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.output.FileWriterWithEncoding:184",
+            "code": "this.out = initWriter(file, encoding, append);",
+            "explanation": "This line calls the 'initWriter' method with the 'encoding' parameter. If 'encoding' is null, the 'initWriter' method will encounter the null check at line 226 and throw a NullPointerException."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.output.FileWriterWithEncoding:171",
+            "code": "this(file, charset, false);",
+            "explanation": "This line calls the constructor that includes the 'encoding' parameter. If 'charset' is null, it will propagate to the constructor and eventually cause a NullPointerException at line 226."
+        }
+    ]
+}

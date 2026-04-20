@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jsoup.safety.Cleaner:73",
+            "code": "List<Node> sourceChildren = source.childNodes();",
+            "explanation": "The NullPointerException indicates that 'source' is null when 'source.childNodes()' is called. This suggests that 'source' is not properly initialized or is unexpectedly null at this point in the code."
+        },
+        {
+            "faultyLine": "org.jsoup.safety.Cleaner:43",
+            "code": "copySafeNodes(dirtyDocument.body(), clean.body());",
+            "explanation": "The method 'copySafeNodes' is called with 'dirtyDocument.body()' as the 'source' parameter. If 'dirtyDocument.body()' is null, it will cause a NullPointerException in 'copySafeNodes'. This indicates that 'dirtyDocument' might not have a body element, or it is not properly initialized."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Document:59",
+            "code": "return findFirstElementByTagName(\"body\", this);",
+            "explanation": "The 'body()' method in 'Document' class returns the first element with the tag name 'body'. If the document does not contain a 'body' element, this method might return null, leading to a NullPointerException when used in 'Cleaner'."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Document:164",
+            "code": "if (node.nodeName().equals(tag))",
+            "explanation": "The 'findFirstElementByTagName' method checks if the node's name matches the tag. If 'node' is null, this will cause a NullPointerException. This suggests that the traversal logic might not handle null nodes properly."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Document:167",
+            "code": "for (Node child: node.childNodes) {",
+            "explanation": "The 'findFirstElementByTagName' method iterates over child nodes. If 'node.childNodes' is null, this will cause a NullPointerException. This indicates that the method might not handle cases where 'node' has no children."
+        }
+    ]
+}

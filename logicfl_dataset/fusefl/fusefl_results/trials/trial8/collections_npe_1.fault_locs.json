@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.collections4.map.CompositeMap:136",
+            "code": "final Collection<K> intersect = CollectionUtils.intersection(this.composite[i].keySet(), map.keySet());",
+            "explanation": "The test results indicate that a NullPointerException is thrown when invoking `map.keySet()`. This suggests that `map` is null. The method `addComposited` does not check if `map` is null before attempting to use it, leading to the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.collections4.map.CompositeMap:112",
+            "code": "this.addComposited(composite[i]);",
+            "explanation": "The constructor of `CompositeMap` calls `addComposited` without checking if `composite[i]` is null. If any element in the `composite` array is null, it will cause a NullPointerException in `addComposited`."
+        },
+        {
+            "faultyLine": "org.apache.commons.collections4.map.CompositeMap:74",
+            "code": "this(new Map[] { one, two }, null);",
+            "explanation": "The constructor of `CompositeMap` initializes the composite map with two maps. If either `one` or `two` is null, it will eventually lead to a NullPointerException in `addComposited`."
+        },
+        {
+            "faultyLine": "org.apache.commons.collections4.map.CompositeMap:144",
+            "code": "final Map<K, V>[] temp = new Map[this.composite.length + 1];",
+            "explanation": "This line creates a new array to hold the composite maps. If `this.composite` contains null elements, it will cause issues when copying or adding elements."
+        },
+        {
+            "faultyLine": "org.apache.commons.collections4.map.CompositeMap:75",
+            "code": "}",
+            "explanation": "The constructor does not perform any null checks on the input maps. Adding null checks here would prevent the propagation of null values to methods like `addComposited`."
+        }
+    ]
+}

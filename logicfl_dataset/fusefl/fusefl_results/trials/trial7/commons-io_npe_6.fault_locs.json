@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.input.ReaderInputStream:132",
+            "code": "charsetEncoder = charset.newEncoder();",
+            "explanation": "The NullPointerException is thrown because `charset` is null when `newEncoder()` is called. This indicates that the `charset` field is not properly initialized or checked for null before this line."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.input.ReaderInputStream:103",
+            "code": "private CharsetEncoder charsetEncoder = super.getCharset().newEncoder();",
+            "explanation": "The `charsetEncoder` is initialized using `super.getCharset().newEncoder()`, which assumes that `super.getCharset()` is never null. If `super.getCharset()` can return null, this will cause a NullPointerException."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.build.AbstractStreamBuilder:103",
+            "code": "return charset;",
+            "explanation": "The `getCharset()` method in `AbstractStreamBuilder` returns the `charset` field. If `charset` is null, it will propagate the null value to the `ReaderInputStream.Builder`, leading to the NullPointerException when `newEncoder()` is called."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.input.ReaderInputStream:157",
+            "code": "return new Builder();",
+            "explanation": "The `Builder` instance is created without ensuring that the `charset` field is properly initialized. This can lead to the `charset` being null when accessed later."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.build.AbstractStreamBuilder:56",
+            "code": "private Charset charset = Charset.defaultCharset();",
+            "explanation": "Although `charset` is initialized with `Charset.defaultCharset()`, it can be set to null later. There should be a null check or a default assignment in the `setCharset` method to prevent it from being null."
+        }
+    ]
+}

@@ -1,0 +1,91 @@
+{"classes": [
+    {
+        "probe_ranges": [
+            {
+                "endLine": 378,
+                "offset": 3,
+                "startLine": 375,
+                "orgLineEnd": 375,
+                "probedLineEnd": 378,
+                "orgLineStart": 375
+            },
+            {
+                "endLine": 383,
+                "offset": 7,
+                "startLine": 379,
+                "orgLineEnd": 376,
+                "probedLineEnd": 383,
+                "orgLineStart": 376
+            }
+        ],
+        "classId": "exception_utils_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 41,
+                "offset": 3,
+                "startLine": 38,
+                "orgLineEnd": 38,
+                "probedLineEnd": 41,
+                "orgLineStart": 38
+            },
+            {
+                "endLine": 59,
+                "offset": 6,
+                "startLine": 56,
+                "orgLineEnd": 53,
+                "probedLineEnd": 59,
+                "orgLineStart": 53
+            }
+        ],
+        "classId": "contexted_exception_test_1"
+    },
+    {
+        "probe_ranges": [{
+            "endLine": 58,
+            "offset": 5,
+            "startLine": 53,
+            "orgLineEnd": 53,
+            "probedLineEnd": 58,
+            "orgLineStart": 53
+        }],
+        "classId": "default_exception_context_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 184,
+                "offset": 3,
+                "startLine": 181,
+                "orgLineEnd": 181,
+                "probedLineEnd": 184,
+                "orgLineStart": 181
+            },
+            {
+                "endLine": 188,
+                "offset": 6,
+                "startLine": 185,
+                "orgLineEnd": 182,
+                "probedLineEnd": 188,
+                "orgLineStart": 182
+            }
+        ],
+        "classId": "immutable_pair_1"
+    },
+    {
+        "probe_ranges": [],
+        "classId": "pair_1"
+    },
+    {
+        "probe_ranges": [{
+            "endLine": 175,
+            "offset": 5,
+            "startLine": 170,
+            "orgLineEnd": 170,
+            "probedLineEnd": 175,
+            "orgLineStart": 170
+        }],
+        "classId": "contexted_exception_1"
+    }
+]}

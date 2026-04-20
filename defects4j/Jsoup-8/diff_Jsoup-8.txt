@@ -1,0 +1,22 @@
+diff -U 5 -r ./defects4j/Jsoup-8/buggy/src/main/java/org/jsoup/nodes/Node.java ./defects4j/Jsoup-8/fixed/src/main/java/org/jsoup/nodes/Node.java
+--- ./defects4j/Jsoup-8/buggy/src/main/java/org/jsoup/nodes/Node.java	2024-05-19 19:44:54.462569759 +0900
++++ ./defects4j/Jsoup-8/fixed/src/main/java/org/jsoup/nodes/Node.java	2024-05-19 19:44:54.486570245 +0900
+@@ -358,14 +358,17 @@
+         outerHtml(accum);
+         return accum.toString();
+     }
+ 
+     protected void outerHtml(StringBuilder accum) {
+-        new NodeTraversor(new OuterHtmlVisitor(accum, ownerDocument().outputSettings())).traverse(this);
++        new NodeTraversor(new OuterHtmlVisitor(accum, getOutputSettings())).traverse(this);
+     }
+ 
+     // if this node has no document (or parent), retrieve the default output settings
++    private Document.OutputSettings getOutputSettings() {
++        return ownerDocument() != null ? ownerDocument().outputSettings() : (new Document("")).outputSettings();
++    }
+ 
+     /**
+      Get the outer HTML of this node.
+      @param accum accumulator to place HTML into
+      */

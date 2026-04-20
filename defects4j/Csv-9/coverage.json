@@ -1,0 +1,56 @@
+{
+    "coverage": [
+        {
+            "covered": [ 24, 29, 35, 40, 47 ],
+            "className": "org.apache.commons.csv.Quote"
+        },
+        {
+            "covered": [ 174, 186, 210, 213, 226, 243, 255, 267, 300, 301, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 324, 325, 420, 429, 438, 447, 457, 467, 484, 493, 642, 647, 652, 657, 662, 667, 671, 717, 720, 734, 747, 750, 785, 798, 845, 848, 874, 886 ],
+            "className": "org.apache.commons.csv.CSVFormat"
+        },
+        {
+            "covered": [ 29, 34, 36, 39, 42, 45, 48, 52, 55, 61, 62, 63, 64 ],
+            "className": "org.apache.commons.csv.Token"
+        },
+        {
+            "covered": [ 61, 62, 63, 64, 65, 66, 67, 68, 69, 85, 88, 93, 96, 112, 118, 132, 134, 142, 145, 149, 152, 160, 163, 188, 191, 192, 193, 194, 195, 196, 197, 198, 207, 208, 212, 216, 291, 364, 368, 372, 389, 396, 400, 404, 408, 412 ],
+            "className": "org.apache.commons.csv.Lexer"
+        },
+        {
+            "covered": [ 36 ],
+            "className": "org.apache.commons.csv.Constants"
+        },
+        {
+            "covered": [ 37, 39, 47, 48, 49, 50, 51, 52, 53, 54, 173, 174, 175 ],
+            "className": "org.apache.commons.csv.CSVRecordTest"
+        },
+        {
+            "covered": [ 35, 52, 53, 54, 55, 56, 57, 180, 214 ],
+            "className": "org.apache.commons.csv.CSVRecord"
+        },
+        {
+            "covered": [ 174, 175, 177, 218, 222, 241, 242, 243, 245, 246, 247, 248, 249, 252, 253, 254, 255, 259, 358, 359, 360, 388, 392, 404, 409, 428, 431, 432, 434, 436, 437, 442, 459, 460, 461, 463, 464, 465, 467, 468, 473, 474, 491, 493, 494, 495, 496, 499 ],
+            "className": "org.apache.commons.csv.CSVParser"
+        },
+        {
+            "covered": [ 32, 35 ],
+            "className": "org.apache.commons.csv.Assertions"
+        },
+        {
+            "covered": [ 40, 43, 51, 52, 56, 57, 60, 61, 73, 161 ],
+            "className": "org.apache.commons.csv.ExtendedBufferedReader"
+        }
+    ],
+    "classes": [
+        "org.apache.commons.csv.Assertions",
+        "org.apache.commons.csv.CSVFormat",
+        "org.apache.commons.csv.CSVParser",
+        "org.apache.commons.csv.CSVRecord",
+        "org.apache.commons.csv.CSVRecordTest",
+        "org.apache.commons.csv.Constants",
+        "org.apache.commons.csv.ExtendedBufferedReader",
+        "org.apache.commons.csv.Lexer",
+        "org.apache.commons.csv.Quote",
+        "org.apache.commons.csv.Token"
+    ]
+}

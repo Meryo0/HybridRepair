@@ -1,0 +1,71 @@
+{"classes": [
+    {
+        "probe_ranges": [
+            {
+                "endLine": 302,
+                "offset": 16,
+                "startLine": 298,
+                "orgLineEnd": 286,
+                "probedLineEnd": 302,
+                "orgLineStart": 286
+            },
+            {
+                "endLine": 306,
+                "offset": 19,
+                "startLine": 303,
+                "orgLineEnd": 287,
+                "probedLineEnd": 306,
+                "orgLineStart": 287
+            },
+            {
+                "endLine": 342,
+                "offset": 22,
+                "startLine": 339,
+                "orgLineEnd": 320,
+                "probedLineEnd": 342,
+                "orgLineStart": 320
+            }
+        ],
+        "classId": "str_matcher_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 119,
+                "offset": 4,
+                "startLine": 115,
+                "orgLineEnd": 117,
+                "probedLineEnd": 121,
+                "orgLineStart": 115
+            },
+            {
+                "endLine": 125,
+                "offset": 7,
+                "startLine": 122,
+                "orgLineEnd": 118,
+                "probedLineEnd": 125,
+                "orgLineStart": 118
+            },
+            {
+                "endLine": 2835,
+                "offset": 13,
+                "startLine": 2829,
+                "orgLineEnd": 2824,
+                "probedLineEnd": 2837,
+                "orgLineStart": 2822
+            }
+        ],
+        "classId": "str_builder_1"
+    },
+    {
+        "probe_ranges": [{
+            "endLine": 1862,
+            "offset": 5,
+            "startLine": 1857,
+            "orgLineEnd": 1857,
+            "probedLineEnd": 1862,
+            "orgLineStart": 1857
+        }],
+        "classId": "str_builder_test_1"
+    }
+]}

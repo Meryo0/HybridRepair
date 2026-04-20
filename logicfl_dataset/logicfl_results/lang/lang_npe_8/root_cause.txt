@@ -1,0 +1,4 @@
+Fault Localization Results
+NPE at line(char_sequence_utils_1, 312) / Null Expression - p_cs_787[cs]
+	 can be caused by 
+p_cs_787[cs] - line(char_sequence_utils_1, 312).

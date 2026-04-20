@@ -1,0 +1,4 @@
+Fault Localization Results
+NPE at line(duration_utils_1, 73) / Null Expression - p_duration_168[duration]
+	 can be caused by 
+p_duration_168[duration] - line(duration_utils_1, 73).

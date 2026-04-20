@@ -1,0 +1,99 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jsoup.nodes.Element:683",
+            "code": "if (parentNode == null) return null;",
+            "explanation": "This line checks if the parent node is null and returns null if it is. This could be causing the `nextElementSibling()` method to return null unexpectedly after cloning the document. The parent node might not be correctly set during the cloning process."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Element:684",
+            "code": "List<Element> siblings = parent().childElementsList();",
+            "explanation": "This line retrieves the list of child elements from the parent. If the parent node is not correctly set during cloning, this list might be empty or incorrect, leading to the `nextElementSibling()` method returning null."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Element:685",
+            "code": "Integer index = indexInList(this, siblings);",
+            "explanation": "This line finds the index of the current element in the list of siblings. If the list of siblings is incorrect or the current element is not found, the subsequent logic to find the next sibling will fail."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Element:686",
+            "code": "Validate.notNull(index);",
+            "explanation": "This line validates that the index is not null. If the index is null, it indicates that the current element was not found in the list of siblings, which could be due to issues during the cloning process."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Element:687",
+            "code": "if (siblings.size() > index+1) return siblings.get(index+1);",
+            "explanation": "This line checks if there is a next sibling and returns it. If the list of siblings is incorrect or the index is wrong, this condition might not be met, leading to the method returning null."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Element:688",
+            "code": "return null;",
+            "explanation": "This line returns null if there is no next sibling. This is the final fallback if the previous conditions are not met, which could be due to issues in the cloning process or incorrect sibling list."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:680",
+            "code": "clone.parentNode = parent; // can be null, to create an orphan split",
+            "explanation": "This line sets the parent node of the cloned element. If the parent node is not correctly set during cloning, it could lead to issues when trying to find the next sibling."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:681",
+            "code": "clone.siblingIndex = parent == null ? 0 : siblingIndex;",
+            "explanation": "This line sets the sibling index of the cloned element. If the sibling index is not correctly set during cloning, it could lead to issues when trying to find the next sibling."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:646",
+            "code": "Node thisClone = doClone(null); // splits for orphan",
+            "explanation": "This line creates a clone of the node. If the cloning process does not correctly set the parent and sibling relationships, it could lead to issues when trying to find the next sibling."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:649",
+            "code": "final LinkedList<Node> nodesToProcess = new LinkedList<>();",
+            "explanation": "This line initializes a list to process nodes during cloning. If the nodes are not correctly processed, it could lead to issues in the cloned document structure."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:650",
+            "code": "nodesToProcess.add(thisClone);",
+            "explanation": "This line adds the cloned node to the list for processing. If the cloned node is not correctly processed, it could lead to issues in the cloned document structure."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:652",
+            "code": "while (!nodesToProcess.isEmpty()) {",
+            "explanation": "This line starts processing the nodes in the list. If the nodes are not correctly processed, it could lead to issues in the cloned document structure."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:653",
+            "code": "Node currParent = nodesToProcess.remove();",
+            "explanation": "This line removes the current parent node from the list for processing. If the parent node is not correctly set or processed, it could lead to issues in the cloned document structure."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:655",
+            "code": "final int size = currParent.childNodeSize();",
+            "explanation": "This line gets the size of the child nodes of the current parent. If the child nodes are not correctly set or processed, it could lead to issues in the cloned document structure."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:656",
+            "code": "for (int i = 0; i < size; i++) {",
+            "explanation": "This line iterates over the child nodes of the current parent. If the child nodes are not correctly set or processed, it could lead to issues in the cloned document structure."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:657",
+            "code": "final List<Node> childNodes = currParent.ensureChildNodes();",
+            "explanation": "This line ensures the child nodes of the current parent are initialized. If the child nodes are not correctly set or processed, it could lead to issues in the cloned document structure."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:658",
+            "code": "Node childClone = childNodes.get(i).doClone(currParent);",
+            "explanation": "This line clones a child node and sets its parent. If the child nodes are not correctly cloned or the parent is not correctly set, it could lead to issues in the cloned document structure."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:659",
+            "code": "childNodes.set(i, childClone);",
+            "explanation": "This line sets the cloned child node in the list. If the child nodes are not correctly set, it could lead to issues in the cloned document structure."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:660",
+            "code": "nodesToProcess.add(childClone);",
+            "explanation": "This line adds the cloned child node to the list for processing. If the child nodes are not correctly processed, it could lead to issues in the cloned document structure."
+        }
+    ]
+}

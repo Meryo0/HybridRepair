@@ -1,0 +1,108 @@
+@SuppressWarnings("unchecked") public void testRemoveFromComposited(){
+  final CompositeMap<K,V> map=new CompositeMap<>(buildOne(),buildTwo());
+  final HashMap<K,V> three=new HashMap<>();
+  three.put((K)"5",(V)"five");
+  map.addComposited(null);
+  map.addComposited(three);
+  assertTrue(map.containsKey("5"));
+  map.remove("5");
+  assertFalse(three.containsKey("5"));
+}
+
+@SuppressWarnings("unchecked") public void testRemoveComposited(){
+  final CompositeMap<K,V> map=new CompositeMap<>(buildOne(),buildTwo());
+  final HashMap<K,V> three=new HashMap<>();
+  three.put((K)"5",(V)"five");
+  map.addComposited(null);
+  map.addComposited(three);
+  assertTrue(map.containsKey("5"));
+  map.removeComposited(three);
+  assertFalse(map.containsKey("5"));
+  map.removeComposited(buildOne());
+  assertFalse(map.containsKey("2"));
+}
+
+@SuppressWarnings("unchecked") public void testAddComposited(){
+  final CompositeMap<K,V> map=new CompositeMap<>(buildOne(),buildTwo());
+  final HashMap<K,V> three=new HashMap<>();
+  three.put((K)"5",(V)"five");
+  map.addComposited(null);
+  map.addComposited(three);
+  assertTrue(map.containsKey("5"));
+  try {
+    map.addComposited(three);
+    fail("Expecting IllegalArgumentException.");
+  }
+ catch (  final IllegalArgumentException ex) {
+  }
+}
+
+@SuppressWarnings("unchecked") public void testRemoveFromUnderlying(){
+  final CompositeMap<K,V> map=new CompositeMap<>(buildOne(),buildTwo());
+  final HashMap<K,V> three=new HashMap<>();
+  three.put((K)"5",(V)"five");
+  map.addComposited(null);
+  map.addComposited(three);
+  assertTrue(map.containsKey("5"));
+  three.remove("5");
+  assertFalse(map.containsKey("5"));
+}
+
+
+
+  JUnit Vintage:CompositeMapTest:testRemoveFromUnderlying
+    MethodSource [className = 'org.apache.commons.collections4.map.CompositeMapTest', methodName = 'testRemoveFromUnderlying', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.util.Map.keySet()" because "map" is null
+       org.apache.commons.collections4.map.CompositeMap.addComposited(CompositeMap.java:136)
+       org.apache.commons.collections4.map.CompositeMapTest.testRemoveFromUnderlying(CompositeMapTest.java:111)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       junit.framework.TestCase.runTest(TestCase.java:177)
+       junit.framework.TestCase.runBare(TestCase.java:142)
+       junit.framework.TestResult$1.protect(TestResult.java:122)
+       junit.framework.TestResult.runProtected(TestResult.java:142)
+       [...]
+  JUnit Vintage:CompositeMapTest:testRemoveComposited
+    MethodSource [className = 'org.apache.commons.collections4.map.CompositeMapTest', methodName = 'testRemoveComposited', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.util.Map.keySet()" because "map" is null
+       org.apache.commons.collections4.map.CompositeMap.addComposited(CompositeMap.java:136)
+       org.apache.commons.collections4.map.CompositeMapTest.testRemoveComposited(CompositeMapTest.java:94)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       junit.framework.TestCase.runTest(TestCase.java:177)
+       junit.framework.TestCase.runBare(TestCase.java:142)
+       junit.framework.TestResult$1.protect(TestResult.java:122)
+       junit.framework.TestResult.runProtected(TestResult.java:142)
+       [...]
+  JUnit Vintage:CompositeMapTest:testRemoveFromComposited
+    MethodSource [className = 'org.apache.commons.collections4.map.CompositeMapTest', methodName = 'testRemoveFromComposited', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.util.Map.keySet()" because "map" is null
+       org.apache.commons.collections4.map.CompositeMap.addComposited(CompositeMap.java:136)
+       org.apache.commons.collections4.map.CompositeMapTest.testRemoveFromComposited(CompositeMapTest.java:125)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       junit.framework.TestCase.runTest(TestCase.java:177)
+       junit.framework.TestCase.runBare(TestCase.java:142)
+       junit.framework.TestResult$1.protect(TestResult.java:122)
+       junit.framework.TestResult.runProtected(TestResult.java:142)
+       [...]
+  JUnit Vintage:CompositeMapTest:testAddComposited
+    MethodSource [className = 'org.apache.commons.collections4.map.CompositeMapTest', methodName = 'testAddComposited', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.util.Map.keySet()" because "map" is null
+       org.apache.commons.collections4.map.CompositeMap.addComposited(CompositeMap.java:136)
+       org.apache.commons.collections4.map.CompositeMapTest.testAddComposited(CompositeMapTest.java:78)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       junit.framework.TestCase.runTest(TestCase.java:177)
+       junit.framework.TestCase.runBare(TestCase.java:142)
+       junit.framework.TestResult$1.protect(TestResult.java:122)
+       junit.framework.TestResult.runProtected(TestResult.java:142)
+       [...]

@@ -1,0 +1,42 @@
+{"npe.traces": [{
+    "test.method": "testRegexFileNameOnly",
+    "traces": [
+        {
+            "is_target": true,
+            "method": "accept",
+            "line": 184,
+            "class": "org.apache.commons.io.filefilter.RegexFileFilter"
+        },
+        {
+            "is_target": true,
+            "method": "assertFiltering",
+            "line": 68,
+            "class": "org.apache.commons.io.filefilter.RegexFileFilterTest"
+        },
+        {
+            "is_target": true,
+            "method": "testRegexFileNameOnly",
+            "line": 170,
+            "class": "org.apache.commons.io.filefilter.RegexFileFilterTest"
+        },
+        {
+            "is_target": false,
+            "method": "invoke",
+            "line": 569,
+            "class": "java.lang.reflect.Method"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        }
+    ],
+    "test.class": "org.apache.commons.io.filefilter.RegexFileFilterTest"
+}]}

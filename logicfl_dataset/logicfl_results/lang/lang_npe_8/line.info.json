@@ -1,0 +1,96 @@
+{"classes": [
+    {
+        "probe_ranges": [
+            {
+                "endLine": 191,
+                "offset": 5,
+                "startLine": 186,
+                "orgLineEnd": 186,
+                "probedLineEnd": 191,
+                "orgLineStart": 186
+            },
+            {
+                "endLine": 197,
+                "offset": 10,
+                "startLine": 192,
+                "orgLineEnd": 187,
+                "probedLineEnd": 197,
+                "orgLineStart": 187
+            },
+            {
+                "endLine": 205,
+                "offset": 17,
+                "startLine": 198,
+                "orgLineEnd": 188,
+                "probedLineEnd": 205,
+                "orgLineStart": 188
+            },
+            {
+                "endLine": 210,
+                "offset": 21,
+                "startLine": 206,
+                "orgLineEnd": 189,
+                "probedLineEnd": 210,
+                "orgLineStart": 189
+            }
+        ],
+        "classId": "char_sequence_utils_test_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 313,
+                "offset": 9,
+                "startLine": 309,
+                "orgLineEnd": 311,
+                "probedLineEnd": 320,
+                "orgLineStart": 309
+            },
+            {
+                "endLine": 319,
+                "offset": 9,
+                "startLine": 314,
+                "orgLineEnd": 310,
+                "probedLineEnd": 319,
+                "orgLineStart": 310
+            },
+            {
+                "endLine": 325,
+                "offset": 13,
+                "startLine": 321,
+                "orgLineEnd": 312,
+                "probedLineEnd": 325,
+                "orgLineStart": 312
+            },
+            {
+                "endLine": 330,
+                "offset": 17,
+                "startLine": 326,
+                "orgLineEnd": 313,
+                "probedLineEnd": 330,
+                "orgLineStart": 313
+            },
+            {
+                "endLine": 345,
+                "offset": 30,
+                "startLine": 332,
+                "orgLineEnd": 315,
+                "probedLineEnd": 345,
+                "orgLineStart": 315
+            },
+            {
+                "endLine": 350,
+                "offset": 33,
+                "startLine": 347,
+                "orgLineEnd": 317,
+                "probedLineEnd": 350,
+                "orgLineStart": 317
+            }
+        ],
+        "classId": "char_sequence_utils_1"
+    },
+    {
+        "probe_ranges": [],
+        "classId": "array_utils_1"
+    }
+]}

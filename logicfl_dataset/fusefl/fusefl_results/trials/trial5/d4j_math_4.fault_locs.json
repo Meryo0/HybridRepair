@@ -1,0 +1,34 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.math3.geometry.euclidean.twod.SubLine:120",
+            "code": "Location loc1 = getRemainingRegion().checkPoint(line1.toSubSpace(v2D));",
+            "explanation": "The method `toSubSpace` is called on `v2D`, which might be null if the lines are parallel or do not intersect. This can lead to a NullPointerException. The code should check if `v2D` is null before calling `toSubSpace`."
+        },
+        {
+            "faultyLine": "org.apache.commons.math3.geometry.euclidean.twod.Line:182",
+            "code": "Vector2D p2 = (Vector2D) point;",
+            "explanation": "The variable `point` might be null, leading to a NullPointerException when trying to cast it to `Vector2D`. This should be checked before the cast."
+        },
+        {
+            "faultyLine": "org.apache.commons.math3.geometry.euclidean.threed.SubLine:116",
+            "code": "Location loc1 = remainingRegion.checkPoint(line.toSubSpace(v1D));",
+            "explanation": "The method `toSubSpace` is called on `v1D`, which might be null if the lines are parallel or do not intersect. This can lead to a NullPointerException. The code should check if `v1D` is null before calling `toSubSpace`."
+        },
+        {
+            "faultyLine": "org.apache.commons.math3.geometry.euclidean.threed.Line:114",
+            "code": "return point.subtract(zero).dotProduct(direction);",
+            "explanation": "The variable `point` might be null, leading to a NullPointerException when trying to call `subtract` on it. This should be checked before the operation."
+        },
+        {
+            "faultyLine": "org.apache.commons.math3.geometry.euclidean.threed.SubLine:113",
+            "code": "Vector3D v1D = line.intersection(subLine.line);",
+            "explanation": "The method `intersection` might return null if the lines are parallel or do not intersect. This should be checked before using `v1D`."
+        },
+        {
+            "faultyLine": "org.apache.commons.math3.geometry.euclidean.twod.SubLine:113",
+            "code": "Line line1 = (Line) getHyperplane();",
+            "explanation": "The method `getHyperplane` might return null, leading to a NullPointerException when trying to cast it to `Line`. This should be checked before the cast."
+        }
+    ]
+}

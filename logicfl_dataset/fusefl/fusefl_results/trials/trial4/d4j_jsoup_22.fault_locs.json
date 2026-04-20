@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jsoup.nodes.Node:445",
+            "code": "return parent().childNodes();",
+            "explanation": "The NullPointerException is thrown because `parent()` returns null for orphan nodes, and invoking `childNodes()` on null causes the exception. This line should handle the case where `parent()` is null."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:487",
+            "code": "return siblingIndex;",
+            "explanation": "The test case `orphanNodeReturnsNullForSiblingElements` expects the sibling index of an orphan node to be 0. This line should ensure that the sibling index is correctly set to 0 for orphan nodes."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:31",
+            "code": "protected Node(String baseUri, Attributes attributes) {",
+            "explanation": "The constructor initializes the Node object. If `attributes` is null, it could cause issues later. Ensure that `attributes` is properly initialized."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:32",
+            "code": "Validate.notNull(baseUri);",
+            "explanation": "This line validates that `baseUri` is not null. If `baseUri` is null, it could cause issues later. Ensure that `baseUri` is properly initialized."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:33",
+            "code": "Validate.notNull(attributes);",
+            "explanation": "This line validates that `attributes` is not null. If `attributes` is null, it could cause issues later. Ensure that `attributes` is properly initialized."
+        }
+    ]
+}

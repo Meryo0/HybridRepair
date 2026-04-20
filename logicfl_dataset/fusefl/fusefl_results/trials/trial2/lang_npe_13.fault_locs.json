@@ -1,0 +1,14 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:4694",
+            "code": "return Pattern.compile(regex, Pattern.DOTALL).matcher(source).replaceAll(replacement);",
+            "explanation": "The NullPointerException indicates that the `source` string might be null. The `Pattern.matcher` method is being called on a potentially null `source`, which leads to the exception. The method should handle the case where `source` is null before attempting to compile the pattern and perform the replacement."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.StringUtils:4710",
+            "code": "return replacePattern(source, regex, StringUtils.EMPTY);",
+            "explanation": "The `removePattern` method calls `replacePattern` with `StringUtils.EMPTY` as the replacement. If `source` is null, it will propagate the null value to `replacePattern`, which will then cause a NullPointerException. This method should also handle the case where `source` is null before calling `replacePattern`."
+        }
+    ]
+}

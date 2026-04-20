@@ -1,0 +1,20 @@
+{
+ "buggy.hash": "",
+ "fixed_hash": "2242",
+ "passed.classes": [],
+ "failed.classes": [
+  "org.jfree.data.general.junit.DatasetUtilitiesTests"
+ ],
+ "failed.tests": [
+  {
+   "class": "org.jfree.data.general.junit.DatasetUtilitiesTests",
+   "name": "testBug2849731_2",
+   "message": ""
+  },
+  {
+   "class": "org.jfree.data.general.junit.DatasetUtilitiesTests",
+   "name": "testBug2849731_3",
+   "message": ""
+  }
+ ]
+}

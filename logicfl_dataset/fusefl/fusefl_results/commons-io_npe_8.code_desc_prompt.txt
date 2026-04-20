@@ -1,0 +1,24 @@
+Provide a short code description of the following code:
+ org.apache.commons.io.file.PathUtils:146 `    private static final OpenOption[] OPEN_OPTIONS_TRUNCATE = {StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING};`
+org.apache.commons.io.file.PathUtils:148 `    private static final OpenOption[] OPEN_OPTIONS_APPEND = {StandardOpenOption.CREATE, StandardOpenOption.APPEND};`
+org.apache.commons.io.file.PathUtils:155 `    public static final CopyOption[] EMPTY_COPY_OPTIONS = {};`
+org.apache.commons.io.file.PathUtils:162 `    public static final DeleteOption[] EMPTY_DELETE_OPTION_ARRAY = {};`
+org.apache.commons.io.file.PathUtils:167 `    public static final FileVisitOption[] EMPTY_FILE_VISIT_OPTION_ARRAY = {};`
+org.apache.commons.io.file.PathUtils:172 `    public static final LinkOption[] EMPTY_LINK_OPTION_ARRAY = {};`
+org.apache.commons.io.file.PathUtils:181 `    public static final LinkOption[] NOFOLLOW_LINK_OPTION_ARRAY = {LinkOption.NOFOLLOW_LINKS};`
+org.apache.commons.io.file.PathUtils:188 `    static final LinkOption NULL_LINK_OPTION = null;`
+org.apache.commons.io.file.PathUtils:193 `    public static final OpenOption[] EMPTY_OPEN_OPTION_ARRAY = {};`
+org.apache.commons.io.file.PathUtils:200 `    public static final Path[] EMPTY_PATH_ARRAY = {};`
+org.apache.commons.io.file.PathUtils:370 `        Path parent = getParent(path);`
+org.apache.commons.io.file.PathUtils:371 `        parent = linkOption == LinkOption.NOFOLLOW_LINKS ? parent : readIfSymbolicLink(parent);`
+org.apache.commons.io.file.PathUtils:825 `        return path == null ? null : path.getParent();`
+org.apache.commons.io.file.PathUtils:1215 `        return Files.isSymbolicLink(path) ? Files.readSymbolicLink(path) : path;`
+ 
+The provided code is expected to pass these test cases:
+ @Test public void testCreateDirectoriesForRootsLinkOptionNull() throws IOException {
+  for (  final File f : File.listRoots()) {
+    final Path path=f.toPath();
+    assertEquals(path.getParent(),PathUtils.createParentDirectories(path,(LinkOption)null));
+  }
+}
+

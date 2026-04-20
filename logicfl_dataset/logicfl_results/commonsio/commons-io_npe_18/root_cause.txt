@@ -1,0 +1,8 @@
+Fault Localization Results
+NPE at line(ioutils_1, 2177) / Null Expression - p_reader_166[reader]
+	 can be caused by 
+p_reader_166[reader] - line(ioutils_1, 2177).
+
+NPE at line(ioutils_1, 2177) / Null Expression - p_reader_166[reader]
+	 can be caused by 
+p_input_1_36[input1] - line(ioutils_1, 792).

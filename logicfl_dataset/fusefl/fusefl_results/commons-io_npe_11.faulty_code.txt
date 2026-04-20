@@ -1,0 +1,8 @@
+org.apache.commons.io.input.ReaderInputStream:85 `        final float minRequired = minBufferSize(charsetEncoder);`
+org.apache.commons.io.input.ReaderInputStream:94 `        return charsetEncoder.maxBytesPerChar() * 2;`
+org.apache.commons.io.input.ReaderInputStream:148 `        this(reader,`
+org.apache.commons.io.input.ReaderInputStream:149 `             charset.newEncoder()`
+org.apache.commons.io.input.ReaderInputStream:175 `    public ReaderInputStream(final Reader reader, final CharsetEncoder charsetEncoder, final int bufferSize) {`
+org.apache.commons.io.input.ReaderInputStream:176 `        this.reader = reader;`
+org.apache.commons.io.input.ReaderInputStream:177 `        this.charsetEncoder = charsetEncoder;`
+org.apache.commons.io.input.ReaderInputStream:178 `        this.encoderIn = CharBuffer.allocate(checkMinBufferSize(charsetEncoder, bufferSize));`

@@ -1,0 +1,60 @@
+{"npe.traces": [{
+    "test.method": "testEquals",
+    "traces": [
+        {
+            "is_target": true,
+            "method": "equals",
+            "line": 121,
+            "class": "org.apache.commons.lang3.mutable.MutableObject"
+        },
+        {
+            "is_target": false,
+            "method": "objectsAreEqual",
+            "line": 110,
+            "class": "org.junit.jupiter.api.AssertionUtils"
+        },
+        {
+            "is_target": false,
+            "method": "assertEquals",
+            "line": 181,
+            "class": "org.junit.jupiter.api.AssertEquals"
+        },
+        {
+            "is_target": false,
+            "method": "assertEquals",
+            "line": 177,
+            "class": "org.junit.jupiter.api.AssertEquals"
+        },
+        {
+            "is_target": false,
+            "method": "assertEquals",
+            "line": 1141,
+            "class": "org.junit.jupiter.api.Assertions"
+        },
+        {
+            "is_target": true,
+            "method": "testEquals",
+            "line": 102,
+            "class": "org.apache.commons.lang3.mutable.MutableObjectTest"
+        },
+        {
+            "is_target": false,
+            "method": "invoke",
+            "line": 569,
+            "class": "java.lang.reflect.Method"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        },
+        {
+            "is_target": false,
+            "method": "forEach",
+            "line": 1511,
+            "class": "java.util.ArrayList"
+        }
+    ],
+    "test.class": "org.apache.commons.lang3.mutable.MutableObjectTest"
+}]}

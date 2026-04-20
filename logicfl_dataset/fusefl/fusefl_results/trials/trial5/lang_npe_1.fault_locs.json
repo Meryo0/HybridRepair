@@ -1,0 +1,14 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.lang3.ClassLoaderUtils:77",
+            "code": "return classLoader + Arrays.toString(classLoader.getURLs());",
+            "explanation": "The code attempts to call `classLoader.getURLs()` without checking if `classLoader` is null. This will throw a NullPointerException if `classLoader` is null. A null check should be added before accessing `classLoader.getURLs()`."
+        },
+        {
+            "faultyLine": "org.apache.commons.lang3.ClassLoaderUtils:67",
+            "code": "return classLoader.toString();",
+            "explanation": "The code attempts to call `classLoader.toString()` without checking if `classLoader` is null. This will throw a NullPointerException if `classLoader` is null. A null check should be added before calling `classLoader.toString()`."
+        }
+    ]
+}

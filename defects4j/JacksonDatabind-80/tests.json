@@ -1,0 +1,15 @@
+{
+ "buggy.hash": "",
+ "fixed_hash": "974ccddfd718a06f889da2dcd58ebb6bc22c8dca",
+ "passed.classes": [],
+ "failed.classes": [
+  "com.fasterxml.jackson.databind.jsontype.TestTypeNames"
+ ],
+ "failed.tests": [
+  {
+   "class": "com.fasterxml.jackson.databind.jsontype.TestTypeNames",
+   "name": "testBaseTypeId1616",
+   "message": ""
+  }
+ ]
+}

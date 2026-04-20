@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.RegexFileFilter:184",
+            "code": "return toFileVisitResult(pattern.matcher(pathToString.apply(path)).matches());",
+            "explanation": "The NullPointerException is thrown because 'pathToString' is null. The test case 'testRegexFileNameOnly' explicitly sets 'pathToString' to null in one of the assertions, which leads to the NPE when 'pathToString.apply(path)' is called."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.RegexFileFilter:125",
+            "code": "public RegexFileFilter(final Pattern pattern, final Function<Path, String> pathToString) {",
+            "explanation": "The constructor does not handle the case where 'pathToString' is null. Adding a null check and providing a default behavior or throwing an appropriate exception would prevent the NPE."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.RegexFileFilter:126",
+            "code": "Objects.requireNonNull(pattern, \"pattern\");",
+            "explanation": "While the 'pattern' is checked for null, 'pathToString' is not. Adding a null check for 'pathToString' here would prevent the NPE."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.RegexFileFilter:127",
+            "code": "this.pattern = pattern;",
+            "explanation": "The assignment of 'pattern' is safe due to the null check, but 'pathToString' is assigned without any null check. This can lead to NPE when 'pathToString' is used later."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.filefilter.RegexFileFilter:128",
+            "code": "this.pathToString = pathToString;",
+            "explanation": "Directly assigning 'pathToString' without a null check can lead to NPE when 'pathToString.apply(path)' is called. A null check should be added here."
+        }
+    ]
+}

@@ -1,0 +1,1346 @@
+Faulty Code:
+org.apache.commons.math.exception.MathIllegalArgumentException:37 `    private final ExceptionContext context = new ExceptionContext();`
+org.apache.commons.math.exception.MathIllegalArgumentException:44 `                                        Object ... args) {`
+org.apache.commons.math.exception.MathIllegalArgumentException:45 `        context.addMessage(pattern, args);`
+org.apache.commons.math.exception.MathIllegalArgumentException:46 `    }`
+org.apache.commons.math.exception.MathIllegalNumberException:46 `        super(pattern, wrong, arguments);`
+org.apache.commons.math.exception.MathIllegalNumberException:47 `        argument = wrong;`
+org.apache.commons.math.exception.MathIllegalNumberException:48 `    }`
+org.apache.commons.math.exception.OutOfRangeException:62 `        super(specific, wrong, lo, hi);`
+org.apache.commons.math.exception.OutOfRangeException:63 `        this.lo = lo;`
+org.apache.commons.math.exception.OutOfRangeException:64 `        this.hi = hi;`
+org.apache.commons.math.exception.OutOfRangeException:65 `    }`
+org.apache.commons.math.exception.util.ArgUtils:42 `        final List<Object> list = new ArrayList<Object>();`
+org.apache.commons.math.exception.util.ArgUtils:43 `        if (array != null) {`
+org.apache.commons.math.exception.util.ArgUtils:44 `            for (Object o : array) {`
+org.apache.commons.math.exception.util.ArgUtils:45 `                if (o instanceof Object[]) {`
+org.apache.commons.math.exception.util.ArgUtils:46 `                    for (Object oR : flatten((Object[]) o)) {`
+org.apache.commons.math.exception.util.ArgUtils:47 `                        list.add(oR);`
+org.apache.commons.math.exception.util.ArgUtils:50 `                    list.add(o);`
+org.apache.commons.math.exception.util.ArgUtils:54 `        return list.toArray();`
+org.apache.commons.math.exception.util.ExceptionContext:39 `public class ExceptionContext implements Serializable {`
+org.apache.commons.math.exception.util.ExceptionContext:45 `    private List<Localizable> msgPatterns = new ArrayList<Localizable>();`
+org.apache.commons.math.exception.util.ExceptionContext:51 `    private List<Object[]> msgArguments = new ArrayList<Object[]>();`
+org.apache.commons.math.exception.util.ExceptionContext:55 `    private Map<String, Object> context = new HashMap<String, Object>();`
+org.apache.commons.math.exception.util.ExceptionContext:66 `        msgPatterns.add(pattern);`
+org.apache.commons.math.exception.util.ExceptionContext:67 `        msgArguments.add(ArgUtils.flatten(arguments));`
+org.apache.commons.math.exception.util.ExceptionContext:68 `    }`
+org.apache.commons.math.exception.util.LocalizedFormats:39 `public enum LocalizedFormats implements Localizable {`
+org.apache.commons.math.exception.util.LocalizedFormats:44 `    ARGUMENT_OUTSIDE_DOMAIN("Argument {0} outside domain [{1} ; {2}]"),`
+org.apache.commons.math.exception.util.LocalizedFormats:45 `    ARRAY_SIZES_SHOULD_HAVE_DIFFERENCE_1("array sizes should have difference 1 ({0} != {1} + 1)"),`
+org.apache.commons.math.exception.util.LocalizedFormats:46 `    ARRAY_SUMS_TO_ZERO("array sums to zero"),`
+org.apache.commons.math.exception.util.LocalizedFormats:47 `    ASSYMETRIC_EIGEN_NOT_SUPPORTED("eigen decomposition of assymetric matrices not supported yet"),`
+org.apache.commons.math.exception.util.LocalizedFormats:48 `    AT_LEAST_ONE_COLUMN("matrix must have at least one column"),`
+org.apache.commons.math.exception.util.LocalizedFormats:49 `    AT_LEAST_ONE_ROW("matrix must have at least one row"),`
+org.apache.commons.math.exception.util.LocalizedFormats:50 `    BANDWIDTH("bandwidth ({0})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:51 `    BINOMIAL_INVALID_PARAMETERS_ORDER("must have n >= k for binomial coefficient (n, k), got k = {0}, n = {1}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:52 `    BINOMIAL_NEGATIVE_PARAMETER("must have n >= 0 for binomial coefficient (n, k), got n = {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:53 `    CANNOT_CLEAR_STATISTIC_CONSTRUCTED_FROM_EXTERNAL_MOMENTS("statistics constructed from external moments cannot be cleared"),`
+org.apache.commons.math.exception.util.LocalizedFormats:54 `    CANNOT_COMPUTE_0TH_ROOT_OF_UNITY("cannot compute 0-th root of unity, indefinite result"),`
+org.apache.commons.math.exception.util.LocalizedFormats:55 `    CANNOT_COMPUTE_BETA_DENSITY_AT_0_FOR_SOME_ALPHA("cannot compute beta density at 0 when alpha = {0,number}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:56 `    CANNOT_COMPUTE_BETA_DENSITY_AT_1_FOR_SOME_BETA("cannot compute beta density at 1 when beta = %.3g"),`
+org.apache.commons.math.exception.util.LocalizedFormats:57 `    CANNOT_COMPUTE_NTH_ROOT_FOR_NEGATIVE_N("cannot compute nth root for null or negative n: {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:58 `    CANNOT_CONVERT_OBJECT_TO_FRACTION("cannot convert given object to a fraction number: {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:59 `    CANNOT_DISCARD_NEGATIVE_NUMBER_OF_ELEMENTS("cannot discard a negative number of elements ({0})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:60 `    CANNOT_FORMAT_INSTANCE_AS_3D_VECTOR("cannot format a {0} instance as a 3D vector"),`
+org.apache.commons.math.exception.util.LocalizedFormats:61 `    CANNOT_FORMAT_INSTANCE_AS_COMPLEX("cannot format a {0} instance as a complex number"),`
+org.apache.commons.math.exception.util.LocalizedFormats:62 `    CANNOT_FORMAT_INSTANCE_AS_REAL_VECTOR("cannot format a {0} instance as a real vector"),`
+org.apache.commons.math.exception.util.LocalizedFormats:63 `    CANNOT_FORMAT_OBJECT_TO_FRACTION("cannot format given object as a fraction number"),`
+org.apache.commons.math.exception.util.LocalizedFormats:64 `    CANNOT_INCREMENT_STATISTIC_CONSTRUCTED_FROM_EXTERNAL_MOMENTS("statistics constructed from external moments cannot be incremented"),`
+org.apache.commons.math.exception.util.LocalizedFormats:65 `    CANNOT_NORMALIZE_A_ZERO_NORM_VECTOR("cannot normalize a zero norm vector"),`
+org.apache.commons.math.exception.util.LocalizedFormats:66 `    CANNOT_RETRIEVE_AT_NEGATIVE_INDEX("elements cannot be retrieved from a negative array index {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:67 `    CANNOT_SET_AT_NEGATIVE_INDEX("cannot set an element at a negative index {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:68 `    CANNOT_SUBSTITUTE_ELEMENT_FROM_EMPTY_ARRAY("cannot substitute an element from an empty array"),`
+org.apache.commons.math.exception.util.LocalizedFormats:69 `    CANNOT_TRANSFORM_TO_DOUBLE("Conversion Exception in Transformation: {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:70 `    CARDAN_ANGLES_SINGULARITY("Cardan angles singularity"),`
+org.apache.commons.math.exception.util.LocalizedFormats:71 `    CLASS_DOESNT_IMPLEMENT_COMPARABLE("class ({0}) does not implement Comparable"),`
+org.apache.commons.math.exception.util.LocalizedFormats:72 `    CLOSEST_ORTHOGONAL_MATRIX_HAS_NEGATIVE_DETERMINANT("the closest orthogonal matrix has a negative determinant {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:73 `    COLUMN_INDEX_OUT_OF_RANGE("column index {0} out of allowed range [{1}, {2}]"),`
+org.apache.commons.math.exception.util.LocalizedFormats:74 `    COLUMN_INDEX("column index ({0})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:75 `    CONTINUED_FRACTION_INFINITY_DIVERGENCE("Continued fraction convergents diverged to +/- infinity for value {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:76 `    CONTINUED_FRACTION_NAN_DIVERGENCE("Continued fraction diverged to NaN for value {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:77 `    CONTRACTION_CRITERIA_SMALLER_THAN_EXPANSION_FACTOR("contraction criteria ({0}) smaller than the expansion factor ({1}).  This would lead to a never ending loop of expansion and contraction as a newly expanded internal storage array would immediately satisfy the criteria for contraction."),`
+org.apache.commons.math.exception.util.LocalizedFormats:78 `    CONTRACTION_CRITERIA_SMALLER_THAN_ONE("contraction criteria smaller than one ({0}).  This would lead to a never ending loop of expansion and contraction as an internal storage array length equal to the number of elements would satisfy the contraction criteria."),`
+org.apache.commons.math.exception.util.LocalizedFormats:79 `    CONVERGENCE_FAILED("convergence failed"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:80 `    CROSSING_BOUNDARY_LOOPS("some outline boundary loops cross each other"),`
+org.apache.commons.math.exception.util.LocalizedFormats:81 `    CUMULATIVE_PROBABILITY_RETURNED_NAN("Cumulative probability function returned NaN for argument {0} p = {1}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:82 `    DIFFERENT_ROWS_LENGTHS("some rows have length {0} while others have length {1}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:83 `    DIGEST_NOT_INITIALIZED("digest not initialized"),`
+org.apache.commons.math.exception.util.LocalizedFormats:84 `    DIMENSIONS_MISMATCH_2x2("got {0}x{1} but expected {2}x{3}"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:85 `    DIMENSIONS_MISMATCH_SIMPLE("{0} != {1}"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:86 `    DIMENSIONS_MISMATCH("dimensions mismatch"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:87 `    DISCRETE_CUMULATIVE_PROBABILITY_RETURNED_NAN("Discrete cumulative probability function returned NaN for argument {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:88 `    DISTRIBUTION_NOT_LOADED("distribution not loaded"),`
+org.apache.commons.math.exception.util.LocalizedFormats:89 `    DUPLICATED_ABSCISSA("Abscissa {0} is duplicated at both indices {1} and {2}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:90 `    EMPTY_CLUSTER_IN_K_MEANS("empty cluster in k-means"),`
+org.apache.commons.math.exception.util.LocalizedFormats:91 `    EMPTY_POLYNOMIALS_COEFFICIENTS_ARRAY("empty polynomials coefficients array"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:92 `    EMPTY_SELECTED_COLUMN_INDEX_ARRAY("empty selected column index array"),`
+org.apache.commons.math.exception.util.LocalizedFormats:93 `    EMPTY_SELECTED_ROW_INDEX_ARRAY("empty selected row index array"),`
+org.apache.commons.math.exception.util.LocalizedFormats:94 `    EMPTY_STRING_FOR_IMAGINARY_CHARACTER("empty string for imaginary character"),`
+org.apache.commons.math.exception.util.LocalizedFormats:95 `    ENDPOINTS_NOT_AN_INTERVAL("endpoints do not specify an interval: [{0}, {1}]"),`
+org.apache.commons.math.exception.util.LocalizedFormats:96 `    EQUAL_VERTICES_IN_SIMPLEX("equal vertices {0} and {1} in simplex configuration"),`
+org.apache.commons.math.exception.util.LocalizedFormats:97 `    EULER_ANGLES_SINGULARITY("Euler angles singularity"),`
+org.apache.commons.math.exception.util.LocalizedFormats:98 `    EVALUATION_FAILED("evaluation failed for argument = {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:99 `    EVALUATION("evaluation"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:100 `    EXPANSION_FACTOR_SMALLER_THAN_ONE("expansion factor smaller than one ({0})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:101 `    FACTORIAL_NEGATIVE_PARAMETER("must have n >= 0 for n!, got n = {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:102 `    FAILED_BRACKETING("number of iterations={4}, maximum iterations={5}, initial={6}, lower bound={7}, upper bound={8}, final a value={0}, final b value={1}, f(a)={2}, f(b)={3}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:103 `    FAILED_FRACTION_CONVERSION("Unable to convert {0} to fraction after {1} iterations"),`
+org.apache.commons.math.exception.util.LocalizedFormats:104 `    FIRST_COLUMNS_NOT_INITIALIZED_YET("first {0} columns are not initialized yet"),`
+org.apache.commons.math.exception.util.LocalizedFormats:105 `    FIRST_ELEMENT_NOT_ZERO("first element is not 0: {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:106 `    FIRST_ROWS_NOT_INITIALIZED_YET("first {0} rows are not initialized yet"),`
+org.apache.commons.math.exception.util.LocalizedFormats:107 `    FRACTION_CONVERSION_OVERFLOW("Overflow trying to convert {0} to fraction ({1}/{2})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:108 `    FUNCTION_NOT_DIFFERENTIABLE("function is not differentiable"),`
+org.apache.commons.math.exception.util.LocalizedFormats:109 `    FUNCTION_NOT_POLYNOMIAL("function is not polynomial"),`
+org.apache.commons.math.exception.util.LocalizedFormats:110 `    GCD_OVERFLOW_32_BITS("overflow: gcd({0}, {1}) is 2^31"),`
+org.apache.commons.math.exception.util.LocalizedFormats:111 `    GCD_OVERFLOW_64_BITS("overflow: gcd({0}, {1}) is 2^63"),`
+org.apache.commons.math.exception.util.LocalizedFormats:112 `    HOLE_BETWEEN_MODELS_TIME_RANGES("{0} wide hole between models time ranges"),`
+org.apache.commons.math.exception.util.LocalizedFormats:113 `    IDENTICAL_ABSCISSAS_DIVISION_BY_ZERO("identical abscissas x[{0}] == x[{1}] == {2} cause division by zero"),`
+org.apache.commons.math.exception.util.LocalizedFormats:114 `    INDEX_LARGER_THAN_MAX("the index specified: {0} is larger than the current maximal index {1}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:115 `    INDEX_NOT_POSITIVE("index ({0}) is not positive"),`
+org.apache.commons.math.exception.util.LocalizedFormats:116 `    INDEX_OUT_OF_RANGE("index {0} out of allowed range [{1}, {2}]"),`
+org.apache.commons.math.exception.util.LocalizedFormats:117 `    INDEX("index ({0})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:118 `    NOT_FINITE_NUMBER("{0} is not a finite number"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:119 `    ARRAY_ELEMENT("value {0} at index {1}"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:120 `    INFINITE_ARRAY_ELEMENT("Array contains an infinite element, {0} at index {1}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:121 `    INFINITE_VALUE_CONVERSION("cannot convert infinite value"),`
+org.apache.commons.math.exception.util.LocalizedFormats:122 `    INITIAL_CAPACITY_NOT_POSITIVE("initial capacity ({0}) is not positive"),`
+org.apache.commons.math.exception.util.LocalizedFormats:123 `    INITIAL_COLUMN_AFTER_FINAL_COLUMN("initial column {1} after final column {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:124 `    INITIAL_ROW_AFTER_FINAL_ROW("initial row {1} after final row {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:125 `    INPUT_DATA_FROM_UNSUPPORTED_DATASOURCE("input data comes from unsupported datasource: {0}, supported sources: {1}, {2}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:126 `    INSTANCES_NOT_COMPARABLE_TO_EXISTING_VALUES("instance of class {0} not comparable to existing values"),`
+org.apache.commons.math.exception.util.LocalizedFormats:127 `    INSUFFICIENT_DATA_FOR_T_STATISTIC("insufficient data for t statistic, needs at least 2, got {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:128 `    INSUFFICIENT_DIMENSION("insufficient dimension {0}, must be at least {1}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:129 `    DIMENSION("dimension ({0})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:130 `    INSUFFICIENT_OBSERVED_POINTS_IN_SAMPLE("sample contains {0} observed points, at least {1} are required"),`
+org.apache.commons.math.exception.util.LocalizedFormats:131 `    INSUFFICIENT_ROWS_AND_COLUMNS("insufficient data: only {0} rows and {1} columns."),`
+org.apache.commons.math.exception.util.LocalizedFormats:132 `    INTEGRATION_METHOD_NEEDS_AT_LEAST_TWO_PREVIOUS_POINTS("{0} method needs at least two previous points"),`
+org.apache.commons.math.exception.util.LocalizedFormats:133 `    INTERNAL_ERROR("internal error, please fill a bug report at {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:134 `    INVALID_BRACKETING_PARAMETERS("invalid bracketing parameters:  lower bound={0},  initial={1}, upper bound={2}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:135 `    INVALID_INTERVAL_INITIAL_VALUE_PARAMETERS("invalid interval, initial value parameters:  lower={0}, initial={1}, upper={2}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:136 `    INVALID_ITERATIONS_LIMITS("invalid iteration limits: min={0}, max={1}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:137 `    INVALID_MAX_ITERATIONS("bad value for maximum iterations number: {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:138 `    INVALID_REGRESSION_ARRAY("input data array length = {0} does not match the number of observations = {1} and the number of regressors = {2}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:139 `    INVALID_ROUNDING_METHOD("invalid rounding method {0}, valid methods: {1} ({2}), {3} ({4}), {5} ({6}), {7} ({8}), {9} ({10}), {11} ({12}), {13} ({14}), {15} ({16})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:140 `    ITERATOR_EXHAUSTED("iterator exhausted"),`
+org.apache.commons.math.exception.util.LocalizedFormats:141 `    LCM_OVERFLOW_32_BITS("overflow: lcm({0}, {1}) is 2^31"),`
+org.apache.commons.math.exception.util.LocalizedFormats:142 `    LCM_OVERFLOW_64_BITS("overflow: lcm({0}, {1}) is 2^63"),`
+org.apache.commons.math.exception.util.LocalizedFormats:143 `    LIST_OF_CHROMOSOMES_BIGGER_THAN_POPULATION_SIZE("list of chromosomes bigger than maxPopulationSize"),`
+org.apache.commons.math.exception.util.LocalizedFormats:144 `    LOESS_EXPECTS_AT_LEAST_ONE_POINT("Loess expects at least 1 point"),`
+org.apache.commons.math.exception.util.LocalizedFormats:145 `    LOWER_BOUND_NOT_BELOW_UPPER_BOUND("lower bound ({0}) must be strictly less than upper bound ({1})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:146 `    LOWER_ENDPOINT_ABOVE_UPPER_ENDPOINT("lower endpoint ({0}) must be less than or equal to upper endpoint ({1})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:147 `    MAP_MODIFIED_WHILE_ITERATING("map has been modified while iterating"),`
+org.apache.commons.math.exception.util.LocalizedFormats:148 `    EVALUATIONS("evaluations"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:149 `    MAX_COUNT_EXCEEDED("maximal count ({0}) exceeded"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:150 `    MAX_EVALUATIONS_EXCEEDED("maximal number of evaluations ({0}) exceeded"),`
+org.apache.commons.math.exception.util.LocalizedFormats:151 `    MAX_ITERATIONS_EXCEEDED("maximal number of iterations ({0}) exceeded"),`
+org.apache.commons.math.exception.util.LocalizedFormats:152 `    MINIMAL_STEPSIZE_REACHED_DURING_INTEGRATION("minimal step size ({0,number,0.00E00}) reached, integration needs {1,number,0.00E00}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:153 `    MISMATCHED_LOESS_ABSCISSA_ORDINATE_ARRAYS("Loess expects the abscissa and ordinate arrays to be of the same size, but got {0} abscissae and {1} ordinatae"),`
+org.apache.commons.math.exception.util.LocalizedFormats:154 `    NAN_ELEMENT_AT_INDEX("element {0} is NaN"),`
+org.apache.commons.math.exception.util.LocalizedFormats:155 `    NAN_VALUE_CONVERSION("cannot convert NaN value"),`
+org.apache.commons.math.exception.util.LocalizedFormats:156 `    NEGATIVE_BRIGHTNESS_EXPONENT("brightness exponent should be positive or null, but got {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:157 `    NEGATIVE_COMPLEX_MODULE("negative complex module {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:158 `    NEGATIVE_ELEMENT_AT_2D_INDEX("element ({0}, {1}) is negative: {2}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:159 `    NEGATIVE_ELEMENT_AT_INDEX("element {0} is negative: {1}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:160 `    NEGATIVE_NUMBER_OF_SUCCESSES("number of successes must be non-negative ({0})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:161 `    NUMBER_OF_SUCCESSES("number of successes ({0})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:162 `    NEGATIVE_NUMBER_OF_TRIALS("number of trials must be non-negative ({0})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:163 `    NUMBER_OF_TRIALS("number of trials ({0})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:164 `    ROBUSTNESS_ITERATIONS("number of robustness iterations ({0})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:165 `    START_POSITION("start position ({0})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:166 `    NON_CONVERGENT_CONTINUED_FRACTION("Continued fraction convergents failed to converge (in less than {0} iterations) for value {1}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:167 `    NON_INVERTIBLE_TRANSFORM("non-invertible affine transform collapses some lines into single points"),`
+org.apache.commons.math.exception.util.LocalizedFormats:168 `    NON_POSITIVE_MICROSPHERE_ELEMENTS("number of microsphere elements must be positive, but got {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:169 `    NON_POSITIVE_POLYNOMIAL_DEGREE("polynomial degree must be positive: degree={0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:170 `    NON_REAL_FINITE_ABSCISSA("all abscissae must be finite real numbers, but {0}-th is {1}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:171 `    NON_REAL_FINITE_ORDINATE("all ordinatae must be finite real numbers, but {0}-th is {1}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:172 `    NON_REAL_FINITE_WEIGHT("all weights must be finite real numbers, but {0}-th is {1}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:173 `    NON_SQUARE_MATRIX("a {0}x{1} matrix was provided instead of a square matrix"),`
+org.apache.commons.math.exception.util.LocalizedFormats:174 `    NORMALIZE_INFINITE("Cannot normalize to an infinite value"),`
+org.apache.commons.math.exception.util.LocalizedFormats:175 `    NORMALIZE_NAN("Cannot normalize to NaN"),`
+org.apache.commons.math.exception.util.LocalizedFormats:176 `    NOT_ADDITION_COMPATIBLE_MATRICES("{0}x{1} and {2}x{3} matrices are not addition compatible"),`
+org.apache.commons.math.exception.util.LocalizedFormats:177 `    NOT_DECREASING_NUMBER_OF_POINTS("points {0} and {1} are not decreasing ({2} < {3})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:178 `    NOT_DECREASING_SEQUENCE("points {3} and {2} are not decreasing ({1} < {0})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:179 `    NOT_ENOUGH_DATA_FOR_NUMBER_OF_PREDICTORS("not enough data ({0} rows) for this many predictors ({1} predictors)"),`
+org.apache.commons.math.exception.util.LocalizedFormats:180 `    NOT_ENOUGH_POINTS_IN_SPLINE_PARTITION("spline partition must have at least {0} points, got {1}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:181 `    NOT_INCREASING_NUMBER_OF_POINTS("points {0} and {1} are not increasing ({2} > {3})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:182 `    NOT_INCREASING_SEQUENCE("points {3} and {2} are not increasing ({1} > {0})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:183 `    NOT_MULTIPLICATION_COMPATIBLE_MATRICES("{0}x{1} and {2}x{3} matrices are not multiplication compatible"),`
+org.apache.commons.math.exception.util.LocalizedFormats:184 `    ALPHA("alpha"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:185 `    BETA("beta"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:186 `    NOT_POSITIVE_COLUMNDIMENSION("invalid column dimension: {0} (must be positive)"),`
+org.apache.commons.math.exception.util.LocalizedFormats:187 `    NOT_POSITIVE_DEFINITE_MATRIX("not positive definite matrix"),`
+org.apache.commons.math.exception.util.LocalizedFormats:188 `    NON_POSITIVE_DEFINITE_MATRIX("not positive definite matrix: diagonal element at ({0},{0}) is larger than {2}"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:189 `    DEGREES_OF_FREEDOM("degrees of freedom ({0})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:190 `    NOT_POSITIVE_DEGREES_OF_FREEDOM("degrees of freedom must be positive ({0})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:191 `    NOT_POSITIVE_ELEMENT_AT_INDEX("element {0} is not positive: {1}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:192 `    NOT_POSITIVE_EXPONENT("invalid exponent {0} (must be positive)"),`
+org.apache.commons.math.exception.util.LocalizedFormats:193 `    EXPONENT("exponent ({0})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:194 `    NOT_POSITIVE_LENGTH("length must be positive ({0})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:195 `    LENGTH("length ({0})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:196 `    NOT_POSITIVE_MEAN("mean must be positive ({0})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:197 `    MEAN("mean ({0})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:198 `    NOT_POSITIVE_NUMBER_OF_SAMPLES("number of sample is not positive: {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:199 `    NUMBER_OF_SAMPLES("number of samples ({0})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:200 `    NOT_POSITIVE_PERMUTATION("permutation k ({0}) must be positive"),`
+org.apache.commons.math.exception.util.LocalizedFormats:201 `    PERMUTATION_SIZE("permutation size ({0}"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:202 `    NOT_POSITIVE_POISSON_MEAN("the Poisson mean must be positive ({0})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:203 `    NOT_POSITIVE_POPULATION_SIZE("population size must be positive ({0})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:204 `    POPULATION_SIZE("population size ({0})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:205 `    NOT_POSITIVE_ROW_DIMENSION("invalid row dimension: {0} (must be positive)"),`
+org.apache.commons.math.exception.util.LocalizedFormats:206 `    NOT_POSITIVE_SAMPLE_SIZE("sample size must be positive ({0})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:207 `    NOT_POSITIVE_SCALE("scale must be positive ({0})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:208 `    SCALE("scale ({0})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:209 `    NOT_POSITIVE_SHAPE("shape must be positive ({0})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:210 `    SHAPE("shape ({0})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:211 `    NOT_POSITIVE_STANDARD_DEVIATION("standard deviation must be positive ({0})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:212 `    STANDARD_DEVIATION("standard deviation ({0})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:213 `    NOT_POSITIVE_UPPER_BOUND("upper bound must be positive ({0})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:214 `    NOT_POSITIVE_WINDOW_SIZE("window size must be positive ({0})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:215 `    NOT_POWER_OF_TWO("{0} is not a power of 2"),`
+org.apache.commons.math.exception.util.LocalizedFormats:216 `    NOT_POWER_OF_TWO_CONSIDER_PADDING("{0} is not a power of 2, consider padding for fix"),`
+org.apache.commons.math.exception.util.LocalizedFormats:217 `    NOT_POWER_OF_TWO_PLUS_ONE("{0} is not a power of 2 plus one"),`
+org.apache.commons.math.exception.util.LocalizedFormats:218 `    NOT_STRICTLY_DECREASING_NUMBER_OF_POINTS("points {0} and {1} are not strictly decreasing ({2} <= {3})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:219 `    NOT_STRICTLY_DECREASING_SEQUENCE("points {3} and {2} are not strictly decreasing ({1} <= {0})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:220 `    NOT_STRICTLY_INCREASING_KNOT_VALUES("knot values must be strictly increasing"),`
+org.apache.commons.math.exception.util.LocalizedFormats:221 `    NOT_STRICTLY_INCREASING_NUMBER_OF_POINTS("points {0} and {1} are not strictly increasing ({2} >= {3})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:222 `    NOT_STRICTLY_INCREASING_SEQUENCE("points {3} and {2} are not strictly increasing ({1} >= {0})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:223 `    NOT_SUBTRACTION_COMPATIBLE_MATRICES("{0}x{1} and {2}x{3} matrices are not subtraction compatible"),`
+org.apache.commons.math.exception.util.LocalizedFormats:224 `    NOT_SUPPORTED_IN_DIMENSION_N("method not supported in dimension {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:225 `    NOT_SYMMETRIC_MATRIX("not symmetric matrix"),`
+org.apache.commons.math.exception.util.LocalizedFormats:226 `    NON_SYMMETRIC_MATRIX("non symmetric matrix: the difference between entries at ({0},{1}) and ({1},{0}) is larger than {2}"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:227 `    NO_BIN_SELECTED("no bin selected"),`
+org.apache.commons.math.exception.util.LocalizedFormats:228 `    NO_CONVERGENCE_WITH_ANY_START_POINT("none of the {0} start points lead to convergence"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:229 `    NO_DATA("no data"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:230 `    NO_DEGREES_OF_FREEDOM("no degrees of freedom ({0} measurements, {1} parameters)"),`
+org.apache.commons.math.exception.util.LocalizedFormats:231 `    NO_DENSITY_FOR_THIS_DISTRIBUTION("This distribution does not have a density function implemented"),`
+org.apache.commons.math.exception.util.LocalizedFormats:232 `    NO_FEASIBLE_SOLUTION("no feasible solution"),`
+org.apache.commons.math.exception.util.LocalizedFormats:233 `    NO_OPTIMUM_COMPUTED_YET("no optimum computed yet"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:234 `    NO_RESULT_AVAILABLE("no result available"),`
+org.apache.commons.math.exception.util.LocalizedFormats:235 `    NO_SUCH_MATRIX_ENTRY("no entry at indices ({0}, {1}) in a {2}x{3} matrix"),`
+org.apache.commons.math.exception.util.LocalizedFormats:236 `    NULL_NOT_ALLOWED("null is not allowed"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:237 `    COVARIANCE_MATRIX("covariance matrix"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:238 `    DENOMINATOR("denominator"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:239 `    DENOMINATOR_FORMAT("denominator format"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:240 `    FRACTION("fraction"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:241 `    FUNCTION("function"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:242 `    IMAGINARY_FORMAT("imaginary format"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:243 `    INPUT_ARRAY("input array"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:244 `    NUMERATOR("numerator"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:245 `    NUMERATOR_FORMAT("numerator format"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:246 `    OBJECT_TRANSFORMATION("conversion exception in transformation"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:247 `    REAL_FORMAT("real format"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:248 `    WHOLE_FORMAT("whole format"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:249 `    NUMBER_TOO_LARGE("{0} is larger than the maximum ({1})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:250 `    NUMBER_TOO_SMALL("{0} is smaller than the minimum ({1})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:251 `    NUMBER_TOO_LARGE_BOUND_EXCLUDED("{0} is larger than, or equal to, the maximum ({1})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:252 `    NUMBER_TOO_SMALL_BOUND_EXCLUDED("{0} is smaller than, or equal to, the minimum ({1})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:253 `    NUMBER_OF_SUCCESS_LARGER_THAN_POPULATION_SIZE("number of successes ({0}) must be less than or equal to population size ({1})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:254 `    NUMERATOR_OVERFLOW_AFTER_MULTIPLY("overflow, numerator too large after multiply: {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:255 `    N_POINTS_GAUSS_LEGENDRE_INTEGRATOR_NOT_SUPPORTED("{0} points Legendre-Gauss integrator not supported, number of points must be in the {1}-{2} range"),`
+org.apache.commons.math.exception.util.LocalizedFormats:256 `    OBSERVED_COUNTS_ALL_ZERO("observed counts are all 0 in observed array {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:257 `    OBSERVED_COUNTS_BOTTH_ZERO_FOR_ENTRY("observed counts are both zero for entry {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:258 `    OUT_OF_BOUNDS_QUANTILE_VALUE("out of bounds quantile value: {0}, must be in (0, 100]"),`
+org.apache.commons.math.exception.util.LocalizedFormats:259 `    OUT_OF_BOUND_SIGNIFICANCE_LEVEL("out of bounds significance level {0}, must be between {1} and {2}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:260 `    SIGNIFICANCE_LEVEL("significance level ({0})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:261 `    OUT_OF_ORDER_ABSCISSA_ARRAY("the abscissae array must be sorted in a strictly increasing order, but the {0}-th element is {1} whereas {2}-th is {3}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:262 `    OUT_OF_RANGE_ROOT_OF_UNITY_INDEX("out of range root of unity index {0} (must be in [{1};{2}])"),`
+org.apache.commons.math.exception.util.LocalizedFormats:263 `    OUT_OF_RANGE("out of range"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:264 `    OUT_OF_RANGE_SIMPLE("{0} out of [{1}, {2}] range"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:265 `    OUTLINE_BOUNDARY_LOOP_OPEN("an outline boundary loop is open"),`
+org.apache.commons.math.exception.util.LocalizedFormats:266 `    OVERFLOW_IN_FRACTION("overflow in fraction {0}/{1}, cannot negate"),`
+org.apache.commons.math.exception.util.LocalizedFormats:267 `    OVERFLOW_IN_ADDITION("overflow in addition: {0} + {1}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:268 `    OVERFLOW_IN_SUBTRACTION("overflow in subtraction: {0} - {1}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:269 `    PERCENTILE_IMPLEMENTATION_CANNOT_ACCESS_METHOD("cannot access {0} method in percentile implementation {1}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:270 `    PERCENTILE_IMPLEMENTATION_UNSUPPORTED_METHOD("percentile implementation {0} does not support {1}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:271 `    PERMUTATION_EXCEEDS_N("permutation size ({0}) exceeds permuation domain ({1})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:272 `    POLYNOMIAL("polynomial"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:273 `    POLYNOMIAL_INTERPOLANTS_MISMATCH_SEGMENTS("number of polynomial interpolants must match the number of segments ({0} != {1} - 1)"),`
+org.apache.commons.math.exception.util.LocalizedFormats:274 `    POPULATION_LIMIT_NOT_POSITIVE("population limit has to be positive"),`
+org.apache.commons.math.exception.util.LocalizedFormats:275 `    POSITION_SIZE_MISMATCH_INPUT_ARRAY("position {0} and size {1} don't fit to the size of the input array {2}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:276 `    POWER_NEGATIVE_PARAMETERS("cannot raise an integral value to a negative power ({0}^{1})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:277 `    PROPAGATION_DIRECTION_MISMATCH("propagation direction mismatch"),`
+org.apache.commons.math.exception.util.LocalizedFormats:278 `    RANDOMKEY_MUTATION_WRONG_CLASS("RandomKeyMutation works only with RandomKeys, not {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:279 `    ROOTS_OF_UNITY_NOT_COMPUTED_YET("roots of unity have not been computed yet"),`
+org.apache.commons.math.exception.util.LocalizedFormats:280 `    ROTATION_MATRIX_DIMENSIONS("a {0}x{1} matrix cannot be a rotation matrix"),`
+org.apache.commons.math.exception.util.LocalizedFormats:281 `    ROW_INDEX_OUT_OF_RANGE("row index {0} out of allowed range [{1}, {2}]"),`
+org.apache.commons.math.exception.util.LocalizedFormats:282 `    ROW_INDEX("row index ({0})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:283 `    SAME_SIGN_AT_ENDPOINTS("function values at endpoints do not have different signs, endpoints: [{0}, {1}], values: [{2}, {3}]"),`
+org.apache.commons.math.exception.util.LocalizedFormats:284 `    SAMPLE_SIZE_EXCEEDS_COLLECTION_SIZE("sample size ({0}) exceeds collection size ({1})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:285 `    SAMPLE_SIZE_LARGER_THAN_POPULATION_SIZE("sample size ({0}) must be less than or equal to population size ({1})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:286 `    SIMPLEX_NEED_ONE_POINT("simplex must contain at least one point"),`
+org.apache.commons.math.exception.util.LocalizedFormats:287 `    SIMPLE_MESSAGE("{0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:288 `    SINGULAR_MATRIX("matrix is singular"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:289 `    SUBARRAY_ENDS_AFTER_ARRAY_END("subarray ends after array end"),`
+org.apache.commons.math.exception.util.LocalizedFormats:290 `    TOO_LARGE_CUTOFF_SINGULAR_VALUE("cutoff singular value is {0}, should be at most {1}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:291 `    TOO_MANY_ELEMENTS_TO_DISCARD_FROM_ARRAY("cannot discard {0} elements from a {1} elements array"),`
+org.apache.commons.math.exception.util.LocalizedFormats:292 `    TOO_SMALL_COST_RELATIVE_TOLERANCE("cost relative tolerance is too small ({0}), no further reduction in the sum of squares is possible"),`
+org.apache.commons.math.exception.util.LocalizedFormats:293 `    TOO_SMALL_INTEGRATION_INTERVAL("too small integration interval: length = {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:294 `    TOO_SMALL_ORTHOGONALITY_TOLERANCE("orthogonality tolerance is too small ({0}), solution is orthogonal to the jacobian"),`
+org.apache.commons.math.exception.util.LocalizedFormats:295 `    TOO_SMALL_PARAMETERS_RELATIVE_TOLERANCE("parameters relative tolerance is too small ({0}), no further improvement in the approximate solution is possible"),`
+org.apache.commons.math.exception.util.LocalizedFormats:296 `    TWO_OR_MORE_CATEGORIES_REQUIRED("two or more categories required, got {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:297 `    TWO_OR_MORE_VALUES_IN_CATEGORY_REQUIRED("two or more values required in each category, one has {0}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:298 `    UNABLE_TO_BRACKET_OPTIMUM_IN_LINE_SEARCH("unable to bracket optimum in line search"),`
+org.apache.commons.math.exception.util.LocalizedFormats:299 `    UNABLE_TO_COMPUTE_COVARIANCE_SINGULAR_PROBLEM("unable to compute covariances: singular problem"),`
+org.apache.commons.math.exception.util.LocalizedFormats:300 `    UNABLE_TO_FIRST_GUESS_HARMONIC_COEFFICIENTS("unable to first guess the harmonic coefficients"),`
+org.apache.commons.math.exception.util.LocalizedFormats:301 `    UNABLE_TO_ORTHOGONOLIZE_MATRIX("unable to orthogonalize matrix in {0} iterations"),`
+org.apache.commons.math.exception.util.LocalizedFormats:302 `    UNABLE_TO_PERFORM_QR_DECOMPOSITION_ON_JACOBIAN("unable to perform Q.R decomposition on the {0}x{1} jacobian matrix"),`
+org.apache.commons.math.exception.util.LocalizedFormats:303 `    UNABLE_TO_SOLVE_SINGULAR_PROBLEM("unable to solve: singular problem"),`
+org.apache.commons.math.exception.util.LocalizedFormats:304 `    UNBOUNDED_SOLUTION("unbounded solution"),`
+org.apache.commons.math.exception.util.LocalizedFormats:305 `    UNKNOWN_MODE("unknown mode {0}, known modes: {1} ({2}), {3} ({4}), {5} ({6}), {7} ({8}), {9} ({10}) and {11} ({12})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:306 `    CANNOT_PARSE_AS_TYPE("string {0} unparseable (from position {1}) as an object of type {2}"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:307 `    CANNOT_PARSE("string {0} unparseable (from position {1})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:308 `    UNPARSEABLE_3D_VECTOR("unparseable 3D vector: \"{0}\""),`
+org.apache.commons.math.exception.util.LocalizedFormats:309 `    UNPARSEABLE_COMPLEX_NUMBER("unparseable complex number: \"{0}\""),`
+org.apache.commons.math.exception.util.LocalizedFormats:310 `    UNPARSEABLE_FRACTION_NUMBER("unparseable fraction number: \"{0}\""),`
+org.apache.commons.math.exception.util.LocalizedFormats:311 `    UNPARSEABLE_REAL_VECTOR("unparseable real vector: \"{0}\""),`
+org.apache.commons.math.exception.util.LocalizedFormats:312 `    UNSUPPORTED_EXPANSION_MODE("unsupported expansion mode {0}, supported modes are {1} ({2}) and {3} ({4})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:313 `    UNSUPPORTED_OPERATION("unsupported operation"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:314 `    ARITHMETIC_EXCEPTION("arithmetic exception"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:315 `    ILLEGAL_STATE("illegal state"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:316 `    USER_EXCEPTION("exception generated in user code"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:317 `    URL_CONTAINS_NO_DATA("URL {0} contains no data"),`
+org.apache.commons.math.exception.util.LocalizedFormats:318 `    VALUES_ADDED_BEFORE_CONFIGURING_STATISTIC("{0} values have been added before statistic is configured"),`
+org.apache.commons.math.exception.util.LocalizedFormats:319 `    VECTOR_LENGTH_MISMATCH("vector length mismatch: got {0} but expected {1}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:320 `    VECTOR_MUST_HAVE_AT_LEAST_ONE_ELEMENT("vector must have at least one element"),`
+org.apache.commons.math.exception.util.LocalizedFormats:321 `    WEIGHT_AT_LEAST_ONE_NON_ZERO("weigth array must contain at least one non-zero value"),`
+org.apache.commons.math.exception.util.LocalizedFormats:322 `    WRONG_BLOCK_LENGTH("wrong array shape (block length = {0}, expected {1})"),`
+org.apache.commons.math.exception.util.LocalizedFormats:323 `    WRONG_NUMBER_OF_POINTS("{0} points are required, got only {1}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:324 `    NUMBER_OF_POINTS("number of points ({0})"), /* keep */`
+org.apache.commons.math.exception.util.LocalizedFormats:325 `    ZERO_DENOMINATOR("denominator must be different from 0"),`
+org.apache.commons.math.exception.util.LocalizedFormats:326 `    ZERO_DENOMINATOR_IN_FRACTION("zero denominator in fraction {0}/{1}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:327 `    ZERO_FRACTION_TO_DIVIDE_BY("the fraction to divide by must not be zero: {0}/{1}"),`
+org.apache.commons.math.exception.util.LocalizedFormats:328 `    ZERO_NORM("zero norm"),`
+org.apache.commons.math.exception.util.LocalizedFormats:329 `    ZERO_NORM_FOR_ROTATION_AXIS("zero norm for rotation axis"),`
+org.apache.commons.math.exception.util.LocalizedFormats:330 `    ZERO_NORM_FOR_ROTATION_DEFINING_VECTOR("zero norm for rotation defining vector"),`
+org.apache.commons.math.exception.util.LocalizedFormats:331 `    ZERO_NOT_ALLOWED("zero not allowed here");`
+org.apache.commons.math.exception.util.LocalizedFormats:344 `    private LocalizedFormats(final String sourceFormat) {`
+org.apache.commons.math.exception.util.LocalizedFormats:345 `        this.sourceFormat = sourceFormat;`
+org.apache.commons.math.exception.util.LocalizedFormats:346 `    }`
+org.apache.commons.math.fraction.Fraction:42 `    public static final Fraction TWO = new Fraction(2, 1);`
+org.apache.commons.math.fraction.Fraction:45 `    public static final Fraction ONE = new Fraction(1, 1);`
+org.apache.commons.math.fraction.Fraction:48 `    public static final Fraction ZERO = new Fraction(0, 1);`
+org.apache.commons.math.fraction.Fraction:51 `    public static final Fraction FOUR_FIFTHS = new Fraction(4, 5);`
+org.apache.commons.math.fraction.Fraction:54 `    public static final Fraction ONE_FIFTH = new Fraction(1, 5);`
+org.apache.commons.math.fraction.Fraction:57 `    public static final Fraction ONE_HALF = new Fraction(1, 2);`
+org.apache.commons.math.fraction.Fraction:60 `    public static final Fraction ONE_QUARTER = new Fraction(1, 4);`
+org.apache.commons.math.fraction.Fraction:63 `    public static final Fraction ONE_THIRD = new Fraction(1, 3);`
+org.apache.commons.math.fraction.Fraction:66 `    public static final Fraction THREE_FIFTHS = new Fraction(3, 5);`
+org.apache.commons.math.fraction.Fraction:69 `    public static final Fraction THREE_QUARTERS = new Fraction(3, 4);`
+org.apache.commons.math.fraction.Fraction:72 `    public static final Fraction TWO_FIFTHS = new Fraction(2, 5);`
+org.apache.commons.math.fraction.Fraction:75 `    public static final Fraction TWO_QUARTERS = new Fraction(2, 4);`
+org.apache.commons.math.fraction.Fraction:78 `    public static final Fraction TWO_THIRDS = new Fraction(2, 3);`
+org.apache.commons.math.fraction.Fraction:81 `    public static final Fraction MINUS_ONE = new Fraction(-1, 1);`
+org.apache.commons.math.fraction.Fraction:246 `        this(num, 1);`
+org.apache.commons.math.fraction.Fraction:247 `    }`
+org.apache.commons.math.fraction.Fraction:256 `    public Fraction(int num, int den) {`
+org.apache.commons.math.fraction.Fraction:257 `        if (den == 0) {`
+org.apache.commons.math.fraction.Fraction:261 `        if (den < 0) {`
+org.apache.commons.math.fraction.Fraction:271 `        final int d = MathUtils.gcd(num, den);`
+org.apache.commons.math.fraction.Fraction:272 `        if (d > 1) {`
+org.apache.commons.math.fraction.Fraction:273 `            num /= d;`
+org.apache.commons.math.fraction.Fraction:274 `            den /= d;`
+org.apache.commons.math.fraction.Fraction:278 `        if (den < 0) {`
+org.apache.commons.math.fraction.Fraction:282 `        this.numerator   = num;`
+org.apache.commons.math.fraction.Fraction:283 `        this.denominator = den;`
+org.apache.commons.math.fraction.Fraction:284 `    }`
+org.apache.commons.math.fraction.Fraction:333 `        if (this == other) {`
+org.apache.commons.math.fraction.Fraction:336 `        if (other instanceof Fraction) {`
+org.apache.commons.math.fraction.Fraction:339 `            Fraction rhs = (Fraction)other;`
+org.apache.commons.math.fraction.Fraction:340 `            return (numerator == rhs.numerator) &&`
+org.apache.commons.math.fraction.Fraction:651 `        return FractionField.getInstance();`
+org.apache.commons.math.fraction.FractionField:47 `        return LazyHolder.INSTANCE;`
+org.apache.commons.math.fraction.FractionField:57 `        return Fraction.ZERO;`
+org.apache.commons.math.fraction.FractionField:66 `        private static final FractionField INSTANCE = new FractionField();`
+org.apache.commons.math.linear.AbstractFieldMatrix:75 `                                  final int columnDimension) {`
+org.apache.commons.math.linear.AbstractFieldMatrix:76 `        if (rowDimension <= 0) {`
+org.apache.commons.math.linear.AbstractFieldMatrix:80 `        if (columnDimension <= 0) {`
+org.apache.commons.math.linear.AbstractFieldMatrix:84 `        this.field = field;`
+org.apache.commons.math.linear.AbstractFieldMatrix:85 `    }`
+org.apache.commons.math.linear.AbstractFieldMatrix:97 `        if (d == null) {`
+org.apache.commons.math.linear.AbstractFieldMatrix:100 `        if (d.length == 0) {`
+org.apache.commons.math.linear.AbstractFieldMatrix:103 `        if (d[0].length == 0) {`
+org.apache.commons.math.linear.AbstractFieldMatrix:106 `        return d[0][0].getField();`
+org.apache.commons.math.linear.AbstractFieldMatrix:139 `        if (columns < 0) {`
+org.apache.commons.math.linear.AbstractFieldMatrix:140 `            T[] dummyRow = (T[]) Array.newInstance(field.getZero().getClass(), 0);`
+org.apache.commons.math.linear.AbstractFieldMatrix:141 `            return (T[][]) Array.newInstance(dummyRow.getClass(), rows);`
+org.apache.commons.math.linear.AbstractFieldMatrix:163 `        T[] array = (T[]) Array.newInstance(field.getZero().getClass(), length);`
+org.apache.commons.math.linear.AbstractFieldMatrix:164 `        Arrays.fill(array, field.getZero());`
+org.apache.commons.math.linear.AbstractFieldMatrix:165 `        return array;`
+org.apache.commons.math.linear.AbstractFieldMatrix:956 `        if (object == this ) {`
+org.apache.commons.math.linear.AbstractFieldMatrix:959 `        if (object instanceof FieldMatrix<?> == false) {`
+org.apache.commons.math.linear.AbstractFieldMatrix:962 `        FieldMatrix<?> m = (FieldMatrix<?>) object;`
+org.apache.commons.math.linear.AbstractFieldMatrix:963 `        final int nRows = getRowDimension();`
+org.apache.commons.math.linear.AbstractFieldMatrix:964 `        final int nCols = getColumnDimension();`
+org.apache.commons.math.linear.AbstractFieldMatrix:965 `        if (m.getColumnDimension() != nCols || m.getRowDimension() != nRows) {`
+org.apache.commons.math.linear.AbstractFieldMatrix:968 `        for (int row = 0; row < nRows; ++row) {`
+org.apache.commons.math.linear.AbstractFieldMatrix:969 `            for (int col = 0; col < nCols; ++col) {`
+org.apache.commons.math.linear.AbstractFieldMatrix:970 `                if (!getEntry(row, col).equals(m.getEntry(row, col))) {`
+org.apache.commons.math.linear.AbstractFieldMatrix:975 `        return true;`
+org.apache.commons.math.linear.AbstractFieldMatrix:1005 `        if (row < 0 || row >= getRowDimension()) {`
+org.apache.commons.math.linear.AbstractFieldMatrix:1006 `            throw new OutOfRangeException(LocalizedFormats.ROW_INDEX,`
+org.apache.commons.math.linear.AbstractFieldMatrix:1007 `                                          row, 0, getRowDimension() - 1);`
+org.apache.commons.math.linear.AbstractFieldMatrix:1009 `    }`
+org.apache.commons.math.linear.AbstractFieldMatrix:1018 `        if (column < 0 || column >= getColumnDimension()) {`
+org.apache.commons.math.linear.AbstractFieldMatrix:1022 `    }`
+org.apache.commons.math.linear.AbstractFieldMatrix:1038 `        checkRowIndex(startRow);`
+org.apache.commons.math.linear.AbstractFieldMatrix:1039 `        checkRowIndex(endRow);`
+org.apache.commons.math.linear.AbstractFieldMatrix:1040 `        if (endRow < startRow) {`
+org.apache.commons.math.linear.AbstractFieldMatrix:1045 `        checkColumnIndex(startColumn);`
+org.apache.commons.math.linear.AbstractFieldMatrix:1046 `        checkColumnIndex(endColumn);`
+org.apache.commons.math.linear.AbstractFieldMatrix:1047 `        if (endColumn < startColumn) {`
+org.apache.commons.math.linear.AbstractFieldMatrix:1051 `    }`
+org.apache.commons.math.linear.AbstractRealMatrix:41 `    protected AbstractRealMatrix() {}`
+org.apache.commons.math.linear.AbstractRealMatrix:50 `    protected AbstractRealMatrix(final int rowDimension, final int columnDimension) {`
+org.apache.commons.math.linear.AbstractRealMatrix:51 `        if (rowDimension < 1) {`
+org.apache.commons.math.linear.AbstractRealMatrix:54 `        if (columnDimension < 1) {`
+org.apache.commons.math.linear.AbstractRealMatrix:57 `    }`
+org.apache.commons.math.linear.AbstractRealMatrix:389 `        final int nRows = subMatrix.length;`
+org.apache.commons.math.linear.AbstractRealMatrix:390 `        if (nRows == 0) {`
+org.apache.commons.math.linear.AbstractRealMatrix:394 `        final int nCols = subMatrix[0].length;`
+org.apache.commons.math.linear.AbstractRealMatrix:395 `        if (nCols == 0) {`
+org.apache.commons.math.linear.AbstractRealMatrix:399 `        for (int r = 1; r < nRows; ++r) {`
+org.apache.commons.math.linear.AbstractRealMatrix:400 `            if (subMatrix[r].length != nCols) {`
+org.apache.commons.math.linear.AbstractRealMatrix:405 `        MatrixUtils.checkRowIndex(this, row);`
+org.apache.commons.math.linear.AbstractRealMatrix:406 `        MatrixUtils.checkColumnIndex(this, column);`
+org.apache.commons.math.linear.AbstractRealMatrix:407 `        MatrixUtils.checkRowIndex(this, nRows + row - 1);`
+org.apache.commons.math.linear.AbstractRealMatrix:408 `        MatrixUtils.checkColumnIndex(this, nCols + column - 1);`
+org.apache.commons.math.linear.AbstractRealMatrix:410 `        for (int i = 0; i < nRows; ++i) {`
+org.apache.commons.math.linear.AbstractRealMatrix:411 `            for (int j = 0; j < nCols; ++j) {`
+org.apache.commons.math.linear.AbstractRealMatrix:412 `                setEntry(row + i, column + j, subMatrix[i][j]);`
+org.apache.commons.math.linear.AbstractRealMatrix:415 `    }`
+org.apache.commons.math.linear.AbstractRealMatrix:885 `        if (object == this ) {`
+org.apache.commons.math.linear.AbstractRealMatrix:888 `        if (object instanceof RealMatrix == false) {`
+org.apache.commons.math.linear.AbstractRealMatrix:891 `        RealMatrix m = (RealMatrix) object;`
+org.apache.commons.math.linear.AbstractRealMatrix:892 `        final int nRows = getRowDimension();`
+org.apache.commons.math.linear.AbstractRealMatrix:893 `        final int nCols = getColumnDimension();`
+org.apache.commons.math.linear.AbstractRealMatrix:894 `        if (m.getColumnDimension() != nCols || m.getRowDimension() != nRows) {`
+org.apache.commons.math.linear.AbstractRealMatrix:897 `        for (int row = 0; row < nRows; ++row) {`
+org.apache.commons.math.linear.AbstractRealMatrix:898 `            for (int col = 0; col < nCols; ++col) {`
+org.apache.commons.math.linear.AbstractRealMatrix:899 `                if (getEntry(row, col) != m.getEntry(row, col)) {`
+org.apache.commons.math.linear.AbstractRealMatrix:904 `        return true;`
+org.apache.commons.math.linear.Array2DRowRealMatrix:93 `    public Array2DRowRealMatrix(final double[][] d) {`
+org.apache.commons.math.linear.Array2DRowRealMatrix:94 `        copyIn(d);`
+org.apache.commons.math.linear.Array2DRowRealMatrix:95 `    }`
+org.apache.commons.math.linear.Array2DRowRealMatrix:271 `        if (data == null) {`
+org.apache.commons.math.linear.Array2DRowRealMatrix:272 `            if (row > 0) {`
+org.apache.commons.math.linear.Array2DRowRealMatrix:275 `            if (column > 0) {`
+org.apache.commons.math.linear.Array2DRowRealMatrix:278 `            final int nRows = subMatrix.length;`
+org.apache.commons.math.linear.Array2DRowRealMatrix:279 `            if (nRows == 0) {`
+org.apache.commons.math.linear.Array2DRowRealMatrix:283 `            final int nCols = subMatrix[0].length;`
+org.apache.commons.math.linear.Array2DRowRealMatrix:284 `            if (nCols == 0) {`
+org.apache.commons.math.linear.Array2DRowRealMatrix:287 `            data = new double[subMatrix.length][nCols];`
+org.apache.commons.math.linear.Array2DRowRealMatrix:288 `            for (int i = 0; i < data.length; ++i) {`
+org.apache.commons.math.linear.Array2DRowRealMatrix:289 `                if (subMatrix[i].length != nCols) {`
+org.apache.commons.math.linear.Array2DRowRealMatrix:292 `                System.arraycopy(subMatrix[i], 0, data[i + row], column, nCols);`
+org.apache.commons.math.linear.Array2DRowRealMatrix:294 `        } else {`
+org.apache.commons.math.linear.Array2DRowRealMatrix:295 `            super.setSubMatrix(subMatrix, row, column);`
+org.apache.commons.math.linear.Array2DRowRealMatrix:298 `    }`
+org.apache.commons.math.linear.Array2DRowRealMatrix:303 `        MatrixUtils.checkMatrixIndex(this, row, column);`
+org.apache.commons.math.linear.Array2DRowRealMatrix:304 `        return data[row][column];`
+org.apache.commons.math.linear.Array2DRowRealMatrix:310 `        MatrixUtils.checkMatrixIndex(this, row, column);`
+org.apache.commons.math.linear.Array2DRowRealMatrix:311 `        data[row][column] = value;`
+org.apache.commons.math.linear.Array2DRowRealMatrix:312 `    }`
+org.apache.commons.math.linear.Array2DRowRealMatrix:331 `        return (data == null) ? 0 : data.length;`
+org.apache.commons.math.linear.Array2DRowRealMatrix:337 `        return ((data == null) || (data[0] == null)) ? 0 : data[0].length;`
+org.apache.commons.math.linear.Array2DRowRealMatrix:533 `        setSubMatrix(in, 0, 0);`
+org.apache.commons.math.linear.Array2DRowRealMatrix:534 `    }`
+org.apache.commons.math.linear.BlockFieldMatrix:121 `        this(rawData.length, rawData[0].length, toBlocksLayout(rawData), false);`
+org.apache.commons.math.linear.BlockFieldMatrix:122 `    }`
+org.apache.commons.math.linear.BlockFieldMatrix:141 `        super(extractField(blockData), rows, columns);`
+org.apache.commons.math.linear.BlockFieldMatrix:142 `        this.rows    = rows;`
+org.apache.commons.math.linear.BlockFieldMatrix:143 `        this.columns = columns;`
+org.apache.commons.math.linear.BlockFieldMatrix:146 `        blockRows    = (rows    + BLOCK_SIZE - 1) / BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockFieldMatrix:147 `        blockColumns = (columns + BLOCK_SIZE - 1) / BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockFieldMatrix:149 `        if (copyArray) {`
+org.apache.commons.math.linear.BlockFieldMatrix:154 `            blocks = blockData;`
+org.apache.commons.math.linear.BlockFieldMatrix:157 `        int index = 0;`
+org.apache.commons.math.linear.BlockFieldMatrix:158 `        for (int iBlock = 0; iBlock < blockRows; ++iBlock) {`
+org.apache.commons.math.linear.BlockFieldMatrix:159 `            final int iHeight = blockHeight(iBlock);`
+org.apache.commons.math.linear.BlockFieldMatrix:160 `            for (int jBlock = 0; jBlock < blockColumns; ++jBlock, ++index) {`
+org.apache.commons.math.linear.BlockFieldMatrix:161 `                if (blockData[index].length != iHeight * blockWidth(jBlock)) {`
+org.apache.commons.math.linear.BlockFieldMatrix:165 `                if (copyArray) {`
+org.apache.commons.math.linear.BlockFieldMatrix:170 `    }`
+org.apache.commons.math.linear.BlockFieldMatrix:198 `        final int rows         = rawData.length;`
+org.apache.commons.math.linear.BlockFieldMatrix:199 `        final int columns      = rawData[0].length;`
+org.apache.commons.math.linear.BlockFieldMatrix:200 `        final int blockRows    = (rows    + BLOCK_SIZE - 1) / BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockFieldMatrix:201 `        final int blockColumns = (columns + BLOCK_SIZE - 1) / BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockFieldMatrix:204 `        for (int i = 0; i < rawData.length; ++i) {`
+org.apache.commons.math.linear.BlockFieldMatrix:205 `            final int length = rawData[i].length;`
+org.apache.commons.math.linear.BlockFieldMatrix:206 `            if (length != columns) {`
+org.apache.commons.math.linear.BlockFieldMatrix:212 `        final Field<T> field = extractField(rawData);`
+org.apache.commons.math.linear.BlockFieldMatrix:213 `        final T[][] blocks = buildArray(field, blockRows * blockColumns, -1);`
+org.apache.commons.math.linear.BlockFieldMatrix:214 `        int blockIndex = 0;`
+org.apache.commons.math.linear.BlockFieldMatrix:215 `        for (int iBlock = 0; iBlock < blockRows; ++iBlock) {`
+org.apache.commons.math.linear.BlockFieldMatrix:216 `            final int pStart  = iBlock * BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockFieldMatrix:217 `            final int pEnd    = FastMath.min(pStart + BLOCK_SIZE, rows);`
+org.apache.commons.math.linear.BlockFieldMatrix:218 `            final int iHeight = pEnd - pStart;`
+org.apache.commons.math.linear.BlockFieldMatrix:219 `            for (int jBlock = 0; jBlock < blockColumns; ++jBlock) {`
+org.apache.commons.math.linear.BlockFieldMatrix:220 `                final int qStart = jBlock * BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockFieldMatrix:221 `                final int qEnd   = FastMath.min(qStart + BLOCK_SIZE, columns);`
+org.apache.commons.math.linear.BlockFieldMatrix:222 `                final int jWidth = qEnd - qStart;`
+org.apache.commons.math.linear.BlockFieldMatrix:225 `                final T[] block = buildArray(field, iHeight * jWidth);`
+org.apache.commons.math.linear.BlockFieldMatrix:226 `                blocks[blockIndex] = block;`
+org.apache.commons.math.linear.BlockFieldMatrix:229 `                int index = 0;`
+org.apache.commons.math.linear.BlockFieldMatrix:230 `                for (int p = pStart; p < pEnd; ++p) {`
+org.apache.commons.math.linear.BlockFieldMatrix:231 `                    System.arraycopy(rawData[p], qStart, block, index, jWidth);`
+org.apache.commons.math.linear.BlockFieldMatrix:232 `                    index += jWidth;`
+org.apache.commons.math.linear.BlockFieldMatrix:235 `                ++blockIndex;`
+org.apache.commons.math.linear.BlockFieldMatrix:239 `        return blocks;`
+org.apache.commons.math.linear.BlockFieldMatrix:762 `        final int refLength = subMatrix[0].length;`
+org.apache.commons.math.linear.BlockFieldMatrix:763 `        if (refLength == 0) {`
+org.apache.commons.math.linear.BlockFieldMatrix:766 `        final int endRow    = row + subMatrix.length - 1;`
+org.apache.commons.math.linear.BlockFieldMatrix:767 `        final int endColumn = column + refLength - 1;`
+org.apache.commons.math.linear.BlockFieldMatrix:768 `        checkSubMatrixIndex(row, endRow, column, endColumn);`
+org.apache.commons.math.linear.BlockFieldMatrix:769 `        for (final T[] subRow : subMatrix) {`
+org.apache.commons.math.linear.BlockFieldMatrix:770 `            if (subRow.length != refLength) {`
+org.apache.commons.math.linear.BlockFieldMatrix:776 `        final int blockStartRow    = row / BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockFieldMatrix:777 `        final int blockEndRow      = (endRow + BLOCK_SIZE) / BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockFieldMatrix:778 `        final int blockStartColumn = column / BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockFieldMatrix:779 `        final int blockEndColumn   = (endColumn + BLOCK_SIZE) / BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockFieldMatrix:782 `        for (int iBlock = blockStartRow; iBlock < blockEndRow; ++iBlock) {`
+org.apache.commons.math.linear.BlockFieldMatrix:783 `            final int iHeight  = blockHeight(iBlock);`
+org.apache.commons.math.linear.BlockFieldMatrix:784 `            final int firstRow = iBlock * BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockFieldMatrix:785 `            final int iStart   = FastMath.max(row,    firstRow);`
+org.apache.commons.math.linear.BlockFieldMatrix:786 `            final int iEnd     = FastMath.min(endRow + 1, firstRow + iHeight);`
+org.apache.commons.math.linear.BlockFieldMatrix:788 `            for (int jBlock = blockStartColumn; jBlock < blockEndColumn; ++jBlock) {`
+org.apache.commons.math.linear.BlockFieldMatrix:789 `                final int jWidth      = blockWidth(jBlock);`
+org.apache.commons.math.linear.BlockFieldMatrix:790 `                final int firstColumn = jBlock * BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockFieldMatrix:791 `                final int jStart      = FastMath.max(column,    firstColumn);`
+org.apache.commons.math.linear.BlockFieldMatrix:792 `                final int jEnd        = FastMath.min(endColumn + 1, firstColumn + jWidth);`
+org.apache.commons.math.linear.BlockFieldMatrix:793 `                final int jLength     = jEnd - jStart;`
+org.apache.commons.math.linear.BlockFieldMatrix:796 `                final T[] block = blocks[iBlock * blockColumns + jBlock];`
+org.apache.commons.math.linear.BlockFieldMatrix:797 `                for (int i = iStart; i < iEnd; ++i) {`
+org.apache.commons.math.linear.BlockFieldMatrix:798 `                    System.arraycopy(subMatrix[i - row], jStart - column,`
+org.apache.commons.math.linear.BlockFieldMatrix:805 `    }`
+org.apache.commons.math.linear.BlockFieldMatrix:1122 `        checkRowIndex(row);`
+org.apache.commons.math.linear.BlockFieldMatrix:1123 `        checkColumnIndex(column);`
+org.apache.commons.math.linear.BlockFieldMatrix:1125 `        final int iBlock = row    / BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockFieldMatrix:1126 `        final int jBlock = column / BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockFieldMatrix:1127 `        final int k      = (row    - iBlock * BLOCK_SIZE) * blockWidth(jBlock) +`
+org.apache.commons.math.linear.BlockFieldMatrix:1130 `        return blocks[iBlock * blockColumns + jBlock][k];`
+org.apache.commons.math.linear.BlockFieldMatrix:1219 `        return rows;`
+org.apache.commons.math.linear.BlockFieldMatrix:1225 `        return columns;`
+org.apache.commons.math.linear.BlockFieldMatrix:1536 `        return (blockRow == blockRows - 1) ? rows - blockRow * BLOCK_SIZE : BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockFieldMatrix:1545 `        return (blockColumn == blockColumns - 1) ? columns - blockColumn * BLOCK_SIZE : BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockRealMatrix:118 `        this(rawData.length, rawData[0].length, toBlocksLayout(rawData), false);`
+org.apache.commons.math.linear.BlockRealMatrix:119 `    }`
+org.apache.commons.math.linear.BlockRealMatrix:137 `        super(rows, columns);`
+org.apache.commons.math.linear.BlockRealMatrix:138 `        this.rows = rows;`
+org.apache.commons.math.linear.BlockRealMatrix:139 `        this.columns = columns;`
+org.apache.commons.math.linear.BlockRealMatrix:142 `        blockRows = (rows + BLOCK_SIZE - 1) / BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockRealMatrix:143 `        blockColumns = (columns + BLOCK_SIZE - 1) / BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockRealMatrix:145 `        if (copyArray) {`
+org.apache.commons.math.linear.BlockRealMatrix:150 `            blocks = blockData;`
+org.apache.commons.math.linear.BlockRealMatrix:153 `        int index = 0;`
+org.apache.commons.math.linear.BlockRealMatrix:154 `        for (int iBlock = 0; iBlock < blockRows; ++iBlock) {`
+org.apache.commons.math.linear.BlockRealMatrix:155 `            final int iHeight = blockHeight(iBlock);`
+org.apache.commons.math.linear.BlockRealMatrix:156 `            for (int jBlock = 0; jBlock < blockColumns; ++jBlock, ++index) {`
+org.apache.commons.math.linear.BlockRealMatrix:157 `                if (blockData[index].length != iHeight * blockWidth(jBlock)) {`
+org.apache.commons.math.linear.BlockRealMatrix:161 `                if (copyArray) {`
+org.apache.commons.math.linear.BlockRealMatrix:166 `    }`
+org.apache.commons.math.linear.BlockRealMatrix:190 `        final int rows = rawData.length;`
+org.apache.commons.math.linear.BlockRealMatrix:191 `        final int columns = rawData[0].length;`
+org.apache.commons.math.linear.BlockRealMatrix:192 `        final int blockRows = (rows    + BLOCK_SIZE - 1) / BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockRealMatrix:193 `        final int blockColumns = (columns + BLOCK_SIZE - 1) / BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockRealMatrix:196 `        for (int i = 0; i < rawData.length; ++i) {`
+org.apache.commons.math.linear.BlockRealMatrix:197 `            final int length = rawData[i].length;`
+org.apache.commons.math.linear.BlockRealMatrix:198 `            if (length != columns) {`
+org.apache.commons.math.linear.BlockRealMatrix:204 `        final double[][] blocks = new double[blockRows * blockColumns][];`
+org.apache.commons.math.linear.BlockRealMatrix:205 `        int blockIndex = 0;`
+org.apache.commons.math.linear.BlockRealMatrix:206 `        for (int iBlock = 0; iBlock < blockRows; ++iBlock) {`
+org.apache.commons.math.linear.BlockRealMatrix:207 `            final int pStart = iBlock * BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockRealMatrix:208 `            final int pEnd = FastMath.min(pStart + BLOCK_SIZE, rows);`
+org.apache.commons.math.linear.BlockRealMatrix:209 `            final int iHeight = pEnd - pStart;`
+org.apache.commons.math.linear.BlockRealMatrix:210 `            for (int jBlock = 0; jBlock < blockColumns; ++jBlock) {`
+org.apache.commons.math.linear.BlockRealMatrix:211 `                final int qStart = jBlock * BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockRealMatrix:212 `                final int qEnd = FastMath.min(qStart + BLOCK_SIZE, columns);`
+org.apache.commons.math.linear.BlockRealMatrix:213 `                final int jWidth = qEnd - qStart;`
+org.apache.commons.math.linear.BlockRealMatrix:216 `                final double[] block = new double[iHeight * jWidth];`
+org.apache.commons.math.linear.BlockRealMatrix:217 `                blocks[blockIndex] = block;`
+org.apache.commons.math.linear.BlockRealMatrix:220 `                int index = 0;`
+org.apache.commons.math.linear.BlockRealMatrix:221 `                for (int p = pStart; p < pEnd; ++p) {`
+org.apache.commons.math.linear.BlockRealMatrix:222 `                    System.arraycopy(rawData[p], qStart, block, index, jWidth);`
+org.apache.commons.math.linear.BlockRealMatrix:223 `                    index += jWidth;`
+org.apache.commons.math.linear.BlockRealMatrix:225 `                ++blockIndex;`
+org.apache.commons.math.linear.BlockRealMatrix:229 `        return blocks;`
+org.apache.commons.math.linear.BlockRealMatrix:769 `        final int refLength = subMatrix[0].length;`
+org.apache.commons.math.linear.BlockRealMatrix:770 `        if (refLength == 0) {`
+org.apache.commons.math.linear.BlockRealMatrix:773 `        final int endRow = row + subMatrix.length - 1;`
+org.apache.commons.math.linear.BlockRealMatrix:774 `        final int endColumn = column + refLength - 1;`
+org.apache.commons.math.linear.BlockRealMatrix:775 `        MatrixUtils.checkSubMatrixIndex(this, row, endRow, column, endColumn);`
+org.apache.commons.math.linear.BlockRealMatrix:776 `        for (final double[] subRow : subMatrix) {`
+org.apache.commons.math.linear.BlockRealMatrix:777 `            if (subRow.length != refLength) {`
+org.apache.commons.math.linear.BlockRealMatrix:783 `        final int blockStartRow = row / BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockRealMatrix:784 `        final int blockEndRow = (endRow + BLOCK_SIZE) / BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockRealMatrix:785 `        final int blockStartColumn = column / BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockRealMatrix:786 `        final int blockEndColumn = (endColumn + BLOCK_SIZE) / BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockRealMatrix:789 `        for (int iBlock = blockStartRow; iBlock < blockEndRow; ++iBlock) {`
+org.apache.commons.math.linear.BlockRealMatrix:790 `            final int iHeight = blockHeight(iBlock);`
+org.apache.commons.math.linear.BlockRealMatrix:791 `            final int firstRow = iBlock * BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockRealMatrix:792 `            final int iStart = FastMath.max(row,    firstRow);`
+org.apache.commons.math.linear.BlockRealMatrix:793 `            final int iEnd = FastMath.min(endRow + 1, firstRow + iHeight);`
+org.apache.commons.math.linear.BlockRealMatrix:795 `            for (int jBlock = blockStartColumn; jBlock < blockEndColumn; ++jBlock) {`
+org.apache.commons.math.linear.BlockRealMatrix:796 `                final int jWidth = blockWidth(jBlock);`
+org.apache.commons.math.linear.BlockRealMatrix:797 `                final int firstColumn = jBlock * BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockRealMatrix:798 `                final int jStart = FastMath.max(column,    firstColumn);`
+org.apache.commons.math.linear.BlockRealMatrix:799 `                final int jEnd = FastMath.min(endColumn + 1, firstColumn + jWidth);`
+org.apache.commons.math.linear.BlockRealMatrix:800 `                final int jLength = jEnd - jStart;`
+org.apache.commons.math.linear.BlockRealMatrix:803 `                final double[] block = blocks[iBlock * blockColumns + jBlock];`
+org.apache.commons.math.linear.BlockRealMatrix:804 `                for (int i = iStart; i < iEnd; ++i) {`
+org.apache.commons.math.linear.BlockRealMatrix:805 `                    System.arraycopy(subMatrix[i - row], jStart - column,`
+org.apache.commons.math.linear.BlockRealMatrix:812 `    }`
+org.apache.commons.math.linear.BlockRealMatrix:1129 `        MatrixUtils.checkMatrixIndex(this, row, column);`
+org.apache.commons.math.linear.BlockRealMatrix:1130 `        final int iBlock = row / BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockRealMatrix:1131 `        final int jBlock = column / BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockRealMatrix:1132 `        final int k = (row - iBlock * BLOCK_SIZE) * blockWidth(jBlock) +`
+org.apache.commons.math.linear.BlockRealMatrix:1134 `        return blocks[iBlock * blockColumns + jBlock][k];`
+org.apache.commons.math.linear.BlockRealMatrix:1209 `        return rows;`
+org.apache.commons.math.linear.BlockRealMatrix:1215 `        return columns;`
+org.apache.commons.math.linear.BlockRealMatrix:1521 `        return (blockRow == blockRows - 1) ? rows - blockRow * BLOCK_SIZE : BLOCK_SIZE;`
+org.apache.commons.math.linear.BlockRealMatrix:1530 `        return (blockColumn == blockColumns - 1) ? columns - blockColumn * BLOCK_SIZE : BLOCK_SIZE;`
+org.apache.commons.math.linear.MatrixUtils:112 `        if (data == null ||`
+org.apache.commons.math.linear.MatrixUtils:116 `        return (data.length * data[0].length <= 4096) ?`
+org.apache.commons.math.linear.MatrixUtils:117 `                new Array2DRowRealMatrix(data) : new BlockRealMatrix(data);`
+org.apache.commons.math.linear.MatrixUtils:363 `        checkRowIndex(m, row);`
+org.apache.commons.math.linear.MatrixUtils:364 `        checkColumnIndex(m, column);`
+org.apache.commons.math.linear.MatrixUtils:365 `    }`
+org.apache.commons.math.linear.MatrixUtils:375 `        if (row < 0 ||`
+org.apache.commons.math.linear.MatrixUtils:376 `            row >= m.getRowDimension()) {`
+org.apache.commons.math.linear.MatrixUtils:377 `            throw new OutOfRangeException(LocalizedFormats.ROW_INDEX,`
+org.apache.commons.math.linear.MatrixUtils:378 `                                          row, 0, m.getRowDimension() - 1);`
+org.apache.commons.math.linear.MatrixUtils:380 `    }`
+org.apache.commons.math.linear.MatrixUtils:390 `        if (column < 0 || column >= m.getColumnDimension()) {`
+org.apache.commons.math.linear.MatrixUtils:391 `            throw new OutOfRangeException(LocalizedFormats.COLUMN_INDEX,`
+org.apache.commons.math.linear.MatrixUtils:392 `                                           column, 0, m.getColumnDimension() - 1);`
+org.apache.commons.math.linear.MatrixUtils:394 `    }`
+org.apache.commons.math.linear.MatrixUtils:412 `        checkRowIndex(m, startRow);`
+org.apache.commons.math.linear.MatrixUtils:413 `        checkRowIndex(m, endRow);`
+org.apache.commons.math.linear.MatrixUtils:414 `        if (endRow < startRow) {`
+org.apache.commons.math.linear.MatrixUtils:419 `        checkColumnIndex(m, startColumn);`
+org.apache.commons.math.linear.MatrixUtils:420 `        checkColumnIndex(m, endColumn);`
+org.apache.commons.math.linear.MatrixUtils:421 `        if (endColumn < startColumn) {`
+org.apache.commons.math.linear.MatrixUtils:427 `    }`
+org.apache.commons.math.linear.OpenMapRealMatrix:48 `        super(rowDimension, columnDimension);`
+org.apache.commons.math.linear.OpenMapRealMatrix:49 `        this.rows = rowDimension;`
+org.apache.commons.math.linear.OpenMapRealMatrix:50 `        this.columns = columnDimension;`
+org.apache.commons.math.linear.OpenMapRealMatrix:51 `        this.entries = new OpenIntToDoubleHashMap(0.0);`
+org.apache.commons.math.linear.OpenMapRealMatrix:52 `    }`
+org.apache.commons.math.linear.OpenMapRealMatrix:80 `        return columns;`
+org.apache.commons.math.linear.OpenMapRealMatrix:210 `        MatrixUtils.checkRowIndex(this, row);`
+org.apache.commons.math.linear.OpenMapRealMatrix:211 `        MatrixUtils.checkColumnIndex(this, column);`
+org.apache.commons.math.linear.OpenMapRealMatrix:212 `        return entries.get(computeKey(row, column));`
+org.apache.commons.math.linear.OpenMapRealMatrix:218 `        return rows;`
+org.apache.commons.math.linear.OpenMapRealMatrix:224 `        MatrixUtils.checkRowIndex(this, row);`
+org.apache.commons.math.linear.OpenMapRealMatrix:225 `        MatrixUtils.checkColumnIndex(this, column);`
+org.apache.commons.math.linear.OpenMapRealMatrix:226 `        if (value == 0.0) {`
+org.apache.commons.math.linear.OpenMapRealMatrix:227 `            entries.remove(computeKey(row, column));`
+org.apache.commons.math.linear.OpenMapRealMatrix:229 `            entries.put(computeKey(row, column), value);`
+org.apache.commons.math.linear.OpenMapRealMatrix:231 `    }`
+org.apache.commons.math.linear.OpenMapRealMatrix:268 `        return row * columns + column;`
+org.apache.commons.math.util.FastMath:80 `    private static final double EXP_INT_TABLE_A[] = new double[1500];`
+org.apache.commons.math.util.FastMath:85 `    private static final double EXP_INT_TABLE_B[] = new double[1500];`
+org.apache.commons.math.util.FastMath:90 `    private static final double EXP_FRAC_TABLE_A[] = new double[1025];`
+org.apache.commons.math.util.FastMath:95 `    private static final double EXP_FRAC_TABLE_B[] = new double[1025];`
+org.apache.commons.math.util.FastMath:98 `    private static final double FACT[] = new double[20];`
+org.apache.commons.math.util.FastMath:101 `    private static final double LN_MANT[][] = new double[1024][];`
+org.apache.commons.math.util.FastMath:110 `    private static final double LN_SPLIT_COEF[][] = {`
+org.apache.commons.math.util.FastMath:130 `    private static final double LN_QUICK_COEF[][] = {`
+org.apache.commons.math.util.FastMath:143 `    private static final double LN_HI_PREC_COEF[][] = {`
+org.apache.commons.math.util.FastMath:153 `    private static final double SINE_TABLE_A[] = new double[14];`
+org.apache.commons.math.util.FastMath:156 `    private static final double SINE_TABLE_B[] = new double[14];`
+org.apache.commons.math.util.FastMath:159 `    private static final double COSINE_TABLE_A[] = new double[14];`
+org.apache.commons.math.util.FastMath:162 `    private static final double COSINE_TABLE_B[] = new double[14];`
+org.apache.commons.math.util.FastMath:165 `    private static final double TANGENT_TABLE_A[] = new double[14];`
+org.apache.commons.math.util.FastMath:168 `    private static final double TANGENT_TABLE_B[] = new double[14];`
+org.apache.commons.math.util.FastMath:171 `    private static final long RECIP_2PI[] = new long[] {`
+org.apache.commons.math.util.FastMath:192 `    private static final long PI_O_4_BITS[] = new long[] {`
+org.apache.commons.math.util.FastMath:200 `    private static final double EIGHTHS[] = {0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1.0, 1.125, 1.25, 1.375, 1.5, 1.625};`
+org.apache.commons.math.util.FastMath:203 `    private static final double CBRTTWO[] = { 0.6299605249474366,`
+org.apache.commons.math.util.FastMath:233 `        FACT[0] = 1.0;`
+org.apache.commons.math.util.FastMath:234 `        for (i = 1; i < FACT.length; i++) {`
+org.apache.commons.math.util.FastMath:235 `            FACT[i] = FACT[i-1] * i;`
+org.apache.commons.math.util.FastMath:238 `        double tmp[] = new double[2];`
+org.apache.commons.math.util.FastMath:239 `        double recip[] = new double[2];`
+org.apache.commons.math.util.FastMath:242 `        for (i = 0; i < 750; i++) {`
+org.apache.commons.math.util.FastMath:243 `            expint(i, tmp);`
+org.apache.commons.math.util.FastMath:244 `            EXP_INT_TABLE_A[i+750] = tmp[0];`
+org.apache.commons.math.util.FastMath:245 `            EXP_INT_TABLE_B[i+750] = tmp[1];`
+org.apache.commons.math.util.FastMath:247 `            if (i != 0) {`
+org.apache.commons.math.util.FastMath:249 `                splitReciprocal(tmp, recip);`
+org.apache.commons.math.util.FastMath:250 `                EXP_INT_TABLE_A[750-i] = recip[0];`
+org.apache.commons.math.util.FastMath:251 `                EXP_INT_TABLE_B[750-i] = recip[1];`
+org.apache.commons.math.util.FastMath:256 `        for (i = 0; i < EXP_FRAC_TABLE_A.length; i++) {`
+org.apache.commons.math.util.FastMath:257 `            slowexp(i/1024.0, tmp);`
+org.apache.commons.math.util.FastMath:258 `            EXP_FRAC_TABLE_A[i] = tmp[0];`
+org.apache.commons.math.util.FastMath:259 `            EXP_FRAC_TABLE_B[i] = tmp[1];`
+org.apache.commons.math.util.FastMath:263 `        for (i = 0; i < LN_MANT.length; i++) {`
+org.apache.commons.math.util.FastMath:264 `            double d = Double.longBitsToDouble( (((long) i) << 42) | 0x3ff0000000000000L );`
+org.apache.commons.math.util.FastMath:265 `            LN_MANT[i] = slowLog(d);`
+org.apache.commons.math.util.FastMath:269 `        buildSinCosTables();`
+org.apache.commons.math.util.FastMath:270 `    }`
+org.apache.commons.math.util.FastMath:1012 `        final double xs[] = new double[2];`
+org.apache.commons.math.util.FastMath:1013 `        final double ys[] = new double[2];`
+org.apache.commons.math.util.FastMath:1014 `        final double facts[] = new double[2];`
+org.apache.commons.math.util.FastMath:1015 `        final double as[] = new double[2];`
+org.apache.commons.math.util.FastMath:1016 `        split(x, xs);`
+org.apache.commons.math.util.FastMath:1017 `        ys[0] = ys[1] = 0.0;`
+org.apache.commons.math.util.FastMath:1019 `        for (int i = 19; i >= 0; i--) {`
+org.apache.commons.math.util.FastMath:1020 `            splitMult(xs, ys, as);`
+org.apache.commons.math.util.FastMath:1021 `            ys[0] = as[0];`
+org.apache.commons.math.util.FastMath:1022 `            ys[1] = as[1];`
+org.apache.commons.math.util.FastMath:1024 `            split(FACT[i], as);`
+org.apache.commons.math.util.FastMath:1025 `            splitReciprocal(as, facts);`
+org.apache.commons.math.util.FastMath:1027 `            splitAdd(ys, facts, as);`
+org.apache.commons.math.util.FastMath:1028 `            ys[0] = as[0];`
+org.apache.commons.math.util.FastMath:1029 `            ys[1] = as[1];`
+org.apache.commons.math.util.FastMath:1032 `        if (result != null) {`
+org.apache.commons.math.util.FastMath:1033 `            result[0] = ys[0];`
+org.apache.commons.math.util.FastMath:1034 `            result[1] = ys[1];`
+org.apache.commons.math.util.FastMath:1037 `        return ys[0] + ys[1];`
+org.apache.commons.math.util.FastMath:1046 `        if (d < 8e298 && d > -8e298) {`
+org.apache.commons.math.util.FastMath:1047 `            final double a = d * HEX_40000000;`
+org.apache.commons.math.util.FastMath:1048 `            split[0] = (d + a) - a;`
+org.apache.commons.math.util.FastMath:1049 `            split[1] = d - split[0];`
+org.apache.commons.math.util.FastMath:1050 `        } else {`
+org.apache.commons.math.util.FastMath:1055 `    }`
+org.apache.commons.math.util.FastMath:1062 `        final double c = a[0] + a[1];`
+org.apache.commons.math.util.FastMath:1063 `        final double d = -(c - a[0] - a[1]);`
+org.apache.commons.math.util.FastMath:1065 `        if (c < 8e298 && c > -8e298) {`
+org.apache.commons.math.util.FastMath:1066 `            double z = c * HEX_40000000;`
+org.apache.commons.math.util.FastMath:1067 `            a[0] = (c + z) - z;`
+org.apache.commons.math.util.FastMath:1068 `            a[1] = c - a[0] + d;`
+org.apache.commons.math.util.FastMath:1069 `        } else {`
+org.apache.commons.math.util.FastMath:1070 `            double z = c * 9.31322574615478515625E-10;`
+org.apache.commons.math.util.FastMath:1071 `            a[0] = (c + z - c) * HEX_40000000;`
+org.apache.commons.math.util.FastMath:1072 `            a[1] = c - a[0] + d;`
+org.apache.commons.math.util.FastMath:1074 `    }`
+org.apache.commons.math.util.FastMath:1082 `        ans[0] = a[0] * b[0];`
+org.apache.commons.math.util.FastMath:1083 `        ans[1] = a[0] * b[1] + a[1] * b[0] + a[1] * b[1];`
+org.apache.commons.math.util.FastMath:1086 `        resplit(ans);`
+org.apache.commons.math.util.FastMath:1087 `    }`
+org.apache.commons.math.util.FastMath:1095 `        ans[0] = a[0] + b[0];`
+org.apache.commons.math.util.FastMath:1096 `        ans[1] = a[1] + b[1];`
+org.apache.commons.math.util.FastMath:1098 `        resplit(ans);`
+org.apache.commons.math.util.FastMath:1099 `    }`
+org.apache.commons.math.util.FastMath:1120 `        final double b = 1.0/4194304.0;`
+org.apache.commons.math.util.FastMath:1121 `        final double a = 1.0 - b;`
+org.apache.commons.math.util.FastMath:1123 `        if (in[0] == 0.0) {`
+org.apache.commons.math.util.FastMath:1128 `        result[0] = a / in[0];`
+org.apache.commons.math.util.FastMath:1129 `        result[1] = (b*in[0]-a*in[1]) / (in[0]*in[0] + in[0]*in[1]);`
+org.apache.commons.math.util.FastMath:1131 `        if (result[1] != result[1]) { // can happen if result[1] is NAN`
+org.apache.commons.math.util.FastMath:1132 `            result[1] = 0.0;`
+org.apache.commons.math.util.FastMath:1136 `        resplit(result);`
+org.apache.commons.math.util.FastMath:1138 `        for (int i = 0; i < 2; i++) {`
+org.apache.commons.math.util.FastMath:1140 `            double err = 1.0 - result[0] * in[0] - result[0] * in[1] -`
+org.apache.commons.math.util.FastMath:1143 `            err = err * (result[0] + result[1]);`
+org.apache.commons.math.util.FastMath:1145 `            result[1] += err;`
+org.apache.commons.math.util.FastMath:1147 `    }`
+org.apache.commons.math.util.FastMath:1155 `        final double xs[] = new double[2];`
+org.apache.commons.math.util.FastMath:1156 `        final double ys[] = new double[2];`
+org.apache.commons.math.util.FastMath:1157 `        final double zs[] = new double[2];`
+org.apache.commons.math.util.FastMath:1160 `        split(a[0], xs);`
+org.apache.commons.math.util.FastMath:1161 `        split(b[0], ys);`
+org.apache.commons.math.util.FastMath:1162 `        splitMult(xs, ys, zs);`
+org.apache.commons.math.util.FastMath:1164 `        result[0] = zs[0];`
+org.apache.commons.math.util.FastMath:1165 `        result[1] = zs[1];`
+org.apache.commons.math.util.FastMath:1168 `        split(b[1], ys);`
+org.apache.commons.math.util.FastMath:1169 `        splitMult(xs, ys, zs);`
+org.apache.commons.math.util.FastMath:1171 `        double tmp = result[0] + zs[0];`
+org.apache.commons.math.util.FastMath:1172 `        result[1] = result[1] - (tmp - result[0] - zs[0]);`
+org.apache.commons.math.util.FastMath:1173 `        result[0] = tmp;`
+org.apache.commons.math.util.FastMath:1174 `        tmp = result[0] + zs[1];`
+org.apache.commons.math.util.FastMath:1175 `        result[1] = result[1] - (tmp - result[0] - zs[1]);`
+org.apache.commons.math.util.FastMath:1176 `        result[0] = tmp;`
+org.apache.commons.math.util.FastMath:1179 `        split(a[1], xs);`
+org.apache.commons.math.util.FastMath:1180 `        split(b[0], ys);`
+org.apache.commons.math.util.FastMath:1181 `        splitMult(xs, ys, zs);`
+org.apache.commons.math.util.FastMath:1183 `        tmp = result[0] + zs[0];`
+org.apache.commons.math.util.FastMath:1184 `        result[1] = result[1] - (tmp - result[0] - zs[0]);`
+org.apache.commons.math.util.FastMath:1185 `        result[0] = tmp;`
+org.apache.commons.math.util.FastMath:1186 `        tmp = result[0] + zs[1];`
+org.apache.commons.math.util.FastMath:1187 `        result[1] = result[1] - (tmp - result[0] - zs[1]);`
+org.apache.commons.math.util.FastMath:1188 `        result[0] = tmp;`
+org.apache.commons.math.util.FastMath:1191 `        split(a[1], xs);`
+org.apache.commons.math.util.FastMath:1192 `        split(b[1], ys);`
+org.apache.commons.math.util.FastMath:1193 `        splitMult(xs, ys, zs);`
+org.apache.commons.math.util.FastMath:1195 `        tmp = result[0] + zs[0];`
+org.apache.commons.math.util.FastMath:1196 `        result[1] = result[1] - (tmp - result[0] - zs[0]);`
+org.apache.commons.math.util.FastMath:1197 `        result[0] = tmp;`
+org.apache.commons.math.util.FastMath:1198 `        tmp = result[0] + zs[1];`
+org.apache.commons.math.util.FastMath:1199 `        result[1] = result[1] - (tmp - result[0] - zs[1]);`
+org.apache.commons.math.util.FastMath:1200 `        result[0] = tmp;`
+org.apache.commons.math.util.FastMath:1201 `    }`
+org.apache.commons.math.util.FastMath:1210 `        final double xs[] = new double[2];`
+org.apache.commons.math.util.FastMath:1211 `        final double as[] = new double[2];`
+org.apache.commons.math.util.FastMath:1212 `        final double ys[] = new double[2];`
+org.apache.commons.math.util.FastMath:1221 `        xs[0] = 2.718281828459045;`
+org.apache.commons.math.util.FastMath:1222 `        xs[1] = 1.4456468917292502E-16;`
+org.apache.commons.math.util.FastMath:1224 `        split(1.0, ys);`
+org.apache.commons.math.util.FastMath:1226 `        while (p > 0) {`
+org.apache.commons.math.util.FastMath:1227 `            if ((p & 1) != 0) {`
+org.apache.commons.math.util.FastMath:1228 `                quadMult(ys, xs, as);`
+org.apache.commons.math.util.FastMath:1229 `                ys[0] = as[0]; ys[1] = as[1];`
+org.apache.commons.math.util.FastMath:1232 `            quadMult(xs, xs, as);`
+org.apache.commons.math.util.FastMath:1233 `            xs[0] = as[0]; xs[1] = as[1];`
+org.apache.commons.math.util.FastMath:1235 `            p >>= 1;`
+org.apache.commons.math.util.FastMath:1238 `        if (result != null) {`
+org.apache.commons.math.util.FastMath:1239 `            result[0] = ys[0];`
+org.apache.commons.math.util.FastMath:1240 `            result[1] = ys[1];`
+org.apache.commons.math.util.FastMath:1242 `            resplit(result);`
+org.apache.commons.math.util.FastMath:1245 `        return ys[0] + ys[1];`
+org.apache.commons.math.util.FastMath:1741 `        double x[] = new double[2];`
+org.apache.commons.math.util.FastMath:1742 `        double x2[] = new double[2];`
+org.apache.commons.math.util.FastMath:1743 `        double y[] = new double[2];`
+org.apache.commons.math.util.FastMath:1744 `        double a[] = new double[2];`
+org.apache.commons.math.util.FastMath:1746 `        split(xi, x);`
+org.apache.commons.math.util.FastMath:1749 `        x[0] += 1.0;`
+org.apache.commons.math.util.FastMath:1750 `        resplit(x);`
+org.apache.commons.math.util.FastMath:1751 `        splitReciprocal(x, a);`
+org.apache.commons.math.util.FastMath:1752 `        x[0] -= 2.0;`
+org.apache.commons.math.util.FastMath:1753 `        resplit(x);`
+org.apache.commons.math.util.FastMath:1754 `        splitMult(x, a, y);`
+org.apache.commons.math.util.FastMath:1755 `        x[0] = y[0];`
+org.apache.commons.math.util.FastMath:1756 `        x[1] = y[1];`
+org.apache.commons.math.util.FastMath:1759 `        splitMult(x, x, x2);`
+org.apache.commons.math.util.FastMath:1765 `        y[0] = LN_SPLIT_COEF[LN_SPLIT_COEF.length-1][0];`
+org.apache.commons.math.util.FastMath:1766 `        y[1] = LN_SPLIT_COEF[LN_SPLIT_COEF.length-1][1];`
+org.apache.commons.math.util.FastMath:1768 `        for (int i = LN_SPLIT_COEF.length-2; i >= 0; i--) {`
+org.apache.commons.math.util.FastMath:1769 `            splitMult(y, x2, a);`
+org.apache.commons.math.util.FastMath:1770 `            y[0] = a[0];`
+org.apache.commons.math.util.FastMath:1771 `            y[1] = a[1];`
+org.apache.commons.math.util.FastMath:1772 `            splitAdd(y, LN_SPLIT_COEF[i], a);`
+org.apache.commons.math.util.FastMath:1773 `            y[0] = a[0];`
+org.apache.commons.math.util.FastMath:1774 `            y[1] = a[1];`
+org.apache.commons.math.util.FastMath:1777 `        splitMult(y, x, a);`
+org.apache.commons.math.util.FastMath:1778 `        y[0] = a[0];`
+org.apache.commons.math.util.FastMath:1779 `        y[1] = a[1];`
+org.apache.commons.math.util.FastMath:1781 `        return y;`
+org.apache.commons.math.util.FastMath:1791 `        final double xs[] = new double[2];`
+org.apache.commons.math.util.FastMath:1792 `        final double ys[] = new double[2];`
+org.apache.commons.math.util.FastMath:1793 `        final double facts[] = new double[2];`
+org.apache.commons.math.util.FastMath:1794 `        final double as[] = new double[2];`
+org.apache.commons.math.util.FastMath:1795 `        split(x, xs);`
+org.apache.commons.math.util.FastMath:1796 `        ys[0] = ys[1] = 0.0;`
+org.apache.commons.math.util.FastMath:1798 `        for (int i = 19; i >= 0; i--) {`
+org.apache.commons.math.util.FastMath:1799 `            splitMult(xs, ys, as);`
+org.apache.commons.math.util.FastMath:1800 `            ys[0] = as[0]; ys[1] = as[1];`
+org.apache.commons.math.util.FastMath:1802 `            if ( (i & 1) == 0) {`
+org.apache.commons.math.util.FastMath:1803 `                continue;`
+org.apache.commons.math.util.FastMath:1806 `            split(FACT[i], as);`
+org.apache.commons.math.util.FastMath:1807 `            splitReciprocal(as, facts);`
+org.apache.commons.math.util.FastMath:1809 `            if ( (i & 2) != 0 ) {`
+org.apache.commons.math.util.FastMath:1810 `                facts[0] = -facts[0];`
+org.apache.commons.math.util.FastMath:1811 `                facts[1] = -facts[1];`
+org.apache.commons.math.util.FastMath:1814 `            splitAdd(ys, facts, as);`
+org.apache.commons.math.util.FastMath:1815 `            ys[0] = as[0]; ys[1] = as[1];`
+org.apache.commons.math.util.FastMath:1818 `        if (result != null) {`
+org.apache.commons.math.util.FastMath:1819 `            result[0] = ys[0];`
+org.apache.commons.math.util.FastMath:1820 `            result[1] = ys[1];`
+org.apache.commons.math.util.FastMath:1823 `        return ys[0] + ys[1];`
+org.apache.commons.math.util.FastMath:1834 `        final double xs[] = new double[2];`
+org.apache.commons.math.util.FastMath:1835 `        final double ys[] = new double[2];`
+org.apache.commons.math.util.FastMath:1836 `        final double facts[] = new double[2];`
+org.apache.commons.math.util.FastMath:1837 `        final double as[] = new double[2];`
+org.apache.commons.math.util.FastMath:1838 `        split(x, xs);`
+org.apache.commons.math.util.FastMath:1839 `        ys[0] = ys[1] = 0.0;`
+org.apache.commons.math.util.FastMath:1841 `        for (int i = 19; i >= 0; i--) {`
+org.apache.commons.math.util.FastMath:1842 `            splitMult(xs, ys, as);`
+org.apache.commons.math.util.FastMath:1843 `            ys[0] = as[0]; ys[1] = as[1];`
+org.apache.commons.math.util.FastMath:1845 `            if ( (i & 1) != 0) {`
+org.apache.commons.math.util.FastMath:1846 `                continue;`
+org.apache.commons.math.util.FastMath:1849 `            split(FACT[i], as);`
+org.apache.commons.math.util.FastMath:1850 `            splitReciprocal(as, facts);`
+org.apache.commons.math.util.FastMath:1852 `            if ( (i & 2) != 0 ) {`
+org.apache.commons.math.util.FastMath:1853 `                facts[0] = -facts[0];`
+org.apache.commons.math.util.FastMath:1854 `                facts[1] = -facts[1];`
+org.apache.commons.math.util.FastMath:1857 `            splitAdd(ys, facts, as);`
+org.apache.commons.math.util.FastMath:1858 `            ys[0] = as[0]; ys[1] = as[1];`
+org.apache.commons.math.util.FastMath:1861 `        if (result != null) {`
+org.apache.commons.math.util.FastMath:1862 `            result[0] = ys[0];`
+org.apache.commons.math.util.FastMath:1863 `            result[1] = ys[1];`
+org.apache.commons.math.util.FastMath:1866 `        return ys[0] + ys[1];`
+org.apache.commons.math.util.FastMath:1872 `        final double result[] = new double[2];`
+org.apache.commons.math.util.FastMath:1875 `        for (int i = 0; i < 7; i++) {`
+org.apache.commons.math.util.FastMath:1876 `            double x = i / 8.0;`
+org.apache.commons.math.util.FastMath:1878 `            slowSin(x, result);`
+org.apache.commons.math.util.FastMath:1879 `            SINE_TABLE_A[i] = result[0];`
+org.apache.commons.math.util.FastMath:1880 `            SINE_TABLE_B[i] = result[1];`
+org.apache.commons.math.util.FastMath:1882 `            slowCos(x, result);`
+org.apache.commons.math.util.FastMath:1883 `            COSINE_TABLE_A[i] = result[0];`
+org.apache.commons.math.util.FastMath:1884 `            COSINE_TABLE_B[i] = result[1];`
+org.apache.commons.math.util.FastMath:1888 `        for (int i = 7; i < 14; i++) {`
+org.apache.commons.math.util.FastMath:1889 `            double xs[] = new double[2];`
+org.apache.commons.math.util.FastMath:1890 `            double ys[] = new double[2];`
+org.apache.commons.math.util.FastMath:1891 `            double as[] = new double[2];`
+org.apache.commons.math.util.FastMath:1892 `            double bs[] = new double[2];`
+org.apache.commons.math.util.FastMath:1893 `            double temps[] = new double[2];`
+org.apache.commons.math.util.FastMath:1895 `            if ( (i & 1) == 0) {`
+org.apache.commons.math.util.FastMath:1897 `                xs[0] = SINE_TABLE_A[i/2];`
+org.apache.commons.math.util.FastMath:1898 `                xs[1] = SINE_TABLE_B[i/2];`
+org.apache.commons.math.util.FastMath:1899 `                ys[0] = COSINE_TABLE_A[i/2];`
+org.apache.commons.math.util.FastMath:1900 `                ys[1] = COSINE_TABLE_B[i/2];`
+org.apache.commons.math.util.FastMath:1903 `                splitMult(xs, ys, result);`
+org.apache.commons.math.util.FastMath:1904 `                SINE_TABLE_A[i] = result[0] * 2.0;`
+org.apache.commons.math.util.FastMath:1905 `                SINE_TABLE_B[i] = result[1] * 2.0;`
+org.apache.commons.math.util.FastMath:1908 `                splitMult(ys, ys, as);`
+org.apache.commons.math.util.FastMath:1909 `                splitMult(xs, xs, temps);`
+org.apache.commons.math.util.FastMath:1910 `                temps[0] = -temps[0];`
+org.apache.commons.math.util.FastMath:1911 `                temps[1] = -temps[1];`
+org.apache.commons.math.util.FastMath:1912 `                splitAdd(as, temps, result);`
+org.apache.commons.math.util.FastMath:1913 `                COSINE_TABLE_A[i] = result[0];`
+org.apache.commons.math.util.FastMath:1914 `                COSINE_TABLE_B[i] = result[1];`
+org.apache.commons.math.util.FastMath:1916 `                xs[0] = SINE_TABLE_A[i/2];`
+org.apache.commons.math.util.FastMath:1917 `                xs[1] = SINE_TABLE_B[i/2];`
+org.apache.commons.math.util.FastMath:1918 `                ys[0] = COSINE_TABLE_A[i/2];`
+org.apache.commons.math.util.FastMath:1919 `                ys[1] = COSINE_TABLE_B[i/2];`
+org.apache.commons.math.util.FastMath:1920 `                as[0] = SINE_TABLE_A[i/2+1];`
+org.apache.commons.math.util.FastMath:1921 `                as[1] = SINE_TABLE_B[i/2+1];`
+org.apache.commons.math.util.FastMath:1922 `                bs[0] = COSINE_TABLE_A[i/2+1];`
+org.apache.commons.math.util.FastMath:1923 `                bs[1] = COSINE_TABLE_B[i/2+1];`
+org.apache.commons.math.util.FastMath:1926 `                splitMult(xs, bs, temps);`
+org.apache.commons.math.util.FastMath:1927 `                splitMult(ys, as, result);`
+org.apache.commons.math.util.FastMath:1928 `                splitAdd(result, temps, result);`
+org.apache.commons.math.util.FastMath:1929 `                SINE_TABLE_A[i] = result[0];`
+org.apache.commons.math.util.FastMath:1930 `                SINE_TABLE_B[i] = result[1];`
+org.apache.commons.math.util.FastMath:1933 `                splitMult(ys, bs, result);`
+org.apache.commons.math.util.FastMath:1934 `                splitMult(xs, as, temps);`
+org.apache.commons.math.util.FastMath:1935 `                temps[0] = -temps[0];`
+org.apache.commons.math.util.FastMath:1936 `                temps[1] = -temps[1];`
+org.apache.commons.math.util.FastMath:1937 `                splitAdd(result, temps, result);`
+org.apache.commons.math.util.FastMath:1938 `                COSINE_TABLE_A[i] = result[0];`
+org.apache.commons.math.util.FastMath:1939 `                COSINE_TABLE_B[i] = result[1];`
+org.apache.commons.math.util.FastMath:1944 `        for (int i = 0; i < 14; i++) {`
+org.apache.commons.math.util.FastMath:1945 `            double xs[] = new double[2];`
+org.apache.commons.math.util.FastMath:1946 `            double ys[] = new double[2];`
+org.apache.commons.math.util.FastMath:1947 `            double as[] = new double[2];`
+org.apache.commons.math.util.FastMath:1949 `            as[0] = COSINE_TABLE_A[i];`
+org.apache.commons.math.util.FastMath:1950 `            as[1] = COSINE_TABLE_B[i];`
+org.apache.commons.math.util.FastMath:1952 `            splitReciprocal(as, ys);`
+org.apache.commons.math.util.FastMath:1954 `            xs[0] = SINE_TABLE_A[i];`
+org.apache.commons.math.util.FastMath:1955 `            xs[1] = SINE_TABLE_B[i];`
+org.apache.commons.math.util.FastMath:1957 `            splitMult(xs, ys, as);`
+org.apache.commons.math.util.FastMath:1959 `            TANGENT_TABLE_A[i] = as[0];`
+org.apache.commons.math.util.FastMath:1960 `            TANGENT_TABLE_B[i] = as[1];`
+org.apache.commons.math.util.FastMath:1963 `    }`
+org.apache.commons.math.util.FastMath:3378 `        return (x < 0) ? -x : x;`
+org.apache.commons.math.util.FastMath:3719 `        if (x != x) { // NaN`
+org.apache.commons.math.util.FastMath:3723 `        if (x >= TWO_POWER_52 || x <= -TWO_POWER_52) {`
+org.apache.commons.math.util.FastMath:3727 `        y = (long) x;`
+org.apache.commons.math.util.FastMath:3728 `        if (x < 0 && y != x) {`
+org.apache.commons.math.util.FastMath:3732 `        if (y == 0) {`
+org.apache.commons.math.util.FastMath:3736 `        return y;`
+org.apache.commons.math.util.FastMath:3746 `        if (x != x) { // NaN`
+org.apache.commons.math.util.FastMath:3750 `        y = floor(x);`
+org.apache.commons.math.util.FastMath:3751 `        if (y == x) {`
+org.apache.commons.math.util.FastMath:3752 `            return y;`
+org.apache.commons.math.util.FastMath:3809 `        return (a <= b) ? a : b;`
+org.apache.commons.math.util.FastMath:3877 `        return (a <= b) ? b : a;`
+org.apache.commons.math.util.MathUtils:85 `    private static final long[] FACTORIALS = new long[] {`
+org.apache.commons.math.util.MathUtils:865 `        int u = p;`
+org.apache.commons.math.util.MathUtils:866 `        int v = q;`
+org.apache.commons.math.util.MathUtils:867 `        if ((u == 0) || (v == 0)) {`
+org.apache.commons.math.util.MathUtils:868 `            if ((u == Integer.MIN_VALUE) || (v == Integer.MIN_VALUE)) {`
+org.apache.commons.math.util.MathUtils:872 `            return FastMath.abs(u) + FastMath.abs(v);`
+org.apache.commons.math.util.MathUtils:879 `        if (u > 0) {`
+org.apache.commons.math.util.MathUtils:880 `            u = -u;`
+org.apache.commons.math.util.MathUtils:882 `        if (v > 0) {`
+org.apache.commons.math.util.MathUtils:883 `            v = -v;`
+org.apache.commons.math.util.MathUtils:886 `        int k = 0;`
+org.apache.commons.math.util.MathUtils:887 `        while ((u & 1) == 0 && (v & 1) == 0 && k < 31) { // while u and v are`
+org.apache.commons.math.util.MathUtils:889 `            u /= 2;`
+org.apache.commons.math.util.MathUtils:890 `            v /= 2;`
+org.apache.commons.math.util.MathUtils:891 `            k++; // cast out twos.`
+org.apache.commons.math.util.MathUtils:893 `        if (k == 31) {`
+org.apache.commons.math.util.MathUtils:899 `        int t = ((u & 1) == 1) ? v : -(u / 2)/* B3 */;`
+org.apache.commons.math.util.MathUtils:905 `            while ((t & 1) == 0) { // while t is even..`
+org.apache.commons.math.util.MathUtils:906 `                t /= 2; // cast out twos`
+org.apache.commons.math.util.MathUtils:909 `            if (t > 0) {`
+org.apache.commons.math.util.MathUtils:910 `                u = -t;`
+org.apache.commons.math.util.MathUtils:912 `                v = t;`
+org.apache.commons.math.util.MathUtils:915 `            t = (v - u) / 2;`
+org.apache.commons.math.util.MathUtils:918 `        } while (t != 0);`
+org.apache.commons.math.util.MathUtils:919 `        return -u * (1 << k); // gcd is u*2^k`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:103 `        this(DEFAULT_EXPECTED_SIZE, missingEntries);`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:104 `    }`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:120 `                                  final double missingEntries) {`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:121 `        final int capacity = computeCapacity(expectedSize);`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:122 `        keys   = new int[capacity];`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:123 `        values = new double[capacity];`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:124 `        states = new byte[capacity];`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:125 `        this.missingEntries = missingEntries;`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:126 `        mask   = capacity - 1;`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:127 `    }`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:153 `        if (expectedSize == 0) {`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:156 `        final int capacity   = (int) FastMath.ceil(expectedSize / LOAD_FACTOR);`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:157 `        final int powerOfTwo = Integer.highestOneBit(capacity);`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:158 `        if (powerOfTwo == capacity) {`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:159 `            return capacity;`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:180 `        final int hash  = hashOf(key);`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:181 `        int index = hash & mask;`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:182 `        if (containsKey(key, index)) {`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:183 `            return values[index];`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:259 `        return findInsertionIndex(keys, states, key, mask);`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:272 `        final int hash = hashOf(key);`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:273 `        int index = hash & mask;`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:274 `        if (states[index] == FREE) {`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:275 `            return index;`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:276 `        } else if (states[index] == FULL && keys[index] == key) {`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:277 `            return changeIndexSign(index);`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:335 `        return -index - 1;`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:354 `        final int hash  = hashOf(key);`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:355 `        int index = hash & mask;`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:356 `        if (containsKey(key, index)) {`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:360 `        if (states[index] == FREE) {`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:361 `            return missingEntries;`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:385 `        return (key != 0 || states[index] == FULL) && keys[index] == key;`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:410 `        int index = findInsertionIndex(key);`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:411 `        double previous = missingEntries;`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:412 `        boolean newMapping = true;`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:413 `        if (index < 0) {`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:414 `            index = changeIndexSign(index);`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:415 `            previous = values[index];`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:416 `            newMapping = false;`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:418 `        keys[index]   = key;`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:419 `        states[index] = FULL;`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:420 `        values[index] = value;`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:421 `        if (newMapping) {`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:422 `            ++size;`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:423 `            if (shouldGrowTable()) {`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:426 `            ++count;`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:428 `        return previous;`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:469 `        return size > (mask + 1) * LOAD_FACTOR;`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:478 `        final int h = key ^ ((key >>> 20) ^ (key >>> 12));`
+org.apache.commons.math.util.OpenIntToDoubleHashMap:479 `        return h ^ (h >>> 7) ^ (h >>> 4);`
+
+
+Task Description:
+The provided code snippets are part of the Apache Commons Math library, specifically dealing with exceptions and matrix operations. Here's a brief description of the key components:
+
+1. **Exception Handling**:
+    - **MathIllegalArgumentException**: This is a custom exception class that extends `IllegalArgumentException`. It uses an `ExceptionContext` to store detailed error messages and arguments.
+    - **MathIllegalNumberException**: Extends `MathIllegalArgumentException` and adds a specific argument (`wrong`) that caused the exception.
+    - **OutOfRangeException**: Extends `MathIllegalNumberException` and includes additional fields for the lower (`lo`) and upper (`hi`) bounds that were violated.
+    - **ExceptionContext**: A class that manages error messages and their arguments. It uses `ArgUtils` to flatten nested argument arrays.
+    - **LocalizedFormats**: An enumeration of localized error message formats.
+
+2. **Matrix Operations**:
+    - **BlockRealMatrix** and **BlockFieldMatrix**: Implementations of matrices that use a block layout to store data. They provide methods to set submatrices and handle various matrix operations.
+    - **Array2DRowRealMatrix**: A matrix implementation that stores data in a 2D array. It also provides methods to set submatrices.
+    - **OpenMapRealMatrix**: A sparse matrix implementation using an open-addressing hash map to store non-zero entries.
+    - **MatrixUtils**: Utility class for matrix operations, including methods to check matrix indices and create matrices.
+
+3. **Utility Classes**:
+    - **ArgUtils**: Provides utility methods to flatten nested arrays.
+    - **FastMath**: Contains optimized mathematical functions and constants.
+    - **MathUtils**: Provides additional mathematical utilities, including methods for computing the greatest common divisor (GCD).
+
+4. **Test Cases**:
+    - The test cases provided are for the `setSubMatrix` method in different matrix implementations (`BlockRealMatrix`, `BlockFieldMatrix`, `OpenMapRealMatrix`, `Array2DRowRealMatrix`). They verify the correct behavior of setting submatrices and handle various edge cases, such as out-of-range indices, null arguments, and invalid submatrix shapes.
+
+The code snippets demonstrate how the Apache Commons Math library handles exceptions and matrix operations, ensuring robust error handling and efficient matrix computations.
+
+Test Results:
+The provided code is throwing NullPointerException. For examples:
+Here are the tests and error messages of NullPointerExceptions.
+@Test public void testSetSubMatrix() throws Exception {
+  BlockRealMatrix m=new BlockRealMatrix(testData);
+  m.setSubMatrix(detData2,1,1);
+  RealMatrix expected=new BlockRealMatrix(new double[][]{{1.0,2.0,3.0},{2.0,1.0,3.0},{1.0,2.0,4.0}});
+  Assert.assertEquals(expected,m);
+  m.setSubMatrix(detData2,0,0);
+  expected=new BlockRealMatrix(new double[][]{{1.0,3.0,3.0},{2.0,4.0,3.0},{1.0,2.0,4.0}});
+  Assert.assertEquals(expected,m);
+  m.setSubMatrix(testDataPlus2,0,0);
+  expected=new BlockRealMatrix(new double[][]{{3.0,4.0,5.0},{4.0,7.0,5.0},{3.0,2.0,10.0}});
+  Assert.assertEquals(expected,m);
+  BlockRealMatrix matrix=new BlockRealMatrix(new double[][]{{1,2,3,4},{5,6,7,8},{9,0,1,2}});
+  matrix.setSubMatrix(new double[][]{{3,4},{5,6}},1,1);
+  expected=new BlockRealMatrix(new double[][]{{1,2,3,4},{5,3,4,8},{9,5,6,2}});
+  Assert.assertEquals(expected,matrix);
+  try {
+    m.setSubMatrix(testData,1,1);
+    Assert.fail("expecting OutOfRangeException");
+  }
+ catch (  OutOfRangeException e) {
+  }
+  try {
+    m.setSubMatrix(testData,-1,1);
+    Assert.fail("expecting OutOfRangeException");
+  }
+ catch (  OutOfRangeException e) {
+  }
+  try {
+    m.setSubMatrix(testData,1,-1);
+    Assert.fail("expecting OutOfRangeException");
+  }
+ catch (  OutOfRangeException e) {
+  }
+  try {
+    m.setSubMatrix(null,1,1);
+    Assert.fail("expecting NullArgumentException");
+  }
+ catch (  NullArgumentException e) {
+  }
+  try {
+    m.setSubMatrix(new double[][]{{1},{2,3}},0,0);
+    Assert.fail("expecting MathIllegalArgumentException");
+  }
+ catch (  MathIllegalArgumentException e) {
+  }
+  try {
+    m.setSubMatrix(new double[][]{{}},0,0);
+    Assert.fail("expecting MathIllegalArgumentException");
+  }
+ catch (  MathIllegalArgumentException e) {
+  }
+}
+
+@Test public void testSetSubMatrix() throws Exception {
+  BlockFieldMatrix<Fraction> m=new BlockFieldMatrix<Fraction>(testData);
+  m.setSubMatrix(detData2,1,1);
+  FieldMatrix<Fraction> expected=new BlockFieldMatrix<Fraction>(new Fraction[][]{{new Fraction(1),new Fraction(2),new Fraction(3)},{new Fraction(2),new Fraction(1),new Fraction(3)},{new Fraction(1),new Fraction(2),new Fraction(4)}});
+  Assert.assertEquals(expected,m);
+  m.setSubMatrix(detData2,0,0);
+  expected=new BlockFieldMatrix<Fraction>(new Fraction[][]{{new Fraction(1),new Fraction(3),new Fraction(3)},{new Fraction(2),new Fraction(4),new Fraction(3)},{new Fraction(1),new Fraction(2),new Fraction(4)}});
+  Assert.assertEquals(expected,m);
+  m.setSubMatrix(testDataPlus2,0,0);
+  expected=new BlockFieldMatrix<Fraction>(new Fraction[][]{{new Fraction(3),new Fraction(4),new Fraction(5)},{new Fraction(4),new Fraction(7),new Fraction(5)},{new Fraction(3),new Fraction(2),new Fraction(10)}});
+  Assert.assertEquals(expected,m);
+  BlockFieldMatrix<Fraction> matrix=new BlockFieldMatrix<Fraction>(new Fraction[][]{{new Fraction(1),new Fraction(2),new Fraction(3),new Fraction(4)},{new Fraction(5),new Fraction(6),new Fraction(7),new Fraction(8)},{new Fraction(9),new Fraction(0),new Fraction(1),new Fraction(2)}});
+  matrix.setSubMatrix(new Fraction[][]{{new Fraction(3),new Fraction(4)},{new Fraction(5),new Fraction(6)}},1,1);
+  expected=new BlockFieldMatrix<Fraction>(new Fraction[][]{{new Fraction(1),new Fraction(2),new Fraction(3),new Fraction(4)},{new Fraction(5),new Fraction(3),new Fraction(4),new Fraction(8)},{new Fraction(9),new Fraction(5),new Fraction(6),new Fraction(2)}});
+  Assert.assertEquals(expected,matrix);
+  try {
+    m.setSubMatrix(testData,1,1);
+    Assert.fail("expecting OutOfRangeException");
+  }
+ catch (  OutOfRangeException e) {
+  }
+  try {
+    m.setSubMatrix(testData,-1,1);
+    Assert.fail("expecting OutOfRangeException");
+  }
+ catch (  OutOfRangeException e) {
+  }
+  try {
+    m.setSubMatrix(testData,1,-1);
+    Assert.fail("expecting OutOfRangeException");
+  }
+ catch (  OutOfRangeException e) {
+  }
+  try {
+    m.setSubMatrix(null,1,1);
+    Assert.fail("expecting NullArgumentException");
+  }
+ catch (  NullArgumentException e) {
+  }
+  try {
+    m.setSubMatrix(new Fraction[][]{{new Fraction(1)},{new Fraction(2),new Fraction(3)}},0,0);
+    Assert.fail("expecting MathIllegalArgumentException");
+  }
+ catch (  MathIllegalArgumentException e) {
+  }
+  try {
+    m.setSubMatrix(new Fraction[][]{{}},0,0);
+    Assert.fail("expecting MathIllegalArgumentException");
+  }
+ catch (  MathIllegalArgumentException e) {
+  }
+}
+
+@Test public void testSetSubMatrix(){
+  OpenMapRealMatrix m=createSparseMatrix(testData);
+  m.setSubMatrix(detData2,1,1);
+  RealMatrix expected=createSparseMatrix(new double[][]{{1.0,2.0,3.0},{2.0,1.0,3.0},{1.0,2.0,4.0}});
+  Assert.assertEquals(expected,m);
+  m.setSubMatrix(detData2,0,0);
+  expected=createSparseMatrix(new double[][]{{1.0,3.0,3.0},{2.0,4.0,3.0},{1.0,2.0,4.0}});
+  Assert.assertEquals(expected,m);
+  m.setSubMatrix(testDataPlus2,0,0);
+  expected=createSparseMatrix(new double[][]{{3.0,4.0,5.0},{4.0,7.0,5.0},{3.0,2.0,10.0}});
+  Assert.assertEquals(expected,m);
+  OpenMapRealMatrix matrix=createSparseMatrix(new double[][]{{1,2,3,4},{5,6,7,8},{9,0,1,2}});
+  matrix.setSubMatrix(new double[][]{{3,4},{5,6}},1,1);
+  expected=createSparseMatrix(new double[][]{{1,2,3,4},{5,3,4,8},{9,5,6,2}});
+  Assert.assertEquals(expected,matrix);
+  try {
+    m.setSubMatrix(testData,1,1);
+    Assert.fail("expecting OutOfRangeException");
+  }
+ catch (  OutOfRangeException e) {
+  }
+  try {
+    m.setSubMatrix(testData,-1,1);
+    Assert.fail("expecting OutOfRangeException");
+  }
+ catch (  OutOfRangeException e) {
+  }
+  try {
+    m.setSubMatrix(testData,1,-1);
+    Assert.fail("expecting OutOfRangeException");
+  }
+ catch (  OutOfRangeException e) {
+  }
+  try {
+    m.setSubMatrix(null,1,1);
+    Assert.fail("expecting NullArgumentException");
+  }
+ catch (  NullArgumentException e) {
+  }
+  try {
+    new OpenMapRealMatrix(0,0);
+    Assert.fail("expecting MathIllegalArgumentException");
+  }
+ catch (  MathIllegalArgumentException e) {
+  }
+  try {
+    m.setSubMatrix(new double[][]{{1},{2,3}},0,0);
+    Assert.fail("expecting MathIllegalArgumentException");
+  }
+ catch (  MathIllegalArgumentException e) {
+  }
+  try {
+    m.setSubMatrix(new double[][]{{}},0,0);
+    Assert.fail("expecting MathIllegalArgumentException");
+  }
+ catch (  MathIllegalArgumentException e) {
+  }
+}
+
+@Test public void testSetSubMatrix() throws Exception {
+  Array2DRowRealMatrix m=new Array2DRowRealMatrix(testData);
+  m.setSubMatrix(detData2,1,1);
+  RealMatrix expected=MatrixUtils.createRealMatrix(new double[][]{{1.0,2.0,3.0},{2.0,1.0,3.0},{1.0,2.0,4.0}});
+  Assert.assertEquals(expected,m);
+  m.setSubMatrix(detData2,0,0);
+  expected=MatrixUtils.createRealMatrix(new double[][]{{1.0,3.0,3.0},{2.0,4.0,3.0},{1.0,2.0,4.0}});
+  Assert.assertEquals(expected,m);
+  m.setSubMatrix(testDataPlus2,0,0);
+  expected=MatrixUtils.createRealMatrix(new double[][]{{3.0,4.0,5.0},{4.0,7.0,5.0},{3.0,2.0,10.0}});
+  Assert.assertEquals(expected,m);
+  try {
+    m.setSubMatrix(testData,1,1);
+    Assert.fail("expecting OutOfRangeException");
+  }
+ catch (  OutOfRangeException e) {
+  }
+  try {
+    m.setSubMatrix(testData,-1,1);
+    Assert.fail("expecting OutOfRangeException");
+  }
+ catch (  OutOfRangeException e) {
+  }
+  try {
+    m.setSubMatrix(testData,1,-1);
+    Assert.fail("expecting OutOfRangeException");
+  }
+ catch (  OutOfRangeException e) {
+  }
+  try {
+    m.setSubMatrix(null,1,1);
+    Assert.fail("expecting NullArgumentException");
+  }
+ catch (  NullArgumentException e) {
+  }
+  Array2DRowRealMatrix m2=new Array2DRowRealMatrix();
+  try {
+    m2.setSubMatrix(testData,0,1);
+    Assert.fail("expecting MathIllegalStateException");
+  }
+ catch (  MathIllegalStateException e) {
+  }
+  try {
+    m2.setSubMatrix(testData,1,0);
+    Assert.fail("expecting MathIllegalStateException");
+  }
+ catch (  MathIllegalStateException e) {
+  }
+  try {
+    m.setSubMatrix(new double[][]{{1},{2,3}},0,0);
+    Assert.fail("expecting MathIllegalArgumentException");
+  }
+ catch (  MathIllegalArgumentException e) {
+  }
+  try {
+    m.setSubMatrix(new double[][]{{}},0,0);
+    Assert.fail("expecting MathIllegalArgumentException");
+  }
+ catch (  MathIllegalArgumentException e) {
+  }
+}
+
+
+
+  JUnit Vintage:BlockRealMatrixTest:testSetSubMatrix
+    MethodSource [className = 'org.apache.commons.math.linear.BlockRealMatrixTest', methodName = 'testSetSubMatrix', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot load from object array because "subMatrix" is null
+       org.apache.commons.math.linear.BlockRealMatrix.setSubMatrix(BlockRealMatrix.java:769)
+       org.apache.commons.math.linear.BlockRealMatrixTest.testSetSubMatrix(BlockRealMatrixTest.java:1116)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+       org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+       org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+       org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+       [...]
+  JUnit Vintage:Array2DRowRealMatrixTest:testSetSubMatrix
+    MethodSource [className = 'org.apache.commons.math.linear.Array2DRowRealMatrixTest', methodName = 'testSetSubMatrix', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot read the array length because "subMatrix" is null
+       org.apache.commons.math.linear.AbstractRealMatrix.setSubMatrix(AbstractRealMatrix.java:389)
+       org.apache.commons.math.linear.Array2DRowRealMatrix.setSubMatrix(Array2DRowRealMatrix.java:295)
+       org.apache.commons.math.linear.Array2DRowRealMatrixTest.testSetSubMatrix(Array2DRowRealMatrixTest.java:933)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+       org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+       org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+       [...]
+  JUnit Vintage:BlockFieldMatrixTest:testSetSubMatrix
+    MethodSource [className = 'org.apache.commons.math.linear.BlockFieldMatrixTest', methodName = 'testSetSubMatrix', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot load from object array because "subMatrix" is null
+       org.apache.commons.math.linear.BlockFieldMatrix.setSubMatrix(BlockFieldMatrix.java:762)
+       org.apache.commons.math.linear.BlockFieldMatrixTest.testSetSubMatrix(BlockFieldMatrixTest.java:1216)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+       org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+       org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+       org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+       [...]
+  JUnit Vintage:SparseRealMatrixTest:testSetSubMatrix
+    MethodSource [className = 'org.apache.commons.math.linear.SparseRealMatrixTest', methodName = 'testSetSubMatrix', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot read the array length because "subMatrix" is null
+       org.apache.commons.math.linear.AbstractRealMatrix.setSubMatrix(AbstractRealMatrix.java:389)
+       org.apache.commons.math.linear.SparseRealMatrixTest.testSetSubMatrix(SparseRealMatrixTest.java:632)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+       org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+       org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+       org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+       [...]
+
+
+Analyze the provided code and utilize task description, test results, and SBFL techniques results to help in identifying potentially faulty lines. Provide the results following this JSON template:
+```json
+{
+  "faultLoc": [
+    {   
+      "faultyLine": (indicating the location of the suspicious code in ClassName:LineNumber format),
+      "code": (displaying the actual code),
+      "explanation": (step by step reasoning on why this location is considered potentially faulty)
+    },  
+    ... 
+   ]   
+}
+```
+Ensure that the objects in the "faultLoc" array are stored in descending order of suspicion.

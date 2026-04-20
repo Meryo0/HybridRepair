@@ -1,0 +1,216 @@
+{"classes": [
+    {
+        "probe_ranges": [
+            {
+                "endLine": 47,
+                "offset": 23,
+                "startLine": 43,
+                "orgLineEnd": 53,
+                "probedLineEnd": 76,
+                "orgLineStart": 43
+            },
+            {
+                "endLine": 51,
+                "offset": 23,
+                "startLine": 48,
+                "orgLineEnd": 52,
+                "probedLineEnd": 75,
+                "orgLineStart": 44
+            },
+            {
+                "endLine": 56,
+                "offset": 23,
+                "startLine": 52,
+                "orgLineEnd": 51,
+                "probedLineEnd": 74,
+                "orgLineStart": 45
+            },
+            {
+                "endLine": 61,
+                "offset": 19,
+                "startLine": 57,
+                "orgLineEnd": 48,
+                "probedLineEnd": 67,
+                "orgLineStart": 46
+            },
+            {
+                "endLine": 66,
+                "offset": 19,
+                "startLine": 62,
+                "orgLineEnd": 47,
+                "probedLineEnd": 66,
+                "orgLineStart": 47
+            },
+            {
+                "endLine": 73,
+                "offset": 23,
+                "startLine": 69,
+                "orgLineEnd": 50,
+                "probedLineEnd": 73,
+                "orgLineStart": 50
+            },
+            {
+                "endLine": 81,
+                "offset": 27,
+                "startLine": 77,
+                "orgLineEnd": 54,
+                "probedLineEnd": 81,
+                "orgLineStart": 54
+            }
+        ],
+        "classId": "arg_utils_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 68,
+                "offset": 3,
+                "startLine": 65,
+                "orgLineEnd": 65,
+                "probedLineEnd": 68,
+                "orgLineStart": 65
+            },
+            {
+                "endLine": 94,
+                "offset": 7,
+                "startLine": 90,
+                "orgLineEnd": 87,
+                "probedLineEnd": 94,
+                "orgLineStart": 87
+            },
+            {
+                "endLine": 100,
+                "offset": 12,
+                "startLine": 95,
+                "orgLineEnd": 88,
+                "probedLineEnd": 100,
+                "orgLineStart": 88
+            }
+        ],
+        "classId": "exception_context_1"
+    },
+    {
+        "probe_ranges": [{
+            "endLine": 362,
+            "offset": 3,
+            "startLine": 359,
+            "orgLineEnd": 359,
+            "probedLineEnd": 362,
+            "orgLineStart": 359
+        }],
+        "classId": "localized_formats_1"
+    },
+    {
+        "probe_ranges": [{
+            "endLine": 1810,
+            "offset": 4,
+            "startLine": 1806,
+            "orgLineEnd": 1806,
+            "probedLineEnd": 1810,
+            "orgLineStart": 1806
+        }],
+        "classId": "math_utils_test_1"
+    },
+    {
+        "probe_ranges": [{
+            "endLine": 50,
+            "offset": 3,
+            "startLine": 47,
+            "orgLineEnd": 47,
+            "probedLineEnd": 50,
+            "orgLineStart": 47
+        }],
+        "classId": "math_illegal_number_exception_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 2299,
+                "offset": 5,
+                "startLine": 2294,
+                "orgLineEnd": 2294,
+                "probedLineEnd": 2299,
+                "orgLineStart": 2294
+            },
+            {
+                "endLine": 2321,
+                "offset": 10,
+                "startLine": 2315,
+                "orgLineEnd": 2313,
+                "probedLineEnd": 2323,
+                "orgLineStart": 2310
+            },
+            {
+                "endLine": 2329,
+                "offset": 14,
+                "startLine": 2325,
+                "orgLineEnd": 2315,
+                "probedLineEnd": 2329,
+                "orgLineStart": 2315
+            },
+            {
+                "endLine": 2337,
+                "offset": 18,
+                "startLine": 2333,
+                "orgLineEnd": 2319,
+                "probedLineEnd": 2337,
+                "orgLineStart": 2319
+            },
+            {
+                "endLine": 2348,
+                "offset": 27,
+                "startLine": 2339,
+                "orgLineEnd": 2321,
+                "probedLineEnd": 2348,
+                "orgLineStart": 2321
+            },
+            {
+                "endLine": 2361,
+                "offset": 38,
+                "startLine": 2350,
+                "orgLineEnd": 2323,
+                "probedLineEnd": 2361,
+                "orgLineStart": 2323
+            },
+            {
+                "endLine": 2368,
+                "offset": 49,
+                "startLine": 2362,
+                "orgLineEnd": 2326,
+                "probedLineEnd": 2375,
+                "orgLineStart": 2324
+            },
+            {
+                "endLine": 2374,
+                "offset": 49,
+                "startLine": 2369,
+                "orgLineEnd": 2325,
+                "probedLineEnd": 2374,
+                "orgLineStart": 2325
+            }
+        ],
+        "classId": "math_utils_1"
+    },
+    {
+        "probe_ranges": [{
+            "endLine": 51,
+            "offset": 5,
+            "startLine": 46,
+            "orgLineEnd": 46,
+            "probedLineEnd": 51,
+            "orgLineStart": 46
+        }],
+        "classId": "math_illegal_argument_exception_1"
+    },
+    {
+        "probe_ranges": [{
+            "endLine": 48,
+            "offset": 3,
+            "startLine": 45,
+            "orgLineEnd": 45,
+            "probedLineEnd": 48,
+            "orgLineStart": 45
+        }],
+        "classId": "dimension_mismatch_exception_1"
+    }
+]}

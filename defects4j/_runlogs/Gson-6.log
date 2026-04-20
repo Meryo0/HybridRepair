@@ -1,0 +1,219 @@
+Load configurations from config.properties
+Load configurations from config.properties
+Collecting coverage from failed tests...
+Running Tests...
+Executing command - /usr/bin/java -Xms256m -Xmx1024m -classpath ../../lib/*:lib/Gson-6_buggy_src.jar:lib/Gson-6_fixed_test.jar -javaagent:../../lib/jacocoagent.jar=excludes=org.junit.*,append=false,destfile=/home/mario/Desktop/LogicFL/defects4j/Gson-6/result/jacoco.exec logicfl.coverage.JUnit4TestRunner config.properties true /home/mario/Desktop/LogicFL/defects4j/Gson-6/result/npe.traces.json /home/mario/Desktop/LogicFL/defects4j/Gson-6/tests.json
+Load configurations from config.properties
+Loading test information from /home/mario/Desktop/LogicFL/defects4j/Gson-6/tests.json
+Test execution summary:
+Tests executed - 2
+Tests succeeded - 0
+Tests failed - 2
+testNullSafeBugSerialize(com.google.gson.regression.JsonAdapterNullSafeTest): Cannot invoke "com.google.gson.TypeAdapter.nullSafe()" because "typeAdapter" is null
+Cannot invoke "com.google.gson.TypeAdapter.nullSafe()" because "typeAdapter" is null
+java.lang.NullPointerException: Cannot invoke "com.google.gson.TypeAdapter.nullSafe()" because "typeAdapter" is null
+	at com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.getTypeAdapter(JsonAdapterAnnotationTypeAdapterFactory.java:67)
+	at com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.create(JsonAdapterAnnotationTypeAdapterFactory.java:47)
+	at com.google.gson.Gson.getDelegateAdapter(Gson.java:498)
+	at com.google.gson.regression.JsonAdapterNullSafeTest$Device$JsonAdapterFactory.create(JsonAdapterNullSafeTest.java:58)
+	at com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.getTypeAdapter(JsonAdapterAnnotationTypeAdapterFactory.java:60)
+	at com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.create(JsonAdapterAnnotationTypeAdapterFactory.java:47)
+	at com.google.gson.Gson.getAdapter(Gson.java:416)
+	at com.google.gson.Gson.toJson(Gson.java:653)
+	at com.google.gson.Gson.toJson(Gson.java:640)
+	at com.google.gson.Gson.toJson(Gson.java:595)
+	at com.google.gson.Gson.toJson(Gson.java:575)
+	at com.google.gson.regression.JsonAdapterNullSafeTest.testNullSafeBugSerialize(JsonAdapterNullSafeTest.java:31)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:36)
+
+testNullSafeBugDeserialize(com.google.gson.regression.JsonAdapterNullSafeTest): Cannot invoke "com.google.gson.TypeAdapter.nullSafe()" because "typeAdapter" is null
+Cannot invoke "com.google.gson.TypeAdapter.nullSafe()" because "typeAdapter" is null
+java.lang.NullPointerException: Cannot invoke "com.google.gson.TypeAdapter.nullSafe()" because "typeAdapter" is null
+	at com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.getTypeAdapter(JsonAdapterAnnotationTypeAdapterFactory.java:67)
+	at com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.create(JsonAdapterAnnotationTypeAdapterFactory.java:47)
+	at com.google.gson.Gson.getDelegateAdapter(Gson.java:498)
+	at com.google.gson.regression.JsonAdapterNullSafeTest$Device$JsonAdapterFactory.create(JsonAdapterNullSafeTest.java:58)
+	at com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.getTypeAdapter(JsonAdapterAnnotationTypeAdapterFactory.java:60)
+	at com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.create(JsonAdapterAnnotationTypeAdapterFactory.java:47)
+	at com.google.gson.Gson.getAdapter(Gson.java:416)
+	at com.google.gson.Gson.fromJson(Gson.java:878)
+	at com.google.gson.Gson.fromJson(Gson.java:844)
+	at com.google.gson.Gson.fromJson(Gson.java:793)
+	at com.google.gson.Gson.fromJson(Gson.java:765)
+	at com.google.gson.regression.JsonAdapterNullSafeTest.testNullSafeBugDeserialize(JsonAdapterNullSafeTest.java:35)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:36)
+
+Store NPE traces to /home/mario/Desktop/LogicFL/defects4j/Gson-6/result/npe.traces.json
+NPE Stack Traces exported to /home/mario/Desktop/LogicFL/defects4j/Gson-6/result/npe.traces.json
+
+Analyzing Coverage Data...
+Covered Classes:[com.google.gson.internal.bind.TypeAdapters$11, com.google.gson.Gson$6, com.google.gson.internal.Streams, com.google.gson.FieldNamingPolicy, com.google.gson.internal.bind.ObjectTypeAdapter$1, com.google.gson.Gson$1, com.google.gson.internal.bind.TypeAdapters$4, com.google.gson.internal.bind.TypeAdapters$9, com.google.gson.internal.bind.TypeAdapters$35, com.google.gson.internal.Excluder, com.google.gson.internal.bind.TypeAdapters$15, com.google.gson.FieldNamingPolicy$3, com.google.gson.LongSerializationPolicy, com.google.gson.internal.ConstructorConstructor, com.google.gson.internal.bind.ObjectTypeAdapter, com.google.gson.internal.bind.SqlDateTypeAdapter, com.google.gson.TypeAdapter$1, com.google.gson.internal.bind.TypeAdapters$10, com.google.gson.internal.bind.TypeAdapters$7, com.google.gson.FieldNamingPolicy$2, com.google.gson.Gson$2, com.google.gson.FieldNamingPolicy$5, com.google.gson.stream.JsonReader, com.google.gson.Gson$3, com.google.gson.FieldNamingPolicy$1, com.google.gson.internal.bind.TimeTypeAdapter, com.google.gson.internal.bind.TypeAdapters$21, com.google.gson.internal.bind.CollectionTypeAdapterFactory, com.google.gson.internal.bind.TypeAdapters$32, com.google.gson.internal.bind.TypeAdapters$30, com.google.gson.stream.JsonWriter, com.google.gson.internal.bind.ReflectiveTypeAdapterFactory, com.google.gson.internal.bind.TypeAdapters$26, com.google.gson.internal.bind.TimeTypeAdapter$1, com.google.gson.internal.bind.TypeAdapters$25, com.google.gson.internal.bind.TypeAdapters$22, com.google.gson.internal.bind.TypeAdapters$8, com.google.gson.TypeAdapter, com.google.gson.internal.bind.ArrayTypeAdapter, com.google.gson.internal.bind.TypeAdapters$16, com.google.gson.internal.bind.TypeAdapters$28, com.google.gson.internal.bind.TypeAdapters$13, com.google.gson.internal.bind.DateTypeAdapter$1, com.google.gson.internal.$Gson$Preconditions, com.google.gson.internal.bind.TypeAdapters$20, com.google.gson.LongSerializationPolicy$2, com.google.gson.internal.bind.TypeAdapters$6, com.google.gson.regression.JsonAdapterNullSafeTest, com.google.gson.internal.bind.TypeAdapters, com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory, com.google.gson.internal.bind.TypeAdapters$18, com.google.gson.Gson$7, com.google.gson.internal.bind.TypeAdapters$2, com.google.gson.reflect.TypeToken, com.google.gson.internal.bind.TypeAdapters$23, com.google.gson.internal.bind.TypeAdapters$29, com.google.gson.FieldNamingPolicy$4, com.google.gson.internal.bind.TypeAdapters$27, com.google.gson.internal.bind.TypeAdapters$12, com.google.gson.internal.bind.SqlDateTypeAdapter$1, com.google.gson.Gson$4, com.google.gson.internal.bind.TypeAdapters$3, com.google.gson.internal.bind.TypeAdapters$1, com.google.gson.internal.bind.TypeAdapters$17, com.google.gson.Gson$FutureTypeAdapter, com.google.gson.Gson, com.google.gson.internal.bind.TypeAdapters$24, com.google.gson.internal.JsonReaderInternalAccess, com.google.gson.internal.ConstructorConstructor$3, com.google.gson.internal.bind.TypeAdapters$5, com.google.gson.internal.bind.DateTypeAdapter, com.google.gson.stream.JsonReader$1, com.google.gson.stream.JsonToken, com.google.gson.internal.bind.TypeAdapters$14, com.google.gson.internal.$Gson$Types, com.google.gson.internal.bind.MapTypeAdapterFactory, com.google.gson.internal.bind.TypeAdapters$34, com.google.gson.internal.bind.TypeAdapters$33, com.google.gson.LongSerializationPolicy$1, com.google.gson.internal.bind.ArrayTypeAdapter$1, com.google.gson.internal.bind.TypeAdapters$19]
+Coverage information exported to /home/mario/Desktop/LogicFL/defects4j/Gson-6/coverage.json
+Collecting coverage complete.
+Exec. Time - 00:00:00.747
+coverage.sh executed successfully.
+Getting configurations from config.properties
+Total 24 Target classes.
+Analyzing class - com.google.gson.FieldNamingPolicy
+Analyzing class - com.google.gson.Gson
+Analyzing class - com.google.gson.LongSerializationPolicy
+Analyzing class - com.google.gson.TypeAdapter
+Analyzing class - com.google.gson.internal.
+Cannot read the class. Skip analysis on the class.
+Analyzing class - com.google.gson.internal.ConstructorConstructor
+Analyzing class - com.google.gson.internal.Excluder
+Analyzing class - com.google.gson.internal.JsonReaderInternalAccess
+Analyzing class - com.google.gson.internal.Streams
+Analyzing class - com.google.gson.internal.bind.ArrayTypeAdapter
+Analyzing class - com.google.gson.internal.bind.CollectionTypeAdapterFactory
+Analyzing class - com.google.gson.internal.bind.DateTypeAdapter
+Analyzing class - com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory
+Analyzing class - com.google.gson.internal.bind.MapTypeAdapterFactory
+Analyzing class - com.google.gson.internal.bind.ObjectTypeAdapter
+Analyzing class - com.google.gson.internal.bind.ReflectiveTypeAdapterFactory
+Analyzing class - com.google.gson.internal.bind.SqlDateTypeAdapter
+Analyzing class - com.google.gson.internal.bind.TimeTypeAdapter
+Analyzing class - com.google.gson.internal.bind.TypeAdapters
+Analyzing class - com.google.gson.reflect.TypeToken
+Analyzing class - com.google.gson.regression.JsonAdapterNullSafeTest
+Analyzing class - com.google.gson.stream.JsonReader
+Analyzing class - com.google.gson.stream.JsonToken
+Analyzing class - com.google.gson.stream.JsonWriter
+Compilation successful!
+FL Facts are exported to /home/mario/Desktop/LogicFL/defects4j/Gson-6/result/logic-fl.pl
+Code Facts are exported to /home/mario/Desktop/LogicFL/defects4j/Gson-6/result/code-facts.pl
+Line matching information exported to /home/mario/Desktop/LogicFL/defects4j/Gson-6/result/line.info.json
+Exec. Time - 00:00:05.605
+static_analyzer.sh executed successfully.
+Getting configurations from config.properties
+Load configurations from config.properties
+Executing command - /usr/bin/java -Xms256m -Xmx1024m -classpath /home/mario/Desktop/LogicFL/defects4j/Gson-6/result/classes:../../lib/*:lib/Gson-6_buggy_src.jar:lib/Gson-6_fixed_test.jar logicfl.coverage.JUnit4TestRunner config.properties true /home/mario/Desktop/LogicFL/defects4j/Gson-6/result/probe.npe.traces.json /home/mario/Desktop/LogicFL/defects4j/Gson-6/tests.json
+Load configurations from config.properties
+Loading test information from /home/mario/Desktop/LogicFL/defects4j/Gson-6/tests.json
+Test execution summary:
+Tests executed - 2
+Tests succeeded - 0
+Tests failed - 2
+testNullSafeBugSerialize(com.google.gson.regression.JsonAdapterNullSafeTest): Cannot invoke "com.google.gson.TypeAdapter.nullSafe()" because "v_type_adapter_264_line_67" is null
+Cannot invoke "com.google.gson.TypeAdapter.nullSafe()" because "v_type_adapter_264_line_67" is null
+java.lang.NullPointerException: Cannot invoke "com.google.gson.TypeAdapter.nullSafe()" because "v_type_adapter_264_line_67" is null
+	at com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.getTypeAdapter(JsonAdapterAnnotationTypeAdapterFactory.java:112)
+	at com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.create(JsonAdapterAnnotationTypeAdapterFactory.java:56)
+	at com.google.gson.Gson.getDelegateAdapter(Gson.java:805)
+	at com.google.gson.regression.JsonAdapterNullSafeTest$Device$JsonAdapterFactory.create(JsonAdapterNullSafeTest.java:70)
+	at com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.getTypeAdapter(JsonAdapterAnnotationTypeAdapterFactory.java:101)
+	at com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.create(JsonAdapterAnnotationTypeAdapterFactory.java:56)
+	at com.google.gson.Gson.getAdapter(Gson.java:691)
+	at com.google.gson.Gson.toJson(Gson.java:990)
+	at com.google.gson.Gson.toJson(Gson.java:974)
+	at com.google.gson.Gson.toJson(Gson.java:919)
+	at com.google.gson.Gson.toJson(Gson.java:892)
+	at com.google.gson.regression.JsonAdapterNullSafeTest.testNullSafeBugSerialize(JsonAdapterNullSafeTest.java:35)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:36)
+
+testNullSafeBugDeserialize(com.google.gson.regression.JsonAdapterNullSafeTest): Cannot invoke "com.google.gson.TypeAdapter.nullSafe()" because "v_type_adapter_264_line_67" is null
+Cannot invoke "com.google.gson.TypeAdapter.nullSafe()" because "v_type_adapter_264_line_67" is null
+java.lang.NullPointerException: Cannot invoke "com.google.gson.TypeAdapter.nullSafe()" because "v_type_adapter_264_line_67" is null
+	at com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.getTypeAdapter(JsonAdapterAnnotationTypeAdapterFactory.java:112)
+	at com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.create(JsonAdapterAnnotationTypeAdapterFactory.java:56)
+	at com.google.gson.Gson.getDelegateAdapter(Gson.java:805)
+	at com.google.gson.regression.JsonAdapterNullSafeTest$Device$JsonAdapterFactory.create(JsonAdapterNullSafeTest.java:70)
+	at com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.getTypeAdapter(JsonAdapterAnnotationTypeAdapterFactory.java:101)
+	at com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.create(JsonAdapterAnnotationTypeAdapterFactory.java:56)
+	at com.google.gson.Gson.getAdapter(Gson.java:691)
+	at com.google.gson.Gson.fromJson(Gson.java:1285)
+	at com.google.gson.Gson.fromJson(Gson.java:1233)
+	at com.google.gson.Gson.fromJson(Gson.java:1173)
+	at com.google.gson.Gson.fromJson(Gson.java:1133)
+	at com.google.gson.regression.JsonAdapterNullSafeTest.testNullSafeBugDeserialize(JsonAdapterNullSafeTest.java:41)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:36)
+
+Store NPE traces to /home/mario/Desktop/LogicFL/defects4j/Gson-6/result/probe.npe.traces.json
+NPE Stack Traces exported to /home/mario/Desktop/LogicFL/defects4j/Gson-6/result/probe.npe.traces.json
+
+
+val(gson_1_expr107, null, line(gson_1, 392)).
+val(v_cached_77, null, line(gson_1, 393)).
+val(gson_1_expr109, null, line(gson_1, 397)).
+val(v_thread_calls_78, null, line(gson_1, 399)).
+val(gson_1_expr116, null, line(gson_1, 406)).
+val(v_ongoing_call_80, null, line(gson_1, 407)).
+val(v_type_adapter_264, null, line(json_adapter_annotation_type_adapter_factory_1, 67)).
+
+
+Exec. Time - 00:00:04.048
+dynamic_analyzer.sh executed successfully.
+Getting configurations from config.properties
+Running Fault Localizer with
+Rules: ../../lib/npe-rules.pl
+Facts: /home/mario/Desktop/LogicFL/defects4j/Gson-6/result/logic-fl.pl
+Code Facts: /home/mario/Desktop/LogicFL/defects4j/Gson-6/result/code-facts.pl
+consult Succeeded
+NPE at line(json_adapter_annotation_type_adapter_factory_1, 67) / Null Expression v_type_adapter_264[typeAdapter]
+	can be caused by 
+v_type_adapter_264[typeAdapter] at line(json_adapter_annotation_type_adapter_factory_1, 67).
+
+NPE at line(json_adapter_annotation_type_adapter_factory_1, 67) / Null Expression v_type_adapter_264[typeAdapter]
+	can be caused by 
+json_adapter_annotation_type_adapter_factory_1_expr18['typeAdapter.nullSafe()'] at line(json_adapter_annotation_type_adapter_factory_1, 67).
+
+Total 2 Identified Fault Locations for NPE.
+Exec. Time - 00:00:00.189
+localizer.sh executed successfully.
+All scripts executed successfully.

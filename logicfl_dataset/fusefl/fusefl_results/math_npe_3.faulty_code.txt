@@ -1,0 +1,5 @@
+org.apache.commons.math.exception.util.DummyLocalizable:38 `    public DummyLocalizable(final String source) {`
+org.apache.commons.math.exception.util.DummyLocalizable:39 `        this.source = source;`
+org.apache.commons.math.exception.util.DummyLocalizable:40 `    }`
+org.apache.commons.math.exception.util.MessageFactory:65 `        final StringBuilder sb = new StringBuilder();`
+org.apache.commons.math.exception.util.MessageFactory:66 `        final MessageFormat generalFmt  = new MessageFormat(general.getLocalizedString(locale), locale);`

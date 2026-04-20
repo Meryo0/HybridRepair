@@ -1,0 +1,39 @@
+org.apache.commons.lang.text.StrBuilder:98 `        this(CAPACITY);`
+org.apache.commons.lang.text.StrBuilder:99 `    }`
+org.apache.commons.lang.text.StrBuilder:107 `        super();`
+org.apache.commons.lang.text.StrBuilder:108 `        if (initialCapacity <= 0) {`
+org.apache.commons.lang.text.StrBuilder:111 `        buffer = new char[initialCapacity];`
+org.apache.commons.lang.text.StrBuilder:112 `    }`
+org.apache.commons.lang.text.StrBuilder:158 `        return nullText;`
+org.apache.commons.lang.text.StrBuilder:228 `        if (capacity > buffer.length) {`
+org.apache.commons.lang.text.StrBuilder:233 `        return this;`
+org.apache.commons.lang.text.StrBuilder:1183 `        if (width > 0) {`
+org.apache.commons.lang.text.StrBuilder:1184 `            ensureCapacity(size + width);`
+org.apache.commons.lang.text.StrBuilder:1185 `            String str = (obj == null ? getNullText() : obj.toString());`
+org.apache.commons.lang.text.StrBuilder:1186 `            int strLen = str.length();`
+org.apache.commons.lang.text.StrBuilder:1227 `        if (width > 0) {`
+org.apache.commons.lang.text.StrBuilder:1228 `            ensureCapacity(size + width);`
+org.apache.commons.lang.text.StrBuilder:1229 `            String str = (obj == null ? getNullText() : obj.toString());`
+org.apache.commons.lang.text.StrBuilder:1230 `            int strLen = str.length();`
+org.apache.commons.lang.text.StrMatcher:37 `    private static final StrMatcher COMMA_MATCHER = new CharMatcher(',');`
+org.apache.commons.lang.text.StrMatcher:41 `    private static final StrMatcher TAB_MATCHER = new CharMatcher('\t');`
+org.apache.commons.lang.text.StrMatcher:45 `    private static final StrMatcher SPACE_MATCHER = new CharMatcher(' ');`
+org.apache.commons.lang.text.StrMatcher:50 `    private static final StrMatcher SPLIT_MATCHER = new CharSetMatcher(" \t\n\r\f".toCharArray());`
+org.apache.commons.lang.text.StrMatcher:54 `    private static final StrMatcher TRIM_MATCHER = new TrimMatcher();`
+org.apache.commons.lang.text.StrMatcher:58 `    private static final StrMatcher SINGLE_QUOTE_MATCHER = new CharMatcher('\'');`
+org.apache.commons.lang.text.StrMatcher:62 `    private static final StrMatcher DOUBLE_QUOTE_MATCHER = new CharMatcher('"');`
+org.apache.commons.lang.text.StrMatcher:66 `    private static final StrMatcher QUOTE_MATCHER = new CharSetMatcher("'\"".toCharArray());`
+org.apache.commons.lang.text.StrMatcher:70 `    private static final StrMatcher NONE_MATCHER = new NoMatcher();`
+org.apache.commons.lang.text.StrMatcher:216 `        super();`
+org.apache.commons.lang.text.StrMatcher:217 `    }`
+org.apache.commons.lang.text.StrMatcher:284 `            super();`
+org.apache.commons.lang.text.StrMatcher:285 `            this.chars = (char[]) chars.clone();`
+org.apache.commons.lang.text.StrMatcher:286 `            Arrays.sort(this.chars);`
+org.apache.commons.lang.text.StrMatcher:287 `        }`
+org.apache.commons.lang.text.StrMatcher:317 `            super();`
+org.apache.commons.lang.text.StrMatcher:318 `            this.ch = ch;`
+org.apache.commons.lang.text.StrMatcher:319 `        }`
+org.apache.commons.lang.text.StrMatcher:386 `            super();`
+org.apache.commons.lang.text.StrMatcher:387 `        }`
+org.apache.commons.lang.text.StrMatcher:413 `            super();`
+org.apache.commons.lang.text.StrMatcher:414 `        }`

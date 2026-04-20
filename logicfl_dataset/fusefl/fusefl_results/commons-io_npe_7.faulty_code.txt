@@ -1,0 +1,36 @@
+org.apache.commons.io.build.AbstractOrigin:294 `            super(origin);`
+org.apache.commons.io.build.AbstractOrigin:295 `        }`
+org.apache.commons.io.build.AbstractOrigin:387 `    protected AbstractOrigin(final T origin) {`
+org.apache.commons.io.build.AbstractOrigin:388 `        this.origin = Objects.requireNonNull(origin, "origin");`
+org.apache.commons.io.build.AbstractOrigin:389 `    }`
+org.apache.commons.io.build.AbstractOriginSupplier:46 `public abstract class AbstractOriginSupplier<T, B extends AbstractOriginSupplier<T, B>> extends AbstractSupplier<T, B> {`
+org.apache.commons.io.build.AbstractOriginSupplier:136 `        return new ReaderOrigin(origin);`
+org.apache.commons.io.build.AbstractOriginSupplier:253 `        this.origin = origin;`
+org.apache.commons.io.build.AbstractOriginSupplier:254 `        return asThis();`
+org.apache.commons.io.build.AbstractOriginSupplier:294 `        return setOrigin(newReaderOrigin(origin));`
+org.apache.commons.io.build.AbstractStreamBuilder:39 `public abstract class AbstractStreamBuilder<T, B extends AbstractStreamBuilder<T, B>> extends AbstractOriginSupplier<T, B> {`
+org.apache.commons.io.build.AbstractStreamBuilder:41 `    private static final OpenOption[] DEFAULT_OPEN_OPTIONS = PathUtils.EMPTY_OPEN_OPTION_ARRAY;`
+org.apache.commons.io.build.AbstractStreamBuilder:46 `    private int bufferSize = IOUtils.DEFAULT_BUFFER_SIZE;`
+org.apache.commons.io.build.AbstractStreamBuilder:51 `    private int bufferSizeDefault = IOUtils.DEFAULT_BUFFER_SIZE;`
+org.apache.commons.io.build.AbstractStreamBuilder:56 `    private Charset charset = Charset.defaultCharset();`
+org.apache.commons.io.build.AbstractStreamBuilder:61 `    private Charset charsetDefault = Charset.defaultCharset();`
+org.apache.commons.io.build.AbstractStreamBuilder:63 `    private OpenOption[] openOptions = DEFAULT_OPEN_OPTIONS;`
+org.apache.commons.io.build.AbstractStreamBuilder:103 `        return charset;`
+org.apache.commons.io.build.AbstractSupplier:29 `public abstract class AbstractSupplier<T, B extends AbstractSupplier<T, B>> implements IOSupplier<T> {`
+org.apache.commons.io.build.AbstractSupplier:38 `        return (B) this;`
+org.apache.commons.io.file.PathUtils:151 `    private static final OpenOption[] OPEN_OPTIONS_TRUNCATE = {StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING};`
+org.apache.commons.io.file.PathUtils:153 `    private static final OpenOption[] OPEN_OPTIONS_APPEND = {StandardOpenOption.CREATE, StandardOpenOption.APPEND};`
+org.apache.commons.io.file.PathUtils:160 `    public static final CopyOption[] EMPTY_COPY_OPTIONS = {};`
+org.apache.commons.io.file.PathUtils:167 `    public static final DeleteOption[] EMPTY_DELETE_OPTION_ARRAY = {};`
+org.apache.commons.io.file.PathUtils:174 `    public static final FileAttribute<?>[] EMPTY_FILE_ATTRIBUTE_ARRAY = {};`
+org.apache.commons.io.file.PathUtils:179 `    public static final FileVisitOption[] EMPTY_FILE_VISIT_OPTION_ARRAY = {};`
+org.apache.commons.io.file.PathUtils:184 `    public static final LinkOption[] EMPTY_LINK_OPTION_ARRAY = {};`
+org.apache.commons.io.file.PathUtils:193 `    public static final LinkOption[] NOFOLLOW_LINK_OPTION_ARRAY = {LinkOption.NOFOLLOW_LINKS};`
+org.apache.commons.io.file.PathUtils:200 `    static final LinkOption NULL_LINK_OPTION = null;`
+org.apache.commons.io.file.PathUtils:205 `    public static final OpenOption[] EMPTY_OPEN_OPTION_ARRAY = {};`
+org.apache.commons.io.file.PathUtils:212 `    public static final Path[] EMPTY_PATH_ARRAY = {};`
+org.apache.commons.io.input.ReaderInputStream:101 `    public static class Builder extends AbstractStreamBuilder<ReaderInputStream, Builder> {`
+org.apache.commons.io.input.ReaderInputStream:103 `        private CharsetEncoder charsetEncoder = super.getCharset().newEncoder();`
+org.apache.commons.io.input.ReaderInputStream:139 `            this.charsetEncoder = charsetEncoder;`
+org.apache.commons.io.input.ReaderInputStream:140 `            super.setCharset(charsetEncoder.charset());`
+org.apache.commons.io.input.ReaderInputStream:153 `        return new Builder();`

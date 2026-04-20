@@ -1,0 +1,51 @@
+@Test public void test_checkStartsWith_functionality() throws Exception {
+  assertTrue(IOCase.SENSITIVE.checkStartsWith("ABC",""));
+  assertTrue(IOCase.SENSITIVE.checkStartsWith("ABC","A"));
+  assertTrue(IOCase.SENSITIVE.checkStartsWith("ABC","AB"));
+  assertTrue(IOCase.SENSITIVE.checkStartsWith("ABC","ABC"));
+  assertFalse(IOCase.SENSITIVE.checkStartsWith("ABC","BC"));
+  assertFalse(IOCase.SENSITIVE.checkStartsWith("ABC","C"));
+  assertFalse(IOCase.SENSITIVE.checkStartsWith("ABC","ABCD"));
+  assertFalse(IOCase.SENSITIVE.checkStartsWith("","ABC"));
+  assertTrue(IOCase.SENSITIVE.checkStartsWith("",""));
+  assertFalse(IOCase.SENSITIVE.checkStartsWith("ABC",null));
+  assertFalse(IOCase.SENSITIVE.checkStartsWith(null,"ABC"));
+  assertFalse(IOCase.SENSITIVE.checkStartsWith(null,null));
+}
+
+@Test public void test_checkEndsWith_functionality() throws Exception {
+  assertTrue(IOCase.SENSITIVE.checkEndsWith("ABC",""));
+  assertFalse(IOCase.SENSITIVE.checkEndsWith("ABC","A"));
+  assertFalse(IOCase.SENSITIVE.checkEndsWith("ABC","AB"));
+  assertTrue(IOCase.SENSITIVE.checkEndsWith("ABC","ABC"));
+  assertTrue(IOCase.SENSITIVE.checkEndsWith("ABC","BC"));
+  assertTrue(IOCase.SENSITIVE.checkEndsWith("ABC","C"));
+  assertFalse(IOCase.SENSITIVE.checkEndsWith("ABC","ABCD"));
+  assertFalse(IOCase.SENSITIVE.checkEndsWith("","ABC"));
+  assertTrue(IOCase.SENSITIVE.checkEndsWith("",""));
+  assertFalse(IOCase.SENSITIVE.checkEndsWith("ABC",null));
+  assertFalse(IOCase.SENSITIVE.checkEndsWith(null,"ABC"));
+  assertFalse(IOCase.SENSITIVE.checkEndsWith(null,null));
+}
+
+
+
+Failures (2):
+  JUnit Jupiter:IOCaseTestCase:test_checkStartsWith_functionality()
+    MethodSource [className = 'org.apache.commons.io.IOCaseTestCase', methodName = 'test_checkStartsWith_functionality', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "String.length()" because "start" is null
+       org.apache.commons.io.IOCase.checkStartsWith(IOCase.java:180)
+       org.apache.commons.io.IOCaseTestCase.test_checkStartsWith_functionality(IOCaseTestCase.java:176)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+  JUnit Jupiter:IOCaseTestCase:test_checkEndsWith_functionality()
+    MethodSource [className = 'org.apache.commons.io.IOCaseTestCase', methodName = 'test_checkEndsWith_functionality', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "String.length()" because "end" is null
+       org.apache.commons.io.IOCase.checkEndsWith(IOCase.java:196)
+       org.apache.commons.io.IOCaseTestCase.test_checkEndsWith_functionality(IOCaseTestCase.java:206)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Store NPE traces to npe.traces.json
+NPE Stack Traces exported to npe.traces.json

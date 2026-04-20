@@ -1,0 +1,102 @@
+diff -U 5 -r ./defects4j/Jsoup-22/buggy/src/main/java/org/jsoup/nodes/Element.java ./defects4j/Jsoup-22/fixed/src/main/java/org/jsoup/nodes/Element.java
+--- ./defects4j/Jsoup-22/buggy/src/main/java/org/jsoup/nodes/Element.java	2024-05-19 19:44:49.938477841 +0900
++++ ./defects4j/Jsoup-22/fixed/src/main/java/org/jsoup/nodes/Element.java	2024-05-19 19:44:49.946478004 +0900
+@@ -429,12 +429,19 @@
+      * Get sibling elements. If the element has no sibling elements, returns an empty list. An element is not a sibling
+      * of itself, so will not be included in the returned list.
+      * @return sibling elements
+      */
+     public Elements siblingElements() {
++        if (parentNode == null)
++            return new Elements(0);
+ 
+-        return parent().children();
++        List<Element> elements = parent().children();
++        Elements siblings = new Elements(elements.size() - 1);
++        for (Element el: elements)
++            if (el != this)
++                siblings.add(el);
++        return siblings;
+     }
+ 
+     /**
+      * Gets the next sibling element of this element. E.g., if a {@code div} contains two {@code p}s, 
+      * the {@code nextElementSibling} of the first {@code p} is the second {@code p}.
+@@ -442,10 +449,11 @@
+      * This is similar to {@link #nextSibling()}, but specifically finds only Elements
+      * @return the next element, or null if there is no next element
+      * @see #previousElementSibling()
+      */
+     public Element nextElementSibling() {
++        if (parentNode == null) return null;
+         List<Element> siblings = parent().children();
+         Integer index = indexInList(this, siblings);
+         Validate.notNull(index);
+         if (siblings.size() > index+1)
+             return siblings.get(index+1);
+@@ -457,10 +465,11 @@
+      * Gets the previous element sibling of this element.
+      * @return the previous element, or null if there is no previous element
+      * @see #nextElementSibling()
+      */
+     public Element previousElementSibling() {
++        if (parentNode == null) return null;
+         List<Element> siblings = parent().children();
+         Integer index = indexInList(this, siblings);
+         Validate.notNull(index);
+         if (index > 0)
+             return siblings.get(index-1);
+diff -U 5 -r ./defects4j/Jsoup-22/buggy/src/main/java/org/jsoup/nodes/Node.java ./defects4j/Jsoup-22/fixed/src/main/java/org/jsoup/nodes/Node.java
+--- ./defects4j/Jsoup-22/buggy/src/main/java/org/jsoup/nodes/Node.java	2024-05-19 19:44:49.938477841 +0900
++++ ./defects4j/Jsoup-22/fixed/src/main/java/org/jsoup/nodes/Node.java	2024-05-19 19:44:49.946478004 +0900
+@@ -439,12 +439,19 @@
+      Retrieves this node's sibling nodes. Similar to {@link #childNodes()  node.parent.childNodes()}, but does not
+      include this node (a node is not a sibling of itself).
+      @return node siblings. If the node has no parent, returns an empty list.
+      */
+     public List<Node> siblingNodes() {
++        if (parentNode == null)
++            return Collections.emptyList();
+ 
+-        return parent().childNodes();
++        List<Node> nodes = parentNode.childNodes;
++        List<Node> siblings = new ArrayList<Node>(nodes.size() - 1);
++        for (Node node: nodes)
++            if (node != this)
++                siblings.add(node);
++        return siblings;
+     }
+ 
+     /**
+      Get this node's next sibling.
+      @return next sibling, or null if this is the last sibling
+@@ -465,10 +472,12 @@
+     /**
+      Get this node's previous sibling.
+      @return the previous sibling, or null if this is the first sibling
+      */
+     public Node previousSibling() {
++        if (parentNode == null)
++            return null; // root
+ 
+         List<Node> siblings = parentNode.childNodes;
+         Integer index = siblingIndex();
+         Validate.notNull(index);
+         if (index > 0)
+diff -U 5 -r ./defects4j/Jsoup-22/buggy/src/main/java/org/jsoup/select/Elements.java ./defects4j/Jsoup-22/fixed/src/main/java/org/jsoup/select/Elements.java
+--- ./defects4j/Jsoup-22/buggy/src/main/java/org/jsoup/select/Elements.java	2024-05-19 19:44:49.942477922 +0900
++++ ./defects4j/Jsoup-22/fixed/src/main/java/org/jsoup/select/Elements.java	2024-05-19 19:44:49.946478004 +0900
+@@ -17,10 +17,13 @@
+ 
+     public Elements() {
+         contents = new ArrayList<Element>();
+     }
+ 
++    public Elements(int initialCapacity) {
++        contents = new ArrayList<Element>(initialCapacity);
++    }
+ 
+     public Elements(Collection<Element> elements) {
+         contents = new ArrayList<Element>(elements);
+     }
+     

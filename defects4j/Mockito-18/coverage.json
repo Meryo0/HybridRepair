@@ -1,0 +1,61 @@
+{
+    "coverage": [
+        {
+            "covered": [ 7, 9, 10, 12 ],
+            "className": "org.mockito.internal.configuration.plugins.PluginRegistry"
+        },
+        {
+            "covered": [ 16, 17, 20 ],
+            "className": "org.mockito.internal.util.collections.Iterables"
+        },
+        {
+            "covered": [ 14, 16, 17 ],
+            "className": "org.mockito.internal.creation.bytebuddy.CachingMockBytecodeGenerator"
+        },
+        {
+            "covered": [ 14, 15, 16, 19, 39 ],
+            "className": "org.mockito.internal.configuration.plugins.PluginFinder"
+        },
+        {
+            "covered": [ 16, 17, 18, 24, 25, 33, 46, 47, 52, 55, 58, 59, 64 ],
+            "className": "org.mockito.internal.configuration.plugins.PluginLoader"
+        },
+        {
+            "covered": [ 5 ],
+            "className": "org.mockito.internal.configuration.plugins.DefaultPluginSwitch"
+        },
+        {
+            "covered": [ 38 ],
+            "className": "org.mockitoutil.TestBase"
+        },
+        {
+            "covered": [ 53, 56 ],
+            "className": "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues"
+        },
+        {
+            "covered": [ 13 ],
+            "className": "org.mockito.internal.util.ObjectMethodsGuru"
+        },
+        {
+            "covered": [ 29 ],
+            "className": "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValuesTest"
+        },
+        {
+            "covered": [ 17 ],
+            "className": "org.mockito.internal.creation.bytebuddy.ByteBuddyMockMaker"
+        }
+    ],
+    "classes": [
+        "org.mockito.internal.configuration.plugins.DefaultPluginSwitch",
+        "org.mockito.internal.configuration.plugins.PluginFinder",
+        "org.mockito.internal.configuration.plugins.PluginLoader",
+        "org.mockito.internal.configuration.plugins.PluginRegistry",
+        "org.mockito.internal.creation.bytebuddy.ByteBuddyMockMaker",
+        "org.mockito.internal.creation.bytebuddy.CachingMockBytecodeGenerator",
+        "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues",
+        "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValuesTest",
+        "org.mockito.internal.util.ObjectMethodsGuru",
+        "org.mockito.internal.util.collections.Iterables",
+        "org.mockitoutil.TestBase"
+    ]
+}

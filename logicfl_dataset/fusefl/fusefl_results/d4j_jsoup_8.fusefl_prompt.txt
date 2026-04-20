@@ -1,0 +1,786 @@
+Faulty Code:
+org.jsoup.Jsoup:44 `        return Parser.parse(html, "");`
+org.jsoup.helper.StringUtil:11 `    private static final String[] padding = {"", " ", "  ", "   ", "    ", "     ", "      ", "       ", "        ", "         ", "          "};`
+org.jsoup.helper.StringUtil:51 `        if (width < 0)`
+org.jsoup.helper.StringUtil:54 `        if (width < padding.length)`
+org.jsoup.helper.StringUtil:55 `            return padding[width];`
+org.jsoup.helper.Validate:15 `        if (obj == null)`
+org.jsoup.helper.Validate:17 `    }`
+org.jsoup.helper.Validate:34 `        if (!val)`
+org.jsoup.helper.Validate:36 `    }`
+org.jsoup.helper.Validate:72 `        if (string == null || string.length() == 0)`
+org.jsoup.helper.Validate:74 `    }`
+org.jsoup.helper.Validate:82 `        if (string == null || string.length() == 0)`
+org.jsoup.helper.Validate:84 `    }`
+org.jsoup.nodes.Attribute:21 `    public Attribute(String key, String value) {`
+org.jsoup.nodes.Attribute:22 `        Validate.notEmpty(key);`
+org.jsoup.nodes.Attribute:23 `        Validate.notNull(value);`
+org.jsoup.nodes.Attribute:24 `        this.key = key.trim().toLowerCase();`
+org.jsoup.nodes.Attribute:25 `        this.value = value;`
+org.jsoup.nodes.Attribute:26 `    }`
+org.jsoup.nodes.Attribute:33 `        return key;`
+org.jsoup.nodes.Attribute:73 `        accum`
+org.jsoup.nodes.Attribute:78 `    }`
+org.jsoup.nodes.Attribute:95 `        String value = Entities.unescape(encodedValue);`
+org.jsoup.nodes.Attribute:96 `        return new Attribute(unencodedKey, value);`
+org.jsoup.nodes.Attribute:118 `        int result = key != null ? key.hashCode() : 0;`
+org.jsoup.nodes.Attribute:119 `        result = 31 * result + (value != null ? value.hashCode() : 0);`
+org.jsoup.nodes.Attribute:120 `        return result;`
+org.jsoup.nodes.Attributes:17 `public class Attributes implements Iterable<Attribute> {`
+org.jsoup.nodes.Attributes:20 `    private LinkedHashMap<String, Attribute> attributes = new LinkedHashMap<String, Attribute>(2);`
+org.jsoup.nodes.Attributes:51 `        Validate.notNull(attribute);`
+org.jsoup.nodes.Attributes:52 `        attributes.put(attribute.getKey(), attribute);`
+org.jsoup.nodes.Attributes:53 `    }`
+org.jsoup.nodes.Attributes:126 `        for (Map.Entry<String, Attribute> entry : attributes.entrySet()) {`
+org.jsoup.nodes.Attributes:127 `            Attribute attribute = entry.getValue();`
+org.jsoup.nodes.Attributes:128 `            accum.append(" ");`
+org.jsoup.nodes.Attributes:129 `            attribute.html(accum, out);`
+org.jsoup.nodes.Attributes:130 `        }`
+org.jsoup.nodes.Attributes:131 `    }`
+org.jsoup.nodes.Attributes:151 `        return attributes != null ? attributes.hashCode() : 0;`
+org.jsoup.nodes.Attributes:154 `    private class Dataset extends AbstractMap<String, String> {`
+org.jsoup.nodes.Document:17 `    private OutputSettings outputSettings = new OutputSettings();`
+org.jsoup.nodes.Document:26 `        super(Tag.valueOf("#root"), baseUri);`
+org.jsoup.nodes.Document:27 `    }`
+org.jsoup.nodes.Document:50 `        return findFirstElementByTagName("head", this);`
+org.jsoup.nodes.Document:58 `        return findFirstElementByTagName("body", this);`
+org.jsoup.nodes.Document:100 `        Element htmlEl = findFirstElementByTagName("html", this);`
+org.jsoup.nodes.Document:101 `        if (htmlEl == null)`
+org.jsoup.nodes.Document:103 `        if (head() == null)`
+org.jsoup.nodes.Document:105 `        if (body() == null)`
+org.jsoup.nodes.Document:110 `        normaliseTextNodes(head());`
+org.jsoup.nodes.Document:111 `        normaliseTextNodes(htmlEl);`
+org.jsoup.nodes.Document:112 `        normaliseTextNodes(this);`
+org.jsoup.nodes.Document:114 `        normaliseStructure("head", htmlEl);`
+org.jsoup.nodes.Document:115 `        normaliseStructure("body", htmlEl);`
+org.jsoup.nodes.Document:117 `        return this;`
+org.jsoup.nodes.Document:122 `        List<Node> toMove = new ArrayList<Node>();`
+org.jsoup.nodes.Document:123 `        for (Node node: element.childNodes) {`
+org.jsoup.nodes.Document:124 `            if (node instanceof TextNode) {`
+org.jsoup.nodes.Document:129 `        }`
+org.jsoup.nodes.Document:131 `        for (int i = toMove.size()-1; i >= 0; i--) {`
+org.jsoup.nodes.Document:137 `    }`
+org.jsoup.nodes.Document:141 `        Elements elements = this.getElementsByTag(tag);`
+org.jsoup.nodes.Document:142 `        Element master = elements.first(); // will always be available as created above if not existent`
+org.jsoup.nodes.Document:143 `        if (elements.size() > 1) { // dupes, move contents to master`
+org.jsoup.nodes.Document:156 `        if (!master.parent().equals(htmlEl)) {`
+org.jsoup.nodes.Document:159 `    }`
+org.jsoup.nodes.Document:163 `        if (node.nodeName().equals(tag))`
+org.jsoup.nodes.Document:164 `            return (Element) node;`
+org.jsoup.nodes.Document:166 `            for (Node child: node.childNodes) {`
+org.jsoup.nodes.Document:167 `                Element found = findFirstElementByTagName(tag, child);`
+org.jsoup.nodes.Document:168 `                if (found != null)`
+org.jsoup.nodes.Document:169 `                    return found;`
+org.jsoup.nodes.Document:170 `            }`
+org.jsoup.nodes.Document:172 `        return null;`
+org.jsoup.nodes.Document:193 `        return "#document";`
+org.jsoup.nodes.Document:200 `        private Entities.EscapeMode escapeMode = Entities.EscapeMode.base;`
+org.jsoup.nodes.Document:201 `        private Charset charset = Charset.forName("UTF-8");`
+org.jsoup.nodes.Document:202 `        private CharsetEncoder charsetEncoder = charset.newEncoder();`
+org.jsoup.nodes.Document:203 `        private boolean prettyPrint = true;`
+org.jsoup.nodes.Document:204 `        private int indentAmount = 1;`
+org.jsoup.nodes.Document:206 `        public OutputSettings() {}`
+org.jsoup.nodes.Document:217 `            return escapeMode;`
+org.jsoup.nodes.Document:265 `            return charsetEncoder;`
+org.jsoup.nodes.Document:274 `            return prettyPrint;`
+org.jsoup.nodes.Document:292 `            return indentAmount;`
+org.jsoup.nodes.Document:312 `        return outputSettings;`
+org.jsoup.nodes.Element:37 `        super(baseUri, attributes);`
+org.jsoup.nodes.Element:39 `        Validate.notNull(tag);    `
+org.jsoup.nodes.Element:40 `        this.tag = tag;`
+org.jsoup.nodes.Element:41 `    }`
+org.jsoup.nodes.Element:52 `        this(tag, baseUri, new Attributes());`
+org.jsoup.nodes.Element:53 `    }`
+org.jsoup.nodes.Element:57 `        return tag.getName();`
+org.jsoup.nodes.Element:66 `        return tag.getName();`
+org.jsoup.nodes.Element:75 `        return tag;`
+org.jsoup.nodes.Element:85 `        return tag.isBlock();`
+org.jsoup.nodes.Element:128 `        return (Element) parentNode;`
+org.jsoup.nodes.Element:199 `        return Selector.select(query, this);`
+org.jsoup.nodes.Element:209 `        Validate.notNull(child);`
+org.jsoup.nodes.Element:211 `        addChildren(child);`
+org.jsoup.nodes.Element:212 `        return this;`
+org.jsoup.nodes.Element:472 `        Validate.notEmpty(tagName);`
+org.jsoup.nodes.Element:473 `        tagName = tagName.toLowerCase().trim();`
+org.jsoup.nodes.Element:475 `        return Collector.collect(new Evaluator.Tag(tagName), this);`
+org.jsoup.nodes.Element:970 `        if (out.prettyPrint() && (isBlock() || (parent() != null && parent().tag().canContainBlock() && siblingIndex() == 0)))`
+org.jsoup.nodes.Element:971 `            indent(accum, depth, out);`
+org.jsoup.nodes.Element:972 `        accum`
+org.jsoup.nodes.Element:975 `        attributes.html(accum, out);`
+org.jsoup.nodes.Element:977 `        if (childNodes.isEmpty() && tag.isSelfClosing())`
+org.jsoup.nodes.Element:978 `            accum.append(" />");`
+org.jsoup.nodes.Element:981 `    }`
+org.jsoup.nodes.Element:984 `        if (!(childNodes.isEmpty() && tag.isSelfClosing())) {`
+org.jsoup.nodes.Element:989 `    }`
+org.jsoup.nodes.Element:1022 `        return outerHtml();`
+org.jsoup.nodes.Element:1027 `        if (this == o) return true;`
+org.jsoup.nodes.Element:1040 `        int result = super.hashCode();`
+org.jsoup.nodes.Element:1041 `        result = 31 * result + (tag != null ? tag.hashCode() : 0);`
+org.jsoup.nodes.Element:1042 `        return result;`
+org.jsoup.nodes.Entities:15 `    public enum EscapeMode {`
+org.jsoup.nodes.Entities:17 `        xhtml(xhtmlByVal),`
+org.jsoup.nodes.Entities:19 `        base(baseByVal),`
+org.jsoup.nodes.Entities:21 `        extended(fullByVal);`
+org.jsoup.nodes.Entities:25 `        EscapeMode(Map<Character, String> map) {`
+org.jsoup.nodes.Entities:26 `            this.map = map;`
+org.jsoup.nodes.Entities:27 `        }`
+org.jsoup.nodes.Entities:30 `            return map;`
+org.jsoup.nodes.Entities:38 `    private static final Pattern unescapePattern = Pattern.compile("&(#(x|X)?([0-9a-fA-F]+)|[a-zA-Z]+);?");`
+org.jsoup.nodes.Entities:41 `        return escape(string, out.encoder(), out.escapeMode());`
+org.jsoup.nodes.Entities:45 `        StringBuilder accum = new StringBuilder(string.length() * 2);`
+org.jsoup.nodes.Entities:46 `        Map<Character, String> map = escapeMode.getMap();`
+org.jsoup.nodes.Entities:48 `        for (int pos = 0; pos < string.length(); pos++) {`
+org.jsoup.nodes.Entities:49 `            Character c = string.charAt(pos);`
+org.jsoup.nodes.Entities:50 `            if (map.containsKey(c))`
+org.jsoup.nodes.Entities:52 `            else if (encoder.canEncode(c))`
+org.jsoup.nodes.Entities:53 `                accum.append(c.charValue());`
+org.jsoup.nodes.Entities:58 `        return accum.toString();`
+org.jsoup.nodes.Entities:62 `        if (!string.contains("&"))`
+org.jsoup.nodes.Entities:63 `            return string;`
+org.jsoup.nodes.Entities:96 `    private static final Object[][] xhtmlArray = {`
+org.jsoup.nodes.Entities:106 `    private static final Object[][] baseArray = {`
+org.jsoup.nodes.Entities:217 `    private static final Object[][] fullArray = {`
+org.jsoup.nodes.Entities:2253 `        full = new HashMap<String, Character>(fullArray.length);`
+org.jsoup.nodes.Entities:2254 `        xhtmlByVal = new HashMap<Character, String>(xhtmlArray.length);`
+org.jsoup.nodes.Entities:2255 `        baseByVal = new HashMap<Character, String>(baseArray.length);`
+org.jsoup.nodes.Entities:2256 `        fullByVal = new HashMap<Character, String>(fullArray.length);`
+org.jsoup.nodes.Entities:2258 `        for (Object[] entity : xhtmlArray) {`
+org.jsoup.nodes.Entities:2259 `            Character c = Character.valueOf((char) ((Integer) entity[1]).intValue());`
+org.jsoup.nodes.Entities:2260 `            xhtmlByVal.put(c, ((String) entity[0]));`
+org.jsoup.nodes.Entities:2262 `        for (Object[] entity : baseArray) {`
+org.jsoup.nodes.Entities:2263 `            Character c = Character.valueOf((char) ((Integer) entity[1]).intValue());`
+org.jsoup.nodes.Entities:2264 `            baseByVal.put(c, ((String) entity[0]));`
+org.jsoup.nodes.Entities:2266 `        for (Object[] entity : fullArray) {`
+org.jsoup.nodes.Entities:2267 `            Character c = Character.valueOf((char) ((Integer) entity[1]).intValue());`
+org.jsoup.nodes.Entities:2268 `            full.put((String) entity[0], c);`
+org.jsoup.nodes.Entities:2269 `            fullByVal.put(c, ((String) entity[0]));`
+org.jsoup.nodes.Entities:2271 `    }`
+org.jsoup.nodes.Evaluator:25 `        Tag (String tagName) {`
+org.jsoup.nodes.Evaluator:26 `            this.tagName = tagName;`
+org.jsoup.nodes.Evaluator:27 `        }`
+org.jsoup.nodes.Evaluator:30 `            return (element.tagName().equals(tagName));`
+org.jsoup.nodes.Node:30 `    protected Node(String baseUri, Attributes attributes) {`
+org.jsoup.nodes.Node:31 `        Validate.notNull(baseUri);`
+org.jsoup.nodes.Node:32 `        Validate.notNull(attributes);`
+org.jsoup.nodes.Node:34 `        childNodes = new ArrayList<Node>(4);`
+org.jsoup.nodes.Node:35 `        this.baseUri = baseUri.trim();`
+org.jsoup.nodes.Node:36 `        this.attributes = attributes;`
+org.jsoup.nodes.Node:37 `    }`
+org.jsoup.nodes.Node:186 `        return childNodes.get(index);`
+org.jsoup.nodes.Node:195 `        return Collections.unmodifiableList(childNodes);`
+org.jsoup.nodes.Node:215 `        if (this instanceof Document)`
+org.jsoup.nodes.Node:216 `            return (Document) this;`
+org.jsoup.nodes.Node:217 `        else if (parentNode == null)`
+org.jsoup.nodes.Node:218 `            return null;`
+org.jsoup.nodes.Node:220 `            return parentNode.ownerDocument();`
+org.jsoup.nodes.Node:227 `        Validate.notNull(parentNode);`
+org.jsoup.nodes.Node:228 `        parentNode.removeChild(this);`
+org.jsoup.nodes.Node:229 `    }`
+org.jsoup.nodes.Node:242 `        if (this.parentNode != null)`
+org.jsoup.nodes.Node:244 `        this.parentNode = parentNode;`
+org.jsoup.nodes.Node:245 `    }`
+org.jsoup.nodes.Node:261 `        Validate.isTrue(out.parentNode == this);`
+org.jsoup.nodes.Node:262 `        int index = out.siblingIndex();`
+org.jsoup.nodes.Node:263 `        childNodes.remove(index);`
+org.jsoup.nodes.Node:264 `        reindexChildren();`
+org.jsoup.nodes.Node:265 `        out.parentNode = null;`
+org.jsoup.nodes.Node:266 `    }`
+org.jsoup.nodes.Node:270 `        for (Node child: children) {`
+org.jsoup.nodes.Node:271 `            reparentChild(child);`
+org.jsoup.nodes.Node:272 `            childNodes.add(child);`
+org.jsoup.nodes.Node:273 `            child.setSiblingIndex(childNodes.size()-1);`
+org.jsoup.nodes.Node:275 `    }`
+org.jsoup.nodes.Node:288 `        if (child.parentNode != null)`
+org.jsoup.nodes.Node:290 `        child.setParentNode(this);`
+org.jsoup.nodes.Node:291 `    }`
+org.jsoup.nodes.Node:294 `        for (int i = 0; i < childNodes.size(); i++) {`
+org.jsoup.nodes.Node:297 `    }`
+org.jsoup.nodes.Node:312 `        if (parentNode == null)`
+org.jsoup.nodes.Node:313 `            return null; // root`
+org.jsoup.nodes.Node:315 `        List<Node> siblings = parentNode.childNodes;`
+org.jsoup.nodes.Node:316 `        Integer index = siblingIndex();`
+org.jsoup.nodes.Node:317 `        Validate.notNull(index);`
+org.jsoup.nodes.Node:318 `        if (siblings.size() > index+1)`
+org.jsoup.nodes.Node:319 `            return siblings.get(index+1);`
+org.jsoup.nodes.Node:321 `            return null;`
+org.jsoup.nodes.Node:345 `        return siblingIndex;`
+org.jsoup.nodes.Node:349 `        this.siblingIndex = siblingIndex;`
+org.jsoup.nodes.Node:350 `    }`
+org.jsoup.nodes.Node:357 `        StringBuilder accum = new StringBuilder(32*1024);`
+org.jsoup.nodes.Node:358 `        outerHtml(accum);`
+org.jsoup.nodes.Node:359 `        return accum.toString();`
+org.jsoup.nodes.Node:363 `        new NodeTraversor(new OuterHtmlVisitor(accum, ownerDocument().outputSettings())).traverse(this);`
+org.jsoup.nodes.Node:364 `    }`
+org.jsoup.nodes.Node:381 `        accum.append("\n").append(StringUtil.padding(depth * out.indentAmount()));`
+org.jsoup.nodes.Node:382 `    }`
+org.jsoup.nodes.Node:393 `        int result = parentNode != null ? parentNode.hashCode() : 0;`
+org.jsoup.nodes.Node:395 `        result = 31 * result + (attributes != null ? attributes.hashCode() : 0);`
+org.jsoup.nodes.Node:396 `        return result;`
+org.jsoup.nodes.Node:403 `        OuterHtmlVisitor(StringBuilder accum, Document.OutputSettings out) {`
+org.jsoup.nodes.Node:404 `            this.accum = accum;`
+org.jsoup.nodes.Node:405 `            this.out = out;`
+org.jsoup.nodes.Node:406 `        }`
+org.jsoup.nodes.Node:409 `            node.outerHtmlHead(accum, depth, out);`
+org.jsoup.nodes.Node:410 `        }`
+org.jsoup.nodes.Node:413 `            if (!node.nodeName().equals("#text")) // saves a void hit.`
+org.jsoup.nodes.Node:414 `                node.outerHtmlTail(accum, depth, out);`
+org.jsoup.nodes.Node:415 `        }`
+org.jsoup.parser.Parser:17 `    private static final Tag htmlTag = Tag.valueOf("html");`
+org.jsoup.parser.Parser:18 `    private static final Tag headTag = Tag.valueOf("head");`
+org.jsoup.parser.Parser:19 `    private static final Tag bodyTag = Tag.valueOf("body");`
+org.jsoup.parser.Parser:20 `    private static final Tag titleTag = Tag.valueOf("title");`
+org.jsoup.parser.Parser:21 `    private static final Tag textareaTag = Tag.valueOf("textarea");`
+org.jsoup.parser.Parser:27 `    private boolean relaxed = false;`
+org.jsoup.parser.Parser:29 `    private Parser(String html, String baseUri, boolean isBodyFragment) {`
+org.jsoup.parser.Parser:30 `        Validate.notNull(html);`
+org.jsoup.parser.Parser:31 `        Validate.notNull(baseUri);`
+org.jsoup.parser.Parser:33 `        stack = new LinkedList<Element>();`
+org.jsoup.parser.Parser:34 `        tq = new TokenQueue(html);`
+org.jsoup.parser.Parser:35 `        this.baseUri = baseUri;`
+org.jsoup.parser.Parser:37 `        if (isBodyFragment) {`
+org.jsoup.parser.Parser:41 `            doc = new Document(baseUri);`
+org.jsoup.parser.Parser:42 `            stack.add(doc);`
+org.jsoup.parser.Parser:44 `    }`
+org.jsoup.parser.Parser:53 `        Parser parser = new Parser(html, baseUri, false);`
+org.jsoup.parser.Parser:54 `        return parser.parse();`
+org.jsoup.parser.Parser:82 `        while (!tq.isEmpty()) {`
+org.jsoup.parser.Parser:83 `            if (tq.matchesStartTag()) {`
+org.jsoup.parser.Parser:84 `                parseStartTag();`
+org.jsoup.parser.Parser:97 `        return doc.normalise();`
+org.jsoup.parser.Parser:133 `        tq.consume("<");`
+org.jsoup.parser.Parser:134 `        String tagName = tq.consumeTagName();`
+org.jsoup.parser.Parser:135 `        Validate.notEmpty(tagName, "Unexpectedly empty tagname. (This should not occur, please report!)");`
+org.jsoup.parser.Parser:137 `        tq.consumeWhitespace();`
+org.jsoup.parser.Parser:138 `        Attributes attributes = new Attributes();`
+org.jsoup.parser.Parser:139 `        while (!tq.matchesAny("<", "/>", ">") && !tq.isEmpty()) {`
+org.jsoup.parser.Parser:140 `            Attribute attribute = parseAttribute();`
+org.jsoup.parser.Parser:141 `            if (attribute != null)`
+org.jsoup.parser.Parser:142 `                attributes.put(attribute);`
+org.jsoup.parser.Parser:143 `        }`
+org.jsoup.parser.Parser:145 `        Tag tag = Tag.valueOf(tagName);`
+org.jsoup.parser.Parser:146 `        Element child = new Element(tag, baseUri, attributes);`
+org.jsoup.parser.Parser:148 `        boolean isEmptyElement = tag.isEmpty(); // empty element if empty tag (e.g. img) or self-closed el (<div/>`
+org.jsoup.parser.Parser:149 `        if (tq.matchChomp("/>")) { // close empty element or tag`
+org.jsoup.parser.Parser:154 `            tq.matchChomp(">");`
+org.jsoup.parser.Parser:156 `        addChildToParent(child, isEmptyElement);`
+org.jsoup.parser.Parser:159 `        if (tag.isData()) {`
+org.jsoup.parser.Parser:173 `        if (child.tagName().equals("base")) {`
+org.jsoup.parser.Parser:180 `    }`
+org.jsoup.parser.Parser:183 `        tq.consumeWhitespace();`
+org.jsoup.parser.Parser:184 `        String key = tq.consumeAttributeKey();`
+org.jsoup.parser.Parser:185 `        String value = "";`
+org.jsoup.parser.Parser:186 `        tq.consumeWhitespace();`
+org.jsoup.parser.Parser:187 `        if (tq.matchChomp("=")) {`
+org.jsoup.parser.Parser:188 `            tq.consumeWhitespace();`
+org.jsoup.parser.Parser:190 `            if (tq.matchChomp(SQ)) {`
+org.jsoup.parser.Parser:191 `                value = tq.chompTo(SQ);`
+org.jsoup.parser.Parser:202 `            tq.consumeWhitespace();`
+org.jsoup.parser.Parser:204 `        if (key.length() != 0)`
+org.jsoup.parser.Parser:205 `            return Attribute.createFromEncoded(key, value);`
+org.jsoup.parser.Parser:235 `        Element parent = popStackToSuitableContainer(child.tag());`
+org.jsoup.parser.Parser:236 `        Tag childTag = child.tag();`
+org.jsoup.parser.Parser:237 `        boolean validAncestor = stackHasValidParent(childTag);`
+org.jsoup.parser.Parser:239 `        if (!validAncestor && !relaxed) {`
+org.jsoup.parser.Parser:241 `            Tag parentTag = childTag.getImplicitParent();`
+org.jsoup.parser.Parser:242 `            Element implicit = new Element(parentTag, baseUri);`
+org.jsoup.parser.Parser:244 `            if (child.tag().equals(bodyTag)) {`
+org.jsoup.parser.Parser:245 `                Element head = new Element(headTag, baseUri);`
+org.jsoup.parser.Parser:246 `                implicit.appendChild(head);`
+org.jsoup.parser.Parser:248 `            implicit.appendChild(child);`
+org.jsoup.parser.Parser:251 `            Element root = addChildToParent(implicit, false);`
+org.jsoup.parser.Parser:252 `            if (!isEmptyElement)`
+org.jsoup.parser.Parser:253 `                stack.addLast(child);`
+org.jsoup.parser.Parser:254 `            return root;`
+org.jsoup.parser.Parser:257 `        parent.appendChild(child);`
+org.jsoup.parser.Parser:259 `        if (!isEmptyElement)`
+org.jsoup.parser.Parser:260 `            stack.addLast(child);`
+org.jsoup.parser.Parser:261 `        return parent;`
+org.jsoup.parser.Parser:265 `        if (stack.size() == 1 && childTag.equals(htmlTag))`
+org.jsoup.parser.Parser:266 `            return true; // root is valid for html node`
+org.jsoup.parser.Parser:268 `        if (childTag.requiresSpecificParent())`
+org.jsoup.parser.Parser:272 `        for (int i = stack.size() -1; i >= 0; i--) {`
+org.jsoup.parser.Parser:273 `            Element el = stack.get(i);`
+org.jsoup.parser.Parser:274 `            Tag parent2 = el.tag();`
+org.jsoup.parser.Parser:275 `            if (parent2.isValidAncestor(childTag)) {`
+org.jsoup.parser.Parser:279 `        return false;`
+org.jsoup.parser.Parser:283 `        while (!stack.isEmpty()) {`
+org.jsoup.parser.Parser:284 `            if (last().tag().canContain(tag))`
+org.jsoup.parser.Parser:285 `                return last();`
+org.jsoup.parser.Parser:316 `        return stack.getLast();`
+org.jsoup.parser.Tag:13 `    private static final Map<String, Tag> tags = new HashMap<String, Tag>();`
+org.jsoup.parser.Tag:16 `        defaultAncestor = new Tag("BODY");`
+org.jsoup.parser.Tag:17 `        tags.put(defaultAncestor.tagName, defaultAncestor);`
+org.jsoup.parser.Tag:21 `    private boolean knownTag = false; // if pre-defined or auto-created`
+org.jsoup.parser.Tag:22 `    private boolean isBlock = true; // block or inline`
+org.jsoup.parser.Tag:23 `    private boolean canContainBlock = true; // Can this tag hold block level tags?`
+org.jsoup.parser.Tag:24 `    private boolean canContainInline = true; // only pcdata if not`
+org.jsoup.parser.Tag:25 `    private boolean optionalClosing = false; // If tag is open, and another seen, close previous tag`
+org.jsoup.parser.Tag:26 `    private boolean empty = false; // can hold nothing; e.g. img`
+org.jsoup.parser.Tag:27 `    private boolean selfClosing = false; // can self close (<foo />). used for unknown tags that self close, without forcing them as empty.`
+org.jsoup.parser.Tag:28 `    private boolean preserveWhitespace = false; // for pre, textarea, script etc`
+org.jsoup.parser.Tag:30 `    private List<Tag> excludes = Collections.emptyList(); // cannot contain these tags`
+org.jsoup.parser.Tag:31 `    private List<Tag> ignoreEndTags = Collections.emptyList(); // ignore these end tags`
+org.jsoup.parser.Tag:35 `    private Tag(String tagName) {`
+org.jsoup.parser.Tag:36 `        this.tagName = tagName.toLowerCase();`
+org.jsoup.parser.Tag:37 `    }`
+org.jsoup.parser.Tag:40 `        return tagName;`
+org.jsoup.parser.Tag:51 `        Validate.notNull(tagName);`
+org.jsoup.parser.Tag:52 `        tagName = tagName.trim().toLowerCase();`
+org.jsoup.parser.Tag:53 `        Validate.notEmpty(tagName);`
+org.jsoup.parser.Tag:55 `        synchronized (tags) {`
+org.jsoup.parser.Tag:56 `            Tag tag = tags.get(tagName);`
+org.jsoup.parser.Tag:57 `            if (tag == null) {`
+org.jsoup.parser.Tag:59 `                tag = new Tag(tagName);`
+org.jsoup.parser.Tag:60 `                tag.setAncestor(defaultAncestor.tagName);`
+org.jsoup.parser.Tag:61 `                tag.setExcludes();`
+org.jsoup.parser.Tag:62 `                tag.isBlock = false;`
+org.jsoup.parser.Tag:63 `                tag.canContainBlock = true;`
+org.jsoup.parser.Tag:65 `            return tag;`
+org.jsoup.parser.Tag:75 `        Validate.notNull(child);`
+org.jsoup.parser.Tag:77 `        if (child.isBlock && !this.canContainBlock)`
+org.jsoup.parser.Tag:80 `        if (!child.isBlock && !this.canContainInline) // not block == inline`
+org.jsoup.parser.Tag:83 `        if (this.optionalClosing && this.equals(child))`
+org.jsoup.parser.Tag:86 `        if (this.empty || this.isData())`
+org.jsoup.parser.Tag:90 `        if (this.requiresSpecificParent() && this.getImplicitParent().equals(child))`
+org.jsoup.parser.Tag:94 `        if (limitChildren) {`
+org.jsoup.parser.Tag:103 `        if (!excludes.isEmpty()) {`
+org.jsoup.parser.Tag:110 `        return true;`
+org.jsoup.parser.Tag:118 `        return isBlock;`
+org.jsoup.parser.Tag:126 `        return canContainBlock;`
+org.jsoup.parser.Tag:142 `        return !canContainInline && !isEmpty();`
+org.jsoup.parser.Tag:150 `        return empty;`
+org.jsoup.parser.Tag:158 `        return empty || selfClosing;`
+org.jsoup.parser.Tag:178 `        return (!ancestors.isEmpty()) ? ancestors.get(0) : null;`
+org.jsoup.parser.Tag:182 `        return directDescendant;`
+org.jsoup.parser.Tag:190 `        if (child.ancestors.isEmpty())`
+org.jsoup.parser.Tag:193 `        for (int i = 0; i < child.ancestors.size(); i++)`
+org.jsoup.parser.Tag:194 `            if (this.equals(child.ancestors.get(i)))`
+org.jsoup.parser.Tag:197 `        return false;`
+org.jsoup.parser.Tag:210 `        if (this == o) return true;`
+org.jsoup.parser.Tag:211 `        if (o == null || getClass() != o.getClass()) return false;`
+org.jsoup.parser.Tag:213 `        Tag tag = (Tag) o;`
+org.jsoup.parser.Tag:215 `        if (tagName != null ? !tagName.equals(tag.tagName) : tag.tagName != null) return false;`
+org.jsoup.parser.Tag:222 `        int result = tagName != null ? tagName.hashCode() : 0;`
+org.jsoup.parser.Tag:223 `        result = 31 * result + (isBlock ? 1 : 0);`
+org.jsoup.parser.Tag:224 `        result = 31 * result + (canContainBlock ? 1 : 0);`
+org.jsoup.parser.Tag:225 `        result = 31 * result + (canContainInline ? 1 : 0);`
+org.jsoup.parser.Tag:226 `        result = 31 * result + (optionalClosing ? 1 : 0);`
+org.jsoup.parser.Tag:227 `        result = 31 * result + (empty ? 1 : 0);`
+org.jsoup.parser.Tag:228 `        return result;`
+org.jsoup.parser.Tag:243 `        createBlock("HTML").setAncestor(new String[0]); // specific includes not impl`
+org.jsoup.parser.Tag:244 `        createBlock("HEAD").setParent("HTML").setLimitChildren();`
+org.jsoup.parser.Tag:245 `        createBlock("BODY").setAncestor("HTML"); // specific includes not impl`
+org.jsoup.parser.Tag:246 `        createBlock("FRAMESET").setAncestor("HTML");`
+org.jsoup.parser.Tag:250 `        createBlock("SCRIPT").setAncestor("HEAD", "BODY").setContainDataOnly();`
+org.jsoup.parser.Tag:251 `        createBlock("NOSCRIPT").setAncestor("HEAD", "BODY");`
+org.jsoup.parser.Tag:252 `        createBlock("STYLE").setAncestor("HEAD", "BODY").setContainDataOnly();`
+org.jsoup.parser.Tag:253 `        createBlock("META").setAncestor("HEAD", "BODY").setEmpty();`
+org.jsoup.parser.Tag:254 `        createBlock("LINK").setAncestor("HEAD", "BODY").setEmpty(); // only within head`
+org.jsoup.parser.Tag:255 `        createInline("OBJECT").setAncestor("HEAD", "BODY"); // flow (block/inline) or param`
+org.jsoup.parser.Tag:256 `        createBlock("TITLE").setAncestor("HEAD", "BODY").setContainDataOnly();`
+org.jsoup.parser.Tag:257 `        createInline("BASE").setAncestor("HEAD", "BODY").setEmpty();`
+org.jsoup.parser.Tag:259 `        createBlock("FRAME").setParent("FRAMESET").setEmpty();`
+org.jsoup.parser.Tag:260 `        createBlock("NOFRAMES").setParent("FRAMESET").setContainDataOnly();`
+org.jsoup.parser.Tag:263 `        createBlock("SECTION");`
+org.jsoup.parser.Tag:264 `        createBlock("NAV");`
+org.jsoup.parser.Tag:265 `        createBlock("ASIDE");`
+org.jsoup.parser.Tag:266 `        createBlock("HGROUP").setLimitChildren(); // limited to h1 - h6`
+org.jsoup.parser.Tag:267 `        createBlock("HEADER").setExcludes("HEADER", "FOOTER");`
+org.jsoup.parser.Tag:268 `        createBlock("FOOTER").setExcludes("HEADER", "FOOTER");`
+org.jsoup.parser.Tag:271 `        createInline("FONT");`
+org.jsoup.parser.Tag:272 `        createInline("TT");`
+org.jsoup.parser.Tag:273 `        createInline("I");`
+org.jsoup.parser.Tag:274 `        createInline("B");`
+org.jsoup.parser.Tag:275 `        createInline("BIG");`
+org.jsoup.parser.Tag:276 `        createInline("SMALL");`
+org.jsoup.parser.Tag:279 `        createInline("EM");`
+org.jsoup.parser.Tag:280 `        createInline("STRONG");`
+org.jsoup.parser.Tag:281 `        createInline("DFN").setOptionalClosing();`
+org.jsoup.parser.Tag:282 `        createInline("CODE");`
+org.jsoup.parser.Tag:283 `        createInline("SAMP");`
+org.jsoup.parser.Tag:284 `        createInline("KBD");`
+org.jsoup.parser.Tag:285 `        createInline("VAR");`
+org.jsoup.parser.Tag:286 `        createInline("CITE");`
+org.jsoup.parser.Tag:287 `        createInline("ABBR");`
+org.jsoup.parser.Tag:288 `        createInline("TIME").setOptionalClosing();`
+org.jsoup.parser.Tag:289 `        createInline("ACRONYM");`
+org.jsoup.parser.Tag:290 `        createInline("MARK");`
+org.jsoup.parser.Tag:293 `        createInline("RUBY");`
+org.jsoup.parser.Tag:294 `        createInline("RT").setParent("RUBY").setExcludes("RT", "RP");`
+org.jsoup.parser.Tag:295 `        createInline("RP").setParent("RUBY").setExcludes("RT", "RP");`
+org.jsoup.parser.Tag:298 `        createInline("A").setOptionalClosing(); // cannot contain self`
+org.jsoup.parser.Tag:299 `        createInline("IMG").setEmpty().setAncestor("BODY", "NOSCRIPT"); // noscript so an image can be in html->head->noscript`
+org.jsoup.parser.Tag:300 `        createInline("BR").setEmpty();`
+org.jsoup.parser.Tag:301 `        createInline("WBR").setEmpty();`
+org.jsoup.parser.Tag:302 `        createInline("MAP"); // map is defined as inline, but can hold block (what?) or area. Seldom used so NBD.`
+org.jsoup.parser.Tag:303 `        createInline("Q");`
+org.jsoup.parser.Tag:304 `        createInline("SUB");`
+org.jsoup.parser.Tag:305 `        createInline("SUP");`
+org.jsoup.parser.Tag:306 `        createInline("BDO");`
+org.jsoup.parser.Tag:307 `        createInline("IFRAME").setOptionalClosing();`
+org.jsoup.parser.Tag:308 `        createInline("EMBED").setEmpty();`
+org.jsoup.parser.Tag:315 `        createInline("SPAN").setCanContainBlock(); // spec is phrasing only, practise is block`
+org.jsoup.parser.Tag:316 `        createBlock("P").setContainInlineOnly(); // emasculated block?`
+org.jsoup.parser.Tag:317 `        createBlock("H1").setAncestor("BODY", "HGROUP").setExcludes("HGROUP", "H1", "H2", "H3", "H4", "H5", "H6");`
+org.jsoup.parser.Tag:318 `        createBlock("H2").setAncestor("BODY", "HGROUP").setExcludes("HGROUP", "H1", "H2", "H3", "H4", "H5", "H6");`
+org.jsoup.parser.Tag:319 `        createBlock("H3").setAncestor("BODY", "HGROUP").setExcludes("HGROUP", "H1", "H2", "H3", "H4", "H5", "H6");`
+org.jsoup.parser.Tag:320 `        createBlock("H4").setAncestor("BODY", "HGROUP").setExcludes("HGROUP", "H1", "H2", "H3", "H4", "H5", "H6");`
+org.jsoup.parser.Tag:321 `        createBlock("H5").setAncestor("BODY", "HGROUP").setExcludes("HGROUP", "H1", "H2", "H3", "H4", "H5", "H6");`
+org.jsoup.parser.Tag:322 `        createBlock("H6").setAncestor("BODY", "HGROUP").setExcludes("HGROUP", "H1", "H2", "H3", "H4", "H5", "H6");`
+org.jsoup.parser.Tag:323 `        createBlock("UL");`
+org.jsoup.parser.Tag:324 `        createBlock("OL");`
+org.jsoup.parser.Tag:325 `        createBlock("PRE").setContainInlineOnly().setPreserveWhitespace();`
+org.jsoup.parser.Tag:326 `        createBlock("DIV");`
+org.jsoup.parser.Tag:327 `        createBlock("BLOCKQUOTE");`
+org.jsoup.parser.Tag:328 `        createBlock("HR").setEmpty();`
+org.jsoup.parser.Tag:329 `        createBlock("ADDRESS").setContainInlineOnly();`
+org.jsoup.parser.Tag:330 `        createBlock("FIGURE");`
+org.jsoup.parser.Tag:331 `        createBlock("FIGCAPTION").setAncestor("FIGURE");`
+org.jsoup.parser.Tag:334 `        createBlock("FORM").setOptionalClosing(); // can't contain self`
+org.jsoup.parser.Tag:335 `        createInline("INPUT").setAncestor("FORM").setEmpty();`
+org.jsoup.parser.Tag:336 `        createInline("SELECT").setAncestor("FORM"); // just contain optgroup or option`
+org.jsoup.parser.Tag:337 `        createInline("TEXTAREA").setAncestor("FORM").setContainDataOnly();`
+org.jsoup.parser.Tag:338 `        createInline("LABEL").setAncestor("FORM").setOptionalClosing(); // not self`
+org.jsoup.parser.Tag:339 `        createInline("BUTTON").setAncestor("FORM"); // bunch of excludes not defined`
+org.jsoup.parser.Tag:340 `        createInline("OPTGROUP").setParent("SELECT"); //  only contain option`
+org.jsoup.parser.Tag:341 `        createInline("OPTION").setParent("SELECT", "OPTGROUP", "DATALIST").setOptionalClosing();`
+org.jsoup.parser.Tag:342 `        createBlock("FIELDSET").setAncestor("FORM");`
+org.jsoup.parser.Tag:343 `        createInline("LEGEND").setAncestor("FIELDSET");`
+org.jsoup.parser.Tag:346 `        createInline("DATALIST");`
+org.jsoup.parser.Tag:347 `        createInline("KEYGEN").setEmpty();`
+org.jsoup.parser.Tag:348 `        createInline("OUTPUT");`
+org.jsoup.parser.Tag:349 `        createInline("PROGRESS").setOptionalClosing();`
+org.jsoup.parser.Tag:350 `        createInline("METER").setOptionalClosing();`
+org.jsoup.parser.Tag:353 `        createInline("AREA").setAncestor("MAP").setEmpty(); // not an inline per-se`
+org.jsoup.parser.Tag:354 `        createInline("PARAM").setParent("OBJECT").setEmpty();`
+org.jsoup.parser.Tag:355 `        createBlock("INS"); // only within body`
+org.jsoup.parser.Tag:356 `        createBlock("DEL"); // only within body`
+org.jsoup.parser.Tag:360 `        createBlock("DL").setOptionalClosing(); // can't nest`
+org.jsoup.parser.Tag:361 `        createBlock("DT").setAncestor("DL").setExcludes("DL", "DD").setOptionalClosing(); // only within DL.`
+org.jsoup.parser.Tag:362 `        createBlock("DD").setAncestor("DL").setExcludes("DL", "DT").setOptionalClosing(); // only within DL.`
+org.jsoup.parser.Tag:364 `        createBlock("LI").setAncestor("UL", "OL").setOptionalClosing(); // only within OL or UL.`
+org.jsoup.parser.Tag:367 `        createBlock("TABLE").setOptionalClosing().setIgnoreEnd("BODY", "CAPTION", "COL", "COLGROUP", "HTML", "TBODY", "TD", "TFOO", "TH", "THEAD", "TR"); // specific list of only includes (tr, td, thead etc) not implemented`
+org.jsoup.parser.Tag:368 `        createBlock("CAPTION").setParent("TABLE").setExcludes("THEAD", "TFOOT", "TBODY", "COLGROUP", "COL", "TR", "TH", "TD").setOptionalClosing().setIgnoreEnd("BODY", "COL", "COLGROUP", "HTML", "TBODY", "TD", "TFOOT", "TH", "THEAD", "TR");`
+org.jsoup.parser.Tag:369 `        createBlock("THEAD").setParent("TABLE").setLimitChildren().setOptionalClosing().setIgnoreEnd("BODY", "CAPTION", "COL", "COLGROUP", "HTML", "TD", "TH", "TR"); // just TR`
+org.jsoup.parser.Tag:370 `        createBlock("TFOOT").setParent("TABLE").setLimitChildren().setOptionalClosing().setIgnoreEnd("BODY", "CAPTION", "COL", "COLGROUP", "HTML", "TD", "TH", "TR"); // just TR`
+org.jsoup.parser.Tag:371 `        createBlock("TBODY").setParent("TABLE").setLimitChildren().setOptionalClosing().setIgnoreEnd("BODY", "CAPTION", "COL", "COLGROUP", "HTML", "TD", "TH", "TR"); // optional / implicit open too. just TR`
+org.jsoup.parser.Tag:372 `        createBlock("COLGROUP").setParent("TABLE").setLimitChildren().setOptionalClosing().setIgnoreEnd("COL"); // just COL`
+org.jsoup.parser.Tag:373 `        createBlock("COL").setParent("COLGROUP").setEmpty();`
+org.jsoup.parser.Tag:374 `        createBlock("TR").setParent("TBODY", "THEAD", "TFOOT", "TABLE").setLimitChildren().setOptionalClosing().setIgnoreEnd("BODY", "CAPTION", "COL", "COLGROUP", "HTML", "TD", "TH"); // just TH, TD`
+org.jsoup.parser.Tag:375 `        createBlock("TH").setParent("TR").setExcludes("THEAD", "TFOOT", "TBODY", "COLGROUP", "COL", "TR", "TH", "TD").setOptionalClosing().setIgnoreEnd("BODY", "CAPTION", "COL", "COLGROUP", "HTML");`
+org.jsoup.parser.Tag:376 `        createBlock("TD").setParent("TR").setExcludes("THEAD", "TFOOT", "TBODY", "COLGROUP", "COL", "TR", "TH", "TD").setOptionalClosing().setIgnoreEnd("BODY", "CAPTION", "COL", "COLGROUP", "HTML");`
+org.jsoup.parser.Tag:379 `        createBlock("VIDEO").setExcludes("VIDEO", "AUDIO");`
+org.jsoup.parser.Tag:380 `        createBlock("AUDIO").setExcludes("VIDEO", "AUDIO");`
+org.jsoup.parser.Tag:381 `        createInline("SOURCE").setParent("VIDEO", "AUDIO").setEmpty();`
+org.jsoup.parser.Tag:382 `        createInline("TRACK").setParent("VIDEO", "AUDIO").setEmpty();`
+org.jsoup.parser.Tag:383 `        createBlock("CANVAS");`
+org.jsoup.parser.Tag:386 `        createBlock("DETAILS");`
+org.jsoup.parser.Tag:387 `        createInline("SUMMARY").setParent("DETAILS");`
+org.jsoup.parser.Tag:388 `        createInline("COMMAND").setEmpty();`
+org.jsoup.parser.Tag:389 `        createBlock("MENU");`
+org.jsoup.parser.Tag:390 `        createInline("DEVICE").setEmpty();`
+org.jsoup.parser.Tag:391 `    }`
+org.jsoup.parser.Tag:394 `        return register(new Tag(tagName));`
+org.jsoup.parser.Tag:398 `        Tag inline = new Tag(tagName);`
+org.jsoup.parser.Tag:399 `        inline.isBlock = false;`
+org.jsoup.parser.Tag:400 `        inline.canContainBlock = false;`
+org.jsoup.parser.Tag:401 `        return register(inline);`
+org.jsoup.parser.Tag:405 `        tag.setAncestor(defaultAncestor.tagName);`
+org.jsoup.parser.Tag:406 `        tag.setKnownTag();`
+org.jsoup.parser.Tag:407 `        synchronized (tags) {`
+org.jsoup.parser.Tag:408 `            tags.put(tag.tagName, tag);`
+org.jsoup.parser.Tag:409 `        }`
+org.jsoup.parser.Tag:410 `        return tag;`
+org.jsoup.parser.Tag:414 `        canContainBlock = true;`
+org.jsoup.parser.Tag:415 `        return this;`
+org.jsoup.parser.Tag:419 `        canContainBlock = false;`
+org.jsoup.parser.Tag:420 `        canContainInline = true;`
+org.jsoup.parser.Tag:421 `        return this;`
+org.jsoup.parser.Tag:425 `        canContainBlock = false;`
+org.jsoup.parser.Tag:426 `        canContainInline = false;`
+org.jsoup.parser.Tag:427 `        preserveWhitespace = true;`
+org.jsoup.parser.Tag:428 `        return this;`
+org.jsoup.parser.Tag:432 `        canContainBlock = false;`
+org.jsoup.parser.Tag:433 `        canContainInline = false;`
+org.jsoup.parser.Tag:434 `        empty = true;`
+org.jsoup.parser.Tag:435 `        return this;`
+org.jsoup.parser.Tag:439 `        optionalClosing = true;`
+org.jsoup.parser.Tag:440 `        return this;`
+org.jsoup.parser.Tag:444 `        preserveWhitespace = true;`
+org.jsoup.parser.Tag:445 `        return this;`
+org.jsoup.parser.Tag:449 `        if (tagNames == null || tagNames.length == 0) {`
+org.jsoup.parser.Tag:450 `            ancestors = Collections.emptyList();`
+org.jsoup.parser.Tag:452 `            ancestors = new ArrayList<Tag>(tagNames.length);`
+org.jsoup.parser.Tag:453 `            for (String name : tagNames) {`
+org.jsoup.parser.Tag:454 `                ancestors.add(Tag.valueOf(name));`
+org.jsoup.parser.Tag:457 `        return this;`
+org.jsoup.parser.Tag:461 `        if (tagNames == null || tagNames.length == 0) {`
+org.jsoup.parser.Tag:462 `            excludes = Collections.emptyList();`
+org.jsoup.parser.Tag:464 `            excludes = new ArrayList<Tag>(tagNames.length);`
+org.jsoup.parser.Tag:465 `            for (String name : tagNames) {`
+org.jsoup.parser.Tag:466 `                excludes.add(Tag.valueOf(name));`
+org.jsoup.parser.Tag:469 `        return this;`
+org.jsoup.parser.Tag:473 `        if (tagNames == null || tagNames.length == 0) {`
+org.jsoup.parser.Tag:476 `            ignoreEndTags = new ArrayList<Tag>(tagNames.length);`
+org.jsoup.parser.Tag:477 `            for (String name : tagNames) {`
+org.jsoup.parser.Tag:478 `                ignoreEndTags.add(Tag.valueOf(name));`
+org.jsoup.parser.Tag:481 `        return this;`
+org.jsoup.parser.Tag:485 `        directDescendant = true;`
+org.jsoup.parser.Tag:486 `        setAncestor(tagNames);`
+org.jsoup.parser.Tag:487 `        return this;`
+org.jsoup.parser.Tag:491 `        limitChildren = true;`
+org.jsoup.parser.Tag:492 `        return this;`
+org.jsoup.parser.Tag:501 `        knownTag = true;`
+org.jsoup.parser.Tag:502 `        return this;`
+org.jsoup.parser.TokenQueue:12 `    private int pos = 0;`
+org.jsoup.parser.TokenQueue:14 `    private static final Character ESC = '\\'; // escape char for chomp balanced.`
+org.jsoup.parser.TokenQueue:20 `    public TokenQueue(String data) {`
+org.jsoup.parser.TokenQueue:21 `        Validate.notNull(data);`
+org.jsoup.parser.TokenQueue:22 `        queue = data;`
+org.jsoup.parser.TokenQueue:23 `    }`
+org.jsoup.parser.TokenQueue:30 `        return remainingLength() == 0;`
+org.jsoup.parser.TokenQueue:34 `        return queue.length() - pos;`
+org.jsoup.parser.TokenQueue:69 `        int count = seq.length();`
+org.jsoup.parser.TokenQueue:70 `        if (count > remainingLength())`
+org.jsoup.parser.TokenQueue:71 `            return false;`
+org.jsoup.parser.TokenQueue:73 `        while (--count >= 0) {`
+org.jsoup.parser.TokenQueue:74 `            if (Character.toLowerCase(seq.charAt(count)) != Character.toLowerCase(queue.charAt(pos+count)))`
+org.jsoup.parser.TokenQueue:75 `                return false;`
+org.jsoup.parser.TokenQueue:77 `        return true;`
+org.jsoup.parser.TokenQueue:96 `        for (String s : seq) {`
+org.jsoup.parser.TokenQueue:97 `            if (matches(s))`
+org.jsoup.parser.TokenQueue:98 `                return true;`
+org.jsoup.parser.TokenQueue:100 `        return false;`
+org.jsoup.parser.TokenQueue:104 `        if (isEmpty())`
+org.jsoup.parser.TokenQueue:107 `        for (char c: seq) {`
+org.jsoup.parser.TokenQueue:108 `            if (queue.charAt(pos) == c)`
+org.jsoup.parser.TokenQueue:111 `        return false;`
+org.jsoup.parser.TokenQueue:116 `        return (remainingLength() >= 2 && queue.charAt(pos) == '<' && Character.isLetterOrDigit(queue.charAt(pos+1)));`
+org.jsoup.parser.TokenQueue:126 `        if (matches(seq)) {`
+org.jsoup.parser.TokenQueue:127 `            pos += seq.length();`
+org.jsoup.parser.TokenQueue:128 `            return true;`
+org.jsoup.parser.TokenQueue:130 `            return false;`
+org.jsoup.parser.TokenQueue:139 `        return !isEmpty() && Character.isWhitespace(queue.charAt(pos));`
+org.jsoup.parser.TokenQueue:147 `        return !isEmpty() && Character.isLetterOrDigit(queue.charAt(pos));`
+org.jsoup.parser.TokenQueue:175 `        if (!matches(seq))`
+org.jsoup.parser.TokenQueue:177 `        int len = seq.length();`
+org.jsoup.parser.TokenQueue:178 `        if (len > remainingLength())`
+org.jsoup.parser.TokenQueue:181 `        pos += len;`
+org.jsoup.parser.TokenQueue:182 `    }`
+org.jsoup.parser.TokenQueue:190 `        int offset = queue.indexOf(seq, pos);`
+org.jsoup.parser.TokenQueue:191 `        if (offset != -1) {`
+org.jsoup.parser.TokenQueue:192 `            String consumed = queue.substring(pos, offset);`
+org.jsoup.parser.TokenQueue:193 `            pos += consumed.length();`
+org.jsoup.parser.TokenQueue:194 `            return consumed;`
+org.jsoup.parser.TokenQueue:248 `        String data = consumeTo(seq);`
+org.jsoup.parser.TokenQueue:249 `        matchChomp(seq);`
+org.jsoup.parser.TokenQueue:250 `        return data;`
+org.jsoup.parser.TokenQueue:314 `        boolean seen = false;`
+org.jsoup.parser.TokenQueue:315 `        while (matchesWhitespace()) {`
+org.jsoup.parser.TokenQueue:316 `            pos++;`
+org.jsoup.parser.TokenQueue:317 `            seen = true;`
+org.jsoup.parser.TokenQueue:319 `        return seen;`
+org.jsoup.parser.TokenQueue:339 `        int start = pos;`
+org.jsoup.parser.TokenQueue:340 `        while (!isEmpty() && (matchesWord() || matchesAny(':', '_', '-')))`
+org.jsoup.parser.TokenQueue:341 `            pos++;`
+org.jsoup.parser.TokenQueue:343 `        return queue.substring(start, pos);`
+org.jsoup.parser.TokenQueue:352 `        int start = pos;`
+org.jsoup.parser.TokenQueue:353 `        while (!isEmpty() && (matchesWord() || matchesAny('|', '_', '-')))`
+org.jsoup.parser.TokenQueue:354 `            pos++;`
+org.jsoup.parser.TokenQueue:356 `        return queue.substring(start, pos);`
+org.jsoup.parser.TokenQueue:377 `        int start = pos;`
+org.jsoup.parser.TokenQueue:378 `        while (!isEmpty() && (matchesWord() || matchesAny('-', '_', ':')))`
+org.jsoup.parser.TokenQueue:379 `            pos++;`
+org.jsoup.parser.TokenQueue:381 `        return queue.substring(start, pos);`
+org.jsoup.select.Collector:24 `        Elements elements = new Elements();`
+org.jsoup.select.Collector:25 `        new NodeTraversor(new Accumulator(elements, eval)).traverse(root);`
+org.jsoup.select.Collector:26 `        return elements;`
+org.jsoup.select.Collector:33 `        Accumulator(Elements elements, Evaluator eval) {`
+org.jsoup.select.Collector:34 `            this.elements = elements;`
+org.jsoup.select.Collector:35 `            this.eval = eval;`
+org.jsoup.select.Collector:36 `        }`
+org.jsoup.select.Collector:39 `            if (node instanceof Element) {`
+org.jsoup.select.Collector:40 `                Element el = (Element) node;`
+org.jsoup.select.Collector:41 `                if (eval.matches(el))`
+org.jsoup.select.Collector:42 `                    elements.add(el);`
+org.jsoup.select.Collector:44 `        }`
+org.jsoup.select.Collector:48 `        }`
+org.jsoup.select.Elements:15 `    public Elements() {`
+org.jsoup.select.Elements:16 `        contents = new ArrayList<Element>();`
+org.jsoup.select.Elements:17 `    }`
+org.jsoup.select.Elements:19 `    public Elements(Collection<Element> elements) {`
+org.jsoup.select.Elements:20 `        contents = new ArrayList<Element>(elements);`
+org.jsoup.select.Elements:21 `    }`
+org.jsoup.select.Elements:394 `        return contents.isEmpty() ? null : contents.get(0);`
+org.jsoup.select.Elements:406 `    public int size() {return contents.size();}`
+org.jsoup.select.Elements:412 `    public Iterator<Element> iterator() {return contents.iterator();}`
+org.jsoup.select.Elements:418 `    public boolean add(Element element) {return contents.add(element);}`
+org.jsoup.select.NodeTraversor:11 `    public NodeTraversor(NodeVisitor visitor) {`
+org.jsoup.select.NodeTraversor:12 `        this.visitor = visitor;`
+org.jsoup.select.NodeTraversor:13 `    }`
+org.jsoup.select.NodeTraversor:16 `        Node node = root;`
+org.jsoup.select.NodeTraversor:17 `        int depth = 0;`
+org.jsoup.select.NodeTraversor:19 `        while (node != null) {`
+org.jsoup.select.NodeTraversor:20 `            visitor.head(node, depth);`
+org.jsoup.select.NodeTraversor:21 `            if (node.childNodes().size() > 0) {`
+org.jsoup.select.NodeTraversor:22 `                node = node.childNode(0);`
+org.jsoup.select.NodeTraversor:23 `                depth++;`
+org.jsoup.select.NodeTraversor:25 `                while (node.nextSibling() == null && depth > 0) {`
+org.jsoup.select.NodeTraversor:26 `                    visitor.tail(node, depth);`
+org.jsoup.select.NodeTraversor:27 `                    node = node.parent();`
+org.jsoup.select.NodeTraversor:28 `                    depth--;`
+org.jsoup.select.NodeTraversor:30 `                visitor.tail(node, depth);`
+org.jsoup.select.NodeTraversor:31 `                if (node == root)`
+org.jsoup.select.NodeTraversor:32 `                    break;`
+org.jsoup.select.NodeTraversor:33 `                node = node.nextSibling();`
+org.jsoup.select.NodeTraversor:36 `    }`
+org.jsoup.select.Selector:58 `    private final static String[] combinators = {",", ">", "+", "~", " "};`
+org.jsoup.select.Selector:64 `    private Selector(String query, Element root) {`
+org.jsoup.select.Selector:65 `        Validate.notNull(query);`
+org.jsoup.select.Selector:66 `        query = query.trim();`
+org.jsoup.select.Selector:67 `        Validate.notEmpty(query);`
+org.jsoup.select.Selector:68 `        Validate.notNull(root);`
+org.jsoup.select.Selector:70 `        this.elements = new LinkedHashSet<Element>();`
+org.jsoup.select.Selector:71 `        this.query = query;`
+org.jsoup.select.Selector:72 `        this.root = root;`
+org.jsoup.select.Selector:73 `        this.tq = new TokenQueue(query);`
+org.jsoup.select.Selector:74 `    }`
+org.jsoup.select.Selector:83 `        return new Selector(query, root).select();`
+org.jsoup.select.Selector:104 `        tq.consumeWhitespace();`
+org.jsoup.select.Selector:106 `        if (tq.matchesAny(combinators)) { // if starts with a combinator, use root as elements`
+org.jsoup.select.Selector:110 `            addElements(findElements()); // chomp first element matcher off queue `
+org.jsoup.select.Selector:113 `        while (!tq.isEmpty()) {`
+org.jsoup.select.Selector:131 `        return new Elements(elements);`
+org.jsoup.select.Selector:154 `        if (tq.matchChomp("#")) {`
+org.jsoup.select.Selector:156 `        } else if (tq.matchChomp(".")) {`
+org.jsoup.select.Selector:158 `        } else if (tq.matchesWord()) {`
+org.jsoup.select.Selector:159 `            return byTag();`
+org.jsoup.select.Selector:186 `        elements.addAll(add);`
+org.jsoup.select.Selector:187 `    }`
+org.jsoup.select.Selector:212 `        String tagName = tq.consumeElementSelector();`
+org.jsoup.select.Selector:213 `        Validate.notEmpty(tagName);`
+org.jsoup.select.Selector:216 `        if (tagName.contains("|"))`
+org.jsoup.select.Selector:218 `        return root.getElementsByTag(tagName);`
+
+
+Task Description:
+The provided code snippets are from the Jsoup library, which is a Java library for working with real-world HTML. Below is a brief description of the relevant parts of the code:
+
+1. **org.jsoup.Jsoup:44**
+   - `return Parser.parse(html, "");`
+   - This line returns the result of parsing the given HTML string using the `Parser` class.
+
+2. **org.jsoup.helper.StringUtil:11**
+   - `private static final String[] padding = {"", " ", "  ", "   ", "    ", "     ", "      ", "       ", "        ", "         ", "          "};`
+   - This line defines a static array of strings used for padding purposes, with each element containing an increasing number of spaces.
+
+3. **org.jsoup.helper.StringUtil:51, 54, 55**
+   - These lines check the width and return the appropriate padding string from the array if the width is within the array's bounds.
+
+4. **org.jsoup.helper.Validate:15, 17, 34, 36, 72, 74, 82, 84**
+   - These lines contain validation checks to ensure that objects and strings are not null or empty.
+
+5. **org.jsoup.nodes.Attribute:21-26, 33, 73, 78, 95, 96, 118-120**
+   - These lines define the `Attribute` class, which represents an HTML attribute. It includes validation, key-value storage, and methods for handling attributes.
+
+6. **org.jsoup.nodes.Attributes:17, 20, 51-53, 126-131, 151, 154**
+   - These lines define the `Attributes` class, which is a collection of `Attribute` objects. It includes methods for adding, iterating, and manipulating attributes.
+
+7. **org.jsoup.nodes.Document:17, 26, 27, 50, 58, 100-117, 122-137, 141-143, 156, 163-172, 193, 200-204, 206, 217, 265, 274, 292, 312**
+   - These lines define the `Document` class, which represents an HTML document. It includes methods for finding elements, normalizing the document structure, and handling output settings.
+
+8. **org.jsoup.nodes.Element:37-41, 52, 53, 57, 66, 75, 85, 128, 199, 209-212, 472-475, 970-972, 975, 977-978, 981, 984-989, 1022, 1027, 1040-1042**
+   - These lines define the `Element` class, which represents an HTML element. It includes methods for manipulating the element's tag, attributes, children, and rendering the element as HTML.
+
+9. **org.jsoup.nodes.Entities:15-30, 38, 41, 45-58, 62-63, 96, 106, 217, 2253-2271**
+   - These lines define the `Entities` class, which handles HTML entity encoding and decoding. It includes methods for escaping and unescaping strings and initializing entity maps.
+
+10. **org.jsoup.nodes.Evaluator:25-27, 30**
+    - These lines define the `Evaluator` class, which is used to evaluate whether elements match certain criteria.
+
+11. **org.jsoup.nodes.Node:30-37, 186, 195, 215-220, 227-229, 242-245, 261-266, 270-275, 288-291, 294-297, 312-321, 345, 349-350, 357-364, 381-382, 393-396, 403-406, 409-415**
+    - These lines define the `Node` class, which is the base class for all nodes in the HTML tree. It includes methods for manipulating child nodes, parent nodes, and rendering the node as HTML.
+
+12. **org.jsoup.parser.Parser:17-21, 27, 29-44, 53-54, 82-97, 133-145, 148-149, 154-156, 159-173, 183-204, 235-261, 265-279, 283-285, 316**
+    - These lines define the `Parser` class, which is responsible for parsing HTML into a `Document` object. It includes methods for handling tags, attributes, and the document structure.
+
+13. **org.jsoup.parser.Tag:13-37, 40, 51-65, 75-90, 94-110, 118-158, 178-228, 243-391, 394-410, 414-487, 491-502**
+    - These lines define the `Tag` class, which represents an HTML tag. It includes methods for handling tag properties, such as whether the tag is block-level, self-closing, or can contain other tags.
+
+14. **org.jsoup.parser.TokenQueue:12-23, 30-34, 69-77, 96-100, 104-111, 116-128, 139-147, 175-182, 190-194, 248-250, 314-319, 339-343, 352-356, 377-381**
+    - These lines define the `TokenQueue` class, which is used to tokenize and parse HTML strings. It includes methods for matching and consuming tokens.
+
+15. **org.jsoup.select.Collector:24-26, 33-36, 39-44, 48**
+    - These lines define the `Collector` class, which collects elements that match a given evaluator.
+
+16. **org.jsoup.select.Elements:15-21, 394, 406, 412, 418**
+    - These lines define the `Elements` class, which is a collection of `Element` objects. It includes methods for adding, iterating, and accessing elements.
+
+17. **org.jsoup.select.NodeTraversor:11-13, 16-36**
+    - These lines define the `NodeTraversor` class, which traverses the HTML tree and applies a visitor to each node.
+
+18. **org.jsoup.select.Selector:58, 64-74, 83, 104-113, 131, 154-159, 186-187, 212-218**
+    - These lines define the `Selector` class, which is used to select elements from the HTML tree based on a query.
+
+The provided test case `parentlessToString` verifies that an `img` element can be correctly parsed, selected, and rendered as a string, both when it is part of a document and when it is removed from the document. The expected output is checked using assertions.
+
+Test Results:
+The provided code is throwing NullPointerException. For examples:
+Here are the tests and error messages of NullPointerExceptions.
+@Test public void parentlessToString(){
+  Document doc=Jsoup.parse("<img src='foo'>");
+  Element img=doc.select("img").first();
+  assertEquals("\n<img src=\"foo\" />",img.toString());
+  img.remove();
+  assertEquals("<img src=\"foo\" />",img.toString());
+}
+
+
+
+parentlessToString(org.jsoup.nodes.ElementTest): Cannot invoke "org.jsoup.nodes.Document.outputSettings()" because the return value of "org.jsoup.nodes.Node.ownerDocument()" is null
+Cannot invoke "org.jsoup.nodes.Document.outputSettings()" because the return value of "org.jsoup.nodes.Node.ownerDocument()" is null
+java.lang.NullPointerException: Cannot invoke "org.jsoup.nodes.Document.outputSettings()" because the return value of "org.jsoup.nodes.Node.ownerDocument()" is null
+	at org.jsoup.nodes.Node.outerHtml(Node.java:363)
+	at org.jsoup.nodes.Node.outerHtml(Node.java:358)
+	at org.jsoup.nodes.Element.toString(Element.java:1022)
+	at org.jsoup.nodes.ElementTest.parentlessToString(ElementTest.java:422)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at kr.ac.seoultech.selab.logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+
+
+
+
+
+Analyze the provided code and utilize task description, test results, and SBFL techniques results to help in identifying potentially faulty lines. Provide the results following this JSON template:
+```json
+{
+  "faultLoc": [
+    {   
+      "faultyLine": (indicating the location of the suspicious code in ClassName:LineNumber format),
+      "code": (displaying the actual code),
+      "explanation": (step by step reasoning on why this location is considered potentially faulty)
+    },  
+    ... 
+   ]   
+}
+```
+Ensure that the objects in the "faultLoc" array are stored in descending order of suspicion.

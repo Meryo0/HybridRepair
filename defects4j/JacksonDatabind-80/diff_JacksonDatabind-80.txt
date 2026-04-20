@@ -1,0 +1,42 @@
+diff -U 5 -r ./defects4j/JacksonDatabind-80/buggy/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver.java ./defects4j/JacksonDatabind-80/fixed/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver.java
+--- ./defects4j/JacksonDatabind-80/buggy/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver.java	2024-05-19 19:44:49.878476615 +0900
++++ ./defects4j/JacksonDatabind-80/fixed/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver.java	2024-05-19 19:44:49.934477759 +0900
+@@ -74,17 +74,19 @@
+                 }
+             }
+         }
+         
+         // then annotated types for property itself
++        if (property != null) {
+             Collection<NamedType> st = ai.findSubtypes(property);
+             if (st != null) {
+                 for (NamedType nt : st) {
+                     AnnotatedClass ac = AnnotatedClassResolver.resolveWithoutSuperTypes(config,
+                             nt.getType());
+                     _collectAndResolve(ac, nt, config, ai, collected);
+                 }            
++            }
+         }
+ 
+         NamedType rootType = new NamedType(rawBase, null);
+         AnnotatedClass ac = AnnotatedClassResolver.resolveWithoutSuperTypes(config, rawBase);
+             
+@@ -140,16 +142,18 @@
+         AnnotatedClass ac = AnnotatedClassResolver.resolveWithoutSuperTypes(config,
+                 rawBase);
+         _collectAndResolveByTypeId(ac, rootType, config, typesHandled, byName);
+         
+         // then with definitions from property
++        if (property != null) {
+             Collection<NamedType> st = ai.findSubtypes(property);
+             if (st != null) {
+                 for (NamedType nt : st) {
+                     ac = AnnotatedClassResolver.resolveWithoutSuperTypes(config, nt.getType());
+                     _collectAndResolveByTypeId(ac, nt, config, typesHandled, byName);
+                 }            
++            }
+         }
+         // and finally explicit type registrations (highest precedence)
+         if (_registeredSubtypes != null) {
+             for (NamedType subtype : _registeredSubtypes) {
+                 // is it a subtype of root type?

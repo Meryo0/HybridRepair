@@ -1,0 +1,24 @@
+@Test public void testToCharArray(){
+  final StringBuilder builder=new StringBuilder("abcdefg");
+  final char[] expected=builder.toString().toCharArray();
+  assertArrayEquals(expected,CharSequenceUtils.toCharArray(builder));
+  assertArrayEquals(expected,CharSequenceUtils.toCharArray(builder.toString()));
+  assertArrayEquals(ArrayUtils.EMPTY_CHAR_ARRAY,CharSequenceUtils.toCharArray(null));
+}
+
+
+
+  JUnit Jupiter:CharSequenceUtilsTest:testToCharArray()
+    MethodSource [className = 'org.apache.commons.lang3.CharSequenceUtilsTest', methodName = 'testToCharArray', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.lang.CharSequence.length()" because "cs" is null
+       org.apache.commons.lang3.CharSequenceUtils.toCharArray(CharSequenceUtils.java:312)
+       org.apache.commons.lang3.CharSequenceUtilsTest.testToCharArray(CharSequenceUtilsTest.java:189)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727)
+       org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+       org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+       org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
+       [...]

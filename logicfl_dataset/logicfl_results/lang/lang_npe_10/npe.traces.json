@@ -1,0 +1,98 @@
+{"npe.traces": [
+    {
+        "test.method": "testReflectionNull",
+        "traces": [
+            {
+                "is_target": false,
+                "method": "requireNonNull",
+                "line": 235,
+                "class": "java.util.Objects"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 560,
+                "class": "org.apache.commons.lang3.builder.ReflectionToStringBuilder"
+            },
+            {
+                "is_target": true,
+                "method": "toString",
+                "line": 386,
+                "class": "org.apache.commons.lang3.builder.ReflectionToStringBuilder"
+            },
+            {
+                "is_target": true,
+                "method": "toString",
+                "line": 156,
+                "class": "org.apache.commons.lang3.builder.ReflectionToStringBuilder"
+            },
+            {
+                "is_target": true,
+                "method": "testReflectionNull",
+                "line": 1268,
+                "class": "org.apache.commons.lang3.builder.ToStringBuilderTest"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            }
+        ],
+        "test.class": "org.apache.commons.lang3.builder.ToStringBuilderTest"
+    },
+    {
+        "test.method": "testConstructorWithNullObject",
+        "traces": [
+            {
+                "is_target": false,
+                "method": "requireNonNull",
+                "line": 235,
+                "class": "java.util.Objects"
+            },
+            {
+                "is_target": true,
+                "method": "<init>",
+                "line": 535,
+                "class": "org.apache.commons.lang3.builder.ReflectionToStringBuilder"
+            },
+            {
+                "is_target": true,
+                "method": "testConstructorWithNullObject",
+                "line": 31,
+                "class": "org.apache.commons.lang3.builder.ReflectionToStringBuilderTest"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            }
+        ],
+        "test.class": "org.apache.commons.lang3.builder.ReflectionToStringBuilderTest"
+    }
+]}

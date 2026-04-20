@@ -1,0 +1,54 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:391",
+            "code": "final boolean file1Exists = file1.exists();",
+            "explanation": "The NullPointerException indicates that 'file1' is null. This line attempts to call 'exists()' on 'file1' without checking if 'file1' is null. Adding a null check before this line can prevent the exception."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:1116",
+            "code": "if (!directory.exists()) {",
+            "explanation": "This line checks if 'directory' exists but does not handle the case where 'directory' might be null. Adding a null check before this line can prevent potential NullPointerExceptions."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:1120",
+            "code": "if (!isSymlink(directory)) {",
+            "explanation": "This line calls 'isSymlink(directory)' without checking if 'directory' is null. Adding a null check before this line can prevent potential NullPointerExceptions."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:1121",
+            "code": "cleanDirectory(directory);",
+            "explanation": "This line calls 'cleanDirectory(directory)' without checking if 'directory' is null. Adding a null check before this line can prevent potential NullPointerExceptions."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:1124",
+            "code": "if (!directory.delete()) {",
+            "explanation": "This line attempts to delete 'directory' without checking if 'directory' is null. Adding a null check before this line can prevent potential NullPointerExceptions."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:1720",
+            "code": "if (file == null) {",
+            "explanation": "This line checks if 'file' is null but does not handle the case properly. Ensuring that 'file' is not null before calling methods on it can prevent potential NullPointerExceptions."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:2676",
+            "code": "if (!directory.exists()) {",
+            "explanation": "This line checks if 'directory' exists but does not handle the case where 'directory' might be null. Adding a null check before this line can prevent potential NullPointerExceptions."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:2681",
+            "code": "if (!directory.isDirectory()) {",
+            "explanation": "This line checks if 'directory' is a directory but does not handle the case where 'directory' might be null. Adding a null check before this line can prevent potential NullPointerExceptions."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:2686",
+            "code": "final File[] files = directory.listFiles();",
+            "explanation": "This line attempts to list files in 'directory' without checking if 'directory' is null. Adding a null check before this line can prevent potential NullPointerExceptions."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:2687",
+            "code": "if (files == null) {  // null if security restricted",
+            "explanation": "This line checks if 'files' is null but does not handle the case where 'directory' might be null. Ensuring that 'directory' is not null before listing files can prevent potential NullPointerExceptions."
+        }
+    ]
+}

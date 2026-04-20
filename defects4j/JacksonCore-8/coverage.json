@@ -1,0 +1,21 @@
+{
+    "coverage": [
+        {
+            "covered": [ 3, 80, 81, 83 ],
+            "className": "com.fasterxml.jackson.core.util.TestTextBuffer"
+        },
+        {
+            "covered": [ 29, 85, 121, 122, 123, 156, 157, 158, 160, 161, 162, 165, 168, 301, 302, 303, 307 ],
+            "className": "com.fasterxml.jackson.core.util.TextBuffer"
+        },
+        {
+            "covered": [ 45, 46, 62, 63, 71, 72, 73, 74 ],
+            "className": "com.fasterxml.jackson.core.util.BufferRecycler"
+        }
+    ],
+    "classes": [
+        "com.fasterxml.jackson.core.util.BufferRecycler",
+        "com.fasterxml.jackson.core.util.TestTextBuffer",
+        "com.fasterxml.jackson.core.util.TextBuffer"
+    ]
+}

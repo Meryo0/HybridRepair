@@ -1,0 +1,320 @@
+{"npe.traces": [
+    {
+        "test.method": "test_checkEquals_functionality",
+        "traces": [
+            {
+                "is_target": false,
+                "method": "requireNonNull",
+                "line": 235,
+                "class": "java.util.Objects"
+            },
+            {
+                "is_target": true,
+                "method": "checkEquals",
+                "line": 200,
+                "class": "org.apache.commons.io.IOCase"
+            },
+            {
+                "is_target": true,
+                "method": "test_checkEquals_functionality",
+                "line": 191,
+                "class": "org.apache.commons.io.IOCaseTest"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            }
+        ],
+        "test.class": "org.apache.commons.io.IOCaseTest"
+    },
+    {
+        "test.method": "testNameFilter",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "accept",
+                "line": 202,
+                "class": "org.apache.commons.io.filefilter.NameFileFilter"
+            },
+            {
+                "is_target": true,
+                "method": "assertFiltering",
+                "line": 52,
+                "class": "org.apache.commons.io.filefilter.AbstractFilterTest"
+            },
+            {
+                "is_target": true,
+                "method": "testNameFilter",
+                "line": 1183,
+                "class": "org.apache.commons.io.filefilter.FileFilterTest"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            }
+        ],
+        "test.class": "org.apache.commons.io.filefilter.FileFilterTest"
+    },
+    {
+        "test.method": "testEmpty",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "accept",
+                "line": 120,
+                "class": "org.apache.commons.io.filefilter.EmptyFileFilter"
+            },
+            {
+                "is_target": true,
+                "method": "assertFiltering",
+                "line": 52,
+                "class": "org.apache.commons.io.filefilter.AbstractFilterTest"
+            },
+            {
+                "is_target": true,
+                "method": "testEmpty",
+                "line": 487,
+                "class": "org.apache.commons.io.filefilter.FileFilterTest"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            }
+        ],
+        "test.class": "org.apache.commons.io.filefilter.FileFilterTest"
+    },
+    {
+        "test.method": "testFiles",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "accept",
+                "line": 108,
+                "class": "org.apache.commons.io.filefilter.FileFileFilter"
+            },
+            {
+                "is_target": true,
+                "method": "assertFiltering",
+                "line": 52,
+                "class": "org.apache.commons.io.filefilter.AbstractFilterTest"
+            },
+            {
+                "is_target": true,
+                "method": "testFiles",
+                "line": 588,
+                "class": "org.apache.commons.io.filefilter.FileFilterTest"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            }
+        ],
+        "test.class": "org.apache.commons.io.filefilter.FileFilterTest"
+    },
+    {
+        "test.method": "testCanRead",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "accept",
+                "line": 117,
+                "class": "org.apache.commons.io.filefilter.CanReadFileFilter"
+            },
+            {
+                "is_target": true,
+                "method": "assertFiltering",
+                "line": 52,
+                "class": "org.apache.commons.io.filefilter.AbstractFilterTest"
+            },
+            {
+                "is_target": true,
+                "method": "testCanRead",
+                "line": 258,
+                "class": "org.apache.commons.io.filefilter.FileFilterTest"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            }
+        ],
+        "test.class": "org.apache.commons.io.filefilter.FileFilterTest"
+    },
+    {
+        "test.method": "testCanWrite",
+        "traces": [
+            {
+                "is_target": true,
+                "method": "accept",
+                "line": 94,
+                "class": "org.apache.commons.io.filefilter.CanWriteFileFilter"
+            },
+            {
+                "is_target": true,
+                "method": "assertFiltering",
+                "line": 52,
+                "class": "org.apache.commons.io.filefilter.AbstractFilterTest"
+            },
+            {
+                "is_target": true,
+                "method": "testCanWrite",
+                "line": 316,
+                "class": "org.apache.commons.io.filefilter.FileFilterTest"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            }
+        ],
+        "test.class": "org.apache.commons.io.filefilter.FileFilterTest"
+    },
+    {
+        "test.method": "testHidden",
+        "traces": [
+            {
+                "is_target": false,
+                "method": "provider",
+                "line": 105,
+                "class": "java.nio.file.Files"
+            },
+            {
+                "is_target": false,
+                "method": "isHidden",
+                "line": 1643,
+                "class": "java.nio.file.Files"
+            },
+            {
+                "is_target": true,
+                "method": "lambda$accept$0",
+                "line": 134,
+                "class": "org.apache.commons.io.filefilter.HiddenFileFilter"
+            },
+            {
+                "is_target": true,
+                "method": "get",
+                "line": 171,
+                "class": "org.apache.commons.io.filefilter.AbstractFileFilter"
+            },
+            {
+                "is_target": true,
+                "method": "accept",
+                "line": 139,
+                "class": "org.apache.commons.io.filefilter.HiddenFileFilter"
+            },
+            {
+                "is_target": true,
+                "method": "assertFiltering",
+                "line": 92,
+                "class": "org.apache.commons.io.filefilter.AbstractFilterTest"
+            },
+            {
+                "is_target": true,
+                "method": "testHidden",
+                "line": 849,
+                "class": "org.apache.commons.io.filefilter.FileFilterTest"
+            },
+            {
+                "is_target": false,
+                "method": "invoke",
+                "line": 569,
+                "class": "java.lang.reflect.Method"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            },
+            {
+                "is_target": false,
+                "method": "forEach",
+                "line": 1511,
+                "class": "java.util.ArrayList"
+            }
+        ],
+        "test.class": "org.apache.commons.io.filefilter.FileFilterTest"
+    }
+]}

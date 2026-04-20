@@ -1,0 +1,54 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.jsoup.nodes.Element:683",
+            "code": "if (parentNode == null) return null;",
+            "explanation": "The method `nextElementSibling` checks if `parentNode` is null and returns null if it is. This could be causing the NullPointerException when trying to access `cloneNextElementSibling.text()`. The clone operation might not be correctly setting the `parentNode` for the cloned elements."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Element:684",
+            "code": "List<Element> siblings = parent().childElementsList();",
+            "explanation": "If `parentNode` is null, calling `parent()` will result in a NullPointerException. This line is highly suspicious because it relies on `parentNode` being correctly set, which might not be the case after cloning."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Element:685",
+            "code": "Integer index = indexInList(this, siblings);",
+            "explanation": "This line assumes that `siblings` is not null and that `this` is correctly indexed within `siblings`. If `siblings` is null or `this` is not found in `siblings`, it could lead to unexpected behavior."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Element:686",
+            "code": "Validate.notNull(index);",
+            "explanation": "This validation will throw an exception if `index` is null, which could happen if `this` is not found in `siblings`. This indicates that the element's position within its parent's children might not be correctly maintained after cloning."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Element:687",
+            "code": "if (siblings.size() > index+1)",
+            "explanation": "This line checks if there is a next sibling, but if `index` is incorrect or `siblings` is not properly populated, it could lead to incorrect behavior or exceptions."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Element:688",
+            "code": "return siblings.get(index+1);",
+            "explanation": "This line returns the next sibling element. If `siblings` is not correctly populated or `index` is incorrect, it could return null or throw an exception. This is likely where the NullPointerException occurs when accessing `cloneNextElementSibling.text()`."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Element:690",
+            "code": "return null;",
+            "explanation": "If no next sibling is found, this line returns null. This could be the cause of the NullPointerException when the test tries to access `cloneNextElementSibling.text()`. The cloning process might not be correctly setting up the sibling relationships."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:680",
+            "code": "clone.parentNode = parent; // can be null, to create an orphan split",
+            "explanation": "During the cloning process, the `parentNode` of the clone is set to the parent of the original node. If this is not correctly handled, it could result in `parentNode` being null for the cloned elements, leading to issues when accessing siblings."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:681",
+            "code": "clone.siblingIndex = parent == null ? 0 : siblingIndex;",
+            "explanation": "This line sets the `siblingIndex` for the clone. If `parent` is null, it sets `siblingIndex` to 0, which might not be correct and could lead to issues when accessing siblings."
+        },
+        {
+            "faultyLine": "org.jsoup.nodes.Node:649",
+            "code": "final LinkedList<Node> nodesToProcess = new LinkedList<>();",
+            "explanation": "The cloning process uses a queue to process nodes. If the queue is not correctly managed, it could lead to incomplete or incorrect cloning of the node tree, affecting sibling relationships."
+        }
+    ]
+}

@@ -1,0 +1,2 @@
+com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory 67
+com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory 67

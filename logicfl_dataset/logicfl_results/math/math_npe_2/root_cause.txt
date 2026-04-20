@@ -1,0 +1,16 @@
+Fault Localization Results
+NPE at line(abstract_real_matrix_1, 389) / Null Expression - p_sub_matrix_575[subMatrix]
+	 can be caused by 
+p_sub_matrix_575[subMatrix] - line(abstract_real_matrix_1, 389).
+
+NPE at line(abstract_real_matrix_1, 389) / Null Expression - p_sub_matrix_575[subMatrix]
+	 can be caused by 
+p_sub_matrix_672[subMatrix] - line(array2_drow_real_matrix_1, 295).
+
+NPE at line(block_real_matrix_1, 769) / Null Expression - p_sub_matrix_1094[subMatrix]
+	 can be caused by 
+p_sub_matrix_1094[subMatrix] - line(block_real_matrix_1, 769).
+
+NPE at line(block_field_matrix_1, 762) / Null Expression - p_sub_matrix_866[subMatrix]
+	 can be caused by 
+p_sub_matrix_866[subMatrix] - line(block_field_matrix_1, 762).

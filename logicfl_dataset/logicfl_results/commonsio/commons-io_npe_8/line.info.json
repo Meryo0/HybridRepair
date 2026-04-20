@@ -1,0 +1,68 @@
+{"classes": [
+    {
+        "probe_ranges": [
+            {
+                "endLine": 396,
+                "offset": 26,
+                "startLine": 392,
+                "orgLineEnd": 370,
+                "probedLineEnd": 396,
+                "orgLineStart": 370
+            },
+            {
+                "endLine": 413,
+                "offset": 42,
+                "startLine": 397,
+                "orgLineEnd": 371,
+                "probedLineEnd": 413,
+                "orgLineStart": 371
+            },
+            {
+                "endLine": 879,
+                "offset": 54,
+                "startLine": 867,
+                "orgLineEnd": 825,
+                "probedLineEnd": 879,
+                "orgLineStart": 825
+            },
+            {
+                "endLine": 1284,
+                "offset": 69,
+                "startLine": 1269,
+                "orgLineEnd": 1215,
+                "probedLineEnd": 1284,
+                "orgLineStart": 1215
+            }
+        ],
+        "classId": "path_utils_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 204,
+                "offset": 26,
+                "startLine": 201,
+                "orgLineEnd": 192,
+                "probedLineEnd": 218,
+                "orgLineStart": 189
+            },
+            {
+                "endLine": 209,
+                "offset": 19,
+                "startLine": 205,
+                "orgLineEnd": 190,
+                "probedLineEnd": 209,
+                "orgLineStart": 190
+            },
+            {
+                "endLine": 217,
+                "offset": 26,
+                "startLine": 210,
+                "orgLineEnd": 191,
+                "probedLineEnd": 217,
+                "orgLineStart": 191
+            }
+        ],
+        "classId": "path_utils_test_1"
+    }
+]}

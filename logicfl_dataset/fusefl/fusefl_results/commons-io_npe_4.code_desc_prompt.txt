@@ -1,0 +1,25 @@
+Provide a short code description of the following code:
+ org.apache.commons.io.file.PathUtils:152 `    private static final OpenOption[] OPEN_OPTIONS_TRUNCATE = { StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING };`
+org.apache.commons.io.file.PathUtils:154 `    private static final OpenOption[] OPEN_OPTIONS_APPEND = { StandardOpenOption.CREATE, StandardOpenOption.APPEND };`
+org.apache.commons.io.file.PathUtils:161 `    public static final CopyOption[] EMPTY_COPY_OPTIONS = {};`
+org.apache.commons.io.file.PathUtils:168 `    public static final DeleteOption[] EMPTY_DELETE_OPTION_ARRAY = {};`
+org.apache.commons.io.file.PathUtils:175 `    public static final FileAttribute<?>[] EMPTY_FILE_ATTRIBUTE_ARRAY = {};`
+org.apache.commons.io.file.PathUtils:180 `    public static final FileVisitOption[] EMPTY_FILE_VISIT_OPTION_ARRAY = {};`
+org.apache.commons.io.file.PathUtils:185 `    public static final LinkOption[] EMPTY_LINK_OPTION_ARRAY = {};`
+org.apache.commons.io.file.PathUtils:194 `    public static final LinkOption[] NOFOLLOW_LINK_OPTION_ARRAY = { LinkOption.NOFOLLOW_LINKS };`
+org.apache.commons.io.file.PathUtils:201 `    static final LinkOption NULL_LINK_OPTION = null;`
+org.apache.commons.io.file.PathUtils:206 `    public static final OpenOption[] EMPTY_OPEN_OPTION_ARRAY = {};`
+org.apache.commons.io.file.PathUtils:213 `    public static final Path[] EMPTY_PATH_ARRAY = {};`
+org.apache.commons.io.file.PathUtils:881 `        final Path fileName = path.getFileName();`
+ 
+The provided code is expected to pass these test cases:
+ @Test public void testGetFileName(){
+  assertNull(PathUtils.getFileName(null,null));
+  assertNull(PathUtils.getFileName(null,Path::toString));
+  assertNull(PathUtils.getFileName(Paths.get("/"),Path::toString));
+  assertNull(PathUtils.getFileName(Paths.get("/"),Path::toString));
+  assertEquals("",PathUtils.getFileName(Paths.get(""),Path::toString));
+  assertEquals("a",PathUtils.getFileName(Paths.get("a"),Path::toString));
+  assertEquals("a",PathUtils.getFileName(Paths.get("p","a"),Path::toString));
+}
+

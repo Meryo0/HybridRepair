@@ -1,0 +1,145 @@
+{"classes": [
+    {
+        "probe_ranges": [],
+        "classId": "returns_empty_values_test_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 25,
+                "offset": 8,
+                "startLine": 18,
+                "orgLineEnd": 17,
+                "probedLineEnd": 25,
+                "orgLineStart": 17
+            },
+            {
+                "endLine": 30,
+                "offset": 10,
+                "startLine": 27,
+                "orgLineEnd": 20,
+                "probedLineEnd": 30,
+                "orgLineStart": 20
+            }
+        ],
+        "classId": "iterables_1"
+    },
+    {
+        "probe_ranges": [],
+        "classId": "returns_empty_values_1"
+    },
+    {
+        "probe_ranges": [],
+        "classId": "object_methods_guru_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 20,
+                "offset": 3,
+                "startLine": 17,
+                "orgLineEnd": 17,
+                "probedLineEnd": 20,
+                "orgLineStart": 17
+            },
+            {
+                "endLine": 31,
+                "offset": 7,
+                "startLine": 27,
+                "orgLineEnd": 24,
+                "probedLineEnd": 31,
+                "orgLineStart": 24
+            },
+            {
+                "endLine": 36,
+                "offset": 11,
+                "startLine": 32,
+                "orgLineEnd": 27,
+                "probedLineEnd": 38,
+                "orgLineStart": 25
+            },
+            {
+                "endLine": 48,
+                "offset": 18,
+                "startLine": 41,
+                "orgLineEnd": 33,
+                "probedLineEnd": 51,
+                "orgLineStart": 33
+            },
+            {
+                "endLine": 68,
+                "offset": 22,
+                "startLine": 64,
+                "orgLineEnd": 46,
+                "probedLineEnd": 68,
+                "orgLineStart": 46
+            },
+            {
+                "endLine": 73,
+                "offset": 26,
+                "startLine": 69,
+                "orgLineEnd": 49,
+                "probedLineEnd": 75,
+                "orgLineStart": 47
+            },
+            {
+                "endLine": 86,
+                "offset": 34,
+                "startLine": 78,
+                "orgLineEnd": 52,
+                "probedLineEnd": 86,
+                "orgLineStart": 52
+            },
+            {
+                "endLine": 99,
+                "offset": 41,
+                "startLine": 92,
+                "orgLineEnd": 58,
+                "probedLineEnd": 99,
+                "orgLineStart": 58
+            },
+            {
+                "endLine": 104,
+                "offset": 45,
+                "startLine": 100,
+                "orgLineEnd": 63,
+                "probedLineEnd": 108,
+                "orgLineStart": 59
+            }
+        ],
+        "classId": "plugin_loader_1"
+    },
+    {
+        "probe_ranges": [],
+        "classId": "default_plugin_switch_1"
+    },
+    {
+        "probe_ranges": [],
+        "classId": "test_base_1"
+    },
+    {
+        "probe_ranges": [],
+        "classId": "plugin_registry_1"
+    },
+    {
+        "probe_ranges": [
+            {
+                "endLine": 18,
+                "offset": 3,
+                "startLine": 15,
+                "orgLineEnd": 15,
+                "probedLineEnd": 18,
+                "orgLineStart": 15
+            },
+            {
+                "endLine": 25,
+                "offset": 6,
+                "startLine": 22,
+                "orgLineEnd": 38,
+                "probedLineEnd": 44,
+                "orgLineStart": 19
+            }
+        ],
+        "classId": "plugin_finder_1"
+    }
+]}

@@ -1,0 +1,109 @@
+Faulty Code:
+org.apache.commons.io.build.AbstractOrigin:294 `            super(origin);`
+org.apache.commons.io.build.AbstractOrigin:295 `        }`
+org.apache.commons.io.build.AbstractOrigin:387 `    protected AbstractOrigin(final T origin) {`
+org.apache.commons.io.build.AbstractOrigin:388 `        this.origin = Objects.requireNonNull(origin, "origin");`
+org.apache.commons.io.build.AbstractOrigin:389 `    }`
+org.apache.commons.io.build.AbstractOriginSupplier:46 `public abstract class AbstractOriginSupplier<T, B extends AbstractOriginSupplier<T, B>> extends AbstractSupplier<T, B> {`
+org.apache.commons.io.build.AbstractOriginSupplier:136 `        return new ReaderOrigin(origin);`
+org.apache.commons.io.build.AbstractOriginSupplier:253 `        this.origin = origin;`
+org.apache.commons.io.build.AbstractOriginSupplier:254 `        return asThis();`
+org.apache.commons.io.build.AbstractOriginSupplier:294 `        return setOrigin(newReaderOrigin(origin));`
+org.apache.commons.io.build.AbstractStreamBuilder:39 `public abstract class AbstractStreamBuilder<T, B extends AbstractStreamBuilder<T, B>> extends AbstractOriginSupplier<T, B> {`
+org.apache.commons.io.build.AbstractStreamBuilder:41 `    private static final OpenOption[] DEFAULT_OPEN_OPTIONS = PathUtils.EMPTY_OPEN_OPTION_ARRAY;`
+org.apache.commons.io.build.AbstractStreamBuilder:46 `    private int bufferSize = IOUtils.DEFAULT_BUFFER_SIZE;`
+org.apache.commons.io.build.AbstractStreamBuilder:51 `    private int bufferSizeDefault = IOUtils.DEFAULT_BUFFER_SIZE;`
+org.apache.commons.io.build.AbstractStreamBuilder:56 `    private Charset charset = Charset.defaultCharset();`
+org.apache.commons.io.build.AbstractStreamBuilder:61 `    private Charset charsetDefault = Charset.defaultCharset();`
+org.apache.commons.io.build.AbstractStreamBuilder:63 `    private OpenOption[] openOptions = DEFAULT_OPEN_OPTIONS;`
+org.apache.commons.io.build.AbstractStreamBuilder:103 `        return charset;`
+org.apache.commons.io.build.AbstractSupplier:29 `public abstract class AbstractSupplier<T, B extends AbstractSupplier<T, B>> implements IOSupplier<T> {`
+org.apache.commons.io.build.AbstractSupplier:38 `        return (B) this;`
+org.apache.commons.io.file.PathUtils:151 `    private static final OpenOption[] OPEN_OPTIONS_TRUNCATE = {StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING};`
+org.apache.commons.io.file.PathUtils:153 `    private static final OpenOption[] OPEN_OPTIONS_APPEND = {StandardOpenOption.CREATE, StandardOpenOption.APPEND};`
+org.apache.commons.io.file.PathUtils:160 `    public static final CopyOption[] EMPTY_COPY_OPTIONS = {};`
+org.apache.commons.io.file.PathUtils:167 `    public static final DeleteOption[] EMPTY_DELETE_OPTION_ARRAY = {};`
+org.apache.commons.io.file.PathUtils:174 `    public static final FileAttribute<?>[] EMPTY_FILE_ATTRIBUTE_ARRAY = {};`
+org.apache.commons.io.file.PathUtils:179 `    public static final FileVisitOption[] EMPTY_FILE_VISIT_OPTION_ARRAY = {};`
+org.apache.commons.io.file.PathUtils:184 `    public static final LinkOption[] EMPTY_LINK_OPTION_ARRAY = {};`
+org.apache.commons.io.file.PathUtils:193 `    public static final LinkOption[] NOFOLLOW_LINK_OPTION_ARRAY = {LinkOption.NOFOLLOW_LINKS};`
+org.apache.commons.io.file.PathUtils:200 `    static final LinkOption NULL_LINK_OPTION = null;`
+org.apache.commons.io.file.PathUtils:205 `    public static final OpenOption[] EMPTY_OPEN_OPTION_ARRAY = {};`
+org.apache.commons.io.file.PathUtils:212 `    public static final Path[] EMPTY_PATH_ARRAY = {};`
+org.apache.commons.io.input.ReaderInputStream:101 `    public static class Builder extends AbstractStreamBuilder<ReaderInputStream, Builder> {`
+org.apache.commons.io.input.ReaderInputStream:103 `        private CharsetEncoder charsetEncoder = super.getCharset().newEncoder();`
+org.apache.commons.io.input.ReaderInputStream:139 `            this.charsetEncoder = charsetEncoder;`
+org.apache.commons.io.input.ReaderInputStream:140 `            super.setCharset(charsetEncoder.charset());`
+org.apache.commons.io.input.ReaderInputStream:153 `        return new Builder();`
+
+
+Task Description:
+The provided code snippets are part of a library that deals with building and supplying various I/O-related objects, such as streams and readers, with configurable options. Here's a brief description of the key components and their relationships:
+
+1. **AbstractOrigin**:
+   - This is an abstract class that holds an origin object of type `T`.
+   - It has a constructor that ensures the origin is not null using `Objects.requireNonNull`.
+
+2. **AbstractOriginSupplier**:
+   - This abstract class extends `AbstractSupplier` and provides additional functionality related to handling an origin.
+   - It has methods to set and return a new origin, such as `new ReaderOrigin(origin)`.
+
+3. **AbstractStreamBuilder**:
+   - This abstract class extends `AbstractOriginSupplier` and provides additional configuration options for building streams.
+   - It includes fields for buffer size, charset, and open options, with default values.
+
+4. **AbstractSupplier**:
+   - This is a generic abstract class that implements `IOSupplier`.
+   - It provides a method `asThis()` to return the current instance cast to the appropriate type.
+
+5. **PathUtils**:
+   - This utility class provides various static final arrays of options related to file operations, such as open options, copy options, delete options, etc.
+
+6. **ReaderInputStream.Builder**:
+   - This is a concrete builder class that extends `AbstractStreamBuilder` to build `ReaderInputStream` objects.
+   - It includes a `CharsetEncoder` field and methods to set and get the charset encoder.
+
+The test case `testResetCharsetEncoder` verifies that the `ReaderInputStream.Builder` can handle a null `CharsetEncoder` and still return a non-null encoder. This involves:
+- Creating a builder instance.
+- Setting a reader with a specific string.
+- Setting the charset encoder to null.
+- Asserting that the charset encoder is not null after these operations.
+
+The code ensures that the builder pattern is used to configure and build I/O objects with various options, providing flexibility and robustness in handling different configurations.
+
+Test Results:
+The provided code is throwing NullPointerException. For examples:
+Here are the tests and error messages of NullPointerExceptions.
+@Test public void testResetCharsetEncoder(){
+  assertNotNull(ReaderInputStream.builder().setReader(new StringReader("\uD800")).setCharsetEncoder(null).getCharsetEncoder());
+}
+
+
+
+Failures (1):
+  JUnit Jupiter:ReaderInputStreamTest:testResetCharsetEncoder()
+    MethodSource [className = 'org.apache.commons.io.input.ReaderInputStreamTest', methodName = 'testResetCharsetEncoder', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.nio.charset.CharsetEncoder.charset()" because "charsetEncoder" is null
+       org.apache.commons.io.input.ReaderInputStream$Builder.setCharsetEncoder(ReaderInputStream.java:140)
+       org.apache.commons.io.input.ReaderInputStreamTest.testResetCharsetEncoder(ReaderInputStreamTest.java:247)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+       java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Store NPE traces to npe.traces.json
+NPE Stack Traces exported to npe.traces.json
+
+
+Analyze the provided code and utilize task description, test results, and SBFL techniques results to help in identifying potentially faulty lines. Provide the results following this JSON template:
+```json
+{
+  "faultLoc": [
+    {   
+      "faultyLine": (indicating the location of the suspicious code in ClassName:LineNumber format),
+      "code": (displaying the actual code),
+      "explanation": (step by step reasoning on why this location is considered potentially faulty)
+    },  
+    ... 
+   ]   
+}
+```
+Ensure that the objects in the "faultLoc" array are stored in descending order of suspicion.

@@ -1,0 +1,151 @@
+@SuppressWarnings("unchecked") public void testContainsAll(){
+  setUpTest();
+  one.add((E)"1");
+  two.add((E)"1");
+  c.addComposited(one);
+  assertTrue(c.containsAll(two));
+  assertFalse(c.containsAll(null));
+}
+
+public void testAddNullLists2Args(){
+  ArrayList<String> nullList=null;
+  CompositeCollection<String> cc=new CompositeCollection<>();
+  cc.addComposited(nullList,nullList);
+  Assert.assertEquals(0,cc.size());
+}
+
+@SuppressWarnings("unchecked") public void testRemoveAll(){
+  setUpMutatorTest();
+  one.add((E)"1");
+  two.add((E)"2");
+  two.add((E)"1");
+  final Collection<E> removing=new ArrayList<>(one);
+  c.addComposited(one,two);
+  c.removeAll(removing);
+  assertTrue(!c.contains("1"));
+  assertTrue(!one.contains("1"));
+  assertTrue(!two.contains("1"));
+  c.removeAll(null);
+  assertTrue(!c.contains("1"));
+  assertTrue(!one.contains("1"));
+  assertTrue(!two.contains("1"));
+}
+
+@SuppressWarnings("unchecked") public void testRetainAll(){
+  setUpTest();
+  one.add((E)"1");
+  one.add((E)"2");
+  two.add((E)"1");
+  c.addComposited(one);
+  c.retainAll(two);
+  assertTrue(!c.contains("2"));
+  assertTrue(!one.contains("2"));
+  assertTrue(c.contains("1"));
+  assertTrue(one.contains("1"));
+  c.retainAll(null);
+  assertTrue(!c.contains("2"));
+  assertTrue(!one.contains("2"));
+  assertTrue(c.contains("1"));
+  assertTrue(one.contains("1"));
+}
+
+public void testAddNullList(){
+  ArrayList<String> nullList=null;
+  CompositeCollection<String> cc=new CompositeCollection<>();
+  cc.addComposited(nullList);
+  Assert.assertEquals(0,cc.size());
+}
+
+public void testAddNullListsVarArgs(){
+  ArrayList<String> nullList=null;
+  CompositeCollection<String> cc=new CompositeCollection<>();
+  cc.addComposited(nullList,nullList,nullList);
+  Assert.assertEquals(0,cc.size());
+}
+
+
+
+  JUnit Vintage:CompositeCollectionTest:testRetainAll
+    MethodSource [className = 'org.apache.commons.collections4.collection.CompositeCollectionTest', methodName = 'testRetainAll', methodParameterTypes = '']
+    => java.lang.NullPointerException
+       java.base/java.util.Objects.requireNonNull(Objects.java:209)
+       java.base/java.util.AbstractCollection.retainAll(AbstractCollection.java:399)
+       org.apache.commons.collections4.collection.CompositeCollection.retainAll(CompositeCollection.java:327)
+       org.apache.commons.collections4.collection.CompositeCollectionTest.testRetainAll(CompositeCollectionTest.java:372)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       junit.framework.TestCase.runTest(TestCase.java:177)
+       junit.framework.TestCase.runBare(TestCase.java:142)
+       [...]
+  JUnit Vintage:CompositeCollectionTest:testAddNullLists2Args
+    MethodSource [className = 'org.apache.commons.collections4.collection.CompositeCollectionTest', methodName = 'testAddNullLists2Args', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.util.Collection.size()" because "item" is null
+       org.apache.commons.collections4.collection.CompositeCollection.size(CompositeCollection.java:103)
+       org.apache.commons.collections4.collection.CompositeCollectionTest.testAddNullLists2Args(CompositeCollectionTest.java:265)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       junit.framework.TestCase.runTest(TestCase.java:177)
+       junit.framework.TestCase.runBare(TestCase.java:142)
+       junit.framework.TestResult$1.protect(TestResult.java:122)
+       junit.framework.TestResult.runProtected(TestResult.java:142)
+       [...]
+  JUnit Vintage:CompositeCollectionTest:testContainsAll
+    MethodSource [className = 'org.apache.commons.collections4.collection.CompositeCollectionTest', methodName = 'testContainsAll', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.util.Collection.iterator()" because "coll" is null
+       org.apache.commons.collections4.collection.CompositeCollection.containsAll(CompositeCollection.java:263)
+       org.apache.commons.collections4.collection.CompositeCollectionTest.testContainsAll(CompositeCollectionTest.java:251)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       junit.framework.TestCase.runTest(TestCase.java:177)
+       junit.framework.TestCase.runBare(TestCase.java:142)
+       junit.framework.TestResult$1.protect(TestResult.java:122)
+       junit.framework.TestResult.runProtected(TestResult.java:142)
+       [...]
+  JUnit Vintage:CompositeCollectionTest:testAddNullListsVarArgs
+    MethodSource [className = 'org.apache.commons.collections4.collection.CompositeCollectionTest', methodName = 'testAddNullListsVarArgs', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.util.Collection.size()" because "item" is null
+       org.apache.commons.collections4.collection.CompositeCollection.size(CompositeCollection.java:103)
+       org.apache.commons.collections4.collection.CompositeCollectionTest.testAddNullListsVarArgs(CompositeCollectionTest.java:272)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       junit.framework.TestCase.runTest(TestCase.java:177)
+       junit.framework.TestCase.runBare(TestCase.java:142)
+       junit.framework.TestResult$1.protect(TestResult.java:122)
+       junit.framework.TestResult.runProtected(TestResult.java:142)
+       [...]
+  JUnit Vintage:CompositeCollectionTest:testAddNullList
+    MethodSource [className = 'org.apache.commons.collections4.collection.CompositeCollectionTest', methodName = 'testAddNullList', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.util.Collection.size()" because "item" is null
+       org.apache.commons.collections4.collection.CompositeCollection.size(CompositeCollection.java:103)
+       org.apache.commons.collections4.collection.CompositeCollectionTest.testAddNullList(CompositeCollectionTest.java:258)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       junit.framework.TestCase.runTest(TestCase.java:177)
+       junit.framework.TestCase.runBare(TestCase.java:142)
+       junit.framework.TestResult$1.protect(TestResult.java:122)
+       junit.framework.TestResult.runProtected(TestResult.java:142)
+       [...]
+  JUnit Vintage:CompositeCollectionTest:testRemoveAll
+    MethodSource [className = 'org.apache.commons.collections4.collection.CompositeCollectionTest', methodName = 'testRemoveAll', methodParameterTypes = '']
+    => java.lang.NullPointerException: Cannot invoke "java.util.Collection.size()" because "coll" is null
+       org.apache.commons.collections4.collection.CompositeCollection.removeAll(CompositeCollection.java:303)
+       org.apache.commons.collections4.collection.CompositeCollectionTest.testRemoveAll(CompositeCollectionTest.java:342)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:568)
+       junit.framework.TestCase.runTest(TestCase.java:177)
+       junit.framework.TestCase.runBare(TestCase.java:142)
+       junit.framework.TestResult$1.protect(TestResult.java:122)
+       junit.framework.TestResult.runProtected(TestResult.java:142)
+       [...]

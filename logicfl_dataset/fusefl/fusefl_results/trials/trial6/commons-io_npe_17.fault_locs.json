@@ -1,0 +1,29 @@
+{
+    "faultLoc": [
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:391",
+            "code": "final boolean file1Exists = file1.exists();",
+            "explanation": "The NullPointerException is thrown because 'file1' is null. This line attempts to call 'exists()' on a null object. The method 'contentEquals' should include a null check for 'file1' and 'file2' before attempting to access their methods."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:1116",
+            "code": "if (!directory.exists()) {",
+            "explanation": "This line checks if a directory exists but does not handle the case where 'directory' might be null. Adding a null check before this line would prevent potential NullPointerExceptions."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:1120",
+            "code": "if (!isSymlink(directory)) {",
+            "explanation": "Similar to the previous line, this line assumes 'directory' is not null. A null check should be added to ensure 'directory' is not null before calling 'isSymlink'."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:2681",
+            "code": "if (!directory.isDirectory()) {",
+            "explanation": "This line checks if 'directory' is a directory but does not handle the case where 'directory' might be null. Adding a null check before this line would prevent potential NullPointerExceptions."
+        },
+        {
+            "faultyLine": "org.apache.commons.io.FileUtils:2686",
+            "code": "final File[] files = directory.listFiles();",
+            "explanation": "This line attempts to list files in 'directory' without checking if 'directory' is null. Adding a null check before this line would prevent potential NullPointerExceptions."
+        }
+    ]
+}

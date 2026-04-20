@@ -1,0 +1,77 @@
+bug_name,is_matched
+lang_1,not matched
+lang_2,matched
+lang_3,not matched
+lang_4,matched
+lang_5,matched
+lang_6,matched
+lang_7,N/A
+lang_8,not matched
+lang_9,N/A
+lang_10,not matched
+lang_11,not matched
+lang_12,not matched
+lang_13,matched
+math_1,not matched
+math_2,not matched
+math_3,matched
+collections_1,matched
+collections_2,partially matched
+collections_3,not matched
+commons-io_1,not matched
+commons-io_2,matched
+commons-io_3,partially matched
+commons-io_4,matched
+commons-io_5,partially matched
+commons-io_6,N/A
+commons-io_7,matched
+commons-io_8,N/A
+commons-io_9,partially matched
+commons-io_10,not matched
+commons-io_11,not matched
+commons-io_12,matched
+commons-io_13,partially matched
+commons-io_14,matched
+commons-io_15,not matched
+commons-io_16,matched
+commons-io_17,matched
+commons-io_18,not matched
+commons-io_19,not matched
+Chart_2,not matched
+Chart_4,matched
+Chart_14,not matched
+Chart_16,not matched
+Cli_5,matched
+Cli_30,not matched
+Closure_2,N/A
+Closure_171,not matched
+Codec_5,not matched
+Codec_13,matched
+Codec_17,not matched
+Csv_4,matched
+Csv_9,not matched
+Csv_11,N/A
+Gson_6,not matched
+Gson_9,not matched
+JacksonCore_8,not matched
+JacksonDatabind_3,partially matched
+JacksonDatabind_13,partially matched
+JacksonDatabind_80,not matched
+JacksonDatabind_93,not matched
+JacksonDatabind_95,not matched
+JacksonDatabind_107,not matched
+Jsoup_8,matched
+Jsoup_22,matched
+Jsoup_26,matched
+Jsoup_66,not matched
+Jsoup_89,matched
+Lang_20,partially matched
+Lang_33,matched
+Lang_39,matched
+Lang_47,partially matched
+Lang_57,matched
+Math_4,not matched
+Math_70,matched
+Math_79,N/A
+Mockito_18,matched
+Mockito_38,not matched

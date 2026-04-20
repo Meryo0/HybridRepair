@@ -1,0 +1,8 @@
+Fault Localization Results
+NPE at line(array_utils_1, 9267) / Null Expression - array_utils_1_expr33['array[i]']
+	 can be caused by 
+array_utils_1_expr33['array[i]'] - line(array_utils_1, 9267).
+
+NPE at line(array_utils_1, 9267) / Null Expression - p_array_745[array]
+	 can be caused by 
+p_array_745[array] - line(array_utils_1, 9267).
