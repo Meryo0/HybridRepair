@@ -777,7 +777,7 @@ public static Range iterateDomainBounds(XYDataset dataset,
             }
         }
         if (minimum > maximum) {
-            return new Range(0.0, 0.0);
+            return new Range(Double.NaN, Double.NaN);
         }
         else {
             return new Range(minimum, maximum);
@@ -1281,7 +1281,7 @@ public static Range iterateRangeBounds(XYDataset dataset,
             }
         }
         if (minimum == Double.POSITIVE_INFINITY) {
-            return new Range(0.0, 0.0);
+            return new Range(Double.NaN, Double.NaN);
         }
         else {
             return new Range(minimum, maximum);

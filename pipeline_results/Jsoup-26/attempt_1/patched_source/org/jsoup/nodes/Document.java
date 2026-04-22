@@ -57,7 +57,9 @@ public class Document extends Element {
      */
 public Element body() {
         Element body = findFirstElementByTagName("body", this);
-        Validate.notNull(body, "Document has no <body> element");
+        if (body == null) {
+            body = appendElement("body");
+        }
         return body;
     }
 
@@ -162,13 +164,11 @@ public Element body() {
     }
 
     // fast method to get first by tag name, used for html, head, body finders
-private Element findFirstElementByTagName(String tag, Node node) {
-        if (node == null) return null;
+    private Element findFirstElementByTagName(String tag, Node node) {
         if (node.nodeName().equals(tag))
             return (Element) node;
         else {
-            for (Node child : node.childNodes) {
-                if (child == null) continue;
+            for (Node child: node.childNodes) {
                 Element found = findFirstElementByTagName(tag, child);
                 if (found != null)
                     return found;
@@ -356,6 +356,7 @@ private Element findFirstElementByTagName(String tag, Node node) {
     public QuirksMode quirksMode() {
         return quirksMode;
     }
+
     public Document quirksMode(QuirksMode quirksMode) {
         this.quirksMode = quirksMode;
         return this;

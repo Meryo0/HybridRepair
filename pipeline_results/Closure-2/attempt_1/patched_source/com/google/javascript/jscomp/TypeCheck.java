@@ -1569,9 +1569,9 @@ private void checkInterfaceConflictProperties(NodeTraversal t, Node n,
       ObjectType interfaceType) {
     ObjectType implicitProto = interfaceType.getImplicitPrototype();
     Set<String> currentPropertyNames;
+    // This can be the case if interfaceType is proxy to a non-existent
+    // object (which is a bad type annotation, but shouldn't crash).
     if (implicitProto != null) {
-      // This can be the case if interfaceType is proxy to a non-existent
-      // object (which is a bad type annotation, but shouldn't crash).
       currentPropertyNames = implicitProto.getOwnPropertyNames();
       for (String name : currentPropertyNames) {
         ObjectType oType = properties.get(name);

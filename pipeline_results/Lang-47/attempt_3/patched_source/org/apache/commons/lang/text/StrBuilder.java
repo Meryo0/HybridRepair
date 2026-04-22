@@ -1179,10 +1179,10 @@ public class StrBuilder implements Cloneable {
      * @param padChar  the pad character to use
      * @return this, to enable chaining
      */
-public StrBuilder appendFixedWidthPadLeft(Object obj, int width, char padChar) {
+    public StrBuilder appendFixedWidthPadLeft(Object obj, int width, char padChar) {
         if (width > 0) {
             ensureCapacity(size + width);
-            String str = (obj == null ? defaultString(getNullText()) : obj.toString());
+            String str = (obj == null ? getNullText() : obj.toString());
             int strLen = str.length();
             if (strLen >= width) {
                 str.getChars(strLen - width, strLen, buffer, size);
@@ -1196,10 +1196,6 @@ public StrBuilder appendFixedWidthPadLeft(Object obj, int width, char padChar) {
             size += width;
         }
         return this;
-    }
-
-    private String defaultString(String str) {
-        return (str == null) ? "" : str;
     }
 
     /**
@@ -1227,10 +1223,10 @@ public StrBuilder appendFixedWidthPadLeft(Object obj, int width, char padChar) {
      * @param padChar  the pad character to use
      * @return this, to enable chaining
      */
-public StrBuilder appendFixedWidthPadRight(Object obj, int width, char padChar) {
+    public StrBuilder appendFixedWidthPadRight(Object obj, int width, char padChar) {
         if (width > 0) {
             ensureCapacity(size + width);
-            String str = (obj == null ? defaultString(getNullText()) : obj.toString());
+            String str = (obj == null ? getNullText() : obj.toString());
             int strLen = str.length();
             if (strLen >= width) {
                 str.getChars(0, width, buffer, size);
@@ -1244,10 +1240,6 @@ public StrBuilder appendFixedWidthPadRight(Object obj, int width, char padChar) 
             size += width;
         }
         return this;
-    }
-
-    private String defaultString(String str) {
-        return (str == null) ? "" : str;
     }
 
     /**

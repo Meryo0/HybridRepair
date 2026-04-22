@@ -69,6 +69,9 @@ public void validateSubType(DeserializationContext ctxt, JavaType type) throws J
         // There are certain nasty classes that could cause problems, mostly
         // via default typing -- catch them here.
         final Class<?> raw = type.getRawClass();
+        if (raw == null) {
+            throw JsonMappingException.from(ctxt, "Raw class type is null, cannot validate subtype.");
+        }
         String full = raw.getName();
 
         main_check:

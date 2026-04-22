@@ -234,7 +234,7 @@ public final class CSVParser implements Iterable<CSVRecord>, Closeable {
      * @throws IOException
      *             If an I/O error occurs
      */
-public CSVParser(final Reader reader, final CSVFormat format) throws IOException {
+    public CSVParser(final Reader reader, final CSVFormat format) throws IOException {
         Assertions.notNull(reader, "reader");
         Assertions.notNull(format, "format");
 
@@ -284,7 +284,7 @@ public CSVParser(final Reader reader, final CSVFormat format) throws IOException
      * </p>
      * @return a copy of the header map that iterates in column order.
      */
-public Map<String, Integer> getHeaderMap() {
+    public Map<String, Integer> getHeaderMap() {
         return new LinkedHashMap<String, Integer>(this.headerMap);
     }
 
@@ -322,11 +322,9 @@ public Map<String, Integer> getHeaderMap() {
      * Initializes the name to index mapping if the format defines a header.
      */
 private Map<String, Integer> initializeHeader() throws IOException {
-        Map<String, Integer> hdrMap = null;
+        Map<String, Integer> hdrMap = new LinkedHashMap<String, Integer>();
         final String[] formatHeader = this.format.getHeader();
         if (formatHeader != null) {
-            hdrMap = new LinkedHashMap<String, Integer>();
-
             String[] header = null;
             if (formatHeader.length == 0) {
                 // read the header from the first line of the file
@@ -348,7 +346,7 @@ private Map<String, Integer> initializeHeader() throws IOException {
                 }
             }
         }
-        return hdrMap != null ? hdrMap : new LinkedHashMap<String, Integer>();
+        return hdrMap;
     }
 
     public boolean isClosed() {

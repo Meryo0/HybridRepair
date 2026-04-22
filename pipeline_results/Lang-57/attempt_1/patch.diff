@@ -1,14 +1,13 @@
 --- java/org/apache/commons/lang/LocaleUtils.java
 +++ java/org/apache/commons/lang/LocaleUtils.java
-@@ -219,7 +219,10 @@
+@@ -219,8 +219,8 @@
       * @param locale the Locale object to check if it is available
       * @return true if the locale is a known locale
       */
 -    public static boolean isAvailableLocale(Locale locale) {
+-        return cAvailableLocaleSet.contains(locale);
 +public static boolean isAvailableLocale(Locale locale) {
-+        if (cAvailableLocaleSet == null) {
-+            return false;
-+        }
-         return cAvailableLocaleSet.contains(locale);
++        return availableLocaleSet().contains(locale);
      }
  
+     //-----------------------------------------------------------------------

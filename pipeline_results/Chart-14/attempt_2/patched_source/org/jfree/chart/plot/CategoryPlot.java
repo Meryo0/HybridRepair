@@ -2158,16 +2158,12 @@ public boolean removeDomainMarker(int index, Marker marker, Layer layer,
         if (layer == Layer.FOREGROUND) {
             markers = (ArrayList) this.foregroundDomainMarkers.get(new Integer(
                     index));
-            if (markers == null) {
-                return false;
-            }
-        }
-        else {
+        } else {
             markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(
                     index));
-            if (markers == null) {
-                return false;
-            }
+        }
+        if (markers == null) {
+            return false;
         }
         boolean removed = markers.remove(marker);
         if (removed && notify) {
@@ -2446,16 +2442,12 @@ public boolean removeRangeMarker(int index, Marker marker, Layer layer,
         if (layer == Layer.FOREGROUND) {
             markers = (ArrayList) this.foregroundRangeMarkers.get(new Integer(
                     index));
-            if (markers == null) {
-                return false;
-            }
-        }
-        else {
+        } else {
             markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(
                     index));
-            if (markers == null) {
-                return false;
-            }
+        }
+        if (markers == null) {
+            return false;
         }
         boolean removed = markers.remove(marker);
         if (removed && notify) {

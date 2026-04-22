@@ -13,7 +13,7 @@
          _collectAndResolveByTypeId(ac, rootType, config, typesHandled, byName);
          
          // then with definitions from property
-+        if (property != null) { // Ensure property is not null
++        if (property != null) {
              Collection<NamedType> st = ai.findSubtypes(property);
              if (st != null) {
                  for (NamedType nt : st) {
@@ -44,7 +44,7 @@
 -    {
 +public List<NamedType> findSubtypes(Annotated a)
 +    {
-+        if (a == null) { // Ensure Annotated object is not null
++        if (a == null) {
 +            return null;
 +        }
          JsonSubTypes t = _findAnnotation(a, JsonSubTypes.class);

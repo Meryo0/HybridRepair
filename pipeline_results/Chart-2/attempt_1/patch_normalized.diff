@@ -14,7 +14,7 @@
          }
          if (minimum > maximum) {
 -            return null;
-+            return new Range(0.0, 0.0);
++            return new Range(Double.NaN, Double.NaN);
          }
          else {
              return new Range(minimum, maximum);
@@ -35,7 +35,7 @@
          }
          if (minimum == Double.POSITIVE_INFINITY) {
 -            return null;
-+            return new Range(0.0, 0.0);
++            return new Range(Double.NaN, Double.NaN);
          }
          else {
              return new Range(minimum, maximum);

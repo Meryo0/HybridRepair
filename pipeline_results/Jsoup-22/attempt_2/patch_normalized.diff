@@ -25,25 +25,58 @@
 
 --- org/jsoup/nodes/Node.java
 +++ org/jsoup/nodes/Node.java
-@@ -466,15 +466,13 @@
+@@ -466,15 +466,16 @@
       Get this node's previous sibling.
       @return the previous sibling, or null if this is the first sibling
       */
 -    public Node previousSibling() {
 -
--        List<Node> siblings = parentNode.childNodes;
++public Node previousSibling() {
++        if (parentNode == null) {
++            return null;
++        }
+         List<Node> siblings = parentNode.childNodes;
 -        Integer index = siblingIndex();
 -        Validate.notNull(index);
 -        if (index > 0)
 -            return siblings.get(index-1);
 -        else
-+public Node previousSibling() {
-+        if (parent() == null) {
-             return null;
+-            return null;
++        int index = siblingIndex();
++        if (index > 0) {
++            return siblings.get(index - 1);
 +        }
-+        List<Node> siblings = parent().childNodes();
-+        int index = siblings.indexOf(this);
-+        return index > 0 ? siblings.get(index - 1) : null;
++        return null;
+     }
+ 
+     /**
+
+--- org/jsoup/nodes/Node.java
++++ org/jsoup/nodes/Node.java
+@@ -449,17 +449,16 @@
+      Get this node's next sibling.
+      @return next sibling, or null if this is the last sibling
+      */
+-    public Node nextSibling() {
+-        if (parentNode == null)
+-            return null; // root
+-        
++public Node nextSibling() {
++        if (parentNode == null) {
++            return null;
++        }
+         List<Node> siblings = parentNode.childNodes;
+-        Integer index = siblingIndex();
+-        Validate.notNull(index);
+-        if (siblings.size() > index+1)
+-            return siblings.get(index+1);
+-        else
+-            return null;
++        int index = siblingIndex();
++        if (index < siblings.size() - 1) {
++            return siblings.get(index + 1);
++        }
++        return null;
      }
  
      /**

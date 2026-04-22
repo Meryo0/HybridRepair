@@ -220,10 +220,7 @@ public class LocaleUtils {
      * @return true if the locale is a known locale
      */
 public static boolean isAvailableLocale(Locale locale) {
-        if (cAvailableLocaleSet == null) {
-            return false;
-        }
-        return cAvailableLocaleSet.contains(locale);
+        return availableLocaleSet().contains(locale);
     }
 
     //-----------------------------------------------------------------------

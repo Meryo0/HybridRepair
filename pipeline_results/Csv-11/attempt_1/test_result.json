@@ -7,5 +7,5 @@
     "org.apache.commons.csv.CSVParserTest"
   ],
   "compile_output": "",
-  "test_output": "JUnit version 4.13.2\nI....I.....................................................\nTime: 0.039\n\nOK (57 tests)\n\n"
+  "test_output": "JUnit version 4.13.2\nI....I.....................................................\nTime: 0.042\n\nOK (57 tests)\n\n"
 }

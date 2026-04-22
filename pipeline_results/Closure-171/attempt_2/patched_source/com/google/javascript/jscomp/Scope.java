@@ -530,10 +530,12 @@ public Var getVar(String name) {
     if (var != null) {
       return var;
     } else if (parent != null) { // Recurse up the parent Scope
-      return parent != null ? parent.getVar(name) : null;
-    } else {
-      return null;
+      Var parentVar = parent.getVar(name);
+      if (parentVar != null && parentVar.getType() != null) {
+        return parentVar;
+      }
     }
+    return null;
   }
 
   /**

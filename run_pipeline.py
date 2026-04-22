@@ -291,9 +291,16 @@ def repair_bug(bug_id: str, force_rerun: bool = False) -> bool:
                 print(f"  → Diagnosi:\n{diagnosis}\n")
             else:
                 # Build error summary from previous test result
+                compile_out = last_test_result.get('compile_output', '')
+                test_out = last_test_result.get('test_output', '')
+                failing_tests = last_test_result.get('failing_test_names', [])
+                
+                failing_tests_str = "\n".join(f"- {t}" for t in failing_tests) if failing_tests else "Nessuno (errore di compilazione o setup)"
+                
                 error_summary = (
-                    f"Compile output:\n{last_test_result.get('compile_output', '')[:800]}\n\n"
-                    f"Test output:\n{last_test_result.get('test_output', '')[:800]}"
+                    f"Failing Tests:\n{failing_tests_str}\n\n"
+                    f"Compile output:\n{compile_out[-1500:] if len(compile_out) > 1500 else compile_out}\n\n"
+                    f"Test output (ultime righe):\n{test_out[-2000:] if len(test_out) > 2000 else test_out}"
                 )
                 raw_response = session.refine(error_summary)
 

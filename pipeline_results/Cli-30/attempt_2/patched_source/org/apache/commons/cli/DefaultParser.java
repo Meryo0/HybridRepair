@@ -152,17 +152,17 @@ private void handleProperties(Properties properties) throws ParseException
                 Option opt = options.getOption(option);
                 if (opt == null)
                 {
-                    continue;
+                    throw new UnrecognizedOptionException("Unrecognized option: " + option, option);
                 }
 
                 // Check if the option is part of a group and if another option in the group is already selected
                 OptionGroup group = options.getOptionGroup(opt);
                 if (group != null && group.getSelected() != null)
                 {
-                    continue;
+                    continue; // Skip this option as another option in the group is already selected
                 }
-            
-                // get the value from the properties
+
+                // Get the value from the properties
                 String value = properties.getProperty(option);
                 
                 if (opt.hasArg())

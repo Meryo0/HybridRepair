@@ -1573,12 +1573,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable,
      * @see #setRenderer(XYItemRenderer)
      */
 public XYItemRenderer getRenderer() {
-        XYItemRenderer renderer = getRenderer(0);
-        if (renderer == null) {
-            // Return a default renderer or handle null case as needed
-            return new StandardXYItemRenderer();
-        }
-        return renderer;
+        return getRenderer(0);
     }
 
     /**
@@ -1594,10 +1589,6 @@ public XYItemRenderer getRenderer(int index) {
         XYItemRenderer result = null;
         if (this.renderers != null && this.renderers.size() > index) {
             result = (XYItemRenderer) this.renderers.get(index);
-        }
-        if (result == null) {
-            // Return a default renderer or handle null case as needed
-            return new StandardXYItemRenderer();
         }
         return result;
     }
@@ -1750,13 +1741,17 @@ public XYItemRenderer getRenderer(int index) {
      */
 public XYItemRenderer getRendererForDataset(XYDataset dataset) {
         XYItemRenderer result = null;
-        for (int i = 0; i < this.datasets.size(); i++) {
-            if (this.datasets.get(i) == dataset) {
-                result = (XYItemRenderer) this.renderers.get(i);
-                if (result == null) {
-                    result = getRenderer();
+        if (this.datasets != null) {
+            for (int i = 0; i < this.datasets.size(); i++) {
+                if (this.datasets.get(i) == dataset) {
+                    if (this.renderers != null && this.renderers.size() > i) {
+                        result = (XYItemRenderer) this.renderers.get(i);
+                    }
+                    if (result == null) {
+                        result = getRenderer();
+                    }
+                    break;
                 }
-                break;
             }
         }
         return result;
@@ -4497,7 +4492,6 @@ public Range getDataRange(ValueAxis axis) {
                                 DatasetUtilities.findRangeBounds(d));
                     }
                 }
-                
                 if (r != null) {
                     Collection c = r.getAnnotations();
                     Iterator i = c.iterator();

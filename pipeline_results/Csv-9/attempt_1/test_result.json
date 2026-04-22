@@ -1,9 +1,11 @@
 {
-  "status": "COMPILE_ERROR",
-  "total_tests": 0,
+  "status": "PASS",
+  "total_tests": 17,
   "failed_tests": 0,
   "failing_test_names": [],
-  "previously_failing_now_passing": [],
-  "compile_output": "/home/mario/Desktop/LogicFL/pipeline_results/Csv-9/attempt_1/patched_source/org/apache/commons/csv/CSVRecord.java:55: error: cannot find symbol\n        this.mapping = mapping != null ? mapping : new LinkedHashMap<>(); // Ensure mapping is never null\n                                                       ^\n  symbol:   class LinkedHashMap\n  location: class CSVRecord\n1 error\n",
-  "test_output": ""
+  "previously_failing_now_passing": [
+    "org.apache.commons.csv.CSVRecordTest"
+  ],
+  "compile_output": "",
+  "test_output": "JUnit version 4.13.2\n.................\nTime: 0.011\n\nOK (17 tests)\n\n"
 }

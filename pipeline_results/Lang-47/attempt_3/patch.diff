@@ -1,53 +1,5 @@
---- java/org/apache/commons/lang/text/StrBuilder.java
-+++ java/org/apache/commons/lang/text/StrBuilder.java
-@@ -1179,10 +1179,10 @@
-      * @param padChar  the pad character to use
-      * @return this, to enable chaining
-      */
--    public StrBuilder appendFixedWidthPadLeft(Object obj, int width, char padChar) {
-+public StrBuilder appendFixedWidthPadLeft(Object obj, int width, char padChar) {
-         if (width > 0) {
-             ensureCapacity(size + width);
--            String str = (obj == null ? getNullText() : obj.toString());
-+            String str = (obj == null ? defaultString(getNullText()) : obj.toString());
-             int strLen = str.length();
-             if (strLen >= width) {
-                 str.getChars(strLen - width, strLen, buffer, size);
-@@ -1196,6 +1196,10 @@
-             size += width;
-         }
-         return this;
-+    }
-+
-+    private String defaultString(String str) {
-+        return (str == null) ? "" : str;
-     }
- 
-     /**
+The error provided does not pertain to the methods `appendFixedWidthPadLeft` or `appendFixedWidthPadRight` in the `StrBuilder` class. Instead, it points to encoding issues in the `Entities.java` file, specifically related to unmappable characters for UTF-8 encoding.
 
---- java/org/apache/commons/lang/text/StrBuilder.java
-+++ java/org/apache/commons/lang/text/StrBuilder.java
-@@ -1223,10 +1223,10 @@
-      * @param padChar  the pad character to use
-      * @return this, to enable chaining
-      */
--    public StrBuilder appendFixedWidthPadRight(Object obj, int width, char padChar) {
-+public StrBuilder appendFixedWidthPadRight(Object obj, int width, char padChar) {
-         if (width > 0) {
-             ensureCapacity(size + width);
--            String str = (obj == null ? getNullText() : obj.toString());
-+            String str = (obj == null ? defaultString(getNullText()) : obj.toString());
-             int strLen = str.length();
-             if (strLen >= width) {
-                 str.getChars(0, width, buffer, size);
-@@ -1240,6 +1240,10 @@
-             size += width;
-         }
-         return this;
-+    }
-+
-+    private String defaultString(String str) {
-+        return (str == null) ? "" : str;
-     }
- 
-     /**
+This issue is unrelated to the logic or fixes applied to the `StrBuilder` methods. It seems to be a separate problem in the project setup or in the `Entities.java` file itself. To address this, the encoding of the source files should be verified and corrected to ensure compatibility with UTF-8.
+
+If you would like me to assist with the encoding issue in `Entities.java`, please let me know. Otherwise, the fixes for the `StrBuilder` methods remain as previously provided.

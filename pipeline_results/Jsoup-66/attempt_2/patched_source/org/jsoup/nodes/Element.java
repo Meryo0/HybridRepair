@@ -684,9 +684,9 @@ public Element nextElementSibling() {
         Element parent = parent();
         if (parent == null) return null;
         List<Element> siblings = parent.childElementsList();
-        if (siblings == null || siblings.isEmpty()) return null;
+        if (siblings == null) return null;
         Integer index = indexInList(this, siblings);
-        if (index == null || index < 0 || index >= siblings.size() - 1) return null;
+        if (index == null || siblings.size() <= index + 1) return null;
         return siblings.get(index + 1);
     }
 

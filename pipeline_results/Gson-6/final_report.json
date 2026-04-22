@@ -6,7 +6,7 @@
   "test_result": {
     "status": "FAIL",
     "total_attempts": 3,
-    "last_failure": ""
+    "last_failure": "JUnit version 4.13.2\n.E.E\nTime: 0.014\nThere were 2 failures:\n1) testNullSafeBugDeserialize(com.google.gson.regression.JsonAdapterNullSafeTest)\njava.lang.IllegalArgumentException: Failed to create TypeAdapter for @JsonAdapter value.\n\tat com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.getTypeAdapter(JsonAdapterAnnotationTypeAdapterFactory.java:70)\n\tat com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.create(JsonAdapterAnnotationTypeAdapterFactory.java:47)\n"
   },
-  "timestamp": "2026-04-22T19:02:48.198381+00:00"
+  "timestamp": "2026-04-22T21:42:13.359445+00:00"
 }

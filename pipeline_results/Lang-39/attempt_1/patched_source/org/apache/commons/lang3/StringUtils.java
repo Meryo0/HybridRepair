@@ -3673,11 +3673,12 @@ private static String replaceEach(String text, String[] searchList, String[] rep
 
         // count the replacement text elements that are larger than their corresponding text being replaced
         for (int i = 0; i < searchList.length; i++) {
-            if (replacementList[i] != null && searchList[i] != null) {
-                int greater = replacementList[i].length() - searchList[i].length();
-                if (greater > 0) {
-                    increase += 3 * greater; // assume 3 matches
-                }
+            if (replacementList[i] == null || searchList[i] == null) {
+                continue;
+            }
+            int greater = replacementList[i].length() - searchList[i].length();
+            if (greater > 0) {
+                increase += 3 * greater; // assume 3 matches
             }
         }
         // have upper-bound at 20% increase, then let Java take over

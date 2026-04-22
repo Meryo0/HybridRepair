@@ -22,3 +22,21 @@
          }
      }
  
+
+--- org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java
++++ org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java
+@@ -148,6 +148,14 @@
+      * @param point the point to find the nearest {@link Cluster} for
+      * @return the nearest {@link Cluster} to the given point
+      */
++/**
++     * Returns the nearest {@link Cluster} to the given point
++     *
++     * @param <T> type of the points to cluster
++     * @param clusters the {@link Cluster}s to search
++     * @param point the point to find the nearest {@link Cluster} for
++     * @return the nearest {@link Cluster} to the given point
++     */
+     private static <T extends Clusterable<T>> Cluster<T>
+         getNearestCluster(final Collection<Cluster<T>> clusters, final T point) {
+         double minDistance = Double.MAX_VALUE;

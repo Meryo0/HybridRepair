@@ -686,10 +686,8 @@ public Element nextElementSibling() {
         List<Element> siblings = parent.childElementsList();
         if (siblings == null || siblings.isEmpty()) return null;
         Integer index = indexInList(this, siblings);
-        if (index == null || index < 0 || index >= siblings.size() - 1) return null;
-        // Ensure the next sibling exists and is valid
-        Element nextSibling = siblings.get(index + 1);
-        return nextSibling != null ? nextSibling : null;
+        if (index == null || index < 0 || siblings.size() <= index + 1) return null;
+        return siblings.get(index + 1);
     }
 
     /**

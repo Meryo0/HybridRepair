@@ -36,14 +36,11 @@ public class Cleaner {
      @param dirtyDocument Untrusted base document to clean.
      @return cleaned document.
      */
-public Document clean(Document dirtyDocument) {
+    public Document clean(Document dirtyDocument) {
         Validate.notNull(dirtyDocument);
 
         Document clean = Document.createShell(dirtyDocument.baseUri());
-        Element dirtyBody = dirtyDocument.body();
-        if (dirtyBody != null) {
-            copySafeNodes(dirtyBody, clean.body());
-        }
+            copySafeNodes(dirtyDocument.body(), clean.body());
 
         return clean;
     }

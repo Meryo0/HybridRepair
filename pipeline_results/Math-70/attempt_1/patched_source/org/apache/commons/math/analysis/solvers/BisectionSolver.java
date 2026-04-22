@@ -81,7 +81,7 @@ public double solve(final UnivariateRealFunction f, double min, double max)
         }
 
         clearResult();
-        verifyInterval(min, max);
+        verifyInterval(min,max);
         double m;
         double fm;
         double fmin;

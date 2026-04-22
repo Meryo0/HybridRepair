@@ -12,7 +12,7 @@
 
 --- org/apache/commons/lang3/StringUtils.java
 +++ org/apache/commons/lang3/StringUtils.java
-@@ -3286,16 +3286,15 @@
+@@ -3286,7 +3286,7 @@
       * @return the joined String, {@code null} if null array input
       * @since 2.0
       */
@@ -21,18 +21,24 @@
          if (array == null) {
              return null;
          }
--        int noOfItems = (endIndex - startIndex);
--        if (noOfItems <= 0) {
-+        if (startIndex < 0 || endIndex > array.length || startIndex >= endIndex) {
+@@ -3295,13 +3295,13 @@
              return EMPTY;
          }
--        
+         
 -        StringBuilder buf = new StringBuilder((array[startIndex] == null ? 16 : array[startIndex].toString().length()) + 1);
-+
-+        StringBuilder buf = new StringBuilder(16);
++        StringBuilder buf = new StringBuilder(16); // Default capacity
  
          for (int i = startIndex; i < endIndex; i++) {
-             if (i > startIndex) {
+-            if (i > startIndex) {
+-                buf.append(separator);
+-            }
+             if (array[i] != null) {
++                if (buf.length() > 0) {
++                    buf.append(separator);
++                }
+                 buf.append(array[i]);
+             }
+         }
 
 --- org/apache/commons/lang3/StringUtils.java
 +++ org/apache/commons/lang3/StringUtils.java
@@ -48,7 +54,7 @@
 
 --- org/apache/commons/lang3/StringUtils.java
 +++ org/apache/commons/lang3/StringUtils.java
-@@ -3365,22 +3365,18 @@
+@@ -3365,7 +3365,7 @@
       * an error to pass in an end index past the end of the array
       * @return the joined String, {@code null} if null array input
       */
@@ -57,20 +63,28 @@
          if (array == null) {
              return null;
          }
-         if (separator == null) {
+@@ -3373,20 +3373,18 @@
              separator = EMPTY;
          }
--
+ 
 -        // endIndex - startIndex > 0:   Len = NofStrings *(len(firstString) + len(separator))
 -        //           (Assuming that all Strings are roughly equally long)
--        int noOfItems = (endIndex - startIndex);
--        if (noOfItems <= 0) {
-+        if (startIndex < 0 || endIndex > array.length || startIndex >= endIndex) {
+         int noOfItems = (endIndex - startIndex);
+         if (noOfItems <= 0) {
              return EMPTY;
          }
  
 -        StringBuilder buf = new StringBuilder((array[startIndex] == null ? 16 : array[startIndex].toString().length()) + separator.length());
-+        StringBuilder buf = new StringBuilder(16);
++        StringBuilder buf = new StringBuilder(16); // Default capacity
  
          for (int i = startIndex; i < endIndex; i++) {
-             if (i > startIndex) {
+-            if (i > startIndex) {
+-                buf.append(separator);
+-            }
+             if (array[i] != null) {
++                if (buf.length() > 0) {
++                    buf.append(separator);
++                }
+                 buf.append(array[i]);
+             }
+         }

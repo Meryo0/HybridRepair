@@ -9,13 +9,13 @@
      		DeserializationContext ctxt, Object instance) throws IOException
      {
          // note: no null checks (unlike usually); deserializer should fail if one found
-@@ -91,6 +91,9 @@
+@@ -90,7 +90,8 @@
+          *  quite yet. Typical use case is with DB inserts.
           */
          
-         ReadableObjectId roid = ctxt.findObjectId(id, _objectIdReader.generator, _objectIdReader.resolver);
-+        if (roid == null) {
-+            throw new IllegalArgumentException("ReadableObjectId cannot be null for id: " + id);
-+        }
+-        ReadableObjectId roid = ctxt.findObjectId(id, _objectIdReader.generator, _objectIdReader.resolver);
++        ReadableObjectId roid = (id == null) ? ctxt.findObjectId(new Object(), _objectIdReader.generator, _objectIdReader.resolver)
++                                             : ctxt.findObjectId(id, _objectIdReader.generator, _objectIdReader.resolver);
          roid.bindItem(instance);
          // also: may need to set a property value as well
          SettableBeanProperty idProp = _objectIdReader.idProperty;
@@ -34,7 +34,7 @@
           */
 +
 +        if (id == null) {
-+            return null; // Return null or handle as per specific requirements
++            return new ReadableObjectId(new ObjectIdGenerator.IdKey(gen.getClass(), null, null));
 +        }
  
          final ObjectIdGenerator.IdKey key = gen.key(id);

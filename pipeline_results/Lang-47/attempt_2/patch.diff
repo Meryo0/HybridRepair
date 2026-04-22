@@ -1,6 +1,6 @@
 --- java/org/apache/commons/lang/text/StrBuilder.java
 +++ java/org/apache/commons/lang/text/StrBuilder.java
-@@ -1179,10 +1179,11 @@
+@@ -1179,10 +1179,10 @@
       * @param padChar  the pad character to use
       * @return this, to enable chaining
       */
@@ -9,15 +9,14 @@
          if (width > 0) {
              ensureCapacity(size + width);
 -            String str = (obj == null ? getNullText() : obj.toString());
-+            String nullText = getNullText();
-+            String str = (obj == null ? (nullText != null ? nullText : "") : obj.toString());
++            String str = (obj == null ? (getNullText() != null ? getNullText() : "") : obj.toString());
              int strLen = str.length();
              if (strLen >= width) {
                  str.getChars(strLen - width, strLen, buffer, size);
 
 --- java/org/apache/commons/lang/text/StrBuilder.java
 +++ java/org/apache/commons/lang/text/StrBuilder.java
-@@ -1223,10 +1223,11 @@
+@@ -1223,10 +1223,10 @@
       * @param padChar  the pad character to use
       * @return this, to enable chaining
       */
@@ -26,8 +25,7 @@
          if (width > 0) {
              ensureCapacity(size + width);
 -            String str = (obj == null ? getNullText() : obj.toString());
-+            String nullText = getNullText();
-+            String str = (obj == null ? (nullText != null ? nullText : "") : obj.toString());
++            String str = (obj == null ? (getNullText() != null ? getNullText() : "") : obj.toString());
              int strLen = str.length();
              if (strLen >= width) {
                  str.getChars(0, width, buffer, size);

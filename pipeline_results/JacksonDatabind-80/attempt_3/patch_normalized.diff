@@ -1,13 +1,13 @@
 --- com/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver.java
 +++ com/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver.java
-@@ -125,37 +125,37 @@
+@@ -125,37 +125,38 @@
       */
  
      @Override
--    public Collection<NamedType> collectAndResolveSubtypesByTypeId(MapperConfig<?> config, 
++@Override
+     public Collection<NamedType> collectAndResolveSubtypesByTypeId(MapperConfig<?> config, 
 -            AnnotatedMember property, JavaType baseType)
 -    {
-+public Collection<NamedType> collectAndResolveSubtypesByTypeId(MapperConfig<?> config, 
 +            AnnotatedMember property, JavaType baseType) {
          final AnnotationIntrospector ai = config.getAnnotationIntrospector();
          Class<?> rawBase = baseType.getRawClass();
@@ -29,7 +29,7 @@
 -        // then with definitions from property
 +
 +        // Then with definitions from property
-+        if (property != null) { // Ensure property is not null
++        if (property != null) {
              Collection<NamedType> st = ai.findSubtypes(property);
              if (st != null) {
                  for (NamedType nt : st) {
@@ -57,7 +57,7 @@
                      _collectAndResolveByTypeId(curr, subtype, config, typesHandled, byName);
                  }
              }
-@@ -164,8 +164,6 @@
+@@ -164,8 +165,6 @@
      }
  
      @Override
@@ -69,16 +69,22 @@
 
 --- com/fasterxml/jackson/databind/introspect/JacksonAnnotationIntrospector.java
 +++ com/fasterxml/jackson/databind/introspect/JacksonAnnotationIntrospector.java
-@@ -551,8 +551,10 @@
+@@ -551,10 +551,15 @@
      }
      
      @Override
 -    public List<NamedType> findSubtypes(Annotated a)
 -    {
-+public List<NamedType> findSubtypes(Annotated a) {
-+        if (a == null) { // Ensure Annotated object is not null
++@Override
++    public List<NamedType> findSubtypes(Annotated a) {
++        if (a == null) {
 +            return null;
 +        }
          JsonSubTypes t = _findAnnotation(a, JsonSubTypes.class);
-         if (t == null) return null;
+-        if (t == null) return null;
++        if (t == null) {
++            return null;
++        }
          JsonSubTypes.Type[] types = t.value();
+         ArrayList<NamedType> result = new ArrayList<NamedType>(types.length);
+         for (JsonSubTypes.Type type : types) {

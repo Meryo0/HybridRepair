@@ -94,15 +94,17 @@ public class KMeansPlusPlusClusterer<T extends Clusterable<T>> {
     private static <T extends Clusterable<T>> void
         assignPointsToClusters(final Collection<Cluster<T>> clusters, final Collection<T> points) {
         if (clusters == null || clusters.isEmpty()) {
-            throw new IllegalArgumentException("Cluster collection must not be null or empty");
+            throw new IllegalArgumentException("The clusters collection cannot be null or empty.");
         }
         for (final T p : points) {
-            if (p == null) {
-                continue; // Skip null points
-            }
             Cluster<T> cluster = getNearestCluster(clusters, p);
             if (cluster != null) {
                 cluster.addPoint(p);
+            } else {
+                // Create a new cluster for the point if no nearest cluster is found
+                Cluster<T> newCluster = new Cluster<>(p);
+                clusters.add(newCluster);
+                newCluster.addPoint(p);
             }
         }
     }
@@ -169,22 +171,20 @@ public class KMeansPlusPlusClusterer<T extends Clusterable<T>> {
      * @param <T> type of the points to cluster
      * @param clusters the {@link Cluster}s to search
      * @param point the point to find the nearest {@link Cluster} for
-     * @return the nearest {@link Cluster} to the given point, or null if no valid cluster is found
+     * @return the nearest {@link Cluster} to the given point
      */
     private static <T extends Clusterable<T>> Cluster<T>
         getNearestCluster(final Collection<Cluster<T>> clusters, final T point) {
-        if (clusters == null || clusters.isEmpty() || point == null) {
-            return null;
+        if (clusters == null || clusters.isEmpty()) {
+            return null; // No clusters to search
         }
         double minDistance = Double.MAX_VALUE;
         Cluster<T> minCluster = null;
         for (final Cluster<T> c : clusters) {
-            if (c.getCenter() != null) {
-                final double distance = point.distanceFrom(c.getCenter());
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    minCluster = c;
-                }
+            final double distance = point.distanceFrom(c.getCenter());
+            if (distance < minDistance) {
+                minDistance = distance;
+                minCluster = c;
             }
         }
         return minCluster;

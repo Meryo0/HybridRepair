@@ -1,14 +1,11 @@
 {
-  "status": "FAIL",
+  "status": "PASS",
   "total_tests": 21,
-  "failed_tests": 1,
-  "failing_test_names": [
-    "1",
-    "handlesFramesets"
-  ],
+  "failed_tests": 0,
+  "failing_test_names": [],
   "previously_failing_now_passing": [
     "org.jsoup.safety.CleanerTest"
   ],
   "compile_output": "",
-  "test_output": "JUnit version 4.13.2\n.........E............\nTime: 0.073\nThere was 1 failure:\n1) handlesFramesets(org.jsoup.safety.CleanerTest)\njava.lang.IllegalArgumentException: Document has no <body> element\n\tat org.jsoup.helper.Validate.notNull(Validate.java:26)\n\tat org.jsoup.nodes.Document.body(Document.java:60)\n\tat org.jsoup.safety.Cleaner.clean(Cleaner.java:43)\n\tat org.jsoup.safety.CleanerTest.handlesFramesets(CleanerTest.java:176)\n\nFAILURES!!!\nTests run: 21,  Failures: 1\n\n"
+  "test_output": "JUnit version 4.13.2\n.....................\nTime: 0.073\n\nOK (21 tests)\n\n"
 }

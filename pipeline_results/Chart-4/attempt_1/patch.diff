@@ -1,25 +1,18 @@
 --- org/jfree/chart/plot/XYPlot.java
 +++ org/jfree/chart/plot/XYPlot.java
-@@ -1572,8 +1572,13 @@
+@@ -1572,7 +1572,7 @@
       *
       * @see #setRenderer(XYItemRenderer)
       */
 -    public XYItemRenderer getRenderer() {
--        return getRenderer(0);
 +public XYItemRenderer getRenderer() {
-+        XYItemRenderer renderer = getRenderer(0);
-+        if (renderer == null) {
-+            // Return a default renderer or handle null case as needed
-+            return new StandardXYItemRenderer();
-+        }
-+        return renderer;
+         return getRenderer(0);
      }
  
-     /**
 
 --- org/jfree/chart/plot/XYPlot.java
 +++ org/jfree/chart/plot/XYPlot.java
-@@ -1585,13 +1585,16 @@
+@@ -1585,13 +1585,12 @@
       *
       * @see #setRenderer(int, XYItemRenderer)
       */
@@ -30,10 +23,6 @@
 +        if (this.renderers != null && this.renderers.size() > index) {
              result = (XYItemRenderer) this.renderers.get(index);
          }
-+        if (result == null) {
-+            // Return a default renderer or handle null case as needed
-+            return new StandardXYItemRenderer();
-+        }
          return result;
 -
      }
@@ -42,15 +31,33 @@
 
 --- org/jfree/chart/plot/XYPlot.java
 +++ org/jfree/chart/plot/XYPlot.java
-@@ -1740,7 +1740,7 @@
+@@ -1740,15 +1740,19 @@
       *
       * @return The renderer (possibly <code>null</code>).
       */
 -    public XYItemRenderer getRendererForDataset(XYDataset dataset) {
 +public XYItemRenderer getRendererForDataset(XYDataset dataset) {
          XYItemRenderer result = null;
-         for (int i = 0; i < this.datasets.size(); i++) {
-             if (this.datasets.get(i) == dataset) {
+-        for (int i = 0; i < this.datasets.size(); i++) {
+-            if (this.datasets.get(i) == dataset) {
+-                result = (XYItemRenderer) this.renderers.get(i);
+-                if (result == null) {
+-                    result = getRenderer();
++        if (this.datasets != null) {
++            for (int i = 0; i < this.datasets.size(); i++) {
++                if (this.datasets.get(i) == dataset) {
++                    if (this.renderers != null && this.renderers.size() > i) {
++                        result = (XYItemRenderer) this.renderers.get(i);
++                    }
++                    if (result == null) {
++                        result = getRenderer();
++                    }
++                    break;
+                 }
+-                break;
+             }
+         }
+         return result;
 
 --- org/jfree/chart/plot/XYPlot.java
 +++ org/jfree/chart/plot/XYPlot.java
@@ -63,15 +70,16 @@
  
          Range result = null;
          List mappedDatasets = new ArrayList();
-@@ -4490,6 +4490,7 @@
+@@ -4489,7 +4489,7 @@
+                                 DatasetUtilities.findRangeBounds(d));
                      }
                  }
-                 
+-                
 +                if (r != null) {
                      Collection c = r.getAnnotations();
                      Iterator i = c.iterator();
                      while (i.hasNext()) {
-@@ -4498,6 +4499,7 @@
+@@ -4498,6 +4498,7 @@
                              includedAnnotations.add(a);
                          }
                      }
@@ -79,15 +87,3 @@
              }
          }
  
-
---- org/jfree/chart/util/AbstractObjectList.java
-+++ org/jfree/chart/util/AbstractObjectList.java
-@@ -105,7 +105,7 @@
-      *
-      * @return The object or <code>null</code>.
-      */
--    protected Object get(int index) {
-+protected Object get(int index) {
-         Object result = null;
-         if (index >= 0 && index < this.size) {
-             result = this.objects[index];

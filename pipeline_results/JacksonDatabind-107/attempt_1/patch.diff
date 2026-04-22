@@ -14,7 +14,7 @@
          String typeId = _locateTypeId(p, ctxt);
          JsonDeserializer<Object> deser = _findDeserializer(ctxt, typeId);
 +        if (deser == null) {
-+            ctxt.reportMappingException("No deserializer found for type id '%s'", typeId);
++            ctxt.reportMappingException("No deserializer found for type id '%s' (for base type %s)", typeId, baseTypeName());
 +            return null;
 +        }
          // Minor complication: we may need to merge type id in?

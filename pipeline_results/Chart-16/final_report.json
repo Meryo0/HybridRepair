@@ -6,7 +6,7 @@
   "test_result": {
     "status": "FAIL",
     "total_attempts": 3,
-    "last_failure": "JUnit version 4.13.2\n....E.....E.....E......\nTime: 0.061\nThere were 3 failures:\n1) testSetCategoryKeys(org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests)\njunit.framework.AssertionFailedError\n\tat junit.framework.Assert.fail(Assert.java:55)\n\tat junit.framework.Assert.assertTrue(Assert.java:22)\n\tat junit.framework.Assert.assertTrue(Assert.java:31)\n\tat junit.framework.TestCase.assertTrue(TestCase.java:200)\n\tat org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests.testSetC"
+    "last_failure": "JUnit version 4.13.2\n....E..............E..\nTime: 0.066\nThere were 2 failures:\n1) testSetCategoryKeys(org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests)\njunit.framework.AssertionFailedError\n\tat junit.framework.Assert.fail(Assert.java:55)\n\tat junit.framework.Assert.assertTrue(Assert.java:22)\n\tat junit.framework.Assert.assertTrue(Assert.java:31)\n\tat junit.framework.TestCase.assertTrue(TestCase.java:200)\n\tat org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests.testSetCa"
   },
-  "timestamp": "2026-04-22T18:54:30.524443+00:00"
+  "timestamp": "2026-04-22T21:18:11.507609+00:00"
 }

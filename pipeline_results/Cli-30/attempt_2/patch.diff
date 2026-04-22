@@ -9,26 +9,30 @@
      {
          if (properties == null)
          {
-@@ -263,8 +263,17 @@
+@@ -263,10 +263,19 @@
              if (!cmd.hasOption(option))
              {
                  Option opt = getOptions().getOption(option);
 -            
 -            // if the option is part of a group, check if another option of the group has been selected
+-            
+-                // get the value from the properties instance
 +                if (opt == null)
 +                {
-+                    continue;
++                    throw new UnrecognizedOptionException("Unrecognized option: " + option, option);
 +                }
 +
 +                // Check if the option is part of a group and if another option in the group is already selected
 +                OptionGroup group = getOptions().getOptionGroup(opt);
 +                if (group != null && group.getSelected() != null)
 +                {
-+                    continue;
++                    continue; // Skip this option as another option in the group is already selected
 +                }
-             
-                 // get the value from the properties instance
++
++                // Get the value from the properties instance
                  String value = properties.getProperty(option);
+ 
+                 if (opt.hasArg())
 
 --- org/apache/commons/cli/DefaultParser.java
 +++ org/apache/commons/cli/DefaultParser.java
@@ -41,23 +45,27 @@
      {
          if (properties == null)
          {
-@@ -150,8 +150,17 @@
+@@ -150,10 +150,19 @@
              if (!cmd.hasOption(option))
              {
                  Option opt = options.getOption(option);
 -            
 -            // if the option is part of a group, check if another option of the group has been selected
+-            
+-                // get the value from the properties
 +                if (opt == null)
 +                {
-+                    continue;
++                    throw new UnrecognizedOptionException("Unrecognized option: " + option, option);
 +                }
 +
 +                // Check if the option is part of a group and if another option in the group is already selected
 +                OptionGroup group = options.getOptionGroup(opt);
 +                if (group != null && group.getSelected() != null)
 +                {
-+                    continue;
++                    continue; // Skip this option as another option in the group is already selected
 +                }
-             
-                 // get the value from the properties
++
++                // Get the value from the properties
                  String value = properties.getProperty(option);
+                 
+                 if (opt.hasArg())

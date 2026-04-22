@@ -1,27 +1,32 @@
-**Revised Root Cause**:
-The previous fix addressed the `NullPointerException` by adding a null-check for the `cAvailableLocaleSet` field. However, this approach does not resolve the underlying issue: the `cAvailableLocaleSet` field is not being initialized properly. The `LocaleUtils` class relies on this field to store the set of available locales, and its absence leads to incorrect behavior in other methods and tests.
+--- java/org/apache/commons/lang/LocaleUtils.java
++++ java/org/apache/commons/lang/LocaleUtils.java
+@@ -233,7 +233,7 @@
+      * @param countryCode  the 2 letter country code, null returns empty
+      * @return an unmodifiable List of Locale objects, never null
+      */
+-    public static List languagesByCountry(String countryCode) {
++public static List languagesByCountry(String countryCode) {
+         List langs = (List) cLanguagesByCountry.get(countryCode);  //syncd
+         if (langs == null) {
+             if (countryCode != null) {
 
-The `cAvailableLocaleSet` field must be initialized with the correct set of available locales. Without this initialization, the `isAvailableLocale` method and other methods that depend on `cAvailableLocaleSet` will not function as intended, leading to test failures.
-
-**Revised Correct Intended Behavior**:
-1. Ensure that the `cAvailableLocaleSet` field is properly initialized with the set of available locales. This can be done using a static initializer or lazy initialization.
-2. The `isAvailableLocale` method should check if the `cAvailableLocaleSet` is null and initialize it if necessary. This ensures that the method behaves correctly even if the field was not initialized earlier.
-3. The method should return `false` if the input `locale` is null, as a null locale cannot be available.
-
-Here is the corrected method with proper initialization of `cAvailableLocaleSet`.
-FILE: java/org/apache/commons/lang/LocaleUtils.java
-```java
-    private static Set<Locale> cAvailableLocaleSet;
-
-    static {
-        // Initialize cAvailableLocaleSet with the available locales
-        cAvailableLocaleSet = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(Locale.getAvailableLocales())));
-    }
-
-    public static boolean isAvailableLocale(Locale locale) {
-        if (locale == null) {
-            return false;
-        }
-        return cAvailableLocaleSet.contains(locale);
-    }
-```
+--- java/org/apache/commons/lang/LocaleUtils.java
++++ java/org/apache/commons/lang/LocaleUtils.java
+@@ -91,7 +91,7 @@
+      * @return a Locale, null if null input
+      * @throws IllegalArgumentException if the string is an invalid format
+      */
+-    public static Locale toLocale(String str) {
++public static Locale toLocale(String str) {
+         if (str == null) {
+             return null;
+         }
+@@ -121,7 +121,7 @@
+                 if (str.charAt(5) != '_') {
+                     throw new IllegalArgumentException("Invalid locale format: " + str);
+                 }
+-                return new Locale(str.substring(0, 2), str.substring(3, 5), str.substring(6));
++                return new Locale(str.substring(0, 2), str.substring(3, 5), str.substring(6).toUpperCase());
+             }
+         }
+     }

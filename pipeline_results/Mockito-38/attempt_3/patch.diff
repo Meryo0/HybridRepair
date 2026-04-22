@@ -1,6 +1,6 @@
 --- org/mockito/internal/verification/argumentmatching/ArgumentMatchingTool.java
 +++ org/mockito/internal/verification/argumentmatching/ArgumentMatchingTool.java
-@@ -44,7 +44,12 @@
+@@ -44,7 +44,14 @@
          }
      }
  
@@ -10,8 +10,10 @@
 +        if (m == null || arg == null) {
 +            return false;
 +        }
-+        String matcherString = StringDescription.toString(m);
-+        String argString = (arg != null) ? arg.toString() : null;
-+        return matcherString.equals(argString);
++        try {
++            return StringDescription.toString(m).equals(arg.toString());
++        } catch (Exception e) {
++            return false;
++        }
      }
  }

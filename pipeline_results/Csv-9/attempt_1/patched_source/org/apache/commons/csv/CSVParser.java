@@ -354,10 +354,12 @@ public final class CSVParser implements Iterable<CSVRecord>, Closeable {
      * @return null if the format has no header.
      * @throws IOException if there is a problem reading the header or skipping the first record
      */
-private Map<String, Integer> initializeHeader() throws IOException {
-        Map<String, Integer> hdrMap = new LinkedHashMap<>(); // Ensure hdrMap is never null
+    private Map<String, Integer> initializeHeader() throws IOException {
+        Map<String, Integer> hdrMap = null;
         final String[] formatHeader = this.format.getHeader();
         if (formatHeader != null) {
+            hdrMap = new LinkedHashMap<String, Integer>();
+
             String[] header = null;
             if (formatHeader.length == 0) {
                 // read the header from the first line of the file

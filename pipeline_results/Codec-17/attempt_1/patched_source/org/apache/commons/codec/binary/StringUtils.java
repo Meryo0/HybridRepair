@@ -336,10 +336,7 @@ public class StringUtils {
      * @since As of 1.7, throws {@link NullPointerException} instead of UnsupportedEncodingException
      */
 public static String newStringIso8859_1(final byte[] bytes) {
-        if (bytes == null) {
-            return null;
-        }
-        return new String(bytes, Charsets.ISO_8859_1);
+        return bytes == null ? null : new String(bytes, Charsets.ISO_8859_1);
     }
 
     /**

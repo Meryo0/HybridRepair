@@ -151,15 +151,15 @@ public final class TextBuffer
      * Method called to clear out any content text buffer may have, and
      * initializes buffer to use non-shared data.
      */
-public void resetWithEmpty()
+    public void resetWithEmpty()
     {
         _inputStart = -1; // indicates shared buffer not used
         _currentSize = 0;
         _inputLen = 0;
 
-        _inputBuffer = new char[0];
+        _inputBuffer = null;
         _resultString = null;
-        _resultArray = new char[0];
+        _resultArray = null;
 
         // And then reset internal input buffers, if necessary:
         if (_hasSegments) {
@@ -298,13 +298,13 @@ public void resetWithEmpty()
 public char[] getTextBuffer()
     {
         // Are we just using shared input buffer?
-        if (_inputStart >= 0) return (_inputBuffer != null) ? _inputBuffer : new char[0];
-        if (_resultArray != null)  return _resultArray;
+        if (_inputStart >= 0) return (_inputBuffer != null) ? _inputBuffer : NO_CHARS;
+        if (_resultArray != null) return _resultArray;
         if (_resultString != null) {
             return (_resultArray = _resultString.toCharArray());
         }
         // Nope; but does it fit in just one segment?
-        if (!_hasSegments)  return (_currentSegment != null) ? _currentSegment : new char[0];
+        if (!_hasSegments) return (_currentSegment != null) ? _currentSegment : NO_CHARS;
         // Nope, need to have/create a non-segmented array and return it
         return contentsAsArray();
     }

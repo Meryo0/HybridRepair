@@ -11,5 +11,5 @@
     "org.apache.commons.csv.CSVParserTest"
   ],
   "compile_output": "",
-  "test_output": "JUnit version 4.13.2\nI..............................E..................\nTime: 0.033\nThere was 1 failure:\n1) testNoHeaderMap(org.apache.commons.csv.CSVParserTest)\njava.lang.AssertionError: expected null, but was:<{}>\n\tat org.junit.Assert.fail(Assert.java:89)\n\tat org.junit.Assert.failNotNull(Assert.java:756)\n\tat org.junit.Assert.assertNull(Assert.java:738)\n\tat org.junit.Assert.assertNull(Assert.java:748)\n\tat org.apache.commons.csv.CSVParserTest.testNoHeaderMap(CSVParserTest.java:670)\n\nFAILURES!!!\nTests run: 48,  Failures: 1\n\n"
+  "test_output": "JUnit version 4.13.2\nI..............................E..................\nTime: 0.09\nThere was 1 failure:\n1) testNoHeaderMap(org.apache.commons.csv.CSVParserTest)\njava.lang.AssertionError: expected null, but was:<{}>\n\tat org.junit.Assert.fail(Assert.java:89)\n\tat org.junit.Assert.failNotNull(Assert.java:756)\n\tat org.junit.Assert.assertNull(Assert.java:738)\n\tat org.junit.Assert.assertNull(Assert.java:748)\n\tat org.apache.commons.csv.CSVParserTest.testNoHeaderMap(CSVParserTest.java:670)\n\nFAILURES!!!\nTests run: 48,  Failures: 1\n\n"
 }

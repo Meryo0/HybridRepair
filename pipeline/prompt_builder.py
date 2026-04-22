@@ -336,7 +336,9 @@ def build_diagnostic_prompt(
 
 ## Istruzioni per la Diagnosi
 
-Analizza il bug. Se hai bisogno di maggiori informazioni sulle variabili, sui tipi o sulle dipendenze dei metodi, PUOI usare il tool `query_prolog` per esplorare il database Prolog (`logic-fl.pl` e `code-facts.pl`). Ad esempio, query come `method_invoc(Id, Nome, Linea)` o `assign(Var, Expr, Linea)`.
+Analizza il bug. Puoi usare i seguenti tool per raccogliere contesto:
+- `query_prolog`: per esplorare il database Prolog (es. `method_invoc`, `assign`, ecc.) vicino alla riga del bug.
+- `read_file`: per leggere l'intero codice sorgente di un file Java e capire l'architettura della classe (variabili membro, overload di metodi, ecc.). Altamente raccomandato se il difetto non è ovvio a colpo d'occhio.
 
 Attenzione: le locazioni segnalate da LogicFL indicano il punto esatto in cui il bug si manifesta. Valuta attentamente se è corretto sanare l'errore in quel metodo esatto o se è più semanticamente corretto intercettare e gestire l'errore (o i dati nulli/invalidi) a monte, nel metodo chiamante. Non limitarti a risolvere il sintomo.
 

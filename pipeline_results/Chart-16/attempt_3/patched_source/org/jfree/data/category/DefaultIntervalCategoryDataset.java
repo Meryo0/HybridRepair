@@ -237,7 +237,10 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
      * @see #getRowIndex(Comparable)
      * @see #getSeriesKey(int)
      */
-    public int getSeriesIndex(Comparable seriesKey) {
+public int getSeriesIndex(Comparable seriesKey) {
+        if (this.seriesKeys == null) {
+            return -1;
+        }
         int result = -1;
         for (int i = 0; i < this.seriesKeys.length; i++) {
             if (seriesKey.equals(this.seriesKeys[i])) {
@@ -740,11 +743,9 @@ public Object clone() throws CloneNotSupportedException {
         DefaultIntervalCategoryDataset clone 
                 = (DefaultIntervalCategoryDataset) super.clone();
         clone.categoryKeys = (this.categoryKeys != null) 
-                ? (Comparable[]) this.categoryKeys.clone() 
-                : null;
+                ? (Comparable[]) this.categoryKeys.clone() : new Comparable[0];
         clone.seriesKeys = (this.seriesKeys != null) 
-                ? (Comparable[]) this.seriesKeys.clone() 
-                : null;
+                ? (Comparable[]) this.seriesKeys.clone() : new Comparable[0];
         clone.startData = clone(this.startData);
         clone.endData = clone(this.endData);
         return clone;

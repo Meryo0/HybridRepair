@@ -1,42 +1,5 @@
 --- com/fasterxml/jackson/databind/type/TypeFactory.java
 +++ com/fasterxml/jackson/databind/type/TypeFactory.java
-@@ -1151,7 +1151,7 @@
-      * as Java typing returned from <code>getGenericXxx</code> methods
-      * (usually for a return or argument type).
-      */
--    protected JavaType _fromAny(ClassStack context, Type type, TypeBindings bindings)
-+protected JavaType _fromAny(ClassStack context, Type type, TypeBindings bindings)
-     {
-         JavaType resultType;
- 
-@@ -1162,20 +1162,20 @@
-         }
-         // But if not, need to start resolving.
-         else if (type instanceof ParameterizedType) {
--            resultType = _fromParamType(context, (ParameterizedType) type, bindings);
-+            resultType = _fromParamType(context, (ParameterizedType) type, bindings != null ? bindings : EMPTY_BINDINGS);
-         }
-         else if (type instanceof JavaType) { // [databind#116]
-             // no need to modify further if we already had JavaType
-             return (JavaType) type;
-         }
-         else if (type instanceof GenericArrayType) {
--            resultType = _fromArrayType(context, (GenericArrayType) type, bindings);
-+            resultType = _fromArrayType(context, (GenericArrayType) type, bindings != null ? bindings : EMPTY_BINDINGS);
-         }
-         else if (type instanceof TypeVariable<?>) {
--            resultType = _fromVariable(context, (TypeVariable<?>) type, bindings);
-+            resultType = _fromVariable(context, (TypeVariable<?>) type, bindings != null ? bindings : EMPTY_BINDINGS);
-         }
-         else if (type instanceof WildcardType) {
--            resultType = _fromWildcard(context, (WildcardType) type, bindings);
-+            resultType = _fromWildcard(context, (WildcardType) type, bindings != null ? bindings : EMPTY_BINDINGS);
-         } else {
-             // sanity check
-             throw new IllegalArgumentException("Unrecognized Type: "+((type == null) ? "[null]" : type.toString()));
-
---- com/fasterxml/jackson/databind/type/TypeFactory.java
-+++ com/fasterxml/jackson/databind/type/TypeFactory.java
 @@ -1406,10 +1406,13 @@
          return ArrayType.construct(elementType, bindings);
      }
@@ -52,44 +15,6 @@
          JavaType type = bindings.findBoundType(name);
          if (type != null) {
              return type;
-
---- com/fasterxml/jackson/databind/type/TypeFactory.java
-+++ com/fasterxml/jackson/databind/type/TypeFactory.java
-@@ -1298,11 +1298,14 @@
-         return _fromAny(context, parent, parentBindings);
-     }
- 
--    protected JavaType[] _resolveSuperInterfaces(ClassStack context, Class<?> rawType, TypeBindings parentBindings)
-+protected JavaType[] _resolveSuperInterfaces(ClassStack context, Class<?> rawType, TypeBindings parentBindings)
-     {
-         Type[] types = ClassUtil.getGenericInterfaces(rawType);
-         if (types == null || types.length == 0) {
-             return NO_TYPES;
-+        }
-+        if (parentBindings == null) {
-+            parentBindings = EMPTY_BINDINGS;
-         }
-         int len = types.length;
-         JavaType[] resolved = new JavaType[len];
-
---- com/fasterxml/jackson/databind/type/TypeFactory.java
-+++ com/fasterxml/jackson/databind/type/TypeFactory.java
-@@ -1289,11 +1289,14 @@
-         return result;
-     }
- 
--    protected JavaType _resolveSuperClass(ClassStack context, Class<?> rawType, TypeBindings parentBindings)
-+protected JavaType _resolveSuperClass(ClassStack context, Class<?> rawType, TypeBindings parentBindings)
-     {
-         Type parent = ClassUtil.getGenericSuperclass(rawType);
-         if (parent == null) {
-             return null;
-+        }
-+        if (parentBindings == null) {
-+            parentBindings = EMPTY_BINDINGS;
-         }
-         return _fromAny(context, parent, parentBindings);
-     }
 
 --- com/fasterxml/jackson/databind/type/TypeParser.java
 +++ com/fasterxml/jackson/databind/type/TypeParser.java

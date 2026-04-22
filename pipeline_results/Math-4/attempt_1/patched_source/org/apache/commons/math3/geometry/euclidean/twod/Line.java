@@ -197,7 +197,7 @@ public Vector1D toSubSpace(final Vector<Euclidean2D> point) {
      * @return intersection point of the instance and the other line
      * or null if there are no intersection points
      */
-public Vector2D intersection(final Line other) {
+    public Vector2D intersection(final Line other) {
         final double d = sin * other.cos - other.sin * cos;
         if (FastMath.abs(d) < 1.0e-10) {
             return null;

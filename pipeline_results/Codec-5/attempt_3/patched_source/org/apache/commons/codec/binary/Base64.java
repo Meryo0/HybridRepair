@@ -410,15 +410,15 @@ int readResults(byte[] b, int bPos, int bAvail) {
                 System.arraycopy(buffer, readPos, b, bPos, len);
                 readPos += len;
                 if (readPos >= pos) {
-                    // Only set buffer to null if it is no longer needed
-                    buffer = null;
-                    readPos = 0; // Reset read position for safety
-                    pos = 0;     // Reset position for safety
+                    // Reset buffer state instead of nullifying it
+                    buffer = new byte[DEFAULT_BUFFER_SIZE];
+                    readPos = 0;
+                    pos = 0;
                 }
             } else {
                 // Re-using the original consumer's output array is only
                 // allowed for one round.
-                buffer = null;
+                buffer = new byte[DEFAULT_BUFFER_SIZE];
             }
             return len;
         }
@@ -592,18 +592,14 @@ int readResults(byte[] b, int bPos, int bAvail) {
             switch (modulus) {
                 case 2 :
                     x = x << 6;
-                    if (buffer == null) {
-                        // Ensure buffer is initialized before use
-                        buffer = new byte[DEFAULT_BUFFER_SIZE];
-                        pos = 0; // Reset position for new buffer
+                    if (buffer == null || pos >= buffer.length) {
+                        buffer = new byte[Math.max(DEFAULT_BUFFER_SIZE, pos + 1)];
                     }
                     buffer[pos++] = (byte) ((x >> 16) & MASK_8BITS);
                     break;
                 case 3 :
-                    if (buffer == null) {
-                        // Ensure buffer is initialized before use
-                        buffer = new byte[DEFAULT_BUFFER_SIZE];
-                        pos = 0; // Reset position for new buffer
+                    if (buffer == null || pos + 1 >= buffer.length) {
+                        buffer = new byte[Math.max(DEFAULT_BUFFER_SIZE, pos + 2)];
                     }
                     buffer[pos++] = (byte) ((x >> 16) & MASK_8BITS);
                     buffer[pos++] = (byte) ((x >> 8) & MASK_8BITS);

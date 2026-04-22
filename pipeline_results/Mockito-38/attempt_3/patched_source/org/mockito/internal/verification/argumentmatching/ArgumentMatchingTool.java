@@ -48,8 +48,10 @@ private boolean toStringEquals(Matcher m, Object arg) {
         if (m == null || arg == null) {
             return false;
         }
-        String matcherString = StringDescription.toString(m);
-        String argString = (arg != null) ? arg.toString() : null;
-        return matcherString.equals(argString);
+        try {
+            return StringDescription.toString(m).equals(arg.toString());
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

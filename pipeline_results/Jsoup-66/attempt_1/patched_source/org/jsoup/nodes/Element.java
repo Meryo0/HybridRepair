@@ -681,10 +681,8 @@ public class Element extends Node {
      */
 public Element nextElementSibling() {
         if (parentNode == null) return null;
-        Element parent = parent();
-        if (parent == null) return null;
-        List<Element> siblings = parent.childElementsList();
-        if (siblings == null || siblings.isEmpty()) return null;
+        List<Element> siblings = parent() != null ? parent().childElementsList() : null;
+        if (siblings == null) return null;
         Integer index = indexInList(this, siblings);
         if (index == null || siblings.size() <= index + 1) return null;
         return siblings.get(index + 1);

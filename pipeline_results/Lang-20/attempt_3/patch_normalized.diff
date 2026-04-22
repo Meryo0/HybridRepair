@@ -26,7 +26,7 @@
          }
          
 -        StringBuilder buf = new StringBuilder((array[startIndex] == null ? 16 : array[startIndex].toString().length()) + 1);
-+        StringBuilder buf = new StringBuilder((array[startIndex] == null ? 16 : String.valueOf(array[startIndex]).length()) + 1);
++        StringBuilder buf = new StringBuilder(16); // Default capacity
  
          for (int i = startIndex; i < endIndex; i++) {
              if (i > startIndex) {
@@ -35,7 +35,7 @@
 -            if (array[i] != null) {
 -                buf.append(array[i]);
 -            }
-+            buf.append(String.valueOf(array[i]));
++            buf.append(array[i] == null ? "null" : array[i]);
          }
          return buf.toString();
      }
@@ -75,7 +75,7 @@
          }
  
 -        StringBuilder buf = new StringBuilder((array[startIndex] == null ? 16 : array[startIndex].toString().length()) + separator.length());
-+        StringBuilder buf = new StringBuilder((array[startIndex] == null ? 16 : String.valueOf(array[startIndex]).length()) + separator.length());
++        StringBuilder buf = new StringBuilder(16); // Default capacity
  
          for (int i = startIndex; i < endIndex; i++) {
              if (i > startIndex) {
@@ -84,7 +84,7 @@
 -            if (array[i] != null) {
 -                buf.append(array[i]);
 -            }
-+            buf.append(String.valueOf(array[i]));
++            buf.append(array[i] == null ? "null" : array[i]);
          }
          return buf.toString();
      }

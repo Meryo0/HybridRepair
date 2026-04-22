@@ -1406,10 +1406,13 @@ public final class TypeFactory
         return ArrayType.construct(elementType, bindings);
     }
 
-    protected JavaType _fromVariable(ClassStack context, TypeVariable<?> var, TypeBindings bindings)
+protected JavaType _fromVariable(ClassStack context, TypeVariable<?> var, TypeBindings bindings)
     {
         // ideally should find it via bindings:
         final String name = var.getName();
+        if (bindings == null) {
+            bindings = EMPTY_BINDINGS;
+        }
         JavaType type = bindings.findBoundType(name);
         if (type != null) {
             return type;

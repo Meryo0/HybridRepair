@@ -93,19 +93,16 @@ public class KMeansPlusPlusClusterer<T extends Clusterable<T>> {
      */
     private static <T extends Clusterable<T>> void
         assignPointsToClusters(final Collection<Cluster<T>> clusters, final Collection<T> points) {
+        if (clusters == null || clusters.isEmpty()) {
+            throw new IllegalArgumentException("The clusters collection cannot be null or empty.");
+        }
         for (final T p : points) {
             Cluster<T> cluster = getNearestCluster(clusters, p);
-            if (cluster == null) {
-                // Fallback: Assign the point to the first cluster if available
-                if (!clusters.isEmpty()) {
-                    cluster = clusters.iterator().next();
-                } else {
-                    // If no clusters exist, create a new one for the point
-                    cluster = new Cluster<>(p);
-                    clusters.add(cluster);
-                }
+            if (cluster != null) {
+                cluster.addPoint(p);
+            } else {
+                throw new IllegalStateException("No nearest cluster found for point: " + p);
             }
-            cluster.addPoint(p);
         }
     }
 
@@ -165,8 +162,19 @@ public class KMeansPlusPlusClusterer<T extends Clusterable<T>> {
      * @param point the point to find the nearest {@link Cluster} for
      * @return the nearest {@link Cluster} to the given point
      */
+/**
+     * Returns the nearest {@link Cluster} to the given point
+     *
+     * @param <T> type of the points to cluster
+     * @param clusters the {@link Cluster}s to search
+     * @param point the point to find the nearest {@link Cluster} for
+     * @return the nearest {@link Cluster} to the given point
+     */
     private static <T extends Clusterable<T>> Cluster<T>
         getNearestCluster(final Collection<Cluster<T>> clusters, final T point) {
+        if (clusters == null || clusters.isEmpty()) {
+            throw new IllegalArgumentException("The clusters collection cannot be null or empty.");
+        }
         double minDistance = Double.MAX_VALUE;
         Cluster<T> minCluster = null;
         for (final Cluster<T> c : clusters) {

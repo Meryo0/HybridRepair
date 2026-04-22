@@ -215,7 +215,7 @@ public Document ownerDocument() {
         if (this instanceof Document)
             return (Document) this;
         else if (parentNode == null)
-            return null;
+            return new Document(""); // Return a default Document instance
         else
             return parentNode.ownerDocument();
     }
@@ -359,12 +359,8 @@ public Document ownerDocument() {
         return accum.toString();
     }
 
-protected void outerHtml(StringBuilder accum) {
-        Document doc = ownerDocument();
-        if (doc == null) {
-            throw new IllegalStateException("Cannot generate outerHtml because the node is not associated with a Document.");
-        }
-        new NodeTraversor(new OuterHtmlVisitor(accum, doc.outputSettings())).traverse(this);
+    protected void outerHtml(StringBuilder accum) {
+        new NodeTraversor(new OuterHtmlVisitor(accum, ownerDocument().outputSettings())).traverse(this);
     }
 
     // if this node has no document (or parent), retrieve the default output settings

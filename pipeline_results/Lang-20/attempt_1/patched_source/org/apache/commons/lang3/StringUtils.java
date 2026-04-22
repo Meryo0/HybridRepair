@@ -3295,7 +3295,7 @@ public static String join(Object[] array, char separator, int startIndex, int en
             return EMPTY;
         }
         
-        StringBuilder buf = new StringBuilder((array[startIndex] == null ? 16 : String.valueOf(array[startIndex]).length()) + 1);
+        StringBuilder buf = new StringBuilder((startIndex < array.length && array[startIndex] != null ? array[startIndex].toString().length() : 16) + 1);
 
         for (int i = startIndex; i < endIndex; i++) {
             if (i > startIndex) {
@@ -3378,7 +3378,7 @@ public static String join(Object[] array, String separator, int startIndex, int 
             return EMPTY;
         }
 
-        StringBuilder buf = new StringBuilder((array[startIndex] == null ? 16 : String.valueOf(array[startIndex]).length()) + separator.length());
+        StringBuilder buf = new StringBuilder((startIndex < array.length && array[startIndex] != null ? array[startIndex].toString().length() : 16) + separator.length());
 
         for (int i = startIndex; i < endIndex; i++) {
             if (i > startIndex) {

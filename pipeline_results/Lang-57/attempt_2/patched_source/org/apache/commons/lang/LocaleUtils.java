@@ -91,7 +91,7 @@ public class LocaleUtils {
      * @return a Locale, null if null input
      * @throws IllegalArgumentException if the string is an invalid format
      */
-    public static Locale toLocale(String str) {
+public static Locale toLocale(String str) {
         if (str == null) {
             return null;
         }
@@ -121,7 +121,7 @@ public class LocaleUtils {
                 if (str.charAt(5) != '_') {
                     throw new IllegalArgumentException("Invalid locale format: " + str);
                 }
-                return new Locale(str.substring(0, 2), str.substring(3, 5), str.substring(6));
+                return new Locale(str.substring(0, 2), str.substring(3, 5), str.substring(6).toUpperCase());
             }
         }
     }
@@ -233,7 +233,7 @@ public class LocaleUtils {
      * @param countryCode  the 2 letter country code, null returns empty
      * @return an unmodifiable List of Locale objects, never null
      */
-    public static List languagesByCountry(String countryCode) {
+public static List languagesByCountry(String countryCode) {
         List langs = (List) cLanguagesByCountry.get(countryCode);  //syncd
         if (langs == null) {
             if (countryCode != null) {

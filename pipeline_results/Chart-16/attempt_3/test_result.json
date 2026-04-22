@@ -1,16 +1,15 @@
 {
   "status": "FAIL",
   "total_tests": 20,
-  "failed_tests": 3,
+  "failed_tests": 2,
   "failing_test_names": [
     "at",
     "testSetCategoryKeys",
-    "testGetSeriesIndex",
-    "testGetRowIndex"
+    "testCloning2"
   ],
   "previously_failing_now_passing": [
     "org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests"
   ],
   "compile_output": "Note: Some input files use or override a deprecated API.\nNote: Recompile with -Xlint:deprecation for details.\nNote: Some input files use unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
-  "test_output": "JUnit version 4.13.2\n....E.....E.....E......\nTime: 0.061\nThere were 3 failures:\n1) testSetCategoryKeys(org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests)\njunit.framework.AssertionFailedError\n\tat junit.framework.Assert.fail(Assert.java:55)\n\tat junit.framework.Assert.assertTrue(Assert.java:22)\n\tat junit.framework.Assert.assertTrue(Assert.java:31)\n\tat junit.framework.TestCase.assertTrue(TestCase.java:200)\n\tat org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests.testSetCategoryKeys(DefaultIntervalCategoryDatasetTests.java:444)\n2) testGetSeriesIndex(org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests)\njava.lang.NullPointerException: Cannot read the array length because \"this.seriesKeys\" is null\n\tat org.jfree.data.category.DefaultIntervalCategoryDataset.getSeriesIndex(DefaultIntervalCategoryDataset.java:242)\n\tat org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests.testGetSeriesIndex(DefaultIntervalCategoryDatasetTests.java:375)\n3) testGetRowIndex(org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests)\njava.lang.NullPointerException: Cannot read the array length because \"this.seriesKeys\" is null\n\tat org.jfree.data.category.DefaultIntervalCategoryDataset.getSeriesIndex(DefaultIntervalCategoryDataset.java:242)\n\tat org.jfree.data.category.DefaultIntervalCategoryDataset.getRowIndex(DefaultIntervalCategoryDataset.java:635)\n\tat org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests.testGetRowIndex(DefaultIntervalCategoryDatasetTests.java:386)\n\nFAILURES!!!\nTests run: 20,  Failures: 3\n\n"
+  "test_output": "JUnit version 4.13.2\n....E..............E..\nTime: 0.066\nThere were 2 failures:\n1) testSetCategoryKeys(org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests)\njunit.framework.AssertionFailedError\n\tat junit.framework.Assert.fail(Assert.java:55)\n\tat junit.framework.Assert.assertTrue(Assert.java:22)\n\tat junit.framework.Assert.assertTrue(Assert.java:31)\n\tat junit.framework.TestCase.assertTrue(TestCase.java:200)\n\tat org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests.testSetCategoryKeys(DefaultIntervalCategoryDatasetTests.java:444)\n2) testCloning2(org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests)\njunit.framework.AssertionFailedError\n\tat junit.framework.Assert.fail(Assert.java:55)\n\tat junit.framework.Assert.assertTrue(Assert.java:22)\n\tat junit.framework.Assert.assertTrue(Assert.java:31)\n\tat junit.framework.TestCase.assertTrue(TestCase.java:200)\n\tat org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests.testCloning2(DefaultIntervalCategoryDatasetTests.java:272)\n\nFAILURES!!!\nTests run: 20,  Failures: 2\n\n"
 }

@@ -9,6 +9,15 @@
                                              boolean includeInterval) {
          if (dataset == null) {
              throw new IllegalArgumentException("Null 'dataset' argument.");
+@@ -776,7 +776,7 @@
+                 }
+             }
+         }
+-        if (minimum > maximum) {
++        if (minimum == Double.POSITIVE_INFINITY || maximum == Double.NEGATIVE_INFINITY) {
+             return null;
+         }
+         else {
 --- org/jfree/data/general/DatasetUtilities.java
 +++ org/jfree/data/general/DatasetUtilities.java
 @@ -1226,7 +1226,7 @@
@@ -20,3 +29,12 @@
              boolean includeInterval) {
          double minimum = Double.POSITIVE_INFINITY;
          double maximum = Double.NEGATIVE_INFINITY;
+@@ -1280,7 +1280,7 @@
+                 }
+             }
+         }
+-        if (minimum == Double.POSITIVE_INFINITY) {
++        if (minimum == Double.POSITIVE_INFINITY || maximum == Double.NEGATIVE_INFINITY) {
+             return null;
+         }
+         else {

@@ -752,11 +752,9 @@ public Object clone() throws CloneNotSupportedException {
         DefaultIntervalCategoryDataset clone 
                 = (DefaultIntervalCategoryDataset) super.clone();
         clone.categoryKeys = (this.categoryKeys != null) 
-                ? (Comparable[]) this.categoryKeys.clone() 
-                : null;
+                ? (Comparable[]) this.categoryKeys.clone() : null;
         clone.seriesKeys = (this.seriesKeys != null) 
-                ? (Comparable[]) this.seriesKeys.clone() 
-                : null;
+                ? (Comparable[]) this.seriesKeys.clone() : null;
         clone.startData = clone(this.startData);
         clone.endData = clone(this.endData);
         return clone;

@@ -1,14 +1,17 @@
-**Revised Root Cause**:
-The failure now points to the `siblingElements()` method in the `Element` class, specifically at line 435. The issue arises because the `parent()` method is returning `null` for orphan elements, and the subsequent call to `children()` on the null parent results in a `NullPointerException`. This is similar to the issue in the `siblingNodes()` method but occurs in a different context.
+It seems that the Prolog queries are not yielding useful results, and the `Element.java` file is too large to read directly. However, based on the error message, the issue appears to be related to the `siblingElements` method in the `Element` class, which is invoking `parent()` and then `children()` without handling the case where `parent()` might return `null`.
 
-The `siblingElements()` method must handle the case where the element is an orphan (i.e., `parent()` returns `null`). Additionally, the method should exclude the element itself from the list of sibling elements.
+I will revise the root cause and provide a fix for the `siblingElements` method based on this analysis.
+
+**Revised Root Cause**:
+The `siblingElements` method in the `Element` class does not handle the case where the `parent()` method returns `null`. If the element is an orphan, attempting to call `children()` on a `null` parent will result in a `NullPointerException`.
 
 **Revised Correct Intended Behavior**:
-1. The `siblingElements()` method should:
-   - Return an empty list if the element is an orphan.
-   - Exclude the element itself from the list of sibling elements.
+The `siblingElements` method should:
+1. Return an empty list if the element has no parent (`parent() == null`).
+2. Exclude the current element itself from the list of siblings when returning the parent's children.
 
-I will now provide the corrected method.
+**Corrected Method**:
+
 FILE: org/jsoup/nodes/Element.java
 ```java
     public List<Element> siblingElements() {

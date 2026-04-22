@@ -1151,7 +1151,7 @@ public final class TypeFactory
      * as Java typing returned from <code>getGenericXxx</code> methods
      * (usually for a return or argument type).
      */
-protected JavaType _fromAny(ClassStack context, Type type, TypeBindings bindings)
+    protected JavaType _fromAny(ClassStack context, Type type, TypeBindings bindings)
     {
         JavaType resultType;
 
@@ -1162,20 +1162,20 @@ protected JavaType _fromAny(ClassStack context, Type type, TypeBindings bindings
         }
         // But if not, need to start resolving.
         else if (type instanceof ParameterizedType) {
-            resultType = _fromParamType(context, (ParameterizedType) type, bindings != null ? bindings : EMPTY_BINDINGS);
+            resultType = _fromParamType(context, (ParameterizedType) type, bindings);
         }
         else if (type instanceof JavaType) { // [databind#116]
             // no need to modify further if we already had JavaType
             return (JavaType) type;
         }
         else if (type instanceof GenericArrayType) {
-            resultType = _fromArrayType(context, (GenericArrayType) type, bindings != null ? bindings : EMPTY_BINDINGS);
+            resultType = _fromArrayType(context, (GenericArrayType) type, bindings);
         }
         else if (type instanceof TypeVariable<?>) {
-            resultType = _fromVariable(context, (TypeVariable<?>) type, bindings != null ? bindings : EMPTY_BINDINGS);
+            resultType = _fromVariable(context, (TypeVariable<?>) type, bindings);
         }
         else if (type instanceof WildcardType) {
-            resultType = _fromWildcard(context, (WildcardType) type, bindings != null ? bindings : EMPTY_BINDINGS);
+            resultType = _fromWildcard(context, (WildcardType) type, bindings);
         } else {
             // sanity check
             throw new IllegalArgumentException("Unrecognized Type: "+((type == null) ? "[null]" : type.toString()));
@@ -1289,26 +1289,20 @@ protected JavaType _fromAny(ClassStack context, Type type, TypeBindings bindings
         return result;
     }
 
-protected JavaType _resolveSuperClass(ClassStack context, Class<?> rawType, TypeBindings parentBindings)
+    protected JavaType _resolveSuperClass(ClassStack context, Class<?> rawType, TypeBindings parentBindings)
     {
         Type parent = ClassUtil.getGenericSuperclass(rawType);
         if (parent == null) {
             return null;
         }
-        if (parentBindings == null) {
-            parentBindings = EMPTY_BINDINGS;
-        }
         return _fromAny(context, parent, parentBindings);
     }
 
-protected JavaType[] _resolveSuperInterfaces(ClassStack context, Class<?> rawType, TypeBindings parentBindings)
+    protected JavaType[] _resolveSuperInterfaces(ClassStack context, Class<?> rawType, TypeBindings parentBindings)
     {
         Type[] types = ClassUtil.getGenericInterfaces(rawType);
         if (types == null || types.length == 0) {
             return NO_TYPES;
-        }
-        if (parentBindings == null) {
-            parentBindings = EMPTY_BINDINGS;
         }
         int len = types.length;
         JavaType[] resolved = new JavaType[len];

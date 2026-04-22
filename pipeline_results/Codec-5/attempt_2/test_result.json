@@ -1,16 +1,12 @@
 {
   "status": "FAIL",
-  "total_tests": 16,
-  "failed_tests": 1,
-  "failing_test_names": [
-    "1",
-    "codec",
-    "testCodec98NPE"
-  ],
+  "total_tests": 0,
+  "failed_tests": 0,
+  "failing_test_names": [],
   "previously_failing_now_passing": [
     "org.apache.commons.codec.binary.Base64OutputStreamTest",
     "org.apache.commons.codec.binary.Base64InputStreamTest"
   ],
   "compile_output": "",
-  "test_output": "JUnit version 4.13.2\n........E........\nTime: 0.363\nThere was 1 failure:\n1) testCodec98NPE(org.apache.commons.codec.binary.Base64InputStreamTest)\njunit.framework.ComparisonFailure: codec-98 NPE Base64InputStream expected:<...IJKLMNOPQRSTUVWXYZ01[]23> but was:<...IJKLMNOPQRSTUVWXYZ01[\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000]23>\n\tat junit.framework.Assert.assertEquals(Assert.java:100)\n\tat junit.framework.TestCase.assertEquals(TestCase.java:253)\n\tat org.apache.commons.codec.binary.Base64InputStreamTest.testCodec98NPE(Base64InputStreamTest.java:64)\n\nFAILURES!!!\nTests run: 16,  Failures: 1\n\n"
+  "test_output": "JUnit run timed out"
 }

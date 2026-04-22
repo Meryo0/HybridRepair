@@ -86,7 +86,7 @@ public ReadableObjectId findObjectId(Object id, ObjectIdGenerator<?> gen, Object
          */
 
         if (id == null) {
-            return null; // Return null or handle as per specific requirements
+            return new ReadableObjectId(new ObjectIdGenerator.IdKey(gen.getClass(), null, null));
         }
 
         final ObjectIdGenerator.IdKey key = gen.key(id);

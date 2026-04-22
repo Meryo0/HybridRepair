@@ -82,10 +82,10 @@ public class DoubleMetaphone implements StringEncoder {
      * @param alternate use alternate encode
      * @return an encoded string
      */
-    public String doubleMetaphone(String value, final boolean alternate) {
+public String doubleMetaphone(String value, final boolean alternate) {
         value = cleanInput(value);
-        if (value == null) {
-            return null;
+        if (value == null || value.isEmpty()) {
+            return ""; // Return an empty string instead of null to avoid NPEs
         }
 
         final boolean slavoGermanic = isSlavoGermanic(value);

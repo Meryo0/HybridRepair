@@ -48,14 +48,16 @@ public final class JsonAdapterAnnotationTypeAdapterFactory implements TypeAdapte
   }
 
   @SuppressWarnings("unchecked") // Casts guarded by conditionals.
-  static TypeAdapter<?> getTypeAdapter(ConstructorConstructor constructorConstructor, Gson gson,
+static TypeAdapter<?> getTypeAdapter(ConstructorConstructor constructorConstructor, Gson gson,
       TypeToken<?> fieldType, JsonAdapter annotation) {
     Class<?> value = annotation.value();
     TypeAdapter<?> typeAdapter;
     if (TypeAdapter.class.isAssignableFrom(value)) {
+      @SuppressWarnings("unchecked") // Casts guarded by conditionals.
       Class<TypeAdapter<?>> typeAdapterClass = (Class<TypeAdapter<?>>) value;
-typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterClass)).construct();
+      typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterClass)).construct();
     } else if (TypeAdapterFactory.class.isAssignableFrom(value)) {
+      @SuppressWarnings("unchecked") // Casts guarded by conditionals.
       Class<TypeAdapterFactory> typeAdapterFactory = (Class<TypeAdapterFactory>) value;
       typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterFactory))
           .construct()
@@ -65,20 +67,8 @@ typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterClass)).constr
           "@JsonAdapter value must be TypeAdapter or TypeAdapterFactory reference.");
     }
     if (typeAdapter == null) {
-      throw new IllegalArgumentException("Failed to create TypeAdapter. The resulting adapter is null.");
+      throw new IllegalArgumentException("Failed to create TypeAdapter for @JsonAdapter value.");
     }
     return typeAdapter.nullSafe();
-  }
-    } else if (TypeAdapterFactory.class.isAssignableFrom(value)) {
-      Class<TypeAdapterFactory> typeAdapterFactory = (Class<TypeAdapterFactory>) value;
-      typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterFactory))
-          .construct()
-          .create(gson, fieldType);
-    } else {
-      throw new IllegalArgumentException(
-          "@JsonAdapter value must be TypeAdapter or TypeAdapterFactory reference.");
-    }
-      typeAdapter = typeAdapter.nullSafe();
-    return typeAdapter;
   }
 }

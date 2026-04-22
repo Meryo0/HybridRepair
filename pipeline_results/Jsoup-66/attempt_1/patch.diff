@@ -1,6 +1,6 @@
 --- org/jsoup/nodes/Element.java
 +++ org/jsoup/nodes/Element.java
-@@ -679,15 +679,15 @@
+@@ -679,15 +679,13 @@
       * @return the next element, or null if there is no next element
       * @see #previousElementSibling()
       */
@@ -8,10 +8,8 @@
 +public Element nextElementSibling() {
          if (parentNode == null) return null;
 -        List<Element> siblings = parent().childElementsList();
-+        Element parent = parent();
-+        if (parent == null) return null;
-+        List<Element> siblings = parent.childElementsList();
-+        if (siblings == null || siblings.isEmpty()) return null;
++        List<Element> siblings = parent() != null ? parent().childElementsList() : null;
++        if (siblings == null) return null;
          Integer index = indexInList(this, siblings);
 -        Validate.notNull(index);
 -        if (siblings.size() > index+1)

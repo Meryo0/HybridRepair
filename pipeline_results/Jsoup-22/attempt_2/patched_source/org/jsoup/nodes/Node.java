@@ -458,17 +458,16 @@ public List<Node> siblingNodes() {
      Get this node's next sibling.
      @return next sibling, or null if this is the last sibling
      */
-    public Node nextSibling() {
-        if (parentNode == null)
-            return null; // root
-        
-        List<Node> siblings = parentNode.childNodes;
-        Integer index = siblingIndex();
-        Validate.notNull(index);
-        if (siblings.size() > index+1)
-            return siblings.get(index+1);
-        else
+public Node nextSibling() {
+        if (parentNode == null) {
             return null;
+        }
+        List<Node> siblings = parentNode.childNodes;
+        int index = siblingIndex();
+        if (index < siblings.size() - 1) {
+            return siblings.get(index + 1);
+        }
+        return null;
     }
 
     /**
@@ -476,12 +475,15 @@ public List<Node> siblingNodes() {
      @return the previous sibling, or null if this is the first sibling
      */
 public Node previousSibling() {
-        if (parent() == null) {
+        if (parentNode == null) {
             return null;
         }
-        List<Node> siblings = parent().childNodes();
-        int index = siblings.indexOf(this);
-        return index > 0 ? siblings.get(index - 1) : null;
+        List<Node> siblings = parentNode.childNodes;
+        int index = siblingIndex();
+        if (index > 0) {
+            return siblings.get(index - 1);
+        }
+        return null;
     }
 
     /**

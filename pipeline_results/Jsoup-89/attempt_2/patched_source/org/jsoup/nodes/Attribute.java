@@ -85,14 +85,14 @@ public class Attribute implements Map.Entry<String, String>, Cloneable  {
      @param val the new attribute value; must not be null
      */
 public String setValue(String val) {
-        String oldVal = this.val; // Store the current value of the field
+        String oldVal = this.val; // Store the current value of val
         if (parent != null) {
             int i = parent.indexOfKey(this.key);
             if (i != Attributes.NotFound)
                 parent.vals[i] = val;
         }
-        this.val = val; // Update the field regardless of parent
-        return Attributes.checkNotNull(oldVal);
+        this.val = val; // Update the local val field
+        return Attributes.checkNotNull(oldVal); // Return the previous value, ensuring it's not null
     }
 
     /**

@@ -740,11 +740,12 @@ public final class DatasetUtilities {
 public static Range iterateDomainBounds(XYDataset dataset,
                                             boolean includeInterval) {
         if (dataset == null) {
-            return null;
+            throw new IllegalArgumentException("Null 'dataset' argument.");
         }
         double minimum = Double.POSITIVE_INFINITY;
         double maximum = Double.NEGATIVE_INFINITY;
         int seriesCount = dataset.getSeriesCount();
+        boolean hasValidData = false; // Track if any valid data points are found
         double lvalue;
         double uvalue;
         if (includeInterval && dataset instanceof IntervalXYDataset) {
@@ -756,9 +757,11 @@ public static Range iterateDomainBounds(XYDataset dataset,
                     uvalue = intervalXYData.getEndXValue(series, item);
                     if (!Double.isNaN(lvalue)) {
                         minimum = Math.min(minimum, lvalue);
+                        hasValidData = true;
                     }
                     if (!Double.isNaN(uvalue)) {
                         maximum = Math.max(maximum, uvalue);
+                        hasValidData = true;
                     }
                 }
             }
@@ -772,11 +775,12 @@ public static Range iterateDomainBounds(XYDataset dataset,
                     if (!Double.isNaN(lvalue)) {
                         minimum = Math.min(minimum, lvalue);
                         maximum = Math.max(maximum, uvalue);
+                        hasValidData = true;
                     }
                 }
             }
         }
-        if (minimum > maximum) {
+        if (!hasValidData) {
             return null;
         }
         else {
@@ -1228,12 +1232,10 @@ public static Range iterateDomainBounds(XYDataset dataset,
      */
 public static Range iterateRangeBounds(XYDataset dataset,
             boolean includeInterval) {
-        if (dataset == null) {
-            return null;
-        }
         double minimum = Double.POSITIVE_INFINITY;
         double maximum = Double.NEGATIVE_INFINITY;
         int seriesCount = dataset.getSeriesCount();
+        boolean hasValidData = false; // Track if any valid data points are found
 
         // handle three cases by dataset type
         if (includeInterval && dataset instanceof IntervalXYDataset) {
@@ -1246,9 +1248,11 @@ public static Range iterateRangeBounds(XYDataset dataset,
                     double uvalue = ixyd.getEndYValue(series, item);
                     if (!Double.isNaN(lvalue)) {
                         minimum = Math.min(minimum, lvalue);
+                        hasValidData = true;
                     }
                     if (!Double.isNaN(uvalue)) {
                         maximum = Math.max(maximum, uvalue);
+                        hasValidData = true;
                     }
                 }
             }
@@ -1263,9 +1267,11 @@ public static Range iterateRangeBounds(XYDataset dataset,
                     double uvalue = ohlc.getHighValue(series, item);
                     if (!Double.isNaN(lvalue)) {
                         minimum = Math.min(minimum, lvalue);
+                        hasValidData = true;
                     }
                     if (!Double.isNaN(uvalue)) {
                         maximum = Math.max(maximum, uvalue);
+                        hasValidData = true;
                     }
                 }
             }
@@ -1279,11 +1285,12 @@ public static Range iterateRangeBounds(XYDataset dataset,
                     if (!Double.isNaN(value)) {
                         minimum = Math.min(minimum, value);
                         maximum = Math.max(maximum, value);
+                        hasValidData = true;
                     }
                 }
             }
         }
-        if (minimum == Double.POSITIVE_INFINITY) {
+        if (!hasValidData) {
             return null;
         }
         else {

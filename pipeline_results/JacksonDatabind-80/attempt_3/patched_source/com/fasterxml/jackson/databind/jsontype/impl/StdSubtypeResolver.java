@@ -125,7 +125,8 @@ public class StdSubtypeResolver
      */
 
     @Override
-public Collection<NamedType> collectAndResolveSubtypesByTypeId(MapperConfig<?> config, 
+@Override
+    public Collection<NamedType> collectAndResolveSubtypesByTypeId(MapperConfig<?> config, 
             AnnotatedMember property, JavaType baseType) {
         final AnnotationIntrospector ai = config.getAnnotationIntrospector();
         Class<?> rawBase = baseType.getRawClass();
@@ -140,7 +141,7 @@ public Collection<NamedType> collectAndResolveSubtypesByTypeId(MapperConfig<?> c
         _collectAndResolveByTypeId(ac, rootType, config, typesHandled, byName);
 
         // Then with definitions from property
-        if (property != null) { // Ensure property is not null
+        if (property != null) {
             Collection<NamedType> st = ai.findSubtypes(property);
             if (st != null) {
                 for (NamedType nt : st) {

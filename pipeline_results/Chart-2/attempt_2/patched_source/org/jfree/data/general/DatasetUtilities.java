@@ -776,7 +776,7 @@ public static Range iterateDomainBounds(XYDataset dataset,
                 }
             }
         }
-        if (minimum > maximum) {
+        if (minimum == Double.POSITIVE_INFINITY || maximum == Double.NEGATIVE_INFINITY) {
             return null;
         }
         else {
@@ -1280,7 +1280,7 @@ public static Range iterateRangeBounds(XYDataset dataset,
                 }
             }
         }
-        if (minimum == Double.POSITIVE_INFINITY) {
+        if (minimum == Double.POSITIVE_INFINITY || maximum == Double.NEGATIVE_INFINITY) {
             return null;
         }
         else {

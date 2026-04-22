@@ -1,3 +1,21 @@
+--- com/fasterxml/jackson/databind/type/TypeFactory.java
++++ com/fasterxml/jackson/databind/type/TypeFactory.java
+@@ -1406,10 +1406,13 @@
+         return ArrayType.construct(elementType, bindings);
+     }
+ 
+-    protected JavaType _fromVariable(ClassStack context, TypeVariable<?> var, TypeBindings bindings)
++protected JavaType _fromVariable(ClassStack context, TypeVariable<?> var, TypeBindings bindings)
+     {
+         // ideally should find it via bindings:
+         final String name = var.getName();
++        if (bindings == null) {
++            bindings = EMPTY_BINDINGS;
++        }
+         JavaType type = bindings.findBoundType(name);
+         if (type != null) {
+             return type;
+
 --- com/fasterxml/jackson/databind/type/TypeParser.java
 +++ com/fasterxml/jackson/databind/type/TypeParser.java
 @@ -37,7 +37,7 @@

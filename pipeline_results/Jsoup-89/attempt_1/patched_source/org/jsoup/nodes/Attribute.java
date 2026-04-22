@@ -39,7 +39,7 @@ public Attribute(String key, String value) {
      * @param val attribute value
      * @param parent the containing Attributes (this Attribute is not automatically added to said Attributes)
      * @see #createFromEncoded*/
-public Attribute(String key, String val, Attributes parent) {
+    public Attribute(String key, String val, Attributes parent) {
         Validate.notNull(key);
         key = key.trim();
         Validate.notEmpty(key); // trimming could potentially make empty, so validate here

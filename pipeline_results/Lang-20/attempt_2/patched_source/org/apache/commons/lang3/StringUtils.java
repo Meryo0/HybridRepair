@@ -3290,17 +3290,18 @@ public static String join(Object[] array, char separator, int startIndex, int en
         if (array == null) {
             return null;
         }
-        if (startIndex < 0 || endIndex > array.length || startIndex >= endIndex) {
+        int noOfItems = (endIndex - startIndex);
+        if (noOfItems <= 0) {
             return EMPTY;
         }
-
-        StringBuilder buf = new StringBuilder(16);
+        
+        StringBuilder buf = new StringBuilder(16); // Default capacity
 
         for (int i = startIndex; i < endIndex; i++) {
-            if (i > startIndex) {
-                buf.append(separator);
-            }
             if (array[i] != null) {
+                if (buf.length() > 0) {
+                    buf.append(separator);
+                }
                 buf.append(array[i]);
             }
         }
@@ -3371,17 +3372,19 @@ public static String join(Object[] array, String separator, int startIndex, int 
         if (separator == null) {
             separator = EMPTY;
         }
-        if (startIndex < 0 || endIndex > array.length || startIndex >= endIndex) {
+
+        int noOfItems = (endIndex - startIndex);
+        if (noOfItems <= 0) {
             return EMPTY;
         }
 
-        StringBuilder buf = new StringBuilder(16);
+        StringBuilder buf = new StringBuilder(16); // Default capacity
 
         for (int i = startIndex; i < endIndex; i++) {
-            if (i > startIndex) {
-                buf.append(separator);
-            }
             if (array[i] != null) {
+                if (buf.length() > 0) {
+                    buf.append(separator);
+                }
                 buf.append(array[i]);
             }
         }

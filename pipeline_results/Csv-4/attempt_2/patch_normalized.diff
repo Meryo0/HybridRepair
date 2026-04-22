@@ -1,14 +1,14 @@
 --- org/apache/commons/csv/CSVParser.java
 +++ org/apache/commons/csv/CSVParser.java
-@@ -234,7 +234,7 @@
-      * @throws IOException
-      *             If an I/O error occurs
+@@ -321,7 +321,7 @@
+     /**
+      * Initializes the name to index mapping if the format defines a header.
       */
--    public CSVParser(final Reader reader, final CSVFormat format) throws IOException {
-+public CSVParser(final Reader reader, final CSVFormat format) throws IOException {
-         Assertions.notNull(reader, "reader");
-         Assertions.notNull(format, "format");
- 
+-    private Map<String, Integer> initializeHeader() throws IOException {
++private Map<String, Integer> initializeHeader() throws IOException {
+         Map<String, Integer> hdrMap = null;
+         final String[] formatHeader = this.format.getHeader();
+         if (formatHeader != null) {
 
 --- org/apache/commons/csv/CSVParser.java
 +++ org/apache/commons/csv/CSVParser.java
@@ -23,31 +23,3 @@
      }
  
      /**
-
---- org/apache/commons/csv/CSVParser.java
-+++ org/apache/commons/csv/CSVParser.java
-@@ -321,11 +321,10 @@
-     /**
-      * Initializes the name to index mapping if the format defines a header.
-      */
--    private Map<String, Integer> initializeHeader() throws IOException {
--        Map<String, Integer> hdrMap = null;
-+private Map<String, Integer> initializeHeader() throws IOException {
-         final String[] formatHeader = this.format.getHeader();
-         if (formatHeader != null) {
--            hdrMap = new LinkedHashMap<String, Integer>();
-+            Map<String, Integer> hdrMap = new LinkedHashMap<String, Integer>();
- 
-             String[] header = null;
-             if (formatHeader.length == 0) {
-@@ -347,8 +346,9 @@
-                     hdrMap.put(header[i], Integer.valueOf(i));
-                 }
-             }
-+            return hdrMap;
-         }
--        return hdrMap;
-+        return null;
-     }
- 
-     public boolean isClosed() {

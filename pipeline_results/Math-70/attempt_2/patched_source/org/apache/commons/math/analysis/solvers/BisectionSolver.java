@@ -76,6 +76,10 @@ public class BisectionSolver extends UnivariateRealSolverImpl {
 public double solve(final UnivariateRealFunction f, double min, double max)
         throws MaxIterationsExceededException, FunctionEvaluationException {
 
+        if (f == null) {
+            throw new IllegalArgumentException("Function cannot be null");
+        }
+
         clearResult();
         verifyInterval(min, max);
         double m;

@@ -101,6 +101,49 @@ def execute_prolog_query(bug_dir: Path, query: str) -> str:
         return f"Error: {e}"
 
 
+def execute_view_file(bug_dir: Path, file_path: str) -> str:
+    """Read a source file to provide context to the LLM.
+    Searches inside bug_dir for the file.
+    """
+    try:
+        # First check if it's an exact path relative to bug_dir
+        target = bug_dir / file_path
+        if not target.exists():
+            # If not, try to find it by name using rglob in source roots
+            from pipeline.logicfl_parser import _read_source_roots
+            source_roots = _read_source_roots(bug_dir)
+            roots = source_roots if source_roots else [bug_dir / "buggy"]
+            
+            found = False
+            for root in roots:
+                if not root.exists():
+                    continue
+                name_to_search = Path(file_path).name
+                matches = list(root.rglob(name_to_search))
+                if matches:
+                    # Prefer exact path match if possible, else take first
+                    exact_matches = [m for m in matches if file_path in str(m)]
+                    target = exact_matches[0] if exact_matches else matches[0]
+                    found = True
+                    break
+            if not found:
+                return f"Error: File {file_path} non trovato nel progetto."
+        
+        lines = target.read_text(encoding="utf-8", errors="replace").splitlines()
+        # Format with line numbers for easier referencing
+        numbered = [f"{i+1:4d} | {line}" for i, line in enumerate(lines)]
+        content = "\n".join(numbered)
+        
+        # Prevent huge files from consuming all tokens
+        if len(content) > 30000: # ~30k chars is around 8k tokens, safe enough
+            return f"Error: Il file {target.name} è troppo grande. ({(len(content))} caratteri)."
+            
+        rel_path = target.relative_to(bug_dir) if target.is_relative_to(bug_dir) else target
+        return f"File: {rel_path}\n```java\n{content}\n```"
+    except Exception as e:
+        return f"Error reading file: {e}"
+
+
 # ── Code extraction helpers ──────────────────────────────────────────────────────
 
 def extract_java_code_from_response(response: str) -> str:
@@ -191,8 +234,8 @@ _SYSTEM_PROMPT = textwrap.dedent("""\
 
     Your task is broken into TWO stages (Specification-First):
       1. DIAGNOSIS: You will first be asked to analyze the root cause of the bug carefully and clearly specify the "Correct Intended Behavior" (Specification).
-         - During this stage, you MAY use the `query_prolog` tool to execute Prolog queries against `logic-fl.pl` and `code-facts.pl` to explore variable definitions, types, method calls, or the AST.
-         - For example: `method_invoc(Id, MethodName, line(Class, Line))` or `assign(Var, Expr, line(Class, Line))`.
+         - During this stage, you MAY use the `query_prolog` tool to explore variable definitions and AST facts.
+         - You MAY ALSO use the `read_file` tool to read the entire source file to understand class structure, member variables, and overloaded methods.
       2. CODE GENERATION: After your diagnosis, you will be asked to provide the corrected Java method based ONLY on your specified intended behavior.
 
     When outputting code, you must:
@@ -250,11 +293,11 @@ class RepairSession:
             The raw LLM response with (hopefully) an improved method.
         """
         follow_up = (
-            "The fix you provided still fails. Here is the error:\n\n"
-            f"```\n{error_message[:1500]}\n```\n\n"
-            "Please carefully re-analyse the root cause. If your previous Correct Intended Behavior "
-            "was wrong or incomplete, please revise it. Then, provide the corrected method(s) again "
-            "using the FILE block format."
+            "The fix you provided still fails. Here is the exact error from the test runner / compiler:\n\n"
+            f"```\n{error_message}\n```\n\n"
+            "Please carefully re-analyse the root cause based on this feedback. If your previous fix caused another exception or failed another test, your original logic might be flawed. "
+            "Use the `read_file` tool to inspect the surrounding class code if you suspect the issue is structural (e.g. shadowing, missing assignments in constructors, or overloaded methods).\n\n"
+            "Provide the revised Correct Intended Behavior and the corrected method(s) again using the FILE block format."
         )
         self._history.append({"role": "user", "content": follow_up})
         # Allow tools during refinement as well
@@ -282,6 +325,23 @@ class RepairSession:
                             "required": ["query"]
                         }
                     }
+                },
+                {
+                    "type": "function",
+                    "function": {
+                        "name": "read_file",
+                        "description": "Legge il codice sorgente completo di un file Java. Usalo per allargare il contesto strutturale della classe oltre la riga segnalata da LogicFL.",
+                        "parameters": {
+                            "type": "object",
+                            "properties": {
+                                "file_path": {
+                                    "type": "string",
+                                    "description": "Il nome del file o il percorso relativo (es. 'BisectionSolver.java' o 'src/main/java/.../BisectionSolver.java')."
+                                }
+                            },
+                            "required": ["file_path"]
+                        }
+                    }
                 }
             ]
 
@@ -304,22 +364,30 @@ class RepairSession:
             if message.tool_calls:
                 # Execute tools
                 for tool_call in message.tool_calls:
-                    if tool_call.function.name == "query_prolog":
-                        try:
-                            args = json.loads(tool_call.function.arguments)
+                    function_name = tool_call.function.name
+                    try:
+                        args = json.loads(tool_call.function.arguments)
+                        if function_name == "query_prolog":
                             q_str = args.get("query", "")
                             print(f"  [llm_patcher] Agent queried Prolog: {q_str}")
                             res = execute_prolog_query(self._bug_dir, q_str)
                             print(f"  [llm_patcher] Tool response: {len(res)} chars")
-                        except Exception as e:
-                            res = f"Error parsing arguments or executing: {e}"
-                        
-                        self._history.append({
-                            "role": "tool",
-                            "tool_call_id": tool_call.id,
-                            "name": tool_call.function.name,
-                            "content": res
-                        })
+                        elif function_name == "read_file":
+                            f_str = args.get("file_path", "")
+                            print(f"  [llm_patcher] Agent read file: {f_str}")
+                            res = execute_view_file(self._bug_dir, f_str)
+                            print(f"  [llm_patcher] Tool response: {len(res)} chars")
+                        else:
+                            res = f"Unknown tool: {function_name}"
+                    except Exception as e:
+                        res = f"Error parsing arguments or executing: {e}"
+                    
+                    self._history.append({
+                        "role": "tool",
+                        "tool_call_id": tool_call.id,
+                        "name": function_name,
+                        "content": res
+                    })
                 # Loop back to let LLM respond with tools' results
                 continue
             else:

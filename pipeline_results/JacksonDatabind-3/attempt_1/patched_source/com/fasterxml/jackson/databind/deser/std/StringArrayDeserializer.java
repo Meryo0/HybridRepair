@@ -63,7 +63,7 @@ public String[] deserialize(JsonParser jp, DeserializationContext ctxt) throws I
             if (t == JsonToken.VALUE_STRING) {
                 value = jp.getText();
             } else if (t == JsonToken.VALUE_NULL) {
-                value = (_elementDeserializer != null) ? _elementDeserializer.getNullValue() : null;
+                value = null; // Default behavior when _elementDeserializer is null
             } else {
                 value = _parseString(jp, ctxt);
             }

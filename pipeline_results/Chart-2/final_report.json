@@ -6,7 +6,7 @@
   "test_result": {
     "status": "FAIL",
     "total_attempts": 3,
-    "last_failure": "JUnit version 4.13.2\n................................................E.E.....\nTime: 0.041\nThere were 2 failures:\n1) testBug2849731_2(org.jfree.data.general.junit.DatasetUtilitiesTests)\njava.lang.NullPointerException: Cannot invoke \"org.jfree.data.Range.getLowerBound()\" because \"r\" is null\n\tat org.jfree.data.general.junit.DatasetUtilitiesTests.testBug2849731_2(DatasetUtilitiesTests.java:1276)\n2) testBug2849731_3(org.jfree.data.general.junit.DatasetUtilitiesTests)\njava.lang.NullPointerException: C"
+    "last_failure": "JUnit version 4.13.2\n................................................E.E.....\nTime: 0.048\nThere were 2 failures:\n1) testBug2849731_2(org.jfree.data.general.junit.DatasetUtilitiesTests)\njava.lang.NullPointerException: Cannot invoke \"org.jfree.data.Range.getLowerBound()\" because \"r\" is null\n\tat org.jfree.data.general.junit.DatasetUtilitiesTests.testBug2849731_2(DatasetUtilitiesTests.java:1276)\n2) testBug2849731_3(org.jfree.data.general.junit.DatasetUtilitiesTests)\njava.lang.NullPointerException: C"
   },
-  "timestamp": "2026-04-22T18:55:29.351638+00:00"
+  "timestamp": "2026-04-22T21:20:03.485078+00:00"
 }

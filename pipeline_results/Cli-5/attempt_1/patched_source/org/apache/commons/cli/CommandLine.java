@@ -178,6 +178,7 @@ private Option resolveOption( String opt )
             {
                 return option;
             }
+
         }
         return null;
     }

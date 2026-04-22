@@ -1,6 +1,6 @@
 --- org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java
 +++ org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java
-@@ -84,11 +84,26 @@
+@@ -84,11 +84,28 @@
       * @param clusters the {@link Cluster}s to add the points to
       * @param points the points to add to the given {@link Cluster}s
       */
@@ -14,16 +14,18 @@
      private static <T extends Clusterable<T>> void
          assignPointsToClusters(final Collection<Cluster<T>> clusters, final Collection<T> points) {
 +        if (clusters == null || clusters.isEmpty()) {
-+            throw new IllegalArgumentException("Cluster collection must not be null or empty");
++            throw new IllegalArgumentException("The clusters collection cannot be null or empty.");
 +        }
          for (final T p : points) {
-+            if (p == null) {
-+                continue; // Skip null points
-+            }
              Cluster<T> cluster = getNearestCluster(clusters, p);
 -            cluster.addPoint(p);
 +            if (cluster != null) {
 +                cluster.addPoint(p);
++            } else {
++                // Create a new cluster for the point if no nearest cluster is found
++                Cluster<T> newCluster = new Cluster<>(p);
++                clusters.add(newCluster);
++                newCluster.addPoint(p);
 +            }
          }
      }
@@ -31,7 +33,7 @@
 
 --- org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java
 +++ org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java
-@@ -148,15 +148,28 @@
+@@ -148,8 +148,19 @@
       * @param point the point to find the nearest {@link Cluster} for
       * @return the nearest {@link Cluster} to the given point
       */
@@ -41,26 +43,13 @@
 +     * @param <T> type of the points to cluster
 +     * @param clusters the {@link Cluster}s to search
 +     * @param point the point to find the nearest {@link Cluster} for
-+     * @return the nearest {@link Cluster} to the given point, or null if no valid cluster is found
++     * @return the nearest {@link Cluster} to the given point
 +     */
      private static <T extends Clusterable<T>> Cluster<T>
          getNearestCluster(final Collection<Cluster<T>> clusters, final T point) {
-+        if (clusters == null || clusters.isEmpty() || point == null) {
-+            return null;
++        if (clusters == null || clusters.isEmpty()) {
++            return null; // No clusters to search
 +        }
          double minDistance = Double.MAX_VALUE;
          Cluster<T> minCluster = null;
          for (final Cluster<T> c : clusters) {
--            final double distance = point.distanceFrom(c.getCenter());
--            if (distance < minDistance) {
--                minDistance = distance;
--                minCluster = c;
-+            if (c.getCenter() != null) {
-+                final double distance = point.distanceFrom(c.getCenter());
-+                if (distance < minDistance) {
-+                    minDistance = distance;
-+                    minCluster = c;
-+                }
-             }
-         }
-         return minCluster;
