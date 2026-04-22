@@ -1,0 +1,14 @@
+{
+  "status": "FAIL",
+  "total_tests": 17,
+  "failed_tests": 1,
+  "failing_test_names": [
+    "1",
+    "orphanNodeReturnsNullForSiblingElements"
+  ],
+  "previously_failing_now_passing": [
+    "org.jsoup.nodes.NodeTest"
+  ],
+  "compile_output": "",
+  "test_output": "JUnit version 4.13.2\n...............E..\nTime: 0.061\nThere was 1 failure:\n1) orphanNodeReturnsNullForSiblingElements(org.jsoup.nodes.NodeTest)\njava.lang.NullPointerException: Cannot read field \"childNodes\" because \"this.parentNode\" is null\n\tat org.jsoup.nodes.Node.previousSibling(Node.java:475)\n\tat org.jsoup.nodes.NodeTest.orphanNodeReturnsNullForSiblingElements(NodeTest.java:192)\n\nFAILURES!!!\nTests run: 17,  Failures: 1\n\n"
+}

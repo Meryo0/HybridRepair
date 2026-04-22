@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "total_tests": 24,
+  "failed_tests": 0,
+  "failing_test_names": [],
+  "previously_failing_now_passing": [
+    "com.fasterxml.jackson.databind.type.TestTypeFactory"
+  ],
+  "compile_output": "Note: Some input files use or override a deprecated API.\nNote: Recompile with -Xlint:deprecation for details.\nNote: Some input files use unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
+  "test_output": "JUnit version 4.12\n........................\nTime: 0.185\n\nOK (24 tests)\n\n"
+}

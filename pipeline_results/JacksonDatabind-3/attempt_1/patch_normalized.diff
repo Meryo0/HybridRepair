@@ -1,0 +1,38 @@
+--- com/fasterxml/jackson/databind/deser/std/StringArrayDeserializer.java
++++ com/fasterxml/jackson/databind/deser/std/StringArrayDeserializer.java
+@@ -29,9 +29,9 @@
+      */
+     protected JsonDeserializer<String> _elementDeserializer;
+ 
+-    public StringArrayDeserializer() {
++public StringArrayDeserializer() {
+         super(String[].class);
+-        _elementDeserializer = null;
++        _elementDeserializer = new StringDeserializer();
+     }
+ 
+     @SuppressWarnings("unchecked")
+@@ -63,7 +63,7 @@
+             if (t == JsonToken.VALUE_STRING) {
+                 value = jp.getText();
+             } else if (t == JsonToken.VALUE_NULL) {
+-                value = _elementDeserializer.getNullValue();
++                value = (_elementDeserializer != null) ? _elementDeserializer.getNullValue() : null;
+             } else {
+                 value = _parseString(jp, ctxt);
+             }
+@@ -77,6 +77,14 @@
+         ctxt.returnObjectBuffer(buffer);
+         return result;
+     }
++
++    @SuppressWarnings("unchecked")
++    protected StringArrayDeserializer(JsonDeserializer<?> deser) {
++        super(String[].class);
++        _elementDeserializer = (JsonDeserializer<String>) deser;
++    }
++   
++    @Override
+ 
+     /**
+      * Offlined version used when we do not use the default deserialization method.

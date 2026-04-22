@@ -1,0 +1,490 @@
+Bug ID: JacksonDatabind-93  |  Tentativo 1
+
+## Fault Locations (LogicFL)
+
+  • com.fasterxml.jackson.databind.jsontype.impl.SubTypeValidator — riga 85  [✓]
+  • com.fasterxml.jackson.databind.jsontype.impl.SubTypeValidator — riga 84  [✓]
+  • com.fasterxml.jackson.databind.jsontype.impl.SubTypeValidator — riga 84  [✓]
+
+## Catena Causale (LogicFL Prolog)
+
+NPE at line(sub_type_validator_1, 85) / Null Expression - v_cls_3684[cls]
+	 can be caused by 
+v_cls_3684[cls] - line(sub_type_validator_1, 85).
+
+NPE at line(sub_type_validator_1, 85) / Null Expression - v_cls_3684[cls]
+	 can be caused by 
+v_raw_3681[raw] - line(sub_type_validator_1, 84).
+
+NPE at line(sub_type_validator_1, 85) / Null Expression - v_cls_3684[cls]
+	 can be caused by 
+sub_type_validator_1_expr30['cls.getSuperclass()'] - line(sub_type_validator_1, 84).
+
+## Metodi Buggy
+
+### FILE: com/fasterxml/jackson/databind/jsontype/impl/SubTypeValidator.java  (righe 67–99, fault alla riga 84)
+```java
+    public void validateSubType(DeserializationContext ctxt, JavaType type) throws JsonMappingException
+    {
+        // There are certain nasty classes that could cause problems, mostly
+        // via default typing -- catch them here.
+        final Class<?> raw = type.getRawClass();
+        String full = raw.getName();
+
+        main_check:
+        do {
+            if (_cfgIllegalClassNames.contains(full)) {
+                break;
+            }
+
+            // 18-Dec-2017, tatu: As per [databind#1855], need bit more sophisticated handling
+            //    for some Spring framework types
+            // 05-Jan-2017, tatu: ... also, only applies to classes, not interfaces
+            if (full.startsWith(PREFIX_STRING)) {
+                for (Class<?> cls = raw; cls != Object.class; cls = cls.getSuperclass()) {  // ◄ FIX THIS LINE (NPE manifests here)
+                    String name = cls.getSimpleName();
+                    // looking for "AbstractBeanFactoryPointcutAdvisor" but no point to allow any is there?
+                    if ("AbstractPointcutAdvisor".equals(name)
+                            // ditto  for "FileSystemXmlApplicationContext": block all ApplicationContexts
+                            || "AbstractApplicationContext".equals(name)) {
+                        break main_check;
+                    }
+                }
+            }
+            return;
+        } while (false);
+
+        throw JsonMappingException.from(ctxt,
+                String.format("Illegal type (%s) to deserialize: prevented for security reasons", full));
+    }
+```
+
+### FILE: com/fasterxml/jackson/databind/jsontype/impl/SubTypeValidator.java  (righe 67–99, fault alla riga 84)
+```java
+    public void validateSubType(DeserializationContext ctxt, JavaType type) throws JsonMappingException
+    {
+        // There are certain nasty classes that could cause problems, mostly
+        // via default typing -- catch them here.
+        final Class<?> raw = type.getRawClass();
+        String full = raw.getName();
+
+        main_check:
+        do {
+            if (_cfgIllegalClassNames.contains(full)) {
+                break;
+            }
+
+            // 18-Dec-2017, tatu: As per [databind#1855], need bit more sophisticated handling
+            //    for some Spring framework types
+            // 05-Jan-2017, tatu: ... also, only applies to classes, not interfaces
+            if (full.startsWith(PREFIX_STRING)) {
+                for (Class<?> cls = raw; cls != Object.class; cls = cls.getSuperclass()) {  // ◄ FIX THIS LINE (NPE manifests here)
+                    String name = cls.getSimpleName();
+                    // looking for "AbstractBeanFactoryPointcutAdvisor" but no point to allow any is there?
+                    if ("AbstractPointcutAdvisor".equals(name)
+                            // ditto  for "FileSystemXmlApplicationContext": block all ApplicationContexts
+                            || "AbstractApplicationContext".equals(name)) {
+                        break main_check;
+                    }
+                }
+            }
+            return;
+        } while (false);
+
+        throw JsonMappingException.from(ctxt,
+                String.format("Illegal type (%s) to deserialize: prevented for security reasons", full));
+    }
+```
+
+### FILE: com/fasterxml/jackson/databind/jsontype/impl/SubTypeValidator.java  (righe 67–99, fault alla riga 85)
+```java
+    public void validateSubType(DeserializationContext ctxt, JavaType type) throws JsonMappingException
+    {
+        // There are certain nasty classes that could cause problems, mostly
+        // via default typing -- catch them here.
+        final Class<?> raw = type.getRawClass();
+        String full = raw.getName();
+
+        main_check:
+        do {
+            if (_cfgIllegalClassNames.contains(full)) {
+                break;
+            }
+
+            // 18-Dec-2017, tatu: As per [databind#1855], need bit more sophisticated handling
+            //    for some Spring framework types
+            // 05-Jan-2017, tatu: ... also, only applies to classes, not interfaces
+            if (full.startsWith(PREFIX_STRING)) {
+                for (Class<?> cls = raw; cls != Object.class; cls = cls.getSuperclass()) {
+                    String name = cls.getSimpleName();  // ◄ FIX THIS LINE (NPE manifests here)
+                    // looking for "AbstractBeanFactoryPointcutAdvisor" but no point to allow any is there?
+                    if ("AbstractPointcutAdvisor".equals(name)
+                            // ditto  for "FileSystemXmlApplicationContext": block all ApplicationContexts
+                            || "AbstractApplicationContext".equals(name)) {
+                        break main_check;
+                    }
+                }
+            }
+            return;
+        } while (false);
+
+        throw JsonMappingException.from(ctxt,
+                String.format("Illegal type (%s) to deserialize: prevented for security reasons", full));
+    }
+```
+
+## File Correlati (stesso progetto — potrebbero servire per il fix)
+
+### package-info.java
+```java
+/**
+ * Package that contains standard implementations for
+ * {@link com.fasterxml.jackson.databind.jsontype.TypeResolverBuilder}
+ * and
+ * {@link com.fasterxml.jackson.databind.jsontype.TypeIdResolver}.
+ */
+package com.fasterxml.jackson.databind.jsontype.impl;
+```
+
+### AsExistingPropertyTypeSerializer.java
+```java
+package com.fasterxml.jackson.databind.jsontype.impl;
+
+import java.io.IOException;
+
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+import com.fasterxml.jackson.core.*;
+
+import com.fasterxml.jackson.databind.BeanProperty;
+import com.fasterxml.jackson.databind.jsontype.TypeIdResolver;
+
+/**
+ * Type serializer used with {@link As#EXISTING_PROPERTY} inclusion mechanism.
+ * Expects type information to be a well-defined property on all sub-classes.
+ */
+public class AsExistingPropertyTypeSerializer
+    extends AsPropertyTypeSerializer
+{
+
+    public AsExistingPropertyTypeSerializer(TypeIdResolver idRes,
+            BeanProperty property, String propName)
+    {
+        super(idRes, property, propName);
+    }
+
+    @Override
+    public AsExistingPropertyTypeSerializer forProperty(BeanProperty prop) {
+        return (_property == prop) ? this :
+            new AsExistingPropertyTypeSerializer(_idResolver, prop, _typePropertyName);
+    }
+    
+    @Override
+    public As getTypeInclusion() { return As.EXISTING_PROPERTY; }
+    
+    @Override
+    public void writeTypePrefixForObject(Object value, JsonGenerator gen) throws IOException
+    {
+        final String typeId = idFromValue(value);
+        if ((typeId != null) && gen.canWriteTypeId()) {
+            gen.writeTypeId(typeId);
+        }
+        gen.writeStartObject();
+    }
+
+    @Override
+    public void writeTypePrefixForObject(Object value, JsonGenerator gen, Class<?> type) throws IOException
+    {
+        final String typeId = idFromValueAndType(value, type);
+        if ((typeId != null) && gen.canWriteTypeId()) {
+            gen.writeTypeId(typeId);
+        }
+        gen.writeStartObject();
+    }
+    
+    @Override
+    public void writeCustomTypePrefixForObject(Object value, JsonGenerator gen, String typeId) throws IOException
+    {
+        if ((typeId != null) && gen.canWriteTypeId()) {
+            gen.writeTypeId(typeId);
+        }
+        gen.writeStartObject();
+    }
+}
+```
+
+### AsExternalTypeDeserializer.java
+```java
+package com.fasterxml.jackson.databind.jsontype.impl;
+
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+
+import com.fasterxml.jackson.databind.BeanProperty;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+import com.fasterxml.jackson.databind.jsontype.TypeIdResolver;
+
+/**
+ * Type deserializer used with {@link As#EXTERNAL_PROPERTY} inclusion mechanism.
+ * Actual implementation may look bit strange since it depends on comprehensive
+ * pre-processing done by {@link com.fasterxml.jackson.databind.deser.BeanDeserializer}
+ * to basically transform external type id into structure that looks more like
+ * "wrapper-array" style inclusion. This intermediate form is chosen to allow
+ * supporting all possible JSON structures.
+ */
+public class AsExternalTypeDeserializer extends AsArrayTypeDeserializer
+{
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * @since 2.8
+     */
+    public AsExternalTypeDeserializer(JavaType bt, TypeIdResolver idRes,
+            String typePropertyName, boolean typeIdVisible, JavaType defaultImpl)
+    {
+        super(bt, idRes, typePropertyName, typeIdVisible, defaultImpl);
+    }
+
+    public AsExternalTypeDeserializer(AsExternalTypeDeserializer src,
+            BeanProperty property) {
+        super(src, property);
+    }
+    
+    @Override
+    public TypeDeserializer forProperty(BeanProperty prop) {
+        if (prop == _property) { // usually if it's null
+            return this;
+        }
+        return new AsExternalTypeDeserializer(this, prop);
+    }
+    
+    @Override
+    public As getTypeInclusion() { return As.EXTERNAL_PROPERTY; }
+
+    // yes, very important distinction...
+    @Override
+    protected boolean _usesExternalId() {
+        return true;
+    }
+}
+```
+
+### MinimalClassNameIdResolver.java
+```java
+package com.fasterxml.jackson.databind.jsontype.impl;
+
+import java.io.IOException;
+
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.DatabindContext;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.type.TypeFactory;
+
+public class MinimalClassNameIdResolver
+    extends ClassNameIdResolver
+{
+    /**
+     * Package name of the base class, to be used for determining common
+     * prefix that can be omitted from included type id.
+     * Does not include the trailing dot.
+     */
+    protected final String _basePackageName;
+
+    /**
+     * Same as {@link #_basePackageName}, but includes trailing dot.
+     */
+    protected final String _basePackagePrefix;
+
+    protected MinimalClassNameIdResolver(JavaType baseType, TypeFactory typeFactory)
+    {
+        super(baseType, typeFactory);
+        String base = baseType.getRawClass().getName();
+        int ix = base.lastIndexOf('.');
+        if (ix < 0) { // can this ever occur?
+            _basePackageName = "";
+            _basePackagePrefix = ".";
+        } else {
+            _basePackagePrefix = base.substring(0, ix+1);
+            _basePackageName = base.substring(0, ix);
+        }
+    }
+
+    @Override
+    public JsonTypeInfo.Id getMechanism() { return JsonTypeInfo.Id.MINIMAL_CLASS; }
+    
+    @Override
+    public String idFromValue(Object value)
+    {
+        String n = value.getClass().getName();
+        if (n.startsWith(_basePackagePrefix)) {
+            // note: we will leave the leading dot in there
+            return n.substring(_basePackagePrefix.length()-1);
+        }
+        return n;
+    }
+
+    @Override
+    protected JavaType _typeFromId(String id, DatabindContext ctxt) throws IOException
+    {
+        if (id.startsWith(".")) {
+            StringBuilder sb = new StringBuilder(id.length() + _basePackageName.length());
+            if  (_basePackageName.length() == 0) {
+                // no package; must remove leading '.' from id
+                sb.append(id.substring(1));
+            } else {
+                // otherwise just concatenate package, with leading-dot-partial name
+                sb.append(_basePackageName).append(id);
+            }
+            id = sb.toString();
+        }
+        return super._typeFromId(id, ctxt);
+    }
+}
+```
+
+### TypeIdResolverBase.java
+```java
+package com.fasterxml.jackson.databind.jsontype.impl;
+
+import java.io.IOException;
+
+import com.fasterxml.jackson.databind.DatabindContext;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.jsontype.TypeIdResolver;
+import com.fasterxml.jackson.databind.type.TypeFactory;
+
+/**
+ * Partial base implementation of {@link TypeIdResolver}: all custom implementations
+ * are <b>strongly</b> recommended to extend this class, instead of directly
+ * implementing {@link TypeIdResolver}.
+ * Note that ALL sub-class need to re-implement
+ * {@link #typeFromId(DatabindContext, String)} method; otherwise implementation
+ * will not work.
+ *<p>
+ * Note that instances created to be constructed from annotations
+ * ({@link com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver})
+ * are always created using no-arguments constructor; protected constructor
+ * is only used sub-classes.
+ */
+public abstract class TypeIdResolverBase
+    implements TypeIdResolver
+{
+    protected final TypeFactory _typeFactory;
+
+    /**
+     * Common base type for all polymorphic instances handled.
+     */
+    protected final JavaType _baseType;
+
+    protected TypeIdResolverBase() {
+        this(null, null);
+    }
+    
+    protected TypeIdResolverBase(JavaType baseType, TypeFactory typeFactory) {
+        _baseType = baseType;
+        _typeFactory = typeFactory;
+    }
+
+    // Standard type id resolvers do not need this: only useful for custom ones.
+    @Override
+    public void init(JavaType bt) { }
+
+    @Override
+    public String idFromBaseType() {
+        /* By default we will just defer to regular handling, handing out the
+         * base type; and since there is no value, must just pass null here
+         * assuming that implementations can deal with it.
+         * Alternative would be to pass a bogus Object, but that does not seem right.
+         */
+        return idFromValueAndType(null, _baseType.getRawClass());
+    }
+
+    @Override
+    public JavaType typeFromId(DatabindContext context, String id)  throws IOException {
+        // 22-Dec-2015, tatu: Must be overridden by sub-classes, so let's throw
+        //    an exception if not
+        throw new IllegalStateException("Sub-class "+getClass().getName()+" MUST implement "
+                +"`typeFromId(DatabindContext,String)");
+    }
+
+    /**
+     * Helper method used to get a simple description of all known type ids,
+     * for use in error messages.
+     */
+    @Override
+    public String getDescForKnownTypeIds() {
+        return null;
+    }
+}
+```
+## Test Falliti
+
+  • com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest#testJDKTypes1872
+
+## Stack Trace
+
+```
+testJDKTypes1872(com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest): Cannot invoke "java.lang.Class.getSimpleName()" because "cls" is null
+Cannot invoke "java.lang.Class.getSimpleName()" because "cls" is null
+java.lang.NullPointerException: Cannot invoke "java.lang.Class.getSimpleName()" because "cls" is null
+	at com.fasterxml.jackson.databind.jsontype.impl.SubTypeValidator.validateSubType(SubTypeValidator.java:85)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializerFactory._validateSubType(BeanDeserializerFactory.java:866)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializerFactory.createBeanDeserializer(BeanDeserializerFactory.java:142)
+	at com.fasterxml.jackson.databind.deser.DeserializerCache._createDeserializer2(DeserializerCache.java:403)
+	at com.fasterxml.jackson.databind.deser.DeserializerCache._createDeserializer(DeserializerCache.java:349)
+	at com.fasterxml.jackson.databind.deser.DeserializerCache._createAndCache2(DeserializerCache.java:264)
+	at com.fasterxml.jackson.databind.deser.DeserializerCache._createAndCacheValueDeserializer(DeserializerCache.java:244)
+	at com.fasterxml.jackson.databind.deser.DeserializerCache.findValueDeserializer(DeserializerCache.java:142)
+	at com.fasterxml.jackson.databind.DeserializationContext.findContextualValueDeserializer(DeserializationContext.java:443)
+	at com.fasterxml.jackson.databind.deser.std.CollectionDeserializer.createContextual(CollectionDeserializer.java:206)
+	at com.fasterxml.jackson.databind.deser.std.CollectionDeserializer.createContextual(CollectionDeserializer.java:26)
+	at com.fasterxml.jackson.databind.DeserializationContext.handlePrimaryContextualization(DeserializationContext.java:650)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializerBase.resolve(BeanDeserializerBase.java:490)
+	at com.fasterxml.jackson.databind.deser.DeserializerCache._createAndCache2(DeserializerCache.java:293)
+	at com.fasterxml.jackson.databind.deser.DeserializerCache._createAndCacheValueDeserializer(DeserializerCache.java:244)
+	at com.fasterxml.jackson.databind.deser.DeserializerCache.findValueDeserializer(DeserializerCache.java:142)
+	at com.fasterxml.jackson.databind.DeserializationContext.findRootValueDeserializer(DeserializationContext.java:476)
+	at com.fasterxml.jackson.databind.ObjectMapper._findRootDeserializer(ObjectMapper.java:3915)
+	at com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:3810)
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:2858)
+	at com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest.testJDKTypes1872(IllegalTypesCheckTest.java:112)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+```
+
+## Istruzioni
+
+Analizza il bug e restituisci i metodi corretti, seguendo queste regole TASSATIVE:
+
+1. **Un FILE block per metodo**: se devi correggere N metodi, emetti N blocchi FILE separati.
+   Ogni blocco deve contenere UN SOLO metodo completo.
+
+2. **Indentazione originale**: mantieni ESATTAMENTE l'indentazione del codice originale.
+   La firma del metodo DEVE iniziare con gli stessi spazi del file originale.
+
+3. **La riga `// ◄ FIX THIS LINE`** indica dove l'NPE si manifesta. Rimuovi questo commento
+   nella risposta — restituisci solo codice Java puro.
+
+4. **Null-safe equality OBBLIGATORIA**: se il metodo confronta due valori che possono essere null,
+   usa `java.util.Objects.equals(a, b)` — questa funzione ritorna `true` se entrambi sono null,
+   mentre `a.equals(b)` lancia NPE se `a` è null, e `a != null && a.equals(b)` ritorna `false`
+   se entrambi sono null (sbagliato semanticamente).
+   Esempio corretto:
+   ```java
+   return java.util.Objects.equals(doubleMetaphone(v1, alt), doubleMetaphone(v2, alt));
+   ```
+
+5. **NON modificare metodi che non causano il bug**: se il metodo `doubleMetaphone` ritorna
+   null per input null, questo è il comportamento CORRETTO e atteso dai test. Non cambiarlo.
+
+6. NON modificare file di test.

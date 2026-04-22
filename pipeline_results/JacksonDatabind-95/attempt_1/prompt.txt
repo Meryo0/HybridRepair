@@ -1,0 +1,1117 @@
+Bug ID: JacksonDatabind-95  |  Tentativo 1
+
+## Fault Locations (LogicFL)
+
+  • com.fasterxml.jackson.databind.type.TypeFactory — riga 1425  [✓]
+  • com.fasterxml.jackson.databind.type.TypeFactory — riga 1413  [✓]
+  • com.fasterxml.jackson.databind.type.TypeParser — riga 59  [✓]
+  • com.fasterxml.jackson.databind.type.TypeFactory — riga 1175  [✓]
+  • com.fasterxml.jackson.databind.type.TypeFactory — riga 1298  [✓]
+  • com.fasterxml.jackson.databind.type.TypeFactory — riga 1311  [✓]
+  • com.fasterxml.jackson.databind.type.TypeFactory — riga 1396  [✓]
+  • com.fasterxml.jackson.databind.type.TypeFactory — riga 1257  [✓]
+  • com.fasterxml.jackson.databind.type.TypeFactory — riga 1254  [✓]
+  • com.fasterxml.jackson.databind.type.TypeFactory — riga 1258  [✓]
+  • com.fasterxml.jackson.databind.type.TypeFactory — riga 1165  [✓]
+
+## Catena Causale (LogicFL Prolog)
+
+NPE at line(type_factory_1, 1413) / Null Expression - p_bindings_513[bindings]
+	 can be caused by 
+p_bindings_513[bindings] - line(type_factory_1, 1425).
+
+NPE at line(type_factory_1, 1413) / Null Expression - p_bindings_513[bindings]
+	 can be caused by 
+p_bindings_513[bindings] - line(type_factory_1, 1413).
+
+NPE at line(type_factory_1, 1413) / Null Expression - p_bindings_513[bindings]
+	 can be caused by 
+type_parser_1_literal4[null] - line(type_parser_1, 59).
+
+NPE at line(type_factory_1, 1413) / Null Expression - p_bindings_513[bindings]
+	 can be caused by 
+p_bindings_464[bindings] - line(type_factory_1, 1175).
+
+NPE at line(type_factory_1, 1413) / Null Expression - p_bindings_513[bindings]
+	 can be caused by 
+p_parent_bindings_476[parentBindings] - line(type_factory_1, 1298).
+
+NPE at line(type_factory_1, 1413) / Null Expression - p_bindings_513[bindings]
+	 can be caused by 
+p_parent_bindings_480[parentBindings] - line(type_factory_1, 1311).
+
+NPE at line(type_factory_1, 1413) / Null Expression - p_bindings_513[bindings]
+	 can be caused by 
+p_parent_bindings_501[parentBindings] - line(type_factory_1, 1396).
+
+NPE at line(type_factory_1, 1413) / Null Expression - p_bindings_513[bindings]
+	 can be caused by 
+p_bindings_468[bindings] - line(type_factory_1, 1257).
+
+NPE at line(type_factory_1, 1413) / Null Expression - p_bindings_513[bindings]
+	 can be caused by 
+p_bindings_468[bindings] - line(type_factory_1, 1254).
+
+NPE at line(type_factory_1, 1413) / Null Expression - p_bindings_513[bindings]
+	 can be caused by 
+p_bindings_468[bindings] - line(type_factory_1, 1258).
+
+NPE at line(type_factory_1, 1413) / Null Expression - p_bindings_513[bindings]
+	 can be caused by 
+p_bindings_464[bindings] - line(type_factory_1, 1165).
+
+## Metodi Buggy
+
+### FILE: com/fasterxml/jackson/databind/type/TypeFactory.java  (righe 1154–1202, fault alla riga 1165)
+```java
+    protected JavaType _fromAny(ClassStack context, Type type, TypeBindings bindings)
+    {
+        JavaType resultType;
+
+        // simple class?
+        if (type instanceof Class<?>) {
+            // Important: remove possible bindings since this is type-erased thingy
+            resultType = _fromClass(context, (Class<?>) type, EMPTY_BINDINGS);
+        }
+        // But if not, need to start resolving.
+        else if (type instanceof ParameterizedType) {
+            resultType = _fromParamType(context, (ParameterizedType) type, bindings);  // ◄ FIX THIS LINE (NPE manifests here)
+        }
+        else if (type instanceof JavaType) { // [databind#116]
+            // no need to modify further if we already had JavaType
+            return (JavaType) type;
+        }
+        else if (type instanceof GenericArrayType) {
+            resultType = _fromArrayType(context, (GenericArrayType) type, bindings);
+        }
+        else if (type instanceof TypeVariable<?>) {
+            resultType = _fromVariable(context, (TypeVariable<?>) type, bindings);
+        }
+        else if (type instanceof WildcardType) {
+            resultType = _fromWildcard(context, (WildcardType) type, bindings);
+        } else {
+            // sanity check
+            throw new IllegalArgumentException("Unrecognized Type: "+((type == null) ? "[null]" : type.toString()));
+        }
+        /* 21-Feb-2016, nateB/tatu: as per [databind#1129] (applied for 2.7.2),
+         *   we do need to let all kinds of types to be refined, esp. for Scala module.
+         */
+        if (_modifiers != null) {
+            TypeBindings b = resultType.getBindings();
+            if (b == null) {
+                b = EMPTY_BINDINGS;
+            }
+            for (TypeModifier mod : _modifiers) {
+                JavaType t = mod.modifyType(resultType, type, b, this);
+                if (t == null) {
+                    throw new IllegalStateException(String.format(
+                            "TypeModifier %s (of type %s) return null for type %s",
+                            mod, mod.getClass().getName(), resultType));
+                }
+                resultType = t;
+            }
+        }
+        return resultType;
+    }
+```
+
+### FILE: com/fasterxml/jackson/databind/type/TypeFactory.java  (righe 1154–1202, fault alla riga 1175)
+```java
+    protected JavaType _fromAny(ClassStack context, Type type, TypeBindings bindings)
+    {
+        JavaType resultType;
+
+        // simple class?
+        if (type instanceof Class<?>) {
+            // Important: remove possible bindings since this is type-erased thingy
+            resultType = _fromClass(context, (Class<?>) type, EMPTY_BINDINGS);
+        }
+        // But if not, need to start resolving.
+        else if (type instanceof ParameterizedType) {
+            resultType = _fromParamType(context, (ParameterizedType) type, bindings);
+        }
+        else if (type instanceof JavaType) { // [databind#116]
+            // no need to modify further if we already had JavaType
+            return (JavaType) type;
+        }
+        else if (type instanceof GenericArrayType) {
+            resultType = _fromArrayType(context, (GenericArrayType) type, bindings);
+        }
+        else if (type instanceof TypeVariable<?>) {
+            resultType = _fromVariable(context, (TypeVariable<?>) type, bindings);  // ◄ FIX THIS LINE (NPE manifests here)
+        }
+        else if (type instanceof WildcardType) {
+            resultType = _fromWildcard(context, (WildcardType) type, bindings);
+        } else {
+            // sanity check
+            throw new IllegalArgumentException("Unrecognized Type: "+((type == null) ? "[null]" : type.toString()));
+        }
+        /* 21-Feb-2016, nateB/tatu: as per [databind#1129] (applied for 2.7.2),
+         *   we do need to let all kinds of types to be refined, esp. for Scala module.
+         */
+        if (_modifiers != null) {
+            TypeBindings b = resultType.getBindings();
+            if (b == null) {
+                b = EMPTY_BINDINGS;
+            }
+            for (TypeModifier mod : _modifiers) {
+                JavaType t = mod.modifyType(resultType, type, b, this);
+                if (t == null) {
+                    throw new IllegalStateException(String.format(
+                            "TypeModifier %s (of type %s) return null for type %s",
+                            mod, mod.getClass().getName(), resultType));
+                }
+                resultType = t;
+            }
+        }
+        return resultType;
+    }
+```
+
+### FILE: com/fasterxml/jackson/databind/type/TypeFactory.java  (righe 1208–1290, fault alla riga 1254)
+```java
+    protected JavaType _fromClass(ClassStack context, Class<?> rawType, TypeBindings bindings)
+    {
+        // Very first thing: small set of core types we know well:
+        JavaType result = _findWellKnownSimple(rawType);
+        if (result != null) {
+            return result;
+        }
+        // Barring that, we may have recently constructed an instance
+        final Object key;
+        if ((bindings == null) || bindings.isEmpty()) {
+            key = rawType;
+        } else {
+            key = bindings.asKey(rawType);
+        }
+        result = _typeCache.get(key); // ok, cache object is synced
+        if (result != null) {
+            return result;
+        }
+
+        // 15-Oct-2015, tatu: recursive reference?
+        if (context == null) {
+            context = new ClassStack(rawType);
+        } else {
+            ClassStack prev = context.find(rawType);
+            if (prev != null) {
+                // Self-reference: needs special handling, then...
+                ResolvedRecursiveType selfRef = new ResolvedRecursiveType(rawType, EMPTY_BINDINGS);
+                prev.addSelfReference(selfRef);
+                return selfRef;
+            }
+            // no, but need to update context to allow for proper cycle resolution
+            context = context.child(rawType);
+        }
+
+        // First: do we have an array type?
+        if (rawType.isArray()) {
+            result = ArrayType.construct(_fromAny(context, rawType.getComponentType(), bindings),
+                    bindings);
+        } else {
+            // If not, need to proceed by first resolving parent type hierarchy
+            
+            JavaType superClass;
+            JavaType[] superInterfaces;
+
+            if (rawType.isInterface()) {
+                superClass = null;
+                superInterfaces = _resolveSuperInterfaces(context, rawType, bindings);  // ◄ FIX THIS LINE (NPE manifests here)
+            } else {
+                // Note: even Enums can implement interfaces, so can not drop those
+                superClass = _resolveSuperClass(context, rawType, bindings);
+                superInterfaces = _resolveSuperInterfaces(context, rawType, bindings);
+            }
+
+            // 19-Oct-2015, tatu: Bit messy, but we need to 'fix' java.util.Properties here...
+            if (rawType == Properties.class) {
+                result = MapType.construct(rawType, bindings, superClass, superInterfaces,
+                        CORE_TYPE_STRING, CORE_TYPE_STRING);
+            }
+            // And then check what flavor of type we got. Start by asking resolved
+            // super-type if refinement is all that is needed?
+            else if (superClass != null) {
+                result = superClass.refine(rawType, bindings, superClass, superInterfaces);
+            }
+            // if not, perhaps we are now resolving a well-known class or interface?
+            if (result == null) {
+                result = _fromWellKnownClass(context, rawType, bindings, superClass, superInterfaces); 
+                if (result == null) {
+                    result = _fromWellKnownInterface(context, rawType, bindings, superClass, superInterfaces);
+                    if (result == null) {
+                        // but if nothing else, "simple" class for now:
+                        result = _newSimpleType(rawType, bindings, superClass, superInterfaces);
+                    }
+                }
+            }
+        }
+        context.resolveSelfReferences(result);
+        // 16-Jul-2016, tatu: [databind#1302] is solved different way, but ideally we shouldn't
+        //     cache anything with partially resolved `ResolvedRecursiveType`... so maybe improve
+        if (!result.hasHandlers()) {
+            _typeCache.putIfAbsent(key, result); // cache object syncs
+        }
+        return result;
+    }
+```
+
+### FILE: com/fasterxml/jackson/databind/type/TypeFactory.java  (righe 1208–1290, fault alla riga 1257)
+```java
+    protected JavaType _fromClass(ClassStack context, Class<?> rawType, TypeBindings bindings)
+    {
+        // Very first thing: small set of core types we know well:
+        JavaType result = _findWellKnownSimple(rawType);
+        if (result != null) {
+            return result;
+        }
+        // Barring that, we may have recently constructed an instance
+        final Object key;
+        if ((bindings == null) || bindings.isEmpty()) {
+            key = rawType;
+        } else {
+            key = bindings.asKey(rawType);
+        }
+        result = _typeCache.get(key); // ok, cache object is synced
+        if (result != null) {
+            return result;
+        }
+
+        // 15-Oct-2015, tatu: recursive reference?
+        if (context == null) {
+            context = new ClassStack(rawType);
+        } else {
+            ClassStack prev = context.find(rawType);
+            if (prev != null) {
+                // Self-reference: needs special handling, then...
+                ResolvedRecursiveType selfRef = new ResolvedRecursiveType(rawType, EMPTY_BINDINGS);
+                prev.addSelfReference(selfRef);
+                return selfRef;
+            }
+            // no, but need to update context to allow for proper cycle resolution
+            context = context.child(rawType);
+        }
+
+        // First: do we have an array type?
+        if (rawType.isArray()) {
+            result = ArrayType.construct(_fromAny(context, rawType.getComponentType(), bindings),
+                    bindings);
+        } else {
+            // If not, need to proceed by first resolving parent type hierarchy
+            
+            JavaType superClass;
+            JavaType[] superInterfaces;
+
+            if (rawType.isInterface()) {
+                superClass = null;
+                superInterfaces = _resolveSuperInterfaces(context, rawType, bindings);
+            } else {
+                // Note: even Enums can implement interfaces, so can not drop those
+                superClass = _resolveSuperClass(context, rawType, bindings);  // ◄ FIX THIS LINE (NPE manifests here)
+                superInterfaces = _resolveSuperInterfaces(context, rawType, bindings);
+            }
+
+            // 19-Oct-2015, tatu: Bit messy, but we need to 'fix' java.util.Properties here...
+            if (rawType == Properties.class) {
+                result = MapType.construct(rawType, bindings, superClass, superInterfaces,
+                        CORE_TYPE_STRING, CORE_TYPE_STRING);
+            }
+            // And then check what flavor of type we got. Start by asking resolved
+            // super-type if refinement is all that is needed?
+            else if (superClass != null) {
+                result = superClass.refine(rawType, bindings, superClass, superInterfaces);
+            }
+            // if not, perhaps we are now resolving a well-known class or interface?
+            if (result == null) {
+                result = _fromWellKnownClass(context, rawType, bindings, superClass, superInterfaces); 
+                if (result == null) {
+                    result = _fromWellKnownInterface(context, rawType, bindings, superClass, superInterfaces);
+                    if (result == null) {
+                        // but if nothing else, "simple" class for now:
+                        result = _newSimpleType(rawType, bindings, superClass, superInterfaces);
+                    }
+                }
+            }
+        }
+        context.resolveSelfReferences(result);
+        // 16-Jul-2016, tatu: [databind#1302] is solved different way, but ideally we shouldn't
+        //     cache anything with partially resolved `ResolvedRecursiveType`... so maybe improve
+        if (!result.hasHandlers()) {
+            _typeCache.putIfAbsent(key, result); // cache object syncs
+        }
+        return result;
+    }
+```
+
+### FILE: com/fasterxml/jackson/databind/type/TypeFactory.java  (righe 1208–1290, fault alla riga 1258)
+```java
+    protected JavaType _fromClass(ClassStack context, Class<?> rawType, TypeBindings bindings)
+    {
+        // Very first thing: small set of core types we know well:
+        JavaType result = _findWellKnownSimple(rawType);
+        if (result != null) {
+            return result;
+        }
+        // Barring that, we may have recently constructed an instance
+        final Object key;
+        if ((bindings == null) || bindings.isEmpty()) {
+            key = rawType;
+        } else {
+            key = bindings.asKey(rawType);
+        }
+        result = _typeCache.get(key); // ok, cache object is synced
+        if (result != null) {
+            return result;
+        }
+
+        // 15-Oct-2015, tatu: recursive reference?
+        if (context == null) {
+            context = new ClassStack(rawType);
+        } else {
+            ClassStack prev = context.find(rawType);
+            if (prev != null) {
+                // Self-reference: needs special handling, then...
+                ResolvedRecursiveType selfRef = new ResolvedRecursiveType(rawType, EMPTY_BINDINGS);
+                prev.addSelfReference(selfRef);
+                return selfRef;
+            }
+            // no, but need to update context to allow for proper cycle resolution
+            context = context.child(rawType);
+        }
+
+        // First: do we have an array type?
+        if (rawType.isArray()) {
+            result = ArrayType.construct(_fromAny(context, rawType.getComponentType(), bindings),
+                    bindings);
+        } else {
+            // If not, need to proceed by first resolving parent type hierarchy
+            
+            JavaType superClass;
+            JavaType[] superInterfaces;
+
+            if (rawType.isInterface()) {
+                superClass = null;
+                superInterfaces = _resolveSuperInterfaces(context, rawType, bindings);
+            } else {
+                // Note: even Enums can implement interfaces, so can not drop those
+                superClass = _resolveSuperClass(context, rawType, bindings);
+                superInterfaces = _resolveSuperInterfaces(context, rawType, bindings);  // ◄ FIX THIS LINE (NPE manifests here)
+            }
+
+            // 19-Oct-2015, tatu: Bit messy, but we need to 'fix' java.util.Properties here...
+            if (rawType == Properties.class) {
+                result = MapType.construct(rawType, bindings, superClass, superInterfaces,
+                        CORE_TYPE_STRING, CORE_TYPE_STRING);
+            }
+            // And then check what flavor of type we got. Start by asking resolved
+            // super-type if refinement is all that is needed?
+            else if (superClass != null) {
+                result = superClass.refine(rawType, bindings, superClass, superInterfaces);
+            }
+            // if not, perhaps we are now resolving a well-known class or interface?
+            if (result == null) {
+                result = _fromWellKnownClass(context, rawType, bindings, superClass, superInterfaces); 
+                if (result == null) {
+                    result = _fromWellKnownInterface(context, rawType, bindings, superClass, superInterfaces);
+                    if (result == null) {
+                        // but if nothing else, "simple" class for now:
+                        result = _newSimpleType(rawType, bindings, superClass, superInterfaces);
+                    }
+                }
+            }
+        }
+        context.resolveSelfReferences(result);
+        // 16-Jul-2016, tatu: [databind#1302] is solved different way, but ideally we shouldn't
+        //     cache anything with partially resolved `ResolvedRecursiveType`... so maybe improve
+        if (!result.hasHandlers()) {
+            _typeCache.putIfAbsent(key, result); // cache object syncs
+        }
+        return result;
+    }
+```
+
+### FILE: com/fasterxml/jackson/databind/type/TypeFactory.java  (righe 1292–1299, fault alla riga 1298)
+```java
+    protected JavaType _resolveSuperClass(ClassStack context, Class<?> rawType, TypeBindings parentBindings)
+    {
+        Type parent = ClassUtil.getGenericSuperclass(rawType);
+        if (parent == null) {
+            return null;
+        }
+        return _fromAny(context, parent, parentBindings);  // ◄ FIX THIS LINE (NPE manifests here)
+    }
+```
+
+### FILE: com/fasterxml/jackson/databind/type/TypeFactory.java  (righe 1301–1314, fault alla riga 1311)
+```java
+    protected JavaType[] _resolveSuperInterfaces(ClassStack context, Class<?> rawType, TypeBindings parentBindings)
+    {
+        Type[] types = ClassUtil.getGenericInterfaces(rawType);
+        if (types == null || types.length == 0) {
+            return NO_TYPES;
+        }
+        int len = types.length;
+        JavaType[] resolved = new JavaType[len];
+        for (int i = 0; i < len; ++i) {
+            Type type = types[i];
+            resolved[i] = _fromAny(context, type, parentBindings);  // ◄ FIX THIS LINE (NPE manifests here)
+        }
+        return resolved;
+    }
+```
+
+### FILE: com/fasterxml/jackson/databind/type/TypeFactory.java  (righe 1366–1401, fault alla riga 1396)
+```java
+    protected JavaType _fromParamType(ClassStack context, ParameterizedType ptype,
+            TypeBindings parentBindings)
+    {
+        // Assumption here is we'll always get Class, not one of other Types
+        Class<?> rawType = (Class<?>) ptype.getRawType();
+
+        // 29-Oct-2015, tatu: For performance reasons, let's streamline handling of
+        //   couple of not-so-useful parametric types
+        if (rawType == CLS_ENUM) {
+            return CORE_TYPE_ENUM;
+        }
+        if (rawType == CLS_COMPARABLE) {
+            return CORE_TYPE_COMPARABLE;
+        }
+        if (rawType == CLS_CLASS) {
+            return CORE_TYPE_CLASS;
+        }
+
+        // First: what is the actual base type? One odd thing is that 'getRawType'
+        // returns Type, not Class<?> as one might expect. But let's assume it is
+        // always of type Class: if not, need to add more code to resolve it to Class.        
+        Type[] args = ptype.getActualTypeArguments();
+        int paramCount = (args == null) ? 0 : args.length;
+        TypeBindings newBindings;        
+
+        if (paramCount == 0) {
+            newBindings = EMPTY_BINDINGS;
+        } else {
+            JavaType[] pt = new JavaType[paramCount];
+            for (int i = 0; i < paramCount; ++i) {
+                pt[i] = _fromAny(context, args[i], parentBindings);  // ◄ FIX THIS LINE (NPE manifests here)
+            }
+            newBindings = TypeBindings.create(rawType, pt);
+        }
+        return _fromClass(context, rawType, newBindings);
+    }
+```
+
+### FILE: com/fasterxml/jackson/databind/type/TypeFactory.java  (righe 1409–1426, fault alla riga 1413)
+```java
+    protected JavaType _fromVariable(ClassStack context, TypeVariable<?> var, TypeBindings bindings)
+    {
+        // ideally should find it via bindings:
+        final String name = var.getName();
+        JavaType type = bindings.findBoundType(name);  // ◄ FIX THIS LINE (NPE manifests here)
+        if (type != null) {
+            return type;
+        }
+        // but if not, use bounds... note that approach here is simplistic; not taking
+        // into account possible multiple bounds, nor consider upper bounds.
+        if (bindings.hasUnbound(name)) {
+            return CORE_TYPE_OBJECT;
+        }
+        bindings = bindings.withUnboundVariable(name);
+
+        Type[] bounds = var.getBounds();
+        return _fromAny(context, bounds[0], bindings);
+    }
+```
+
+### FILE: com/fasterxml/jackson/databind/type/TypeFactory.java  (righe 1409–1426, fault alla riga 1425)
+```java
+    protected JavaType _fromVariable(ClassStack context, TypeVariable<?> var, TypeBindings bindings)
+    {
+        // ideally should find it via bindings:
+        final String name = var.getName();
+        JavaType type = bindings.findBoundType(name);
+        if (type != null) {
+            return type;
+        }
+        // but if not, use bounds... note that approach here is simplistic; not taking
+        // into account possible multiple bounds, nor consider upper bounds.
+        if (bindings.hasUnbound(name)) {
+            return CORE_TYPE_OBJECT;
+        }
+        bindings = bindings.withUnboundVariable(name);
+
+        Type[] bounds = var.getBounds();
+        return _fromAny(context, bounds[0], bindings);  // ◄ FIX THIS LINE (NPE manifests here)
+    }
+```
+
+### FILE: com/fasterxml/jackson/databind/type/TypeParser.java  (righe 40–60, fault alla riga 59)
+```java
+    protected JavaType parseType(MyTokenizer tokens)
+        throws IllegalArgumentException
+    {
+        if (!tokens.hasMoreTokens()) {
+            throw _problem(tokens, "Unexpected end-of-string");
+        }
+        Class<?> base = findClass(tokens.nextToken(), tokens);
+
+        // either end (ok, non generic type), or generics
+        if (tokens.hasMoreTokens()) {
+            String token = tokens.nextToken();
+            if ("<".equals(token)) {
+                List<JavaType> parameterTypes = parseTypes(tokens);
+                TypeBindings b = TypeBindings.create(base, parameterTypes);
+                return _factory._fromClass(null, base, b);
+            }
+            // can be comma that separates types, or closing '>'
+            tokens.pushBack(token);
+        }
+        return _factory._fromClass(null, base, null);  // ◄ FIX THIS LINE (NPE manifests here)
+    }
+```
+
+## File Correlati (stesso progetto — potrebbero servire per il fix)
+
+### LRUMap.java
+```java
+package com.fasterxml.jackson.databind.util;
+
+import java.io.*;
+import java.util.concurrent.ConcurrentHashMap;
+
+/**
+ * Helper for simple bounded maps used for reusing lookup values.
+ *<p>
+ * Note that serialization behavior is such that contents are NOT serialized,
+ * on assumption that all use cases are for caching where persistence
+ * does not make sense. The only thing serialized is the cache size of Map.
+ *<p>
+ * NOTE: since version 2.4.2, this is <b>NOT</b> an LRU-based at all; reason
+ * being that it is not possible to use JDK components that do LRU _AND_ perform
+ * well wrt synchronization on multi-core systems. So we choose efficient synchronization
+ * over potentially more efficient handling of entries.
+ *<p>
+ * And yes, there are efficient LRU implementations such as
+ * <a href="https://code.google.com/p/concurrentlinkedhashmap/">concurrentlinkedhashmap</a>;
+ * but at this point we really try to keep external deps to minimum. But perhaps
+ * a shaded variant may be used one day.
+ */
+public class LRUMap<K,V>
+    implements java.io.Serializable
+{
+    private static final long serialVersionUID = 1L;
+
+    protected final transient int _maxEntries;
+
+    protected final transient ConcurrentHashMap<K,V> _map;
+    
+    public LRUMap(int initialEntries, int maxEntries)
+    {
+        // We'll use concurrency level of 4, seems reasonable
+        _map = new ConcurrentHashMap<K,V>(initialEntries, 0.8f, 4);
+        _maxEntries = maxEntries;
+    }
+
+    public V put(K key, V value) {
+        if (_map.size() >= _maxEntries) {
+            // double-locking, yes, but safe here; trying to avoid "clear storms"
+            synchronized (this) {
+                if (_map.size() >= _maxEntries) {
+                    clear();
+                }
+            }
+        }
+        return _map.put(key, value);
+    }
+
+    /**
+     * @since 2.5
+     */
+    public V putIfAbsent(K key, V value) {
+        // not 100% optimal semantically, but better from correctness (never exceeds
+        // defined maximum) and close enough all in all:
+        if (_map.size() >= _maxEntries) {
+            synchronized (this) {
+                if (_map.size() >= _maxEntries) {
+                    clear();
+                }
+            }
+        }
+        return _map.putIfAbsent(key, value);
+    }
+    
+    // NOTE: key is of type Object only to retain binary backwards-compatibility
+    public V get(Object key) {  return _map.get(key); }
+
+    public void clear() { _map.clear(); }
+    public int size() { return _map.size(); }
+
+    /*
+    /**********************************************************
+    /* Serializable overrides
+    /**********************************************************
+     */
+
+    /**
+     * Ugly hack, to work through the requirement that _value is indeed final,
+     * and that JDK serialization won't call ctor(s) if Serializable is implemented.
+     * 
+     * @since 2.1
+     */
+    protected transient int _jdkSerializeMaxEntries;
+
+    private void readObject(ObjectInputStream in) throws IOException {
+        _jdkSerializeMaxEntries = in.readInt();
+    }
+
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.writeInt(_jdkSerializeMaxEntries);
+    }
+
+    protected Object readResolve() {
+        return new LRUMap<Object,Object>(_jdkSerializeMaxEntries, _jdkSerializeMaxEntries);
+    }
+}
+```
+
+### TypeModifier.java
+```java
+package com.fasterxml.jackson.databind.type;
+
+import java.lang.reflect.Type;
+
+import com.fasterxml.jackson.databind.JavaType;
+
+/**
+ * Class that defines API that can be used to modify details of
+ * {@link JavaType} instances constructed using {@link TypeFactory}.
+ * Registered modifiers are called in order, to let them modify (or
+ * replace) basic type instance factory constructs.
+ * This is typically needed to support creation of
+ * {@link MapLikeType} and {@link CollectionLikeType} instances,
+ * as those can not be constructed in generic fashion.
+ */
+public abstract class TypeModifier
+{
+    /**
+     * Method called to let modifier change constructed type definition.
+     * Note that this is only guaranteed to be called for
+     * non-container types ("simple" types not recognized as arrays,
+     * <code>java.util.Collection</code> or <code>java.util.Map</code>).
+     * 
+     * @param type Instance to modify
+     * @param jdkType JDK type that was used to construct instance to modify
+     * @param context Type resolution context used for the type
+     * @param typeFactory Type factory that can be used to construct parameter type; note,
+     *   however, that care must be taken to avoid infinite loops -- specifically, do not
+     *   construct instance of primary type itself
+     * 
+     * @return Actual type instance to use; usually either <code>type</code> (as is or with
+     *    modifications), or a newly constructed type instance based on it. Can not be null.
+     */
+    public abstract JavaType modifyType(JavaType type, Type jdkType, TypeBindings context,
+            TypeFactory typeFactory);
+}
+```
+
+### ClassStack.java
+```java
+package com.fasterxml.jackson.databind.type;
+
+import java.util.ArrayList;
+
+import com.fasterxml.jackson.databind.JavaType;
+
+/**
+ * Simple helper class used to keep track of 'call stack' for classes being referenced
+ * (as well as unbound variables)
+ *
+ * @since 2.7
+ */
+public final class ClassStack
+{
+    protected final ClassStack _parent;
+    protected final Class<?> _current;
+
+    private ArrayList<ResolvedRecursiveType> _selfRefs;
+
+    public ClassStack(Class<?> rootType) {
+        this(null, rootType);
+    }
+
+    private ClassStack(ClassStack parent, Class<?> curr) {
+        _parent = parent;
+        _current = curr;
+    }
+
+    /**
+     * @return New stack frame, if addition is ok; null if not
+     */
+    public ClassStack child(Class<?> cls) {
+        return new ClassStack(this, cls);
+    }
+
+    /**
+     * Method called to indicate that there is a self-reference from
+     * deeper down in stack pointing into type this stack frame represents.
+     */
+    public void addSelfReference(ResolvedRecursiveType ref)
+    {
+        if (_selfRefs == null) {
+            _selfRefs = new ArrayList<ResolvedRecursiveType>();
+        }
+        _selfRefs.add(ref);
+    }
+
+    /**
+     * Method called when type that this stack frame represents is
+     * fully resolved, allowing self-references to be completed
+     * (if there are any)
+     */
+    public void resolveSelfReferences(JavaType resolved)
+    {
+        if (_selfRefs != null) {
+            for (ResolvedRecursiveType ref : _selfRefs) {
+                ref.setReference(resolved);
+            }
+        }
+    }
+
+    public ClassStack find(Class<?> cls)
+    {
+        if (_current == cls) return this;
+        for (ClassStack curr = _parent; curr != null; curr = curr._parent) {
+            if (curr._current == cls) {
+                return curr;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[ClassStack (self-refs: ")
+            .append((_selfRefs == null) ? "0" : String.valueOf(_selfRefs.size()))
+            .append(')')
+                    ;
+        for (ClassStack curr = this; curr != null; curr = curr._parent) {
+            sb.append(' ').append(curr._current.getName());
+        }
+        sb.append(']');
+        return sb.toString();
+    }
+}
+```
+
+### CollectionType.java
+```java
+package com.fasterxml.jackson.databind.type;
+
+import java.lang.reflect.TypeVariable;
+
+import com.fasterxml.jackson.databind.JavaType;
+
+/**
+ * Type that represents Java Collection types (Lists, Sets).
+ */
+public final class CollectionType
+    extends CollectionLikeType
+{
+    private static final long serialVersionUID = 1L;
+
+    /*
+    /**********************************************************
+    /* Life-cycle
+    /**********************************************************
+     */
+
+    private CollectionType(Class<?> collT, TypeBindings bindings,
+            JavaType superClass, JavaType[] superInts, JavaType elemT,
+            Object valueHandler, Object typeHandler, boolean asStatic)
+    {
+        super(collT, bindings, superClass, superInts, elemT, valueHandler, typeHandler, asStatic);
+    }
+
+    /**
+     * @since 2.7
+     */
+    protected CollectionType(TypeBase base, JavaType elemT) {
+        super(base, elemT);
+    }
+
+    /**
+     * @since 2.7
+     */
+    public static CollectionType construct(Class<?> rawType, TypeBindings bindings,
+            JavaType superClass, JavaType[] superInts, JavaType elemT) {
+        return new CollectionType(rawType, bindings, superClass, superInts, elemT,
+                null, null, false);
+    }
+
+    /**
+     * @deprecated Since 2.7, remove from 2.9
+     */
+    @Deprecated // since 2.7
+    public static CollectionType construct(Class<?> rawType, JavaType elemT) {
+        // First: may need to fabricate TypeBindings (needed for refining into
+        // concrete collection types, as per [databind#1102])
+        TypeVariable<?>[] vars = rawType.getTypeParameters();
+        TypeBindings bindings;
+        if ((vars == null) || (vars.length != 1)) {
+            bindings = TypeBindings.emptyBindings();
+        } else {
+            bindings = TypeBindings.create(rawType, elemT);
+        }
+        return new CollectionType(rawType, bindings,
+                // !!! TODO: Wrong, does have supertypes, but:
+                _bogusSuperClass(rawType), null, elemT,
+                null, null, false);
+    }
+
+    @Deprecated // since 2.7
+    @Override
+    protected JavaType _narrow(Class<?> subclass) {
+        return new CollectionType(subclass, _bindings,
+                _superClass, _superInterfaces, _elementType, null, null, _asStatic);
+    }
+
+    @Override
+    public JavaType withContentType(JavaType contentType) {
+        if (_elementType == contentType) {
+            return this;
+        }
+        return new CollectionType(_class, _bindings, _superClass, _superInterfaces,
+                contentType, _valueHandler, _typeHandler, _asStatic);
+    }
+    
+    @Override
+    public CollectionType withTypeHandler(Object h) {
+        return new CollectionType(_class, _bindings,
+                _superClass, _superInterfaces, _elementType, _valueHandler, h, _asStatic);
+    }
+
+    @Override
+    public CollectionType withContentTypeHandler(Object h)
+    {
+        return new CollectionType(_class, _bindings,
+                _superClass, _superInterfaces, _elementType.withTypeHandler(h),
+                _valueHandler, _typeHandler, _asStatic);
+    }
+
+    @Override
+    public CollectionType withValueHandler(Object h) {
+        return new CollectionType(_class, _bindings,
+                _superClass, _superInterfaces, _elementType, h, _typeHandler, _asStatic);
+    }
+
+    @Override
+    public  CollectionType withContentValueHandler(Object h) {
+        return new CollectionType(_class, _bindings,
+                _superClass, _superInterfaces, _elementType.withValueHandler(h),
+                _valueHandler, _typeHandler, _asStatic);
+    }
+
+    @Override
+    public CollectionType withStaticTyping() {
+        if (_asStatic) {
+            return this;
+        }
+        return new CollectionType(_class, _bindings,
+                _superClass, _superInterfaces, _elementType.withStaticTyping(),
+                _valueHandler, _typeHandler, true);
+    }
+
+    @Override
+    public JavaType refine(Class<?> rawType, TypeBindings bindings,
+            JavaType superClass, JavaType[] superInterfaces) {
+        return new CollectionType(rawType, bindings,
+                superClass, superInterfaces, _elementType,
+                _valueHandler, _typeHandler, _asStatic);
+    }
+
+    /*
+    /**********************************************************
+    /* Standard methods
+    /**********************************************************
+     */
+
+    @Override
+    public String toString()
+    {
+        return "[collection type; class "+_class.getName()+", contains "+_elementType+"]";
+    }
+}
+```
+
+### PlaceholderForType.java
+```java
+package com.fasterxml.jackson.databind.type;
+
+import com.fasterxml.jackson.databind.JavaType;
+
+/**
+ * Helper type used when introspecting bindings for already resolved types,
+ * needed for specialization.
+ *
+ * @since 2.8.11
+ */
+public class PlaceholderForType extends TypeBase
+{
+    private static final long serialVersionUID = 1L;
+
+    protected final int _ordinal;
+
+    /**
+     * Type assigned during wildcard resolution (which follows type
+     * structure resolution)
+     */
+    protected JavaType _actualType;
+    
+    public PlaceholderForType(int ordinal)
+    {
+        super(Object.class, TypeBindings.emptyBindings(),
+                TypeFactory.unknownType(), null, 1, // super-class, super-interfaces, hashCode
+                null, null, false); // value/type handler, as-static
+        _ordinal = ordinal;
+    }
+
+    public JavaType actualType() { return _actualType; }
+    public void actualType(JavaType t) { _actualType = t; }
+
+    // Override to get better diagnostics
+    @Override
+    protected String buildCanonicalName() {
+        return toString();
+    }
+
+    @Override
+    public StringBuilder getGenericSignature(StringBuilder sb) {
+        return getErasedSignature(sb);
+    }
+
+    @Override
+    public StringBuilder getErasedSignature(StringBuilder sb) {
+        sb.append('$').append(_ordinal+1);
+        return sb;
+    }
+
+    @Override
+    public JavaType withTypeHandler(Object h) {
+        return _unsupported();
+    }
+
+    @Override
+    public JavaType withContentTypeHandler(Object h) {
+        return _unsupported();
+    }
+
+    @Override
+    public JavaType withValueHandler(Object h) {
+        return _unsupported();
+    }
+
+    @Override
+    public JavaType withContentValueHandler(Object h) {
+        return _unsupported();
+    }
+
+    @Override
+    public JavaType withContentType(JavaType contentType) {
+        return _unsupported();
+    }
+
+    @Override
+    public JavaType withStaticTyping() {
+        return _unsupported();
+    }
+
+    @Override
+    public JavaType refine(Class<?> rawType, TypeBindings bindings, JavaType superClass, JavaType[] superInterfaces) {
+        return _unsupported();
+    }
+
+    @Override
+    protected JavaType _narrow(Class<?> subclass) {
+        return _unsupported();
+    }
+
+    @Override
+    public boolean isContainerType() {
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return getErasedSignature(new StringBuilder()).toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return (o == this);
+    }
+
+    private <T> T _unsupported() {
+        throw new UnsupportedOperationException("Operation should not be attempted on "+getClass().getName());
+    }
+}
+```
+## Test Falliti
+
+  • com.fasterxml.jackson.databind.type.TestTypeFactory#testCanonicalNames
+
+## Stack Trace
+
+```
+testCanonicalNames(com.fasterxml.jackson.databind.type.TestTypeFactory): Cannot invoke "com.fasterxml.jackson.databind.type.TypeBindings.findBoundType(String)" because "bindings" is null
+Cannot invoke "com.fasterxml.jackson.databind.type.TypeBindings.findBoundType(String)" because "bindings" is null
+java.lang.NullPointerException: Cannot invoke "com.fasterxml.jackson.databind.type.TypeBindings.findBoundType(String)" because "bindings" is null
+	at com.fasterxml.jackson.databind.type.TypeFactory._fromVariable(TypeFactory.java:1413)
+	at com.fasterxml.jackson.databind.type.TypeFactory._fromAny(TypeFactory.java:1175)
+	at com.fasterxml.jackson.databind.type.TypeFactory._fromParamType(TypeFactory.java:1396)
+	at com.fasterxml.jackson.databind.type.TypeFactory._fromAny(TypeFactory.java:1165)
+	at com.fasterxml.jackson.databind.type.TypeFactory._resolveSuperInterfaces(TypeFactory.java:1311)
+	at com.fasterxml.jackson.databind.type.TypeFactory._fromClass(TypeFactory.java:1254)
+	at com.fasterxml.jackson.databind.type.TypeParser.parseType(TypeParser.java:59)
+	at com.fasterxml.jackson.databind.type.TypeParser.parse(TypeParser.java:32)
+	at com.fasterxml.jackson.databind.type.TypeFactory.constructFromCanonical(TypeFactory.java:536)
+	at com.fasterxml.jackson.databind.type.TestTypeFactory.testCanonicalNames(TestTypeFactory.java:237)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:176)
+	at junit.framework.TestCase.runBare(TestCase.java:141)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:129)
+	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+	at junit.framework.TestSuite.run(TestSuite.java:247)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+```
+
+## Istruzioni
+
+Analizza il bug e restituisci i metodi corretti, seguendo queste regole TASSATIVE:
+
+1. **Un FILE block per metodo**: se devi correggere N metodi, emetti N blocchi FILE separati.
+   Ogni blocco deve contenere UN SOLO metodo completo.
+
+2. **Indentazione originale**: mantieni ESATTAMENTE l'indentazione del codice originale.
+   La firma del metodo DEVE iniziare con gli stessi spazi del file originale.
+
+3. **La riga `// ◄ FIX THIS LINE`** indica dove l'NPE si manifesta. Rimuovi questo commento
+   nella risposta — restituisci solo codice Java puro.
+
+4. **Null-safe equality OBBLIGATORIA**: se il metodo confronta due valori che possono essere null,
+   usa `java.util.Objects.equals(a, b)` — questa funzione ritorna `true` se entrambi sono null,
+   mentre `a.equals(b)` lancia NPE se `a` è null, e `a != null && a.equals(b)` ritorna `false`
+   se entrambi sono null (sbagliato semanticamente).
+   Esempio corretto:
+   ```java
+   return java.util.Objects.equals(doubleMetaphone(v1, alt), doubleMetaphone(v2, alt));
+   ```
+
+5. **NON modificare metodi che non causano il bug**: se il metodo `doubleMetaphone` ritorna
+   null per input null, questo è il comportamento CORRETTO e atteso dai test. Non cambiarlo.
+
+6. NON modificare file di test.

@@ -1,0 +1,31 @@
+--- org/apache/commons/math/analysis/solvers/BisectionSolver.java
++++ org/apache/commons/math/analysis/solvers/BisectionSolver.java
+@@ -73,11 +73,15 @@
+     }
+ 
+     /** {@inheritDoc} */
+-    public double solve(final UnivariateRealFunction f, double min, double max)
++public double solve(final UnivariateRealFunction f, double min, double max)
+         throws MaxIterationsExceededException, FunctionEvaluationException {
+ 
++        if (f == null) {
++            throw new IllegalArgumentException("Function cannot be null");
++        }
++
+         clearResult();
+-        verifyInterval(min,max);
++        verifyInterval(min, max);
+         double m;
+         double fm;
+         double fmin;
+@@ -85,8 +89,8 @@
+         int i = 0;
+         while (i < maximalIterationCount) {
+             m = UnivariateRealSolverUtils.midpoint(min, max);
+-           fmin = f.value(min);
+-           fm = f.value(m);
++            fmin = f.value(min);
++            fm = f.value(m);
+ 
+             if (fm * fmin > 0.0) {
+                 // max and m bracket the root.

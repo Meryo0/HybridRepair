@@ -1,0 +1,9 @@
+{
+  "status": "COMPILE_ERROR",
+  "total_tests": 0,
+  "failed_tests": 0,
+  "failing_test_names": [],
+  "previously_failing_now_passing": [],
+  "compile_output": "/home/mario/Desktop/LogicFL/pipeline_results/JacksonDatabind-107/attempt_2/patched_source/com/fasterxml/jackson/databind/jsontype/impl/TypeDeserializerBase.java:208: error: cannot find symbol\n            throw JsonMappingException.from(ctxt, String.format(\n                  ^\n  symbol:   variable JsonMappingException\n  location: class TypeDeserializerBase\nNote: Some input files use or override a deprecated API.\nNote: Recompile with -Xlint:deprecation for details.\nNote: Some input files use unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n1 error\n",
+  "test_output": ""
+}

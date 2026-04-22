@@ -1,0 +1,9 @@
+{
+  "status": "COMPILE_ERROR",
+  "total_tests": 0,
+  "failed_tests": 0,
+  "failing_test_names": [],
+  "previously_failing_now_passing": [],
+  "compile_output": "/home/mario/Desktop/LogicFL/pipeline_results/JacksonDatabind-95/attempt_1/patched_source/com/fasterxml/jackson/databind/type/TypeParser.java:59: error: cannot find symbol\n        return _factory._fromClass(null, base, EMPTY_BINDINGS);\n                                               ^\n  symbol:   variable EMPTY_BINDINGS\n  location: class TypeParser\nNote: Some input files use or override a deprecated API.\nNote: Recompile with -Xlint:deprecation for details.\nNote: Some input files use unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n1 error\n",
+  "test_output": ""
+}

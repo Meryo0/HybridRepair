@@ -1,0 +1,587 @@
+Bug ID: JacksonDatabind-80  |  Tentativo 1
+
+## Fault Locations (LogicFL)
+
+  • com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver — riga 145  [✓]
+  • com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector — riga 556  [✓]
+
+## Catena Causale (LogicFL Prolog)
+
+NPE at line(annotation_introspector_1, 1336) / Null Expression - p_annotated_115[annotated]
+	 can be caused by 
+p_property_2230[property] - line(std_subtype_resolver_1, 145).
+
+NPE at line(annotation_introspector_1, 1336) / Null Expression - p_annotated_115[annotated]
+	 can be caused by 
+p_a_2026[a] - line(jackson_annotation_introspector_1, 556).
+
+## Metodi Buggy
+
+### FILE: com/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver.java  (righe 128–164, fault alla riga 145)
+```java
+    public Collection<NamedType> collectAndResolveSubtypesByTypeId(MapperConfig<?> config, 
+            AnnotatedMember property, JavaType baseType)
+    {
+        final AnnotationIntrospector ai = config.getAnnotationIntrospector();
+        Class<?> rawBase = baseType.getRawClass();
+
+        // Need to keep track of classes that have been handled already 
+        Set<Class<?>> typesHandled = new HashSet<Class<?>>();
+        Map<String,NamedType> byName = new LinkedHashMap<String,NamedType>();
+
+        // start with lowest-precedence, which is from type hierarchy
+        NamedType rootType = new NamedType(rawBase, null);
+        AnnotatedClass ac = AnnotatedClassResolver.resolveWithoutSuperTypes(config,
+                rawBase);
+        _collectAndResolveByTypeId(ac, rootType, config, typesHandled, byName);
+        
+        // then with definitions from property
+            Collection<NamedType> st = ai.findSubtypes(property);  // ◄ FIX THIS LINE (NPE manifests here)
+            if (st != null) {
+                for (NamedType nt : st) {
+                    ac = AnnotatedClassResolver.resolveWithoutSuperTypes(config, nt.getType());
+                    _collectAndResolveByTypeId(ac, nt, config, typesHandled, byName);
+                }            
+        }
+        // and finally explicit type registrations (highest precedence)
+        if (_registeredSubtypes != null) {
+            for (NamedType subtype : _registeredSubtypes) {
+                // is it a subtype of root type?
+                if (rawBase.isAssignableFrom(subtype.getType())) { // yes
+                    AnnotatedClass curr = AnnotatedClassResolver.resolveWithoutSuperTypes(config,
+                            subtype.getType());
+                    _collectAndResolveByTypeId(curr, subtype, config, typesHandled, byName);
+                }
+            }
+        }
+        return _combineNamedAndUnnamed(rawBase, typesHandled, byName);
+    }
+```
+
+### FILE: com/fasterxml/jackson/databind/introspect/JacksonAnnotationIntrospector.java  (righe 554–564, fault alla riga 556)
+```java
+    public List<NamedType> findSubtypes(Annotated a)
+    {
+        JsonSubTypes t = _findAnnotation(a, JsonSubTypes.class);  // ◄ FIX THIS LINE (NPE manifests here)
+        if (t == null) return null;
+        JsonSubTypes.Type[] types = t.value();
+        ArrayList<NamedType> result = new ArrayList<NamedType>(types.length);
+        for (JsonSubTypes.Type type : types) {
+            result.add(new NamedType(type.value(), type.name()));
+        }
+        return result;
+    }
+```
+
+## File Correlati (stesso progetto — potrebbero servire per il fix)
+
+### NamedType.java
+```java
+package com.fasterxml.jackson.databind.jsontype;
+
+/**
+ * Simple container class for types with optional logical name, used
+ * as external identifier
+ */
+public final class NamedType implements java.io.Serializable
+{
+    private static final long serialVersionUID = 1L;
+
+    protected final Class<?> _class;
+    protected final int _hashCode;
+
+    protected String _name;
+    
+    public NamedType(Class<?> c) { this(c, null); }
+    
+    public NamedType(Class<?> c, String name) {
+        _class = c;
+        _hashCode = c.getName().hashCode();
+        setName(name);
+    }
+
+    public Class<?> getType() { return _class; }
+    public String getName() { return _name; }
+    public void setName(String name) { _name = (name == null || name.length() == 0) ? null : name; }
+
+    public boolean hasName() { return _name != null; }
+    
+    /**
+     * Equality is defined based on class only, not on name
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (o == null) return false;
+        if (o.getClass() != getClass()) return false;
+        return _class == ((NamedType) o)._class;
+    }
+
+    @Override
+    public int hashCode() { return _hashCode; }
+
+    @Override
+    public String toString() {
+    	return "[NamedType, class "+_class.getName()+", name: "
+    	        +(_name == null ? "null" :("'"+_name+"'"))+"]";
+    }
+}
+```
+
+### Named.java
+```java
+package com.fasterxml.jackson.databind.util;
+
+/**
+ * Simple tag interface mostly to allow sorting by name.
+ */
+public interface Named {
+    public String getName();
+}
+```
+
+### SubtypeResolver.java
+```java
+package com.fasterxml.jackson.databind.jsontype;
+
+import java.util.Collection;
+
+import com.fasterxml.jackson.databind.AnnotationIntrospector;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.cfg.MapperConfig;
+import com.fasterxml.jackson.databind.introspect.AnnotatedClass;
+import com.fasterxml.jackson.databind.introspect.AnnotatedMember;
+
+/**
+ * Helper object used for handling registration on resolving of super-types
+ * to sub-types.
+ */
+public abstract class SubtypeResolver
+{
+    /*
+    /**********************************************************
+    /* Methods for registering external subtype definitions
+    /**********************************************************
+     */
+
+    /**
+     * Method for registering specified subtypes (possibly including type
+     * names); for type entries without name, non-qualified class name
+     * as used as name (unless overridden by annotation).
+     */
+    public abstract void registerSubtypes(NamedType... types);
+
+    public abstract void registerSubtypes(Class<?>... classes);
+
+    /*
+    /**********************************************************
+    /* Subtype resolution
+    /**********************************************************
+     */
+
+    /**
+     * Method for finding out all reachable subtypes for a property specified
+     * by given element (method or field),
+     * such that access is by type,
+     * typically needed for serialization (converting from type to type name).
+     * 
+     * @param baseType Effective property base type to use; may differ from
+     *    actual type of property; for structured types it is content (value) type and NOT
+     *    structured type.
+     * 
+     * @since 2.6
+     */
+    public Collection<NamedType> collectAndResolveSubtypesByClass(MapperConfig<?> config, 
+            AnnotatedMember property, JavaType baseType) {
+        // for backwards compatibility...
+        return collectAndResolveSubtypes(property, config,
+                config.getAnnotationIntrospector(), baseType);
+    }
+
+    /**
+     * Method for finding out all reachable subtypes for given type,
+     * such that access is by type,
+     * typically needed for serialization (converting from type to type name).
+     * 
+     * @param baseType Effective property base type to use; may differ from
+     *    actual type of property; for structured types it is content (value) type and NOT
+     *    structured type.
+     * 
+     * @since 2.6
+     */
+    public Collection<NamedType> collectAndResolveSubtypesByClass(MapperConfig<?> config,
+            AnnotatedClass baseType) {
+        // for backwards compatibility...
+        return collectAndResolveSubtypes(baseType, config, config.getAnnotationIntrospector());
+    }
+
+    /**
+     * Method for finding out all reachable subtypes for a property specified
+     * by given element (method or field),
+     * such that access is by type id,
+     * typically needed for deserialization (converting from type id to type).
+     * 
+     * @param baseType Effective property base type to use; may differ from
+     *    actual type of property; for structured types it is content (value) type and NOT
+     *    structured type.
+     * 
+     * @since 2.6
+     */
+    public Collection<NamedType> collectAndResolveSubtypesByTypeId(MapperConfig<?> config, 
+            AnnotatedMember property, JavaType baseType) {
+        // for backwards compatibility...
+        return collectAndResolveSubtypes(property, config,
+                config.getAnnotationIntrospector(), baseType);
+    }
+
+    /**
+     * Method for finding out all reachable subtypes for given type,
+     * such that access is by type id,
+     * typically needed for deserialization (converting from type id to type).
+     * 
+     * @param baseType Effective property base type to use; may differ from
+     *    actual type of property; for structured types it is content (value) type and NOT
+     *    structured type.
+     * 
+     * @since 2.6
+     */
+    public Collection<NamedType> collectAndResolveSubtypesByTypeId(MapperConfig<?> config,
+            AnnotatedClass baseType) {
+        // for backwards compatibility...
+        return collectAndResolveSubtypes(baseType, config, config.getAnnotationIntrospector());
+    }
+    
+    /*
+    /**********************************************************
+    /* Deprecated methods
+    /**********************************************************
+     */
+    
+    /**
+     * @deprecated Since 2.6 Use either
+     *   {@link #collectAndResolveSubtypesByClass(MapperConfig, AnnotatedMember, JavaType)}
+     *   or {@link #collectAndResolveSubtypesByTypeId(MapperConfig, AnnotatedMember, JavaType)}
+     *   instead.
+     */
+    @Deprecated
+    public Collection<NamedType> collectAndResolveSubtypes(AnnotatedMember property,
+            MapperConfig<?> config, AnnotationIntrospector ai, JavaType baseType) {
+        return collectAndResolveSubtypesByClass(config, property, baseType);
+    }
+
+    /**
+     * @deprecated Since 2.6 Use either
+     *   {@link #collectAndResolveSubtypesByClass(MapperConfig, AnnotatedClass)}
+     *   or {@link #collectAndResolveSubtypesByTypeId(MapperConfig, AnnotatedClass)}
+     *   instead.
+     */
+    @Deprecated
+    public Collection<NamedType> collectAndResolveSubtypes(AnnotatedClass baseType,
+            MapperConfig<?> config, AnnotationIntrospector ai) {
+        return collectAndResolveSubtypesByClass(config, baseType);
+    }
+}
+```
+
+### Annotated.java
+```java
+package com.fasterxml.jackson.databind.introspect;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.AnnotatedElement;
+import java.lang.reflect.Modifier;
+import java.lang.reflect.Type;
+
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.type.TypeBindings;
+
+/**
+ * Shared base class used for anything on which annotations (included
+ * within a {@link AnnotationMap}).
+ */
+public abstract class Annotated
+{
+    protected Annotated() { }
+
+    public abstract <A extends Annotation> A getAnnotation(Class<A> acls);
+
+    public abstract boolean hasAnnotation(Class<?> acls);
+
+    /**
+     * @since 2.7
+     */
+    public abstract boolean hasOneOf(Class<? extends Annotation>[] annoClasses);
+
+    /**
+     * Method that can be used to find actual JDK element that this instance
+     * represents. It is non-null, except for method/constructor parameters
+     * which do not have a JDK counterpart.
+     */
+    public abstract AnnotatedElement getAnnotated();
+
+    protected abstract int getModifiers();
+
+    public boolean isPublic() {
+        return Modifier.isPublic(getModifiers());
+    }
+
+    public abstract String getName();
+
+    /**
+     * Full generic type of the annotated element; definition
+     * of what exactly this means depends on sub-class.
+     *
+     * @since 2.7
+     */
+    public abstract JavaType getType();
+
+    /**
+     * @deprecated Since 2.7 Use {@link #getType()} instead. To be removed from 2.9
+     */
+    @Deprecated
+    public final JavaType getType(TypeBindings bogus) {
+        return getType();
+    }
+
+    /**
+     * JDK declared generic type of the annotated element; definition
+     * of what exactly this means depends on sub-class. Note that such type
+     * can not be reliably resolved without {@link TypeResolutionContext}, and
+     * as a result use of this method was deprecated in Jackson 2.7: see
+     * {@link #getType} for replacement.
+     *
+     * @deprecated Since 2.7 should instead use {@link #getType()}. To be removed from 2.9
+     */
+    @Deprecated
+    public Type getGenericType() {
+        return getRawType();
+    }
+
+    /**
+     * "Raw" type (type-erased class) of the annotated element; definition
+     * of what exactly this means depends on sub-class.
+     */
+    public abstract Class<?> getRawType();
+
+    // Also: ensure we can use #equals, #hashCode
+    
+    @Override
+    public abstract boolean equals(Object o);
+
+    @Override
+    public abstract int hashCode();
+
+    @Override
+    public abstract String toString();
+}
+```
+
+### AnnotatedMember.java
+```java
+package com.fasterxml.jackson.databind.introspect;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Member;
+
+import com.fasterxml.jackson.databind.util.ClassUtil;
+
+/**
+ * Intermediate base class for annotated entities that are members of
+ * a class; fields, methods and constructors. This is a superset
+ * of things that can represent logical properties as it contains
+ * constructors in addition to fields and methods.
+ */
+public abstract class AnnotatedMember
+    extends Annotated
+    implements java.io.Serializable
+{
+    private static final long serialVersionUID = 1L; // since 2.5
+
+    // 19-Dec-2014, tatu: Similarly, assumed NOT to be needed in cases where
+    //    owning object (ObjectMapper or relatives) is being JDK-serialized
+    /**
+     * Context object needed for resolving generic type associated with this
+     * member (method parameter or return value, or field type).
+     *
+     * @since 2.7
+     */
+    protected final transient TypeResolutionContext _typeContext;
+
+    // Transient since information not needed after construction, so
+    // no need to persist
+    protected final transient AnnotationMap _annotations;
+
+    protected AnnotatedMember(TypeResolutionContext ctxt, AnnotationMap annotations) {
+        super();
+        _typeContext = ctxt;
+        _annotations = annotations;
+    }
+
+    /**
+     * Copy-constructor.
+     *
+     * @since 2.5
+     */
+    protected AnnotatedMember(AnnotatedMember base) {
+        _typeContext = base._typeContext;
+        _annotations = base._annotations;
+    }
+
+    /**
+     * Fluent factory method that will construct a new instance that uses specified
+     * instance annotations instead of currently configured ones.
+     *
+     * @since 2.9 (promoted from `Annotated`)
+     */
+    public abstract Annotated withAnnotations(AnnotationMap fallback);
+
+    /**
+     * Actual physical class in which this memmber was declared.
+     */
+    public abstract Class<?> getDeclaringClass();
+
+    public abstract Member getMember();
+
+    public String getFullName() {
+        return getDeclaringClass().getName() + "#" + getName();
+    }
+
+    /**
+     * Accessor for {@link TypeResolutionContext} that is used for resolving
+     * full generic type of this member.
+     * 
+     * @since 2.7
+     *
+     * @deprecated Since 2.9
+     */
+    @Deprecated
+    public TypeResolutionContext getTypeContext() {
+        return _typeContext;
+    }
+
+    @Override
+    public final <A extends Annotation> A getAnnotation(Class<A> acls) {
+        if (_annotations == null) {
+            return null;
+        }
+        return _annotations.get(acls);
+    }
+
+    @Override
+    public final boolean hasAnnotation(Class<?> acls) {
+        if (_annotations == null) {
+            return false;
+        }
+        return _annotations.has(acls);
+    }
+
+    @Override
+    public boolean hasOneOf(Class<? extends Annotation>[] annoClasses) {
+        if (_annotations == null) {
+            return false;
+        }
+        return _annotations.hasOneOf(annoClasses);
+    }
+
+    /**
+     *<p>
+     * NOTE: promoted in 2.9 from `Annotated` up
+     */
+    public AnnotationMap getAllAnnotations() { // alas, used by at least one module, hence public
+        return _annotations;
+    }
+
+    /**
+     * Method that can be called to modify access rights, by calling
+     * {@link java.lang.reflect.AccessibleObject#setAccessible} on
+     * the underlying annotated element.
+     *<p>
+     * Note that caller should verify that
+     * {@link com.fasterxml.jackson.databind.MapperFeature#CAN_OVERRIDE_ACCESS_MODIFIERS}
+     * is enabled before calling this method; as well as pass
+     * <code>force</code> flag appropriately.
+     * 
+     * @since 2.7
+     */
+    public final void fixAccess(boolean force) {
+        Member m = getMember();
+        if (m != null) { // may be null for virtual members
+            ClassUtil.checkAndFixAccess(m, force);
+        }
+    }
+
+    /**
+     * Optional method that can be used to assign value of
+     * this member on given object, if this is a supported
+     * operation for member type.
+     *<p>
+     * This is implemented for fields and single-argument
+     * member methods; but not for constructor parameters or
+     * other types of methods (like static methods)
+     */
+    public abstract void setValue(Object pojo, Object value)
+        throws UnsupportedOperationException, IllegalArgumentException;
+
+    /**
+     * Optional method that can be used to access the value of
+     * this member on given object, if this is a supported
+     * operation for member type.
+     *<p>
+     * This is implemented for fields and no-argument
+... (troncato a 150 righe su 156)
+```
+## Test Falliti
+
+  • com.fasterxml.jackson.databind.jsontype.TestTypeNames#testBaseTypeId1616
+
+## Stack Trace
+
+```
+testBaseTypeId1616(com.fasterxml.jackson.databind.jsontype.TestTypeNames): Cannot invoke "com.fasterxml.jackson.databind.introspect.Annotated.getAnnotation(java.lang.Class)" because "annotated" is null
+Cannot invoke "com.fasterxml.jackson.databind.introspect.Annotated.getAnnotation(java.lang.Class)" because "annotated" is null
+java.lang.NullPointerException: Cannot invoke "com.fasterxml.jackson.databind.introspect.Annotated.getAnnotation(java.lang.Class)" because "annotated" is null
+	at com.fasterxml.jackson.databind.AnnotationIntrospector._findAnnotation(AnnotationIntrospector.java:1336)
+	at com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector.findSubtypes(JacksonAnnotationIntrospector.java:556)
+	at com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver.collectAndResolveSubtypesByTypeId(StdSubtypeResolver.java:145)
+	at com.fasterxml.jackson.databind.jsontype.TestTypeNames.testBaseTypeId1616(TestTypeNames.java:47)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+```
+
+## Istruzioni
+
+Analizza il bug e restituisci i metodi corretti, seguendo queste regole TASSATIVE:
+
+1. **Un FILE block per metodo**: se devi correggere N metodi, emetti N blocchi FILE separati.
+   Ogni blocco deve contenere UN SOLO metodo completo.
+
+2. **Indentazione originale**: mantieni ESATTAMENTE l'indentazione del codice originale.
+   La firma del metodo DEVE iniziare con gli stessi spazi del file originale.
+
+3. **La riga `// ◄ FIX THIS LINE`** indica dove l'NPE si manifesta. Rimuovi questo commento
+   nella risposta — restituisci solo codice Java puro.
+
+4. **Null-safe equality OBBLIGATORIA**: se il metodo confronta due valori che possono essere null,
+   usa `java.util.Objects.equals(a, b)` — questa funzione ritorna `true` se entrambi sono null,
+   mentre `a.equals(b)` lancia NPE se `a` è null, e `a != null && a.equals(b)` ritorna `false`
+   se entrambi sono null (sbagliato semanticamente).
+   Esempio corretto:
+   ```java
+   return java.util.Objects.equals(doubleMetaphone(v1, alt), doubleMetaphone(v2, alt));
+   ```
+
+5. **NON modificare metodi che non causano il bug**: se il metodo `doubleMetaphone` ritorna
+   null per input null, questo è il comportamento CORRETTO e atteso dai test. Non cambiarlo.
+
+6. NON modificare file di test.

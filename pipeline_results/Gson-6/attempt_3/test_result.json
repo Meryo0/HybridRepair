@@ -1,0 +1,9 @@
+{
+  "status": "COMPILE_ERROR",
+  "total_tests": 0,
+  "failed_tests": 0,
+  "failing_test_names": [],
+  "previously_failing_now_passing": [],
+  "compile_output": "/home/mario/Desktop/LogicFL/pipeline_results/Gson-6/attempt_3/patched_source/com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java:77: error: class, interface, or enum expected\n    } else if (TypeAdapterFactory.class.isAssignableFrom(value)) {\n    ^\n/home/mario/Desktop/LogicFL/pipeline_results/Gson-6/attempt_3/patched_source/com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java:77: error: <identifier> expected\n    } else if (TypeAdapterFactory.class.isAssignableFrom(value)) {\n                                       ^\n/home/mario/Desktop/LogicFL/pipeline_results/Gson-6/attempt_3/patched_source/com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java:79: error: <identifier> expected\n      typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterFactory))\n                 ^\n/home/mario/Desktop/LogicFL/pipeline_results/Gson-6/attempt_3/patched_source/com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java:82: error: class, interface, or enum expected\n    } else {\n      ^\n/home/mario/Desktop/LogicFL/pipeline_results/Gson-6/attempt_3/patched_source/com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java:85: error: class, interface, or enum expected\n    }\n    ^\n/home/mario/Desktop/LogicFL/pipeline_results/Gson-6/attempt_3/patched_source/com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java:87: error: class, interface, or enum expected\n    return typeAdapter;\n    ^\n/home/mario/Desktop/LogicFL/pipeline_results/Gson-6/attempt_3/patched_source/com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java:88: error: class, interface, or enum expected\n  }\n  ^\n7 errors\n",
+  "test_output": ""
+}

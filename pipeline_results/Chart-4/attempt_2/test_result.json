@@ -1,0 +1,24 @@
+{
+  "status": "FAIL",
+  "total_tests": 79,
+  "failed_tests": 1,
+  "failing_test_names": [
+    "1",
+    "expected",
+    "testGetRendererForDataset"
+  ],
+  "previously_failing_now_passing": [
+    "org.jfree.chart.junit.XYStepAreaChartTests",
+    "org.jfree.chart.plot.junit.XYPlotTests",
+    "org.jfree.chart.junit.JFreeChartTests",
+    "org.jfree.chart.axis.junit.LogAxisTests",
+    "org.jfree.chart.junit.XYStepChartTests",
+    "org.jfree.chart.junit.ScatterPlotTests",
+    "org.jfree.chart.junit.TimeSeriesChartTests",
+    "org.jfree.chart.axis.junit.NumberAxisTests",
+    "org.jfree.chart.junit.XYAreaChartTests",
+    "org.jfree.chart.axis.junit.ValueAxisTests"
+  ],
+  "compile_output": "Note: Some input files use or override a deprecated API.\nNote: Recompile with -Xlint:deprecation for details.\nNote: Some input files use unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
+  "test_output": "JUnit version 4.13.2\n...................E............................................................\nTime: 1.369\nThere was 1 failure:\n1) testGetRendererForDataset(org.jfree.chart.plot.junit.XYPlotTests)\njunit.framework.AssertionFailedError: expected:<null> but was:<org.jfree.chart.renderer.xy.XYLineAndShapeRenderer@354dd86c>\n\tat junit.framework.Assert.fail(Assert.java:57)\n\tat junit.framework.Assert.failNotEquals(Assert.java:329)\n\tat junit.framework.Assert.assertEquals(Assert.java:78)\n\tat junit.framework.Assert.assertEquals(Assert.java:86)\n\tat junit.framework.TestCase.assertEquals(TestCase.java:246)\n\tat org.jfree.chart.plot.junit.XYPlotTests.testGetRendererForDataset(XYPlotTests.java:888)\n\nFAILURES!!!\nTests run: 79,  Failures: 1\n\n"
+}

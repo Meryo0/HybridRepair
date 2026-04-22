@@ -1,0 +1,780 @@
+Bug ID: Csv-9  |  Tentativo 1
+
+## Fault Locations (LogicFL)
+
+  • org.apache.commons.csv.CSVParser — riga 388  [✓]
+  • org.apache.commons.csv.CSVRecord — riga 180  [✓]
+  • org.apache.commons.csv.CSVRecord — riga 55  [✓]
+  • org.apache.commons.csv.CSVParser — riga 496  [✓]
+  • org.apache.commons.csv.CSVParser — riga 248  [✓]
+  • org.apache.commons.csv.CSVParser — riga 358  [✓]
+
+## Catena Causale (LogicFL Prolog)
+
+NPE at line(csvrecord_1, 180) / Null Expression - f_mapping_92[mapping]
+	 can be caused by 
+v_hdr_map_74[hdrMap] - line(csvparser_1, 388).
+
+NPE at line(csvrecord_1, 180) / Null Expression - f_mapping_92[mapping]
+	 can be caused by 
+f_mapping_92[mapping] - line(csvrecord_1, 180).
+
+NPE at line(csvrecord_1, 180) / Null Expression - f_mapping_92[mapping]
+	 can be caused by 
+p_mapping_87[mapping] - line(csvrecord_1, 55).
+
+NPE at line(csvrecord_1, 180) / Null Expression - f_mapping_92[mapping]
+	 can be caused by 
+f_header_map_69[headerMap] - line(csvparser_1, 496).
+
+NPE at line(csvrecord_1, 180) / Null Expression - f_mapping_92[mapping]
+	 can be caused by 
+csvparser_1_expr20['this.initializeHeader()'] - line(csvparser_1, 248).
+
+NPE at line(csvrecord_1, 180) / Null Expression - f_mapping_92[mapping]
+	 can be caused by 
+csvparser_1_literal6[null] - line(csvparser_1, 358).
+
+## Metodi Buggy
+
+### FILE: org/apache/commons/csv/CSVParser.java  (righe 238–258, fault alla riga 248)
+```java
+     * @throws IOException
+     *             If there is a problem reading the header or skipping the first record
+     */
+    public CSVParser(final Reader reader, final CSVFormat format) throws IOException {
+        Assertions.notNull(reader, "reader");
+        Assertions.notNull(format, "format");
+
+        format.validate();
+        this.format = format;
+        this.lexer = new Lexer(format, new ExtendedBufferedReader(reader));
+        this.headerMap = this.initializeHeader();  // ◄ FIX THIS LINE (NPE manifests here)
+    }
+
+    private void addRecordValue() {
+        final String input = this.reusableToken.content.toString();
+        final String nullString = this.format.getNullString();
+        if (nullString == null) {
+            this.record.add(input);
+        } else {
+            this.record.add(input.equalsIgnoreCase(nullString) ? null : input);
+        }
+```
+
+### FILE: org/apache/commons/csv/CSVParser.java  (righe 357–389, fault alla riga 358)
+```java
+    private Map<String, Integer> initializeHeader() throws IOException {
+        Map<String, Integer> hdrMap = null;  // ◄ FIX THIS LINE (NPE manifests here)
+        final String[] formatHeader = this.format.getHeader();
+        if (formatHeader != null) {
+            hdrMap = new LinkedHashMap<String, Integer>();
+
+            String[] header = null;
+            if (formatHeader.length == 0) {
+                // read the header from the first line of the file
+                final CSVRecord nextRecord = this.nextRecord();
+                if (nextRecord != null) {
+                    header = nextRecord.values();
+                }
+            } else {
+                if (this.format.getSkipHeaderRecord()) {
+                    this.nextRecord();
+                }
+                header = formatHeader;
+            }
+
+            // build the name to index mappings
+            if (header != null) {
+                for (int i = 0; i < header.length; i++) {
+                    if (hdrMap.containsKey(header[i])) {
+                        throw new IllegalArgumentException("The header contains duplicate names: " +
+                                Arrays.toString(header));
+                    }
+                    hdrMap.put(header[i], Integer.valueOf(i));
+                }
+            }
+        }
+        return hdrMap;
+    }
+```
+
+### FILE: org/apache/commons/csv/CSVParser.java  (righe 357–389, fault alla riga 388)
+```java
+    private Map<String, Integer> initializeHeader() throws IOException {
+        Map<String, Integer> hdrMap = null;
+        final String[] formatHeader = this.format.getHeader();
+        if (formatHeader != null) {
+            hdrMap = new LinkedHashMap<String, Integer>();
+
+            String[] header = null;
+            if (formatHeader.length == 0) {
+                // read the header from the first line of the file
+                final CSVRecord nextRecord = this.nextRecord();
+                if (nextRecord != null) {
+                    header = nextRecord.values();
+                }
+            } else {
+                if (this.format.getSkipHeaderRecord()) {
+                    this.nextRecord();
+                }
+                header = formatHeader;
+            }
+
+            // build the name to index mappings
+            if (header != null) {
+                for (int i = 0; i < header.length; i++) {
+                    if (hdrMap.containsKey(header[i])) {
+                        throw new IllegalArgumentException("The header contains duplicate names: " +
+                                Arrays.toString(header));
+                    }
+                    hdrMap.put(header[i], Integer.valueOf(i));
+                }
+            }
+        }
+        return hdrMap;  // ◄ FIX THIS LINE (NPE manifests here)
+    }
+```
+
+### FILE: org/apache/commons/csv/CSVParser.java  (righe 486–502, fault alla riga 496)
+```java
+                this.reusableToken.type = TOKEN; // Read another token
+                break;
+            default:
+                throw new IllegalStateException("Unexpected Token type: " + this.reusableToken.type);
+            }
+        } while (this.reusableToken.type == TOKEN);
+
+        if (!this.record.isEmpty()) {
+            this.recordNumber++;
+            final String comment = sb == null ? null : sb.toString();
+            result = new CSVRecord(this.record.toArray(new String[this.record.size()]), this.headerMap, comment,  // ◄ FIX THIS LINE (NPE manifests here)
+                    this.recordNumber);
+        }
+        return result;
+    }
+
+}
+```
+
+### FILE: org/apache/commons/csv/CSVRecord.java  (righe 45–65, fault alla riga 55)
+```java
+    /** The record number. */
+    private final long recordNumber;
+
+    /** The values of the record */
+    private final String[] values;
+
+    CSVRecord(final String[] values, final Map<String, Integer> mapping,
+            final String comment, final long recordNumber) {
+        this.recordNumber = recordNumber;
+        this.values = values != null ? values : EMPTY_STRING_ARRAY;
+        this.mapping = mapping;  // ◄ FIX THIS LINE (NPE manifests here)
+        this.comment = comment;
+    }
+
+    /**
+     * Returns a value by {@link Enum}.
+     *
+     * @param e
+     *            an enum
+     * @return the String at the given enum String
+     */
+```
+
+### FILE: org/apache/commons/csv/CSVRecord.java  (righe 170–190, fault alla riga 180)
+```java
+        return toList().iterator();
+    }
+
+    /**
+     * Puts all values of this record into the given Map.
+     *
+     * @param map The Map to populate.
+     * @return the given map.
+     */
+    <M extends Map<String, String>> M putIn(final M map) {
+        for (final Entry<String, Integer> entry : mapping.entrySet()) {  // ◄ FIX THIS LINE (NPE manifests here)
+            final int col = entry.getValue().intValue();
+            if (col < values.length) {
+                map.put(entry.getKey(), values[col]);
+            }
+        }
+        return map;
+    }
+
+    /**
+     * Returns the number of values in this record.
+```
+
+## File Correlati (stesso progetto — potrebbero servire per il fix)
+
+### Assertions.java
+```java
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.apache.commons.csv;
+
+/**
+ * Utility class for input parameter validation
+ *
+ * @version $Id$
+ */
+final class Assertions {
+
+    private Assertions() {
+        // can not be instantiated
+    }
+
+    public static void notNull(final Object parameter, final String parameterName) {
+        if (parameter == null) {
+            throw new IllegalArgumentException("Parameter '" + parameterName + "' must not be null!");
+        }
+    }
+}
+```
+
+### Constants.java
+```java
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.apache.commons.csv;
+
+/**
+ * Constants for this package.
+ *
+ * @version $Id$
+ */
+final class Constants {
+
+    static final char BACKSPACE = '\b';
+    static final char COMMA = ',';
+
+    /**
+     * Starts a comment, the remainder of the line is the comment.
+     */
+    static final char COMMENT = '#';
+
+    static final char CR = '\r';
+    static final Character DOUBLE_QUOTE_CHAR = Character.valueOf('"');
+    static final char BACKSLASH = '\\';
+    static final char FF = '\f';
+    static final char LF = '\n';
+    static final char SP = ' ';
+    static final char TAB = '\t';
+
+    /** ASCII record separator */
+    static final char RS = 30;
+
+    /** ASCII unit separator */
+    static final char US = 31;
+
+    static final String EMPTY = "";
+
+    /** The end of stream symbol */
+    static final int END_OF_STREAM = -1;
+
+    /** Undefined state for the lookahead char */
+    static final int UNDEFINED = -2;
+
+    /** According to RFC 4180, line breaks are delimited by CRLF */
+    static final String CRLF = "\r\n";
+
+    /**
+     * Unicode line separator.
+     */
+    static final String LINE_SEPARATOR = "\u2028";
+
+    /**
+     * Unicode paragraph separator.
+     */
+    static final String PARAGRAPH_SEPARATOR = "\u2029";
+
+    /**
+     * Unicode next line.
+     */
+    static final String NEXT_LINE = "\u0085";
+
+}
+```
+
+### Token.java
+```java
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.apache.commons.csv;
+
+import static org.apache.commons.csv.Token.Type.INVALID;
+
+/**
+ * Internal token representation.
+ * <p/>
+ * It is used as contract between the lexer and the parser.
+ *
+ * @version $Id$
+ */
+final class Token {
+
+    /** length of the initial token (content-)buffer */
+    private static final int INITIAL_TOKEN_LENGTH = 50;
+
+    enum Type {
+        /** Token has no valid content, i.e. is in its initialized state. */
+        INVALID,
+
+        /** Token with content, at beginning or in the middle of a line. */
+        TOKEN,
+
+        /** Token (which can have content) when the end of file is reached. */
+        EOF,
+
+        /** Token with content when the end of a line is reached. */
+        EORECORD,
+
+        /** Token is a comment line. */
+        COMMENT
+    }
+
+    /** Token type */
+    Token.Type type = INVALID;
+
+    /** The content buffer. */
+    final StringBuilder content = new StringBuilder(INITIAL_TOKEN_LENGTH);
+
+    /** Token ready flag: indicates a valid token with content (ready for the parser). */
+    boolean isReady;
+
+    void reset() {
+        content.setLength(0);
+        type = INVALID;
+        isReady = false;
+    }
+
+    /**
+     * Eases IDE debugging.
+     *
+     * @return a string helpful for debugging.
+     */
+    @Override
+    public String toString() {
+        return type.name() + " [" + content.toString() + "]";
+    }
+}
+```
+
+### ExtendedBufferedReader.java
+```java
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.apache.commons.csv;
+
+import static org.apache.commons.csv.Constants.CR;
+import static org.apache.commons.csv.Constants.END_OF_STREAM;
+import static org.apache.commons.csv.Constants.LF;
+import static org.apache.commons.csv.Constants.UNDEFINED;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.Reader;
+
+/**
+ * A special buffered reader which supports sophisticated read access.
+ * <p>
+ * In particular the reader supports a look-ahead option, which allows you to see the next char returned by
+ * {@link #read()}.
+ *
+ * @version $Id$
+ */
+final class ExtendedBufferedReader extends BufferedReader {
+
+    /** The last char returned */
+    private int lastChar = UNDEFINED;
+
+    /** The count of EOLs (CR/LF/CRLF) seen so far */
+    private long eolCounter = 0;
+
+    private boolean closed;
+
+    /**
+     * Created extended buffered reader using default buffer-size
+     */
+    ExtendedBufferedReader(final Reader reader) {
+        super(reader);
+    }
+
+    @Override
+    public int read() throws IOException {
+        final int current = super.read();
+        if (current == CR || (current == LF && lastChar != CR)) {
+            eolCounter++;
+        }
+        lastChar = current;
+        return lastChar;
+    }
+
+    /**
+     * Returns the last character that was read as an integer (0 to 65535). This will be the last character returned by
+     * any of the read methods. This will not include a character read using the {@link #lookAhead()} method. If no
+     * character has been read then this will return {@link Constants#UNDEFINED}. If the end of the stream was reached
+     * on the last read then this will return {@link Constants#END_OF_STREAM}.
+     *
+     * @return the last character that was read
+     */
+    int getLastChar() {
+        return lastChar;
+    }
+
+    @Override
+    public int read(final char[] buf, final int offset, final int length) throws IOException {
+        if (length == 0) {
+            return 0;
+        }
+
+        final int len = super.read(buf, offset, length);
+
+        if (len > 0) {
+
+            for (int i = offset; i < offset + len; i++) {
+                final char ch = buf[i];
+                if (ch == LF) {
+                    if (CR != (i > 0 ? buf[i - 1] : lastChar)) {
+                        eolCounter++;
+                    }
+                } else if (ch == CR) {
+                    eolCounter++;
+                }
+            }
+
+            lastChar = buf[offset + len - 1];
+
+        } else if (len == -1) {
+            lastChar = END_OF_STREAM;
+        }
+
+        return len;
+    }
+
+    /**
+     * Calls {@link BufferedReader#readLine()} which drops the line terminator(s). This method should only be called
+     * when processing a comment, otherwise information can be lost.
+     * <p>
+     * Increments {@link #eolCounter}
+     * <p>
+     * Sets {@link #lastChar} to {@link Constants#END_OF_STREAM} at EOF, otherwise to LF
+     *
+     * @return the line that was read, or null if reached EOF.
+     */
+    @Override
+    public String readLine() throws IOException {
+        final String line = super.readLine();
+
+        if (line != null) {
+            lastChar = LF; // needed for detecting start of line
+            eolCounter++;
+        } else {
+            lastChar = END_OF_STREAM;
+        }
+
+        return line;
+    }
+
+    /**
+     * Returns the next character in the current reader without consuming it. So the next call to {@link #read()} will
+     * still return this value. Does not affect line number or last character.
+     *
+     * @return the next character
+     *
+     * @throws IOException
+     *             if there is an error in reading
+     */
+    int lookAhead() throws IOException {
+        super.mark(1);
+        final int c = super.read();
+        super.reset();
+
+        return c;
+    }
+
+    /**
+     * Returns the current line number
+     *
+     * @return the current line number
+... (troncato a 150 righe su 178)
+```
+
+### Lexer.java
+```java
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.apache.commons.csv;
+
+import static org.apache.commons.csv.Constants.BACKSPACE;
+import static org.apache.commons.csv.Constants.CR;
+import static org.apache.commons.csv.Constants.END_OF_STREAM;
+import static org.apache.commons.csv.Constants.FF;
+import static org.apache.commons.csv.Constants.LF;
+import static org.apache.commons.csv.Constants.TAB;
+import static org.apache.commons.csv.Constants.UNDEFINED;
+import static org.apache.commons.csv.Token.Type.COMMENT;
+import static org.apache.commons.csv.Token.Type.EOF;
+import static org.apache.commons.csv.Token.Type.EORECORD;
+import static org.apache.commons.csv.Token.Type.INVALID;
+import static org.apache.commons.csv.Token.Type.TOKEN;
+
+import java.io.IOException;
+
+/**
+ *
+ *
+ * @version $Id$
+ */
+final class Lexer {
+
+    /**
+     * Constant char to use for disabling comments, escapes and encapsulation. The value -2 is used because it
+     * won't be confused with an EOF signal (-1), and because the Unicode value {@code FFFE} would be encoded as two
+     * chars (using surrogates) and thus there should never be a collision with a real text char.
+     */
+    private static final char DISABLED = '\ufffe';
+
+    private final char delimiter;
+    private final char escape;
+    private final char quoteChar;
+    private final char commentStart;
+
+    private final boolean ignoreSurroundingSpaces;
+    private final boolean ignoreEmptyLines;
+
+    /** The input stream */
+    private final ExtendedBufferedReader reader;
+
+    /** INTERNAL API. but ctor needs to be called dynamically by PerformanceTest class */
+    Lexer(final CSVFormat format, final ExtendedBufferedReader reader) {
+        this.reader = reader;
+        this.delimiter = format.getDelimiter();
+        this.escape = mapNullToDisabled(format.getEscape());
+        this.quoteChar = mapNullToDisabled(format.getQuoteChar());
+        this.commentStart = mapNullToDisabled(format.getCommentStart());
+        this.ignoreSurroundingSpaces = format.getIgnoreSurroundingSpaces();
+        this.ignoreEmptyLines = format.getIgnoreEmptyLines();
+    }
+
+    /**
+     * Returns the next token.
+     * <p/>
+     * A token corresponds to a term, a record change or an end-of-file indicator.
+     *
+     * @param token
+     *            an existing Token object to reuse. The caller is responsible to initialize the Token.
+     * @return the next token found
+     * @throws java.io.IOException
+     *             on stream access error
+     */
+    Token nextToken(final Token token) throws IOException {
+
+        // get the last read char (required for empty line detection)
+        int lastChar = reader.getLastChar();
+
+        // read the next char and set eol
+        int c = reader.read();
+        /*
+         * Note: The following call will swallow LF if c == CR. But we don't need to know if the last char was CR or LF
+         * - they are equivalent here.
+         */
+        boolean eol = readEndOfLine(c);
+
+        // empty line detection: eol AND (last char was EOL or beginning)
+        if (ignoreEmptyLines) {
+            while (eol && isStartOfLine(lastChar)) {
+                // go on char ahead ...
+                lastChar = c;
+                c = reader.read();
+                eol = readEndOfLine(c);
+                // reached end of file without any content (empty line at the end)
+                if (isEndOfFile(c)) {
+                    token.type = EOF;
+                    // don't set token.isReady here because no content
+                    return token;
+                }
+            }
+        }
+
+        // did we reach eof during the last iteration already ? EOF
+        if (isEndOfFile(lastChar) || (!isDelimiter(lastChar) && isEndOfFile(c))) {
+            token.type = EOF;
+            // don't set token.isReady here because no content
+            return token;
+        }
+
+        if (isStartOfLine(lastChar) && isCommentStart(c)) {
+            final String line = reader.readLine();
+            if (line == null) {
+                token.type = EOF;
+                // don't set token.isReady here because no content
+                return token;
+            }
+            final String comment = line.trim();
+            token.content.append(comment);
+            token.type = COMMENT;
+            return token;
+        }
+
+        // important: make sure a new char gets consumed in each iteration
+        while (token.type == INVALID) {
+            // ignore whitespaces at beginning of a token
+            if (ignoreSurroundingSpaces) {
+                while (isWhitespace(c) && !eol) {
+                    c = reader.read();
+                    eol = readEndOfLine(c);
+                }
+            }
+
+            // ok, start of token reached: encapsulated, or token
+            if (isDelimiter(c)) {
+                // empty token return TOKEN("")
+                token.type = TOKEN;
+            } else if (eol) {
+                // empty token return EORECORD("")
+                // noop: token.content.append("");
+                token.type = EORECORD;
+            } else if (isQuoteChar(c)) {
+                // consume encapsulated token
+... (troncato a 150 righe su 431)
+```
+## Test Falliti
+
+  • org.apache.commons.csv.CSVRecordTest#testToMapWithNoHeader
+
+## Stack Trace
+
+```
+testToMapWithNoHeader(org.apache.commons.csv.CSVRecordTest): Cannot invoke "java.util.Map.entrySet()" because "this.mapping" is null
+Cannot invoke "java.util.Map.entrySet()" because "this.mapping" is null
+java.lang.NullPointerException: Cannot invoke "java.util.Map.entrySet()" because "this.mapping" is null
+	at org.apache.commons.csv.CSVRecord.putIn(CSVRecord.java:180)
+	at org.apache.commons.csv.CSVRecord.toMap(CSVRecord.java:214)
+	at org.apache.commons.csv.CSVRecordTest.testToMapWithNoHeader(CSVRecordTest.java:175)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+```
+
+## Istruzioni
+
+Analizza il bug e restituisci i metodi corretti, seguendo queste regole TASSATIVE:
+
+1. **Un FILE block per metodo**: se devi correggere N metodi, emetti N blocchi FILE separati.
+   Ogni blocco deve contenere UN SOLO metodo completo.
+
+2. **Indentazione originale**: mantieni ESATTAMENTE l'indentazione del codice originale.
+   La firma del metodo DEVE iniziare con gli stessi spazi del file originale.
+
+3. **La riga `// ◄ FIX THIS LINE`** indica dove l'NPE si manifesta. Rimuovi questo commento
+   nella risposta — restituisci solo codice Java puro.
+
+4. **Null-safe equality OBBLIGATORIA**: se il metodo confronta due valori che possono essere null,
+   usa `java.util.Objects.equals(a, b)` — questa funzione ritorna `true` se entrambi sono null,
+   mentre `a.equals(b)` lancia NPE se `a` è null, e `a != null && a.equals(b)` ritorna `false`
+   se entrambi sono null (sbagliato semanticamente).
+   Esempio corretto:
+   ```java
+   return java.util.Objects.equals(doubleMetaphone(v1, alt), doubleMetaphone(v2, alt));
+   ```
+
+5. **NON modificare metodi che non causano il bug**: se il metodo `doubleMetaphone` ritorna
+   null per input null, questo è il comportamento CORRETTO e atteso dai test. Non cambiarlo.
+
+6. NON modificare file di test.

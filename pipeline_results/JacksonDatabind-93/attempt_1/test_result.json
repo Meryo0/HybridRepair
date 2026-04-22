@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "total_tests": 4,
+  "failed_tests": 0,
+  "failing_test_names": [],
+  "previously_failing_now_passing": [
+    "com.fasterxml.jackson.databind.interop.IllegalTypesCheckTest"
+  ],
+  "compile_output": "Note: Some input files use or override a deprecated API.\nNote: Recompile with -Xlint:deprecation for details.\nNote: Some input files use unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
+  "test_output": "JUnit version 4.13.2\n....\nTime: 0.121\n\nOK (4 tests)\n\n"
+}

@@ -1,0 +1,14 @@
+{
+  "status": "FAIL",
+  "total_tests": 21,
+  "failed_tests": 1,
+  "failing_test_names": [
+    "1",
+    "handlesFramesets"
+  ],
+  "previously_failing_now_passing": [
+    "org.jsoup.safety.CleanerTest"
+  ],
+  "compile_output": "",
+  "test_output": "JUnit version 4.13.2\n.........E............\nTime: 0.079\nThere was 1 failure:\n1) handlesFramesets(org.jsoup.safety.CleanerTest)\njava.lang.IllegalStateException: Document has no body element\n\tat org.jsoup.nodes.Document.body(Document.java:61)\n\tat org.jsoup.safety.Cleaner.clean(Cleaner.java:43)\n\tat org.jsoup.safety.CleanerTest.handlesFramesets(CleanerTest.java:176)\n\nFAILURES!!!\nTests run: 21,  Failures: 1\n\n"
+}

@@ -1,0 +1,9 @@
+{
+  "status": "COMPILE_ERROR",
+  "total_tests": 0,
+  "failed_tests": 0,
+  "failing_test_names": [],
+  "previously_failing_now_passing": [],
+  "compile_output": "/home/mario/Desktop/LogicFL/pipeline_results/Chart-4/attempt_1/patched_source/org/jfree/chart/plot/XYPlot.java:1577: error: cannot find symbol\n        return renderer != null ? renderer : new DefaultXYItemRenderer();\n                                                 ^\n  symbol:   class DefaultXYItemRenderer\n  location: class XYPlot\n/home/mario/Desktop/LogicFL/pipeline_results/Chart-4/attempt_1/patched_source/org/jfree/chart/plot/XYPlot.java:1594: error: cannot find symbol\n        return result != null ? result : new DefaultXYItemRenderer();\n                                             ^\n  symbol:   class DefaultXYItemRenderer\n  location: class XYPlot\n/home/mario/Desktop/LogicFL/pipeline_results/Chart-4/attempt_1/patched_source/org/jfree/chart/plot/XYPlot.java:1754: error: cannot find symbol\n        return result != null ? result : new DefaultXYItemRenderer();\n                                             ^\n  symbol:   class DefaultXYItemRenderer\n  location: class XYPlot\nNote: Some input files use or override a deprecated API.\nNote: Recompile with -Xlint:deprecation for details.\nNote: Some input files use unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n3 errors\n",
+  "test_output": ""
+}

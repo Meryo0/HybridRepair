@@ -1,0 +1,25 @@
+--- org/apache/commons/lang3/ClassUtils.java
++++ org/apache/commons/lang3/ClassUtils.java
+@@ -899,6 +899,9 @@
+      * @return a <code>Class</code> array, <code>null</code> if null array input
+      * @since 2.4
+      */
++/**
++     * @since 2.4
++     */
+     public static Class<?>[] toClass(Object[] array) {
+         if (array == null) {
+             return null;
+@@ -907,7 +910,11 @@
+         }
+         Class<?>[] classes = new Class[array.length];
+         for (int i = 0; i < array.length; i++) {
+-            classes[i] = array[i].getClass();
++            if (array[i] == null) {
++                classes[i] = null;
++            } else {
++                classes[i] = array[i].getClass();
++            }
+         }
+         return classes;
+     }

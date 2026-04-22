@@ -1,0 +1,12 @@
+{
+  "bug_id": "Chart-4",
+  "success": false,
+  "winning_attempt": null,
+  "total_attempts": 3,
+  "test_result": {
+    "status": "FAIL",
+    "total_attempts": 3,
+    "last_failure": "JUnit version 4.13.2\n.E.E.E..E..............E......................E.....E.E......E.E.E.E.E.E.E.E.E.......E.E.....E.E.E.E..\nTime: 0.757\nThere were 23 failures:\n1) testDrawWithNullInfo(org.jfree.chart.junit.XYStepAreaChartTests)\njava.lang.NullPointerException: Cannot invoke \"org.jfree.chart.renderer.xy.XYItemRenderer.getAnnotations()\" because \"<local10>\" is null\n\tat org.jfree.chart.plot.XYPlot.getDataRange(XYPlot.java:4491)\n\tat org.jfree.chart.axis.NumberAxis.autoAdjustRange(NumberAxis.java:434)\n"
+  },
+  "timestamp": "2026-04-20T14:45:52.575756+00:00"
+}

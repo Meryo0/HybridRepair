@@ -1,0 +1,272 @@
+Bug ID: Mockito-38  |  Tentativo 1
+
+## Fault Locations (LogicFL)
+
+  • org.mockito.internal.verification.argumentmatching.ArgumentMatchingTool — riga 48  [✓]
+
+## Catena Causale (LogicFL Prolog)
+
+NPE at line(argument_matching_tool_1, 48) / Null Expression - p_arg_318[arg]
+	 can be caused by 
+p_arg_318[arg] - line(argument_matching_tool_1, 48).
+
+## Metodi Buggy
+
+### FILE: org/mockito/internal/verification/argumentmatching/ArgumentMatchingTool.java  (righe 47–49, fault alla riga 48)
+```java
+    private boolean toStringEquals(Matcher m, Object arg) {
+        return StringDescription.toString(m).equals(arg.toString());  // ◄ FIX THIS LINE (NPE manifests here)
+    }
+```
+
+## File Correlati (stesso progetto — potrebbero servire per il fix)
+
+### VerificationData.java
+```java
+/*
+ * Copyright (c) 2007 Mockito contributors
+ * This program is made available under the terms of the MIT License.
+ */
+package org.mockito.internal.verification.api;
+
+import java.util.List;
+
+import org.mockito.internal.invocation.Invocation;
+import org.mockito.internal.invocation.InvocationMatcher;
+
+public interface VerificationData {
+
+    List<Invocation> getAllInvocations();
+
+    InvocationMatcher getWanted();   
+    
+}
+```
+
+### VerificationInOrderMode.java
+```java
+/*
+ * Copyright (c) 2007 Mockito contributors
+ * This program is made available under the terms of the MIT License.
+ */
+package org.mockito.internal.verification.api;
+
+public interface VerificationInOrderMode {
+
+    void verifyInOrder(VerificationData data);
+    
+}
+```
+
+### VerificationMode.java
+```java
+/*
+ * Copyright (c) 2007 Mockito contributors
+ * This program is made available under the terms of the MIT License.
+ */
+package org.mockito.internal.verification.api;
+
+import org.mockito.Mockito;
+
+/**
+ * Allows verifying that certain behavior happened at least once / exact number
+ * of times / never. E.g:
+ * 
+ * <pre>
+ * verify(mock, times(5)).someMethod(&quot;was called five times&quot;);
+ * 
+ * verify(mock, never()).someMethod(&quot;was never called&quot;);
+ * 
+ * verify(mock, atLeastOnce()).someMethod(&quot;was called at least once&quot;);
+ * 
+ * verify(mock, atLeast(2)).someMethod(&quot;was called at least twice&quot;);
+ * 
+ * verify(mock, atMost(3)).someMethod(&quot;was called at most 3 times&quot;);
+ * 
+ * </pre>
+ * 
+ * <b>times(1) is the default</b> and can be omitted
+ * <p>
+ * See examples in javadoc for {@link Mockito#verify(Object, VerificationMode)}
+ */
+public interface VerificationMode {
+    
+    void verify(VerificationData data);
+    
+}
+```
+
+### AtLeastDiscrepancy.java
+```java
+/*
+ * Copyright (c) 2007 Mockito contributors
+ * This program is made available under the terms of the MIT License.
+ */
+package org.mockito.internal.verification.checkers;
+
+import org.mockito.exceptions.Discrepancy;
+
+public class AtLeastDiscrepancy extends Discrepancy {
+
+    public AtLeastDiscrepancy(int wantedCount, int actualCount) {
+        super(wantedCount, actualCount);
+    }
+    
+    @Override
+    public String getPluralizedWantedCount() {
+        return "*at least* " + super.getPluralizedWantedCount();
+    }
+}
+```
+
+### AtLeastXNumberOfInvocationsChecker.java
+```java
+/*
+ * Copyright (c) 2007 Mockito contributors
+ * This program is made available under the terms of the MIT License.
+ */
+package org.mockito.internal.verification.checkers;
+
+import java.util.List;
+
+import org.mockito.exceptions.Reporter;
+import org.mockito.internal.debugging.Location;
+import org.mockito.internal.invocation.Invocation;
+import org.mockito.internal.invocation.InvocationMatcher;
+import org.mockito.internal.invocation.InvocationsFinder;
+
+public class AtLeastXNumberOfInvocationsChecker {
+    
+    private final Reporter reporter = new Reporter();
+    private final InvocationsFinder finder = new InvocationsFinder();
+
+    public void check(List<Invocation> invocations, InvocationMatcher wanted, int wantedCount) {
+        List<Invocation> actualInvocations = finder.findInvocations(invocations, wanted);
+        
+        int actualCount = actualInvocations.size();
+        if (wantedCount > actualCount) {
+            Location lastLocation = finder.getLastLocation(actualInvocations);
+            reporter.tooLittleActualInvocations(new AtLeastDiscrepancy(wantedCount, actualCount), wanted, lastLocation);        
+        }
+        
+        for (Invocation i : actualInvocations) {
+            i.markVerified();
+        }
+    }
+}
+```
+## Test Falliti
+
+  • org.mockito.internal.verification.argumentmatching.ArgumentMatchingToolTest#shouldWorkFineWhenGivenArgIsNull
+  • org.mockitousage.bugs.ActualInvocationHasNullArgumentNPEBugTest#shouldAllowPassingNullArgument
+
+## Stack Trace
+
+```
+shouldWorkFineWhenGivenArgIsNull(org.mockito.internal.verification.argumentmatching.ArgumentMatchingToolTest): Cannot invoke "Object.toString()" because "arg" is null
+Cannot invoke "Object.toString()" because "arg" is null
+java.lang.NullPointerException: Cannot invoke "Object.toString()" because "arg" is null
+	at org.mockito.internal.verification.argumentmatching.ArgumentMatchingTool.toStringEquals(ArgumentMatchingTool.java:48)
+	at org.mockito.internal.verification.argumentmatching.ArgumentMatchingTool.getSuspiciouslyNotMatchingArgsIndexes(ArgumentMatchingTool.java:28)
+	at org.mockito.internal.verification.argumentmatching.ArgumentMatchingToolTest.shouldWorkFineWhenGivenArgIsNull(ArgumentMatchingToolTest.java:82)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+shouldAllowPassingNullArgument(org.mockitousage.bugs.ActualInvocationHasNullArgumentNPEBugTest): null
+null
+java.lang.ExceptionInInitializerError
+	at org.mockito.cglib.core.KeyFactory$Generator.generateClass(KeyFactory.java:167)
+	at org.mockito.cglib.core.DefaultGeneratorStrategy.generate(DefaultGeneratorStrategy.java:25)
+	at org.mockito.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:217)
+	at org.mockito.cglib.core.KeyFactory$Generator.create(KeyFactory.java:145)
+	at org.mockito.cglib.core.KeyFactory.create(KeyFactory.java:117)
+	at org.mockito.cglib.core.KeyFactory.create(KeyFactory.java:109)
+	at org.mockito.cglib.core.KeyFactory.create(KeyFactory.java:105)
+	at org.mockito.cglib.proxy.Enhancer.<clinit>(Enhancer.java:70)
+	at org.mockito.internal.creation.jmock.ClassImposterizer.createProxyClass(ClassImposterizer.java:77)
+	at org.mockito.internal.creation.jmock.ClassImposterizer.imposterise(ClassImposterizer.java:59)
+	at org.mockito.internal.util.MockUtil.createMock(MockUtil.java:42)
+	at org.mockito.internal.MockitoCore.mock(MockitoCore.java:39)
+	at org.mockito.Mockito.mock(Mockito.java:775)
+	at org.mockito.Mockito.mock(Mockito.java:671)
+	at org.mockitousage.bugs.ActualInvocationHasNullArgumentNPEBugTest.shouldAllowPassingNullArgument(ActualInvocationHasNullArgumentNPEBugTest.java:22)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+Caused by: java.lang.reflect.InaccessibleObjectException: Unable to make protected final java.lang.Class java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain) throws java.lang.ClassFormatError accessible: module java.base does not "opens java.lang" to unnamed module @47db50c5
+	at java.base/java.lang.reflect.AccessibleObject.throwInaccessibleObjectException(AccessibleObject.java:387)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:363)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:311)
+	at java.base/java.lang.reflect.Method.checkCanSetAccessible(Method.java:201)
+	at java.base/java.lang.reflect.Method.setAccessible(Method.java:195)
+	at org.mockito.cglib.core.ReflectUtils$2.run(ReflectUtils.java:57)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:318)
+	at org.mockito.cglib.core.ReflectUtils.<clinit>(ReflectUtils.java:47)
+	... 37 more
+```
+
+## Istruzioni
+
+Analizza il bug e restituisci i metodi corretti, seguendo queste regole TASSATIVE:
+
+1. **Un FILE block per metodo**: se devi correggere N metodi, emetti N blocchi FILE separati.
+   Ogni blocco deve contenere UN SOLO metodo completo.
+
+2. **Indentazione originale**: mantieni ESATTAMENTE l'indentazione del codice originale.
+   La firma del metodo DEVE iniziare con gli stessi spazi del file originale.
+
+3. **La riga `// ◄ FIX THIS LINE`** indica dove l'NPE si manifesta. Rimuovi questo commento
+   nella risposta — restituisci solo codice Java puro.
+
+4. **Null-safe equality OBBLIGATORIA**: se il metodo confronta due valori che possono essere null,
+   usa `java.util.Objects.equals(a, b)` — questa funzione ritorna `true` se entrambi sono null,
+   mentre `a.equals(b)` lancia NPE se `a` è null, e `a != null && a.equals(b)` ritorna `false`
+   se entrambi sono null (sbagliato semanticamente).
+   Esempio corretto:
+   ```java
+   return java.util.Objects.equals(doubleMetaphone(v1, alt), doubleMetaphone(v2, alt));
+   ```
+
+5. **NON modificare metodi che non causano il bug**: se il metodo `doubleMetaphone` ritorna
+   null per input null, questo è il comportamento CORRETTO e atteso dai test. Non cambiarlo.
+
+6. NON modificare file di test.

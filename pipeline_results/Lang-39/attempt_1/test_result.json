@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "total_tests": 66,
+  "failed_tests": 0,
+  "failing_test_names": [],
+  "previously_failing_now_passing": [
+    "org.apache.commons.lang3.StringUtilsTest"
+  ],
+  "compile_output": "Note: /home/mario/Desktop/LogicFL/pipeline_results/Lang-39/attempt_1/patched_source/org/apache/commons/lang3/CharUtils.java uses or overrides a deprecated API.\nNote: Recompile with -Xlint:deprecation for details.\nNote: Some input files use unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
+  "test_output": "JUnit version 4.13.2\n..................................................................\nTime: 0.057\n\nOK (66 tests)\n\n"
+}

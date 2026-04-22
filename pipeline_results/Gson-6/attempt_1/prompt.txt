@@ -1,0 +1,568 @@
+Bug ID: Gson-6  |  Tentativo 1
+
+## Fault Locations (LogicFL)
+
+  • com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory — riga 67  [✓]
+  • com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory — riga 67  [✓]
+
+## Catena Causale (LogicFL Prolog)
+
+NPE at line(json_adapter_annotation_type_adapter_factory_1, 67) / Null Expression - v_type_adapter_264[typeAdapter]
+	 can be caused by 
+v_type_adapter_264[typeAdapter] - line(json_adapter_annotation_type_adapter_factory_1, 67).
+
+NPE at line(json_adapter_annotation_type_adapter_factory_1, 67) / Null Expression - v_type_adapter_264[typeAdapter]
+	 can be caused by 
+json_adapter_annotation_type_adapter_factory_1_expr18['typeAdapter.nullSafe()'] - line(json_adapter_annotation_type_adapter_factory_1, 67).
+
+## Metodi Buggy
+
+### FILE: com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java  (righe 57–70, fault alla riga 67)
+```java
+      typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterClass)).construct();
+    } else if (TypeAdapterFactory.class.isAssignableFrom(value)) {
+      Class<TypeAdapterFactory> typeAdapterFactory = (Class<TypeAdapterFactory>) value;
+      typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterFactory))
+          .construct()
+          .create(gson, fieldType);
+    } else {
+      throw new IllegalArgumentException(
+          "@JsonAdapter value must be TypeAdapter or TypeAdapterFactory reference.");
+    }
+      typeAdapter = typeAdapter.nullSafe();  // ◄ FIX THIS LINE (NPE manifests here)
+    return typeAdapter;
+  }
+}
+```
+
+### FILE: com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java  (righe 57–70, fault alla riga 67)
+```java
+      typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterClass)).construct();
+    } else if (TypeAdapterFactory.class.isAssignableFrom(value)) {
+      Class<TypeAdapterFactory> typeAdapterFactory = (Class<TypeAdapterFactory>) value;
+      typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterFactory))
+          .construct()
+          .create(gson, fieldType);
+    } else {
+      throw new IllegalArgumentException(
+          "@JsonAdapter value must be TypeAdapter or TypeAdapterFactory reference.");
+    }
+      typeAdapter = typeAdapter.nullSafe();  // ◄ FIX THIS LINE (NPE manifests here)
+    return typeAdapter;
+  }
+}
+```
+
+## File Correlati (stesso progetto — potrebbero servire per il fix)
+
+### ArrayTypeAdapter.java
+```java
+/*
+ * Copyright (C) 2011 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.google.gson.internal.bind;
+
+import java.io.IOException;
+import java.lang.reflect.Array;
+import java.lang.reflect.GenericArrayType;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.internal.$Gson$Types;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonToken;
+import com.google.gson.stream.JsonWriter;
+
+/**
+ * Adapt an array of objects.
+ */
+public final class ArrayTypeAdapter<E> extends TypeAdapter<Object> {
+  public static final TypeAdapterFactory FACTORY = new TypeAdapterFactory() {
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    @Override public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> typeToken) {
+      Type type = typeToken.getType();
+      if (!(type instanceof GenericArrayType || type instanceof Class && ((Class<?>) type).isArray())) {
+        return null;
+      }
+
+      Type componentType = $Gson$Types.getArrayComponentType(type);
+      TypeAdapter<?> componentTypeAdapter = gson.getAdapter(TypeToken.get(componentType));
+      return new ArrayTypeAdapter(
+              gson, componentTypeAdapter, $Gson$Types.getRawType(componentType));
+    }
+  };
+
+  private final Class<E> componentType;
+  private final TypeAdapter<E> componentTypeAdapter;
+
+  public ArrayTypeAdapter(Gson context, TypeAdapter<E> componentTypeAdapter, Class<E> componentType) {
+    this.componentTypeAdapter =
+      new TypeAdapterRuntimeTypeWrapper<E>(context, componentTypeAdapter, componentType);
+    this.componentType = componentType;
+  }
+
+  @Override public Object read(JsonReader in) throws IOException {
+    if (in.peek() == JsonToken.NULL) {
+      in.nextNull();
+      return null;
+    }
+
+    List<E> list = new ArrayList<E>();
+    in.beginArray();
+    while (in.hasNext()) {
+      E instance = componentTypeAdapter.read(in);
+      list.add(instance);
+    }
+    in.endArray();
+    Object array = Array.newInstance(componentType, list.size());
+    for (int i = 0; i < list.size(); i++) {
+      Array.set(array, i, list.get(i));
+    }
+    return array;
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override public void write(JsonWriter out, Object array) throws IOException {
+    if (array == null) {
+      out.nullValue();
+      return;
+    }
+
+    out.beginArray();
+    for (int i = 0, length = Array.getLength(array); i < length; i++) {
+      E value = (E) Array.get(array, i);
+      componentTypeAdapter.write(out, value);
+    }
+    out.endArray();
+  }
+}
+```
+
+### DateTypeAdapter.java
+```java
+/*
+ * Copyright (C) 2011 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.google.gson.internal.bind;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.TypeAdapter;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.internal.bind.util.ISO8601Utils;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonToken;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.ParsePosition;
+import java.util.Date;
+import java.util.Locale;
+
+/**
+ * Adapter for Date. Although this class appears stateless, it is not.
+ * DateFormat captures its time zone and locale when it is created, which gives
+ * this class state. DateFormat isn't thread safe either, so this class has
+ * to synchronize its read and write methods.
+ */
+public final class DateTypeAdapter extends TypeAdapter<Date> {
+  public static final TypeAdapterFactory FACTORY = new TypeAdapterFactory() {
+    @SuppressWarnings("unchecked") // we use a runtime check to make sure the 'T's equal
+    @Override public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> typeToken) {
+      return typeToken.getRawType() == Date.class ? (TypeAdapter<T>) new DateTypeAdapter() : null;
+    }
+  };
+
+  private final DateFormat enUsFormat
+      = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT, Locale.US);
+  private final DateFormat localFormat
+      = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT);
+
+  @Override public Date read(JsonReader in) throws IOException {
+    if (in.peek() == JsonToken.NULL) {
+      in.nextNull();
+      return null;
+    }
+    return deserializeToDate(in.nextString());
+  }
+
+  private synchronized Date deserializeToDate(String json) {
+    try {
+      return localFormat.parse(json);
+    } catch (ParseException ignored) {
+    }
+    try {
+      return enUsFormat.parse(json);
+    } catch (ParseException ignored) {
+    }
+    try {
+    	return ISO8601Utils.parse(json, new ParsePosition(0));
+    } catch (ParseException e) {
+      throw new JsonSyntaxException(json, e);
+    }
+  }
+
+  @Override public synchronized void write(JsonWriter out, Date value) throws IOException {
+    if (value == null) {
+      out.nullValue();
+      return;
+    }
+    String dateFormatAsString = enUsFormat.format(value);
+    out.value(dateFormatAsString);
+  }
+  
+  
+}
+```
+
+### SqlDateTypeAdapter.java
+```java
+/*
+ * Copyright (C) 2011 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.google.gson.internal.bind;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.TypeAdapter;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonToken;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+/**
+ * Adapter for java.sql.Date. Although this class appears stateless, it is not.
+ * DateFormat captures its time zone and locale when it is created, which gives
+ * this class state. DateFormat isn't thread safe either, so this class has
+ * to synchronize its read and write methods.
+ */
+public final class SqlDateTypeAdapter extends TypeAdapter<java.sql.Date> {
+  public static final TypeAdapterFactory FACTORY = new TypeAdapterFactory() {
+    @SuppressWarnings("unchecked") // we use a runtime check to make sure the 'T's equal
+    @Override public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> typeToken) {
+      return typeToken.getRawType() == java.sql.Date.class
+          ? (TypeAdapter<T>) new SqlDateTypeAdapter() : null;
+    }
+  };
+
+  private final DateFormat format = new SimpleDateFormat("MMM d, yyyy");
+
+  @Override
+  public synchronized java.sql.Date read(JsonReader in) throws IOException {
+    if (in.peek() == JsonToken.NULL) {
+      in.nextNull();
+      return null;
+    }
+    try {
+      final long utilDate = format.parse(in.nextString()).getTime();
+      return new java.sql.Date(utilDate);
+    } catch (ParseException e) {
+      throw new JsonSyntaxException(e);
+    }
+  }
+
+  @Override
+  public synchronized void write(JsonWriter out, java.sql.Date value) throws IOException {
+    out.value(value == null ? null : format.format(value));
+  }
+}
+```
+
+### TimeTypeAdapter.java
+```java
+/*
+ * Copyright (C) 2011 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.google.gson.internal.bind;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.TypeAdapter;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonToken;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+/**
+ * Adapter for Time. Although this class appears stateless, it is not.
+ * DateFormat captures its time zone and locale when it is created, which gives
+ * this class state. DateFormat isn't thread safe either, so this class has
+ * to synchronize its read and write methods.
+ */
+public final class TimeTypeAdapter extends TypeAdapter<Time> {
+  public static final TypeAdapterFactory FACTORY = new TypeAdapterFactory() {
+    @SuppressWarnings("unchecked") // we use a runtime check to make sure the 'T's equal
+    @Override public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> typeToken) {
+      return typeToken.getRawType() == Time.class ? (TypeAdapter<T>) new TimeTypeAdapter() : null;
+    }
+  };
+
+  private final DateFormat format = new SimpleDateFormat("hh:mm:ss a");
+
+  @Override public synchronized Time read(JsonReader in) throws IOException {
+    if (in.peek() == JsonToken.NULL) {
+      in.nextNull();
+      return null;
+    }
+    try {
+      Date date = format.parse(in.nextString());
+      return new Time(date.getTime());
+    } catch (ParseException e) {
+      throw new JsonSyntaxException(e);
+    }
+  }
+
+  @Override public synchronized void write(JsonWriter out, Time value) throws IOException {
+    out.value(value == null ? null : format.format(value));
+  }
+}
+```
+
+### TypeAdapterRuntimeTypeWrapper.java
+```java
+/*
+ * Copyright (C) 2011 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.google.gson.internal.bind;
+
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
+
+final class TypeAdapterRuntimeTypeWrapper<T> extends TypeAdapter<T> {
+  private final Gson context;
+  private final TypeAdapter<T> delegate;
+  private final Type type;
+
+  TypeAdapterRuntimeTypeWrapper(Gson context, TypeAdapter<T> delegate, Type type) {
+    this.context = context;
+    this.delegate = delegate;
+    this.type = type;
+  }
+
+  @Override
+  public T read(JsonReader in) throws IOException {
+    return delegate.read(in);
+  }
+
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  @Override
+  public void write(JsonWriter out, T value) throws IOException {
+    // Order of preference for choosing type adapters
+    // First preference: a type adapter registered for the runtime type
+    // Second preference: a type adapter registered for the declared type
+    // Third preference: reflective type adapter for the runtime type (if it is a sub class of the declared type)
+    // Fourth preference: reflective type adapter for the declared type
+
+    TypeAdapter chosen = delegate;
+    Type runtimeType = getRuntimeTypeIfMoreSpecific(type, value);
+    if (runtimeType != type) {
+      TypeAdapter runtimeTypeAdapter = context.getAdapter(TypeToken.get(runtimeType));
+      if (!(runtimeTypeAdapter instanceof ReflectiveTypeAdapterFactory.Adapter)) {
+        // The user registered a type adapter for the runtime type, so we will use that
+        chosen = runtimeTypeAdapter;
+      } else if (!(delegate instanceof ReflectiveTypeAdapterFactory.Adapter)) {
+        // The user registered a type adapter for Base class, so we prefer it over the
+        // reflective type adapter for the runtime type
+        chosen = delegate;
+      } else {
+        // Use the type adapter for runtime type
+        chosen = runtimeTypeAdapter;
+      }
+    }
+    chosen.write(out, value);
+  }
+
+  /**
+   * Finds a compatible runtime type if it is more specific
+   */
+  private Type getRuntimeTypeIfMoreSpecific(Type type, Object value) {
+    if (value != null
+        && (type == Object.class || type instanceof TypeVariable<?> || type instanceof Class<?>)) {
+      type = value.getClass();
+    }
+    return type;
+  }
+}
+```
+## Test Falliti
+
+  • com.google.gson.regression.JsonAdapterNullSafeTest#testNullSafeBugDeserialize
+  • com.google.gson.regression.JsonAdapterNullSafeTest#testNullSafeBugSerialize
+
+## Stack Trace
+
+```
+testNullSafeBugSerialize(com.google.gson.regression.JsonAdapterNullSafeTest): Cannot invoke "com.google.gson.TypeAdapter.nullSafe()" because "typeAdapter" is null
+Cannot invoke "com.google.gson.TypeAdapter.nullSafe()" because "typeAdapter" is null
+java.lang.NullPointerException: Cannot invoke "com.google.gson.TypeAdapter.nullSafe()" because "typeAdapter" is null
+	at com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.getTypeAdapter(JsonAdapterAnnotationTypeAdapterFactory.java:67)
+	at com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.create(JsonAdapterAnnotationTypeAdapterFactory.java:47)
+	at com.google.gson.Gson.getDelegateAdapter(Gson.java:498)
+	at com.google.gson.regression.JsonAdapterNullSafeTest$Device$JsonAdapterFactory.create(JsonAdapterNullSafeTest.java:58)
+	at com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.getTypeAdapter(JsonAdapterAnnotationTypeAdapterFactory.java:60)
+	at com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.create(JsonAdapterAnnotationTypeAdapterFactory.java:47)
+	at com.google.gson.Gson.getAdapter(Gson.java:416)
+	at com.google.gson.Gson.toJson(Gson.java:653)
+	at com.google.gson.Gson.toJson(Gson.java:640)
+	at com.google.gson.Gson.toJson(Gson.java:595)
+	at com.google.gson.Gson.toJson(Gson.java:575)
+	at com.google.gson.regression.JsonAdapterNullSafeTest.testNullSafeBugSerialize(JsonAdapterNullSafeTest.java:31)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testNullSafeBugDeserialize(com.google.gson.regression.JsonAdapterNullSafeTest): Cannot invoke "com.google.gson.TypeAdapter.nullSafe()" because "typeAdapter" is null
+Cannot invoke "com.google.gson.TypeAdapter.nullSafe()" because "typeAdapter" is null
+java.lang.NullPointerException: Cannot invoke "com.google.gson.TypeAdapter.nullSafe()" because "typeAdapter" is null
+	at com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.getTypeAdapter(JsonAdapterAnnotationTypeAdapterFactory.java:67)
+	at com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.create(JsonAdapterAnnotationTypeAdapterFactory.java:47)
+	at com.google.gson.Gson.getDelegateAdapter(Gson.java:498)
+	at com.google.gson.regression.JsonAdapterNullSafeTest$Device$JsonAdapterFactory.create(JsonAdapterNullSafeTest.java:58)
+	at com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.getTypeAdapter(JsonAdapterAnnotationTypeAdapterFactory.java:60)
+	at com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory.create(JsonAdapterAnnotationTypeAdapterFactory.java:47)
+	at com.google.gson.Gson.getAdapter(Gson.java:416)
+	at com.google.gson.Gson.fromJson(Gson.java:878)
+	at com.google.gson.Gson.fromJson(Gson.java:844)
+	at com.google.gson.Gson.fromJson(Gson.java:793)
+	at com.google.gson.Gson.fromJson(Gson.java:765)
+	at com.google.gson.regression.JsonAdapterNullSafeTest.testNullSafeBugDeserialize(JsonAdapterNullSafeTest.java:35)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+```
+
+## Istruzioni
+
+Analizza il bug e restituisci i metodi corretti, seguendo queste regole TASSATIVE:
+
+1. **Un FILE block per metodo**: se devi correggere N metodi, emetti N blocchi FILE separati.
+   Ogni blocco deve contenere UN SOLO metodo completo.
+
+2. **Indentazione originale**: mantieni ESATTAMENTE l'indentazione del codice originale.
+   La firma del metodo DEVE iniziare con gli stessi spazi del file originale.
+
+3. **La riga `// ◄ FIX THIS LINE`** indica dove l'NPE si manifesta. Rimuovi questo commento
+   nella risposta — restituisci solo codice Java puro.
+
+4. **Null-safe equality OBBLIGATORIA**: se il metodo confronta due valori che possono essere null,
+   usa `java.util.Objects.equals(a, b)` — questa funzione ritorna `true` se entrambi sono null,
+   mentre `a.equals(b)` lancia NPE se `a` è null, e `a != null && a.equals(b)` ritorna `false`
+   se entrambi sono null (sbagliato semanticamente).
+   Esempio corretto:
+   ```java
+   return java.util.Objects.equals(doubleMetaphone(v1, alt), doubleMetaphone(v2, alt));
+   ```
+
+5. **NON modificare metodi che non causano il bug**: se il metodo `doubleMetaphone` ritorna
+   null per input null, questo è il comportamento CORRETTO e atteso dai test. Non cambiarlo.
+
+6. NON modificare file di test.

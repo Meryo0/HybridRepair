@@ -1,0 +1,1198 @@
+Bug ID: Lang-39  |  Tentativo 1
+
+## Fault Locations (LogicFL)
+
+  • org.apache.commons.lang3.StringUtils — riga 3676  [✓]
+  • org.apache.commons.lang3.StringUtils — riga 3676  [✓]
+  • org.apache.commons.lang3.StringUtils — riga 3676  [✓]
+
+## Catena Causale (LogicFL Prolog)
+
+NPE at line(string_utils_1, 3676) / Null Expression - string_utils_1_expr46['replacementList[i]']
+	 can be caused by 
+string_utils_1_expr46['replacementList[i]'] - line(string_utils_1, 3676).
+
+NPE at line(string_utils_1, 3676) / Null Expression - p_replacement_list_199[replacementList]
+	 can be caused by 
+p_replacement_list_199[replacementList] - line(string_utils_1, 3676).
+
+NPE at line(string_utils_1, 3676) / Null Expression - p_search_list_198[searchList]
+	 can be caused by 
+p_search_list_198[searchList] - line(string_utils_1, 3676).
+
+## Metodi Buggy
+
+### FILE: java/org/apache/commons/lang3/StringUtils.java  (righe 3605–3731, fault alla riga 3676)
+```java
+    private static String replaceEach(String text, String[] searchList, String[] replacementList, 
+                                      boolean repeat, int timeToLive) 
+    {
+
+        // mchyzer Performance note: This creates very few new objects (one major goal)
+        // let me know if there are performance requests, we can create a harness to measure
+
+        if (text == null || text.length() == 0 || searchList == null || 
+            searchList.length == 0 || replacementList == null || replacementList.length == 0) 
+        {
+            return text;
+        }
+
+        // if recursing, this shouldnt be less than 0
+        if (timeToLive < 0) {
+            throw new IllegalStateException("TimeToLive of " + timeToLive + " is less than 0: " + text);
+        }
+
+        int searchLength = searchList.length;
+        int replacementLength = replacementList.length;
+
+        // make sure lengths are ok, these need to be equal
+        if (searchLength != replacementLength) {
+            throw new IllegalArgumentException("Search and Replace array lengths don't match: "
+                + searchLength
+                + " vs "
+                + replacementLength);
+        }
+
+        // keep track of which still have matches
+        boolean[] noMoreMatchesForReplIndex = new boolean[searchLength];
+
+        // index on index that the match was found
+        int textIndex = -1;
+        int replaceIndex = -1;
+        int tempIndex = -1;
+
+        // index of replace array that will replace the search string found
+        // NOTE: logic duplicated below START
+        for (int i = 0; i < searchLength; i++) {
+            if (noMoreMatchesForReplIndex[i] || searchList[i] == null || 
+                searchList[i].length() == 0 || replacementList[i] == null) 
+            {
+                continue;
+            }
+            tempIndex = text.indexOf(searchList[i]);
+
+            // see if we need to keep searching for this
+            if (tempIndex == -1) {
+                noMoreMatchesForReplIndex[i] = true;
+            } else {
+                if (textIndex == -1 || tempIndex < textIndex) {
+                    textIndex = tempIndex;
+                    replaceIndex = i;
+                }
+            }
+        }
+        // NOTE: logic mostly below END
+
+        // no search strings found, we are done
+        if (textIndex == -1) {
+            return text;
+        }
+
+        int start = 0;
+
+        // get a good guess on the size of the result buffer so it doesnt have to double if it goes over a bit
+        int increase = 0;
+
+        // count the replacement text elements that are larger than their corresponding text being replaced
+        for (int i = 0; i < searchList.length; i++) {
+            int greater = replacementList[i].length() - searchList[i].length();  // ◄ FIX THIS LINE (NPE manifests here)
+            if (greater > 0) {
+                increase += 3 * greater; // assume 3 matches
+            }
+        }
+        // have upper-bound at 20% increase, then let Java take over
+        increase = Math.min(increase, text.length() / 5);
+
+        StringBuilder buf = new StringBuilder(text.length() + increase);
+
+        while (textIndex != -1) {
+
+            for (int i = start; i < textIndex; i++) {
+                buf.append(text.charAt(i));
+            }
+            buf.append(replacementList[replaceIndex]);
+
+            start = textIndex + searchList[replaceIndex].length();
+
+            textIndex = -1;
+            replaceIndex = -1;
+            tempIndex = -1;
+            // find the next earliest match
+            // NOTE: logic mostly duplicated above START
+            for (int i = 0; i < searchLength; i++) {
+                if (noMoreMatchesForReplIndex[i] || searchList[i] == null || 
+                    searchList[i].length() == 0 || replacementList[i] == null) 
+                {
+                    continue;
+                }
+                tempIndex = text.indexOf(searchList[i], start);
+
+                // see if we need to keep searching for this
+                if (tempIndex == -1) {
+                    noMoreMatchesForReplIndex[i] = true;
+                } else {
+                    if (textIndex == -1 || tempIndex < textIndex) {
+                        textIndex = tempIndex;
+                        replaceIndex = i;
+                    }
+                }
+            }
+            // NOTE: logic duplicated above END
+
+        }
+        int textLength = text.length();
+        for (int i = start; i < textLength; i++) {
+            buf.append(text.charAt(i));
+        }
+        String result = buf.toString();
+        if (!repeat) {
+            return result;
+        }
+
+        return replaceEach(result, searchList, replacementList, repeat, timeToLive - 1);
+    }
+```
+
+### FILE: java/org/apache/commons/lang3/StringUtils.java  (righe 3605–3731, fault alla riga 3676)
+```java
+    private static String replaceEach(String text, String[] searchList, String[] replacementList, 
+                                      boolean repeat, int timeToLive) 
+    {
+
+        // mchyzer Performance note: This creates very few new objects (one major goal)
+        // let me know if there are performance requests, we can create a harness to measure
+
+        if (text == null || text.length() == 0 || searchList == null || 
+            searchList.length == 0 || replacementList == null || replacementList.length == 0) 
+        {
+            return text;
+        }
+
+        // if recursing, this shouldnt be less than 0
+        if (timeToLive < 0) {
+            throw new IllegalStateException("TimeToLive of " + timeToLive + " is less than 0: " + text);
+        }
+
+        int searchLength = searchList.length;
+        int replacementLength = replacementList.length;
+
+        // make sure lengths are ok, these need to be equal
+        if (searchLength != replacementLength) {
+            throw new IllegalArgumentException("Search and Replace array lengths don't match: "
+                + searchLength
+                + " vs "
+                + replacementLength);
+        }
+
+        // keep track of which still have matches
+        boolean[] noMoreMatchesForReplIndex = new boolean[searchLength];
+
+        // index on index that the match was found
+        int textIndex = -1;
+        int replaceIndex = -1;
+        int tempIndex = -1;
+
+        // index of replace array that will replace the search string found
+        // NOTE: logic duplicated below START
+        for (int i = 0; i < searchLength; i++) {
+            if (noMoreMatchesForReplIndex[i] || searchList[i] == null || 
+                searchList[i].length() == 0 || replacementList[i] == null) 
+            {
+                continue;
+            }
+            tempIndex = text.indexOf(searchList[i]);
+
+            // see if we need to keep searching for this
+            if (tempIndex == -1) {
+                noMoreMatchesForReplIndex[i] = true;
+            } else {
+                if (textIndex == -1 || tempIndex < textIndex) {
+                    textIndex = tempIndex;
+                    replaceIndex = i;
+                }
+            }
+        }
+        // NOTE: logic mostly below END
+
+        // no search strings found, we are done
+        if (textIndex == -1) {
+            return text;
+        }
+
+        int start = 0;
+
+        // get a good guess on the size of the result buffer so it doesnt have to double if it goes over a bit
+        int increase = 0;
+
+        // count the replacement text elements that are larger than their corresponding text being replaced
+        for (int i = 0; i < searchList.length; i++) {
+            int greater = replacementList[i].length() - searchList[i].length();  // ◄ FIX THIS LINE (NPE manifests here)
+            if (greater > 0) {
+                increase += 3 * greater; // assume 3 matches
+            }
+        }
+        // have upper-bound at 20% increase, then let Java take over
+        increase = Math.min(increase, text.length() / 5);
+
+        StringBuilder buf = new StringBuilder(text.length() + increase);
+
+        while (textIndex != -1) {
+
+            for (int i = start; i < textIndex; i++) {
+                buf.append(text.charAt(i));
+            }
+            buf.append(replacementList[replaceIndex]);
+
+            start = textIndex + searchList[replaceIndex].length();
+
+            textIndex = -1;
+            replaceIndex = -1;
+            tempIndex = -1;
+            // find the next earliest match
+            // NOTE: logic mostly duplicated above START
+            for (int i = 0; i < searchLength; i++) {
+                if (noMoreMatchesForReplIndex[i] || searchList[i] == null || 
+                    searchList[i].length() == 0 || replacementList[i] == null) 
+                {
+                    continue;
+                }
+                tempIndex = text.indexOf(searchList[i], start);
+
+                // see if we need to keep searching for this
+                if (tempIndex == -1) {
+                    noMoreMatchesForReplIndex[i] = true;
+                } else {
+                    if (textIndex == -1 || tempIndex < textIndex) {
+                        textIndex = tempIndex;
+                        replaceIndex = i;
+                    }
+                }
+            }
+            // NOTE: logic duplicated above END
+
+        }
+        int textLength = text.length();
+        for (int i = start; i < textLength; i++) {
+            buf.append(text.charAt(i));
+        }
+        String result = buf.toString();
+        if (!repeat) {
+            return result;
+        }
+
+        return replaceEach(result, searchList, replacementList, repeat, timeToLive - 1);
+    }
+```
+
+### FILE: java/org/apache/commons/lang3/StringUtils.java  (righe 3605–3731, fault alla riga 3676)
+```java
+    private static String replaceEach(String text, String[] searchList, String[] replacementList, 
+                                      boolean repeat, int timeToLive) 
+    {
+
+        // mchyzer Performance note: This creates very few new objects (one major goal)
+        // let me know if there are performance requests, we can create a harness to measure
+
+        if (text == null || text.length() == 0 || searchList == null || 
+            searchList.length == 0 || replacementList == null || replacementList.length == 0) 
+        {
+            return text;
+        }
+
+        // if recursing, this shouldnt be less than 0
+        if (timeToLive < 0) {
+            throw new IllegalStateException("TimeToLive of " + timeToLive + " is less than 0: " + text);
+        }
+
+        int searchLength = searchList.length;
+        int replacementLength = replacementList.length;
+
+        // make sure lengths are ok, these need to be equal
+        if (searchLength != replacementLength) {
+            throw new IllegalArgumentException("Search and Replace array lengths don't match: "
+                + searchLength
+                + " vs "
+                + replacementLength);
+        }
+
+        // keep track of which still have matches
+        boolean[] noMoreMatchesForReplIndex = new boolean[searchLength];
+
+        // index on index that the match was found
+        int textIndex = -1;
+        int replaceIndex = -1;
+        int tempIndex = -1;
+
+        // index of replace array that will replace the search string found
+        // NOTE: logic duplicated below START
+        for (int i = 0; i < searchLength; i++) {
+            if (noMoreMatchesForReplIndex[i] || searchList[i] == null || 
+                searchList[i].length() == 0 || replacementList[i] == null) 
+            {
+                continue;
+            }
+            tempIndex = text.indexOf(searchList[i]);
+
+            // see if we need to keep searching for this
+            if (tempIndex == -1) {
+                noMoreMatchesForReplIndex[i] = true;
+            } else {
+                if (textIndex == -1 || tempIndex < textIndex) {
+                    textIndex = tempIndex;
+                    replaceIndex = i;
+                }
+            }
+        }
+        // NOTE: logic mostly below END
+
+        // no search strings found, we are done
+        if (textIndex == -1) {
+            return text;
+        }
+
+        int start = 0;
+
+        // get a good guess on the size of the result buffer so it doesnt have to double if it goes over a bit
+        int increase = 0;
+
+        // count the replacement text elements that are larger than their corresponding text being replaced
+        for (int i = 0; i < searchList.length; i++) {
+            int greater = replacementList[i].length() - searchList[i].length();  // ◄ FIX THIS LINE (NPE manifests here)
+            if (greater > 0) {
+                increase += 3 * greater; // assume 3 matches
+            }
+        }
+        // have upper-bound at 20% increase, then let Java take over
+        increase = Math.min(increase, text.length() / 5);
+
+        StringBuilder buf = new StringBuilder(text.length() + increase);
+
+        while (textIndex != -1) {
+
+            for (int i = start; i < textIndex; i++) {
+                buf.append(text.charAt(i));
+            }
+            buf.append(replacementList[replaceIndex]);
+
+            start = textIndex + searchList[replaceIndex].length();
+
+            textIndex = -1;
+            replaceIndex = -1;
+            tempIndex = -1;
+            // find the next earliest match
+            // NOTE: logic mostly duplicated above START
+            for (int i = 0; i < searchLength; i++) {
+                if (noMoreMatchesForReplIndex[i] || searchList[i] == null || 
+                    searchList[i].length() == 0 || replacementList[i] == null) 
+                {
+                    continue;
+                }
+                tempIndex = text.indexOf(searchList[i], start);
+
+                // see if we need to keep searching for this
+                if (tempIndex == -1) {
+                    noMoreMatchesForReplIndex[i] = true;
+                } else {
+                    if (textIndex == -1 || tempIndex < textIndex) {
+                        textIndex = tempIndex;
+                        replaceIndex = i;
+                    }
+                }
+            }
+            // NOTE: logic duplicated above END
+
+        }
+        int textLength = text.length();
+        for (int i = start; i < textLength; i++) {
+            buf.append(text.charAt(i));
+        }
+        String result = buf.toString();
+        if (!repeat) {
+            return result;
+        }
+
+        return replaceEach(result, searchList, replacementList, repeat, timeToLive - 1);
+    }
+```
+
+## File Correlati (stesso progetto — potrebbero servire per il fix)
+
+### ObjectUtils.java
+```java
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.apache.commons.lang3;
+
+import java.io.Serializable;
+
+/**
+ * <p>Operations on <code>Object</code>.</p>
+ * 
+ * <p>This class tries to handle <code>null</code> input gracefully.
+ * An exception will generally not be thrown for a <code>null</code> input.
+ * Each method documents its behaviour in more detail.</p>
+ *
+ * @author Apache Software Foundation
+ * @author <a href="mailto:nissim@nksystems.com">Nissim Karpenstein</a>
+ * @author <a href="mailto:janekdb@yahoo.co.uk">Janek Bogucki</a>
+ * @author Daniel L. Rall
+ * @author Gary Gregory
+ * @author Mario Winterer
+ * @author <a href="mailto:david@davidkarlsen.com">David J. M. Karlsen</a>
+ * @since 1.0
+ * @version $Id$
+ */
+//@Immutable
+public class ObjectUtils {
+
+    /**
+     * <p>Singleton used as a <code>null</code> placeholder where
+     * <code>null</code> has another meaning.</p>
+     *
+     * <p>For example, in a <code>HashMap</code> the
+     * {@link java.util.HashMap#get(java.lang.Object)} method returns
+     * <code>null</code> if the <code>Map</code> contains
+     * <code>null</code> or if there is no matching key. The
+     * <code>Null</code> placeholder can be used to distinguish between
+     * these two cases.</p>
+     *
+     * <p>Another example is <code>Hashtable</code>, where <code>null</code>
+     * cannot be stored.</p>
+     *
+     * <p>This instance is Serializable.</p>
+     */
+    public static final Null NULL = new Null();
+    
+    /**
+     * <p><code>ObjectUtils</code> instances should NOT be constructed in
+     * standard programming. Instead, the class should be used as
+     * <code>ObjectUtils.defaultIfNull("a","b");</code>.</p>
+     *
+     * <p>This constructor is public to permit tools that require a JavaBean instance
+     * to operate.</p>
+     */
+    public ObjectUtils() {
+        super();
+    }
+
+    // Defaulting
+    //-----------------------------------------------------------------------
+    /**
+     * <p>Returns a default value if the object passed is
+     * <code>null</code>.</p>
+     * 
+     * <pre>
+     * ObjectUtils.defaultIfNull(null, null)      = null
+     * ObjectUtils.defaultIfNull(null, "")        = ""
+     * ObjectUtils.defaultIfNull(null, "zz")      = "zz"
+     * ObjectUtils.defaultIfNull("abc", *)        = "abc"
+     * ObjectUtils.defaultIfNull(Boolean.TRUE, *) = Boolean.TRUE
+     * </pre>
+     *
+     * @param object  the <code>Object</code> to test, may be <code>null</code>
+     * @param defaultValue  the default value to return, may be <code>null</code>
+     * @return <code>object</code> if it is not <code>null</code>, defaultValue otherwise
+     */
+    public static Object defaultIfNull(Object object, Object defaultValue) {
+        return object != null ? object : defaultValue;
+    }
+
+    /**
+     * <p>Returns the first value in the array which is not <code>null</code>.
+     * If all the values are <code>null</code> or the array is <code>null</code>
+     * or empty then <code>null</code> is returned.</p>
+     * 
+     * <pre>
+     * ObjectUtils.firstNonNull(null, null)      = null
+     * ObjectUtils.firstNonNull(null, "")        = ""
+     * ObjectUtils.firstNonNull(null, null, "")  = ""
+     * ObjectUtils.firstNonNull(null, "zz")      = "zz"
+     * ObjectUtils.firstNonNull("abc", *)        = "abc"
+     * ObjectUtils.firstNonNull(null, "xyz", *)  = "xyz"
+     * ObjectUtils.firstNonNull(Boolean.TRUE, *) = Boolean.TRUE
+     * ObjectUtils.firstNonNull()                = null
+     * </pre>
+     *
+     * @param values  the values to test, may be <code>null</code> or empty
+     * @return the first value from <code>values</code> which is not <code>null</code>,
+     *  or <code>null</code> if there are no non-null values
+     */
+    public static <T> T firstNonNull(T... values) {
+        if (values != null) {
+            for (T val : values) {
+                if (val != null) {
+                    return val;
+                }
+            }
+        }
+        return null;
+    }
+
+    // Null-safe equals/hashCode
+    //-----------------------------------------------------------------------
+    /**
+     * <p>Compares two objects for equality, where either one or both
+     * objects may be <code>null</code>.</p>
+     *
+     * <pre>
+     * ObjectUtils.equals(null, null)                  = true
+     * ObjectUtils.equals(null, "")                    = false
+     * ObjectUtils.equals("", null)                    = false
+     * ObjectUtils.equals("", "")                      = true
+     * ObjectUtils.equals(Boolean.TRUE, null)          = false
+     * ObjectUtils.equals(Boolean.TRUE, "true")        = false
+     * ObjectUtils.equals(Boolean.TRUE, Boolean.TRUE)  = true
+     * ObjectUtils.equals(Boolean.TRUE, Boolean.FALSE) = false
+     * </pre>
+     *
+     * @param object1  the first object, may be <code>null</code>
+     * @param object2  the second object, may be <code>null</code>
+     * @return <code>true</code> if the values of both objects are the same
+     */
+    public static boolean equals(Object object1, Object object2) {
+        if (object1 == object2) {
+            return true;
+        }
+        if ((object1 == null) || (object2 == null)) {
+            return false;
+... (troncato a 150 righe su 354)
+```
+
+### CharUtils.java
+```java
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.apache.commons.lang3;
+
+/**
+ * <p>Operations on char primitives and Character objects.</p>
+ *
+ * <p>This class tries to handle <code>null</code> input gracefully.
+ * An exception will not be thrown for a <code>null</code> input.
+ * Each method documents its behaviour in more detail.</p>
+ * 
+ * @author Apache Software Foundation
+ * @since 2.1
+ * @version $Id$
+ */
+public class CharUtils {
+    
+    private static final String CHAR_STRING = 
+        "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007" +
+        "\b\t\n\u000b\f\r\u000e\u000f" +
+        "\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017" +
+        "\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f" +
+        "\u0020\u0021\"\u0023\u0024\u0025\u0026\u0027" +
+        "\u0028\u0029\u002a\u002b\u002c\u002d\u002e\u002f" +
+        "\u0030\u0031\u0032\u0033\u0034\u0035\u0036\u0037" +
+        "\u0038\u0039\u003a\u003b\u003c\u003d\u003e\u003f" +
+        "\u0040\u0041\u0042\u0043\u0044\u0045\u0046\u0047" +
+        "\u0048\u0049\u004a\u004b\u004c\u004d\u004e\u004f" +
+        "\u0050\u0051\u0052\u0053\u0054\u0055\u0056\u0057" +
+        "\u0058\u0059\u005a\u005b\\\u005d\u005e\u005f" +
+        "\u0060\u0061\u0062\u0063\u0064\u0065\u0066\u0067" +
+        "\u0068\u0069\u006a\u006b\u006c\u006d\u006e\u006f" +
+        "\u0070\u0071\u0072\u0073\u0074\u0075\u0076\u0077" +
+        "\u0078\u0079\u007a\u007b\u007c\u007d\u007e\u007f";
+    
+    private static final String[] CHAR_STRING_ARRAY = new String[128];
+    private static final Character[] CHAR_ARRAY = new Character[128];
+    
+    /**
+     * <code>\u000a</code> linefeed LF ('\n').
+     * 
+     * @see <a href="http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#101089">JLF: Escape Sequences
+     *      for Character and String Literals</a>
+     * @since 2.2
+     */
+    public static final char LF = '\n';
+
+    /**
+     * <code>\u000d</code> carriage return CR ('\r').
+     * 
+     * @see <a href="http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#101089">JLF: Escape Sequences
+     *      for Character and String Literals</a>
+     * @since 2.2
+     */
+    public static final char CR = '\r';
+    
+
+    static {
+        for (int i = 127; i >= 0; i--) {
+            CHAR_STRING_ARRAY[i] = CHAR_STRING.substring(i, i + 1);
+            CHAR_ARRAY[i] = new Character((char) i);
+        }
+    }
+
+    /**
+     * <p><code>CharUtils</code> instances should NOT be constructed in standard programming.
+     * Instead, the class should be used as <code>CharUtils.toString('c');</code>.</p>
+     *
+     * <p>This constructor is public to permit tools that require a JavaBean instance
+     * to operate.</p>
+     */
+    public CharUtils() {
+      super();
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * <p>Converts the character to a Character.</p>
+     * 
+     * <p>For ASCII 7 bit characters, this uses a cache that will return the
+     * same Character object each time.</p>
+     *
+     * <pre>
+     *   CharUtils.toCharacterObject(' ')  = ' '
+     *   CharUtils.toCharacterObject('A')  = 'A'
+     * </pre>
+     *
+     * @param ch  the character to convert
+     * @return a Character of the specified character
+     */
+    public static Character toCharacterObject(char ch) {
+        if (ch < CHAR_ARRAY.length) {
+            return CHAR_ARRAY[ch];
+        }
+        return new Character(ch);
+    }
+    
+    /**
+     * <p>Converts the String to a Character using the first character, returning
+     * null for empty Strings.</p>
+     * 
+     * <p>For ASCII 7 bit characters, this uses a cache that will return the
+     * same Character object each time.</p>
+     * 
+     * <pre>
+     *   CharUtils.toCharacterObject(null) = null
+     *   CharUtils.toCharacterObject("")   = null
+     *   CharUtils.toCharacterObject("A")  = 'A'
+     *   CharUtils.toCharacterObject("BA") = 'B'
+     * </pre>
+     *
+     * @param str  the character to convert
+     * @return the Character value of the first letter of the String
+     */
+    public static Character toCharacterObject(String str) {
+        if (StringUtils.isEmpty(str)) {
+            return null;
+        }
+        return toCharacterObject(str.charAt(0));
+    }
+    
+    //-----------------------------------------------------------------------
+    /**
+     * <p>Converts the Character to a char throwing an exception for <code>null</code>.</p>
+     * 
+     * <pre>
+     *   CharUtils.toChar(null) = IllegalArgumentException
+     *   CharUtils.toChar(' ')  = ' '
+     *   CharUtils.toChar('A')  = 'A'
+     * </pre>
+     *
+     * @param ch  the character to convert
+     * @return the char value of the Character
+     * @throws IllegalArgumentException if the Character is null
+     */
+    public static char toChar(Character ch) {
+... (troncato a 150 righe su 560)
+```
+
+### WordUtils.java
+```java
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.apache.commons.lang3;
+
+/**
+ * <p>Operations on Strings that contain words.</p>
+ * 
+ * <p>This class tries to handle <code>null</code> input gracefully.
+ * An exception will not be thrown for a <code>null</code> input.
+ * Each method documents its behaviour in more detail.</p>
+ * 
+ * @author Apache Software Foundation
+ * @author Apache Jakarta Velocity
+ * @author <a href="mailto:hps@intermeta.de">Henning P. Schmiedehausen</a>
+ * @author Gary Gregory
+ * @since 2.0
+ * @version $Id$
+ */
+public class WordUtils {
+
+    /**
+     * <p><code>WordUtils</code> instances should NOT be constructed in
+     * standard programming. Instead, the class should be used as
+     * <code>WordUtils.wrap("foo bar", 20);</code>.</p>
+     *
+     * <p>This constructor is public to permit tools that require a JavaBean
+     * instance to operate.</p>
+     */
+    public WordUtils() {
+      super();
+    }
+
+    // Wrapping
+    //--------------------------------------------------------------------------
+//    /**
+//     * <p>Wraps a block of text to a specified line length using '\n' as
+//     * a newline.</p>
+//     *
+//     * <p>This method takes a block of text, which might have long lines in it
+//     * and wraps the long lines based on the supplied lineLength parameter.</p>
+//     * 
+//     * <p>If a single word is longer than the line length (eg. a URL), it will
+//     * not be broken, and will display beyond the expected width.</p>
+//     * 
+//     * <p>If there are tabs in inString, you are going to get results that are
+//     * a bit strange. Tabs are a single character but are displayed as 4 or 8
+//     * spaces. Remove the tabs.</p>
+//     *
+//     * @param str  text which is in need of word-wrapping, may be null
+//     * @param lineLength  the column to wrap the words at
+//     * @return the text with all the long lines word-wrapped
+//     *  <code>null</code> if null string input
+//     */
+//    public static String wrapText(String str, int lineLength) {
+//        return wrap(str, null, lineLength);
+//    }
+    
+//    /**
+//     * <p>Wraps a block of text to a specified line length.</p>
+//     *
+//     * <p>This method takes a block of text, which might have long lines in it
+//     * and wraps the long lines based on the supplied lineLength parameter.</p>
+//     * 
+//     * <p>If a single word is longer than the wrapColumn (eg. a URL), it will
+//     * not be broken, and will display beyond the expected width.</p>
+//     * 
+//     * <p>If there are tabs in inString, you are going to get results that are
+//     * a bit strange. Tabs are a single character but are displayed as 4 or 8
+//     * spaces. Remove the tabs.</p>
+//     *
+//     * @param str  text which is in need of word-wrapping, may be null
+//     * @param newLineChars  the characters that define a newline, null treated as \n
+//     * @param lineLength  the column to wrap the words at
+//     * @return the text with all the long lines word-wrapped
+//     *  <code>null</code> if null string input
+//     */
+//    public static String wrapText(String str, String newLineChars, int lineLength) {
+//        if (str == null) {
+//            return null;
+//        }
+//        if (newLineChars == null) {
+//            newLineChars = "\n";
+//        }
+//        StringTokenizer lineTokenizer = new StringTokenizer(str, newLineChars, true);
+//        StringBuffer stringBuffer = new StringBuffer();
+//
+//        while (lineTokenizer.hasMoreTokens()) {
+//            try {
+//                String nextLine = lineTokenizer.nextToken();
+//
+//                if (nextLine.length() > lineLength) {
+//                    // This line is long enough to be wrapped.
+//                    nextLine = wrapLine(nextLine, null, lineLength, false);
+//                }
+//
+//                stringBuffer.append(nextLine);
+//
+//            } catch (NoSuchElementException nsee) {
+//                // thrown by nextToken(), but I don't know why it would
+//                break;
+//            }
+//        }
+//
+//        return stringBuffer.toString();
+//    }
+
+    // Wrapping
+    //-----------------------------------------------------------------------
+    /**
+     * <p>Wraps a single line of text, identifying words by <code>' '</code>.</p>
+     * 
+     * <p>New lines will be separated by the system property line separator.
+     * Very long words, such as URLs will <i>not</i> be wrapped.</p>
+     * 
+     * <p>Leading spaces on a new line are stripped.
+     * Trailing spaces are not stripped.</p>
+     *
+     * <pre>
+     * WordUtils.wrap(null, *) = null
+     * WordUtils.wrap("", *) = ""
+     * </pre>
+     *
+     * @param str  the String to be word wrapped, may be null
+     * @param wrapLength  the column to wrap the words at, less than 1 is treated as 1
+     * @return a line with newlines inserted, <code>null</code> if null input
+     */
+    public static String wrap(String str, int wrapLength) {
+        return wrap(str, wrapLength, null, false);
+    }
+    
+    /**
+     * <p>Wraps a single line of text, identifying words by <code>' '</code>.</p>
+     * 
+     * <p>Leading spaces on a new line are stripped.
+     * Trailing spaces are not stripped.</p>
+     * 
+... (troncato a 150 righe su 647)
+```
+
+### ClassUtils.java
+```java
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.apache.commons.lang3;
+
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+
+
+/**
+ * <p>Operates on classes without using reflection.</p>
+ *
+ * <p>This class handles invalid <code>null</code> inputs as best it can.
+ * Each method documents its behaviour in more detail.</p>
+ *
+ * <p>The notion of a <code>canonical name</code> includes the human
+ * readable name for the type, for example <code>int[]</code>. The
+ * non-canonical method variants work with the JVM names, such as
+ * <code>[I</code>. </p>
+ *
+ * @author Apache Software Foundation
+ * @author Gary Gregory
+ * @author Norm Deane
+ * @author Alban Peignier
+ * @author Tomasz Blachowicz
+ * @since 2.0
+ * @version $Id$
+ */
+public class ClassUtils {
+
+    /**
+     * <p>The package separator character: <code>'&#x2e;' == {@value}</code>.</p>
+     */
+    public static final char PACKAGE_SEPARATOR_CHAR = '.';
+
+    /**
+     * <p>The package separator String: <code>"&#x2e;"</code>.</p>
+     */
+    public static final String PACKAGE_SEPARATOR = String.valueOf(PACKAGE_SEPARATOR_CHAR);
+
+    /**
+     * <p>The inner class separator character: <code>'$' == {@value}</code>.</p>
+     */
+    public static final char INNER_CLASS_SEPARATOR_CHAR = '$';
+
+    /**
+     * <p>The inner class separator String: <code>"$"</code>.</p>
+     */
+    public static final String INNER_CLASS_SEPARATOR = String.valueOf(INNER_CLASS_SEPARATOR_CHAR);
+
+    /**
+     * Maps primitive <code>Class</code>es to their corresponding wrapper <code>Class</code>.
+     */
+    private static final Map<Class<?>, Class<?>> primitiveWrapperMap = new HashMap<Class<?>, Class<?>>();
+    static {
+         primitiveWrapperMap.put(Boolean.TYPE, Boolean.class);
+         primitiveWrapperMap.put(Byte.TYPE, Byte.class);
+         primitiveWrapperMap.put(Character.TYPE, Character.class);
+         primitiveWrapperMap.put(Short.TYPE, Short.class);
+         primitiveWrapperMap.put(Integer.TYPE, Integer.class);
+         primitiveWrapperMap.put(Long.TYPE, Long.class);
+         primitiveWrapperMap.put(Double.TYPE, Double.class);
+         primitiveWrapperMap.put(Float.TYPE, Float.class);
+         primitiveWrapperMap.put(Void.TYPE, Void.TYPE);
+    }
+
+    /**
+     * Maps wrapper <code>Class</code>es to their corresponding primitive types.
+     */
+    private static final Map<Class<?>, Class<?>> wrapperPrimitiveMap = new HashMap<Class<?>, Class<?>>();
+    static {
+        for (Class<?> primitiveClass : primitiveWrapperMap.keySet()) {
+            Class<?> wrapperClass = primitiveWrapperMap.get(primitiveClass);
+            if (!primitiveClass.equals(wrapperClass)) {
+                wrapperPrimitiveMap.put(wrapperClass, primitiveClass);
+            }
+        }
+    }
+
+    /**
+     * Maps a primitive class name to its corresponding abbreviation used in array class names.
+     */
+    private static final Map<String, String> abbreviationMap = new HashMap<String, String>();
+
+    /**
+     * Maps an abbreviation used in array class names to corresponding primitive class name.
+     */
+    private static final Map<String, String> reverseAbbreviationMap = new HashMap<String, String>();
+
+    /**
+     * Add primitive type abbreviation to maps of abbreviations.
+     *
+     * @param primitive Canonical name of primitive type
+     * @param abbreviation Corresponding abbreviation of primitive type
+     */
+    private static void addAbbreviation(String primitive, String abbreviation) {
+        abbreviationMap.put(primitive, abbreviation);
+        reverseAbbreviationMap.put(abbreviation, primitive);
+    }
+
+    /**
+     * Feed abbreviation maps
+     */
+    static {
+        addAbbreviation("int", "I");
+        addAbbreviation("boolean", "Z");
+        addAbbreviation("float", "F");
+        addAbbreviation("long", "J");
+        addAbbreviation("short", "S");
+        addAbbreviation("byte", "B");
+        addAbbreviation("double", "D");
+        addAbbreviation("char", "C");
+    }
+
+    /**
+     * <p>ClassUtils instances should NOT be constructed in standard programming.
+     * Instead, the class should be used as
+     * <code>ClassUtils.getShortClassName(cls)</code>.</p>
+     *
+     * <p>This constructor is public to permit tools that require a JavaBean
+     * instance to operate.</p>
+     */
+    public ClassUtils() {
+      super();
+    }
+
+    // Short class name
+    // ----------------------------------------------------------------------
+    /**
+     * <p>Gets the class name minus the package name for an <code>Object</code>.</p>
+     *
+... (troncato a 150 righe su 1037)
+```
+
+### EnumUtils.java
+```java
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.apache.commons.lang3;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Utility library to provide helper methods for Java enums.
+ * 
+ * @author Apache Software Foundation
+ */
+public class EnumUtils {
+
+    /**
+     * This constructor is public to permit tools that require a JavaBean
+     * instance to operate.
+     */
+    public EnumUtils() {
+    }
+
+    /**
+     * Gets the <code>Map</code> of <code>enums</code> by name.
+     * <p>
+     * This method is useful when you need a map of enums by name.
+     *
+     * @param enumClass  the class of the <code>enum</code> to get, not null
+     * @return the modifiable map of enum names to enums, never null
+     */
+    public static <E extends Enum<E>> Map<String, E> getEnumMap(Class<E> enumClass) {
+        Map<String, E> map = new LinkedHashMap<String, E>();
+        for (E e: enumClass.getEnumConstants()) {
+            map.put(e.name(), e);
+        }
+        return map;
+    }
+
+    /**
+     * Gets the <code>List</code> of <code>enums</code>.
+     * <p>
+     * This method is useful when you need a list of enums rather than an array.
+     *
+     * @param enumClass  the class of the <code>enum</code> to get, not null
+     * @return the modifiable list of enums, never null
+     */
+    public static <E extends Enum<E>> List<E> getEnumList(Class<E> enumClass) {
+        return new ArrayList<E>(Arrays.asList(enumClass.getEnumConstants()));
+    }
+
+    /**
+     * Checks if the specified name is a valid <code>enum</code> for the class.
+     * <p>
+     * This method differs from {@link Enum#valueOf} in that checks if the name is
+     * a valid enum without needing to catch the exception.
+     *
+     * @param enumClass  the class of the <code>enum</code> to get, not null
+     * @return the map of enum names to enums, never null
+     */
+    public static <E extends Enum<E>> boolean isValidEnum(Class<E> enumClass, String enumName) {
+        try {
+            Enum.valueOf(enumClass, enumName);
+            return true;
+        } catch (IllegalArgumentException ex) {
+            return false;
+        }
+    }
+
+    /**
+     * Gets the <code>enum</code> for the class, returning <code>null</code> if not found.
+     * <p>
+     * This method differs from {@link Enum#valueOf} in that it does not throw an exception
+     * for an invalid enum name.
+     *
+     * @param enumClass  the class of the <code>enum</code> to get, not null
+     * @return the map of enum names to enums, never null
+     */
+    public static <E extends Enum<E>> E getEnum(Class<E> enumClass, String enumName) {
+        try {
+            return Enum.valueOf(enumClass, enumName);
+        } catch (IllegalArgumentException ex) {
+            return null;
+        }
+    }
+
+}
+```
+## Test Falliti
+
+  • org.apache.commons.lang3.StringUtilsTest#testReplace_StringStringArrayStringArray
+
+## Stack Trace
+
+```
+testReplace_StringStringArrayStringArray(org.apache.commons.lang3.StringUtilsTest): Cannot invoke "String.length()" because "replacementList[i]" is null
+Cannot invoke "String.length()" because "replacementList[i]" is null
+java.lang.NullPointerException: Cannot invoke "String.length()" because "replacementList[i]" is null
+	at org.apache.commons.lang3.StringUtils.replaceEach(StringUtils.java:3676)
+	at org.apache.commons.lang3.StringUtils.replaceEach(StringUtils.java:3502)
+	at org.apache.commons.lang3.StringUtilsTest.testReplace_StringStringArrayStringArray(StringUtilsTest.java:1039)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+```
+
+## Istruzioni
+
+Analizza il bug e restituisci i metodi corretti, seguendo queste regole TASSATIVE:
+
+1. **Un FILE block per metodo**: se devi correggere N metodi, emetti N blocchi FILE separati.
+   Ogni blocco deve contenere UN SOLO metodo completo.
+
+2. **Indentazione originale**: mantieni ESATTAMENTE l'indentazione del codice originale.
+   La firma del metodo DEVE iniziare con gli stessi spazi del file originale.
+
+3. **La riga `// ◄ FIX THIS LINE`** indica dove l'NPE si manifesta. Rimuovi questo commento
+   nella risposta — restituisci solo codice Java puro.
+
+4. **Null-safe equality OBBLIGATORIA**: se il metodo confronta due valori che possono essere null,
+   usa `java.util.Objects.equals(a, b)` — questa funzione ritorna `true` se entrambi sono null,
+   mentre `a.equals(b)` lancia NPE se `a` è null, e `a != null && a.equals(b)` ritorna `false`
+   se entrambi sono null (sbagliato semanticamente).
+   Esempio corretto:
+   ```java
+   return java.util.Objects.equals(doubleMetaphone(v1, alt), doubleMetaphone(v2, alt));
+   ```
+
+5. **NON modificare metodi che non causano il bug**: se il metodo `doubleMetaphone` ritorna
+   null per input null, questo è il comportamento CORRETTO e atteso dai test. Non cambiarlo.
+
+6. NON modificare file di test.

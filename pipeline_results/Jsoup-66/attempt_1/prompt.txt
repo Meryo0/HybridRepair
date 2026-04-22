@@ -1,0 +1,466 @@
+Bug ID: Jsoup-66  |  Tentativo 1
+
+## Fault Locations (LogicFL)
+
+  • org.jsoup.nodes.Element — riga 683  [✓]
+  • org.jsoup.nodes.Element — riga 690  [✓]
+
+## Catena Causale (LogicFL Prolog)
+
+NPE at line(element_test_1, 1235) / Null Expression - v_clone_next_element_sibling_340[cloneNextElementSibling]
+	 can be caused by 
+element_1_literal12[null] - line(element_1, 683).
+
+NPE at line(element_test_1, 1235) / Null Expression - v_clone_next_element_sibling_340[cloneNextElementSibling]
+	 can be caused by 
+element_1_literal15[null] - line(element_1, 690).
+
+## Metodi Buggy
+
+### FILE: org/jsoup/nodes/Element.java  (righe 682–691, fault alla riga 683)
+```java
+    public Element nextElementSibling() {
+        if (parentNode == null) return null;  // ◄ FIX THIS LINE (NPE manifests here)
+        List<Element> siblings = parent().childElementsList();
+        Integer index = indexInList(this, siblings);
+        Validate.notNull(index);
+        if (siblings.size() > index+1)
+            return siblings.get(index+1);
+        else
+            return null;
+    }
+```
+
+### FILE: org/jsoup/nodes/Element.java  (righe 682–691, fault alla riga 690)
+```java
+    public Element nextElementSibling() {
+        if (parentNode == null) return null;
+        List<Element> siblings = parent().childElementsList();
+        Integer index = indexInList(this, siblings);
+        Validate.notNull(index);
+        if (siblings.size() > index+1)
+            return siblings.get(index+1);
+        else
+            return null;  // ◄ FIX THIS LINE (NPE manifests here)
+    }
+```
+
+## File Correlati (stesso progetto — potrebbero servire per il fix)
+
+### StringUtil.java
+```java
+package org.jsoup.helper;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+
+/**
+ * A minimal String utility class. Designed for internal jsoup use only.
+ */
+public final class StringUtil {
+    // memoised padding up to 21
+    static final String[] padding = {"", " ", "  ", "   ", "    ", "     ", "      ", "       ", "        ",
+        "         ", "          ", "           ", "            ", "             ", "              ", "               ",
+        "                ", "                 ", "                  ", "                   ", "                    "};
+
+    /**
+     * Join a collection of strings by a separator
+     * @param strings collection of string objects
+     * @param sep string to place between strings
+     * @return joined string
+     */
+    public static String join(Collection strings, String sep) {
+        return join(strings.iterator(), sep);
+    }
+
+    /**
+     * Join a collection of strings by a separator
+     * @param strings iterator of string objects
+     * @param sep string to place between strings
+     * @return joined string
+     */
+    public static String join(Iterator strings, String sep) {
+        if (!strings.hasNext())
+            return "";
+
+        String start = strings.next().toString();
+        if (!strings.hasNext()) // only one, avoid builder
+            return start;
+
+        StringBuilder sb = new StringBuilder(64).append(start);
+        while (strings.hasNext()) {
+            sb.append(sep);
+            sb.append(strings.next());
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Returns space padding
+     * @param width amount of padding desired
+     * @return string of spaces * width
+     */
+    public static String padding(int width) {
+        if (width < 0)
+            throw new IllegalArgumentException("width must be > 0");
+
+        if (width < padding.length)
+            return padding[width];
+        char[] out = new char[width];
+        for (int i = 0; i < width; i++)
+            out[i] = ' ';
+        return String.valueOf(out);
+    }
+
+    /**
+     * Tests if a string is blank: null, empty, or only whitespace (" ", \r\n, \t, etc)
+     * @param string string to test
+     * @return if string is blank
+     */
+    public static boolean isBlank(String string) {
+        if (string == null || string.length() == 0)
+            return true;
+
+        int l = string.length();
+        for (int i = 0; i < l; i++) {
+            if (!StringUtil.isWhitespace(string.codePointAt(i)))
+                return false;
+        }
+        return true;
+    }
+
+    /**
+     * Tests if a string is numeric, i.e. contains only digit characters
+     * @param string string to test
+     * @return true if only digit chars, false if empty or null or contains non-digit chars
+     */
+    public static boolean isNumeric(String string) {
+        if (string == null || string.length() == 0)
+            return false;
+
+        int l = string.length();
+        for (int i = 0; i < l; i++) {
+            if (!Character.isDigit(string.codePointAt(i)))
+                return false;
+        }
+        return true;
+    }
+
+    /**
+     * Tests if a code point is "whitespace" as defined in the HTML spec. Used for output HTML.
+     * @param c code point to test
+     * @return true if code point is whitespace, false otherwise
+     * @see #isActuallyWhitespace(int)
+     */
+    public static boolean isWhitespace(int c){
+        return c == ' ' || c == '\t' || c == '\n' || c == '\f' || c == '\r';
+    }
+
+    /**
+     * Tests if a code point is "whitespace" as defined by what it looks like. Used for Element.text etc.
+     * @param c code point to test
+     * @return true if code point is whitespace, false otherwise
+     */
+    public static boolean isActuallyWhitespace(int c){
+        return c == ' ' || c == '\t' || c == '\n' || c == '\f' || c == '\r' || c == 160;
+        // 160 is &nbsp; (non-breaking space). Not in the spec but expected.
+    }
+
+    /**
+     * Normalise the whitespace within this string; multiple spaces collapse to a single, and all whitespace characters
+     * (e.g. newline, tab) convert to a simple space
+     * @param string content to normalise
+     * @return normalised string
+     */
+    public static String normaliseWhitespace(String string) {
+        StringBuilder sb = StringUtil.stringBuilder();
+        appendNormalisedWhitespace(sb, string, false);
+        return sb.toString();
+    }
+
+    /**
+     * After normalizing the whitespace within a string, appends it to a string builder.
+     * @param accum builder to append to
+     * @param string string to normalize whitespace within
+     * @param stripLeading set to true if you wish to remove any leading whitespace
+     */
+    public static void appendNormalisedWhitespace(StringBuilder accum, String string, boolean stripLeading) {
+        boolean lastWasWhite = false;
+        boolean reachedNonWhite = false;
+
+        int len = string.length();
+        int c;
+        for (int i = 0; i < len; i+= Character.charCount(c)) {
+            c = string.codePointAt(i);
+            if (isActuallyWhitespace(c)) {
+                if ((stripLeading && !reachedNonWhite) || lastWasWhite)
+                    continue;
+                accum.append(' ');
+... (troncato a 150 righe su 239)
+```
+
+### NodeVisitor.java
+```java
+package org.jsoup.select;
+
+import org.jsoup.nodes.Node;
+
+/**
+ * Node visitor interface. Provide an implementing class to {@link NodeTraversor} to iterate through nodes.
+ * <p>
+ * This interface provides two methods, {@code head} and {@code tail}. The head method is called when the node is first
+ * seen, and the tail method when all of the node's children have been visited. As an example, head can be used to
+ * create a start tag for a node, and tail to create the end tag.
+ * </p>
+ */
+public interface NodeVisitor {
+    /**
+     * Callback for when a node is first visited.
+     *
+     * @param node the node being visited.
+     * @param depth the depth of the node, relative to the root node. E.g., the root node has depth 0, and a child node
+     * of that will have depth 1.
+     */
+    void head(Node node, int depth);
+
+    /**
+     * Callback for when a node is last visited, after all of its descendants have been visited.
+     *
+     * @param node the node being visited.
+     * @param depth the depth of the node, relative to the root node. E.g., the root node has depth 0, and a child node
+     * of that will have depth 1.
+     */
+    void tail(Node node, int depth);
+}
+```
+
+### Normalizer.java
+```java
+package org.jsoup.internal;
+
+import java.util.Locale;
+
+/**
+ * Util methods for normalizing strings. Jsoup internal use only, please don't depend on this API.
+ */
+public final class Normalizer {
+
+    public static String lowerCase(final String input) {
+        return input.toLowerCase(Locale.ENGLISH);
+    }
+
+    public static String normalize(final String input) {
+        return lowerCase(input).trim();
+    }
+}
+```
+
+### ChangeNotifyingArrayList.java
+```java
+package org.jsoup.helper;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+/**
+ * Implementation of ArrayList that watches out for changes to the contents.
+ */
+public abstract class ChangeNotifyingArrayList<E> extends ArrayList<E> {
+    public ChangeNotifyingArrayList(int initialCapacity) {
+        super(initialCapacity);
+    }
+
+    public abstract void onContentsChanged();
+
+    @Override
+    public E set(int index, E element) {
+        onContentsChanged();
+        return super.set(index, element);
+    }
+
+    @Override
+    public boolean add(E e) {
+        onContentsChanged();
+        return super.add(e);
+    }
+
+    @Override
+    public void add(int index, E element) {
+        onContentsChanged();
+        super.add(index, element);
+    }
+
+    @Override
+    public E remove(int index) {
+        onContentsChanged();
+        return super.remove(index);
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        onContentsChanged();
+        return super.remove(o);
+    }
+
+    @Override
+    public void clear() {
+        onContentsChanged();
+        super.clear();
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends E> c) {
+        onContentsChanged();
+        return super.addAll(c);
+    }
+
+    @Override
+    public boolean addAll(int index, Collection<? extends E> c) {
+        onContentsChanged();
+        return super.addAll(index, c);
+    }
+
+    @Override
+    protected void removeRange(int fromIndex, int toIndex) {
+        onContentsChanged();
+        super.removeRange(fromIndex, toIndex);
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        onContentsChanged();
+        return super.removeAll(c);
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        onContentsChanged();
+        return super.retainAll(c);
+    }
+
+}
+```
+
+### ParseSettings.java
+```java
+package org.jsoup.parser;
+
+import org.jsoup.nodes.Attributes;
+
+import static org.jsoup.internal.Normalizer.lowerCase;
+
+/**
+ * Controls parser settings, to optionally preserve tag and/or attribute name case.
+ */
+public class ParseSettings {
+    /**
+     * HTML default settings: both tag and attribute names are lower-cased during parsing.
+     */
+    public static final ParseSettings htmlDefault;
+    /**
+     * Preserve both tag and attribute case.
+     */
+    public static final ParseSettings preserveCase;
+
+    static {
+        htmlDefault = new ParseSettings(false, false);
+        preserveCase = new ParseSettings(true, true);
+    }
+
+    private final boolean preserveTagCase;
+    private final boolean preserveAttributeCase;
+
+    /**
+     * Define parse settings.
+     * @param tag preserve tag case?
+     * @param attribute preserve attribute name case?
+     */
+    public ParseSettings(boolean tag, boolean attribute) {
+        preserveTagCase = tag;
+        preserveAttributeCase = attribute;
+    }
+
+    String normalizeTag(String name) {
+        name = name.trim();
+        if (!preserveTagCase)
+            name = lowerCase(name);
+        return name;
+    }
+
+    String normalizeAttribute(String name) {
+        name = name.trim();
+        if (!preserveAttributeCase)
+            name = lowerCase(name);
+        return name;
+    }
+
+    Attributes normalizeAttributes(Attributes attributes) {
+        if (!preserveAttributeCase) {
+            attributes.normalize();
+        }
+        return attributes;
+    }
+}
+```
+## Test Falliti
+
+  • org.jsoup.nodes.ElementTest#testNextElementSiblingAfterClone
+
+## Stack Trace
+
+```
+testNextElementSiblingAfterClone(org.jsoup.nodes.ElementTest): Cannot invoke "org.jsoup.nodes.Element.text()" because "cloneNextElementSibling" is null
+Cannot invoke "org.jsoup.nodes.Element.text()" because "cloneNextElementSibling" is null
+java.lang.NullPointerException: Cannot invoke "org.jsoup.nodes.Element.text()" because "cloneNextElementSibling" is null
+	at org.jsoup.nodes.ElementTest.testNextElementSiblingAfterClone(ElementTest.java:1235)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+```
+
+## Istruzioni
+
+Analizza il bug e restituisci i metodi corretti, seguendo queste regole TASSATIVE:
+
+1. **Un FILE block per metodo**: se devi correggere N metodi, emetti N blocchi FILE separati.
+   Ogni blocco deve contenere UN SOLO metodo completo.
+
+2. **Indentazione originale**: mantieni ESATTAMENTE l'indentazione del codice originale.
+   La firma del metodo DEVE iniziare con gli stessi spazi del file originale.
+
+3. **La riga `// ◄ FIX THIS LINE`** indica dove l'NPE si manifesta. Rimuovi questo commento
+   nella risposta — restituisci solo codice Java puro.
+
+4. **Null-safe equality OBBLIGATORIA**: se il metodo confronta due valori che possono essere null,
+   usa `java.util.Objects.equals(a, b)` — questa funzione ritorna `true` se entrambi sono null,
+   mentre `a.equals(b)` lancia NPE se `a` è null, e `a != null && a.equals(b)` ritorna `false`
+   se entrambi sono null (sbagliato semanticamente).
+   Esempio corretto:
+   ```java
+   return java.util.Objects.equals(doubleMetaphone(v1, alt), doubleMetaphone(v2, alt));
+   ```
+
+5. **NON modificare metodi che non causano il bug**: se il metodo `doubleMetaphone` ritorna
+   null per input null, questo è il comportamento CORRETTO e atteso dai test. Non cambiarlo.
+
+6. NON modificare file di test.

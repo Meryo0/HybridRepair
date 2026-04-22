@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "total_tests": 18,
+  "failed_tests": 0,
+  "failing_test_names": [],
+  "previously_failing_now_passing": [
+    "org.apache.commons.codec.binary.StringUtilsTest"
+  ],
+  "compile_output": "",
+  "test_output": "JUnit version 4.13.2\n..................\nTime: 0.028\n\nOK (18 tests)\n\n"
+}

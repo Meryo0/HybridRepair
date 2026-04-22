@@ -1,0 +1,26 @@
+--- com/fasterxml/jackson/databind/jsontype/impl/TypeDeserializerBase.java
++++ com/fasterxml/jackson/databind/jsontype/impl/TypeDeserializerBase.java
+@@ -198,17 +198,16 @@
+         return deser;
+     }
+ 
+-    protected final JsonDeserializer<Object> _findDefaultImplDeserializer(DeserializationContext ctxt) throws IOException
+-    {
+-        /* 06-Feb-2013, tatu: As per [databind#148], consider default implementation value of
+-         *   {@link java.lang.Void} to mean "serialize as null"; as well as DeserializationFeature
+-         *   to do swift mapping to null
+-         */
++protected final JsonDeserializer<Object> _findDefaultImplDeserializer(DeserializationContext ctxt) throws IOException
++    {
+         if (_defaultImpl == null) {
+             if (!ctxt.isEnabled(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE)) {
+                 return NullifyingDeserializer.instance;
+             }
+-            return null;
++            // Instead of returning null, use ctxt.reportMappingException to throw a meaningful exception
++            ctxt.reportMappingException("No default implementation specified for type id resolver '%s'", 
++                _idResolver.getClass().getName());
++            return null; // This line will never be reached, but is required for compilation
+         }
+         Class<?> raw = _defaultImpl.getRawClass();
+         if (ClassUtil.isBogusClass(raw)) {

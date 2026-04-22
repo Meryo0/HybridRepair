@@ -1,0 +1,19 @@
+--- org/jsoup/nodes/Node.java
++++ org/jsoup/nodes/Node.java
+@@ -440,9 +440,13 @@
+      include this node (a node is not a sibling of itself).
+      @return node siblings. If the node has no parent, returns an empty list.
+      */
+-    public List<Node> siblingNodes() {
+-
+-        return parent().childNodes();
++public List<Node> siblingNodes() {
++        if (parent() == null) {
++            return Collections.emptyList();
++        }
++        List<Node> siblings = parent().childNodes();
++        siblings.remove(this);
++        return siblings;
+     }
+ 
+     /**

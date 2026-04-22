@@ -1,0 +1,10 @@
+{
+  "bug_id": "Gson-9",
+  "success": false,
+  "winning_attempt": null,
+  "total_attempts": 0,
+  "test_result": {
+    "error": "LogicFL completato ma /home/mario/Desktop/LogicFL/defects4j/Gson-9/result/fault_locs.txt non trovato.\nControlla i log di LogicFL per errori."
+  },
+  "timestamp": "2026-04-20T14:50:52.854021+00:00"
+}

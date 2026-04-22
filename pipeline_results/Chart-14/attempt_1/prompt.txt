@@ -1,0 +1,932 @@
+Bug ID: Chart-14  |  Tentativo 1
+
+## Fault Locations (LogicFL)
+
+  • org.jfree.chart.plot.XYPlot — riga 2529  [✓]
+  • org.jfree.chart.plot.XYPlot — riga 2293  [✓]
+  • org.jfree.chart.plot.CategoryPlot — riga 2448  [✓]
+  • org.jfree.chart.plot.CategoryPlot — riga 2166  [✓]
+
+## Catena Causale (LogicFL Prolog)
+
+NPE at line(xyplot_1, 2529) / Null Expression - v_markers_745[markers]
+	 can be caused by 
+v_markers_745[markers] - line(xyplot_1, 2529).
+
+NPE at line(xyplot_1, 2293) / Null Expression - v_markers_722[markers]
+	 can be caused by 
+v_markers_722[markers] - line(xyplot_1, 2293).
+
+NPE at line(category_plot_1, 2448) / Null Expression - v_markers_265[markers]
+	 can be caused by 
+v_markers_265[markers] - line(category_plot_1, 2448).
+
+NPE at line(category_plot_1, 2166) / Null Expression - v_markers_238[markers]
+	 can be caused by 
+v_markers_238[markers] - line(category_plot_1, 2166).
+
+## Metodi Buggy
+
+### FILE: org/jfree/chart/plot/XYPlot.java  (righe 2282–2298, fault alla riga 2293)
+```java
+    public boolean removeDomainMarker(int index, Marker marker, Layer layer,
+    		boolean notify) {
+        ArrayList markers;
+        if (layer == Layer.FOREGROUND) {
+            markers = (ArrayList) this.foregroundDomainMarkers.get(new Integer(
+                    index));
+        }
+        else {
+            markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(
+                    index));
+        }
+        boolean removed = markers.remove(marker);  // ◄ FIX THIS LINE (NPE manifests here)
+        if (removed && notify) {
+            fireChangeEvent();
+        }
+        return removed;
+    }
+```
+
+### FILE: org/jfree/chart/plot/XYPlot.java  (righe 2515–2534, fault alla riga 2529)
+```java
+    public boolean removeRangeMarker(int index, Marker marker, Layer layer,
+    		boolean notify) {
+        if (marker == null) {
+            throw new IllegalArgumentException("Null 'marker' argument.");
+        }
+        ArrayList markers;
+        if (layer == Layer.FOREGROUND) {
+            markers = (ArrayList) this.foregroundRangeMarkers.get(new Integer(
+                    index));
+        }
+        else {
+            markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(
+                    index));
+        }
+        boolean removed = markers.remove(marker);  // ◄ FIX THIS LINE (NPE manifests here)
+        if (removed && notify) {
+            fireChangeEvent();
+        }
+        return removed;
+    }
+```
+
+### FILE: org/jfree/chart/plot/CategoryPlot.java  (righe 2155–2171, fault alla riga 2166)
+```java
+    public boolean removeDomainMarker(int index, Marker marker, Layer layer,
+    		boolean notify) {
+        ArrayList markers;
+        if (layer == Layer.FOREGROUND) {
+            markers = (ArrayList) this.foregroundDomainMarkers.get(new Integer(
+                    index));
+        }
+        else {
+            markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(
+                    index));
+        }
+        boolean removed = markers.remove(marker);  // ◄ FIX THIS LINE (NPE manifests here)
+        if (removed && notify) {
+            fireChangeEvent();
+        }
+        return removed;
+    }
+```
+
+### FILE: org/jfree/chart/plot/CategoryPlot.java  (righe 2434–2453, fault alla riga 2448)
+```java
+    public boolean removeRangeMarker(int index, Marker marker, Layer layer,
+    		boolean notify) {
+        if (marker == null) {
+            throw new IllegalArgumentException("Null 'marker' argument.");
+        }
+        ArrayList markers;
+        if (layer == Layer.FOREGROUND) {
+            markers = (ArrayList) this.foregroundRangeMarkers.get(new Integer(
+                    index));
+        }
+        else {
+            markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(
+                    index));
+        }
+        boolean removed = markers.remove(marker);  // ◄ FIX THIS LINE (NPE manifests here)
+        if (removed && notify) {
+            fireChangeEvent();
+        }
+        return removed;
+    }
+```
+
+## File Correlati (stesso progetto — potrebbero servire per il fix)
+
+### ChartChangeEvent.java
+```java
+/* ===========================================================
+ * JFreeChart : a free chart library for the Java(tm) platform
+ * ===========================================================
+ *
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ *
+ * Project Info:  http://www.jfree.org/jfreechart/index.html
+ *
+ * This library is free software; you can redistribute it and/or modify it 
+ * under the terms of the GNU Lesser General Public License as published by 
+ * the Free Software Foundation; either version 2.1 of the License, or 
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but 
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
+ * USA.  
+ *
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * in the United States and other countries.]
+ *
+ * ---------------------
+ * ChartChangeEvent.java
+ * ---------------------
+ * (C) Copyright 2000-2007, by Object Refinery Limited.
+ *
+ * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   -;
+ *
+ * Changes (from 24-Aug-2001)
+ * --------------------------
+ * 24-Aug-2001 : Added standard source header. Fixed DOS encoding problem (DG);
+ * 07-Nov-2001 : Updated header (DG);
+ *               Change event type names (DG);
+ * 09-Oct-2002 : Fixed errors reported by Checkstyle (DG);
+ * 18-Feb-2005 : Changed the type from int to ChartChangeEventType (DG);
+ *
+ */
+
+package org.jfree.chart.event;
+
+import java.util.EventObject;
+
+import org.jfree.chart.JFreeChart;
+
+/**
+ * A change event that encapsulates information about a change to a chart.
+ */
+public class ChartChangeEvent extends EventObject {
+
+    /** The type of event. */
+    private ChartChangeEventType type;
+
+    /** The chart that generated the event. */
+    private JFreeChart chart;
+
+    /**
+     * Creates a new chart change event.
+     *
+     * @param source  the source of the event (could be the chart, a title, 
+     *                an axis etc.)
+     */
+    public ChartChangeEvent(Object source) {
+        this(source, null, ChartChangeEventType.GENERAL);
+    }
+
+    /**
+     * Creates a new chart change event.
+     *
+     * @param source  the source of the event (could be the chart, a title, an 
+     *                axis etc.)
+     * @param chart  the chart that generated the event.
+     */
+    public ChartChangeEvent(Object source, JFreeChart chart) {
+        this(source, chart, ChartChangeEventType.GENERAL);
+    }
+
+    /**
+     * Creates a new chart change event.
+     *
+     * @param source  the source of the event (could be the chart, a title, an
+                      axis etc.)
+     * @param chart  the chart that generated the event.
+     * @param type  the type of event.
+     */
+    public ChartChangeEvent(Object source, JFreeChart chart, 
+                            ChartChangeEventType type) {
+        super(source);
+        this.chart = chart;
+        this.type = type;
+    }
+
+    /**
+     * Returns the chart that generated the change event.
+     *
+     * @return The chart that generated the change event.
+     */
+    public JFreeChart getChart() {
+        return this.chart;
+    }
+
+    /**
+     * Sets the chart that generated the change event.
+     *
+     * @param chart  the chart that generated the event.
+     */
+    public void setChart(JFreeChart chart) {
+        this.chart = chart;
+    }
+
+    /**
+     * Returns the event type.
+     *
+     * @return The event type.
+     */
+    public ChartChangeEventType getType() {
+        return this.type;
+    }
+
+    /**
+     * Sets the event type.
+     *
+     * @param type  the event type.
+     */
+    public void setType(ChartChangeEventType type) {
+        this.type = type;
+    }
+
+}
+```
+
+### ChartChangeEventType.java
+```java
+/* ===========================================================
+ * JFreeChart : a free chart library for the Java(tm) platform
+ * ===========================================================
+ *
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ *
+ * Project Info:  http://www.jfree.org/jfreechart/index.html
+ *
+ * This library is free software; you can redistribute it and/or modify it 
+ * under the terms of the GNU Lesser General Public License as published by 
+ * the Free Software Foundation; either version 2.1 of the License, or 
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but 
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
+ * USA.  
+ *
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * in the United States and other countries.]
+ *
+ * -------------------------
+ * ChartChangeEventType.java
+ * -------------------------
+ * (C) Copyright 2005, 2007, by Object Refinery Limited.
+ *
+ * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   -;
+ *
+ * Changes:
+ * --------
+ * 18-Feb-2005 : Version 1 (DG);
+ * 
+ */
+
+package org.jfree.chart.event;
+
+import java.io.ObjectStreamException;
+import java.io.Serializable;
+
+/**
+ * Defines tokens used to indicate an event type.
+ */
+public final class ChartChangeEventType implements Serializable {
+
+    /** For serialization. */
+    private static final long serialVersionUID = 5481917022435735602L;
+    
+    /** GENERAL. */
+    public static final ChartChangeEventType GENERAL 
+        = new ChartChangeEventType("ChartChangeEventType.GENERAL");
+
+    /** NEW_DATASET. */
+    public static final ChartChangeEventType NEW_DATASET 
+        = new ChartChangeEventType("ChartChangeEventType.NEW_DATASET");
+
+    /** DATASET_UPDATED. */
+    public static final ChartChangeEventType DATASET_UPDATED
+        = new ChartChangeEventType("ChartChangeEventType.DATASET_UPDATED");
+
+    /** The name. */
+    private String name;
+
+    /**
+     * Private constructor.
+     *
+     * @param name  the name.
+     */
+    private ChartChangeEventType(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Returns a string representing the object.
+     *
+     * @return The string.
+     */
+    public String toString() {
+        return this.name;
+    }
+
+    /**
+     * Returns <code>true</code> if this object is equal to the specified 
+     * object, and <code>false</code> otherwise.
+     *
+     * @param obj  the object (<code>null</code> permitted).
+     *
+     * @return A boolean.
+     */
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof ChartChangeEventType)) {
+            return false;
+        }
+        ChartChangeEventType that = (ChartChangeEventType) obj;
+        if (!this.name.equals(that.toString())) {
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+     * Returns a hash code value for the object.
+     *
+     * @return The hashcode
+     */
+    public int hashCode() {
+        return this.name.hashCode();
+    }
+
+    /**
+     * Ensures that serialization returns the unique instances.
+     * 
+     * @return The object.
+     * 
+     * @throws ObjectStreamException if there is a problem.
+     */
+    private Object readResolve() throws ObjectStreamException {
+        if (this.equals(ChartChangeEventType.GENERAL)) {
+            return ChartChangeEventType.GENERAL;
+        }
+        else if (this.equals(ChartChangeEventType.NEW_DATASET)) {
+            return ChartChangeEventType.NEW_DATASET;
+        }
+        else if (this.equals(ChartChangeEventType.DATASET_UPDATED)) {
+            return ChartChangeEventType.DATASET_UPDATED;
+        }
+        return null;
+    }
+    
+}
+```
+
+### PaintUtilities.java
+```java
+/* ===========================================================
+ * JFreeChart : a free chart library for the Java(tm) platform
+ * ===========================================================
+ *
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ *
+ * Project Info:  http://www.jfree.org/jfreechart/index.html
+ *
+ * This library is free software; you can redistribute it and/or modify it 
+ * under the terms of the GNU Lesser General Public License as published by 
+ * the Free Software Foundation; either version 2.1 of the License, or 
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but 
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
+ * USA.  
+ *
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * in the United States and other countries.]
+ *
+ * -------------------
+ * PaintUtilities.java
+ * -------------------
+ * (C) Copyright 2003-2007, by Object Refinery Limited.
+ *
+ * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   -;
+ *
+ * Changes
+ * -------
+ * 13-Nov-2003 : Version 1 (DG);
+ * 04-Oct-2004 : Renamed PaintUtils --> PaintUtilities (DG);
+ * 23-Feb-2005 : Rewrote equal() method with less indenting required (DG);
+ * 21-Jun-2007 : Copied from JCommon (DG);
+ *
+ */
+
+package org.jfree.chart.util;
+
+import java.awt.GradientPaint;
+import java.awt.Paint;
+import java.awt.Color;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+
+/**
+ * Utility code that relates to <code>Paint</code> objects.
+ */
+public class PaintUtilities {
+
+    /**
+     * Private constructor prevents object creation.
+     */
+    private PaintUtilities() {
+    }
+
+    /**
+     * Returns <code>true</code> if the two <code>Paint</code> objects are equal 
+     * OR both <code>null</code>.  This method handles
+     * <code>GradientPaint</code> as a special case.
+     *
+     * @param p1  paint 1 (<code>null</code> permitted).
+     * @param p2  paint 2 (<code>null</code> permitted).
+     *
+     * @return A boolean.
+     */
+    public static boolean equal(Paint p1, Paint p2) {
+
+        // handle cases where either or both arguments are null
+        if (p1 == null) {
+            return (p2 == null);   
+        }
+        if (p2 == null) {
+            return false;   
+        }
+        
+        boolean result = false;
+        // handle GradientPaint as a special case...
+        if (p1 instanceof GradientPaint && p2 instanceof GradientPaint) {
+            GradientPaint gp1 = (GradientPaint) p1;
+            GradientPaint gp2 = (GradientPaint) p2;
+            result = gp1.getColor1().equals(gp2.getColor1()) 
+                && gp1.getColor2().equals(gp2.getColor2())
+                && gp1.getPoint1().equals(gp2.getPoint1())    
+                && gp1.getPoint2().equals(gp2.getPoint2())
+                && gp1.isCyclic() == gp2.isCyclic()
+                && gp1.getTransparency() == gp1.getTransparency(); 
+        }
+        else {
+            result = p1.equals(p2);
+        }
+        return result;
+
+    }
+
+    /**
+     * Converts a color into a string. If the color is equal to one of the
+     * defined constant colors, that name is returned instead. Otherwise the
+     * color is returned as hex-string.
+     *
+     * @param c the color.
+     * @return the string for this color.
+     */
+    public static String colorToString (Color c)
+    {
+      try {
+          Field[] fields = Color.class.getFields();
+          for (int i = 0; i < fields.length; i++) {
+              Field f = fields[i];
+              if (Modifier.isPublic(f.getModifiers())
+                  && Modifier.isFinal(f.getModifiers())
+                  && Modifier.isStatic(f.getModifiers())) {
+                  String name = f.getName();
+                  Object oColor = f.get(null);
+                  if (oColor instanceof Color) {
+                      if (c.equals(oColor)) {
+                          return name;
+                      }
+                  }
+              }
+          }
+      }
+      catch (Exception e) {
+          //
+      }
+
+      // no defined constant color, so this must be a user defined color
+      String color = Integer.toHexString(c.getRGB() & 0x00ffffff);
+      StringBuffer retval = new StringBuffer(7);
+      retval.append("#");
+
+      int fillUp = 6 - color.length();
+      for (int i = 0; i < fillUp; i++) {
+          retval.append("0");
+      }
+
+      retval.append(color);
+      return retval.toString();
+    }
+
+    /**
+     * Converts a given string into a color.
+     *
+     * @param value the string, either a name or a hex-string.
+... (troncato a 150 righe su 176)
+```
+
+### RendererUtilities.java
+```java
+/* ===========================================================
+ * JFreeChart : a free chart library for the Java(tm) platform
+ * ===========================================================
+ *
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ *
+ * Project Info:  http://www.jfree.org/jfreechart/index.html
+ *
+ * This library is free software; you can redistribute it and/or modify it 
+ * under the terms of the GNU Lesser General Public License as published by 
+ * the Free Software Foundation; either version 2.1 of the License, or 
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but 
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
+ * USA.  
+ *
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * in the United States and other countries.]
+ *
+ * ----------------------
+ * RendererUtilities.java
+ * ----------------------
+ * (C) Copyright 2007, by Object Refinery Limited.
+ *
+ * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   -;
+ *
+ * Changes
+ * -------
+ * 19-Apr-2007 : Version 1 (DG);
+ * 
+ */
+
+package org.jfree.chart.renderer;
+
+import org.jfree.data.DomainOrder;
+import org.jfree.data.xy.XYDataset;
+
+/**
+ * Utility methods related to the rendering process.
+ * 
+ * @since 1.0.6
+ */
+public class RendererUtilities {
+    
+    /**
+     * Finds the lower index of the range of live items in the specified data
+     * series.  
+     * 
+     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param series  the series index.
+     * @param xLow  the lowest x-value in the live range.
+     * @param xHigh  the highest x-value in the live range.
+     * 
+     * @return The index of the required item.
+     * 
+     * @since 1.0.6
+     * 
+     * @see #findLiveItemsUpperBound(XYDataset, int, double, double)
+     */
+    public static int findLiveItemsLowerBound(XYDataset dataset, int series, 
+            double xLow, double xHigh) {
+        int itemCount = dataset.getItemCount(series);
+        if (itemCount <= 1) {
+            return 0;
+        }
+        if (dataset.getDomainOrder() == DomainOrder.ASCENDING) {
+            // for data in ascending order by x-value, we are (broadly) looking
+            // for the index of the highest x-value that is less that xLow
+            int low = 0;
+            int high = itemCount - 1;
+            int mid = (low + high) / 2;
+            double lowValue = dataset.getXValue(series, low);
+            if (lowValue >= xLow) {
+                // special case where the lowest x-value is >= xLow
+                return low;
+            }
+            double highValue = dataset.getXValue(series, high);
+            if (highValue < xLow) {
+                // special case where the highest x-value is < xLow
+                return high;
+            }
+            while (high - low > 1) {
+                double midV = dataset.getXValue(series, mid);
+                if (midV >= xLow) {
+                    high = mid;
+                }
+                else {
+                    low = mid;
+                }
+                mid = (low + high) / 2;
+            }
+            return mid;
+        }
+        else if (dataset.getDomainOrder() == DomainOrder.DESCENDING) {
+            // when the x-values are sorted in descending order, the lower
+            // bound is found by calculating relative to the xHigh value
+            int low = 0;
+            int high = itemCount - 1;
+            int mid = (low + high) / 2;
+            double lowValue = dataset.getXValue(series, low);
+            if (lowValue <= xHigh) {
+                return low;
+            }
+            double highValue = dataset.getXValue(series, high);
+            if (highValue > xHigh) {
+                return high;
+            }
+            while (high - low > 1) {
+                double midV = dataset.getXValue(series, mid);
+                if (midV > xHigh) {
+                    low = mid;
+                }
+                else {
+                    high = mid;
+                }
+                mid = (low + high) / 2;
+            }
+            return mid;
+        }
+        else {
+            // we don't know anything about the ordering of the x-values,
+            // but we can still skip any initial values that fall outside the
+            // range...
+            int index = 0;
+            // skip any items that don't need including...
+            while (index < itemCount && dataset.getXValue(series, index) 
+                    < xLow) {
+                index++;
+            }
+            return Math.max(0, index - 1);
+        }
+    }
+    
+    /**
+     * Finds the index of the item in the specified series that...
+     * 
+     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param series  the series index.
+     * @param xLow  the lowest x-value in the live range.
+     * @param xHigh  the highest x-value in the live range.
+     *
+     * @return The index of the required item.
+... (troncato a 150 righe su 247)
+```
+
+### RendererState.java
+```java
+/* ===========================================================
+ * JFreeChart : a free chart library for the Java(tm) platform
+ * ===========================================================
+ *
+ * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.
+ *
+ * Project Info:  http://www.jfree.org/jfreechart/index.html
+ *
+ * This library is free software; you can redistribute it and/or modify it 
+ * under the terms of the GNU Lesser General Public License as published by 
+ * the Free Software Foundation; either version 2.1 of the License, or 
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but 
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
+ * USA.  
+ *
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * in the United States and other countries.]
+ *
+ * ------------------
+ * RendererState.java
+ * ------------------
+ * (C) Copyright 2003-2007, by Object Refinery Limited.
+ *
+ * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   -;
+ *
+ * Changes:
+ * --------
+ * 07-Oct-2003 : Version 1 (DG);
+ * 09-Jun-2005 : Added a convenience method to access the entity 
+ *               collection (DG);
+ *
+ */
+
+package org.jfree.chart.renderer;
+
+import org.jfree.chart.ChartRenderingInfo;
+import org.jfree.chart.entity.EntityCollection;
+import org.jfree.chart.plot.PlotRenderingInfo;
+
+/**
+ * Represents the current state of a renderer.
+ */
+public class RendererState {
+    
+    /** The plot rendering info. */
+    private PlotRenderingInfo info;
+    
+    /**
+     * Creates a new state object.
+     * 
+     * @param info  the plot rendering info.
+     */
+    public RendererState(PlotRenderingInfo info) {
+        this.info = info;
+    }
+    
+    /**
+     * Returns the plot rendering info.
+     * 
+     * @return The info.
+     */
+    public PlotRenderingInfo getInfo() {
+        return this.info;
+    }
+    
+    /**
+     * A convenience method that returns a reference to the entity
+     * collection (may be <code>null</code>) being used to record
+     * chart entities.
+     * 
+     * @return The entity collection (possibly <code>null</code>).
+     */
+    public EntityCollection getEntityCollection() {
+        EntityCollection result = null;
+        if (this.info != null) {
+            ChartRenderingInfo owner = this.info.getOwner();
+            if (owner != null) {
+                result = owner.getEntityCollection(); 
+            }
+        }
+        return result;
+    }
+    
+}
+```
+## Test Falliti
+
+  • org.jfree.chart.plot.junit.CategoryPlotTests#testRemoveRangeMarker
+  • org.jfree.chart.plot.junit.CategoryPlotTests#testRemoveDomainMarker
+  • org.jfree.chart.plot.junit.XYPlotTests#testRemoveRangeMarker
+  • org.jfree.chart.plot.junit.XYPlotTests#testRemoveDomainMarker
+
+## Stack Trace
+
+```
+testRemoveRangeMarker(org.jfree.chart.plot.junit.XYPlotTests): Cannot invoke "java.util.ArrayList.remove(Object)" because "markers" is null
+Cannot invoke "java.util.ArrayList.remove(Object)" because "markers" is null
+java.lang.NullPointerException: Cannot invoke "java.util.ArrayList.remove(Object)" because "markers" is null
+	at org.jfree.chart.plot.XYPlot.removeRangeMarker(XYPlot.java:2529)
+	at org.jfree.chart.plot.XYPlot.removeRangeMarker(XYPlot.java:2498)
+	at org.jfree.chart.plot.XYPlot.removeRangeMarker(XYPlot.java:2481)
+	at org.jfree.chart.plot.XYPlot.removeRangeMarker(XYPlot.java:2465)
+	at org.jfree.chart.plot.junit.XYPlotTests.testRemoveRangeMarker(XYPlotTests.java:1037)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testRemoveDomainMarker(org.jfree.chart.plot.junit.XYPlotTests): Cannot invoke "java.util.ArrayList.remove(Object)" because "markers" is null
+Cannot invoke "java.util.ArrayList.remove(Object)" because "markers" is null
+java.lang.NullPointerException: Cannot invoke "java.util.ArrayList.remove(Object)" because "markers" is null
+	at org.jfree.chart.plot.XYPlot.removeDomainMarker(XYPlot.java:2293)
+	at org.jfree.chart.plot.XYPlot.removeDomainMarker(XYPlot.java:2265)
+	at org.jfree.chart.plot.XYPlot.removeDomainMarker(XYPlot.java:2248)
+	at org.jfree.chart.plot.XYPlot.removeDomainMarker(XYPlot.java:2232)
+	at org.jfree.chart.plot.junit.XYPlotTests.testRemoveDomainMarker(XYPlotTests.java:1028)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testRemoveRangeMarker(org.jfree.chart.plot.junit.CategoryPlotTests): Cannot invoke "java.util.ArrayList.remove(Object)" because "markers" is null
+Cannot invoke "java.util.ArrayList.remove(Object)" because "markers" is null
+java.lang.NullPointerException: Cannot invoke "java.util.ArrayList.remove(Object)" because "markers" is null
+	at org.jfree.chart.plot.CategoryPlot.removeRangeMarker(CategoryPlot.java:2448)
+	at org.jfree.chart.plot.CategoryPlot.removeRangeMarker(CategoryPlot.java:2415)
+	at org.jfree.chart.plot.CategoryPlot.removeRangeMarker(CategoryPlot.java:2396)
+	at org.jfree.chart.plot.CategoryPlot.removeRangeMarker(CategoryPlot.java:2378)
+	at org.jfree.chart.plot.junit.CategoryPlotTests.testRemoveRangeMarker(CategoryPlotTests.java:780)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testRemoveDomainMarker(org.jfree.chart.plot.junit.CategoryPlotTests): Cannot invoke "java.util.ArrayList.remove(Object)" because "markers" is null
+Cannot invoke "java.util.ArrayList.remove(Object)" because "markers" is null
+java.lang.NullPointerException: Cannot invoke "java.util.ArrayList.remove(Object)" because "markers" is null
+	at org.jfree.chart.plot.CategoryPlot.removeDomainMarker(CategoryPlot.java:2166)
+	at org.jfree.chart.plot.CategoryPlot.removeDomainMarker(CategoryPlot.java:2139)
+	at org.jfree.chart.plot.CategoryPlot.removeDomainMarker(CategoryPlot.java:2122)
+	at org.jfree.chart.plot.CategoryPlot.removeDomainMarker(CategoryPlot.java:2106)
+	at org.jfree.chart.plot.junit.CategoryPlotTests.testRemoveDomainMarker(CategoryPlotTests.java:771)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+```
+
+## Istruzioni
+
+Analizza il bug e restituisci i metodi corretti, seguendo queste regole TASSATIVE:
+
+1. **Un FILE block per metodo**: se devi correggere N metodi, emetti N blocchi FILE separati.
+   Ogni blocco deve contenere UN SOLO metodo completo.
+
+2. **Indentazione originale**: mantieni ESATTAMENTE l'indentazione del codice originale.
+   La firma del metodo DEVE iniziare con gli stessi spazi del file originale.
+
+3. **La riga `// ◄ FIX THIS LINE`** indica dove l'NPE si manifesta. Rimuovi questo commento
+   nella risposta — restituisci solo codice Java puro.
+
+4. **Null-safe equality OBBLIGATORIA**: se il metodo confronta due valori che possono essere null,
+   usa `java.util.Objects.equals(a, b)` — questa funzione ritorna `true` se entrambi sono null,
+   mentre `a.equals(b)` lancia NPE se `a` è null, e `a != null && a.equals(b)` ritorna `false`
+   se entrambi sono null (sbagliato semanticamente).
+   Esempio corretto:
+   ```java
+   return java.util.Objects.equals(doubleMetaphone(v1, alt), doubleMetaphone(v2, alt));
+   ```
+
+5. **NON modificare metodi che non causano il bug**: se il metodo `doubleMetaphone` ritorna
+   null per input null, questo è il comportamento CORRETTO e atteso dai test. Non cambiarlo.
+
+6. NON modificare file di test.

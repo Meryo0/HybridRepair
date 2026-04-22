@@ -1,0 +1,22 @@
+--- org/jfree/chart/plot/XYPlot.java
++++ org/jfree/chart/plot/XYPlot.java
+@@ -2279,7 +2279,7 @@
+      *
+      * @since 1.0.10
+      */
+-    public boolean removeDomainMarker(int index, Marker marker, Layer layer,
++public boolean removeDomainMarker(int index, Marker marker, Layer layer,
+     		boolean notify) {
+         ArrayList markers;
+         if (layer == Layer.FOREGROUND) {
+--- org/jfree/chart/plot/XYPlot.java
++++ org/jfree/chart/plot/XYPlot.java
+@@ -2512,7 +2512,7 @@
+      *
+      * @since 1.0.10
+      */
+-    public boolean removeRangeMarker(int index, Marker marker, Layer layer,
++public boolean removeRangeMarker(int index, Marker marker, Layer layer,
+     		boolean notify) {
+         if (marker == null) {
+             throw new IllegalArgumentException("Null 'marker' argument.");

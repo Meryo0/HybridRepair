@@ -1,0 +1,18 @@
+{
+  "bug_id": "JacksonCore-8",
+  "success": true,
+  "winning_attempt": 1,
+  "total_attempts": 1,
+  "test_result": {
+    "status": "PASS",
+    "total_tests": 5,
+    "failed_tests": 0,
+    "failing_test_names": [],
+    "previously_failing_now_passing": [
+      "com.fasterxml.jackson.core.util.TestTextBuffer"
+    ],
+    "compile_output": "",
+    "test_output": "JUnit version 4.13.2\n.....\nTime: 0.052\n\nOK (5 tests)\n\n"
+  },
+  "timestamp": "2026-04-20T14:36:10.767821+00:00"
+}

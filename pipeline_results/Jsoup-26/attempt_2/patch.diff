@@ -1,0 +1,24 @@
+--- org/jsoup/nodes/Document.java
++++ org/jsoup/nodes/Document.java
+@@ -55,8 +55,14 @@
+      Accessor to the document's {@code body} element.
+      @return {@code body}
+      */
+-    public Element body() {
+-        return findFirstElementByTagName("body", this);
++public Element body() {
++        Element body = findFirstElementByTagName("body", this);
++        if (body == null) {
++            // Return a placeholder empty body element instead of throwing an exception
++            body = new Element(Tag.valueOf("body"), baseUri());
++            appendChild(body);
++        }
++        return body;
+     }
+ 
+     /**
+@@ -358,4 +364,3 @@
+         return this;
+     }
+ }
+-

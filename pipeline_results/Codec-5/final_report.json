@@ -1,0 +1,12 @@
+{
+  "bug_id": "Codec-5",
+  "success": false,
+  "winning_attempt": null,
+  "total_attempts": 3,
+  "test_result": {
+    "status": "FAIL",
+    "total_attempts": 3,
+    "last_failure": ""
+  },
+  "timestamp": "2026-04-20T14:33:41.765534+00:00"
+}

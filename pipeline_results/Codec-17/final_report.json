@@ -1,0 +1,18 @@
+{
+  "bug_id": "Codec-17",
+  "success": true,
+  "winning_attempt": 1,
+  "total_attempts": 1,
+  "test_result": {
+    "status": "PASS",
+    "total_tests": 18,
+    "failed_tests": 0,
+    "failing_test_names": [],
+    "previously_failing_now_passing": [
+      "org.apache.commons.codec.binary.StringUtilsTest"
+    ],
+    "compile_output": "",
+    "test_output": "JUnit version 4.13.2\n..................\nTime: 0.028\n\nOK (18 tests)\n\n"
+  },
+  "timestamp": "2026-04-20T14:49:44.979866+00:00"
+}

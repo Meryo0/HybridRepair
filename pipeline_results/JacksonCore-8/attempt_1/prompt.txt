@@ -1,0 +1,801 @@
+Bug ID: JacksonCore-8  |  Tentativo 1
+
+## Fault Locations (LogicFL)
+
+  • com.fasterxml.jackson.core.util.TextBuffer — riga 307  [✓]
+  • com.fasterxml.jackson.core.util.TextBuffer — riga 301  [✓]
+  • com.fasterxml.jackson.core.util.TextBuffer — riga 302  [✓]
+  • com.fasterxml.jackson.core.util.TextBuffer — riga 160  [✓]
+  • com.fasterxml.jackson.core.util.TextBuffer — riga 162  [✓]
+
+## Catena Causale (LogicFL Prolog)
+
+NPE at line(test_text_buffer_1, 83) / Null Expression - test_text_buffer_1_expr7['tb.getTextBuffer()']
+	 can be caused by 
+f__current_segment_41['_currentSegment'] - line(text_buffer_1, 307).
+
+NPE at line(test_text_buffer_1, 83) / Null Expression - test_text_buffer_1_expr7['tb.getTextBuffer()']
+	 can be caused by 
+f__input_buffer_30['_inputBuffer'] - line(text_buffer_1, 301).
+
+NPE at line(test_text_buffer_1, 83) / Null Expression - test_text_buffer_1_expr7['tb.getTextBuffer()']
+	 can be caused by 
+f__result_array_32['_resultArray'] - line(text_buffer_1, 302).
+
+NPE at line(test_text_buffer_1, 83) / Null Expression - test_text_buffer_1_expr7['tb.getTextBuffer()']
+	 can be caused by 
+text_buffer_1_literal6[null] - line(text_buffer_1, 160).
+
+NPE at line(test_text_buffer_1, 83) / Null Expression - test_text_buffer_1_expr7['tb.getTextBuffer()']
+	 can be caused by 
+text_buffer_1_literal8[null] - line(text_buffer_1, 162).
+
+## Metodi Buggy
+
+### FILE: com/fasterxml/jackson/core/util/TextBuffer.java  (righe 154–168, fault alla riga 160)
+```java
+    public void resetWithEmpty()
+    {
+        _inputStart = -1; // indicates shared buffer not used
+        _currentSize = 0;
+        _inputLen = 0;
+
+        _inputBuffer = null;  // ◄ FIX THIS LINE (NPE manifests here)
+        _resultString = null;
+        _resultArray = null;
+
+        // And then reset internal input buffers, if necessary:
+        if (_hasSegments) {
+            clearSegments();
+        }
+    }
+```
+
+### FILE: com/fasterxml/jackson/core/util/TextBuffer.java  (righe 154–168, fault alla riga 162)
+```java
+    public void resetWithEmpty()
+    {
+        _inputStart = -1; // indicates shared buffer not used
+        _currentSize = 0;
+        _inputLen = 0;
+
+        _inputBuffer = null;
+        _resultString = null;
+        _resultArray = null;  // ◄ FIX THIS LINE (NPE manifests here)
+
+        // And then reset internal input buffers, if necessary:
+        if (_hasSegments) {
+            clearSegments();
+        }
+    }
+```
+
+### FILE: com/fasterxml/jackson/core/util/TextBuffer.java  (righe 298–310, fault alla riga 301)
+```java
+    public char[] getTextBuffer()
+    {
+        // Are we just using shared input buffer?
+        if (_inputStart >= 0) return _inputBuffer;  // ◄ FIX THIS LINE (NPE manifests here)
+        if (_resultArray != null)  return _resultArray;
+        if (_resultString != null) {
+            return (_resultArray = _resultString.toCharArray());
+        }
+        // Nope; but does it fit in just one segment?
+        if (!_hasSegments)  return _currentSegment;
+        // Nope, need to have/create a non-segmented array and return it
+        return contentsAsArray();
+    }
+```
+
+### FILE: com/fasterxml/jackson/core/util/TextBuffer.java  (righe 298–310, fault alla riga 302)
+```java
+    public char[] getTextBuffer()
+    {
+        // Are we just using shared input buffer?
+        if (_inputStart >= 0) return _inputBuffer;
+        if (_resultArray != null)  return _resultArray;  // ◄ FIX THIS LINE (NPE manifests here)
+        if (_resultString != null) {
+            return (_resultArray = _resultString.toCharArray());
+        }
+        // Nope; but does it fit in just one segment?
+        if (!_hasSegments)  return _currentSegment;
+        // Nope, need to have/create a non-segmented array and return it
+        return contentsAsArray();
+    }
+```
+
+### FILE: com/fasterxml/jackson/core/util/TextBuffer.java  (righe 298–310, fault alla riga 307)
+```java
+    public char[] getTextBuffer()
+    {
+        // Are we just using shared input buffer?
+        if (_inputStart >= 0) return _inputBuffer;
+        if (_resultArray != null)  return _resultArray;
+        if (_resultString != null) {
+            return (_resultArray = _resultString.toCharArray());
+        }
+        // Nope; but does it fit in just one segment?
+        if (!_hasSegments)  return _currentSegment;  // ◄ FIX THIS LINE (NPE manifests here)
+        // Nope, need to have/create a non-segmented array and return it
+        return contentsAsArray();
+    }
+```
+
+## File Correlati (stesso progetto — potrebbero servire per il fix)
+
+### BufferRecycler.java
+```java
+package com.fasterxml.jackson.core.util;
+
+/**
+ * This is a small utility class, whose main functionality is to allow
+ * simple reuse of raw byte/char buffers. It is usually used through
+ * <code>ThreadLocal</code> member of the owning class pointing to
+ * instance of this class through a <code>SoftReference</code>. The
+ * end result is a low-overhead GC-cleanable recycling: hopefully
+ * ideal for use by stream readers.
+ */
+public class BufferRecycler
+{
+    /**
+     * Buffer used for reading byte-based input.
+     */
+    public final static int BYTE_READ_IO_BUFFER = 0;
+
+    /**
+     * Buffer used for temporarily storing encoded content; used
+     * for example by UTF-8 encoding writer
+     */
+    public final static int BYTE_WRITE_ENCODING_BUFFER = 1;
+
+    /**
+     * Buffer used for temporarily concatenating output; used for
+     * example when requesting output as byte array.
+     */
+    public final static int BYTE_WRITE_CONCAT_BUFFER = 2;
+
+    /**
+     * Buffer used for concatenating binary data that is either being
+     * encoded as base64 output, or decoded from base64 input.
+     *
+     * @since 2.1
+     */
+    public final static int BYTE_BASE64_CODEC_BUFFER = 3;
+
+    public final static int CHAR_TOKEN_BUFFER = 0;  // Tokenizable input
+    public final static int CHAR_CONCAT_BUFFER = 1; // concatenated output
+    public final static int CHAR_TEXT_BUFFER = 2; // Text content from input
+    public final static int CHAR_NAME_COPY_BUFFER = 3; // Temporary buffer for getting name characters
+
+    // Buffer lengths, defined in 2.4 (smaller before that)
+
+    private final static int[] BYTE_BUFFER_LENGTHS = new int[] { 8000, 8000, 2000, 2000 };
+    private final static int[] CHAR_BUFFER_LENGTHS = new int[] { 4000, 4000, 200, 200 };
+    
+    final protected byte[][] _byteBuffers;
+    final protected char[][] _charBuffers;
+
+    /*
+    /**********************************************************
+    /* Construction
+    /**********************************************************
+     */
+    
+    /**
+     * Default constructor used for creating instances of this default
+     * implementation.
+     */
+    public BufferRecycler() {
+        this(4, 4);
+    }
+
+    /**
+     * Alternate constructor to be used by sub-classes, to allow customization
+     * of number of low-level buffers in use.
+     * 
+     * @since 2.4
+     */
+    protected BufferRecycler(int bbCount, int cbCount) {
+        _byteBuffers = new byte[bbCount][];
+        _charBuffers = new char[cbCount][];
+    }
+
+    /*
+    /**********************************************************
+    /* Public API, byte buffers
+    /**********************************************************
+     */
+    
+    /**
+     * @param ix One of <code>READ_IO_BUFFER</code> constants.
+     */
+    public final byte[] allocByteBuffer(int ix) {
+        return allocByteBuffer(ix, 0);
+    }
+
+    public byte[] allocByteBuffer(int ix, int minSize) {
+        final int DEF_SIZE = byteBufferLength(ix);
+        if (minSize < DEF_SIZE) {
+            minSize = DEF_SIZE;
+        }
+        byte[] buffer = _byteBuffers[ix];
+        if (buffer == null || buffer.length < minSize) {
+            buffer = balloc(minSize);
+        } else {
+            _byteBuffers[ix] = null;
+        }
+        return buffer;
+    }
+
+    public final void releaseByteBuffer(int ix, byte[] buffer) {
+        _byteBuffers[ix] = buffer;
+    }
+
+    /*
+    /**********************************************************
+    /* Public API, char buffers
+    /**********************************************************
+     */
+    
+    public final char[] allocCharBuffer(int ix) {
+        return allocCharBuffer(ix, 0);
+    }
+
+    public char[] allocCharBuffer(int ix, int minSize) {
+        final int DEF_SIZE = charBufferLength(ix);
+        if (minSize < DEF_SIZE) {
+            minSize = DEF_SIZE;
+        }
+        char[] buffer = _charBuffers[ix];
+        if (buffer == null || buffer.length < minSize) {
+            buffer = calloc(minSize);
+        } else {
+            _charBuffers[ix] = null;
+        }
+        return buffer;
+    }
+
+    public void releaseCharBuffer(int ix, char[] buffer) {
+        _charBuffers[ix] = buffer;
+    }
+
+    /*
+    /**********************************************************
+    /* Overridable helper methods
+    /**********************************************************
+     */
+
+    protected int byteBufferLength(int ix) {
+        return BYTE_BUFFER_LENGTHS[ix];
+    }
+
+    protected int charBufferLength(int ix) {
+        return CHAR_BUFFER_LENGTHS[ix];
+    }
+    
+    /*
+    /**********************************************************
+... (troncato a 150 righe su 157)
+```
+
+### NumberInput.java
+```java
+package com.fasterxml.jackson.core.io;
+
+import java.math.BigDecimal;
+
+public final class NumberInput
+{
+    /**
+     * Textual representation of a double constant that can cause nasty problems
+     * with JDK (see http://www.exploringbinary.com/java-hangs-when-converting-2-2250738585072012e-308).
+     */
+    public final static String NASTY_SMALL_DOUBLE = "2.2250738585072012e-308";
+
+    /**
+     * Constants needed for parsing longs from basic int parsing methods
+     */
+    final static long L_BILLION = 1000000000;
+
+    final static String MIN_LONG_STR_NO_SIGN = String.valueOf(Long.MIN_VALUE).substring(1);
+    final static String MAX_LONG_STR = String.valueOf(Long.MAX_VALUE);
+
+    /**
+     * Fast method for parsing integers that are known to fit into
+     * regular 32-bit signed int type. This means that length is
+     * between 1 and 9 digits (inclusive)
+     *<p>
+     * Note: public to let unit tests call it
+     */
+    public static int parseInt(char[] ch, int off, int len)
+    {
+        int num = ch[off] - '0';
+
+        if (len > 4) {
+            num = (num * 10) + (ch[++off] - '0');
+            num = (num * 10) + (ch[++off] - '0');
+            num = (num * 10) + (ch[++off] - '0');
+            num = (num * 10) + (ch[++off] - '0');
+            len -= 4;
+            if (len > 4) {
+                num = (num * 10) + (ch[++off] - '0');
+                num = (num * 10) + (ch[++off] - '0');
+                num = (num * 10) + (ch[++off] - '0');
+                num = (num * 10) + (ch[++off] - '0');
+                return num;
+            }
+        }
+        if (len > 1) {
+            num = (num * 10) + (ch[++off] - '0');
+            if (len > 2) {
+                num = (num * 10) + (ch[++off] - '0');
+                if (len > 3) {
+                    num = (num * 10) + (ch[++off] - '0');
+                }
+            }
+        }
+        return num;
+    }
+
+    /**
+     * Helper method to (more) efficiently parse integer numbers from
+     * String values.
+     */
+    public static int parseInt(String s)
+    {
+        /* Ok: let's keep strategy simple: ignoring optional minus sign,
+         * we'll accept 1 - 9 digits and parse things efficiently;
+         * otherwise just defer to JDK parse functionality.
+         */
+        char c = s.charAt(0);
+        int len = s.length();
+        boolean neg = (c == '-');
+        int offset = 1;
+        // must have 1 - 9 digits after optional sign:
+        // negative?
+        if (neg) {
+            if (len == 1 || len > 10) {
+                return Integer.parseInt(s);
+            }
+            c = s.charAt(offset++);
+        } else {
+            if (len > 9) {
+                return Integer.parseInt(s);
+            }
+        }
+        if (c > '9' || c < '0') {
+            return Integer.parseInt(s);
+        }
+        int num = c - '0';
+        if (offset < len) {
+            c = s.charAt(offset++);
+            if (c > '9' || c < '0') {
+                return Integer.parseInt(s);
+            }
+            num = (num * 10) + (c - '0');
+            if (offset < len) {
+                c = s.charAt(offset++);
+                if (c > '9' || c < '0') {
+                    return Integer.parseInt(s);
+                }
+                num = (num * 10) + (c - '0');
+                // Let's just loop if we have more than 3 digits:
+                if (offset < len) {
+                    do {
+                        c = s.charAt(offset++);
+                        if (c > '9' || c < '0') {
+                            return Integer.parseInt(s);
+                        }
+                        num = (num * 10) + (c - '0');
+                    } while (offset < len);
+                }
+            }
+        }
+        return neg ? -num : num;
+    }
+    
+    public static long parseLong(char[] ch, int off, int len)
+    {
+        // Note: caller must ensure length is [10, 18]
+        int len1 = len-9;
+        long val = parseInt(ch, off, len1) * L_BILLION;
+        return val + (long) parseInt(ch, off+len1, 9);
+    }
+
+    public static long parseLong(String s)
+    {
+        /* Ok, now; as the very first thing, let's just optimize case of "fake longs";
+         * that is, if we know they must be ints, call int parsing
+         */
+        int length = s.length();
+        if (length <= 9) {
+            return (long) parseInt(s);
+        }
+        // !!! TODO: implement efficient 2-int parsing...
+        return Long.parseLong(s);
+    }
+    
+    /**
+     * Helper method for determining if given String representation of
+     * an integral number would fit in 64-bit Java long or not.
+     * Note that input String must NOT contain leading minus sign (even
+     * if 'negative' is set to true).
+     *
+     * @param negative Whether original number had a minus sign (which is
+     *    NOT passed to this method) or not
+     */
+    public static boolean inLongRange(char[] ch, int off, int len,
+            boolean negative)
+    {
+        String cmpStr = negative ? MIN_LONG_STR_NO_SIGN : MAX_LONG_STR;
+        int cmpLen = cmpStr.length();
+        if (len < cmpLen) return true;
+... (troncato a 150 righe su 307)
+```
+
+### CharacterEscapes.java
+```java
+package com.fasterxml.jackson.core.io;
+
+import java.util.Arrays;
+
+import com.fasterxml.jackson.core.SerializableString;
+
+/**
+ * Abstract base class that defines interface for customizing character
+ * escaping aspects for String values, for formats that use escaping.
+ * For JSON this applies to both property names and String values.
+ */
+@SuppressWarnings("serial")
+public abstract class CharacterEscapes
+    implements java.io.Serializable // since 2.1
+{
+    /**
+     * Value used for lookup tables to indicate that matching characters
+     * do not need to be escaped.
+     */
+    public final static int ESCAPE_NONE = 0;
+
+    /**
+     * Value used for lookup tables to indicate that matching characters
+     * are to be escaped using standard escaping; for JSON this means
+     * (for example) using "backslash - u" escape method.
+     */
+    public final static int ESCAPE_STANDARD = -1;
+
+    /**
+     * Value used for lookup tables to indicate that matching characters
+     * will need custom escapes; and that another call
+     * to {@link #getEscapeSequence} is needed to figure out exact escape
+     * sequence to output.
+     */
+    public final static int ESCAPE_CUSTOM = -2;
+    
+    /**
+     * Method generators can call to get lookup table for determining
+     * escape handling for first 128 characters of Unicode (ASCII
+     * characters. Caller is not to modify contents of this array, since
+     * this is expected to be a shared copy.
+     * 
+     * @return Array with size of at least 128, where first 128 entries
+     *    have either one of <code>ESCAPE_xxx</code> constants, or non-zero positive
+     *    integer (meaning of which is data format specific; for JSON it means
+     *    that combination of backslash and character with that value is to be used)
+     *    to indicate that specific escape sequence is to be used.
+     */
+    public abstract int[] getEscapeCodesForAscii();
+
+    /**
+     * Method generators can call to get lookup table for determining
+     * exact escape sequence to use for given character.
+     * It can be called for any character, but typically is called for
+     * either for ASCII characters for which custom escape
+     * sequence is needed; or for any non-ASCII character.
+     */
+    public abstract SerializableString getEscapeSequence(int ch);
+
+    /**
+     * Helper method that can be used to get a copy of standard JSON
+     * escape definitions; this is useful when just wanting to slightly
+     * customize definitions. Caller can modify this array as it sees
+     * fit and usually returns modified instance via {@link #getEscapeCodesForAscii}
+     */
+    public static int[] standardAsciiEscapesForJSON()
+    {
+        int[] esc = CharTypes.get7BitOutputEscapes();
+        return Arrays.copyOf(esc, esc.length);
+    }
+}
+```
+
+### SegmentedStringWriter.java
+```java
+package com.fasterxml.jackson.core.io;
+
+import java.io.*;
+
+import com.fasterxml.jackson.core.util.BufferRecycler;
+import com.fasterxml.jackson.core.util.TextBuffer;
+
+/**
+ * Efficient alternative to {@link StringWriter}, based on using segmented
+ * internal buffer. Initial input buffer is also recyclable.
+ *<p>
+ * This class is most useful when serializing JSON content as a String:
+ * if so, instance of this class can be given as the writer to
+ * <code>JsonGenerator</code>.
+ */
+public final class SegmentedStringWriter extends Writer
+{
+    final protected TextBuffer _buffer;
+
+    public SegmentedStringWriter(BufferRecycler br) {
+        super();
+        _buffer = new TextBuffer(br);
+    }
+
+    /*
+    /**********************************************************
+    /* java.io.Writer implementation
+    /**********************************************************
+     */
+
+    @Override
+    public Writer append(char c) {
+        write(c);
+        return this;
+    }
+
+    @Override
+    public Writer append(CharSequence csq) {
+        String str = csq.toString();
+        _buffer.append(str, 0, str.length());
+        return this;
+    }
+
+    @Override
+    public Writer append(CharSequence csq, int start, int end) {
+        String str = csq.subSequence(start, end).toString();
+        _buffer.append(str, 0, str.length());
+        return this;
+    }
+
+    @Override public void close() { } // NOP
+    @Override public void flush() { } // NOP
+
+    @Override
+    public void write(char[] cbuf) { _buffer.append(cbuf, 0, cbuf.length); }
+
+    @Override
+    public void write(char[] cbuf, int off, int len) { _buffer.append(cbuf, off, len); }
+
+    @Override
+    public void write(int c) { _buffer.append((char) c); }
+
+    @Override
+    public void write(String str) { _buffer.append(str, 0, str.length()); }
+
+    @Override
+    public void write(String str, int off, int len) { _buffer.append(str, off, len); }
+
+    /*
+    /**********************************************************
+    /* Extended API
+    /**********************************************************
+     */
+
+    /**
+     * Main access method that will construct a String that contains
+     * all the contents, release all internal buffers we may have,
+     * and return result String.
+     * Note that the method is not idempotent -- if called second time,
+     * will just return an empty String.
+     */
+    public String getAndClear() {
+        String result = _buffer.contentsAsString();
+        _buffer.releaseBuffers();
+        return result;
+    }
+}
+```
+
+### JsonParserSequence.java
+```java
+package com.fasterxml.jackson.core.util;
+
+import java.io.IOException;
+import java.util.*;
+
+import com.fasterxml.jackson.core.*;
+
+/**
+ * Helper class that can be used to sequence multiple physical
+ * {@link JsonParser}s to create a single logical sequence of
+ * tokens, as a single {@link JsonParser}.
+ *<p>
+ * Fairly simple use of {@link JsonParserDelegate}: only need
+ * to override {@link #nextToken} to handle transition
+ */
+public class JsonParserSequence extends JsonParserDelegate
+{
+    /**
+     * Parsers other than the first one (which is initially assigned
+     * as delegate)
+     */
+    protected final JsonParser[] _parsers;
+    
+    /**
+     * Index of the next parser in {@link #_parsers}.
+     */
+    protected int _nextParser;
+    
+    /*
+     *******************************************************
+     * Construction
+     *******************************************************
+     */
+
+    protected JsonParserSequence(JsonParser[] parsers)
+    {
+        super(parsers[0]);
+        _parsers = parsers;
+        _nextParser = 1;
+    }
+
+    /**
+     * Method that will construct a parser (possibly a sequence) that
+     * contains all given sub-parsers.
+     * All parsers given are checked to see if they are sequences: and
+     * if so, they will be "flattened", that is, contained parsers are
+     * directly added in a new sequence instead of adding sequences
+     * within sequences. This is done to minimize delegation depth,
+     * ideally only having just a single level of delegation.
+     */
+    public static JsonParserSequence createFlattened(JsonParser first, JsonParser second)
+    {
+        if (!(first instanceof JsonParserSequence || second instanceof JsonParserSequence)) {
+            // simple:
+            return new JsonParserSequence(new JsonParser[] { first, second });
+        }
+        ArrayList<JsonParser> p = new ArrayList<JsonParser>();
+        if (first instanceof JsonParserSequence) {
+            ((JsonParserSequence) first).addFlattenedActiveParsers(p);
+        } else {
+            p.add(first);
+        }
+        if (second instanceof JsonParserSequence) {
+            ((JsonParserSequence) second).addFlattenedActiveParsers(p);
+        } else {
+            p.add(second);
+        }
+        return new JsonParserSequence(p.toArray(new JsonParser[p.size()]));
+    }
+
+    @SuppressWarnings("resource")
+    protected void addFlattenedActiveParsers(List<JsonParser> result)
+    {
+        for (int i = _nextParser-1, len = _parsers.length; i < len; ++i) {
+            JsonParser p = _parsers[i];
+            if (p instanceof JsonParserSequence) {
+                ((JsonParserSequence) p).addFlattenedActiveParsers(result);
+            } else {
+                result.add(p);
+            }
+        }
+    }
+    
+    /*
+     *******************************************************
+     * Overridden methods, needed: cases where default
+     * delegation does not work
+     *******************************************************
+     */
+    
+    @Override
+    public void close() throws IOException {
+        do { delegate.close(); } while (switchToNext());
+    }
+
+    @Override
+    public JsonToken nextToken() throws IOException, JsonParseException
+    {
+        JsonToken t = delegate.nextToken();
+        if (t != null) return t;
+        while (switchToNext()) {
+            t = delegate.nextToken();
+            if (t != null) return t;
+        }
+        return null;
+    }
+
+    /*
+    /*******************************************************
+    /* Additional extended API
+    /*******************************************************
+     */
+
+    /**
+     * Method that is most useful for debugging or testing;
+     * returns actual number of underlying parsers sequence
+     * was constructed with (nor just ones remaining active)
+     */
+    public int containedParsersCount() {
+        return _parsers.length;
+    }
+    
+    /*
+    /*******************************************************
+    /* Helper methods
+    /*******************************************************
+     */
+
+    /**
+     * Method that will switch active parser from the current one
+     * to next parser in sequence, if there is another parser left,
+     * making this the new delegate. Old delegate is returned if
+     * switch succeeds.
+     * 
+     * @return True if switch succeeded; false otherwise
+     */
+    protected boolean switchToNext()
+    {
+        if (_nextParser >= _parsers.length) {
+            return false;
+        }
+        delegate = _parsers[_nextParser++];
+        return true;
+    }
+}
+```
+## Test Falliti
+
+  • com.fasterxml.jackson.core.util.TestTextBuffer#testEmpty
+
+## Stack Trace
+
+```
+testEmpty(com.fasterxml.jackson.core.util.TestTextBuffer): Cannot read the array length because the return value of "com.fasterxml.jackson.core.util.TextBuffer.getTextBuffer()" is null
+Cannot read the array length because the return value of "com.fasterxml.jackson.core.util.TextBuffer.getTextBuffer()" is null
+java.lang.NullPointerException: Cannot read the array length because the return value of "com.fasterxml.jackson.core.util.TextBuffer.getTextBuffer()" is null
+	at com.fasterxml.jackson.core.util.TestTextBuffer.testEmpty(TestTextBuffer.java:83)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+```
+
+## Istruzioni
+
+Analizza il bug e restituisci i metodi corretti, seguendo queste regole TASSATIVE:
+
+1. **Un FILE block per metodo**: se devi correggere N metodi, emetti N blocchi FILE separati.
+   Ogni blocco deve contenere UN SOLO metodo completo.
+
+2. **Indentazione originale**: mantieni ESATTAMENTE l'indentazione del codice originale.
+   La firma del metodo DEVE iniziare con gli stessi spazi del file originale.
+
+3. **La riga `// ◄ FIX THIS LINE`** indica dove l'NPE si manifesta. Rimuovi questo commento
+   nella risposta — restituisci solo codice Java puro.
+
+4. **Null-safe equality OBBLIGATORIA**: se il metodo confronta due valori che possono essere null,
+   usa `java.util.Objects.equals(a, b)` — questa funzione ritorna `true` se entrambi sono null,
+   mentre `a.equals(b)` lancia NPE se `a` è null, e `a != null && a.equals(b)` ritorna `false`
+   se entrambi sono null (sbagliato semanticamente).
+   Esempio corretto:
+   ```java
+   return java.util.Objects.equals(doubleMetaphone(v1, alt), doubleMetaphone(v2, alt));
+   ```
+
+5. **NON modificare metodi che non causano il bug**: se il metodo `doubleMetaphone` ritorna
+   null per input null, questo è il comportamento CORRETTO e atteso dai test. Non cambiarlo.
+
+6. NON modificare file di test.

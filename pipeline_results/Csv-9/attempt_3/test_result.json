@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "total_tests": 17,
+  "failed_tests": 0,
+  "failing_test_names": [],
+  "previously_failing_now_passing": [
+    "org.apache.commons.csv.CSVRecordTest"
+  ],
+  "compile_output": "",
+  "test_output": "JUnit version 4.13.2\n.................\nTime: 0.011\n\nOK (17 tests)\n\n"
+}

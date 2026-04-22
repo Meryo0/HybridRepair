@@ -1,0 +1,12 @@
+{
+  "bug_id": "JacksonDatabind-107",
+  "success": false,
+  "winning_attempt": null,
+  "total_attempts": 3,
+  "test_result": {
+    "status": "FAIL",
+    "total_attempts": 3,
+    "last_failure": "JUnit version 4.13.1\n.E.\nTime: 0.235\nThere was 1 failure:\n1) testWithDeserializationProblemHandler(com.fasterxml.jackson.databind.deser.filter.ProblemHandlerUnknownTypeId2221Test)\ncom.fasterxml.jackson.databind.JsonMappingException: No default implementation specified for type id resolver 'com.fasterxml.jackson.databind.jsontype.impl.ClassNameIdResolver'\n at [Source: (String)\"{\n          \"_class\":\"com.fasterxml.jackson.databind.deser.filter.ProblemHandlerUnknownTypeId2221Test$GenericContent\",\n  "
+  },
+  "timestamp": "2026-04-20T14:53:44.106317+00:00"
+}

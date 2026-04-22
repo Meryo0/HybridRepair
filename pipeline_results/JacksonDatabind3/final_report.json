@@ -1,0 +1,10 @@
+{
+  "bug_id": "JacksonDatabind3",
+  "success": false,
+  "winning_attempt": null,
+  "total_attempts": 0,
+  "test_result": {
+    "error": "Bug directory not found: /home/mario/Desktop/LogicFL/defects4j/JacksonDatabind3\nAvailable bugs: check /home/mario/Desktop/LogicFL/defects4j"
+  },
+  "timestamp": "2026-04-20T14:36:35.752403+00:00"
+}

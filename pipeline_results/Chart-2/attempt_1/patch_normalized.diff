@@ -1,0 +1,43 @@
+--- org/jfree/data/general/DatasetUtilities.java
++++ org/jfree/data/general/DatasetUtilities.java
+@@ -737,7 +737,7 @@
+      *
+      * @return The range (possibly <code>null</code>).
+      */
+-    public static Range iterateDomainBounds(XYDataset dataset,
++public static Range iterateDomainBounds(XYDataset dataset,
+                                             boolean includeInterval) {
+         if (dataset == null) {
+             throw new IllegalArgumentException("Null 'dataset' argument.");
+@@ -776,8 +776,8 @@
+                 }
+             }
+         }
+-        if (minimum > maximum) {
+-            return null;
++        if (minimum > maximum || minimum == Double.POSITIVE_INFINITY) {
++            return new Range(0.0, 0.0);
+         }
+         else {
+             return new Range(minimum, maximum);
+
+--- org/jfree/data/general/DatasetUtilities.java
++++ org/jfree/data/general/DatasetUtilities.java
+@@ -1226,7 +1226,7 @@
+      *
+      * @since 1.0.10
+      */
+-    public static Range iterateRangeBounds(XYDataset dataset,
++public static Range iterateRangeBounds(XYDataset dataset,
+             boolean includeInterval) {
+         double minimum = Double.POSITIVE_INFINITY;
+         double maximum = Double.NEGATIVE_INFINITY;
+@@ -1281,7 +1281,7 @@
+             }
+         }
+         if (minimum == Double.POSITIVE_INFINITY) {
+-            return null;
++            return new Range(0.0, 0.0);
+         }
+         else {
+             return new Range(minimum, maximum);

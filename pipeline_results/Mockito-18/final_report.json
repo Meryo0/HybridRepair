@@ -1,0 +1,10 @@
+{
+  "bug_id": "Mockito-18",
+  "success": false,
+  "winning_attempt": null,
+  "total_attempts": 0,
+  "test_result": {
+    "error": "LogicFL completato ma /home/mario/Desktop/LogicFL/defects4j/Mockito-18/result/fault_locs.txt non trovato.\nControlla i log di LogicFL per errori."
+  },
+  "timestamp": "2026-04-20T15:02:09.541370+00:00"
+}

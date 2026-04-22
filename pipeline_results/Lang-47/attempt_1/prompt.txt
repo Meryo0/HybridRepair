@@ -1,0 +1,970 @@
+Bug ID: Lang-47  |  Tentativo 1
+
+## Fault Locations (LogicFL)
+
+  • org.apache.commons.lang.text.StrBuilder — riga 1186  [✓]
+  • org.apache.commons.lang.text.StrBuilder — riga 1185  [✓]
+  • org.apache.commons.lang.text.StrBuilder — riga 1230  [✓]
+  • org.apache.commons.lang.text.StrBuilder — riga 1229  [✓]
+  • org.apache.commons.lang.text.StrBuilder — riga 1185  [✓]
+  • org.apache.commons.lang.text.StrBuilder — riga 1229  [✓]
+
+## Catena Causale (LogicFL Prolog)
+
+NPE at line(str_builder_1, 1186) / Null Expression - v_str_88[str]
+	 can be caused by 
+v_str_88[str] - line(str_builder_1, 1186).
+
+NPE at line(str_builder_1, 1186) / Null Expression - v_str_88[str]
+	 can be caused by 
+str_builder_1_expr11['(obj == null ? getNullText() : obj.toString())'] - line(str_builder_1, 1185).
+
+NPE at line(str_builder_1, 1230) / Null Expression - v_str_96[str]
+	 can be caused by 
+v_str_96[str] - line(str_builder_1, 1230).
+
+NPE at line(str_builder_1, 1230) / Null Expression - v_str_96[str]
+	 can be caused by 
+str_builder_1_expr20['(obj == null ? getNullText() : obj.toString())'] - line(str_builder_1, 1229).
+
+NPE at line(str_builder_1, 1186) / Null Expression - v_str_88[str]
+	 can be caused by 
+str_builder_1_expr12['obj == null ? getNullText() : obj.toString()'] - line(str_builder_1, 1185).
+
+NPE at line(str_builder_1, 1230) / Null Expression - v_str_96[str]
+	 can be caused by 
+str_builder_1_expr21['obj == null ? getNullText() : obj.toString()'] - line(str_builder_1, 1229).
+
+## Metodi Buggy
+
+### FILE: java/org/apache/commons/lang/text/StrBuilder.java  (righe 1182–1199, fault alla riga 1185)
+```java
+    public StrBuilder appendFixedWidthPadLeft(Object obj, int width, char padChar) {
+        if (width > 0) {
+            ensureCapacity(size + width);
+            String str = (obj == null ? getNullText() : obj.toString());  // ◄ FIX THIS LINE (NPE manifests here)
+            int strLen = str.length();
+            if (strLen >= width) {
+                str.getChars(strLen - width, strLen, buffer, size);
+            } else {
+                int padLen = width - strLen;
+                for (int i = 0; i < padLen; i++) {
+                    buffer[size + i] = padChar;
+                }
+                str.getChars(0, strLen, buffer, size + padLen);
+            }
+            size += width;
+        }
+        return this;
+    }
+```
+
+### FILE: java/org/apache/commons/lang/text/StrBuilder.java  (righe 1182–1199, fault alla riga 1185)
+```java
+    public StrBuilder appendFixedWidthPadLeft(Object obj, int width, char padChar) {
+        if (width > 0) {
+            ensureCapacity(size + width);
+            String str = (obj == null ? getNullText() : obj.toString());  // ◄ FIX THIS LINE (NPE manifests here)
+            int strLen = str.length();
+            if (strLen >= width) {
+                str.getChars(strLen - width, strLen, buffer, size);
+            } else {
+                int padLen = width - strLen;
+                for (int i = 0; i < padLen; i++) {
+                    buffer[size + i] = padChar;
+                }
+                str.getChars(0, strLen, buffer, size + padLen);
+            }
+            size += width;
+        }
+        return this;
+    }
+```
+
+### FILE: java/org/apache/commons/lang/text/StrBuilder.java  (righe 1182–1199, fault alla riga 1186)
+```java
+    public StrBuilder appendFixedWidthPadLeft(Object obj, int width, char padChar) {
+        if (width > 0) {
+            ensureCapacity(size + width);
+            String str = (obj == null ? getNullText() : obj.toString());
+            int strLen = str.length();  // ◄ FIX THIS LINE (NPE manifests here)
+            if (strLen >= width) {
+                str.getChars(strLen - width, strLen, buffer, size);
+            } else {
+                int padLen = width - strLen;
+                for (int i = 0; i < padLen; i++) {
+                    buffer[size + i] = padChar;
+                }
+                str.getChars(0, strLen, buffer, size + padLen);
+            }
+            size += width;
+        }
+        return this;
+    }
+```
+
+### FILE: java/org/apache/commons/lang/text/StrBuilder.java  (righe 1226–1243, fault alla riga 1229)
+```java
+    public StrBuilder appendFixedWidthPadRight(Object obj, int width, char padChar) {
+        if (width > 0) {
+            ensureCapacity(size + width);
+            String str = (obj == null ? getNullText() : obj.toString());  // ◄ FIX THIS LINE (NPE manifests here)
+            int strLen = str.length();
+            if (strLen >= width) {
+                str.getChars(0, width, buffer, size);
+            } else {
+                int padLen = width - strLen;
+                str.getChars(0, strLen, buffer, size);
+                for (int i = 0; i < padLen; i++) {
+                    buffer[size + strLen + i] = padChar;
+                }
+            }
+            size += width;
+        }
+        return this;
+    }
+```
+
+### FILE: java/org/apache/commons/lang/text/StrBuilder.java  (righe 1226–1243, fault alla riga 1229)
+```java
+    public StrBuilder appendFixedWidthPadRight(Object obj, int width, char padChar) {
+        if (width > 0) {
+            ensureCapacity(size + width);
+            String str = (obj == null ? getNullText() : obj.toString());  // ◄ FIX THIS LINE (NPE manifests here)
+            int strLen = str.length();
+            if (strLen >= width) {
+                str.getChars(0, width, buffer, size);
+            } else {
+                int padLen = width - strLen;
+                str.getChars(0, strLen, buffer, size);
+                for (int i = 0; i < padLen; i++) {
+                    buffer[size + strLen + i] = padChar;
+                }
+            }
+            size += width;
+        }
+        return this;
+    }
+```
+
+### FILE: java/org/apache/commons/lang/text/StrBuilder.java  (righe 1226–1243, fault alla riga 1230)
+```java
+    public StrBuilder appendFixedWidthPadRight(Object obj, int width, char padChar) {
+        if (width > 0) {
+            ensureCapacity(size + width);
+            String str = (obj == null ? getNullText() : obj.toString());
+            int strLen = str.length();  // ◄ FIX THIS LINE (NPE manifests here)
+            if (strLen >= width) {
+                str.getChars(0, width, buffer, size);
+            } else {
+                int padLen = width - strLen;
+                str.getChars(0, strLen, buffer, size);
+                for (int i = 0; i < padLen; i++) {
+                    buffer[size + strLen + i] = padChar;
+                }
+            }
+            size += width;
+        }
+        return this;
+    }
+```
+
+## File Correlati (stesso progetto — potrebbero servire per il fix)
+
+### Range.java
+```java
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.apache.commons.lang.math;
+
+/**
+ * <p><code>Range</code> represents a range of numbers of the same type.</p>
+ * 
+ * <p>Specific subclasses hold the range values as different types. Each
+ * subclass should be immutable and {@link java.io.Serializable Serializable}
+ * if possible.</p>
+ *
+ * @author Stephen Colebourne
+ * @since 2.0
+ * @version $Id$
+ */
+public abstract class Range {
+
+    /**
+     * <p>Constructs a new range.</p>
+     */
+    public Range() {
+        super();
+    }
+
+    // Accessors
+    //--------------------------------------------------------------------
+
+    /**
+     * <p>Gets the minimum number in this range.</p>
+     *
+     * @return the minimum number in this range
+     */
+    public abstract Number getMinimumNumber();
+
+    /**
+     * <p>Gets the minimum number in this range as a <code>long</code>.</p>
+     * 
+     * <p>This implementation uses the {@link #getMinimumNumber()} method. 
+     * Subclasses may be able to optimise this.</p>
+     *
+     * @return the minimum number in this range
+     */
+    public long getMinimumLong() {
+        return getMinimumNumber().longValue();
+    }
+
+    /**
+     * <p>Gets the minimum number in this range as a <code>int</code>.</p>
+     * 
+     * <p>This implementation uses the {@link #getMinimumNumber()} method. 
+     * Subclasses may be able to optimise this.</p>
+     *
+     * @return the minimum number in this range
+     */
+    public int getMinimumInteger() {
+        return getMinimumNumber().intValue();
+    }
+
+    /**
+     * <p>Gets the minimum number in this range as a <code>double</code>.</p>
+     * 
+     * <p>This implementation uses the {@link #getMinimumNumber()} method. 
+     * Subclasses may be able to optimise this.</p>
+     *
+     * @return the minimum number in this range
+     */
+    public double getMinimumDouble() {
+        return getMinimumNumber().doubleValue();
+    }
+
+    /**
+     * <p>Gets the minimum number in this range as a <code>float</code>.</p>
+     * 
+     * <p>This implementation uses the {@link #getMinimumNumber()} method. 
+     * Subclasses may be able to optimise this.</p>
+     *
+     * @return the minimum number in this range
+     */
+    public float getMinimumFloat() {
+        return getMinimumNumber().floatValue();
+    }
+
+    /**
+     * <p>Gets the maximum number in this range.</p>
+     *
+     * @return the maximum number in this range
+     */
+    public abstract Number getMaximumNumber();
+
+    /**
+     * <p>Gets the maximum number in this range as a <code>long</code>.</p>
+     * 
+     * <p>This implementation uses the {@link #getMaximumNumber()} method. 
+     * Subclasses may be able to optimise this.</p>
+     *
+     * @return the maximum number in this range
+     */
+    public long getMaximumLong() {
+        return getMaximumNumber().longValue();
+    }
+
+    /**
+     * <p>Gets the maximum number in this range as a <code>int</code>.</p>
+     * 
+     * <p>This implementation uses the {@link #getMaximumNumber()} method. 
+     * Subclasses may be able to optimise this.</p>
+     *
+     * @return the maximum number in this range
+     */
+    public int getMaximumInteger() {
+        return getMaximumNumber().intValue();
+    }
+
+    /**
+     * <p>Gets the maximum number in this range as a <code>double</code>.</p>
+     * 
+     * <p>This implementation uses the {@link #getMaximumNumber()} method. 
+     * Subclasses may be able to optimise this.</p>
+     *
+     * @return the maximum number in this range
+     */
+    public double getMaximumDouble() {
+        return getMaximumNumber().doubleValue();
+    }
+
+    /**
+     * <p>Gets the maximum number in this range as a <code>float</code>.</p>
+     * 
+     * <p>This implementation uses the {@link #getMaximumNumber()} method. 
+     * Subclasses may be able to optimise this.</p>
+     *
+     * @return the maximum number in this range
+     */
+    public float getMaximumFloat() {
+        return getMaximumNumber().floatValue();
+    }
+... (troncato a 150 righe su 431)
+```
+
+### StrMatcher.java
+```java
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.apache.commons.lang.text;
+
+import java.util.Arrays;
+
+/**
+ * A matcher class that can be queried to determine if a character array
+ * portion matches.
+ * <p>
+ * This class comes complete with various factory methods.
+ * If these do not suffice, you can subclass and implement your own matcher.
+ *
+ * @author Stephen Colebourne
+ * @since 2.2
+ * @version $Id$
+ */
+public abstract class StrMatcher {
+
+    /**
+     * Matches the comma character.
+     */
+    private static final StrMatcher COMMA_MATCHER = new CharMatcher(',');
+    /**
+     * Matches the tab character.
+     */
+    private static final StrMatcher TAB_MATCHER = new CharMatcher('\t');
+    /**
+     * Matches the space character.
+     */
+    private static final StrMatcher SPACE_MATCHER = new CharMatcher(' ');
+    /**
+     * Matches the same characters as StringTokenizer,
+     * namely space, tab, newline, formfeed.
+     */
+    private static final StrMatcher SPLIT_MATCHER = new CharSetMatcher(" \t\n\r\f".toCharArray());
+    /**
+     * Matches the String trim() whitespace characters.
+     */
+    private static final StrMatcher TRIM_MATCHER = new TrimMatcher();
+    /**
+     * Matches the double quote character.
+     */
+    private static final StrMatcher SINGLE_QUOTE_MATCHER = new CharMatcher('\'');
+    /**
+     * Matches the double quote character.
+     */
+    private static final StrMatcher DOUBLE_QUOTE_MATCHER = new CharMatcher('"');
+    /**
+     * Matches the single or double quote character.
+     */
+    private static final StrMatcher QUOTE_MATCHER = new CharSetMatcher("'\"".toCharArray());
+    /**
+     * Matches no characters.
+     */
+    private static final StrMatcher NONE_MATCHER = new NoMatcher();
+
+    // -----------------------------------------------------------------------
+
+    /**
+     * Returns a matcher which matches the comma character.
+     *
+     * @return a matcher for a comma
+     */
+    public static StrMatcher commaMatcher() {
+        return COMMA_MATCHER;
+    }
+
+    /**
+     * Returns a matcher which matches the tab character.
+     *
+     * @return a matcher for a tab
+     */
+    public static StrMatcher tabMatcher() {
+        return TAB_MATCHER;
+    }
+
+    /**
+     * Returns a matcher which matches the space character.
+     *
+     * @return a matcher for a space
+     */
+    public static StrMatcher spaceMatcher() {
+        return SPACE_MATCHER;
+    }
+
+    /**
+     * Matches the same characters as StringTokenizer,
+     * namely space, tab, newline and formfeed.
+     *
+     * @return the split matcher
+     */
+    public static StrMatcher splitMatcher() {
+        return SPLIT_MATCHER;
+    }
+
+    /**
+     * Matches the String trim() whitespace characters.
+     *
+     * @return the trim matcher
+     */
+    public static StrMatcher trimMatcher() {
+        return TRIM_MATCHER;
+    }
+
+    /**
+     * Returns a matcher which matches the single quote character.
+     *
+     * @return a matcher for a single quote
+     */
+    public static StrMatcher singleQuoteMatcher() {
+        return SINGLE_QUOTE_MATCHER;
+    }
+
+    /**
+     * Returns a matcher which matches the double quote character.
+     *
+     * @return a matcher for a double quote
+     */
+    public static StrMatcher doubleQuoteMatcher() {
+        return DOUBLE_QUOTE_MATCHER;
+    }
+
+    /**
+     * Returns a matcher which matches the single or double quote character.
+     *
+     * @return a matcher for a single or double quote
+     */
+    public static StrMatcher quoteMatcher() {
+        return QUOTE_MATCHER;
+    }
+
+    /**
+     * Matches no characters.
+     *
+     * @return a matcher that matches nothing
+... (troncato a 150 righe su 430)
+```
+
+### EnumUtils.java
+```java
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.apache.commons.lang.enum;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * <p>Utility class for accessing and manipulating {@link Enum}s.</p>
+ *
+ * @deprecated Replaced by {@link org.apache.commons.lang.enums.EnumUtils org.apache.commons.lang.enums.EnumUtils} 
+ *          and will be removed in version 3.0. All classes in this package are deprecated and repackaged to 
+ *          {@link org.apache.commons.lang.enums} since <code>enum</code> is a Java 1.5 keyword. 
+ * @see org.apache.commons.lang.enums.EnumUtils
+ * @see Enum
+ * @see ValuedEnum
+ * @author Stephen Colebourne
+ * @author Gary Gregory
+ * @since 1.0
+ * @version $Id$
+ */
+public class EnumUtils {
+
+    /**
+     * Public constructor. This class should not normally be instantiated.
+     * @since 2.0
+     */
+    public EnumUtils() {
+        super();
+    }
+
+    /**
+     * <p>Gets an <code>Enum</code> object by class and name.</p>
+     * 
+     * @param enumClass  the class of the <code>Enum</code> to get
+     * @param name  the name of the Enum to get, may be <code>null</code>
+     * @return the enum object
+     * @throws IllegalArgumentException if the enum class is <code>null</code>
+     */
+    public static Enum getEnum(Class enumClass, String name) {
+        return Enum.getEnum(enumClass, name);
+    }
+
+    /**
+     * <p>Gets a <code>ValuedEnum</code> object by class and value.</p>
+     * 
+     * @param enumClass  the class of the <code>Enum</code> to get
+     * @param value  the value of the <code>Enum</code> to get
+     * @return the enum object, or null if the enum does not exist
+     * @throws IllegalArgumentException if the enum class is <code>null</code>
+     */
+    public static ValuedEnum getEnum(Class enumClass, int value) {
+        return (ValuedEnum) ValuedEnum.getEnum(enumClass, value);
+    }
+
+    /**
+     * <p>Gets the <code>Map</code> of <code>Enum</code> objects by
+     * name using the <code>Enum</code> class.</p>
+     *
+     * <p>If the requested class has no enum objects an empty
+     * <code>Map</code> is returned. The <code>Map</code> is unmodifiable.</p>
+     * 
+     * @param enumClass  the class of the <code>Enum</code> to get
+     * @return the enum object Map
+     * @throws IllegalArgumentException if the enum class is <code>null</code>
+     * @throws IllegalArgumentException if the enum class is not a subclass
+     *  of <code>Enum</code>
+     */
+    public static Map getEnumMap(Class enumClass) {
+        return Enum.getEnumMap(enumClass);
+    }
+
+    /**
+     * <p>Gets the <code>List</code> of <code>Enum</code> objects using
+     * the <code>Enum</code> class.</p>
+     *
+     * <p>The list is in the order that the objects were created
+     * (source code order).</p>
+     *
+     * <p>If the requested class has no enum objects an empty
+     * <code>List</code> is returned. The <code>List</code> is unmodifiable.</p>
+     * 
+     * @param enumClass  the class of the Enum to get
+     * @return the enum object Map
+     * @throws IllegalArgumentException if the enum class is <code>null</code>
+     * @throws IllegalArgumentException if the enum class is not a subclass
+     *  of <code>Enum</code>
+     */
+    public static List getEnumList(Class enumClass) {
+        return Enum.getEnumList(enumClass);
+    }
+
+    /**
+     * <p>Gets an <code>Iterator</code> over the <code>Enum</code> objects
+     * in an <code>Enum</code> class.</p>
+     *
+     * <p>The iterator is in the order that the objects were created
+     * (source code order).</p>
+     *
+     * <p>If the requested class has no enum objects an empty
+     * <code>Iterator</code> is returned. The <code>Iterator</code>
+     * is unmodifiable.</p>
+     * 
+     * @param enumClass  the class of the <code>Enum</code> to get
+     * @return an <code>Iterator</code> of the <code>Enum</code> objects
+     * @throws IllegalArgumentException if the enum class is <code>null</code>
+     * @throws IllegalArgumentException if the enum class is not a subclass of <code>Enum</code>
+     */
+    public static Iterator iterator(Class enumClass) {
+        return Enum.getEnumList(enumClass).iterator();
+    }
+    
+}
+```
+
+### EnumUtils.java
+```java
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.apache.commons.lang.enums;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * <p>Utility class for accessing and manipulating {@link Enum}s.</p>
+ *
+ * @see Enum
+ * @see ValuedEnum
+ * @author Stephen Colebourne
+ * @author Gary Gregory
+ * @since 2.1 (class existed in enum package from v1.0)
+ * @version $Id$
+ */
+public class EnumUtils {
+
+    /**
+     * Public constructor. This class should not normally be instantiated.
+     * @since 2.0
+     */
+    public EnumUtils() {
+      super();
+    }
+
+    /**
+     * <p>Gets an <code>Enum</code> object by class and name.</p>
+     * 
+     * @param enumClass  the class of the <code>Enum</code> to get
+     * @param name  the name of the Enum to get, may be <code>null</code>
+     * @return the enum object
+     * @throws IllegalArgumentException if the enum class is <code>null</code>
+     */
+    public static Enum getEnum(Class enumClass, String name) {
+        return Enum.getEnum(enumClass, name);
+    }
+
+    /**
+     * <p>Gets a <code>ValuedEnum</code> object by class and value.</p>
+     * 
+     * @param enumClass  the class of the <code>Enum</code> to get
+     * @param value  the value of the <code>Enum</code> to get
+     * @return the enum object, or null if the enum does not exist
+     * @throws IllegalArgumentException if the enum class is <code>null</code>
+     */
+    public static ValuedEnum getEnum(Class enumClass, int value) {
+        return (ValuedEnum) ValuedEnum.getEnum(enumClass, value);
+    }
+
+    /**
+     * <p>Gets the <code>Map</code> of <code>Enum</code> objects by
+     * name using the <code>Enum</code> class.</p>
+     *
+     * <p>If the requested class has no enum objects an empty
+     * <code>Map</code> is returned. The <code>Map</code> is unmodifiable.</p>
+     * 
+     * @param enumClass  the class of the <code>Enum</code> to get
+     * @return the enum object Map
+     * @throws IllegalArgumentException if the enum class is <code>null</code>
+     * @throws IllegalArgumentException if the enum class is not a subclass
+     *  of <code>Enum</code>
+     */
+    public static Map getEnumMap(Class enumClass) {
+        return Enum.getEnumMap(enumClass);
+    }
+
+    /**
+     * <p>Gets the <code>List</code> of <code>Enum</code> objects using
+     * the <code>Enum</code> class.</p>
+     *
+     * <p>The list is in the order that the objects were created
+     * (source code order).</p>
+     *
+     * <p>If the requested class has no enum objects an empty
+     * <code>List</code> is returned. The <code>List</code> is unmodifiable.</p>
+     * 
+     * @param enumClass  the class of the Enum to get
+     * @return the enum object Map
+     * @throws IllegalArgumentException if the enum class is <code>null</code>
+     * @throws IllegalArgumentException if the enum class is not a subclass
+     *  of <code>Enum</code>
+     */
+    public static List getEnumList(Class enumClass) {
+        return Enum.getEnumList(enumClass);
+    }
+
+    /**
+     * <p>Gets an <code>Iterator</code> over the <code>Enum</code> objects
+     * in an <code>Enum</code> class.</p>
+     *
+     * <p>The iterator is in the order that the objects were created
+     * (source code order).</p>
+     *
+     * <p>If the requested class has no enum objects an empty
+     * <code>Iterator</code> is returned. The <code>Iterator</code>
+     * is unmodifiable.</p>
+     * 
+     * @param enumClass  the class of the <code>Enum</code> to get
+     * @return an <code>Iterator</code> of the <code>Enum</code> objects
+     * @throws IllegalArgumentException if the enum class is <code>null</code>
+     * @throws IllegalArgumentException if the enum class is not a subclass of <code>Enum</code>
+     */
+    public static Iterator iterator(Class enumClass) {
+        return Enum.getEnumList(enumClass).iterator();
+    }
+    
+}
+```
+
+### RandomUtils.java
+```java
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.apache.commons.lang.math;
+
+import java.util.Random;
+
+/**
+ * <p><code>RandomUtils</code> is a wrapper that supports all possible 
+ * {@link java.util.Random} methods via the {@link java.lang.Math#random()}
+ * method and its system-wide <code>Random</code> object.
+ * 
+ * @author Gary D. Gregory
+ * @since 2.0
+ * @version $Id$
+ */
+public class RandomUtils {
+
+    /**
+     * An instance of {@link JVMRandom}.
+     */
+    public static final Random JVM_RANDOM = new JVMRandom();
+
+// should be possible for JVM_RANDOM?
+//    public static void nextBytes(byte[]) {
+//    public synchronized double nextGaussian();
+//    }
+
+    /**
+     * <p>Returns the next pseudorandom, uniformly distributed int value
+     * from the Math.random() sequence.</p>
+     *
+     * @return the random int
+     */
+    public static int nextInt() {
+        return nextInt(JVM_RANDOM);
+    }
+    
+    /**
+     * <p>Returns the next pseudorandom, uniformly distributed int value
+     * from the given <code>random</code> sequence.</p>
+     *
+     * @param random the Random sequence generator.
+     * @return the random int
+     */
+    public static int nextInt(Random random) {
+        return random.nextInt();
+    }
+    
+    /**
+     * <p>Returns a pseudorandom, uniformly distributed int value
+     * between <code>0</code> (inclusive) and the specified value
+     * (exclusive), from the Math.random() sequence.</p>
+     *
+     * @param n  the specified exclusive max-value
+     * @return the random int
+     */
+    public static int nextInt(int n) {
+        return nextInt(JVM_RANDOM, n);
+    }
+    
+    /**
+     * <p>Returns a pseudorandom, uniformly distributed int value
+     * between <code>0</code> (inclusive) and the specified value
+     * (exclusive), from the given Random sequence.</p>
+     *
+     * @param random the Random sequence generator.
+     * @param n  the specified exclusive max-value
+     * @return the random int
+     */
+    public static int nextInt(Random random, int n) {
+        // check this cannot return 'n'
+        return random.nextInt(n);
+    }
+    
+    /**
+     * <p>Returns the next pseudorandom, uniformly distributed long value
+     * from the Math.random() sequence.</p>
+     *
+     * @return the random long
+     */
+    public static long nextLong() {
+        return nextLong(JVM_RANDOM);
+    }
+
+    /**
+     * <p>Returns the next pseudorandom, uniformly distributed long value
+     * from the given Random sequence.</p>
+     *
+     * @param random the Random sequence generator.
+     * @return the random long
+     */
+    public static long nextLong(Random random) {
+        return random.nextLong();
+    }
+    
+    /**
+     * <p>Returns the next pseudorandom, uniformly distributed boolean value
+     * from the Math.random() sequence.</p>
+     *
+     * @return the random boolean
+     */
+    public static boolean nextBoolean() {
+        return nextBoolean(JVM_RANDOM);
+    }
+
+    /**
+     * <p>Returns the next pseudorandom, uniformly distributed boolean value
+     * from the given random sequence.</p>
+     *
+     * @param random the Random sequence generator.
+     * @return the random boolean
+     */
+    public static boolean nextBoolean(Random random) {
+        return random.nextBoolean();
+    }
+    
+    /**
+     * <p>Returns the next pseudorandom, uniformly distributed float value
+     * between <code>0.0</code> and <code>1.0</code> from the Math.random()
+     * sequence.</p>
+     *
+     * @return the random float
+     */
+    public static float nextFloat() {
+        return nextFloat(JVM_RANDOM);
+    }
+
+    /**
+     * <p>Returns the next pseudorandom, uniformly distributed float value
+     * between <code>0.0</code> and <code>1.0</code> from the given Random
+     * sequence.</p>
+     *
+     * @param random the Random sequence generator.
+     * @return the random float
+... (troncato a 150 righe su 179)
+```
+## Test Falliti
+
+  • org.apache.commons.lang.text.StrBuilderTest#testLang412Left
+  • org.apache.commons.lang.text.StrBuilderTest#testLang412Right
+
+## Stack Trace
+
+```
+testLang412Left(org.apache.commons.lang.text.StrBuilderTest): Cannot invoke "String.length()" because "str" is null
+Cannot invoke "String.length()" because "str" is null
+java.lang.NullPointerException: Cannot invoke "String.length()" because "str" is null
+	at org.apache.commons.lang.text.StrBuilder.appendFixedWidthPadLeft(StrBuilder.java:1186)
+	at org.apache.commons.lang.text.StrBuilderTest.testLang412Left(StrBuilderTest.java:1761)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testLang412Right(org.apache.commons.lang.text.StrBuilderTest): Cannot invoke "String.length()" because "str" is null
+Cannot invoke "String.length()" because "str" is null
+java.lang.NullPointerException: Cannot invoke "String.length()" because "str" is null
+	at org.apache.commons.lang.text.StrBuilder.appendFixedWidthPadRight(StrBuilder.java:1230)
+	at org.apache.commons.lang.text.StrBuilderTest.testLang412Right(StrBuilderTest.java:1755)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+```
+
+## Istruzioni
+
+Analizza il bug e restituisci i metodi corretti, seguendo queste regole TASSATIVE:
+
+1. **Un FILE block per metodo**: se devi correggere N metodi, emetti N blocchi FILE separati.
+   Ogni blocco deve contenere UN SOLO metodo completo.
+
+2. **Indentazione originale**: mantieni ESATTAMENTE l'indentazione del codice originale.
+   La firma del metodo DEVE iniziare con gli stessi spazi del file originale.
+
+3. **La riga `// ◄ FIX THIS LINE`** indica dove l'NPE si manifesta. Rimuovi questo commento
+   nella risposta — restituisci solo codice Java puro.
+
+4. **Null-safe equality OBBLIGATORIA**: se il metodo confronta due valori che possono essere null,
+   usa `java.util.Objects.equals(a, b)` — questa funzione ritorna `true` se entrambi sono null,
+   mentre `a.equals(b)` lancia NPE se `a` è null, e `a != null && a.equals(b)` ritorna `false`
+   se entrambi sono null (sbagliato semanticamente).
+   Esempio corretto:
+   ```java
+   return java.util.Objects.equals(doubleMetaphone(v1, alt), doubleMetaphone(v2, alt));
+   ```
+
+5. **NON modificare metodi che non causano il bug**: se il metodo `doubleMetaphone` ritorna
+   null per input null, questo è il comportamento CORRETTO e atteso dai test. Non cambiarlo.
+
+6. NON modificare file di test.

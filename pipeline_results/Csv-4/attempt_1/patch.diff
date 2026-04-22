@@ -1,0 +1,54 @@
+--- org/apache/commons/csv/CSVParser.java
++++ org/apache/commons/csv/CSVParser.java
+@@ -234,14 +234,14 @@
+      * @throws IOException
+      *             If an I/O error occurs
+      */
+-    public CSVParser(final Reader reader, final CSVFormat format) throws IOException {
++public CSVParser(final Reader reader, final CSVFormat format) throws IOException {
+         Assertions.notNull(reader, "reader");
+         Assertions.notNull(format, "format");
+ 
+         format.validate();
+         this.format = format;
+         this.lexer = new Lexer(format, new ExtendedBufferedReader(reader));
+-        this.headerMap = this.initializeHeader();
++        this.headerMap = java.util.Optional.ofNullable(this.initializeHeader()).orElseGet(java.util.Collections::emptyMap);
+     }
+ 
+     private void addRecordValue() {
+
+--- org/apache/commons/csv/CSVParser.java
++++ org/apache/commons/csv/CSVParser.java
+@@ -284,8 +284,8 @@
+      * </p>
+      * @return a copy of the header map that iterates in column order.
+      */
+-    public Map<String, Integer> getHeaderMap() {
+-        return new LinkedHashMap<String, Integer>(this.headerMap);
++public Map<String, Integer> getHeaderMap() {
++        return new LinkedHashMap<String, Integer>(java.util.Optional.ofNullable(this.headerMap).orElseGet(java.util.Collections::emptyMap));
+     }
+ 
+     /**
+
+--- org/apache/commons/csv/CSVParser.java
++++ org/apache/commons/csv/CSVParser.java
+@@ -321,7 +321,7 @@
+     /**
+      * Initializes the name to index mapping if the format defines a header.
+      */
+-    private Map<String, Integer> initializeHeader() throws IOException {
++private Map<String, Integer> initializeHeader() throws IOException {
+         Map<String, Integer> hdrMap = null;
+         final String[] formatHeader = this.format.getHeader();
+         if (formatHeader != null) {
+@@ -348,7 +348,7 @@
+                 }
+             }
+         }
+-        return hdrMap;
++        return hdrMap != null ? hdrMap : java.util.Collections.emptyMap();
+     }
+ 
+     public boolean isClosed() {

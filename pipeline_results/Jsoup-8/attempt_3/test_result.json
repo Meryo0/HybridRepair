@@ -1,0 +1,9 @@
+{
+  "status": "COMPILE_ERROR",
+  "total_tests": 0,
+  "failed_tests": 0,
+  "failing_test_names": [],
+  "previously_failing_now_passing": [],
+  "compile_output": "/home/mario/Desktop/LogicFL/pipeline_results/Jsoup-8/attempt_3/patched_source/org/jsoup/nodes/Node.java:364: error: an enclosing instance that contains Document.OutputSettings is required\n        Document.OutputSettings outputSettings = (ownerDoc != null) ? ownerDoc.outputSettings() : new Document.OutputSettings();\n                                                                                                  ^\nNote: /home/mario/Desktop/LogicFL/pipeline_results/Jsoup-8/attempt_3/patched_source/org/jsoup/nodes/Node.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n1 error\n",
+  "test_output": ""
+}

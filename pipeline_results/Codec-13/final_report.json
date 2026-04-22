@@ -1,0 +1,18 @@
+{
+  "bug_id": "Codec-13",
+  "success": true,
+  "winning_attempt": 1,
+  "total_attempts": 1,
+  "test_result": {
+    "status": "PASS",
+    "total_tests": 16,
+    "failed_tests": 0,
+    "failing_test_names": [],
+    "previously_failing_now_passing": [
+      "org.apache.commons.codec.language.DoubleMetaphoneTest"
+    ],
+    "compile_output": "",
+    "test_output": "JUnit version 4.13.2\n................\nTime: 0.039\n\nOK (16 tests)\n\n"
+  },
+  "timestamp": "2026-04-20T14:49:22.759354+00:00"
+}

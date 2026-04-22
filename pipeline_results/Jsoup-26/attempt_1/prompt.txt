@@ -1,0 +1,935 @@
+Bug ID: Jsoup-26  |  Tentativo 1
+
+## Fault Locations (LogicFL)
+
+  • org.jsoup.nodes.Document — riga 173  [✓]
+  • org.jsoup.nodes.Document — riga 170  [✓]
+  • org.jsoup.safety.Cleaner — riga 73  [✓]
+  • org.jsoup.safety.Cleaner — riga 43  [✓]
+  • org.jsoup.nodes.Document — riga 59  [✓]
+  • org.jsoup.nodes.Document — riga 168  [✓]
+
+## Catena Causale (LogicFL Prolog)
+
+NPE at line(cleaner_1, 73) / Null Expression - p_source_898[source]
+	 can be caused by 
+document_1_literal7[null] - line(document_1, 173).
+
+NPE at line(cleaner_1, 73) / Null Expression - p_source_898[source]
+	 can be caused by 
+v_found_110[found] - line(document_1, 170).
+
+NPE at line(cleaner_1, 73) / Null Expression - p_source_898[source]
+	 can be caused by 
+p_source_898[source] - line(cleaner_1, 73).
+
+NPE at line(cleaner_1, 73) / Null Expression - p_source_898[source]
+	 can be caused by 
+cleaner_1_expr9['dirtyDocument.body()'] - line(cleaner_1, 43).
+
+NPE at line(cleaner_1, 73) / Null Expression - p_source_898[source]
+	 can be caused by 
+document_1_expr9['findFirstElementByTagName("body",this)'] - line(document_1, 59).
+
+NPE at line(cleaner_1, 73) / Null Expression - p_source_898[source]
+	 can be caused by 
+document_1_expr14['findFirstElementByTagName(tag,child)'] - line(document_1, 168).
+
+## Metodi Buggy
+
+### FILE: org/jsoup/nodes/Document.java  (righe 58–60, fault alla riga 59)
+```java
+    public Element body() {
+        return findFirstElementByTagName("body", this);  // ◄ FIX THIS LINE (NPE manifests here)
+    }
+```
+
+### FILE: org/jsoup/nodes/Document.java  (righe 163–174, fault alla riga 168)
+```java
+    private Element findFirstElementByTagName(String tag, Node node) {
+        if (node.nodeName().equals(tag))
+            return (Element) node;
+        else {
+            for (Node child: node.childNodes) {
+                Element found = findFirstElementByTagName(tag, child);  // ◄ FIX THIS LINE (NPE manifests here)
+                if (found != null)
+                    return found;
+            }
+        }
+        return null;
+    }
+```
+
+### FILE: org/jsoup/nodes/Document.java  (righe 163–174, fault alla riga 170)
+```java
+    private Element findFirstElementByTagName(String tag, Node node) {
+        if (node.nodeName().equals(tag))
+            return (Element) node;
+        else {
+            for (Node child: node.childNodes) {
+                Element found = findFirstElementByTagName(tag, child);
+                if (found != null)
+                    return found;  // ◄ FIX THIS LINE (NPE manifests here)
+            }
+        }
+        return null;
+    }
+```
+
+### FILE: org/jsoup/nodes/Document.java  (righe 163–174, fault alla riga 173)
+```java
+    private Element findFirstElementByTagName(String tag, Node node) {
+        if (node.nodeName().equals(tag))
+            return (Element) node;
+        else {
+            for (Node child: node.childNodes) {
+                Element found = findFirstElementByTagName(tag, child);
+                if (found != null)
+                    return found;
+            }
+        }
+        return null;  // ◄ FIX THIS LINE (NPE manifests here)
+    }
+```
+
+### FILE: org/jsoup/safety/Cleaner.java  (righe 39–46, fault alla riga 43)
+```java
+    public Document clean(Document dirtyDocument) {
+        Validate.notNull(dirtyDocument);
+
+        Document clean = Document.createShell(dirtyDocument.baseUri());
+            copySafeNodes(dirtyDocument.body(), clean.body());  // ◄ FIX THIS LINE (NPE manifests here)
+
+        return clean;
+    }
+```
+
+### FILE: org/jsoup/safety/Cleaner.java  (righe 72–98, fault alla riga 73)
+```java
+    private int copySafeNodes(Element source, Element dest) {
+        List<Node> sourceChildren = source.childNodes();  // ◄ FIX THIS LINE (NPE manifests here)
+        int numDiscarded = 0;
+
+        for (Node sourceChild : sourceChildren) {
+            if (sourceChild instanceof Element) {
+                Element sourceEl = (Element) sourceChild;
+
+                if (whitelist.isSafeTag(sourceEl.tagName())) { // safe, clone and copy safe attrs
+                    ElementMeta meta = createSafeElement(sourceEl);
+                    Element destChild = meta.el;
+                    dest.appendChild(destChild);
+
+                    numDiscarded += meta.numAttribsDiscarded;
+                    numDiscarded += copySafeNodes(sourceEl, destChild); // recurs
+                } else { // not a safe tag, but it may have children (els or text) that are, so recurse
+                    numDiscarded++;
+                    numDiscarded += copySafeNodes(sourceEl, dest);
+                }
+            } else if (sourceChild instanceof TextNode) {
+                TextNode sourceText = (TextNode) sourceChild;
+                TextNode destText = new TextNode(sourceText.getWholeText(), sourceChild.baseUri());
+                dest.appendChild(destText);
+            } // else, we don't care about comments, xml proc instructions, etc
+        }
+        return numDiscarded;
+    }
+```
+
+## File Correlati (stesso progetto — potrebbero servire per il fix)
+
+### Validate.java
+```java
+package org.jsoup.helper;
+
+/**
+ * Simple validation methods. Designed for jsoup internal use
+ */
+public final class Validate {
+    
+    private Validate() {}
+
+    /**
+     * Validates that the object is not null
+     * @param obj object to test
+     */
+    public static void notNull(Object obj) {
+        if (obj == null)
+            throw new IllegalArgumentException("Object must not be null");
+    }
+
+    /**
+     * Validates that the object is not null
+     * @param obj object to test
+     * @param msg message to output if validation fails
+     */
+    public static void notNull(Object obj, String msg) {
+        if (obj == null)
+            throw new IllegalArgumentException(msg);
+    }
+
+    /**
+     * Validates that the value is true
+     * @param val object to test
+     */
+    public static void isTrue(boolean val) {
+        if (!val)
+            throw new IllegalArgumentException("Must be true");
+    }
+
+    /**
+     * Validates that the value is true
+     * @param val object to test
+     * @param msg message to output if validation fails
+     */
+    public static void isTrue(boolean val, String msg) {
+        if (!val)
+            throw new IllegalArgumentException(msg);
+    }
+
+    /**
+     * Validates that the value is false
+     * @param val object to test
+     */
+    public static void isFalse(boolean val) {
+        if (val)
+            throw new IllegalArgumentException("Must be false");
+    }
+
+    /**
+     * Validates that the value is false
+     * @param val object to test
+     * @param msg message to output if validation fails
+     */
+    public static void isFalse(boolean val, String msg) {
+        if (val)
+            throw new IllegalArgumentException(msg);
+    }
+
+    /**
+     * Validates that the array contains no null elements
+     * @param objects the array to test
+     */
+    public static void noNullElements(Object[] objects) {
+        noNullElements(objects, "Array must not contain any null objects");
+    }
+
+    /**
+     * Validates that the array contains no null elements
+     * @param objects the array to test
+     * @param msg message to output if validation fails
+     */
+    public static void noNullElements(Object[] objects, String msg) {
+        for (Object obj : objects)
+            if (obj == null)
+                throw new IllegalArgumentException(msg);
+    }
+
+    /**
+     * Validates that the string is not empty
+     * @param string the string to test
+     */
+    public static void notEmpty(String string) {
+        if (string == null || string.length() == 0)
+            throw new IllegalArgumentException("String must not be empty");
+    }
+
+    /**
+     * Validates that the string is not empty
+     * @param string the string to test
+     * @param msg message to output if validation fails
+     */
+    public static void notEmpty(String string, String msg) {
+        if (string == null || string.length() == 0)
+            throw new IllegalArgumentException(msg);
+    }
+
+    /**
+     Cause a failure.
+     @param msg message to output.
+     */
+    public static void fail(String msg) {
+        throw new IllegalArgumentException(msg);
+    }
+}
+```
+
+### Entities.java
+```java
+package org.jsoup.nodes;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.CharsetEncoder;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * HTML entities, and escape routines.
+ * Source: <a href="http://www.w3.org/TR/html5/named-character-references.html#named-character-references">W3C HTML
+ * named character references</a>.
+ */
+public class Entities {
+    public enum EscapeMode {
+        /** Restricted entities suitable for XHTML output: lt, gt, amp, apos, and quot only. */
+        xhtml(xhtmlByVal),
+        /** Default HTML output entities. */
+        base(baseByVal),
+        /** Complete HTML entities. */
+        extended(fullByVal);
+
+        private Map<Character, String> map;
+
+        EscapeMode(Map<Character, String> map) {
+            this.map = map;
+        }
+
+        public Map<Character, String> getMap() {
+            return map;
+        }
+    }
+
+    private static final Map<String, Character> full;
+    private static final Map<Character, String> xhtmlByVal;
+    private static final Map<Character, String> baseByVal;
+    private static final Map<Character, String> fullByVal;
+    private static final Pattern unescapePattern = Pattern.compile("&(#(x|X)?([0-9a-fA-F]+)|[a-zA-Z]+\\d*);?");
+    private static final Pattern strictUnescapePattern = Pattern.compile("&(#(x|X)?([0-9a-fA-F]+)|[a-zA-Z]+\\d*);");
+
+    private Entities() {}
+
+    /**
+     * Check if the input is a known named entity
+     * @param name the possible entity name (e.g. "lt" or "amp"
+     * @return true if a known named entity
+     */
+    public static boolean isNamedEntity(String name) {
+        return full.containsKey(name);
+    }
+
+    /**
+     * Get the Character value of the named entity
+     * @param name named entity (e.g. "lt" or "amp")
+     * @return the Character value of the named entity (e.g. '<' or '&')
+     */
+    public static Character getCharacterByName(String name) {
+        return full.get(name);
+    }
+    
+    static String escape(String string, Document.OutputSettings out) {
+        return escape(string, out.encoder(), out.escapeMode());
+    }
+
+    static String escape(String string, CharsetEncoder encoder, EscapeMode escapeMode) {
+        StringBuilder accum = new StringBuilder(string.length() * 2);
+        Map<Character, String> map = escapeMode.getMap();
+
+        for (int pos = 0; pos < string.length(); pos++) {
+            Character c = string.charAt(pos);
+            if (map.containsKey(c))
+                accum.append('&').append(map.get(c)).append(';');
+            else if (encoder.canEncode(c))
+                accum.append(c.charValue());
+            else
+                accum.append("&#").append((int) c).append(';');
+        }
+
+        return accum.toString();
+    }
+
+    static String unescape(String string) {
+        return unescape(string, false);
+    }
+
+    /**
+     * Unescape the input string.
+     * @param string
+     * @param strict if "strict" (that is, requires trailing ';' char, otherwise that's optional)
+     * @return
+     */
+    static String unescape(String string, boolean strict) {
+        // todo: change this method to use Tokeniser.consumeCharacterReference
+        if (!string.contains("&"))
+            return string;
+
+        Matcher m = strict? strictUnescapePattern.matcher(string) : unescapePattern.matcher(string); // &(#(x|X)?([0-9a-fA-F]+)|[a-zA-Z]\\d*);?
+        StringBuffer accum = new StringBuffer(string.length()); // pity matcher can't use stringbuilder, avoid syncs
+        // todo: replace m.appendReplacement with own impl, so StringBuilder and quoteReplacement not required
+
+        while (m.find()) {
+            int charval = -1;
+            String num = m.group(3);
+            if (num != null) {
+                try {
+                    int base = m.group(2) != null ? 16 : 10; // 2 is hex indicator
+                    charval = Integer.valueOf(num, base);
+                } catch (NumberFormatException e) {
+                } // skip
+            } else {
+                String name = m.group(1);
+                if (full.containsKey(name))
+                    charval = full.get(name);
+            }
+
+            if (charval != -1 || charval > 0xFFFF) { // out of range
+                String c = Character.toString((char) charval);
+                m.appendReplacement(accum, Matcher.quoteReplacement(c));
+            } else {
+                m.appendReplacement(accum, Matcher.quoteReplacement(m.group(0))); // replace with original string
+            }
+        }
+        m.appendTail(accum);
+        return accum.toString();
+    }
+
+    // xhtml has restricted entities
+    private static final Object[][] xhtmlArray = {
+            {"quot", 0x00022},
+            {"amp", 0x00026},
+            {"apos", 0x00027},
+            {"lt", 0x0003C},
+            {"gt", 0x0003E}
+    };
+
+    static {
+        xhtmlByVal = new HashMap<Character, String>();
+        baseByVal = toCharacterKey(loadEntities("entities-base.properties")); // most common / default
+        full = loadEntities("entities-full.properties"); // extended and overblown.
+        fullByVal = toCharacterKey(full);
+
+        for (Object[] entity : xhtmlArray) {
+            Character c = Character.valueOf((char) ((Integer) entity[1]).intValue());
+            xhtmlByVal.put(c, ((String) entity[0]));
+        }
+    }
+
+    private static Map<String, Character> loadEntities(String filename) {
+        Properties properties = new Properties();
+... (troncato a 150 righe su 184)
+```
+
+### TextNode.java
+```java
+package org.jsoup.nodes;
+
+import org.jsoup.helper.StringUtil;
+import org.jsoup.helper.Validate;
+
+/**
+ A text node.
+
+ @author Jonathan Hedley, jonathan@hedley.net */
+public class TextNode extends Node {
+    /*
+    TextNode is a node, and so by default comes with attributes and children. The attributes are seldom used, but use
+    memory, and the child nodes are never used. So we don't have them, and override accessors to attributes to create
+    them as needed on the fly.
+     */
+    private static final String TEXT_KEY = "text";
+    String text;
+
+    /**
+     Create a new TextNode representing the supplied (unencoded) text).
+
+     @param text raw text
+     @param baseUri base uri
+     @see #createFromEncoded(String, String)
+     */
+    public TextNode(String text, String baseUri) {
+        this.baseUri = baseUri;
+        this.text = text;
+    }
+
+    public String nodeName() {
+        return "#text";
+    }
+    
+    /**
+     * Get the text content of this text node.
+     * @return Unencoded, normalised text.
+     * @see TextNode#getWholeText()
+     */
+    public String text() {
+        return normaliseWhitespace(getWholeText());
+    }
+    
+    /**
+     * Set the text content of this text node.
+     * @param text unencoded text
+     * @return this, for chaining
+     */
+    public TextNode text(String text) {
+        this.text = text;
+        if (attributes != null)
+            attributes.put(TEXT_KEY, text);
+        return this;
+    }
+
+    /**
+     Get the (unencoded) text of this text node, including any newlines and spaces present in the original.
+     @return text
+     */
+    public String getWholeText() {
+        return attributes == null ? text : attributes.get(TEXT_KEY);
+    }
+
+    /**
+     Test if this text node is blank -- that is, empty or only whitespace (including newlines).
+     @return true if this document is empty or only whitespace, false if it contains any text content.
+     */
+    public boolean isBlank() {
+        return StringUtil.isBlank(getWholeText());
+    }
+
+    /**
+     * Split this text node into two nodes at the specified string offset. After splitting, this node will contain the
+     * original text up to the offset, and will have a new text node sibling containing the text after the offset.
+     * @param offset string offset point to split node at.
+     * @return the newly created text node containing the text after the offset.
+     */
+    public TextNode splitText(int offset) {
+        Validate.isTrue(offset >= 0, "Split offset must be not be negative");
+        Validate.isTrue(offset < text.length(), "Split offset must not be greater than current text length");
+
+        String head = getWholeText().substring(0, offset);
+        String tail = getWholeText().substring(offset);
+        text(head);
+        TextNode tailNode = new TextNode(tail, this.baseUri());
+        if (parent() != null)
+            parent().addChildren(siblingIndex()+1, tailNode);
+
+        return tailNode;
+    }
+
+    void outerHtmlHead(StringBuilder accum, int depth, Document.OutputSettings out) {
+        String html = Entities.escape(getWholeText(), out);
+        if (out.prettyPrint() && parent() instanceof Element && !((Element) parent()).preserveWhitespace()) {
+            html = normaliseWhitespace(html);
+        }
+
+        if (out.prettyPrint() && siblingIndex() == 0 && parentNode instanceof Element && ((Element) parentNode).tag().formatAsBlock() && !isBlank())
+            indent(accum, depth, out);
+        accum.append(html);
+    }
+
+    void outerHtmlTail(StringBuilder accum, int depth, Document.OutputSettings out) {}
+
+    public String toString() {
+        return outerHtml();
+    }
+
+    /**
+     * Create a new TextNode from HTML encoded (aka escaped) data.
+     * @param encodedText Text containing encoded HTML (e.g. &amp;lt;)
+     * @return TextNode containing unencoded data (e.g. &lt;)
+     */
+    public static TextNode createFromEncoded(String encodedText, String baseUri) {
+        String text = Entities.unescape(encodedText);
+        return new TextNode(text, baseUri);
+    }
+
+    static String normaliseWhitespace(String text) {
+        text = StringUtil.normaliseWhitespace(text);
+        return text;
+    }
+
+    static String stripLeadingWhitespace(String text) {
+        return text.replaceFirst("^\\s+", "");
+    }
+
+    static boolean lastCharIsWhitespace(StringBuilder sb) {
+        return sb.length() != 0 && sb.charAt(sb.length() - 1) == ' ';
+    }
+
+    // attribute fiddling. create on first access.
+    private void ensureAttributes() {
+        if (attributes == null) {
+            attributes = new Attributes();
+            attributes.put(TEXT_KEY, text);
+        }
+    }
+
+    @Override
+    public String attr(String attributeKey) {
+        ensureAttributes();
+        return super.attr(attributeKey);
+    }
+
+    @Override
+    public Attributes attributes() {
+        ensureAttributes();
+        return super.attributes();
+    }
+... (troncato a 150 righe su 175)
+```
+
+### Tag.java
+```java
+package org.jsoup.parser;
+
+import org.jsoup.helper.Validate;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * HTML Tag capabilities.
+ *
+ * @author Jonathan Hedley, jonathan@hedley.net
+ */
+public class Tag {
+    private static final Map<String, Tag> tags = new HashMap<String, Tag>(); // map of known tags
+
+    private String tagName;
+    private boolean isBlock = true; // block or inline
+    private boolean formatAsBlock = true; // should be formatted as a block
+    private boolean canContainBlock = true; // Can this tag hold block level tags?
+    private boolean canContainInline = true; // only pcdata if not
+    private boolean empty = false; // can hold nothing; e.g. img
+    private boolean selfClosing = false; // can self close (<foo />). used for unknown tags that self close, without forcing them as empty.
+    private boolean preserveWhitespace = false; // for pre, textarea, script etc
+
+    private Tag(String tagName) {
+        this.tagName = tagName.toLowerCase();
+    }
+
+    /**
+     * Get this tag's name.
+     *
+     * @return the tag's name
+     */
+    public String getName() {
+        return tagName;
+    }
+
+    /**
+     * Get a Tag by name. If not previously defined (unknown), returns a new generic tag, that can do anything.
+     * <p/>
+     * Pre-defined tags (P, DIV etc) will be ==, but unknown tags are not registered and will only .equals().
+     *
+     * @param tagName Name of tag, e.g. "p". Case insensitive.
+     * @return The tag, either defined or new generic.
+     */
+    public static Tag valueOf(String tagName) {
+        Validate.notNull(tagName);
+        tagName = tagName.trim().toLowerCase();
+        Validate.notEmpty(tagName);
+
+        synchronized (tags) {
+            Tag tag = tags.get(tagName);
+            if (tag == null) {
+                // not defined: create default; go anywhere, do anything! (incl be inside a <p>)
+                tag = new Tag(tagName);
+                tag.isBlock = false;
+                tag.canContainBlock = true;
+            }
+            return tag;
+        }
+    }
+
+    /**
+     * Gets if this is a block tag.
+     *
+     * @return if block tag
+     */
+    public boolean isBlock() {
+        return isBlock;
+    }
+
+    /**
+     * Gets if this tag should be formatted as a block (or as inline)
+     *
+     * @return if should be formatted as block or inline
+     */
+    public boolean formatAsBlock() {
+        return formatAsBlock;
+    }
+
+    /**
+     * Gets if this tag can contain block tags.
+     *
+     * @return if tag can contain block tags
+     */
+    public boolean canContainBlock() {
+        return canContainBlock;
+    }
+
+    /**
+     * Gets if this tag is an inline tag.
+     *
+     * @return if this tag is an inline tag.
+     */
+    public boolean isInline() {
+        return !isBlock;
+    }
+
+    /**
+     * Gets if this tag is a data only tag.
+     *
+     * @return if this tag is a data only tag
+     */
+    public boolean isData() {
+        return !canContainInline && !isEmpty();
+    }
+
+    /**
+     * Get if this is an empty tag
+     *
+     * @return if this is an empty tag
+     */
+    public boolean isEmpty() {
+        return empty;
+    }
+
+    /**
+     * Get if this tag is self closing.
+     *
+     * @return if this tag should be output as self closing.
+     */
+    public boolean isSelfClosing() {
+        return empty || selfClosing;
+    }
+
+    /**
+     * Get if this is a pre-defined tag, or was auto created on parsing.
+     *
+     * @return if a known tag
+     */
+    public boolean isKnownTag() {
+        return tags.containsKey(tagName);
+    }
+
+    /**
+     * Check if this tagname is a known tag.
+     *
+     * @param tagName name of tag
+     * @return if known HTML tag
+     */
+    public static boolean isKnownTag(String tagName) {
+        return tags.containsKey(tagName);
+    }
+
+    /**
+     * Get if this tag should preserve whitespace within child text nodes.
+     *
+     * @return if preserve whitepace
+     */
+    public boolean preserveWhitespace() {
+... (troncato a 150 righe su 262)
+```
+
+### Elements.java
+```java
+package org.jsoup.select;
+
+import org.jsoup.helper.Validate;
+import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
+
+import java.util.*;
+
+/**
+ A list of {@link Element Elements}, with methods that act on every element in the list.
+ <p/>
+ To get an Elements object, use the {@link Element#select(String)} method.
+
+ @author Jonathan Hedley, jonathan@hedley.net */
+public class Elements implements List<Element>, Cloneable {
+    private List<Element> contents;
+
+    public Elements() {
+        contents = new ArrayList<Element>();
+    }
+
+    public Elements(int initialCapacity) {
+        contents = new ArrayList<Element>(initialCapacity);
+    }
+
+    public Elements(Collection<Element> elements) {
+        contents = new ArrayList<Element>(elements);
+    }
+    
+    public Elements(List<Element> elements) {
+        contents = elements;
+    }
+    
+    public Elements(Element... elements) {
+        this(Arrays.asList(elements));
+    }
+    
+    @Override
+	public Elements clone() {
+    	List<Element> elements = new ArrayList<Element>();
+    	
+    	for(Element e : contents)
+    		elements.add(e.clone());
+		
+    	
+    	return new Elements(elements);
+	}
+
+	// attribute methods
+    /**
+     Get an attribute value from the first matched element that has the attribute.
+     @param attributeKey The attribute key.
+     @return The attribute value from the first matched element that has the attribute.. If no elements were matched (isEmpty() == true),
+     or if the no elements have the attribute, returns empty string.
+     @see #hasAttr(String)
+     */
+    public String attr(String attributeKey) {
+        for (Element element : contents) {
+            if (element.hasAttr(attributeKey))
+                return element.attr(attributeKey);
+        }
+        return "";
+    }
+
+    /**
+     Checks if any of the matched elements have this attribute set.
+     @param attributeKey attribute key
+     @return true if any of the elements have the attribute; false if none do.
+     */
+    public boolean hasAttr(String attributeKey) {
+        for (Element element : contents) {
+            if (element.hasAttr(attributeKey))
+                return true;
+        }
+        return false;
+    }
+
+    /**
+     * Set an attribute on all matched elements.
+     * @param attributeKey attribute key
+     * @param attributeValue attribute value
+     * @return this
+     */
+    public Elements attr(String attributeKey, String attributeValue) {
+        for (Element element : contents) {
+            element.attr(attributeKey, attributeValue);
+        }
+        return this;
+    }
+
+    /**
+     * Remove an attribute from every matched element.
+     * @param attributeKey The attribute to remove.
+     * @return this (for chaining)
+     */
+    public Elements removeAttr(String attributeKey) {
+        for (Element element : contents) {
+            element.removeAttr(attributeKey);
+        }
+        return this;
+    }
+
+    /**
+     Add the class name to every matched element's {@code class} attribute.
+     @param className class name to add
+     @return this
+     */
+    public Elements addClass(String className) {
+        for (Element element : contents) {
+            element.addClass(className);
+        }
+        return this;
+    }
+
+    /**
+     Remove the class name from every matched element's {@code class} attribute, if present.
+     @param className class name to remove
+     @return this
+     */
+    public Elements removeClass(String className) {
+        for (Element element : contents) {
+            element.removeClass(className);
+        }
+        return this;
+    }
+
+    /**
+     Toggle the class name on every matched element's {@code class} attribute.
+     @param className class name to add if missing, or remove if present, from every element.
+     @return this
+     */
+    public Elements toggleClass(String className) {
+        for (Element element : contents) {
+            element.toggleClass(className);
+        }
+        return this;
+    }
+
+    /**
+     Determine if any of the matched elements have this class name set in their {@code class} attribute.
+     @param className class name to check for
+     @return true if any do, false if none do
+     */
+    public boolean hasClass(String className) {
+        for (Element element : contents) {
+            if (element.hasClass(className))
+                return true;
+        }
+        return false;
+    }
+... (troncato a 150 righe su 536)
+```
+## Test Falliti
+
+  • org.jsoup.safety.CleanerTest#handlesFramesets
+
+## Stack Trace
+
+```
+handlesFramesets(org.jsoup.safety.CleanerTest): Cannot invoke "org.jsoup.nodes.Element.childNodes()" because "source" is null
+Cannot invoke "org.jsoup.nodes.Element.childNodes()" because "source" is null
+java.lang.NullPointerException: Cannot invoke "org.jsoup.nodes.Element.childNodes()" because "source" is null
+	at org.jsoup.safety.Cleaner.copySafeNodes(Cleaner.java:73)
+	at org.jsoup.safety.Cleaner.clean(Cleaner.java:43)
+	at org.jsoup.safety.CleanerTest.handlesFramesets(CleanerTest.java:176)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+```
+
+## Istruzioni
+
+Analizza il bug e restituisci i metodi corretti, seguendo queste regole TASSATIVE:
+
+1. **Un FILE block per metodo**: se devi correggere N metodi, emetti N blocchi FILE separati.
+   Ogni blocco deve contenere UN SOLO metodo completo.
+
+2. **Indentazione originale**: mantieni ESATTAMENTE l'indentazione del codice originale.
+   La firma del metodo DEVE iniziare con gli stessi spazi del file originale.
+
+3. **La riga `// ◄ FIX THIS LINE`** indica dove l'NPE si manifesta. Rimuovi questo commento
+   nella risposta — restituisci solo codice Java puro.
+
+4. **Null-safe equality OBBLIGATORIA**: se il metodo confronta due valori che possono essere null,
+   usa `java.util.Objects.equals(a, b)` — questa funzione ritorna `true` se entrambi sono null,
+   mentre `a.equals(b)` lancia NPE se `a` è null, e `a != null && a.equals(b)` ritorna `false`
+   se entrambi sono null (sbagliato semanticamente).
+   Esempio corretto:
+   ```java
+   return java.util.Objects.equals(doubleMetaphone(v1, alt), doubleMetaphone(v2, alt));
+   ```
+
+5. **NON modificare metodi che non causano il bug**: se il metodo `doubleMetaphone` ritorna
+   null per input null, questo è il comportamento CORRETTO e atteso dai test. Non cambiarlo.
+
+6. NON modificare file di test.

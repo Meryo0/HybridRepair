@@ -1,0 +1,754 @@
+Bug ID: Jsoup-89  |  Tentativo 1
+
+## Fault Locations (LogicFL)
+
+  • org.jsoup.nodes.Attribute — riga 88  [✓]
+  • org.jsoup.nodes.Attribute — riga 33  [✓]
+  • org.jsoup.nodes.Attribute — riga 48  [✓]
+
+## Catena Causale (LogicFL Prolog)
+
+NPE at line(attribute_1, 88) / Null Expression - f_parent_25[parent]
+	 can be caused by 
+f_parent_25[parent] - line(attribute_1, 88).
+
+NPE at line(attribute_1, 88) / Null Expression - f_parent_25[parent]
+	 can be caused by 
+attribute_1_literal1[null] - line(attribute_1, 33).
+
+NPE at line(attribute_1, 88) / Null Expression - f_parent_25[parent]
+	 can be caused by 
+p_parent_22[parent] - line(attribute_1, 48).
+
+## Metodi Buggy
+
+### FILE: org/jsoup/nodes/Attribute.java  (righe 23–43, fault alla riga 33)
+```java
+    private String val;
+    Attributes parent; // used to update the holding Attributes when the key / value is changed via this interface
+
+    /**
+     * Create a new attribute from unencoded (raw) key and value.
+     * @param key attribute key; case is preserved.
+     * @param value attribute value
+     * @see #createFromEncoded
+     */
+    public Attribute(String key, String value) {
+        this(key, value, null);  // ◄ FIX THIS LINE (NPE manifests here)
+    }
+
+    /**
+     * Create a new attribute from unencoded (raw) key and value.
+     * @param key attribute key; case is preserved.
+     * @param val attribute value
+     * @param parent the containing Attributes (this Attribute is not automatically added to said Attributes)
+     * @see #createFromEncoded*/
+    public Attribute(String key, String val, Attributes parent) {
+        Validate.notNull(key);
+```
+
+### FILE: org/jsoup/nodes/Attribute.java  (righe 38–58, fault alla riga 48)
+```java
+     * @param key attribute key; case is preserved.
+     * @param val attribute value
+     * @param parent the containing Attributes (this Attribute is not automatically added to said Attributes)
+     * @see #createFromEncoded*/
+    public Attribute(String key, String val, Attributes parent) {
+        Validate.notNull(key);
+        key = key.trim();
+        Validate.notEmpty(key); // trimming could potentially make empty, so validate here
+        this.key = key;
+        this.val = val;
+        this.parent = parent;  // ◄ FIX THIS LINE (NPE manifests here)
+    }
+
+    /**
+     Get the attribute key.
+     @return the attribute key
+     */
+    public String getKey() {
+        return key;
+    }
+
+```
+
+### FILE: org/jsoup/nodes/Attribute.java  (righe 87–96, fault alla riga 88)
+```java
+    public String setValue(String val) {
+        String oldVal = parent.get(this.key);  // ◄ FIX THIS LINE (NPE manifests here)
+        if (parent != null) {
+            int i = parent.indexOfKey(this.key);
+            if (i != Attributes.NotFound)
+                parent.vals[i] = val;
+        }
+        this.val = val;
+        return Attributes.checkNotNull(oldVal);
+    }
+```
+
+## File Correlati (stesso progetto — potrebbero servire per il fix)
+
+### StringUtil.java
+```java
+package org.jsoup.internal;
+
+import org.jsoup.helper.Validate;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Stack;
+
+/**
+ * A minimal String utility class. Designed for internal jsoup use only.
+ */
+public final class StringUtil {
+    // memoised padding up to 21
+    static final String[] padding = {"", " ", "  ", "   ", "    ", "     ", "      ", "       ", "        ",
+        "         ", "          ", "           ", "            ", "             ", "              ", "               ",
+        "                ", "                 ", "                  ", "                   ", "                    "};
+
+    /**
+     * Join a collection of strings by a separator
+     * @param strings collection of string objects
+     * @param sep string to place between strings
+     * @return joined string
+     */
+    public static String join(Collection strings, String sep) {
+        return join(strings.iterator(), sep);
+    }
+
+    /**
+     * Join a collection of strings by a separator
+     * @param strings iterator of string objects
+     * @param sep string to place between strings
+     * @return joined string
+     */
+    public static String join(Iterator strings, String sep) {
+        if (!strings.hasNext())
+            return "";
+
+        String start = strings.next().toString();
+        if (!strings.hasNext()) // only one, avoid builder
+            return start;
+
+        StringBuilder sb = StringUtil.borrowBuilder().append(start);
+        while (strings.hasNext()) {
+            sb.append(sep);
+            sb.append(strings.next());
+        }
+        return StringUtil.releaseBuilder(sb);
+    }
+
+    /**
+     * Join an array of strings by a separator
+     * @param strings collection of string objects
+     * @param sep string to place between strings
+     * @return joined string
+     */
+    public static String join(String[] strings, String sep) {
+        return join(Arrays.asList(strings), sep);
+    }
+
+    /**
+     * Returns space padding
+     * @param width amount of padding desired
+     * @return string of spaces * width
+     */
+    public static String padding(int width) {
+        if (width < 0)
+            throw new IllegalArgumentException("width must be > 0");
+
+        if (width < padding.length)
+            return padding[width];
+        char[] out = new char[width];
+        for (int i = 0; i < width; i++)
+            out[i] = ' ';
+        return String.valueOf(out);
+    }
+
+    /**
+     * Tests if a string is blank: null, empty, or only whitespace (" ", \r\n, \t, etc)
+     * @param string string to test
+     * @return if string is blank
+     */
+    public static boolean isBlank(String string) {
+        if (string == null || string.length() == 0)
+            return true;
+
+        int l = string.length();
+        for (int i = 0; i < l; i++) {
+            if (!StringUtil.isWhitespace(string.codePointAt(i)))
+                return false;
+        }
+        return true;
+    }
+
+    /**
+     * Tests if a string is numeric, i.e. contains only digit characters
+     * @param string string to test
+     * @return true if only digit chars, false if empty or null or contains non-digit chars
+     */
+    public static boolean isNumeric(String string) {
+        if (string == null || string.length() == 0)
+            return false;
+
+        int l = string.length();
+        for (int i = 0; i < l; i++) {
+            if (!Character.isDigit(string.codePointAt(i)))
+                return false;
+        }
+        return true;
+    }
+
+    /**
+     * Tests if a code point is "whitespace" as defined in the HTML spec. Used for output HTML.
+     * @param c code point to test
+     * @return true if code point is whitespace, false otherwise
+     * @see #isActuallyWhitespace(int)
+     */
+    public static boolean isWhitespace(int c){
+        return c == ' ' || c == '\t' || c == '\n' || c == '\f' || c == '\r';
+    }
+
+    /**
+     * Tests if a code point is "whitespace" as defined by what it looks like. Used for Element.text etc.
+     * @param c code point to test
+     * @return true if code point is whitespace, false otherwise
+     */
+    public static boolean isActuallyWhitespace(int c){
+        return c == ' ' || c == '\t' || c == '\n' || c == '\f' || c == '\r' || c == 160;
+        // 160 is &nbsp; (non-breaking space). Not in the spec but expected.
+    }
+
+    public static boolean isInvisibleChar(int c) {
+        return Character.getType(c) == 16 && (c == 8203 || c == 8204 || c == 8205 || c == 173);
+        // zero width sp, zw non join, zw join, soft hyphen
+    }
+
+    /**
+     * Normalise the whitespace within this string; multiple spaces collapse to a single, and all whitespace characters
+     * (e.g. newline, tab) convert to a simple space
+     * @param string content to normalise
+     * @return normalised string
+     */
+    public static String normaliseWhitespace(String string) {
+        StringBuilder sb = StringUtil.borrowBuilder();
+        appendNormalisedWhitespace(sb, string, false);
+        return StringUtil.releaseBuilder(sb);
+    }
+
+... (troncato a 150 righe su 277)
+```
+
+### BooleanAttribute.java
+```java
+package org.jsoup.nodes;
+
+/**
+ * A boolean attribute that is written out without any value.
+ * @deprecated just use null values (vs empty string) for booleans.
+ */
+public class BooleanAttribute extends Attribute {
+    /**
+     * Create a new boolean attribute from unencoded (raw) key.
+     * @param key attribute key
+     */
+    public BooleanAttribute(String key) {
+        super(key, null);
+    }
+
+    @Override
+    protected boolean isBooleanAttribute() {
+        return true;
+    }
+}
+```
+
+### Validate.java
+```java
+package org.jsoup.helper;
+
+/**
+ * Simple validation methods. Designed for jsoup internal use
+ */
+public final class Validate {
+    
+    private Validate() {}
+
+    /**
+     * Validates that the object is not null
+     * @param obj object to test
+     */
+    public static void notNull(Object obj) {
+        if (obj == null)
+            throw new IllegalArgumentException("Object must not be null");
+    }
+
+    /**
+     * Validates that the object is not null
+     * @param obj object to test
+     * @param msg message to output if validation fails
+     */
+    public static void notNull(Object obj, String msg) {
+        if (obj == null)
+            throw new IllegalArgumentException(msg);
+    }
+
+    /**
+     * Validates that the value is true
+     * @param val object to test
+     */
+    public static void isTrue(boolean val) {
+        if (!val)
+            throw new IllegalArgumentException("Must be true");
+    }
+
+    /**
+     * Validates that the value is true
+     * @param val object to test
+     * @param msg message to output if validation fails
+     */
+    public static void isTrue(boolean val, String msg) {
+        if (!val)
+            throw new IllegalArgumentException(msg);
+    }
+
+    /**
+     * Validates that the value is false
+     * @param val object to test
+     */
+    public static void isFalse(boolean val) {
+        if (val)
+            throw new IllegalArgumentException("Must be false");
+    }
+
+    /**
+     * Validates that the value is false
+     * @param val object to test
+     * @param msg message to output if validation fails
+     */
+    public static void isFalse(boolean val, String msg) {
+        if (val)
+            throw new IllegalArgumentException(msg);
+    }
+
+    /**
+     * Validates that the array contains no null elements
+     * @param objects the array to test
+     */
+    public static void noNullElements(Object[] objects) {
+        noNullElements(objects, "Array must not contain any null objects");
+    }
+
+    /**
+     * Validates that the array contains no null elements
+     * @param objects the array to test
+     * @param msg message to output if validation fails
+     */
+    public static void noNullElements(Object[] objects, String msg) {
+        for (Object obj : objects)
+            if (obj == null)
+                throw new IllegalArgumentException(msg);
+    }
+
+    /**
+     * Validates that the string is not empty
+     * @param string the string to test
+     */
+    public static void notEmpty(String string) {
+        if (string == null || string.length() == 0)
+            throw new IllegalArgumentException("String must not be empty");
+    }
+
+    /**
+     * Validates that the string is not empty
+     * @param string the string to test
+     * @param msg message to output if validation fails
+     */
+    public static void notEmpty(String string, String msg) {
+        if (string == null || string.length() == 0)
+            throw new IllegalArgumentException(msg);
+    }
+
+    /**
+     Cause a failure.
+     @param msg message to output.
+     */
+    public static void fail(String msg) {
+        throw new IllegalArgumentException(msg);
+    }
+}
+```
+
+### Entities.java
+```java
+package org.jsoup.nodes;
+
+import org.jsoup.SerializationException;
+import org.jsoup.internal.StringUtil;
+import org.jsoup.helper.Validate;
+import org.jsoup.parser.CharacterReader;
+import org.jsoup.parser.Parser;
+
+import java.io.IOException;
+import java.nio.charset.CharsetEncoder;
+import java.util.Arrays;
+import java.util.HashMap;
+
+import static org.jsoup.nodes.Entities.EscapeMode.base;
+import static org.jsoup.nodes.Entities.EscapeMode.extended;
+
+/**
+ * HTML entities, and escape routines. Source: <a href="http://www.w3.org/TR/html5/named-character-references.html#named-character-references">W3C
+ * HTML named character references</a>.
+ */
+public class Entities {
+    private static final int empty = -1;
+    private static final String emptyName = "";
+    static final int codepointRadix = 36;
+    private static final char[] codeDelims = {',', ';'};
+    private static final HashMap<String, String> multipoints = new HashMap<>(); // name -> multiple character references
+    private static final Document.OutputSettings DefaultOutput = new Document.OutputSettings();
+
+    public enum EscapeMode {
+        /**
+         * Restricted entities suitable for XHTML output: lt, gt, amp, and quot only.
+         */
+        xhtml(EntitiesData.xmlPoints, 4),
+        /**
+         * Default HTML output entities.
+         */
+        base(EntitiesData.basePoints, 106),
+        /**
+         * Complete HTML entities.
+         */
+        extended(EntitiesData.fullPoints, 2125);
+
+        // table of named references to their codepoints. sorted so we can binary search. built by BuildEntities.
+        private String[] nameKeys;
+        private int[] codeVals; // limitation is the few references with multiple characters; those go into multipoints.
+
+        // table of codepoints to named entities.
+        private int[] codeKeys; // we don' support multicodepoints to single named value currently
+        private String[] nameVals;
+
+        EscapeMode(String file, int size) {
+            load(this, file, size);
+        }
+
+        int codepointForName(final String name) {
+            int index = Arrays.binarySearch(nameKeys, name);
+            return index >= 0 ? codeVals[index] : empty;
+        }
+
+        String nameForCodepoint(final int codepoint) {
+            final int index = Arrays.binarySearch(codeKeys, codepoint);
+            if (index >= 0) {
+                // the results are ordered so lower case versions of same codepoint come after uppercase, and we prefer to emit lower
+                // (and binary search for same item with multi results is undefined
+                return (index < nameVals.length - 1 && codeKeys[index + 1] == codepoint) ?
+                    nameVals[index + 1] : nameVals[index];
+            }
+            return emptyName;
+        }
+
+        private int size() {
+            return nameKeys.length;
+        }
+    }
+
+    private Entities() {
+    }
+
+    /**
+     * Check if the input is a known named entity
+     *
+     * @param name the possible entity name (e.g. "lt" or "amp")
+     * @return true if a known named entity
+     */
+    public static boolean isNamedEntity(final String name) {
+        return extended.codepointForName(name) != empty;
+    }
+
+    /**
+     * Check if the input is a known named entity in the base entity set.
+     *
+     * @param name the possible entity name (e.g. "lt" or "amp")
+     * @return true if a known named entity in the base set
+     * @see #isNamedEntity(String)
+     */
+    public static boolean isBaseNamedEntity(final String name) {
+        return base.codepointForName(name) != empty;
+    }
+
+    /**
+     * Get the Character value of the named entity
+     *
+     * @param name named entity (e.g. "lt" or "amp")
+     * @return the Character value of the named entity (e.g. '{@literal <}' or '{@literal &}')
+     * @deprecated does not support characters outside the BMP or multiple character names
+     */
+    public static Character getCharacterByName(String name) {
+        return (char) extended.codepointForName(name);
+    }
+
+    /**
+     * Get the character(s) represented by the named entity
+     *
+     * @param name entity (e.g. "lt" or "amp")
+     * @return the string value of the character(s) represented by this entity, or "" if not defined
+     */
+    public static String getByName(String name) {
+        String val = multipoints.get(name);
+        if (val != null)
+            return val;
+        int codepoint = extended.codepointForName(name);
+        if (codepoint != empty)
+            return new String(new int[]{codepoint}, 0, 1);
+        return emptyName;
+    }
+
+    public static int codepointsForName(final String name, final int[] codepoints) {
+        String val = multipoints.get(name);
+        if (val != null) {
+            codepoints[0] = val.codePointAt(0);
+            codepoints[1] = val.codePointAt(1);
+            return 2;
+        }
+        int codepoint = extended.codepointForName(name);
+        if (codepoint != empty) {
+            codepoints[0] = codepoint;
+            return 1;
+        }
+        return 0;
+    }
+
+    /**
+     * HTML escape an input string. That is, {@code <} is returned as {@code &lt;}
+     *
+     * @param string the un-escaped string to escape
+     * @param out the output settings to use
+     * @return the escaped string
+     */
+    public static String escape(String string, Document.OutputSettings out) {
+        if (string == null)
+... (troncato a 150 righe su 355)
+```
+
+### Attributes.java
+```java
+package org.jsoup.nodes;
+
+import org.jsoup.SerializationException;
+import org.jsoup.internal.StringUtil;
+import org.jsoup.helper.Validate;
+
+import java.io.IOException;
+import java.util.AbstractMap;
+import java.util.AbstractSet;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import static org.jsoup.internal.Normalizer.lowerCase;
+
+/**
+ * The attributes of an Element.
+ * <p>
+ * Attributes are treated as a map: there can be only one value associated with an attribute key/name.
+ * </p>
+ * <p>
+ * Attribute name and value comparisons are  generally <b>case sensitive</b>. By default for HTML, attribute names are
+ * normalized to lower-case on parsing. That means you should use lower-case strings when referring to attributes by
+ * name.
+ * </p>
+ *
+ * @author Jonathan Hedley, jonathan@hedley.net
+ */
+public class Attributes implements Iterable<Attribute>, Cloneable {
+    protected static final String dataPrefix = "data-";
+    private static final int InitialCapacity = 4; // todo - analyze Alexa 1MM sites, determine best setting
+
+    // manages the key/val arrays
+    private static final int GrowthFactor = 2;
+    private static final String[] Empty = {};
+    static final int NotFound = -1;
+    private static final String EmptyString = "";
+
+    private int size = 0; // number of slots used (not capacity, which is keys.length
+    String[] keys = Empty;
+    String[] vals = Empty;
+
+    // check there's room for more
+    private void checkCapacity(int minNewSize) {
+        Validate.isTrue(minNewSize >= size);
+        int curSize = keys.length;
+        if (curSize >= minNewSize)
+            return;
+
+        int newSize = curSize >= InitialCapacity ? size * GrowthFactor : InitialCapacity;
+        if (minNewSize > newSize)
+            newSize = minNewSize;
+
+        keys = copyOf(keys, newSize);
+        vals = copyOf(vals, newSize);
+    }
+
+    // simple implementation of Arrays.copy, for support of Android API 8.
+    private static String[] copyOf(String[] orig, int size) {
+        final String[] copy = new String[size];
+        System.arraycopy(orig, 0, copy, 0,
+                Math.min(orig.length, size));
+        return copy;
+    }
+
+    int indexOfKey(String key) {
+        Validate.notNull(key);
+        for (int i = 0; i < size; i++) {
+            if (key.equals(keys[i]))
+                return i;
+        }
+        return NotFound;
+    }
+
+    private int indexOfKeyIgnoreCase(String key) {
+        Validate.notNull(key);
+        for (int i = 0; i < size; i++) {
+            if (key.equalsIgnoreCase(keys[i]))
+                return i;
+        }
+        return NotFound;
+    }
+
+    // we track boolean attributes as null in values - they're just keys. so returns empty for consumers
+    static String checkNotNull(String val) {
+        return val == null ? EmptyString : val;
+    }
+
+    /**
+     Get an attribute value by key.
+     @param key the (case-sensitive) attribute key
+     @return the attribute value if set; or empty string if not set (or a boolean attribute).
+     @see #hasKey(String)
+     */
+    public String get(String key) {
+        int i = indexOfKey(key);
+        return i == NotFound ? EmptyString : checkNotNull(vals[i]);
+    }
+
+    /**
+     * Get an attribute's value by case-insensitive key
+     * @param key the attribute name
+     * @return the first matching attribute value if set; or empty string if not set (ora boolean attribute).
+     */
+    public String getIgnoreCase(String key) {
+        int i = indexOfKeyIgnoreCase(key);
+        return i == NotFound ? EmptyString : checkNotNull(vals[i]);
+    }
+
+    // adds without checking if this key exists
+    private void add(String key, String value) {
+        checkCapacity(size + 1);
+        keys[size] = key;
+        vals[size] = value;
+        size++;
+    }
+
+    /**
+     * Set a new attribute, or replace an existing one by key.
+     * @param key case sensitive attribute key
+     * @param value attribute value
+     * @return these attributes, for chaining
+     */
+    public Attributes put(String key, String value) {
+        int i = indexOfKey(key);
+        if (i != NotFound)
+            vals[i] = value;
+        else
+            add(key, value);
+        return this;
+    }
+
+    void putIgnoreCase(String key, String value) {
+        int i = indexOfKeyIgnoreCase(key);
+        if (i != NotFound) {
+            vals[i] = value;
+            if (!keys[i].equals(key)) // case changed, update
+                keys[i] = key;
+        }
+        else
+            add(key, value);
+    }
+
+    /**
+     * Set a new boolean attribute, remove attribute if value is false.
+     * @param key case <b>insensitive</b> attribute key
+... (troncato a 150 righe su 446)
+```
+## Test Falliti
+
+  • org.jsoup.nodes.AttributeTest#settersOnOrphanAttribute
+
+## Stack Trace
+
+```
+settersOnOrphanAttribute(org.jsoup.nodes.AttributeTest): Cannot invoke "org.jsoup.nodes.Attributes.get(String)" because "this.parent" is null
+Cannot invoke "org.jsoup.nodes.Attributes.get(String)" because "this.parent" is null
+java.lang.NullPointerException: Cannot invoke "org.jsoup.nodes.Attributes.get(String)" because "this.parent" is null
+	at org.jsoup.nodes.Attribute.setValue(Attribute.java:88)
+	at org.jsoup.nodes.AttributeTest.settersOnOrphanAttribute(AttributeTest.java:44)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+```
+
+## Istruzioni
+
+Analizza il bug e restituisci i metodi corretti, seguendo queste regole TASSATIVE:
+
+1. **Un FILE block per metodo**: se devi correggere N metodi, emetti N blocchi FILE separati.
+   Ogni blocco deve contenere UN SOLO metodo completo.
+
+2. **Indentazione originale**: mantieni ESATTAMENTE l'indentazione del codice originale.
+   La firma del metodo DEVE iniziare con gli stessi spazi del file originale.
+
+3. **La riga `// ◄ FIX THIS LINE`** indica dove l'NPE si manifesta. Rimuovi questo commento
+   nella risposta — restituisci solo codice Java puro.
+
+4. **Null-safe equality OBBLIGATORIA**: se il metodo confronta due valori che possono essere null,
+   usa `java.util.Objects.equals(a, b)` — questa funzione ritorna `true` se entrambi sono null,
+   mentre `a.equals(b)` lancia NPE se `a` è null, e `a != null && a.equals(b)` ritorna `false`
+   se entrambi sono null (sbagliato semanticamente).
+   Esempio corretto:
+   ```java
+   return java.util.Objects.equals(doubleMetaphone(v1, alt), doubleMetaphone(v2, alt));
+   ```
+
+5. **NON modificare metodi che non causano il bug**: se il metodo `doubleMetaphone` ritorna
+   null per input null, questo è il comportamento CORRETTO e atteso dai test. Non cambiarlo.
+
+6. NON modificare file di test.

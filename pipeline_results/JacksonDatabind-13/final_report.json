@@ -1,0 +1,18 @@
+{
+  "bug_id": "JacksonDatabind-13",
+  "success": true,
+  "winning_attempt": 2,
+  "total_attempts": 2,
+  "test_result": {
+    "status": "PASS",
+    "total_tests": 17,
+    "failed_tests": 0,
+    "failing_test_names": [],
+    "previously_failing_now_passing": [
+      "com.fasterxml.jackson.databind.struct.TestObjectIdDeserialization"
+    ],
+    "compile_output": "Note: Some input files use or override a deprecated API.\nNote: Recompile with -Xlint:deprecation for details.\nNote: Some input files use unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
+    "test_output": "JUnit version 4.11\n.................\nTime: 0.118\n\nOK (17 tests)\n\n"
+  },
+  "timestamp": "2026-04-20T14:52:53.993803+00:00"
+}

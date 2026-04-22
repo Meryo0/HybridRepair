@@ -1,0 +1,31 @@
+--- java/org/apache/commons/cli/CommandLine.java
++++ java/org/apache/commons/cli/CommandLine.java
+@@ -63,9 +63,9 @@
+      * @param opt Short name of the option
+      * @return true if set, false if not
+      */
+-    public boolean hasOption(String opt)
+-    {
+-        return options.contains( resolveOption(opt));
++public boolean hasOption(String opt)
++    {
++        return options.contains(resolveOption(opt));
+     }
+ 
+     /** 
+
+--- java/org/apache/commons/cli/Util.java
++++ java/org/apache/commons/cli/Util.java
+@@ -31,8 +31,11 @@
+      *
+      * @return the new String.
+      */
+-    static String stripLeadingHyphens(String str)
++static String stripLeadingHyphens(String str)
+     {
++        if (str == null) {
++            return null;
++        }
+         if (str.startsWith("--"))
+         {
+             return str.substring(2, str.length());

@@ -1,0 +1,994 @@
+Bug ID: Lang-20  |  Tentativo 1
+
+## Fault Locations (LogicFL)
+
+  • org.apache.commons.lang3.StringUtils — riga 3383  [✓]
+  • org.apache.commons.lang3.StringUtils — riga 3383  [✓]
+  • org.apache.commons.lang3.StringUtils — riga 3338  [✓]
+  • org.apache.commons.lang3.StringUtils — riga 3383  [✓]
+  • org.apache.commons.lang3.StringUtils — riga 3338  [✓]
+  • org.apache.commons.lang3.StringUtils — riga 3298  [✓]
+  • org.apache.commons.lang3.StringUtils — riga 3260  [✓]
+  • org.apache.commons.lang3.StringUtils — riga 3298  [✓]
+
+## Catena Causale (LogicFL Prolog)
+
+NPE at line(string_utils_1, 3383) / Null Expression - p_separator_193[separator]
+	 can be caused by 
+p_separator_193[separator] - line(string_utils_1, 3383).
+
+NPE at line(string_utils_1, 3383) / Null Expression - p_array_192[array]
+	 can be caused by 
+p_array_192[array] - line(string_utils_1, 3383).
+
+NPE at line(string_utils_1, 3383) / Null Expression - p_array_192[array]
+	 can be caused by 
+p_array_190[array] - line(string_utils_1, 3338).
+
+NPE at line(string_utils_1, 3383) / Null Expression - string_utils_1_expr61['array[startIndex].toString()']
+	 can be caused by 
+string_utils_1_expr61['array[startIndex].toString()'] - line(string_utils_1, 3383).
+
+NPE at line(string_utils_1, 3383) / Null Expression - p_separator_193[separator]
+	 can be caused by 
+p_separator_191[separator] - line(string_utils_1, 3338).
+
+NPE at line(string_utils_1, 3298) / Null Expression - p_array_182[array]
+	 can be caused by 
+p_array_182[array] - line(string_utils_1, 3298).
+
+NPE at line(string_utils_1, 3298) / Null Expression - p_array_182[array]
+	 can be caused by 
+p_array_180[array] - line(string_utils_1, 3260).
+
+NPE at line(string_utils_1, 3298) / Null Expression - string_utils_1_expr34['array[startIndex].toString()']
+	 can be caused by 
+string_utils_1_expr34['array[startIndex].toString()'] - line(string_utils_1, 3298).
+
+## Metodi Buggy
+
+### FILE: org/apache/commons/lang3/StringUtils.java  (righe 3255–3261, fault alla riga 3260)
+```java
+    public static String join(Object[] array, char separator) {
+        if (array == null) {
+            return null;
+        }
+
+        return join(array, separator, 0, array.length);  // ◄ FIX THIS LINE (NPE manifests here)
+    }
+```
+
+### FILE: org/apache/commons/lang3/StringUtils.java  (righe 3289–3309, fault alla riga 3298)
+```java
+    public static String join(Object[] array, char separator, int startIndex, int endIndex) {
+        if (array == null) {
+            return null;
+        }
+        int noOfItems = (endIndex - startIndex);
+        if (noOfItems <= 0) {
+            return EMPTY;
+        }
+        
+        StringBuilder buf = new StringBuilder((array[startIndex] == null ? 16 : array[startIndex].toString().length()) + 1);  // ◄ FIX THIS LINE (NPE manifests here)
+
+        for (int i = startIndex; i < endIndex; i++) {
+            if (i > startIndex) {
+                buf.append(separator);
+            }
+            if (array[i] != null) {
+                buf.append(array[i]);
+            }
+        }
+        return buf.toString();
+    }
+```
+
+### FILE: org/apache/commons/lang3/StringUtils.java  (righe 3289–3309, fault alla riga 3298)
+```java
+    public static String join(Object[] array, char separator, int startIndex, int endIndex) {
+        if (array == null) {
+            return null;
+        }
+        int noOfItems = (endIndex - startIndex);
+        if (noOfItems <= 0) {
+            return EMPTY;
+        }
+        
+        StringBuilder buf = new StringBuilder((array[startIndex] == null ? 16 : array[startIndex].toString().length()) + 1);  // ◄ FIX THIS LINE (NPE manifests here)
+
+        for (int i = startIndex; i < endIndex; i++) {
+            if (i > startIndex) {
+                buf.append(separator);
+            }
+            if (array[i] != null) {
+                buf.append(array[i]);
+            }
+        }
+        return buf.toString();
+    }
+```
+
+### FILE: org/apache/commons/lang3/StringUtils.java  (righe 3334–3339, fault alla riga 3338)
+```java
+    public static String join(Object[] array, String separator) {
+        if (array == null) {
+            return null;
+        }
+        return join(array, separator, 0, array.length);  // ◄ FIX THIS LINE (NPE manifests here)
+    }
+```
+
+### FILE: org/apache/commons/lang3/StringUtils.java  (righe 3334–3339, fault alla riga 3338)
+```java
+    public static String join(Object[] array, String separator) {
+        if (array == null) {
+            return null;
+        }
+        return join(array, separator, 0, array.length);  // ◄ FIX THIS LINE (NPE manifests here)
+    }
+```
+
+### FILE: org/apache/commons/lang3/StringUtils.java  (righe 3368–3394, fault alla riga 3383)
+```java
+    public static String join(Object[] array, String separator, int startIndex, int endIndex) {
+        if (array == null) {
+            return null;
+        }
+        if (separator == null) {
+            separator = EMPTY;
+        }
+
+        // endIndex - startIndex > 0:   Len = NofStrings *(len(firstString) + len(separator))
+        //           (Assuming that all Strings are roughly equally long)
+        int noOfItems = (endIndex - startIndex);
+        if (noOfItems <= 0) {
+            return EMPTY;
+        }
+
+        StringBuilder buf = new StringBuilder((array[startIndex] == null ? 16 : array[startIndex].toString().length()) + separator.length());  // ◄ FIX THIS LINE (NPE manifests here)
+
+        for (int i = startIndex; i < endIndex; i++) {
+            if (i > startIndex) {
+                buf.append(separator);
+            }
+            if (array[i] != null) {
+                buf.append(array[i]);
+            }
+        }
+        return buf.toString();
+    }
+```
+
+### FILE: org/apache/commons/lang3/StringUtils.java  (righe 3368–3394, fault alla riga 3383)
+```java
+    public static String join(Object[] array, String separator, int startIndex, int endIndex) {
+        if (array == null) {
+            return null;
+        }
+        if (separator == null) {
+            separator = EMPTY;
+        }
+
+        // endIndex - startIndex > 0:   Len = NofStrings *(len(firstString) + len(separator))
+        //           (Assuming that all Strings are roughly equally long)
+        int noOfItems = (endIndex - startIndex);
+        if (noOfItems <= 0) {
+            return EMPTY;
+        }
+
+        StringBuilder buf = new StringBuilder((array[startIndex] == null ? 16 : array[startIndex].toString().length()) + separator.length());  // ◄ FIX THIS LINE (NPE manifests here)
+
+        for (int i = startIndex; i < endIndex; i++) {
+            if (i > startIndex) {
+                buf.append(separator);
+            }
+            if (array[i] != null) {
+                buf.append(array[i]);
+            }
+        }
+        return buf.toString();
+    }
+```
+
+### FILE: org/apache/commons/lang3/StringUtils.java  (righe 3368–3394, fault alla riga 3383)
+```java
+    public static String join(Object[] array, String separator, int startIndex, int endIndex) {
+        if (array == null) {
+            return null;
+        }
+        if (separator == null) {
+            separator = EMPTY;
+        }
+
+        // endIndex - startIndex > 0:   Len = NofStrings *(len(firstString) + len(separator))
+        //           (Assuming that all Strings are roughly equally long)
+        int noOfItems = (endIndex - startIndex);
+        if (noOfItems <= 0) {
+            return EMPTY;
+        }
+
+        StringBuilder buf = new StringBuilder((array[startIndex] == null ? 16 : array[startIndex].toString().length()) + separator.length());  // ◄ FIX THIS LINE (NPE manifests here)
+
+        for (int i = startIndex; i < endIndex; i++) {
+            if (i > startIndex) {
+                buf.append(separator);
+            }
+            if (array[i] != null) {
+                buf.append(array[i]);
+            }
+        }
+        return buf.toString();
+    }
+```
+
+## File Correlati (stesso progetto — potrebbero servire per il fix)
+
+### CharSequenceUtils.java
+```java
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.apache.commons.lang3;
+
+/**
+ * <p>Operations on {@link java.lang.CharSequence} that are
+ * {@code null} safe.</p>
+ *
+ * @see java.lang.CharSequence
+ * @since 3.0
+ * @version $Id$
+ */
+public class CharSequenceUtils {
+
+    /**
+     * <p>{@code CharSequenceUtils} instances should NOT be constructed in
+     * standard programming. </p>
+     *
+     * <p>This constructor is public to permit tools that require a JavaBean
+     * instance to operate.</p>
+     */
+    public CharSequenceUtils() {
+        super();
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * <p>Returns a new {@code CharSequence} that is a subsequence of this
+     * sequence starting with the {@code char} value at the specified index.</p>
+     *
+     * <p>This provides the {@code CharSequence} equivalent to {@link String#substring(int)}.
+     * The length (in {@code char}) of the returned sequence is {@code length() - start},
+     * so if {@code start == end} then an empty sequence is returned.</p>
+     *
+     * @param cs  the specified subsequence, null returns null
+     * @param start  the start index, inclusive, valid
+     * @return a new subsequence, may be null
+     * @throws IndexOutOfBoundsException if {@code start} is negative or if 
+     *  {@code start} is greater than {@code length()}
+     */
+    public static CharSequence subSequence(CharSequence cs, int start) {
+        return cs == null ? null : cs.subSequence(start, cs.length());
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * <p>Finds the first index in the {@code CharSequence} that matches the
+     * specified character.</p>
+     *
+     * @param cs  the {@code CharSequence} to be processed, not null
+     * @param searchChar  the char to be searched for
+     * @param start  the start index, negative starts at the string start
+     * @return the index where the search char was found, -1 if not found
+     */
+    static int indexOf(CharSequence cs, int searchChar, int start) {
+        if (cs instanceof String) {
+            return ((String) cs).indexOf(searchChar, start);
+        } else {
+            int sz = cs.length();
+            if (start < 0) {
+                start = 0;
+            }
+            for (int i = start; i < sz; i++) {
+                if (cs.charAt(i) == searchChar) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+    }
+
+    /**
+     * Used by the indexOf(CharSequence methods) as a green implementation of indexOf.
+     *
+     * @param cs the {@code CharSequence} to be processed
+     * @param searchChar the {@code CharSequence} to be searched for
+     * @param start the start index
+     * @return the index where the search sequence was found
+     */
+    static int indexOf(CharSequence cs, CharSequence searchChar, int start) {
+        return cs.toString().indexOf(searchChar.toString(), start);
+//        if (cs instanceof String && searchChar instanceof String) {
+//            // TODO: Do we assume searchChar is usually relatively small;
+//            //       If so then calling toString() on it is better than reverting to
+//            //       the green implementation in the else block
+//            return ((String) cs).indexOf((String) searchChar, start);
+//        } else {
+//            // TODO: Implement rather than convert to String
+//            return cs.toString().indexOf(searchChar.toString(), start);
+//        }
+    }
+
+    /**
+     * <p>Finds the last index in the {@code CharSequence} that matches the
+     * specified character.</p>
+     *
+     * @param cs  the {@code CharSequence} to be processed
+     * @param searchChar  the char to be searched for
+     * @param start  the start index, negative returns -1, beyond length starts at end
+     * @return the index where the search char was found, -1 if not found
+     */
+    static int lastIndexOf(CharSequence cs, int searchChar, int start) {
+        if (cs instanceof String) {
+            return ((String) cs).lastIndexOf(searchChar, start);
+        } else {
+            int sz = cs.length();
+            if (start < 0) {
+                return -1;
+            }
+            if (start >= sz) {
+                start = sz - 1;
+            }
+            for (int i = start; i >= 0; --i) {
+                if (cs.charAt(i) == searchChar) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+    }
+
+    /**
+     * Used by the lastIndexOf(CharSequence methods) as a green implementation of lastIndexOf
+     *
+     * @param cs the {@code CharSequence} to be processed
+     * @param searchChar the {@code CharSequence} to be searched for
+     * @param start the start index
+     * @return the index where the search sequence was found
+     */
+    static int lastIndexOf(CharSequence cs, CharSequence searchChar, int start) {
+        return cs.toString().lastIndexOf(searchChar.toString(), start);
+//        if (cs instanceof String && searchChar instanceof String) {
+//            // TODO: Do we assume searchChar is usually relatively small;
+//            //       If so then calling toString() on it is better than reverting to
+//            //       the green implementation in the else block
+//            return ((String) cs).lastIndexOf((String) searchChar, start);
+... (troncato a 150 righe su 197)
+```
+
+### ObjectUtils.java
+```java
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.apache.commons.lang3;
+
+import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+import org.apache.commons.lang3.exception.CloneFailedException;
+
+/**
+ * <p>Operations on {@code Object}.</p>
+ *
+ * <p>This class tries to handle {@code null} input gracefully.
+ * An exception will generally not be thrown for a {@code null} input.
+ * Each method documents its behaviour in more detail.</p>
+ *
+ * <p>#ThreadSafe#</p>
+ * @since 1.0
+ * @version $Id$
+ */
+//@Immutable
+public class ObjectUtils {
+
+    /**
+     * <p>Singleton used as a {@code null} placeholder where
+     * {@code null} has another meaning.</p>
+     *
+     * <p>For example, in a {@code HashMap} the
+     * {@link java.util.HashMap#get(java.lang.Object)} method returns
+     * {@code null} if the {@code Map} contains {@code null} or if there
+     * is no matching key. The {@code Null} placeholder can be used to
+     * distinguish between these two cases.</p>
+     *
+     * <p>Another example is {@code Hashtable}, where {@code null}
+     * cannot be stored.</p>
+     *
+     * <p>This instance is Serializable.</p>
+     */
+    public static final Null NULL = new Null();
+
+    /**
+     * <p>{@code ObjectUtils} instances should NOT be constructed in
+     * standard programming. Instead, the static methods on the class should
+     * be used, such as {@code ObjectUtils.defaultIfNull("a","b");}.</p>
+     *
+     * <p>This constructor is public to permit tools that require a JavaBean
+     * instance to operate.</p>
+     */
+    public ObjectUtils() {
+        super();
+    }
+
+    // Defaulting
+    //-----------------------------------------------------------------------
+    /**
+     * <p>Returns a default value if the object passed is {@code null}.</p>
+     *
+     * <pre>
+     * ObjectUtils.defaultIfNull(null, null)      = null
+     * ObjectUtils.defaultIfNull(null, "")        = ""
+     * ObjectUtils.defaultIfNull(null, "zz")      = "zz"
+     * ObjectUtils.defaultIfNull("abc", *)        = "abc"
+     * ObjectUtils.defaultIfNull(Boolean.TRUE, *) = Boolean.TRUE
+     * </pre>
+     *
+     * @param <T> the type of the object
+     * @param object  the {@code Object} to test, may be {@code null}
+     * @param defaultValue  the default value to return, may be {@code null}
+     * @return {@code object} if it is not {@code null}, defaultValue otherwise
+     */
+    public static <T> T defaultIfNull(T object, T defaultValue) {
+        return object != null ? object : defaultValue;
+    }
+
+    /**
+     * <p>Returns the first value in the array which is not {@code null}.
+     * If all the values are {@code null} or the array is {@code null}
+     * or empty then {@code null} is returned.</p>
+     *
+     * <pre>
+     * ObjectUtils.firstNonNull(null, null)      = null
+     * ObjectUtils.firstNonNull(null, "")        = ""
+     * ObjectUtils.firstNonNull(null, null, "")  = ""
+     * ObjectUtils.firstNonNull(null, "zz")      = "zz"
+     * ObjectUtils.firstNonNull("abc", *)        = "abc"
+     * ObjectUtils.firstNonNull(null, "xyz", *)  = "xyz"
+     * ObjectUtils.firstNonNull(Boolean.TRUE, *) = Boolean.TRUE
+     * ObjectUtils.firstNonNull()                = null
+     * </pre>
+     *
+     * @param <T> the component type of the array
+     * @param values  the values to test, may be {@code null} or empty
+     * @return the first value from {@code values} which is not {@code null},
+     *  or {@code null} if there are no non-null values
+     * @since 3.0
+     */
+    public static <T> T firstNonNull(T... values) {
+        if (values != null) {
+            for (T val : values) {
+                if (val != null) {
+                    return val;
+                }
+            }
+        }
+        return null;
+    }
+
+    // Null-safe equals/hashCode
+    //-----------------------------------------------------------------------
+    /**
+     * <p>Compares two objects for equality, where either one or both
+     * objects may be {@code null}.</p>
+     *
+     * <pre>
+     * ObjectUtils.equals(null, null)                  = true
+     * ObjectUtils.equals(null, "")                    = false
+     * ObjectUtils.equals("", null)                    = false
+     * ObjectUtils.equals("", "")                      = true
+     * ObjectUtils.equals(Boolean.TRUE, null)          = false
+     * ObjectUtils.equals(Boolean.TRUE, "true")        = false
+     * ObjectUtils.equals(Boolean.TRUE, Boolean.TRUE)  = true
+     * ObjectUtils.equals(Boolean.TRUE, Boolean.FALSE) = false
+     * </pre>
+     *
+     * @param object1  the first object, may be {@code null}
+     * @param object2  the second object, may be {@code null}
+     * @return {@code true} if the values of both objects are the same
+     */
+    public static boolean equals(Object object1, Object object2) {
+        if (object1 == object2) {
+            return true;
+        }
+        if ((object1 == null) || (object2 == null)) {
+            return false;
+... (troncato a 150 righe su 521)
+```
+
+### CharUtils.java
+```java
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.apache.commons.lang3;
+
+/**
+ * <p>Operations on char primitives and Character objects.</p>
+ *
+ * <p>This class tries to handle {@code null} input gracefully.
+ * An exception will not be thrown for a {@code null} input.
+ * Each method documents its behaviour in more detail.</p>
+ * 
+ * <p>#ThreadSafe#</p>
+ * @since 2.1
+ * @version $Id$
+ */
+public class CharUtils {
+    
+    private static final String CHAR_STRING = 
+        "\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007" +
+        "\b\t\n\u000b\f\r\u000e\u000f" +
+        "\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017" +
+        "\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f" +
+        "\u0020\u0021\"\u0023\u0024\u0025\u0026\u0027" +
+        "\u0028\u0029\u002a\u002b\u002c\u002d\u002e\u002f" +
+        "\u0030\u0031\u0032\u0033\u0034\u0035\u0036\u0037" +
+        "\u0038\u0039\u003a\u003b\u003c\u003d\u003e\u003f" +
+        "\u0040\u0041\u0042\u0043\u0044\u0045\u0046\u0047" +
+        "\u0048\u0049\u004a\u004b\u004c\u004d\u004e\u004f" +
+        "\u0050\u0051\u0052\u0053\u0054\u0055\u0056\u0057" +
+        "\u0058\u0059\u005a\u005b\\\u005d\u005e\u005f" +
+        "\u0060\u0061\u0062\u0063\u0064\u0065\u0066\u0067" +
+        "\u0068\u0069\u006a\u006b\u006c\u006d\u006e\u006f" +
+        "\u0070\u0071\u0072\u0073\u0074\u0075\u0076\u0077" +
+        "\u0078\u0079\u007a\u007b\u007c\u007d\u007e\u007f";
+    
+    private static final String[] CHAR_STRING_ARRAY = new String[128];
+    private static final Character[] CHAR_ARRAY = new Character[128];
+    
+    /**
+     * {@code \u000a} linefeed LF ('\n').
+     * 
+     * @see <a href="http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#101089">JLF: Escape Sequences
+     *      for Character and String Literals</a>
+     * @since 2.2
+     */
+    public static final char LF = '\n';
+
+    /**
+     * {@code \u000d} carriage return CR ('\r').
+     * 
+     * @see <a href="http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#101089">JLF: Escape Sequences
+     *      for Character and String Literals</a>
+     * @since 2.2
+     */
+    public static final char CR = '\r';
+    
+
+    static {
+        for (int i = 127; i >= 0; i--) {
+            CHAR_STRING_ARRAY[i] = CHAR_STRING.substring(i, i + 1);
+            CHAR_ARRAY[i] = new Character((char) i);
+        }
+    }
+
+    /**
+     * <p>{@code CharUtils} instances should NOT be constructed in standard programming.
+     * Instead, the class should be used as {@code CharUtils.toString('c');}.</p>
+     *
+     * <p>This constructor is public to permit tools that require a JavaBean instance
+     * to operate.</p>
+     */
+    public CharUtils() {
+      super();
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * <p>Converts the character to a Character.</p>
+     * 
+     * <p>For ASCII 7 bit characters, this uses a cache that will return the
+     * same Character object each time.</p>
+     *
+     * <pre>
+     *   CharUtils.toCharacterObject(' ')  = ' '
+     *   CharUtils.toCharacterObject('A')  = 'A'
+     * </pre>
+     *
+     * @param ch  the character to convert
+     * @return a Character of the specified character
+     */
+    public static Character toCharacterObject(char ch) {
+        if (ch < CHAR_ARRAY.length) {
+            return CHAR_ARRAY[ch];
+        }
+        return new Character(ch);
+    }
+    
+    /**
+     * <p>Converts the String to a Character using the first character, returning
+     * null for empty Strings.</p>
+     * 
+     * <p>For ASCII 7 bit characters, this uses a cache that will return the
+     * same Character object each time.</p>
+     * 
+     * <pre>
+     *   CharUtils.toCharacterObject(null) = null
+     *   CharUtils.toCharacterObject("")   = null
+     *   CharUtils.toCharacterObject("A")  = 'A'
+     *   CharUtils.toCharacterObject("BA") = 'B'
+     * </pre>
+     *
+     * @param str  the character to convert
+     * @return the Character value of the first letter of the String
+     */
+    public static Character toCharacterObject(String str) {
+        if (StringUtils.isEmpty(str)) {
+            return null;
+        }
+        return toCharacterObject(str.charAt(0));
+    }
+    
+    //-----------------------------------------------------------------------
+    /**
+     * <p>Converts the Character to a char throwing an exception for {@code null}.</p>
+     * 
+     * <pre>
+     *   CharUtils.toChar(' ')  = ' '
+     *   CharUtils.toChar('A')  = 'A'
+     *   CharUtils.toChar(null) throws IllegalArgumentException
+     * </pre>
+     *
+     * @param ch  the character to convert
+     * @return the char value of the Character
+     * @throws IllegalArgumentException if the Character is null
+     */
+    public static char toChar(Character ch) {
+... (troncato a 150 righe su 560)
+```
+
+### CharEncoding.java
+```java
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.apache.commons.lang3;
+
+import java.nio.charset.Charset;
+import java.nio.charset.IllegalCharsetNameException;
+
+/**
+ * <p>Character encoding names required of every implementation of the Java platform.</p>
+ *
+ * <p>According to <a href="http://java.sun.com/j2se/1.3/docs/api/java/lang/package-summary.html#charenc">JRE character
+ * encoding names</a>:</p>
+ *
+ * <p><cite>Every implementation of the Java platform is required to support the following character encodings.
+ * Consult the release documentation for your implementation to see if any other encodings are supported.
+ * </cite></p>
+ *
+ * @see <a href="http://download.oracle.com/javase/1.3/docs/guide/intl/encoding.doc.html">JRE character encoding names</a>
+ * @since 2.1
+ * @version $Id$
+ */
+public class CharEncoding {
+
+    /**
+     * <p>ISO Latin Alphabet #1, also known as ISO-LATIN-1.</p>
+     *
+     * <p>Every implementation of the Java platform is required to support this character encoding.</p>
+     */
+    public static final String ISO_8859_1 = "ISO-8859-1";
+
+    /**
+     * <p>Seven-bit ASCII, also known as ISO646-US, also known as the Basic Latin block
+     * of the Unicode character set.</p>
+     *
+     * <p>Every implementation of the Java platform is required to support this character encoding.</p>
+     */
+    public static final String US_ASCII = "US-ASCII";
+
+    /**
+     * <p>Sixteen-bit Unicode Transformation Format, byte order specified by a mandatory initial
+     * byte-order mark (either order accepted on input, big-endian used on output).</p>
+     *
+     * <p>Every implementation of the Java platform is required to support this character encoding.</p>
+     */
+    public static final String UTF_16 = "UTF-16";
+
+    /**
+     * <p>Sixteen-bit Unicode Transformation Format, big-endian byte order.</p>
+     *
+     * <p>Every implementation of the Java platform is required to support this character encoding.</p>
+     */
+    public static final String UTF_16BE = "UTF-16BE";
+
+    /**
+     * <p>Sixteen-bit Unicode Transformation Format, little-endian byte order.</p>
+     *
+     * <p>Every implementation of the Java platform is required to support this character encoding.</p>
+     */
+    public static final String UTF_16LE = "UTF-16LE";
+
+    /**
+     * <p>Eight-bit Unicode Transformation Format.</p>
+     *
+     * <p>Every implementation of the Java platform is required to support this character encoding.</p>
+     */
+    public static final String UTF_8 = "UTF-8";
+
+    //-----------------------------------------------------------------------
+    /**
+     * <p>Returns whether the named charset is supported.</p>
+     *
+     * <p>This is similar to <a
+     * href="http://download.oracle.com/javase/1.4.2/docs/api/java/nio/charset/Charset.html#isSupported%28java.lang.String%29">
+     * java.nio.charset.Charset.isSupported(String)</a> but handles more formats</p>
+     *
+     * @param name  the name of the requested charset; may be either a canonical name or an alias, null returns false
+     * @return {@code true} if the charset is available in the current Java virtual machine
+     */
+    public static boolean isSupported(String name) {
+        if (name == null) {
+            return false;
+        }
+        try {
+            return Charset.isSupported(name);
+        } catch (IllegalCharsetNameException ex) {
+            return false;
+        }
+    }
+
+}
+```
+
+### EnumUtils.java
+```java
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.apache.commons.lang3;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * <p>Utility library to provide helper methods for Java enums.</p>
+ *
+ * <p>#ThreadSafe#</p>
+ *
+ * @since 3.0
+ * @version $Id$
+ */
+public class EnumUtils {
+
+    /**
+     * This constructor is public to permit tools that require a JavaBean
+     * instance to operate.
+     */
+    public EnumUtils() {
+    }
+
+    /**
+     * <p>Gets the {@code Map} of enums by name.</p>
+     *
+     * <p>This method is useful when you need a map of enums by name.</p>
+     *
+     * @param <E> the type of the enumeration
+     * @param enumClass  the class of the enum to query, not null
+     * @return the modifiable map of enum names to enums, never null
+     */
+    public static <E extends Enum<E>> Map<String, E> getEnumMap(Class<E> enumClass) {
+        Map<String, E> map = new LinkedHashMap<String, E>();
+        for (E e: enumClass.getEnumConstants()) {
+            map.put(e.name(), e);
+        }
+        return map;
+    }
+
+    /**
+     * <p>Gets the {@code List} of enums.</p>
+     *
+     * <p>This method is useful when you need a list of enums rather than an array.</p>
+     *
+     * @param <E> the type of the enumeration
+     * @param enumClass  the class of the enum to query, not null
+     * @return the modifiable list of enums, never null
+     */
+    public static <E extends Enum<E>> List<E> getEnumList(Class<E> enumClass) {
+        return new ArrayList<E>(Arrays.asList(enumClass.getEnumConstants()));
+    }
+
+    /**
+     * <p>Checks if the specified name is a valid enum for the class.</p>
+     *
+     * <p>This method differs from {@link Enum#valueOf} in that checks if the name is
+     * a valid enum without needing to catch the exception.</p>
+     *
+     * @param <E> the type of the enumeration
+     * @param enumClass  the class of the enum to query, not null
+     * @param enumName   the enum name, null returns false
+     * @return true if the enum name is valid, otherwise false
+     */
+    public static <E extends Enum<E>> boolean isValidEnum(Class<E> enumClass, String enumName) {
+        if (enumName == null) {
+            return false;
+        }
+        try {
+            Enum.valueOf(enumClass, enumName);
+            return true;
+        } catch (IllegalArgumentException ex) {
+            return false;
+        }
+    }
+
+    /**
+     * <p>Gets the enum for the class, returning {@code null} if not found.</p>
+     *
+     * <p>This method differs from {@link Enum#valueOf} in that it does not throw an exception
+     * for an invalid enum name.</p>
+     *
+     * @param <E> the type of the enumeration
+     * @param enumClass  the class of the enum to query, not null
+     * @param enumName   the enum name, null returns null
+     * @return the enum, null if not found
+     */
+    public static <E extends Enum<E>> E getEnum(Class<E> enumClass, String enumName) {
+        if (enumName == null) {
+            return null;
+        }
+        try {
+            return Enum.valueOf(enumClass, enumName);
+        } catch (IllegalArgumentException ex) {
+            return null;
+        }
+    }
+
+}
+```
+## Test Falliti
+
+  • org.apache.commons.lang3.StringUtilsTest#testJoin_ArrayChar
+  • org.apache.commons.lang3.StringUtilsTest#testJoin_Objectarray
+
+## Stack Trace
+
+```
+testJoin_Objectarray(org.apache.commons.lang3.StringUtilsTest): Cannot invoke "String.length()" because the return value of "Object.toString()" is null
+Cannot invoke "String.length()" because the return value of "Object.toString()" is null
+java.lang.NullPointerException: Cannot invoke "String.length()" because the return value of "Object.toString()" is null
+	at org.apache.commons.lang3.StringUtils.join(StringUtils.java:3383)
+	at org.apache.commons.lang3.StringUtils.join(StringUtils.java:3338)
+	at org.apache.commons.lang3.StringUtils.join(StringUtils.java:3230)
+	at org.apache.commons.lang3.StringUtilsTest.testJoin_Objectarray(StringUtilsTest.java:193)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testJoin_ArrayChar(org.apache.commons.lang3.StringUtilsTest): Cannot invoke "String.length()" because the return value of "Object.toString()" is null
+Cannot invoke "String.length()" because the return value of "Object.toString()" is null
+java.lang.NullPointerException: Cannot invoke "String.length()" because the return value of "Object.toString()" is null
+	at org.apache.commons.lang3.StringUtils.join(StringUtils.java:3298)
+	at org.apache.commons.lang3.StringUtilsTest.testJoin_ArrayChar(StringUtilsTest.java:209)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+```
+
+## Istruzioni
+
+Analizza il bug e restituisci i metodi corretti, seguendo queste regole TASSATIVE:
+
+1. **Un FILE block per metodo**: se devi correggere N metodi, emetti N blocchi FILE separati.
+   Ogni blocco deve contenere UN SOLO metodo completo.
+
+2. **Indentazione originale**: mantieni ESATTAMENTE l'indentazione del codice originale.
+   La firma del metodo DEVE iniziare con gli stessi spazi del file originale.
+
+3. **La riga `// ◄ FIX THIS LINE`** indica dove l'NPE si manifesta. Rimuovi questo commento
+   nella risposta — restituisci solo codice Java puro.
+
+4. **Null-safe equality OBBLIGATORIA**: se il metodo confronta due valori che possono essere null,
+   usa `java.util.Objects.equals(a, b)` — questa funzione ritorna `true` se entrambi sono null,
+   mentre `a.equals(b)` lancia NPE se `a` è null, e `a != null && a.equals(b)` ritorna `false`
+   se entrambi sono null (sbagliato semanticamente).
+   Esempio corretto:
+   ```java
+   return java.util.Objects.equals(doubleMetaphone(v1, alt), doubleMetaphone(v2, alt));
+   ```
+
+5. **NON modificare metodi che non causano il bug**: se il metodo `doubleMetaphone` ritorna
+   null per input null, questo è il comportamento CORRETTO e atteso dai test. Non cambiarlo.
+
+6. NON modificare file di test.

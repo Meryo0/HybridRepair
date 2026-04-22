@@ -1,0 +1,133 @@
+--- org/jfree/chart/plot/XYPlot.java
++++ org/jfree/chart/plot/XYPlot.java
+@@ -1572,8 +1572,9 @@
+      *
+      * @see #setRenderer(XYItemRenderer)
+      */
+-    public XYItemRenderer getRenderer() {
+-        return getRenderer(0);
++public XYItemRenderer getRenderer() {
++        XYItemRenderer renderer = getRenderer(0);
++        return renderer != null ? renderer : new DefaultXYItemRenderer();
+     }
+ 
+     /**
+
+--- org/jfree/chart/plot/XYPlot.java
++++ org/jfree/chart/plot/XYPlot.java
+@@ -1585,13 +1585,12 @@
+      *
+      * @see #setRenderer(int, XYItemRenderer)
+      */
+-    public XYItemRenderer getRenderer(int index) {
++public XYItemRenderer getRenderer(int index) {
+         XYItemRenderer result = null;
+-        if (this.renderers.size() > index) {
++        if (this.renderers != null && this.renderers.size() > index) {
+             result = (XYItemRenderer) this.renderers.get(index);
+         }
+-        return result;
+-
++        return result != null ? result : new DefaultXYItemRenderer();
+     }
+ 
+     /**
+
+--- org/jfree/chart/plot/XYPlot.java
++++ org/jfree/chart/plot/XYPlot.java
+@@ -1740,10 +1740,10 @@
+      *
+      * @return The renderer (possibly <code>null</code>).
+      */
+-    public XYItemRenderer getRendererForDataset(XYDataset dataset) {
++public XYItemRenderer getRendererForDataset(XYDataset dataset) {
+         XYItemRenderer result = null;
+         for (int i = 0; i < this.datasets.size(); i++) {
+-            if (this.datasets.get(i) == dataset) {
++            if (java.util.Objects.equals(this.datasets.get(i), dataset)) {
+                 result = (XYItemRenderer) this.renderers.get(i);
+                 if (result == null) {
+                     result = getRenderer();
+@@ -1751,7 +1751,7 @@
+                 break;
+             }
+         }
+-        return result;
++        return result != null ? result : new DefaultXYItemRenderer();
+     }
+ 
+     /**
+
+--- org/jfree/chart/plot/XYPlot.java
++++ org/jfree/chart/plot/XYPlot.java
+@@ -4422,21 +4422,19 @@
+      *
+      * @return The range.
+      */
+-    public Range getDataRange(ValueAxis axis) {
++public Range getDataRange(ValueAxis axis) {
+ 
+         Range result = null;
+         List mappedDatasets = new ArrayList();
+         List includedAnnotations = new ArrayList();
+         boolean isDomainAxis = true;
+ 
+-        // is it a domain axis?
+         int domainIndex = getDomainAxisIndex(axis);
+         if (domainIndex >= 0) {
+             isDomainAxis = true;
+             mappedDatasets.addAll(getDatasetsMappedToDomainAxis(
+                     new Integer(domainIndex)));
+             if (domainIndex == 0) {
+-                // grab the plot's annotations
+                 Iterator iterator = this.annotations.iterator();
+                 while (iterator.hasNext()) {
+                     XYAnnotation annotation = (XYAnnotation) iterator.next();
+@@ -4447,7 +4445,6 @@
+             }
+         }
+ 
+-        // or is it a range axis?
+         int rangeIndex = getRangeAxisIndex(axis);
+         if (rangeIndex >= 0) {
+             isDomainAxis = false;
+@@ -4464,8 +4461,6 @@
+             }
+         }
+ 
+-        // iterate through the datasets that map to the axis and get the union
+-        // of the ranges.
+         Iterator iterator = mappedDatasets.iterator();
+         while (iterator.hasNext()) {
+             XYDataset d = (XYDataset) iterator.next();
+@@ -4490,6 +4485,7 @@
+                     }
+                 }
+                 
++                if (r != null) {
+                     Collection c = r.getAnnotations();
+                     Iterator i = c.iterator();
+                     while (i.hasNext()) {
+@@ -4498,6 +4494,7 @@
+                             includedAnnotations.add(a);
+                         }
+                     }
++                }
+             }
+         }
+ 
+
+--- org/jfree/chart/util/AbstractObjectList.java
++++ org/jfree/chart/util/AbstractObjectList.java
+@@ -105,9 +105,9 @@
+      *
+      * @return The object or <code>null</code>.
+      */
+-    protected Object get(int index) {
++protected Object get(int index) {
+         Object result = null;
+-        if (index >= 0 && index < this.size) {
++        if (this.objects != null && index >= 0 && index < this.size) {
+             result = this.objects[index];
+         }
+         return result;

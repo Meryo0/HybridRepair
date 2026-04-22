@@ -1,0 +1,18 @@
+{
+  "bug_id": "Csv-9",
+  "success": true,
+  "winning_attempt": 3,
+  "total_attempts": 3,
+  "test_result": {
+    "status": "PASS",
+    "total_tests": 17,
+    "failed_tests": 0,
+    "failing_test_names": [],
+    "previously_failing_now_passing": [
+      "org.apache.commons.csv.CSVRecordTest"
+    ],
+    "compile_output": "",
+    "test_output": "JUnit version 4.13.2\n.................\nTime: 0.011\n\nOK (17 tests)\n\n"
+  },
+  "timestamp": "2026-04-20T14:35:21.755797+00:00"
+}

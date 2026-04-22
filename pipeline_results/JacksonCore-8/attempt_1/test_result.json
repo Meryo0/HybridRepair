@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "total_tests": 5,
+  "failed_tests": 0,
+  "failing_test_names": [],
+  "previously_failing_now_passing": [
+    "com.fasterxml.jackson.core.util.TestTextBuffer"
+  ],
+  "compile_output": "",
+  "test_output": "JUnit version 4.13.2\n.....\nTime: 0.052\n\nOK (5 tests)\n\n"
+}

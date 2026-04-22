@@ -1,0 +1,105 @@
+--- org/jfree/chart/plot/XYPlot.java
++++ org/jfree/chart/plot/XYPlot.java
+@@ -2279,9 +2279,9 @@
+      *
+      * @since 1.0.10
+      */
+-    public boolean removeDomainMarker(int index, Marker marker, Layer layer,
++public boolean removeDomainMarker(int index, Marker marker, Layer layer,
+     		boolean notify) {
+-        ArrayList markers;
++        ArrayList markers = null;
+         if (layer == Layer.FOREGROUND) {
+             markers = (ArrayList) this.foregroundDomainMarkers.get(new Integer(
+                     index));
+@@ -2289,6 +2289,9 @@
+         else {
+             markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(
+                     index));
++        }
++        if (markers == null) {
++            return false;
+         }
+         boolean removed = markers.remove(marker);
+         if (removed && notify) {
+
+--- org/jfree/chart/plot/XYPlot.java
++++ org/jfree/chart/plot/XYPlot.java
+@@ -2512,12 +2512,12 @@
+      *
+      * @since 1.0.10
+      */
+-    public boolean removeRangeMarker(int index, Marker marker, Layer layer,
++public boolean removeRangeMarker(int index, Marker marker, Layer layer,
+     		boolean notify) {
+         if (marker == null) {
+             throw new IllegalArgumentException("Null 'marker' argument.");
+         }
+-        ArrayList markers;
++        ArrayList markers = null;
+         if (layer == Layer.FOREGROUND) {
+             markers = (ArrayList) this.foregroundRangeMarkers.get(new Integer(
+                     index));
+@@ -2525,6 +2525,9 @@
+         else {
+             markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(
+                     index));
++        }
++        if (markers == null) {
++            return false;
+         }
+         boolean removed = markers.remove(marker);
+         if (removed && notify) {
+
+--- org/jfree/chart/plot/CategoryPlot.java
++++ org/jfree/chart/plot/CategoryPlot.java
+@@ -2152,9 +2152,9 @@
+      *
+      * @since 1.0.10
+      */
+-    public boolean removeDomainMarker(int index, Marker marker, Layer layer,
++public boolean removeDomainMarker(int index, Marker marker, Layer layer,
+     		boolean notify) {
+-        ArrayList markers;
++        ArrayList markers = null;
+         if (layer == Layer.FOREGROUND) {
+             markers = (ArrayList) this.foregroundDomainMarkers.get(new Integer(
+                     index));
+@@ -2162,6 +2162,9 @@
+         else {
+             markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(
+                     index));
++        }
++        if (markers == null) {
++            return false;
+         }
+         boolean removed = markers.remove(marker);
+         if (removed && notify) {
+
+--- org/jfree/chart/plot/CategoryPlot.java
++++ org/jfree/chart/plot/CategoryPlot.java
+@@ -2431,12 +2431,12 @@
+      * 
+      * @see #addRangeMarker(int, Marker, Layer, boolean)
+      */
+-    public boolean removeRangeMarker(int index, Marker marker, Layer layer,
++public boolean removeRangeMarker(int index, Marker marker, Layer layer,
+     		boolean notify) {
+         if (marker == null) {
+             throw new IllegalArgumentException("Null 'marker' argument.");
+         }
+-        ArrayList markers;
++        ArrayList markers = null;
+         if (layer == Layer.FOREGROUND) {
+             markers = (ArrayList) this.foregroundRangeMarkers.get(new Integer(
+                     index));
+@@ -2444,6 +2444,9 @@
+         else {
+             markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(
+                     index));
++        }
++        if (markers == null) {
++            return false;
+         }
+         boolean removed = markers.remove(marker);
+         if (removed && notify) {

@@ -1,0 +1,15 @@
+{
+  "status": "FAIL",
+  "total_tests": 125,
+  "failed_tests": 2,
+  "failing_test_names": [
+    "expected",
+    "testMethodBeforeFunction2",
+    "testPropertiesOnInterface2"
+  ],
+  "previously_failing_now_passing": [
+    "com.google.javascript.jscomp.TypedScopeCreatorTest"
+  ],
+  "compile_output": "Note: /home/mario/Desktop/LogicFL/pipeline_results/Closure-171/attempt_2/patched_source/com/google/javascript/jscomp/CompilerOptions.java uses or overrides a deprecated API.\nNote: Recompile with -Xlint:deprecation for details.\n",
+  "test_output": "JUnit version 4.13.2\n........................E........................................E.............................................................\nTime: 0.659\nThere were 2 failures:\n1) testMethodBeforeFunction2(com.google.javascript.jscomp.TypedScopeCreatorTest)\njunit.framework.ComparisonFailure: expected:<[function (this:Window, ?): undefined]> but was:<[?]>\n\tat junit.framework.Assert.assertEquals(Assert.java:100)\n\tat junit.framework.Assert.assertEquals(Assert.java:107)\n\tat junit.framework.TestCase.assertEquals(TestCase.java:260)\n\tat com.google.javascript.jscomp.TypedScopeCreatorTest.testMethodBeforeFunction2(TypedScopeCreatorTest.java:452)\n2) testPropertiesOnInterface2(com.google.javascript.jscomp.TypedScopeCreatorTest)\njava.lang.NullPointerException: Cannot invoke \"com.google.javascript.jscomp.Scope$Var.getType()\" because the return value of \"com.google.javascript.jscomp.Scope.getVar(String)\" is null\n\tat com.google.javascript.jscomp.TypedScopeCreatorTest.testPropertiesOnInterface2(TypedScopeCreatorTest.java:551)\n\nFAILURES!!!\nTests run: 125,  Failures: 2\n\n"
+}

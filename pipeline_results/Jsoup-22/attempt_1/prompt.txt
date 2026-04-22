@@ -1,0 +1,478 @@
+Bug ID: Jsoup-22  |  Tentativo 1
+
+## Fault Locations (LogicFL)
+
+  • org.jsoup.nodes.Node — riga 445  [✓]
+
+## Catena Causale (LogicFL Prolog)
+
+NPE at line(node_1, 445) / Null Expression - node_1_expr13['parent()']
+	 can be caused by 
+node_1_expr13['parent()'] - line(node_1, 445).
+
+## Metodi Buggy
+
+### FILE: org/jsoup/nodes/Node.java  (righe 443–446, fault alla riga 445)
+```java
+    public List<Node> siblingNodes() {
+
+        return parent().childNodes();  // ◄ FIX THIS LINE (NPE manifests here)
+    }
+```
+
+## File Correlati (stesso progetto — potrebbero servire per il fix)
+
+### StringUtil.java
+```java
+package org.jsoup.helper;
+
+import java.util.Collection;
+import java.util.Iterator;
+
+/**
+ * A minimal String utility class. Designed for interal jsoup use only.
+ */
+public final class StringUtil {
+    // memoised padding up to 10
+    private static final String[] padding = {"", " ", "  ", "   ", "    ", "     ", "      ", "       ", "        ", "         ", "          "};
+
+    /**
+     * Join a collection of strings by a seperator
+     * @param strings collection of string objects
+     * @param sep string to place between strings
+     * @return joined string
+     */
+    public static String join(Collection strings, String sep) {
+        return join(strings.iterator(), sep);
+    }
+
+    /**
+     * Join a collection of strings by a seperator
+     * @param strings iterator of string objects
+     * @param sep string to place between strings
+     * @return joined string
+     */
+    public static String join(Iterator strings, String sep) {
+        if (!strings.hasNext())
+            return "";
+
+        String start = strings.next().toString();
+        if (!strings.hasNext()) // only one, avoid builder
+            return start;
+
+        StringBuilder sb = new StringBuilder(64).append(start);
+        while (strings.hasNext()) {
+            sb.append(sep);
+            sb.append(strings.next());
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Returns space padding
+     * @param width amount of padding desired
+     * @return string of spaces * width
+     */
+    public static String padding(int width) {
+        if (width < 0)
+            throw new IllegalArgumentException("width must be > 0");
+
+        if (width < padding.length)
+            return padding[width];
+
+        char[] out = new char[width];
+        for (int i = 0; i < width; i++)
+            out[i] = ' ';
+        return String.valueOf(out);
+    }
+
+    /**
+     * Tests if a string is blank: null, emtpy, or only whitespace (" ", \r\n, \t, etc)
+     * @param string string to test
+     * @return if string is blank
+     */
+    public static boolean isBlank(String string) {
+        if (string == null || string.length() == 0)
+            return true;
+
+        int l = string.length();
+        for (int i = 0; i < l; i++) {
+            if (!StringUtil.isWhitespace(string.codePointAt(i)))
+                return false;
+        }
+        return true;
+    }
+
+    /**
+     * Tests if a string is numeric, i.e. contains only digit characters
+     * @param string string to test
+     * @return true if only digit chars, false if empty or null or contains non-digit chrs
+     */
+    public static boolean isNumeric(String string) {
+        if (string == null || string.length() == 0)
+            return false;
+
+        int l = string.length();
+        for (int i = 0; i < l; i++) {
+            if (!Character.isDigit(string.codePointAt(i)))
+                return false;
+        }
+        return true;
+    }
+
+    /**
+     * Tests if a code point is "whitespace" as defined in the HTML spec.
+     * @param c code point to test
+     * @return true if code point is whitespace, false otherwise
+     */
+    public static boolean isWhitespace(int c){
+        return c == ' ' || c == '\t' || c == '\n' || c == '\f' || c == '\r';
+    }
+
+    public static String normaliseWhitespace(String string) {
+        StringBuilder sb = new StringBuilder(string.length());
+
+        boolean lastWasWhite = false;
+        boolean modified = false;
+
+        int l = string.length();
+        for (int i = 0; i < l; i++) {
+            int c = string.codePointAt(i);
+            if (isWhitespace(c)) {
+                if (lastWasWhite) {
+                    modified = true;
+                    continue;
+                }
+                if (c != ' ')
+                    modified = true;
+                sb.append(' ');
+                lastWasWhite = true;
+            }
+            else {
+                sb.appendCodePoint(c);
+                lastWasWhite = false;
+            }
+        }
+        return modified ? sb.toString() : string;
+    }
+
+    public static boolean in(String needle, String... haystack) {
+        for (String hay : haystack) {
+            if (hay.equals(needle))
+            return true;
+        }
+        return false;
+    }
+}
+```
+
+### NodeTraversor.java
+```java
+package org.jsoup.select;
+
+import org.jsoup.nodes.Node;
+
+/**
+ * Depth-first node traversor. Use to iterate through all nodes under and including the specified root node.
+ * <p/>
+ * This implementation does not use recursion, so a deep DOM does not risk blowing the stack.
+ */
+public class NodeTraversor {
+    private NodeVisitor visitor;
+
+    /**
+     * Create a new traversor.
+     * @param visitor a class implementing the {@link NodeVisitor} interface, to be called when visiting each node.
+     */
+    public NodeTraversor(NodeVisitor visitor) {
+        this.visitor = visitor;
+    }
+
+    /**
+     * Start a depth-first traverse of the root and all of its descendants.
+     * @param root the root node point to traverse.
+     */
+    public void traverse(Node root) {
+        Node node = root;
+        int depth = 0;
+        
+        while (node != null) {
+            visitor.head(node, depth);
+            if (node.childNodes().size() > 0) {
+                node = node.childNode(0);
+                depth++;
+            } else {
+                while (node.nextSibling() == null && depth > 0) {
+                    visitor.tail(node, depth);
+                    node = node.parent();
+                    depth--;
+                }
+                visitor.tail(node, depth);
+                if (node == root)
+                    break;
+                node = node.nextSibling();
+            }
+        }
+    }
+}
+```
+
+### NodeVisitor.java
+```java
+package org.jsoup.select;
+
+import org.jsoup.nodes.Node;
+
+/**
+ * Node visitor interface. Provide an implementing class to {@link NodeTraversor} to iterate through nodes.
+ * <p/>
+ * This interface provides two methods, {@code head} and {@code tail}. The head method is called when the node is first
+ * seen, and the tail method when all of the node's children have been visited. As an example, head can be used to
+ * create a start tag for a node, and tail to create the end tag.
+ */
+public interface NodeVisitor {
+    /**
+     * Callback for when a node is first visited.
+     *
+     * @param node the node being visited.
+     * @param depth the depth of the node, relative to the root node. E.g., the root node has depth 0, and a child node
+     * of that will have depth 1.
+     */
+    public void head(Node node, int depth);
+
+    /**
+     * Callback for when a node is last visited, after all of its descendants have been visited.
+     *
+     * @param node the node being visited.
+     * @param depth the depth of the node, relative to the root node. E.g., the root node has depth 0, and a child node
+     * of that will have depth 1.
+     */
+    public void tail(Node node, int depth);
+}
+```
+
+### Comment.java
+```java
+package org.jsoup.nodes;
+
+/**
+ A comment node.
+
+ @author Jonathan Hedley, jonathan@hedley.net */
+public class Comment extends Node {
+    private static final String COMMENT_KEY = "comment";
+
+    /**
+     Create a new comment node.
+     @param data The contents of the comment
+     @param baseUri base URI
+     */
+    public Comment(String data, String baseUri) {
+        super(baseUri);
+        attributes.put(COMMENT_KEY, data);
+    }
+
+    public String nodeName() {
+        return "#comment";
+    }
+
+    /**
+     Get the contents of the comment.
+     @return comment content
+     */
+    public String getData() {
+        return attributes.get(COMMENT_KEY);
+    }
+
+    void outerHtmlHead(StringBuilder accum, int depth, Document.OutputSettings out) {
+        if (out.prettyPrint())
+            indent(accum, depth, out);
+        accum
+                .append("<!--")
+                .append(getData())
+                .append("-->");
+    }
+
+    void outerHtmlTail(StringBuilder accum, int depth, Document.OutputSettings out) {}
+
+    public String toString() {
+        return outerHtml();
+    }
+}
+```
+
+### Validate.java
+```java
+package org.jsoup.helper;
+
+/**
+ * Simple validation methods. Designed for jsoup internal use
+ */
+public final class Validate {
+    
+    private Validate() {}
+
+    /**
+     * Validates that the obect is not null
+     * @param obj object to test
+     */
+    public static void notNull(Object obj) {
+        if (obj == null)
+            throw new IllegalArgumentException("Object must not be null");
+    }
+
+    /**
+     * Validates that the object is not null
+     * @param obj object to test
+     * @param msg message to output if validation fails
+     */
+    public static void notNull(Object obj, String msg) {
+        if (obj == null)
+            throw new IllegalArgumentException(msg);
+    }
+
+    /**
+     * Validates that the value is true
+     * @param val object to test
+     */
+    public static void isTrue(boolean val) {
+        if (!val)
+            throw new IllegalArgumentException("Must be true");
+    }
+
+    /**
+     * Validates that the value is true
+     * @param val object to test
+     * @param msg message to output if validation fails
+     */
+    public static void isTrue(boolean val, String msg) {
+        if (!val)
+            throw new IllegalArgumentException(msg);
+    }
+
+    /**
+     * Validates that the value is false
+     * @param val object to test
+     */
+    public static void isFalse(boolean val) {
+        if (val)
+            throw new IllegalArgumentException("Must be false");
+    }
+
+    /**
+     * Validates that the value is false
+     * @param val object to test
+     * @param msg message to output if validation fails
+     */
+    public static void isFalse(boolean val, String msg) {
+        if (val)
+            throw new IllegalArgumentException(msg);
+    }
+
+    /**
+     * Validates that the array contains no null elements
+     * @param objects the array to test
+     */
+    public static void noNullElements(Object[] objects) {
+        noNullElements(objects, "Array must not contain any null objects");
+    }
+
+    /**
+     * Validates that the array contains no null elements
+     * @param objects the array to test
+     * @param msg message to output if validation fails
+     */
+    public static void noNullElements(Object[] objects, String msg) {
+        for (Object obj : objects)
+            if (obj == null)
+                throw new IllegalArgumentException(msg);
+    }
+
+    /**
+     * Validates that the string is not empty
+     * @param string the string to test
+     */
+    public static void notEmpty(String string) {
+        if (string == null || string.length() == 0)
+            throw new IllegalArgumentException("String must not be empty");
+    }
+
+    /**
+     * Validates that the string is not empty
+     * @param string the string to test
+     * @param msg message to output if validation fails
+     */
+    public static void notEmpty(String string, String msg) {
+        if (string == null || string.length() == 0)
+            throw new IllegalArgumentException(msg);
+    }
+
+    /**
+     Cause a failure.
+     @param msg message to output.
+     */
+    public static void fail(String msg) {
+        throw new IllegalArgumentException(msg);
+    }
+}
+```
+## Test Falliti
+
+  • org.jsoup.nodes.NodeTest#orphanNodeReturnsNullForSiblingElements
+
+## Stack Trace
+
+```
+orphanNodeReturnsNullForSiblingElements(org.jsoup.nodes.NodeTest): Cannot invoke "org.jsoup.nodes.Node.childNodes()" because the return value of "org.jsoup.nodes.Node.parent()" is null
+Cannot invoke "org.jsoup.nodes.Node.childNodes()" because the return value of "org.jsoup.nodes.Node.parent()" is null
+java.lang.NullPointerException: Cannot invoke "org.jsoup.nodes.Node.childNodes()" because the return value of "org.jsoup.nodes.Node.parent()" is null
+	at org.jsoup.nodes.Node.siblingNodes(Node.java:445)
+	at org.jsoup.nodes.NodeTest.orphanNodeReturnsNullForSiblingElements(NodeTest.java:190)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+```
+
+## Istruzioni
+
+Analizza il bug e restituisci i metodi corretti, seguendo queste regole TASSATIVE:
+
+1. **Un FILE block per metodo**: se devi correggere N metodi, emetti N blocchi FILE separati.
+   Ogni blocco deve contenere UN SOLO metodo completo.
+
+2. **Indentazione originale**: mantieni ESATTAMENTE l'indentazione del codice originale.
+   La firma del metodo DEVE iniziare con gli stessi spazi del file originale.
+
+3. **La riga `// ◄ FIX THIS LINE`** indica dove l'NPE si manifesta. Rimuovi questo commento
+   nella risposta — restituisci solo codice Java puro.
+
+4. **Null-safe equality OBBLIGATORIA**: se il metodo confronta due valori che possono essere null,
+   usa `java.util.Objects.equals(a, b)` — questa funzione ritorna `true` se entrambi sono null,
+   mentre `a.equals(b)` lancia NPE se `a` è null, e `a != null && a.equals(b)` ritorna `false`
+   se entrambi sono null (sbagliato semanticamente).
+   Esempio corretto:
+   ```java
+   return java.util.Objects.equals(doubleMetaphone(v1, alt), doubleMetaphone(v2, alt));
+   ```
+
+5. **NON modificare metodi che non causano il bug**: se il metodo `doubleMetaphone` ritorna
+   null per input null, questo è il comportamento CORRETTO e atteso dai test. Non cambiarlo.
+
+6. NON modificare file di test.

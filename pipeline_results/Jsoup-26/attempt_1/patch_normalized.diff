@@ -1,0 +1,90 @@
+--- org/jsoup/nodes/Document.java
++++ org/jsoup/nodes/Document.java
+@@ -55,8 +55,12 @@
+      Accessor to the document's {@code body} element.
+      @return {@code body}
+      */
+-    public Element body() {
+-        return findFirstElementByTagName("body", this);
++public Element body() {
++        Element body = findFirstElementByTagName("body", this);
++        if (body == null) {
++            throw new IllegalStateException("Document has no body element");
++        }
++        return body;
+     }
+ 
+     /**
+@@ -358,4 +362,3 @@
+         return this;
+     }
+ }
+-
+
+--- org/jsoup/nodes/Document.java
++++ org/jsoup/nodes/Document.java
+@@ -160,14 +160,18 @@
+     }
+ 
+     // fast method to get first by tag name, used for html, head, body finders
+-    private Element findFirstElementByTagName(String tag, Node node) {
+-        if (node.nodeName().equals(tag))
++private Element findFirstElementByTagName(String tag, Node node) {
++        if (node == null || tag == null) {
++            return null;
++        }
++        if (java.util.Objects.equals(node.nodeName(), tag)) {
+             return (Element) node;
+-        else {
+-            for (Node child: node.childNodes) {
++        } else {
++            for (Node child : node.childNodes) {
+                 Element found = findFirstElementByTagName(tag, child);
+-                if (found != null)
++                if (found != null) {
+                     return found;
++                }
+             }
+         }
+         return null;
+@@ -358,4 +362,3 @@
+         return this;
+     }
+ }
+-
+
+--- org/jsoup/safety/Cleaner.java
++++ org/jsoup/safety/Cleaner.java
+@@ -36,11 +36,15 @@
+      @param dirtyDocument Untrusted base document to clean.
+      @return cleaned document.
+      */
+-    public Document clean(Document dirtyDocument) {
++public Document clean(Document dirtyDocument) {
+         Validate.notNull(dirtyDocument);
+ 
+         Document clean = Document.createShell(dirtyDocument.baseUri());
+-            copySafeNodes(dirtyDocument.body(), clean.body());
++        Element dirtyBody = dirtyDocument.body();
++        Element cleanBody = clean.body();
++        if (dirtyBody != null && cleanBody != null) {
++            copySafeNodes(dirtyBody, cleanBody);
++        }
+ 
+         return clean;
+     }
+
+--- org/jsoup/safety/Cleaner.java
++++ org/jsoup/safety/Cleaner.java
+@@ -69,7 +69,10 @@
+      @param dest destination element to copy into
+      @return number of discarded elements (that were considered unsafe)
+      */
+-    private int copySafeNodes(Element source, Element dest) {
++private int copySafeNodes(Element source, Element dest) {
++        if (source == null || dest == null) {
++            return 0;
++        }
+         List<Node> sourceChildren = source.childNodes();
+         int numDiscarded = 0;
+ 

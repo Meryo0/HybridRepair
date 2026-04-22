@@ -1,0 +1,62 @@
+--- com/fasterxml/jackson/databind/deser/std/StringArrayDeserializer.java
++++ com/fasterxml/jackson/databind/deser/std/StringArrayDeserializer.java
+@@ -29,7 +29,7 @@
+      */
+     protected JsonDeserializer<String> _elementDeserializer;
+ 
+-    public StringArrayDeserializer() {
++public StringArrayDeserializer() {
+         super(String[].class);
+         _elementDeserializer = null;
+     }
+@@ -39,7 +39,7 @@
+         super(String[].class);
+         _elementDeserializer = (JsonDeserializer<String>) deser;
+     }
+-   
++
+     @Override
+     public String[] deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException
+     {
+@@ -47,23 +47,20 @@
+         if (!jp.isExpectedStartArrayToken()) {
+             return handleNonArray(jp, ctxt);
+         }
+-        if (_elementDeserializer != null) {
+-            return _deserializeCustom(jp, ctxt);
+-        }
+ 
+         final ObjectBuffer buffer = ctxt.leaseObjectBuffer();
+         Object[] chunk = buffer.resetAndStart();
+-        
++
+         int ix = 0;
+         JsonToken t;
+-        
++
+         while ((t = jp.nextToken()) != JsonToken.END_ARRAY) {
+             // Ok: no need to convert Strings, but must recognize nulls
+             String value;
+             if (t == JsonToken.VALUE_STRING) {
+                 value = jp.getText();
+             } else if (t == JsonToken.VALUE_NULL) {
+-                value = _elementDeserializer.getNullValue();
++                value = (_elementDeserializer != null) ? _elementDeserializer.getNullValue(ctxt) : null;
+             } else {
+                 value = _parseString(jp, ctxt);
+             }
+@@ -77,6 +74,14 @@
+         ctxt.returnObjectBuffer(buffer);
+         return result;
+     }
++
++    @SuppressWarnings("unchecked")
++    protected StringArrayDeserializer(JsonDeserializer<?> deser) {
++        super(String[].class);
++        _elementDeserializer = (JsonDeserializer<String>) deser;
++    }
++   
++    @Override
+ 
+     /**
+      * Offlined version used when we do not use the default deserialization method.

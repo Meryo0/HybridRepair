@@ -1,0 +1,570 @@
+Bug ID: Chart-2  |  Tentativo 1
+
+## Fault Locations (LogicFL)
+
+  • org.jfree.data.general.DatasetUtilities — riga 780  [✓]
+  • org.jfree.data.general.DatasetUtilities — riga 1284  [✓]
+
+## Catena Causale (LogicFL Prolog)
+
+NPE at line(dataset_utilities_tests_1, 1276) / Null Expression - v_r_207[r]
+	 can be caused by 
+dataset_utilities_1_literal5[null] - line(dataset_utilities_1, 780).
+
+NPE at line(dataset_utilities_tests_1, 1299) / Null Expression - v_r_211[r]
+	 can be caused by 
+dataset_utilities_1_literal9[null] - line(dataset_utilities_1, 1284).
+
+## Metodi Buggy
+
+### FILE: org/jfree/data/general/DatasetUtilities.java  (righe 740–785, fault alla riga 780)
+```java
+    public static Range iterateDomainBounds(XYDataset dataset,
+                                            boolean includeInterval) {
+        if (dataset == null) {
+            throw new IllegalArgumentException("Null 'dataset' argument.");
+        }
+        double minimum = Double.POSITIVE_INFINITY;
+        double maximum = Double.NEGATIVE_INFINITY;
+        int seriesCount = dataset.getSeriesCount();
+        double lvalue;
+        double uvalue;
+        if (includeInterval && dataset instanceof IntervalXYDataset) {
+            IntervalXYDataset intervalXYData = (IntervalXYDataset) dataset;
+            for (int series = 0; series < seriesCount; series++) {
+                int itemCount = dataset.getItemCount(series);
+                for (int item = 0; item < itemCount; item++) {
+                    lvalue = intervalXYData.getStartXValue(series, item);
+                    uvalue = intervalXYData.getEndXValue(series, item);
+                    if (!Double.isNaN(lvalue)) {
+                        minimum = Math.min(minimum, lvalue);
+                    }
+                    if (!Double.isNaN(uvalue)) {
+                        maximum = Math.max(maximum, uvalue);
+                    }
+                }
+            }
+        }
+        else {
+            for (int series = 0; series < seriesCount; series++) {
+                int itemCount = dataset.getItemCount(series);
+                for (int item = 0; item < itemCount; item++) {
+                    lvalue = dataset.getXValue(series, item);
+                    uvalue = lvalue;
+                    if (!Double.isNaN(lvalue)) {
+                        minimum = Math.min(minimum, lvalue);
+                        maximum = Math.max(maximum, uvalue);
+                    }
+                }
+            }
+        }
+        if (minimum > maximum) {
+            return null;  // ◄ FIX THIS LINE (NPE manifests here)
+        }
+        else {
+            return new Range(minimum, maximum);
+        }
+    }
+```
+
+### FILE: org/jfree/data/general/DatasetUtilities.java  (righe 1229–1289, fault alla riga 1284)
+```java
+    public static Range iterateRangeBounds(XYDataset dataset,
+            boolean includeInterval) {
+        double minimum = Double.POSITIVE_INFINITY;
+        double maximum = Double.NEGATIVE_INFINITY;
+        int seriesCount = dataset.getSeriesCount();
+
+        // handle three cases by dataset type
+        if (includeInterval && dataset instanceof IntervalXYDataset) {
+            // handle special case of IntervalXYDataset
+            IntervalXYDataset ixyd = (IntervalXYDataset) dataset;
+            for (int series = 0; series < seriesCount; series++) {
+                int itemCount = dataset.getItemCount(series);
+                for (int item = 0; item < itemCount; item++) {
+                    double lvalue = ixyd.getStartYValue(series, item);
+                    double uvalue = ixyd.getEndYValue(series, item);
+                    if (!Double.isNaN(lvalue)) {
+                        minimum = Math.min(minimum, lvalue);
+                    }
+                    if (!Double.isNaN(uvalue)) {
+                        maximum = Math.max(maximum, uvalue);
+                    }
+                }
+            }
+        }
+        else if (includeInterval && dataset instanceof OHLCDataset) {
+            // handle special case of OHLCDataset
+            OHLCDataset ohlc = (OHLCDataset) dataset;
+            for (int series = 0; series < seriesCount; series++) {
+                int itemCount = dataset.getItemCount(series);
+                for (int item = 0; item < itemCount; item++) {
+                    double lvalue = ohlc.getLowValue(series, item);
+                    double uvalue = ohlc.getHighValue(series, item);
+                    if (!Double.isNaN(lvalue)) {
+                        minimum = Math.min(minimum, lvalue);
+                    }
+                    if (!Double.isNaN(uvalue)) {
+                        maximum = Math.max(maximum, uvalue);
+                    }
+                }
+            }
+        }
+        else {
+            // standard case - plain XYDataset
+            for (int series = 0; series < seriesCount; series++) {
+                int itemCount = dataset.getItemCount(series);
+                for (int item = 0; item < itemCount; item++) {
+                    double value = dataset.getYValue(series, item);
+                    if (!Double.isNaN(value)) {
+                        minimum = Math.min(minimum, value);
+                        maximum = Math.max(maximum, value);
+                    }
+                }
+            }
+        }
+        if (minimum == Double.POSITIVE_INFINITY) {
+            return null;  // ◄ FIX THIS LINE (NPE manifests here)
+        }
+        else {
+            return new Range(minimum, maximum);
+        }
+    }
+```
+
+## File Correlati (stesso progetto — potrebbero servire per il fix)
+
+### PieDataset.java
+```java
+/* ===========================================================
+ * JFreeChart : a free chart library for the Java(tm) platform
+ * ===========================================================
+ *
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ *
+ * Project Info:  http://www.jfree.org/jfreechart/index.html
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
+ *
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
+ * in the United States and other countries.]
+ *
+ * ---------------
+ * PieDataset.java
+ * ---------------
+ * (C) Copyright 2001-2008, by Object Refinery Limited.
+ *
+ * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   Sam (oldman);
+ *
+ * Changes
+ * -------
+ * 17-Nov-2001 : Version 1 (DG);
+ * 22-Jan-2002 : Removed the getCategoryCount() method, updated Javadoc
+ *               comments (DG);
+ * 18-Apr-2002 : getCategories() now returns List instead of Set (oldman);
+ * 23-Oct-2002 : Reorganised the code: PieDataset now extends KeyedValues
+ *               interface (DG);
+ * 04-Mar-2003 : Now just replicates the KeyedValuesDataset interface (DG);
+ * 01-Jul-2009 : Added optional selection state that can be associated with
+ *               the dataset (DG);
+ *
+ */
+
+package org.jfree.data.pie;
+
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.KeyedValues;
+import org.jfree.data.general.Dataset;
+
+/**
+ * A general purpose dataset where values are associated with keys.  As the
+ * name suggests, you can use this dataset to supply data for pie charts (refer
+ * to the {@link PiePlot} class).
+ */
+public interface PieDataset extends KeyedValues, Dataset {
+
+    /**
+     * Returns the selection state for this dataset, if any.
+     *
+     * @return The selection state (possibly <code>null</code>).
+     *
+     * @since 1.2.0
+     */
+    public PieDatasetSelectionState getSelectionState();
+
+}
+```
+
+### TableXYDataset.java
+```java
+/* ===========================================================
+ * JFreeChart : a free chart library for the Java(tm) platform
+ * ===========================================================
+ *
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ *
+ * Project Info:  http://www.jfree.org/jfreechart/index.html
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
+ *
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
+ * in the United States and other countries.]
+ *
+ * -------------------
+ * TableXYDataset.java
+ * -------------------
+ * (C) Copyright 2000-2008, by Richard Atkinson and Contributors.
+ *
+ * Original Author:  Richard Atkinson;
+ * Contributor(s):   David Gilbert (for Object Refinery Limited);
+ *
+ * Changes
+ * -------
+ * 22-Sep-2003 : Changed to be an interface.  Previous functionality moved to
+ *               DefaultTableXYDataset;
+ * 16-Feb-2004 : Updated Javadocs (DG);
+ *
+ */
+
+package org.jfree.data.xy;
+
+
+/**
+ * A dataset containing one or more data series containing (x, y) data items,
+ * where all series in the dataset share the same set of x-values.  This is a
+ * restricted form of the {@link XYDataset} interface (which allows independent
+ * x-values between series). This is used primarily by the
+ * {@link org.jfree.chart.renderer.xy.StackedXYAreaRenderer}.
+ */
+public interface TableXYDataset extends XYDataset {
+
+    /**
+     * Returns the number of items every series.
+     *
+     * @return The item count.
+     */
+    public int getItemCount();
+
+}
+```
+
+### XYDomainInfo.java
+```java
+/* ===========================================================
+ * JFreeChart : a free chart library for the Java(tm) platform
+ * ===========================================================
+ *
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ *
+ * Project Info:  http://www.jfree.org/jfreechart/index.html
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
+ *
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
+ * in the United States and other countries.]
+ *
+ * -----------------
+ * XYDomainInfo.java
+ * -----------------
+ * (C) Copyright 2009, by Object Refinery Limited.
+ *
+ * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   -;
+ *
+ * Changes
+ * -------
+ * 27-Mar-2009 : Version 1 (DG);
+ *
+ */
+
+package org.jfree.data.xy;
+
+import java.util.List;
+import org.jfree.data.Range;
+
+/**
+ * An interface that can (optionally) be implemented by a dataset to assist in
+ * determining the minimum and maximum x-values in the dataset.
+ *
+ * @since 1.0.13
+ */
+public interface XYDomainInfo {
+
+    /**
+     * Returns the range of the values in this dataset's domain.
+     *
+     * @param visibleSeriesKeys  the keys of the visible series.
+     * @param includeInterval  a flag that determines whether or not the
+     *                         y-interval is taken into account.
+     *
+     * @return The range (or <code>null</code> if the dataset contains no
+     *     values).
+     */
+    public Range getDomainBounds(List visibleSeriesKeys,
+            boolean includeInterval);
+
+}
+```
+
+### XYRangeInfo.java
+```java
+/* ===========================================================
+ * JFreeChart : a free chart library for the Java(tm) platform
+ * ===========================================================
+ *
+ * (C) Copyright 2000-2009, by Object Refinery Limited and Contributors.
+ *
+ * Project Info:  http://www.jfree.org/jfreechart/index.html
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
+ *
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
+ * in the United States and other countries.]
+ *
+ * ----------------
+ * XYRangeInfo.java
+ * ----------------
+ * (C) Copyright 2009, by Object Refinery Limited.
+ *
+ * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   -;
+ *
+ * Changes
+ * -------
+ * 27-Mar-2009 : Version 1 (DG);
+ *
+ */
+
+package org.jfree.data.xy;
+
+import java.util.List;
+import org.jfree.data.Range;
+
+/**
+ * An interface that can (optionally) be implemented by a dataset to assist in
+ * determining the minimum and maximum y-values.
+ *
+ * @since 1.0.13
+ */
+public interface XYRangeInfo {
+
+    /**
+     * Returns the range of the values in this dataset's range.
+     *
+     * @param visibleSeriesKeys  the keys of the visible series.
+     * @param xRange  the x-range (<code>null</code> not permitted).
+     * @param includeInterval  a flag that determines whether or not the
+     *                         y-interval is taken into account.
+     *
+     * @return The range (or <code>null</code> if the dataset contains no
+     *     values).
+     */
+    public Range getRangeBounds(List visibleSeriesKeys, Range xRange,
+            boolean includeInterval);
+
+}
+```
+
+### MultiValueCategoryDataset.java
+```java
+/* ===========================================================
+ * JFreeChart : a free chart library for the Java(tm) platform
+ * ===========================================================
+ *
+ * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.
+ *
+ * Project Info:  http://www.jfree.org/jfreechart/index.html
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
+ *
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
+ * in the United States and other countries.]
+ *
+ * ------------------------------
+ * MultiValueCategoryDataset.java
+ * ------------------------------
+ * (C) Copyright 2007, 2008, by David Forslund and Contributors.
+ *
+ * Original Author:  David Forslund;
+ * Contributor(s):   David Gilbert (for Object Refinery Limited);
+ *
+ * Changes
+ * -------
+ * 08-Oct-2007 : Version 1, see patch 1780779 (DG);
+ *
+ */
+
+package org.jfree.data.statistics;
+
+import org.jfree.data.category.CategoryDataset;
+
+import java.util.List;
+
+/**
+ * A category dataset that defines multiple values for each item.
+ *
+ * @since 1.0.7
+ */
+public interface MultiValueCategoryDataset extends CategoryDataset {
+
+    /**
+     * Returns a list (possibly empty) of the values for the specified item.
+     * The returned list should be unmodifiable.
+     *
+     * @param row  the row index (zero-based).
+     * @param column   the column index (zero-based).
+     *
+     * @return The list of values.
+     */
+    public List getValues(int row, int column);
+
+    /**
+     * Returns a list (possibly empty) of the values for the specified item.
+     * The returned list should be unmodifiable.
+     *
+     * @param rowKey  the row key (<code>null</code> not permitted).
+     * @param columnKey  the column key (<code>null</code> not permitted).
+     *
+     * @return The list of values.
+     */
+    public List getValues(Comparable rowKey, Comparable columnKey);
+
+}
+```
+## Test Falliti
+
+  • org.jfree.data.general.junit.DatasetUtilitiesTests#testBug2849731_2
+  • org.jfree.data.general.junit.DatasetUtilitiesTests#testBug2849731_3
+
+## Stack Trace
+
+```
+testBug2849731_2(org.jfree.data.general.junit.DatasetUtilitiesTests): Cannot invoke "org.jfree.data.Range.getLowerBound()" because "r" is null
+Cannot invoke "org.jfree.data.Range.getLowerBound()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.data.Range.getLowerBound()" because "r" is null
+	at org.jfree.data.general.junit.DatasetUtilitiesTests.testBug2849731_2(DatasetUtilitiesTests.java:1276)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+
+testBug2849731_3(org.jfree.data.general.junit.DatasetUtilitiesTests): Cannot invoke "org.jfree.data.Range.getLowerBound()" because "r" is null
+Cannot invoke "org.jfree.data.Range.getLowerBound()" because "r" is null
+java.lang.NullPointerException: Cannot invoke "org.jfree.data.Range.getLowerBound()" because "r" is null
+	at org.jfree.data.general.junit.DatasetUtilitiesTests.testBug2849731_3(DatasetUtilitiesTests.java:1299)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at logicfl.coverage.JUnit4TestRunner.main(JUnit4TestRunner.java:33)
+```
+
+## Istruzioni
+
+Analizza il bug e restituisci i metodi corretti, seguendo queste regole TASSATIVE:
+
+1. **Un FILE block per metodo**: se devi correggere N metodi, emetti N blocchi FILE separati.
+   Ogni blocco deve contenere UN SOLO metodo completo.
+
+2. **Indentazione originale**: mantieni ESATTAMENTE l'indentazione del codice originale.
+   La firma del metodo DEVE iniziare con gli stessi spazi del file originale.
+
+3. **La riga `// ◄ FIX THIS LINE`** indica dove l'NPE si manifesta. Rimuovi questo commento
+   nella risposta — restituisci solo codice Java puro.
+
+4. **Null-safe equality OBBLIGATORIA**: se il metodo confronta due valori che possono essere null,
+   usa `java.util.Objects.equals(a, b)` — questa funzione ritorna `true` se entrambi sono null,
+   mentre `a.equals(b)` lancia NPE se `a` è null, e `a != null && a.equals(b)` ritorna `false`
+   se entrambi sono null (sbagliato semanticamente).
+   Esempio corretto:
+   ```java
+   return java.util.Objects.equals(doubleMetaphone(v1, alt), doubleMetaphone(v2, alt));
+   ```
+
+5. **NON modificare metodi che non causano il bug**: se il metodo `doubleMetaphone` ritorna
+   null per input null, questo è il comportamento CORRETTO e atteso dai test. Non cambiarlo.
+
+6. NON modificare file di test.
