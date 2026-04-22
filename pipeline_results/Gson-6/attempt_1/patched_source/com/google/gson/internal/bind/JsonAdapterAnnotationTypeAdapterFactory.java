@@ -64,12 +64,12 @@ typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterClass)).constr
       throw new IllegalArgumentException(
           "@JsonAdapter value must be TypeAdapter or TypeAdapterFactory reference.");
     }
-      if (typeAdapter != null) {
-        typeAdapter = typeAdapter.nullSafe();
-      }
+    if (typeAdapter == null) {
+      throw new IllegalArgumentException("Failed to create TypeAdapter. The resulting adapter is null.");
+    }
+    typeAdapter = typeAdapter.nullSafe();
     return typeAdapter;
   }
-}
     } else if (TypeAdapterFactory.class.isAssignableFrom(value)) {
       Class<TypeAdapterFactory> typeAdapterFactory = (Class<TypeAdapterFactory>) value;
       typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterFactory))

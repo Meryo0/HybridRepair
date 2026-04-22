@@ -910,10 +910,7 @@ public class ClassUtils {
         }
         Class<?>[] classes = new Class[array.length];
         for (int i = 0; i < array.length; i++) {
-            if (array[i] == null) {
-                throw new IllegalArgumentException("Array element at index " + i + " is null");
-            }
-            classes[i] = array[i].getClass();
+            classes[i] = (array[i] != null) ? array[i].getClass() : null;
         }
         return classes;
     }

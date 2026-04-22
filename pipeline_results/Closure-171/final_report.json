@@ -6,7 +6,7 @@
   "test_result": {
     "status": "FAIL",
     "total_attempts": 3,
-    "last_failure": "JUnit version 4.13.2\n........................E........................................E.............................................................\nTime: 0.618\nThere were 2 failures:\n1) testMethodBeforeFunction2(com.google.javascript.jscomp.TypedScopeCreatorTest)\njunit.framework.ComparisonFailure: expected:<[function (this:Window, ?): undefined]> but was:<[?]>\n\tat junit.framework.Assert.assertEquals(Assert.java:100)\n\tat junit.framework.Assert.assertEquals(Assert.java:107)\n\tat junit.framework.Te"
+    "last_failure": "JUnit version 4.13.2\n........................E........................................E.............................................................\nTime: 0.686\nThere were 2 failures:\n1) testMethodBeforeFunction2(com.google.javascript.jscomp.TypedScopeCreatorTest)\njunit.framework.ComparisonFailure: expected:<[function (this:Window, ?): undefined]> but was:<[?]>\n\tat junit.framework.Assert.assertEquals(Assert.java:100)\n\tat junit.framework.Assert.assertEquals(Assert.java:107)\n\tat junit.framework.Te"
   },
-  "timestamp": "2026-04-20T14:48:45.077605+00:00"
+  "timestamp": "2026-04-22T18:58:16.123617+00:00"
 }

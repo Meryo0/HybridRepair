@@ -265,6 +265,13 @@ protected void processProperties(Properties properties) throws ParseException
                 Option opt = getOptions().getOption(option);
                 if (opt == null)
                 {
+                    throw new UnrecognizedOptionException("Unrecognized option: " + option);
+                }
+
+                // Check if the option is part of a group and if another option in the group is already selected
+                OptionGroup group = getOptions().getOptionGroup(opt);
+                if (group != null && group.getSelected() != null)
+                {
                     continue;
                 }
             

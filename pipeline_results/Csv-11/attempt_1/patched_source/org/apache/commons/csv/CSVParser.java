@@ -380,16 +380,13 @@ private Map<String, Integer> initializeHeader() throws IOException {
             if (headerRecord != null) {
                 for (int i = 0; i < headerRecord.length; i++) {
                     final String header = headerRecord[i];
-                    if (header == null) {
-                        throw new IllegalArgumentException("Header record contains a null value at index " + i);
-                    }
                     final boolean containsHeader = hdrMap.containsKey(header);
-                    final boolean emptyHeader = header.trim().isEmpty();
+                    final boolean emptyHeader = (header == null || header.trim().isEmpty());
                     if (containsHeader && (!emptyHeader || (emptyHeader && !this.format.getIgnoreEmptyHeaders()))) {
                         throw new IllegalArgumentException("The header contains a duplicate name: \"" + header +
                                 "\" in " + Arrays.toString(headerRecord));
                     }
-                    hdrMap.put(header, Integer.valueOf(i));
+                    hdrMap.put(header == null ? "" : header, Integer.valueOf(i));
                 }
             }
         }

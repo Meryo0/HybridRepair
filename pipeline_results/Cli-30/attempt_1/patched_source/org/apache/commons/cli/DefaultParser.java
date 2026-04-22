@@ -155,6 +155,8 @@ private void handleProperties(Properties properties) throws ParseException
                     continue;
                 }
             
+                // if the option is part of a group, check if another option of the group has been selected
+            
                 // get the value from the properties
                 String value = properties.getProperty(option);
                 

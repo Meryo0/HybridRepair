@@ -112,7 +112,7 @@ public class Line implements Embedding<Euclidean3D, Euclidean1D> {
      */
 public double getAbscissa(final Vector3D point) {
         if (point == null) {
-            throw new NullPointerException("Point cannot be null");
+            throw new IllegalArgumentException("Input point cannot be null.");
         }
         return point.subtract(zero).dotProduct(direction);
     }
@@ -130,7 +130,7 @@ public double getAbscissa(final Vector3D point) {
      */
 public Vector1D toSubSpace(final Vector<Euclidean3D> point) {
         if (point == null) {
-            throw new NullPointerException("Point cannot be null");
+            throw new IllegalArgumentException("Input point cannot be null.");
         }
         return new Vector1D(getAbscissa((Vector3D) point));
     }

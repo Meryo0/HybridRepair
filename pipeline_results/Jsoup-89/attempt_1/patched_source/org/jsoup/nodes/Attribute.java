@@ -30,7 +30,7 @@ public class Attribute implements Map.Entry<String, String>, Cloneable  {
      * @see #createFromEncoded
      */
 public Attribute(String key, String value) {
-        this(key, value, new Attributes());
+        this(key, value, null);
     }
 
     /**
@@ -45,7 +45,7 @@ public Attribute(String key, String val, Attributes parent) {
         Validate.notEmpty(key); // trimming could potentially make empty, so validate here
         this.key = key;
         this.val = val;
-        this.parent = parent != null ? parent : new Attributes();
+        this.parent = parent;
     }
 
     /**

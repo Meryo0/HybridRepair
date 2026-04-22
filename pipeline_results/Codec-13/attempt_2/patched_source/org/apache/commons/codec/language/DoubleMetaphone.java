@@ -82,9 +82,9 @@ public class DoubleMetaphone implements StringEncoder {
      * @param alternate use alternate encode
      * @return an encoded string
      */
-public String doubleMetaphone(String value, final boolean alternate) {
+    public String doubleMetaphone(String value, final boolean alternate) {
         value = cleanInput(value);
-        if (value == null || value.isEmpty()) {
+        if (value == null) {
             return null;
         }
 
@@ -243,7 +243,10 @@ public String doubleMetaphone(String value, final boolean alternate) {
 public boolean isDoubleMetaphoneEqual(final String value1, final String value2, final boolean alternate) {
         String metaphone1 = doubleMetaphone(value1, alternate);
         String metaphone2 = doubleMetaphone(value2, alternate);
-        return java.util.Objects.equals(metaphone1, metaphone2);
+        if (metaphone1 == null || metaphone2 == null) {
+            return false;
+        }
+        return metaphone1.equals(metaphone2);
     }
 
     /**

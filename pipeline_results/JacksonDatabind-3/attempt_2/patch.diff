@@ -1,20 +1,23 @@
 --- com/fasterxml/jackson/databind/deser/std/StringArrayDeserializer.java
 +++ com/fasterxml/jackson/databind/deser/std/StringArrayDeserializer.java
-@@ -29,7 +29,7 @@
+@@ -29,9 +29,9 @@
       */
      protected JsonDeserializer<String> _elementDeserializer;
  
 -    public StringArrayDeserializer() {
 +public StringArrayDeserializer() {
          super(String[].class);
-         _elementDeserializer = null;
+-        _elementDeserializer = null;
++        _elementDeserializer = StringDeserializer.instance;  // Initialize with a default deserializer
      }
+ 
+     @SuppressWarnings("unchecked")
 @@ -63,7 +63,7 @@
              if (t == JsonToken.VALUE_STRING) {
                  value = jp.getText();
              } else if (t == JsonToken.VALUE_NULL) {
 -                value = _elementDeserializer.getNullValue();
-+                value = (_elementDeserializer != null) ? _elementDeserializer.getNullValue() : null;
++                value = _elementDeserializer.getNullValue();  // Safe because _elementDeserializer is always initialized
              } else {
                  value = _parseString(jp, ctxt);
              }

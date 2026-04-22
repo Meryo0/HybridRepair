@@ -267,6 +267,13 @@ protected void processProperties(Properties properties) throws ParseException
                 {
                     continue;
                 }
+
+                // Check if the option is part of a group and if another option in the group is already selected
+                OptionGroup group = getOptions().getOptionGroup(opt);
+                if (group != null && group.getSelected() != null)
+                {
+                    continue;
+                }
             
                 // get the value from the properties instance
                 String value = properties.getProperty(option);
@@ -292,16 +299,6 @@ protected void processProperties(Properties properties) throws ParseException
                     // if the value is not yes, true or 1 then don't add the
                     // option to the CommandLine
                     continue;
-                }
-
-                if (opt.getOptionGroup() != null)
-                {
-                    OptionGroup group = opt.getOptionGroup();
-                    if (group.isSelected())
-                    {
-                        throw new AlreadySelectedException("The option '" + option + "' was specified but an option from this group has already been selected: '" + group.getSelected() + "'");
-                    }
-                    group.setSelected(opt);
                 }
 
                 cmd.addOption(opt);

@@ -4,6 +4,6 @@
   "failed_tests": 0,
   "failing_test_names": [],
   "previously_failing_now_passing": [],
-  "compile_output": "/home/mario/Desktop/LogicFL/pipeline_results/Csv-9/attempt_1/patched_source/org/apache/commons/csv/CSVParser.java:250: error: variable headerMap might already have been assigned\n            this.headerMap = new LinkedHashMap<>(); // Ensure headerMap is never null\n                ^\n/home/mario/Desktop/LogicFL/pipeline_results/Csv-9/attempt_1/patched_source/org/apache/commons/csv/CSVRecord.java:55: error: cannot find symbol\n        this.mapping = mapping != null ? mapping : new LinkedHashMap<>(); // Ensure mapping is never null\n                                                       ^\n  symbol:   class LinkedHashMap\n  location: class CSVRecord\n2 errors\n",
+  "compile_output": "/home/mario/Desktop/LogicFL/pipeline_results/Csv-9/attempt_1/patched_source/org/apache/commons/csv/CSVRecord.java:55: error: cannot find symbol\n        this.mapping = mapping != null ? mapping : new LinkedHashMap<>(); // Ensure mapping is never null\n                                                       ^\n  symbol:   class LinkedHashMap\n  location: class CSVRecord\n1 error\n",
   "test_output": ""
 }

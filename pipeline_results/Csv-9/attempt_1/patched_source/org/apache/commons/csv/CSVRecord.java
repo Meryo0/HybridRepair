@@ -176,13 +176,11 @@ CSVRecord(final String[] values, final Map<String, Integer> mapping,
      * @param map The Map to populate.
      * @return the given map.
      */
-<M extends Map<String, String>> M putIn(final M map) {
-        if (mapping != null) { // Ensure mapping is not null before accessing
-            for (final Entry<String, Integer> entry : mapping.entrySet()) {
-                final int col = entry.getValue().intValue();
-                if (col < values.length) {
-                    map.put(entry.getKey(), values[col]);
-                }
+    <M extends Map<String, String>> M putIn(final M map) {
+        for (final Entry<String, Integer> entry : mapping.entrySet()) {
+            final int col = entry.getValue().intValue();
+            if (col < values.length) {
+                map.put(entry.getKey(), values[col]);
             }
         }
         return map;

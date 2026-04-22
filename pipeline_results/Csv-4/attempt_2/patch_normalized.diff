@@ -19,28 +19,35 @@
 -    public Map<String, Integer> getHeaderMap() {
 -        return new LinkedHashMap<String, Integer>(this.headerMap);
 +public Map<String, Integer> getHeaderMap() {
-+        return this.headerMap; // Return the headerMap directly, which may be null as expected by the test
++        return this.headerMap == null ? null : new LinkedHashMap<String, Integer>(this.headerMap);
      }
  
      /**
 
 --- org/apache/commons/csv/CSVParser.java
 +++ org/apache/commons/csv/CSVParser.java
-@@ -321,7 +321,7 @@
+@@ -321,11 +321,10 @@
      /**
       * Initializes the name to index mapping if the format defines a header.
       */
 -    private Map<String, Integer> initializeHeader() throws IOException {
+-        Map<String, Integer> hdrMap = null;
 +private Map<String, Integer> initializeHeader() throws IOException {
-         Map<String, Integer> hdrMap = null;
          final String[] formatHeader = this.format.getHeader();
          if (formatHeader != null) {
-@@ -348,7 +348,7 @@
+-            hdrMap = new LinkedHashMap<String, Integer>();
++            Map<String, Integer> hdrMap = new LinkedHashMap<String, Integer>();
+ 
+             String[] header = null;
+             if (formatHeader.length == 0) {
+@@ -347,8 +346,9 @@
+                     hdrMap.put(header[i], Integer.valueOf(i));
                  }
              }
++            return hdrMap;
          }
 -        return hdrMap;
-+        return hdrMap; // Return null if no header is initialized, as expected by the test
++        return null;
      }
  
      public boolean isClosed() {

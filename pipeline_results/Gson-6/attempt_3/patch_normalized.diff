@@ -1,6 +1,6 @@
 --- com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java
 +++ com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java
-@@ -54,7 +54,26 @@
+@@ -54,7 +54,21 @@
      TypeAdapter<?> typeAdapter;
      if (TypeAdapter.class.isAssignableFrom(value)) {
        Class<TypeAdapter<?>> typeAdapterClass = (Class<TypeAdapter<?>>) value;
@@ -8,23 +8,18 @@
 +typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterClass)).construct();
 +    } else if (TypeAdapterFactory.class.isAssignableFrom(value)) {
 +      Class<TypeAdapterFactory> typeAdapterFactory = (Class<TypeAdapterFactory>) value;
-+      TypeAdapterFactory factoryInstance = constructorConstructor.get(TypeToken.get(typeAdapterFactory)).construct();
-+      if (factoryInstance != null) {
-+        typeAdapter = factoryInstance.create(gson, fieldType);
-+      } else {
-+        throw new NullPointerException("The constructed TypeAdapterFactory is null.");
-+      }
++      typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterFactory))
++          .construct()
++          .create(gson, fieldType);
 +    } else {
 +      throw new IllegalArgumentException(
 +          "@JsonAdapter value must be TypeAdapter or TypeAdapterFactory reference.");
 +    }
-+      if (typeAdapter == null) {
-+        throw new NullPointerException("The constructed TypeAdapter is null.");
-+      }
-+      typeAdapter = typeAdapter.nullSafe();
-+    return typeAdapter;
++    if (typeAdapter == null) {
++      throw new IllegalArgumentException("Failed to create TypeAdapter. The resulting adapter is null.");
++    }
++    return typeAdapter.nullSafe();
 +  }
-+}
      } else if (TypeAdapterFactory.class.isAssignableFrom(value)) {
        Class<TypeAdapterFactory> typeAdapterFactory = (Class<TypeAdapterFactory>) value;
        typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterFactory))

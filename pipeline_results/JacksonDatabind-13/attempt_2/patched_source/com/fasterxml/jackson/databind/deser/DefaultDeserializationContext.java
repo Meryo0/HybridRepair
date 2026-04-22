@@ -85,11 +85,16 @@ public ReadableObjectId findObjectId(Object id, ObjectIdGenerator<?> gen, Object
          *   missing id already works.
          */
 
-        final ObjectIdGenerator.IdKey key = (id == null) ? null : gen.key(id);
+        if (id == null) {
+            // Return a placeholder ReadableObjectId for null IDs
+            return new ReadableObjectId(null);
+        }
+
+        final ObjectIdGenerator.IdKey key = gen.key(id);
 
         if (_objectIds == null) {
             _objectIds = new LinkedHashMap<ObjectIdGenerator.IdKey,ReadableObjectId>();
-        } else if (key != null) {
+        } else {
             ReadableObjectId entry = _objectIds.get(key);
             if (entry != null) {
                 return entry;
@@ -113,10 +118,6 @@ public ReadableObjectId findObjectId(Object id, ObjectIdGenerator<?> gen, Object
         if (resolver == null) {
             resolver = resolverType.newForDeserialization(this);
             _objectIdResolvers.add(resolver);
-        }
-
-        if (key == null) {
-            return null; // Allow null id to pass through as per databind#742
         }
 
         ReadableObjectId entry = new ReadableObjectId(key);

@@ -1162,32 +1162,20 @@ protected JavaType _fromAny(ClassStack context, Type type, TypeBindings bindings
         }
         // But if not, need to start resolving.
         else if (type instanceof ParameterizedType) {
-            if (bindings == null) {
-                bindings = EMPTY_BINDINGS;
-            }
-            resultType = _fromParamType(context, (ParameterizedType) type, bindings);
+            resultType = _fromParamType(context, (ParameterizedType) type, bindings != null ? bindings : EMPTY_BINDINGS);
         }
         else if (type instanceof JavaType) { // [databind#116]
             // no need to modify further if we already had JavaType
             return (JavaType) type;
         }
         else if (type instanceof GenericArrayType) {
-            if (bindings == null) {
-                bindings = EMPTY_BINDINGS;
-            }
-            resultType = _fromArrayType(context, (GenericArrayType) type, bindings);
+            resultType = _fromArrayType(context, (GenericArrayType) type, bindings != null ? bindings : EMPTY_BINDINGS);
         }
         else if (type instanceof TypeVariable<?>) {
-            if (bindings == null) {
-                bindings = EMPTY_BINDINGS;
-            }
-            resultType = _fromVariable(context, (TypeVariable<?>) type, bindings);
+            resultType = _fromVariable(context, (TypeVariable<?>) type, bindings != null ? bindings : EMPTY_BINDINGS);
         }
         else if (type instanceof WildcardType) {
-            if (bindings == null) {
-                bindings = EMPTY_BINDINGS;
-            }
-            resultType = _fromWildcard(context, (WildcardType) type, bindings);
+            resultType = _fromWildcard(context, (WildcardType) type, bindings != null ? bindings : EMPTY_BINDINGS);
         } else {
             // sanity check
             throw new IllegalArgumentException("Unrecognized Type: "+((type == null) ? "[null]" : type.toString()));
@@ -1307,7 +1295,10 @@ protected JavaType _resolveSuperClass(ClassStack context, Class<?> rawType, Type
         if (parent == null) {
             return null;
         }
-        return _fromAny(context, parent, parentBindings == null ? EMPTY_BINDINGS : parentBindings);
+        if (parentBindings == null) {
+            parentBindings = EMPTY_BINDINGS;
+        }
+        return _fromAny(context, parent, parentBindings);
     }
 
 protected JavaType[] _resolveSuperInterfaces(ClassStack context, Class<?> rawType, TypeBindings parentBindings)
@@ -1316,11 +1307,14 @@ protected JavaType[] _resolveSuperInterfaces(ClassStack context, Class<?> rawTyp
         if (types == null || types.length == 0) {
             return NO_TYPES;
         }
+        if (parentBindings == null) {
+            parentBindings = EMPTY_BINDINGS;
+        }
         int len = types.length;
         JavaType[] resolved = new JavaType[len];
         for (int i = 0; i < len; ++i) {
             Type type = types[i];
-            resolved[i] = _fromAny(context, type, parentBindings == null ? EMPTY_BINDINGS : parentBindings);
+            resolved[i] = _fromAny(context, type, parentBindings);
         }
         return resolved;
     }
@@ -1375,7 +1369,7 @@ protected JavaType[] _resolveSuperInterfaces(ClassStack context, Class<?> rawTyp
      * This method deals with parameterized types, that is,
      * first class generic classes.
      */
-protected JavaType _fromParamType(ClassStack context, ParameterizedType ptype,
+    protected JavaType _fromParamType(ClassStack context, ParameterizedType ptype,
             TypeBindings parentBindings)
     {
         // Assumption here is we'll always get Class, not one of other Types
@@ -1405,7 +1399,7 @@ protected JavaType _fromParamType(ClassStack context, ParameterizedType ptype,
         } else {
             JavaType[] pt = new JavaType[paramCount];
             for (int i = 0; i < paramCount; ++i) {
-                pt[i] = _fromAny(context, args[i], parentBindings == null ? EMPTY_BINDINGS : parentBindings);
+                pt[i] = _fromAny(context, args[i], parentBindings);
             }
             newBindings = TypeBindings.create(rawType, pt);
         }

@@ -241,7 +241,7 @@ public CSVParser(final Reader reader, final CSVFormat format) throws IOException
         format.validate();
         this.format = format;
         this.lexer = new Lexer(format, new ExtendedBufferedReader(reader));
-        this.headerMap = java.util.Optional.ofNullable(this.initializeHeader()).orElseGet(java.util.Collections::emptyMap);
+        this.headerMap = this.initializeHeader();
     }
 
     private void addRecordValue() {
@@ -285,7 +285,7 @@ public CSVParser(final Reader reader, final CSVFormat format) throws IOException
      * @return a copy of the header map that iterates in column order.
      */
 public Map<String, Integer> getHeaderMap() {
-        return new LinkedHashMap<String, Integer>(java.util.Optional.ofNullable(this.headerMap).orElseGet(java.util.Collections::emptyMap));
+        return new LinkedHashMap<String, Integer>(this.headerMap);
     }
 
     /**
@@ -348,7 +348,7 @@ private Map<String, Integer> initializeHeader() throws IOException {
                 }
             }
         }
-        return hdrMap != null ? hdrMap : java.util.Collections.emptyMap();
+        return hdrMap != null ? hdrMap : new LinkedHashMap<String, Integer>();
     }
 
     public boolean isClosed() {

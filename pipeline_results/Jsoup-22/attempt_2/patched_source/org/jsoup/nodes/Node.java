@@ -445,8 +445,13 @@ public List<Node> siblingNodes() {
             return Collections.emptyList();
         }
         List<Node> siblings = parent().childNodes();
-        siblings.remove(this);
-        return siblings;
+        List<Node> result = new ArrayList<>(siblings.size() - 1);
+        for (Node sibling : siblings) {
+            if (sibling != this) {
+                result.add(sibling);
+            }
+        }
+        return result;
     }
 
     /**
@@ -470,15 +475,13 @@ public List<Node> siblingNodes() {
      Get this node's previous sibling.
      @return the previous sibling, or null if this is the first sibling
      */
-    public Node previousSibling() {
-
-        List<Node> siblings = parentNode.childNodes;
-        Integer index = siblingIndex();
-        Validate.notNull(index);
-        if (index > 0)
-            return siblings.get(index-1);
-        else
+public Node previousSibling() {
+        if (parent() == null) {
             return null;
+        }
+        List<Node> siblings = parent().childNodes();
+        int index = siblings.indexOf(this);
+        return index > 0 ? siblings.get(index - 1) : null;
     }
 
     /**

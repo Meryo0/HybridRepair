@@ -179,7 +179,7 @@ public class Line implements Hyperplane<Euclidean2D>, Embedding<Euclidean2D, Euc
     /** {@inheritDoc} */
 public Vector1D toSubSpace(final Vector<Euclidean2D> point) {
         if (point == null) {
-            throw new NullPointerException("Point cannot be null");
+            throw new IllegalArgumentException("Input point cannot be null.");
         }
         Vector2D p2 = (Vector2D) point;
         return new Vector1D(cos * p2.getX() + sin * p2.getY());

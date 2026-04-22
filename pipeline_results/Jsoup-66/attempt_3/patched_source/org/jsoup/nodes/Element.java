@@ -681,13 +681,15 @@ public class Element extends Node {
      */
 public Element nextElementSibling() {
         if (parentNode == null) return null;
-        if (!(parent() instanceof Element)) return null;
-        List<Element> siblings = parent().childElementsList();
+        Element parent = parent();
+        if (parent == null) return null;
+        List<Element> siblings = parent.childElementsList();
         if (siblings == null || siblings.isEmpty()) return null;
         Integer index = indexInList(this, siblings);
         if (index == null || index < 0 || index >= siblings.size() - 1) return null;
+        // Ensure the next sibling exists and is valid
         Element nextSibling = siblings.get(index + 1);
-        return nextSibling != null ? nextSibling.clone() : null;
+        return nextSibling != null ? nextSibling : null;
     }
 
     /**

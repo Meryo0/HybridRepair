@@ -1,0 +1,15 @@
+{
+  "status": "FAIL",
+  "total_tests": 26,
+  "failed_tests": 1,
+  "failing_test_names": [
+    "1",
+    "testIntersectionNotIntersecting"
+  ],
+  "previously_failing_now_passing": [
+    "org.apache.commons.math3.geometry.euclidean.twod.SubLineTest",
+    "org.apache.commons.math3.geometry.euclidean.threed.SubLineTest"
+  ],
+  "compile_output": "Note: Some input files use or override a deprecated API.\nNote: Recompile with -Xlint:deprecation for details.\nNote: /home/mario/Desktop/LogicFL/pipeline_results/Math-4/attempt_3/patched_source/org/apache/commons/math3/geometry/partitioning/RegionFactory.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
+  "test_output": "JUnit version 4.13.2\n....................E......\nTime: 0.021\nThere was 1 failure:\n1) testIntersectionNotIntersecting(org.apache.commons.math3.geometry.euclidean.threed.SubLineTest)\njava.lang.NullPointerException: Cannot invoke \"org.apache.commons.math3.geometry.euclidean.threed.Vector3D.subtract(org.apache.commons.math3.geometry.Vector)\" because \"point\" is null\n\tat org.apache.commons.math3.geometry.euclidean.threed.Line.getAbscissa(Line.java:114)\n\tat org.apache.commons.math3.geometry.euclidean.threed.Line.toSubSpace(Line.java:129)\n\tat org.apache.commons.math3.geometry.euclidean.threed.SubLine.intersection(SubLine.java:116)\n\tat org.apache.commons.math3.geometry.euclidean.threed.SubLineTest.testIntersectionNotIntersecting(SubLineTest.java:160)\n\nFAILURES!!!\nTests run: 26,  Failures: 1\n\n"
+}

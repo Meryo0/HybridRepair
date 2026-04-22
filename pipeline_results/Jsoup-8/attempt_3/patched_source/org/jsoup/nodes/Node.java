@@ -360,8 +360,9 @@ public abstract class Node {
     }
 
 protected void outerHtml(StringBuilder accum) {
-        Document ownerDoc = ownerDocument();
-        Document.OutputSettings outputSettings = (ownerDoc != null) ? ownerDoc.outputSettings() : new Document.OutputSettings();
+        Document.OutputSettings outputSettings = ownerDocument() != null 
+            ? ownerDocument().outputSettings() 
+            : new Document.OutputSettings(); // Create a standalone OutputSettings instance
         new NodeTraversor(new OuterHtmlVisitor(accum, outputSettings)).traverse(this);
     }
 

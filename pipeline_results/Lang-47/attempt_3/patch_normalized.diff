@@ -1,6 +1,6 @@
 --- java/org/apache/commons/lang/text/StrBuilder.java
 +++ java/org/apache/commons/lang/text/StrBuilder.java
-@@ -1179,10 +1179,14 @@
+@@ -1179,10 +1179,10 @@
       * @param padChar  the pad character to use
       * @return this, to enable chaining
       */
@@ -9,18 +9,25 @@
          if (width > 0) {
              ensureCapacity(size + width);
 -            String str = (obj == null ? getNullText() : obj.toString());
-+            String nullText = getNullText();
-+            String str = (obj == null ? nullText : obj.toString());
-+            if (str == null) {
-+                str = "";
-+            }
++            String str = (obj == null ? defaultString(getNullText()) : obj.toString());
              int strLen = str.length();
              if (strLen >= width) {
                  str.getChars(strLen - width, strLen, buffer, size);
+@@ -1196,6 +1196,10 @@
+             size += width;
+         }
+         return this;
++    }
++
++    private String defaultString(String str) {
++        return (str == null) ? "" : str;
+     }
+ 
+     /**
 
 --- java/org/apache/commons/lang/text/StrBuilder.java
 +++ java/org/apache/commons/lang/text/StrBuilder.java
-@@ -1223,10 +1223,14 @@
+@@ -1223,10 +1223,10 @@
       * @param padChar  the pad character to use
       * @return this, to enable chaining
       */
@@ -29,11 +36,18 @@
          if (width > 0) {
              ensureCapacity(size + width);
 -            String str = (obj == null ? getNullText() : obj.toString());
-+            String nullText = getNullText();
-+            String str = (obj == null ? nullText : obj.toString());
-+            if (str == null) {
-+                str = "";
-+            }
++            String str = (obj == null ? defaultString(getNullText()) : obj.toString());
              int strLen = str.length();
              if (strLen >= width) {
                  str.getChars(0, width, buffer, size);
+@@ -1240,6 +1240,10 @@
+             size += width;
+         }
+         return this;
++    }
++
++    private String defaultString(String str) {
++        return (str == null) ? "" : str;
+     }
+ 
+     /**

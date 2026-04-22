@@ -134,13 +134,13 @@ public Collection<NamedType> collectAndResolveSubtypesByTypeId(MapperConfig<?> c
         Set<Class<?>> typesHandled = new HashSet<Class<?>>();
         Map<String, NamedType> byName = new LinkedHashMap<String, NamedType>();
 
-        // start with lowest-precedence, which is from type hierarchy
+        // Start with lowest-precedence, which is from type hierarchy
         NamedType rootType = new NamedType(rawBase, null);
         AnnotatedClass ac = AnnotatedClassResolver.resolveWithoutSuperTypes(config, rawBase);
         _collectAndResolveByTypeId(ac, rootType, config, typesHandled, byName);
 
-        // then with definitions from property
-        if (property != null) {
+        // Then with definitions from property
+        if (property != null) { // Ensure property is not null
             Collection<NamedType> st = ai.findSubtypes(property);
             if (st != null) {
                 for (NamedType nt : st) {
@@ -150,13 +150,12 @@ public Collection<NamedType> collectAndResolveSubtypesByTypeId(MapperConfig<?> c
             }
         }
 
-        // and finally explicit type registrations (highest precedence)
+        // And finally explicit type registrations (highest precedence)
         if (_registeredSubtypes != null) {
             for (NamedType subtype : _registeredSubtypes) {
-                // is it a subtype of root type?
-                if (rawBase.isAssignableFrom(subtype.getType())) { // yes
-                    AnnotatedClass curr = AnnotatedClassResolver.resolveWithoutSuperTypes(config,
-                            subtype.getType());
+                // Is it a subtype of root type?
+                if (rawBase.isAssignableFrom(subtype.getType())) { // Yes
+                    AnnotatedClass curr = AnnotatedClassResolver.resolveWithoutSuperTypes(config, subtype.getType());
                     _collectAndResolveByTypeId(curr, subtype, config, typesHandled, byName);
                 }
             }

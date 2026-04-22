@@ -910,11 +910,7 @@ public class ClassUtils {
         }
         Class<?>[] classes = new Class[array.length];
         for (int i = 0; i < array.length; i++) {
-            if (array[i] == null) {
-                classes[i] = null;
-            } else {
-                classes[i] = array[i].getClass();
-            }
+            classes[i] = (array[i] != null) ? array[i].getClass() : Object.class;
         }
         return classes;
     }

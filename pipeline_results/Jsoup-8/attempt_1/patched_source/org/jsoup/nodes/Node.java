@@ -214,7 +214,7 @@ public abstract class Node {
 public Document ownerDocument() {
         if (this instanceof Document)
             return (Document) this;
-        else if (parentNode == null || !(parentNode instanceof Node))
+        else if (parentNode == null)
             return null;
         else
             return parentNode.ownerDocument();
@@ -360,8 +360,11 @@ public Document ownerDocument() {
     }
 
 protected void outerHtml(StringBuilder accum) {
-        Document.OutputSettings outputSettings = ownerDocument() != null ? ownerDocument().outputSettings() : new Document.OutputSettings();
-        new NodeTraversor(new OuterHtmlVisitor(accum, outputSettings)).traverse(this);
+        Document doc = ownerDocument();
+        if (doc == null) {
+            throw new IllegalStateException("Cannot generate outerHtml because the node is not associated with a Document.");
+        }
+        new NodeTraversor(new OuterHtmlVisitor(accum, doc.outputSettings())).traverse(this);
     }
 
     // if this node has no document (or parent), retrieve the default output settings

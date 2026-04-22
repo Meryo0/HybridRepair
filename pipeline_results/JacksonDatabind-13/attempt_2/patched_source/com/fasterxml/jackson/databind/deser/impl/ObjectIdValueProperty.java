@@ -90,11 +90,10 @@ public Object deserializeSetAndReturn(JsonParser jp,
          *  quite yet. Typical use case is with DB inserts.
          */
         
-        ReadableObjectId roid = ctxt.findObjectId(id, _objectIdReader.generator, _objectIdReader.resolver);
-        if (roid == null) {
-            return instance; // Allow null id to pass through as per databind#742
+        ReadableObjectId roid = (id == null) ? null : ctxt.findObjectId(id, _objectIdReader.generator, _objectIdReader.resolver);
+        if (roid != null) {
+            roid.bindItem(instance);
         }
-        roid.bindItem(instance);
         // also: may need to set a property value as well
         SettableBeanProperty idProp = _objectIdReader.idProperty;
         if (idProp != null) {

@@ -12,7 +12,7 @@
       "com.fasterxml.jackson.databind.struct.TestObjectIdDeserialization"
     ],
     "compile_output": "Note: Some input files use or override a deprecated API.\nNote: Recompile with -Xlint:deprecation for details.\nNote: Some input files use unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
-    "test_output": "JUnit version 4.11\n.................\nTime: 0.118\n\nOK (17 tests)\n\n"
+    "test_output": "JUnit version 4.11\n.................\nTime: 0.112\n\nOK (17 tests)\n\n"
   },
-  "timestamp": "2026-04-20T14:52:53.993803+00:00"
+  "timestamp": "2026-04-22T19:06:23.314040+00:00"
 }

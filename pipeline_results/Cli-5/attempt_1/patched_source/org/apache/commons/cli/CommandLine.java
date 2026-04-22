@@ -63,9 +63,9 @@ public class CommandLine {
      * @param opt Short name of the option
      * @return true if set, false if not
      */
-public boolean hasOption(String opt)
+    public boolean hasOption(String opt)
     {
-        return options.contains(resolveOption(opt));
+        return options.contains( resolveOption(opt));
     }
 
     /** 
@@ -161,8 +161,11 @@ public boolean hasOption(String opt)
      * @param opt short or long name of the option
      * @return Canonicalized option
      */
-    private Option resolveOption( String opt )
+private Option resolveOption( String opt )
     {
+        if (opt == null) {
+            return null;
+        }
         opt = Util.stripLeadingHyphens(opt);
         for ( Iterator it = options.iterator(); it.hasNext(); )
         {
@@ -174,8 +177,7 @@ public boolean hasOption(String opt)
             if (opt.equals( option.getLongOpt()))
             {
                 return option;
-        }
-
+            }
         }
         return null;
     }

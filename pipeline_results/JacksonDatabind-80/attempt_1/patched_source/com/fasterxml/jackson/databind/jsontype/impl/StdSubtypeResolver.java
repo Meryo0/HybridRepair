@@ -142,7 +142,7 @@ public Collection<NamedType> collectAndResolveSubtypesByTypeId(MapperConfig<?> c
         _collectAndResolveByTypeId(ac, rootType, config, typesHandled, byName);
         
         // then with definitions from property
-        if (property != null) {
+        if (property != null) { // Ensure property is not null
             Collection<NamedType> st = ai.findSubtypes(property);
             if (st != null) {
                 for (NamedType nt : st) {

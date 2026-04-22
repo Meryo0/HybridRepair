@@ -31,7 +31,7 @@ public final class StringArrayDeserializer
 
 public StringArrayDeserializer() {
         super(String[].class);
-        _elementDeserializer = null;
+        _elementDeserializer = StringDeserializer.instance;  // Initialize with a default deserializer
     }
 
     @SuppressWarnings("unchecked")
@@ -39,7 +39,7 @@ public StringArrayDeserializer() {
         super(String[].class);
         _elementDeserializer = (JsonDeserializer<String>) deser;
     }
-
+   
     @Override
     public String[] deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException
     {
@@ -47,20 +47,23 @@ public StringArrayDeserializer() {
         if (!jp.isExpectedStartArrayToken()) {
             return handleNonArray(jp, ctxt);
         }
+        if (_elementDeserializer != null) {
+            return _deserializeCustom(jp, ctxt);
+        }
 
         final ObjectBuffer buffer = ctxt.leaseObjectBuffer();
         Object[] chunk = buffer.resetAndStart();
-
+        
         int ix = 0;
         JsonToken t;
-
+        
         while ((t = jp.nextToken()) != JsonToken.END_ARRAY) {
             // Ok: no need to convert Strings, but must recognize nulls
             String value;
             if (t == JsonToken.VALUE_STRING) {
                 value = jp.getText();
             } else if (t == JsonToken.VALUE_NULL) {
-                value = (_elementDeserializer != null) ? _elementDeserializer.getNullValue(ctxt) : null;
+                value = (_elementDeserializer != null) ? _elementDeserializer.getNullValue() : null;  // Null-safe handling
             } else {
                 value = _parseString(jp, ctxt);
             }

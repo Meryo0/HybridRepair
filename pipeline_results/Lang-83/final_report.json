@@ -1,0 +1,10 @@
+{
+  "bug_id": "Lang-83",
+  "success": false,
+  "winning_attempt": null,
+  "total_attempts": 0,
+  "test_result": {
+    "error": "Bug directory not found: /home/mario/Desktop/LogicFL/defects4j/Lang-83\nAvailable bugs: check /home/mario/Desktop/LogicFL/defects4j"
+  },
+  "timestamp": "2026-04-22T18:35:48.523045+00:00"
+}

@@ -1,6 +1,6 @@
 --- org/apache/commons/csv/CSVParser.java
 +++ org/apache/commons/csv/CSVParser.java
-@@ -234,14 +234,14 @@
+@@ -234,7 +234,7 @@
       * @throws IOException
       *             If an I/O error occurs
       */
@@ -9,28 +9,18 @@
          Assertions.notNull(reader, "reader");
          Assertions.notNull(format, "format");
  
-         format.validate();
-         this.format = format;
-         this.lexer = new Lexer(format, new ExtendedBufferedReader(reader));
--        this.headerMap = this.initializeHeader();
-+        this.headerMap = java.util.Optional.ofNullable(this.initializeHeader()).orElseGet(java.util.Collections::emptyMap);
-     }
- 
-     private void addRecordValue() {
 
 --- org/apache/commons/csv/CSVParser.java
 +++ org/apache/commons/csv/CSVParser.java
-@@ -284,8 +284,8 @@
+@@ -284,7 +284,7 @@
       * </p>
       * @return a copy of the header map that iterates in column order.
       */
 -    public Map<String, Integer> getHeaderMap() {
--        return new LinkedHashMap<String, Integer>(this.headerMap);
 +public Map<String, Integer> getHeaderMap() {
-+        return new LinkedHashMap<String, Integer>(java.util.Optional.ofNullable(this.headerMap).orElseGet(java.util.Collections::emptyMap));
+         return new LinkedHashMap<String, Integer>(this.headerMap);
      }
  
-     /**
 
 --- org/apache/commons/csv/CSVParser.java
 +++ org/apache/commons/csv/CSVParser.java
@@ -48,7 +38,7 @@
              }
          }
 -        return hdrMap;
-+        return hdrMap != null ? hdrMap : java.util.Collections.emptyMap();
++        return hdrMap != null ? hdrMap : new LinkedHashMap<String, Integer>();
      }
  
      public boolean isClosed() {

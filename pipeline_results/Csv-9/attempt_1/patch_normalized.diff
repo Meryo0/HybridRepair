@@ -1,45 +1,20 @@
 --- org/apache/commons/csv/CSVParser.java
 +++ org/apache/commons/csv/CSVParser.java
-@@ -238,7 +238,7 @@
-      * @throws IOException
-      *             If there is a problem reading the header or skipping the first record
-      */
--    public CSVParser(final Reader reader, final CSVFormat format) throws IOException {
-+public CSVParser(final Reader reader, final CSVFormat format) throws IOException {
-         Assertions.notNull(reader, "reader");
-         Assertions.notNull(format, "format");
- 
-@@ -246,6 +246,9 @@
-         this.format = format;
-         this.lexer = new Lexer(format, new ExtendedBufferedReader(reader));
-         this.headerMap = this.initializeHeader();
-+        if (this.headerMap == null) {
-+            this.headerMap = new LinkedHashMap<>(); // Ensure headerMap is never null
-+        }
-     }
- 
-     private void addRecordValue() {
-
---- org/apache/commons/csv/CSVParser.java
-+++ org/apache/commons/csv/CSVParser.java
-@@ -354,7 +354,7 @@
+@@ -354,12 +354,10 @@
       * @return null if the format has no header.
       * @throws IOException if there is a problem reading the header or skipping the first record
       */
 -    private Map<String, Integer> initializeHeader() throws IOException {
+-        Map<String, Integer> hdrMap = null;
 +private Map<String, Integer> initializeHeader() throws IOException {
-         Map<String, Integer> hdrMap = null;
++        Map<String, Integer> hdrMap = new LinkedHashMap<>(); // Ensure hdrMap is never null
          final String[] formatHeader = this.format.getHeader();
          if (formatHeader != null) {
-@@ -385,7 +385,7 @@
-                 }
-             }
-         }
--        return hdrMap;
-+        return hdrMap != null ? hdrMap : new LinkedHashMap<>(); // Ensure non-null return
-     }
- 
-     public boolean isClosed() {
+-            hdrMap = new LinkedHashMap<String, Integer>();
+-
+             String[] header = null;
+             if (formatHeader.length == 0) {
+                 // read the header from the first line of the file
 
 --- org/apache/commons/csv/CSVRecord.java
 +++ org/apache/commons/csv/CSVRecord.java
@@ -57,25 +32,3 @@
          this.comment = comment;
      }
  
-
---- org/apache/commons/csv/CSVRecord.java
-+++ org/apache/commons/csv/CSVRecord.java
-@@ -176,11 +176,13 @@
-      * @param map The Map to populate.
-      * @return the given map.
-      */
--    <M extends Map<String, String>> M putIn(final M map) {
--        for (final Entry<String, Integer> entry : mapping.entrySet()) {
--            final int col = entry.getValue().intValue();
--            if (col < values.length) {
--                map.put(entry.getKey(), values[col]);
-+<M extends Map<String, String>> M putIn(final M map) {
-+        if (mapping != null) { // Ensure mapping is not null before accessing
-+            for (final Entry<String, Integer> entry : mapping.entrySet()) {
-+                final int col = entry.getValue().intValue();
-+                if (col < values.length) {
-+                    map.put(entry.getKey(), values[col]);
-+                }
-             }
-         }
-         return map;

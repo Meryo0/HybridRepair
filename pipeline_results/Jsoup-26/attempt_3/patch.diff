@@ -1,0 +1,47 @@
+--- org/jsoup/nodes/Document.java
++++ org/jsoup/nodes/Document.java
+@@ -55,8 +55,12 @@
+      Accessor to the document's {@code body} element.
+      @return {@code body}
+      */
+-    public Element body() {
+-        return findFirstElementByTagName("body", this);
++public Element body() {
++        Element body = findFirstElementByTagName("body", this);
++        if (body == null) {
++            body = new Element(Tag.valueOf("body"), baseUri()); // Create a placeholder <body> element
++        }
++        return body;
+     }
+ 
+     /**
+@@ -358,4 +362,3 @@
+         return this;
+     }
+ }
+-
+
+--- org/jsoup/nodes/Document.java
++++ org/jsoup/nodes/Document.java
+@@ -160,11 +160,13 @@
+     }
+ 
+     // fast method to get first by tag name, used for html, head, body finders
+-    private Element findFirstElementByTagName(String tag, Node node) {
+-        if (node.nodeName().equals(tag))
++private Element findFirstElementByTagName(String tag, Node node) {
++        if (node == null) return null; // Handle null node
++        if (java.util.Objects.equals(node.nodeName(), tag))
+             return (Element) node;
+         else {
+-            for (Node child: node.childNodes) {
++            for (Node child : node.childNodes) {
++                if (child == null) continue; // Skip null children
+                 Element found = findFirstElementByTagName(tag, child);
+                 if (found != null)
+                     return found;
+@@ -358,4 +360,3 @@
+         return this;
+     }
+ }
+-

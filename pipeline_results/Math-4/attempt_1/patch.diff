@@ -7,7 +7,7 @@
 -    public Vector1D toSubSpace(final Vector<Euclidean2D> point) {
 +public Vector1D toSubSpace(final Vector<Euclidean2D> point) {
 +        if (point == null) {
-+            throw new NullPointerException("Point cannot be null");
++            throw new IllegalArgumentException("Input point cannot be null.");
 +        }
          Vector2D p2 = (Vector2D) point;
          return new Vector1D(cos * p2.getX() + sin * p2.getY());
@@ -56,7 +56,7 @@
 -    public double getAbscissa(final Vector3D point) {
 +public double getAbscissa(final Vector3D point) {
 +        if (point == null) {
-+            throw new NullPointerException("Point cannot be null");
++            throw new IllegalArgumentException("Input point cannot be null.");
 +        }
          return point.subtract(zero).dotProduct(direction);
      }
@@ -71,7 +71,7 @@
 -    public Vector1D toSubSpace(final Vector<Euclidean3D> point) {
 +public Vector1D toSubSpace(final Vector<Euclidean3D> point) {
 +        if (point == null) {
-+            throw new NullPointerException("Point cannot be null");
++            throw new IllegalArgumentException("Input point cannot be null.");
 +        }
          return new Vector1D(getAbscissa((Vector3D) point));
      }

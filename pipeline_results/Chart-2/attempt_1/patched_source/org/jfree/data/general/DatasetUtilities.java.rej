@@ -9,13 +9,11 @@
                                              boolean includeInterval) {
          if (dataset == null) {
              throw new IllegalArgumentException("Null 'dataset' argument.");
-@@ -776,8 +776,8 @@
-                 }
+@@ -777,7 +777,7 @@
              }
          }
--        if (minimum > maximum) {
+         if (minimum > maximum) {
 -            return null;
-+        if (minimum > maximum || minimum == Double.POSITIVE_INFINITY) {
 +            return new Range(0.0, 0.0);
          }
          else {

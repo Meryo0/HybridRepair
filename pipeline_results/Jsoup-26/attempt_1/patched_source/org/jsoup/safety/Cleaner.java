@@ -41,9 +41,8 @@ public Document clean(Document dirtyDocument) {
 
         Document clean = Document.createShell(dirtyDocument.baseUri());
         Element dirtyBody = dirtyDocument.body();
-        Element cleanBody = clean.body();
-        if (dirtyBody != null && cleanBody != null) {
-            copySafeNodes(dirtyBody, cleanBody);
+        if (dirtyBody != null) {
+            copySafeNodes(dirtyBody, clean.body());
         }
 
         return clean;
@@ -73,10 +72,7 @@ public Document clean(Document dirtyDocument) {
      @param dest destination element to copy into
      @return number of discarded elements (that were considered unsafe)
      */
-private int copySafeNodes(Element source, Element dest) {
-        if (source == null || dest == null) {
-            return 0;
-        }
+    private int copySafeNodes(Element source, Element dest) {
         List<Node> sourceChildren = source.childNodes();
         int numDiscarded = 0;
 

@@ -1,6 +1,6 @@
 --- org/apache/commons/math/analysis/solvers/BisectionSolver.java
 +++ org/apache/commons/math/analysis/solvers/BisectionSolver.java
-@@ -73,24 +73,30 @@
+@@ -73,11 +73,11 @@
      }
  
      /** {@inheritDoc} */
@@ -11,27 +11,17 @@
          clearResult();
 -        verifyInterval(min,max);
 +        verifyInterval(min, max);
-+
-+        if (f == null) {
-+            throw new IllegalArgumentException("Function cannot be null");
-+        }
-+
          double m;
          double fm;
          double fmin;
- 
+@@ -85,8 +85,8 @@
          int i = 0;
-+        fmin = f.value(min); // Ensure f.value(min) is called only once and after null check
          while (i < maximalIterationCount) {
              m = UnivariateRealSolverUtils.midpoint(min, max);
 -           fmin = f.value(min);
 -           fm = f.value(m);
++            fmin = f.value(min);
 +            fm = f.value(m);
  
              if (fm * fmin > 0.0) {
                  // max and m bracket the root.
-                 min = m;
-+                fmin = fm; // Update fmin to avoid redundant calls
-             } else {
-                 // min and m bracket the root.
-                 max = m;

@@ -1,6 +1,6 @@
 --- org/jfree/chart/plot/XYPlot.java
 +++ org/jfree/chart/plot/XYPlot.java
-@@ -2279,7 +2279,7 @@
+@@ -2279,16 +2279,22 @@
       *
       * @since 1.0.10
       */
@@ -9,13 +9,18 @@
      		boolean notify) {
          ArrayList markers;
          if (layer == Layer.FOREGROUND) {
-@@ -2289,6 +2289,9 @@
+             markers = (ArrayList) this.foregroundDomainMarkers.get(new Integer(
+                     index));
++            if (markers == null) {
++                return false;
++            }
+         }
          else {
              markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(
                      index));
-+        }
-+        if (markers == null) {
-+            return false;
++            if (markers == null) {
++                return false;
++            }
          }
          boolean removed = markers.remove(marker);
          if (removed && notify) {
@@ -31,20 +36,27 @@
      		boolean notify) {
          if (marker == null) {
              throw new IllegalArgumentException("Null 'marker' argument.");
-@@ -2525,6 +2525,9 @@
+@@ -2521,10 +2521,16 @@
+         if (layer == Layer.FOREGROUND) {
+             markers = (ArrayList) this.foregroundRangeMarkers.get(new Integer(
+                     index));
++            if (markers == null) {
++                return false;
++            }
+         }
          else {
              markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(
                      index));
-+        }
-+        if (markers == null) {
-+            return false;
++            if (markers == null) {
++                return false;
++            }
          }
          boolean removed = markers.remove(marker);
          if (removed && notify) {
 
 --- org/jfree/chart/plot/CategoryPlot.java
 +++ org/jfree/chart/plot/CategoryPlot.java
-@@ -2152,7 +2152,7 @@
+@@ -2152,16 +2152,22 @@
       *
       * @since 1.0.10
       */
@@ -53,13 +65,18 @@
      		boolean notify) {
          ArrayList markers;
          if (layer == Layer.FOREGROUND) {
-@@ -2162,6 +2162,9 @@
+             markers = (ArrayList) this.foregroundDomainMarkers.get(new Integer(
+                     index));
++            if (markers == null) {
++                return false;
++            }
+         }
          else {
              markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(
                      index));
-+        }
-+        if (markers == null) {
-+            return false;
++            if (markers == null) {
++                return false;
++            }
          }
          boolean removed = markers.remove(marker);
          if (removed && notify) {
@@ -75,13 +92,20 @@
      		boolean notify) {
          if (marker == null) {
              throw new IllegalArgumentException("Null 'marker' argument.");
-@@ -2444,6 +2444,9 @@
+@@ -2440,10 +2440,16 @@
+         if (layer == Layer.FOREGROUND) {
+             markers = (ArrayList) this.foregroundRangeMarkers.get(new Integer(
+                     index));
++            if (markers == null) {
++                return false;
++            }
+         }
          else {
              markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(
                      index));
-+        }
-+        if (markers == null) {
-+            return false;
++            if (markers == null) {
++                return false;
++            }
          }
          boolean removed = markers.remove(marker);
          if (removed && notify) {

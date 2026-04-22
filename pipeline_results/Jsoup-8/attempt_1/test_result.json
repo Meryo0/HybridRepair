@@ -1,9 +1,14 @@
 {
-  "status": "COMPILE_ERROR",
-  "total_tests": 0,
-  "failed_tests": 0,
-  "failing_test_names": [],
-  "previously_failing_now_passing": [],
-  "compile_output": "/home/mario/Desktop/LogicFL/pipeline_results/Jsoup-8/attempt_1/patched_source/org/jsoup/nodes/Node.java:363: error: an enclosing instance that contains Document.OutputSettings is required\n        Document.OutputSettings outputSettings = ownerDocument() != null ? ownerDocument().outputSettings() : new Document.OutputSettings();\n                                                                                                              ^\nNote: /home/mario/Desktop/LogicFL/pipeline_results/Jsoup-8/attempt_1/patched_source/org/jsoup/nodes/Node.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n1 error\n",
-  "test_output": ""
+  "status": "FAIL",
+  "total_tests": 39,
+  "failed_tests": 1,
+  "failing_test_names": [
+    "1",
+    "parentlessToString"
+  ],
+  "previously_failing_now_passing": [
+    "org.jsoup.nodes.ElementTest"
+  ],
+  "compile_output": "Note: /home/mario/Desktop/LogicFL/pipeline_results/Jsoup-8/attempt_1/patched_source/org/jsoup/nodes/Node.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
+  "test_output": "JUnit version 4.13.2\n.E......................................\nTime: 0.054\nThere was 1 failure:\n1) parentlessToString(org.jsoup.nodes.ElementTest)\njava.lang.IllegalStateException: Cannot generate outerHtml because the node is not associated with a Document.\n\tat org.jsoup.nodes.Node.outerHtml(Node.java:365)\n\tat org.jsoup.nodes.Node.outerHtml(Node.java:358)\n\tat org.jsoup.nodes.Element.toString(Element.java:1022)\n\tat org.jsoup.nodes.ElementTest.parentlessToString(ElementTest.java:422)\n\nFAILURES!!!\nTests run: 39,  Failures: 1\n\n"
 }

@@ -1,25 +1,15 @@
 --- org/apache/commons/codec/language/DoubleMetaphone.java
 +++ org/apache/commons/codec/language/DoubleMetaphone.java
-@@ -82,7 +82,7 @@
-      * @param alternate use alternate encode
-      * @return an encoded string
-      */
--    public String doubleMetaphone(String value, final boolean alternate) {
-+public String doubleMetaphone(String value, final boolean alternate) {
-         value = cleanInput(value);
-         if (value == null) {
-             return null;
-
---- org/apache/commons/codec/language/DoubleMetaphone.java
-+++ org/apache/commons/codec/language/DoubleMetaphone.java
-@@ -240,8 +240,8 @@
+@@ -240,8 +240,10 @@
       * @return {@code true} if the encoded <code>String</code>s are equal;
       *          {@code false} otherwise.
       */
 -    public boolean isDoubleMetaphoneEqual(final String value1, final String value2, final boolean alternate) {
 -        return doubleMetaphone(value1, alternate).equals(doubleMetaphone(value2, alternate));
 +public boolean isDoubleMetaphoneEqual(final String value1, final String value2, final boolean alternate) {
-+        return java.util.Objects.equals(doubleMetaphone(value1, alternate), doubleMetaphone(value2, alternate));
++        String metaphone1 = doubleMetaphone(value1, alternate);
++        String metaphone2 = doubleMetaphone(value2, alternate);
++        return metaphone1 != null && metaphone2 != null && metaphone1.equals(metaphone2);
      }
  
      /**

@@ -9,7 +9,7 @@
      {
          if (properties == null)
          {
-@@ -263,8 +263,10 @@
+@@ -263,8 +263,17 @@
              if (!cmd.hasOption(option))
              {
                  Option opt = getOptions().getOption(option);
@@ -19,26 +19,16 @@
 +                {
 +                    continue;
 +                }
++
++                // Check if the option is part of a group and if another option in the group is already selected
++                OptionGroup group = getOptions().getOptionGroup(opt);
++                if (group != null && group.getSelected() != null)
++                {
++                    continue;
++                }
              
                  // get the value from the properties instance
                  String value = properties.getProperty(option);
-@@ -292,6 +294,16 @@
-                     continue;
-                 }
- 
-+                if (opt.getOptionGroup() != null)
-+                {
-+                    OptionGroup group = opt.getOptionGroup();
-+                    if (group.isSelected())
-+                    {
-+                        throw new AlreadySelectedException("The option '" + option + "' was specified but an option from this group has already been selected: '" + group.getSelected() + "'");
-+                    }
-+                    group.setSelected(opt);
-+                }
-+
-                 cmd.addOption(opt);
-                 updateRequiredOptions(opt);
-             }
 
 --- org/apache/commons/cli/DefaultParser.java
 +++ org/apache/commons/cli/DefaultParser.java
@@ -51,7 +41,7 @@
      {
          if (properties == null)
          {
-@@ -150,8 +150,10 @@
+@@ -150,8 +150,17 @@
              if (!cmd.hasOption(option))
              {
                  Option opt = options.getOption(option);
@@ -61,23 +51,13 @@
 +                {
 +                    continue;
 +                }
++
++                // Check if the option is part of a group and if another option in the group is already selected
++                OptionGroup group = options.getOptionGroup(opt);
++                if (group != null && group.getSelected() != null)
++                {
++                    continue;
++                }
              
                  // get the value from the properties
                  String value = properties.getProperty(option);
-@@ -169,6 +171,16 @@
-                 {
-                     // if the value is not yes, true or 1 then don't add the option to the CommandLine
-                     continue;
-+                }
-+
-+                if (opt.getOptionGroup() != null)
-+                {
-+                    OptionGroup group = opt.getOptionGroup();
-+                    if (group.isSelected())
-+                    {
-+                        throw new AlreadySelectedException("The option '" + option + "' was specified but an option from this group has already been selected: '" + group.getSelected() + "'");
-+                    }
-+                    group.setSelected(opt);
-                 }
-                 
-                 handleOption(opt);

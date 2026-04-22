@@ -1,17 +1,14 @@
 --- com/fasterxml/jackson/databind/deser/std/StringArrayDeserializer.java
 +++ com/fasterxml/jackson/databind/deser/std/StringArrayDeserializer.java
-@@ -29,9 +29,9 @@
-      */
-     protected JsonDeserializer<String> _elementDeserializer;
- 
--    public StringArrayDeserializer() {
-+public StringArrayDeserializer() {
-         super(String[].class);
--        _elementDeserializer = null;
-+        _elementDeserializer = new StringDeserializer();
+@@ -41,7 +41,7 @@
      }
- 
-     @SuppressWarnings("unchecked")
+    
+     @Override
+-    public String[] deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException
++public String[] deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException
+     {
+         // Ok: must point to START_ARRAY (or equivalent)
+         if (!jp.isExpectedStartArrayToken()) {
 @@ -63,7 +63,7 @@
              if (t == JsonToken.VALUE_STRING) {
                  value = jp.getText();
@@ -21,18 +18,3 @@
              } else {
                  value = _parseString(jp, ctxt);
              }
-@@ -77,6 +77,14 @@
-         ctxt.returnObjectBuffer(buffer);
-         return result;
-     }
-+
-+    @SuppressWarnings("unchecked")
-+    protected StringArrayDeserializer(JsonDeserializer<?> deser) {
-+        super(String[].class);
-+        _elementDeserializer = (JsonDeserializer<String>) deser;
-+    }
-+   
-+    @Override
- 
-     /**
-      * Offlined version used when we do not use the default deserialization method.

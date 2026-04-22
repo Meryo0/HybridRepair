@@ -1,0 +1,36 @@
+--- org/apache/commons/math3/geometry/euclidean/twod/Line.java
++++ org/apache/commons/math3/geometry/euclidean/twod/Line.java
+@@ -177,7 +177,10 @@
+     }
+ 
+     /** {@inheritDoc} */
+-    public Vector1D toSubSpace(final Vector<Euclidean2D> point) {
++public Vector1D toSubSpace(final Vector<Euclidean2D> point) {
++        if (point == null) {
++            return null;
++        }
+         Vector2D p2 = (Vector2D) point;
+         return new Vector1D(cos * p2.getX() + sin * p2.getY());
+     }
+
+--- org/apache/commons/math3/geometry/euclidean/twod/SubLine.java
++++ org/apache/commons/math3/geometry/euclidean/twod/SubLine.java
+@@ -107,7 +107,7 @@
+      * occurring on endpoints lead to null being returned
+      * @return the intersection point if there is one, null if the sub-lines don't intersect
+      */
+-    public Vector2D intersection(final SubLine subLine, final boolean includeEndPoints) {
++public Vector2D intersection(final SubLine subLine, final boolean includeEndPoints) {
+ 
+         // retrieve the underlying lines
+         Line line1 = (Line) getHyperplane();
+@@ -115,6 +115,9 @@
+ 
+         // compute the intersection on infinite line
+         Vector2D v2D = line1.intersection(line2);
++        if (v2D == null) {
++            return null;
++        }
+ 
+         // check location of point with respect to first sub-line
+         Location loc1 = getRemainingRegion().checkPoint(line1.toSubSpace(v2D));

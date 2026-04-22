@@ -9,20 +9,23 @@
      		DeserializationContext ctxt, Object instance) throws IOException
      {
          // note: no null checks (unlike usually); deserializer should fail if one found
-@@ -91,6 +91,9 @@
+@@ -90,8 +90,10 @@
+          *  quite yet. Typical use case is with DB inserts.
           */
          
-         ReadableObjectId roid = ctxt.findObjectId(id, _objectIdReader.generator, _objectIdReader.resolver);
-+        if (roid == null) {
-+            return instance; // Allow null id to pass through as per databind#742
+-        ReadableObjectId roid = ctxt.findObjectId(id, _objectIdReader.generator, _objectIdReader.resolver);
+-        roid.bindItem(instance);
++        ReadableObjectId roid = (id == null) ? null : ctxt.findObjectId(id, _objectIdReader.generator, _objectIdReader.resolver);
++        if (roid != null) {
++            roid.bindItem(instance);
 +        }
-         roid.bindItem(instance);
          // also: may need to set a property value as well
          SettableBeanProperty idProp = _objectIdReader.idProperty;
+         if (idProp != null) {
 
 --- com/fasterxml/jackson/databind/deser/DefaultDeserializationContext.java
 +++ com/fasterxml/jackson/databind/deser/DefaultDeserializationContext.java
-@@ -79,17 +79,17 @@
+@@ -79,11 +79,16 @@
       */
  
      @Override
@@ -32,18 +35,15 @@
          /* 02-Apr-2015, tatu: As per [databind#742] should allow 'null', similar to how
           *   missing id already works.
           */
++
++        if (id == null) {
++            // Return a placeholder ReadableObjectId for null IDs
++            return new ReadableObjectId(null);
++        }
  
--        final ObjectIdGenerator.IdKey key = gen.key(id);
-+        final ObjectIdGenerator.IdKey key = (id == null) ? null : gen.key(id);
+         final ObjectIdGenerator.IdKey key = gen.key(id);
  
-         if (_objectIds == null) {
-             _objectIds = new LinkedHashMap<ObjectIdGenerator.IdKey,ReadableObjectId>();
--        } else {
-+        } else if (key != null) {
-             ReadableObjectId entry = _objectIds.get(key);
-             if (entry != null) {
-                 return entry;
-@@ -112,16 +112,11 @@
+@@ -112,15 +117,6 @@
  
          if (resolver == null) {
              resolver = resolverType.newForDeserialization(this);
@@ -57,10 +57,5 @@
 -            }
 -            */
              _objectIdResolvers.add(resolver);
-+        }
-+
-+        if (key == null) {
-+            return null; // Allow null id to pass through as per databind#742
          }
  
-         ReadableObjectId entry = new ReadableObjectId(key);

@@ -92,7 +92,7 @@ public Object deserializeSetAndReturn(JsonParser jp,
         
         ReadableObjectId roid = ctxt.findObjectId(id, _objectIdReader.generator, _objectIdReader.resolver);
         if (roid == null) {
-            throw new IllegalStateException("Could not resolve ObjectId for id: " + id);
+            throw new IllegalArgumentException("ReadableObjectId cannot be null for id: " + id);
         }
         roid.bindItem(instance);
         // also: may need to set a property value as well

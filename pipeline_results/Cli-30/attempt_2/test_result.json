@@ -1,9 +1,17 @@
 {
-  "status": "COMPILE_ERROR",
-  "total_tests": 0,
-  "failed_tests": 0,
-  "failing_test_names": [],
-  "previously_failing_now_passing": [],
-  "compile_output": "/home/mario/Desktop/LogicFL/pipeline_results/Cli-30/attempt_2/patched_source/org/apache/commons/cli/DefaultParser.java:176: error: cannot find symbol\n                if (opt.getOptionGroup() != null)\n                       ^\n  symbol:   method getOptionGroup()\n  location: variable opt of type Option\n/home/mario/Desktop/LogicFL/pipeline_results/Cli-30/attempt_2/patched_source/org/apache/commons/cli/DefaultParser.java:178: error: cannot find symbol\n                    OptionGroup group = opt.getOptionGroup();\n                                           ^\n  symbol:   method getOptionGroup()\n  location: variable opt of type Option\n/home/mario/Desktop/LogicFL/pipeline_results/Cli-30/attempt_2/patched_source/org/apache/commons/cli/DefaultParser.java:179: error: cannot find symbol\n                    if (group.isSelected())\n                             ^\n  symbol:   method isSelected()\n  location: variable group of type OptionGroup\n/home/mario/Desktop/LogicFL/pipeline_results/Cli-30/attempt_2/patched_source/org/apache/commons/cli/Parser.java:297: error: cannot find symbol\n                if (opt.getOptionGroup() != null)\n                       ^\n  symbol:   method getOptionGroup()\n  location: variable opt of type Option\n/home/mario/Desktop/LogicFL/pipeline_results/Cli-30/attempt_2/patched_source/org/apache/commons/cli/Parser.java:299: error: cannot find symbol\n                    OptionGroup group = opt.getOptionGroup();\n                                           ^\n  symbol:   method getOptionGroup()\n  location: variable opt of type Option\n/home/mario/Desktop/LogicFL/pipeline_results/Cli-30/attempt_2/patched_source/org/apache/commons/cli/Parser.java:300: error: cannot find symbol\n                    if (group.isSelected())\n                             ^\n  symbol:   method isSelected()\n  location: variable group of type OptionGroup\nNote: /home/mario/Desktop/LogicFL/pipeline_results/Cli-30/attempt_2/patched_source/org/apache/commons/cli/TypeHandler.java uses or overrides a deprecated API.\nNote: Recompile with -Xlint:deprecation for details.\nNote: Some input files use unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n6 errors\n",
-  "test_output": ""
+  "status": "FAIL",
+  "total_tests": 232,
+  "failed_tests": 4,
+  "failing_test_names": [
+    "UnrecognizedOptionException",
+    "testPropertyOptionUnexpected"
+  ],
+  "previously_failing_now_passing": [
+    "org.apache.commons.cli.GnuParserTest",
+    "org.apache.commons.cli.PosixParserTest",
+    "org.apache.commons.cli.BasicParserTest",
+    "org.apache.commons.cli.DefaultParserTest"
+  ],
+  "compile_output": "Note: /home/mario/Desktop/LogicFL/pipeline_results/Cli-30/attempt_2/patched_source/org/apache/commons/cli/TypeHandler.java uses or overrides a deprecated API.\nNote: Recompile with -Xlint:deprecation for details.\nNote: Some input files use unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
+  "test_output": "JUnit version 4.13.2\n...........................................E........................................................E...............................................................E...............................................E.......................\nTime: 0.04\nThere were 4 failures:\n1) testPropertyOptionUnexpected(org.apache.commons.cli.GnuParserTest)\njunit.framework.AssertionFailedError: UnrecognizedOptionException expected\n\tat junit.framework.Assert.fail(Assert.java:57)\n\tat junit.framework.TestCase.fail(TestCase.java:223)\n\tat org.apache.commons.cli.ParserTestCase.testPropertyOptionUnexpected(ParserTestCase.java:1011)\n2) testPropertyOptionUnexpected(org.apache.commons.cli.PosixParserTest)\njunit.framework.AssertionFailedError: UnrecognizedOptionException expected\n\tat junit.framework.Assert.fail(Assert.java:57)\n\tat junit.framework.TestCase.fail(TestCase.java:223)\n\tat org.apache.commons.cli.ParserTestCase.testPropertyOptionUnexpected(ParserTestCase.java:1011)\n3) testPropertyOptionUnexpected(org.apache.commons.cli.BasicParserTest)\njunit.framework.AssertionFailedError: UnrecognizedOptionException expected\n\tat junit.framework.Assert.fail(Assert.java:57)\n\tat junit.framework.TestCase.fail(TestCase.java:223)\n\tat org.apache.commons.cli.ParserTestCase.testPropertyOptionUnexpected(ParserTestCase.java:1011)\n4) testPropertyOptionUnexpected(org.apache.commons.cli.DefaultParserTest)\njunit.framework.AssertionFailedError: UnrecognizedOptionException expected\n\tat junit.framework.Assert.fail(Assert.java:57)\n\tat junit.framework.TestCase.fail(TestCase.java:223)\n\tat org.apache.commons.cli.ParserTestCase.testPropertyOptionUnexpected(ParserTestCase.java:1011)\n\nFAILURES!!!\nTests run: 232,  Failures: 4\n\n"
 }

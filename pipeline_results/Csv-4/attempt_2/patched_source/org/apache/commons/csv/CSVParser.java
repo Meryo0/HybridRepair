@@ -285,7 +285,7 @@ public CSVParser(final Reader reader, final CSVFormat format) throws IOException
      * @return a copy of the header map that iterates in column order.
      */
 public Map<String, Integer> getHeaderMap() {
-        return this.headerMap; // Return the headerMap directly, which may be null as expected by the test
+        return this.headerMap == null ? null : new LinkedHashMap<String, Integer>(this.headerMap);
     }
 
     /**
@@ -322,10 +322,9 @@ public Map<String, Integer> getHeaderMap() {
      * Initializes the name to index mapping if the format defines a header.
      */
 private Map<String, Integer> initializeHeader() throws IOException {
-        Map<String, Integer> hdrMap = null;
         final String[] formatHeader = this.format.getHeader();
         if (formatHeader != null) {
-            hdrMap = new LinkedHashMap<String, Integer>();
+            Map<String, Integer> hdrMap = new LinkedHashMap<String, Integer>();
 
             String[] header = null;
             if (formatHeader.length == 0) {
@@ -347,8 +346,9 @@ private Map<String, Integer> initializeHeader() throws IOException {
                     hdrMap.put(header[i], Integer.valueOf(i));
                 }
             }
+            return hdrMap;
         }
-        return hdrMap; // Return null if no header is initialized, as expected by the test
+        return null;
     }
 
     public boolean isClosed() {

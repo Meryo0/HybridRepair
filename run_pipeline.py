@@ -276,8 +276,9 @@ def repair_bug(bug_id: str, force_rerun: bool = False) -> bool:
     source_roots = _read_source_roots(bug_dir)
 
     # ── Step 3: VibeRepair-style repair loop ────────────────────────────────────
-    session = llm_patcher.RepairSession()
-    initial_prompt = prompt_builder.build_method_repair_prompt(logicfl_result, attempt=1)
+    session = llm_patcher.RepairSession(bug_dir)
+    diagnostic_prompt = prompt_builder.build_diagnostic_prompt(logicfl_result, attempt=1)
+    code_gen_prompt = prompt_builder.build_code_gen_prompt()
 
     for attempt in range(1, config.MAX_REPAIR_ATTEMPTS + 1):
         print(f"\n  [Tentativo {attempt}/{config.MAX_REPAIR_ATTEMPTS}]")
@@ -286,7 +287,8 @@ def repair_bug(bug_id: str, force_rerun: bool = False) -> bool:
         try:
             print("  → Chiamata Azure OpenAI GPT-4o...")
             if attempt == 1:
-                raw_response = session.first_attempt(initial_prompt)
+                diagnosis, raw_response = session.first_attempt(diagnostic_prompt, code_gen_prompt)
+                print(f"  → Diagnosi:\n{diagnosis}\n")
             else:
                 # Build error summary from previous test result
                 error_summary = (
@@ -302,7 +304,7 @@ def repair_bug(bug_id: str, force_rerun: bool = False) -> bool:
                 last_test_result = {"status": "LLM_ERROR", "error": "No FILE blocks in response",
                                     "compile_output": "", "test_output": ""}
                 reporter.save_attempt_result(
-                    bug_id, attempt, initial_prompt if attempt == 1 else "(refine)", raw_response,
+                    bug_id, attempt, "Two-stage Specification-First" if attempt == 1 else "(refine)", raw_response,
                     last_test_result,
                 )
                 continue
@@ -313,7 +315,7 @@ def repair_bug(bug_id: str, force_rerun: bool = False) -> bool:
             last_test_result = {"status": "LLM_ERROR", "error": str(exc),
                                 "compile_output": "", "test_output": ""}
             reporter.save_attempt_result(
-                bug_id, attempt, initial_prompt if attempt == 1 else "(refine)", "",
+                bug_id, attempt, "Two-stage Specification-First" if attempt == 1 else "(refine)", "",
                 last_test_result,
             )
             continue
@@ -338,7 +340,7 @@ def repair_bug(bug_id: str, force_rerun: bool = False) -> bool:
             last_test_result = {"status": "PATCH_ERROR", "error": str(exc),
                                 "compile_output": "", "test_output": ""}
             reporter.save_attempt_result(
-                bug_id, attempt, initial_prompt if attempt == 1 else "(refine)",
+                bug_id, attempt, "Two-stage Specification-First" if attempt == 1 else "(refine)",
                 combined_diff, last_test_result,
             )
             continue
@@ -354,7 +356,7 @@ def repair_bug(bug_id: str, force_rerun: bool = False) -> bool:
                                 "compile_output": "", "test_output": ""}
 
         reporter.save_attempt_result(
-            bug_id, attempt, initial_prompt if attempt == 1 else "(refine)",
+            bug_id, attempt, "Two-stage Specification-First" if attempt == 1 else "(refine)",
             combined_diff, last_test_result,
         )
 

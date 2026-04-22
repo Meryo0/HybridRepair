@@ -11,7 +11,10 @@ New strategy (inspired by VibeRepair):
 from __future__ import annotations
 
 import difflib
+import json
 import re
+import subprocess
+import sys
 import textwrap
 from pathlib import Path
 from typing import List, Optional
@@ -42,13 +45,69 @@ def _get_client() -> AzureOpenAI:
     )
 
 
+# ── Prolog Execution Tool ────────────────────────────────────────────────────────
+
+def execute_prolog_query(bug_dir: Path, query: str) -> str:
+    """Execute a Prolog query on the bug's logic-fl.pl in an isolated process.
+    
+    This avoids pyswip singleton contamination between runs.
+    """
+    logic_fl = bug_dir / "result" / "logic-fl.pl"
+    if not logic_fl.exists():
+        return f"Error: {logic_fl} not found."
+        
+    script = textwrap.dedent(f"""\
+        from pyswip import Prolog
+        import sys
+        
+        try:
+            p = Prolog()
+            p.consult(r"{logic_fl.resolve()}")
+            q_str = r\"\"\"{query}\"\"\"
+            results = list(p.query(q_str, maxresult=20))
+            cleaned = []
+            for res in results:
+                c = {{}}
+                for k, v in res.items():
+                    if isinstance(v, bytes):
+                        c[k] = v.decode('utf-8', errors='replace')
+                    else:
+                        c[k] = str(v)
+                cleaned.append(c)
+            for c in cleaned:
+                print(c)
+        except Exception as e:
+            print(f"Prolog Error: {{e}}", file=sys.stderr)
+            sys.exit(1)
+    """)
+    
+    try:
+        proc = subprocess.run(
+            [sys.executable, "-c", script],
+            capture_output=True,
+            text=True,
+            timeout=15,
+            cwd=str(bug_dir)
+        )
+        if proc.returncode != 0:
+            return f"Error executing query:\n{proc.stderr}"
+        out = proc.stdout.strip()
+        if not out:
+            return "Query succeeded but returned no results (or false)."
+        return out
+    except subprocess.TimeoutExpired:
+        return "Error: Query timed out after 15 seconds."
+    except Exception as e:
+        return f"Error: {e}"
+
+
 # ── Code extraction helpers ──────────────────────────────────────────────────────
 
 def extract_java_code_from_response(response: str) -> str:
     """Extract the Java method body from an LLM response.
 
     Handles:
-      1. Fenced code block:  ```java\\n...\\n```  or  ```\\n...\\n```
+      1. Fenced code block:  ```java\n...\n```  or  ```\n...\n```
       2. Plain code (no fences): returned as-is after stripping.
     """
     if not response:
@@ -123,40 +182,28 @@ def build_diff_from_fixed_method(
 # ── Stateful repair session ──────────────────────────────────────────────────────
 
 _SYSTEM_PROMPT = textwrap.dedent("""\
-    You are an expert Java developer specializing in fixing NullPointerException bugs.
+    You are an expert Java developer specializing in fixing software bugs in the Defects4J benchmark.
     The user will provide you with:
       - A buggy Java method (the fault location identified by LogicFL)
-      - The NPE stack trace and failing test information
+      - The stack trace and failing test information
       - Causal chain analysis from LogicFL's Prolog engine
       - Optionally: related source files in the same project
 
-    Your task:
-      1. Analyse the root cause of the NPE carefully. The fault location is where the
-         NPE *manifests*, but the real bug may be in the logic above (e.g. wrong
-         min/max computation, a method that returns null, missing null check on both
-         sides of a comparison, etc.).
-      2. Return ONLY the corrected Java method — the complete, compilable method body.
-         Do NOT return a diff. Do NOT return the whole file. Do NOT add explanations
-         outside the code block.
-      3. If the fix requires modifying a helper method in another file, you MUST also
-         include that file's corrected method in the same response, clearly labelled:
-           FILE: org/example/Helper.java
-           ```java
-           ... corrected method ...
-           ```
-      4. Keep the fix minimal — preserve the original style, indentation and comments.
-      5. Null-safe comparisons: remember that (a != null && a.equals(b)) returns FALSE
-         when both a and b are null, which may be wrong. Use Objects.equals(a, b) or
-         a custom null-safe helper when both-null should mean equal.
+    Your task is broken into TWO stages (Specification-First):
+      1. DIAGNOSIS: You will first be asked to analyze the root cause of the bug carefully and clearly specify the "Correct Intended Behavior" (Specification).
+         - During this stage, you MAY use the `query_prolog` tool to execute Prolog queries against `logic-fl.pl` and `code-facts.pl` to explore variable definitions, types, method calls, or the AST.
+         - For example: `method_invoc(Id, MethodName, line(Class, Line))` or `assign(Var, Expr, line(Class, Line))`.
+      2. CODE GENERATION: After your diagnosis, you will be asked to provide the corrected Java method based ONLY on your specified intended behavior.
 
-    Output format (required):
-      FILE: <relative/path/to/File.java>
-      ```java
-      <complete corrected method>
-      ```
-
-    If only one file needs changing, output exactly one FILE block.
-    If multiple files need changing, output multiple FILE blocks in order.
+    When outputting code, you must:
+      - Return ONLY the corrected Java method — the complete, compilable method body.
+      - Use the format:
+          FILE: <relative/path/to/File.java>
+          ```java
+          <complete corrected method>
+          ```
+      - Keep the fix minimal — preserve the original style, indentation and comments.
+      - Use null-safe comparisons where appropriate (e.g., Objects.equals(a, b)).
 """)
 
 
@@ -168,18 +215,30 @@ class RepairSession:
     rather than re-sending the full prompt from scratch.
     """
 
-    def __init__(self) -> None:
+    def __init__(self, bug_dir: Path) -> None:
         self._client = _get_client()
+        self._bug_dir = bug_dir
         self._history: List[dict] = [
             {"role": "system", "content": _SYSTEM_PROMPT}
         ]
 
     # ── Public API ──────────────────────────────────────────────────────────────
 
-    def first_attempt(self, prompt: str) -> str:
-        """Send the initial repair prompt and return the raw LLM response."""
-        self._history.append({"role": "user", "content": prompt})
-        return self._call()
+    def first_attempt(self, diagnostic_prompt: str, code_gen_prompt: str) -> tuple[str, str]:
+        """Send the initial diagnostic prompt, then the code generation prompt.
+
+        Returns:
+            A tuple of (diagnosis_response, code_response).
+        """
+        # Step 1: Diagnose (Tools allowed)
+        self._history.append({"role": "user", "content": diagnostic_prompt})
+        diagnosis_response = self._call(use_tools=True)
+
+        # Step 2: Code Gen (No tools needed, just emit code)
+        self._history.append({"role": "user", "content": code_gen_prompt})
+        code_response = self._call(use_tools=False)
+
+        return diagnosis_response, code_response
 
     def refine(self, error_message: str) -> str:
         """Send a follow-up message with the compile/test error for refinement.
@@ -193,25 +252,79 @@ class RepairSession:
         follow_up = (
             "The fix you provided still fails. Here is the error:\n\n"
             f"```\n{error_message[:1500]}\n```\n\n"
-            "Please carefully re-analyse the root cause and provide a corrected method. "
-            "Remember to output only the FILE block(s) with the complete corrected method(s)."
+            "Please carefully re-analyse the root cause. If your previous Correct Intended Behavior "
+            "was wrong or incomplete, please revise it. Then, provide the corrected method(s) again "
+            "using the FILE block format."
         )
         self._history.append({"role": "user", "content": follow_up})
-        return self._call()
+        # Allow tools during refinement as well
+        return self._call(use_tools=True)
 
     # ── Internal ────────────────────────────────────────────────────────────────
 
-    def _call(self) -> str:
-        response = self._client.chat.completions.create(
-            model=config.AZURE_OPENAI_DEPLOYMENT,
-            messages=self._history,
-            temperature=config.LLM_TEMPERATURE,
-            max_tokens=config.LLM_MAX_TOKENS,
-        )
-        content = response.choices[0].message.content or ""
-        # Append assistant reply to history for next turn
-        self._history.append({"role": "assistant", "content": content})
-        return content
+    def _call(self, use_tools: bool = False) -> str:
+        tools = None
+        if use_tools:
+            tools = [
+                {
+                    "type": "function",
+                    "function": {
+                        "name": "query_prolog",
+                        "description": "Execute a Prolog query on the bug's logic-fl database (max 20 results). Useful for checking facts like method_invoc(Id, Name, Line), assign(Var, Expr, Line), param(Name, Index, MethodId), etc.",
+                        "parameters": {
+                            "type": "object",
+                            "properties": {
+                                "query": {
+                                    "type": "string",
+                                    "description": "The Prolog query to execute. Example: 'method_invoc(Id, MethodName, line(Class, Line))'."
+                                }
+                            },
+                            "required": ["query"]
+                        }
+                    }
+                }
+            ]
+
+        while True:
+            kwargs = {
+                "model": config.AZURE_OPENAI_DEPLOYMENT,
+                "messages": self._history,
+                "temperature": config.LLM_TEMPERATURE,
+                "max_tokens": config.LLM_MAX_TOKENS,
+            }
+            if tools:
+                kwargs["tools"] = tools
+
+            response = self._client.chat.completions.create(**kwargs)
+            message = response.choices[0].message
+            
+            # Save assistant message to history
+            self._history.append(message.model_dump(exclude_unset=True))
+
+            if message.tool_calls:
+                # Execute tools
+                for tool_call in message.tool_calls:
+                    if tool_call.function.name == "query_prolog":
+                        try:
+                            args = json.loads(tool_call.function.arguments)
+                            q_str = args.get("query", "")
+                            print(f"  [llm_patcher] Agent queried Prolog: {q_str}")
+                            res = execute_prolog_query(self._bug_dir, q_str)
+                            print(f"  [llm_patcher] Tool response: {len(res)} chars")
+                        except Exception as e:
+                            res = f"Error parsing arguments or executing: {e}"
+                        
+                        self._history.append({
+                            "role": "tool",
+                            "tool_call_id": tool_call.id,
+                            "name": tool_call.function.name,
+                            "content": res
+                        })
+                # Loop back to let LLM respond with tools' results
+                continue
+            else:
+                # No tool calls, return content
+                return message.content or ""
 
 
 # ── Response parsing ─────────────────────────────────────────────────────────────
@@ -227,7 +340,7 @@ def parse_repair_response(
     """
     results = []
 
-    # Pattern: FILE: path\\n```java?\\n...code...\\n```
+    # Pattern: FILE: path\n```java?\n...code...\n```
     pattern = re.compile(
         r"FILE:\s*([^\n]+)\n```(?:java)?\s*\n(.*?)```",
         re.DOTALL,

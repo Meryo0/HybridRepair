@@ -269,23 +269,21 @@ con l'ultimo blocco `+++`. Nessuna spiegazione, nessun markdown, solo il diff gr
 
 # ── New VibeRepair-style: generate corrected method, not a diff ──────────────────
 
-def build_method_repair_prompt(
+def build_diagnostic_prompt(
     result: LogicFLResult,
     attempt: int = 1,
 ) -> str:
-    """Build the initial prompt for the VibeRepair-style session.
+    """Build the initial diagnostic prompt for the Specification-First session.
 
-    Unlike build_repair_prompt(), this asks the LLM to return the
-    *complete corrected method(s)* in FILE blocks, not a unified diff.
-    Python will build the diff from the returned code.
+    Asks the LLM to analyze the bug and output the Root Cause and
+    Correct Intended Behavior, WITHOUT writing the code yet.
 
     Args:
         result:  Parsed LogicFL output.
-        attempt: Current attempt number (for display only; the refinement
-                 loop is handled by RepairSession.refine(), not this function).
+        attempt: Current attempt number.
 
     Returns:
-        The user-turn prompt string for RepairSession.first_attempt().
+        The diagnostic prompt string.
     """
     fault_locs_text = _format_fault_locations(result.fault_locations)
     causal_chains_text = _format_causal_chains(result.causal_chains)
@@ -293,12 +291,8 @@ def build_method_repair_prompt(
     stack_traces_text = result.stack_traces.strip() or "(nessuno stack trace disponibile)"
     related_sources_section = _build_related_sources(result.fault_locations)
 
-    # Build per-method sections: clean Java source + relative path for FILE: header
     method_sections: List[str] = []
     seen_files: set = set()
-    # Also collect (file, start_1, end_1) metadata for the pipeline to use
-    method_meta: List[dict] = []
-
     by_file: dict = {}
     for fl in result.fault_locations:
         by_file.setdefault(fl["file_path"], []).append(fl["line"])
@@ -315,69 +309,71 @@ def build_method_repair_prompt(
         for target_line in sorted(lines):
             snippet, start_1, end_1 = code_extractor.extract_method_source(java_file, target_line)
             method_sections.append(
-                f"### FILE: {rel}  (righe {start_1}–{end_1}, fault alla riga {target_line})\n"
-                f"```java\n{snippet}\n```"
+                f"### FILE: {rel}  (righe {start_1}–{end_1}, fault alla riga {target_line})\\n"
+                f"```java\\n{snippet}\\n```"
             )
-            method_meta.append({
-                "file": java_file,
-                "relative_path": rel,
-                "start_1": start_1,
-                "end_1": end_1,
-                "target_line": target_line,
-            })
 
-    methods_block = "\n\n".join(method_sections) if method_sections else "(nessun metodo estratto)"
+    methods_block = "\\n\\n".join(method_sections) if method_sections else "(nessun metodo estratto)"
 
     prompt = f"""Bug ID: {result.bug_id}  |  Tentativo {attempt}
 
 ## Fault Locations (LogicFL)
-
 {fault_locs_text}
 
 ## Catena Causale (LogicFL Prolog)
-
 {causal_chains_text}
 
 ## Metodi Buggy
-
 {methods_block}
 {related_sources_section}
 ## Test Falliti
-
 {failing_tests_text}
 
 ## Stack Trace
-
 ```
 {stack_traces_text}
 ```
 
-## Istruzioni
+## Istruzioni per la Diagnosi
 
-Analizza il bug e restituisci i metodi corretti, seguendo queste regole TASSATIVE:
+Analizza il bug. Se hai bisogno di maggiori informazioni sulle variabili, sui tipi o sulle dipendenze dei metodi, PUOI usare il tool `query_prolog` per esplorare il database Prolog (`logic-fl.pl` e `code-facts.pl`). Ad esempio, query come `method_invoc(Id, Nome, Linea)` o `assign(Var, Expr, Linea)`.
 
+Attenzione: le locazioni segnalate da LogicFL indicano il punto esatto in cui il bug si manifesta. Valuta attentamente se è corretto sanare l'errore in quel metodo esatto o se è più semanticamente corretto intercettare e gestire l'errore (o i dati nulli/invalidi) a monte, nel metodo chiamante. Non limitarti a risolvere il sintomo.
+
+Quando sei sicuro, restituisci ESATTAMENTE e SOLO le seguenti due sezioni, senza nient'altro:
+
+**Root Cause**:
+(Spiega in dettaglio qual è il difetto logico nel codice originale che causa l'eccezione o il comportamento errato, tracciando il flusso di esecuzione fino al fault).
+
+**Correct Intended Behavior**:
+(Specifica cosa dovrebbe fare il codice al posto di fallire. Definisci chiaramente il comportamento corretto e null-safe).
+"""
+    return prompt.strip()
+
+
+def build_code_gen_prompt() -> str:
+    """Build the second prompt for the Specification-First session.
+    
+    Tells the LLM to use the diagnosis it just provided to generate the code.
+    """
+    prompt = """
+Ora, basandoti ESCLUSIVAMENTE sulla "Root Cause" e sul "Correct Intended Behavior" che hai appena stabilito, fornisci il codice Java corretto.
+
+Segui queste regole TASSATIVE:
 1. **Un FILE block per metodo**: se devi correggere N metodi, emetti N blocchi FILE separati.
-   Ogni blocco deve contenere UN SOLO metodo completo.
-
-2. **Indentazione originale**: mantieni ESATTAMENTE l'indentazione del codice originale.
-   La firma del metodo DEVE iniziare con gli stessi spazi del file originale.
-
-3. **La riga `// ◄ FIX THIS LINE`** indica dove l'NPE si manifesta. Rimuovi questo commento
-   nella risposta — restituisci solo codice Java puro.
-
-4. **Null-safe equality OBBLIGATORIA**: se il metodo confronta due valori che possono essere null,
-   usa `java.util.Objects.equals(a, b)` — questa funzione ritorna `true` se entrambi sono null,
-   mentre `a.equals(b)` lancia NPE se `a` è null, e `a != null && a.equals(b)` ritorna `false`
-   se entrambi sono null (sbagliato semanticamente).
-   Esempio corretto:
+   Ogni blocco deve contenere UN SOLO metodo completo. Formato:
+   FILE: percorso/relativo/del/File.java
    ```java
-   return java.util.Objects.equals(doubleMetaphone(v1, alt), doubleMetaphone(v2, alt));
+   <intero metodo>
    ```
 
-5. **NON modificare metodi che non causano il bug**: se il metodo `doubleMetaphone` ritorna
-   null per input null, questo è il comportamento CORRETTO e atteso dai test. Non cambiarlo.
+2. **Indentazione originale**: mantieni ESATTAMENTE l'indentazione del codice originale.
 
-6. NON modificare file di test.
+3. La riga `// ◄ FIX THIS LINE` (se presente) indica dove il bug si manifesta. Rimuovi questo commento.
+
+4. Usa comparazioni null-safe se necessario (es. `java.util.Objects.equals(a, b)` invece di `a.equals(b)` se entrambi possono essere null). Se il metodo deve rifiutare input non validi in base alla sua firma, sentiti libero di far propagare l'eccezione o restituire un risultato adeguato a monte.
+
+Restituisci SOLO i blocchi di codice Java con l'intestazione FILE, nessuna spiegazione aggiuntiva.
 """
     return prompt.strip()
 

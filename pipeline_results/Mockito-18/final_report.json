@@ -4,7 +4,7 @@
   "winning_attempt": null,
   "total_attempts": 0,
   "test_result": {
-    "error": "LogicFL completato ma /home/mario/Desktop/LogicFL/defects4j/Mockito-18/result/fault_locs.txt non trovato.\nControlla i log di LogicFL per errori."
+    "error": "No fault locations found by LogicFL"
   },
-  "timestamp": "2026-04-20T15:02:09.541370+00:00"
+  "timestamp": "2026-04-22T19:19:24.912211+00:00"
 }

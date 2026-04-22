@@ -6,7 +6,7 @@
   "test_result": {
     "status": "FAIL",
     "total_attempts": 3,
-    "last_failure": "JUnit version 4.13.2\n.......E\nTime: 0.04\nThere was 1 failure:\n1) shouldAllowPassingNullArgument(org.mockitousage.bugs.ActualInvocationHasNullArgumentNPEBugTest)\njava.lang.ExceptionInInitializerError\n\tat org.mockito.cglib.core.KeyFactory$Generator.generateClass(KeyFactory.java:167)\n\tat org.mockito.cglib.core.DefaultGeneratorStrategy.generate(DefaultGeneratorStrategy.java:25)\n\tat org.mockito.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:217)\n\tat org.mockito.cglib.core.KeyFac"
+    "last_failure": "JUnit version 4.13.2\n.E......\nTime: 0.04\nThere was 1 failure:\n1) shouldAllowPassingNullArgument(org.mockitousage.bugs.ActualInvocationHasNullArgumentNPEBugTest)\njava.lang.ExceptionInInitializerError\n\tat org.mockito.cglib.core.KeyFactory$Generator.generateClass(KeyFactory.java:167)\n\tat org.mockito.cglib.core.DefaultGeneratorStrategy.generate(DefaultGeneratorStrategy.java:25)\n\tat org.mockito.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:217)\n\tat org.mockito.cglib.core.KeyFac"
   },
-  "timestamp": "2026-04-20T15:02:31.100317+00:00"
+  "timestamp": "2026-04-22T19:19:47.302928+00:00"
 }

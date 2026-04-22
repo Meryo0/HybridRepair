@@ -10,16 +10,12 @@
      public static Class<?>[] toClass(Object[] array) {
          if (array == null) {
              return null;
-@@ -907,7 +910,11 @@
+@@ -907,7 +910,7 @@
          }
          Class<?>[] classes = new Class[array.length];
          for (int i = 0; i < array.length; i++) {
 -            classes[i] = array[i].getClass();
-+            if (array[i] == null) {
-+                classes[i] = null;
-+            } else {
-+                classes[i] = array[i].getClass();
-+            }
++            classes[i] = (array[i] != null) ? array[i].getClass() : Object.class;
          }
          return classes;
      }

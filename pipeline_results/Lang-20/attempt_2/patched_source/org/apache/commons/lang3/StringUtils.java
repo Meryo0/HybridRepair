@@ -3290,12 +3290,11 @@ public static String join(Object[] array, char separator, int startIndex, int en
         if (array == null) {
             return null;
         }
-        int noOfItems = (endIndex - startIndex);
-        if (noOfItems <= 0) {
+        if (startIndex < 0 || endIndex > array.length || startIndex >= endIndex) {
             return EMPTY;
         }
-        
-        StringBuilder buf = new StringBuilder((startIndex < array.length && array[startIndex] != null ? array[startIndex].toString().length() : 16) + 1);
+
+        StringBuilder buf = new StringBuilder(16);
 
         for (int i = startIndex; i < endIndex; i++) {
             if (i > startIndex) {
@@ -3303,8 +3302,6 @@ public static String join(Object[] array, char separator, int startIndex, int en
             }
             if (array[i] != null) {
                 buf.append(array[i]);
-            } else {
-                buf.append("null");
             }
         }
         return buf.toString();
@@ -3374,13 +3371,11 @@ public static String join(Object[] array, String separator, int startIndex, int 
         if (separator == null) {
             separator = EMPTY;
         }
-
-        int noOfItems = (endIndex - startIndex);
-        if (noOfItems <= 0) {
+        if (startIndex < 0 || endIndex > array.length || startIndex >= endIndex) {
             return EMPTY;
         }
 
-        StringBuilder buf = new StringBuilder((startIndex < array.length && array[startIndex] != null ? array[startIndex].toString().length() : 16) + separator.length());
+        StringBuilder buf = new StringBuilder(16);
 
         for (int i = startIndex; i < endIndex; i++) {
             if (i > startIndex) {
@@ -3388,8 +3383,6 @@ public static String join(Object[] array, String separator, int startIndex, int 
             }
             if (array[i] != null) {
                 buf.append(array[i]);
-            } else {
-                buf.append("null");
             }
         }
         return buf.toString();

@@ -1,24 +1,60 @@
 --- org/jsoup/nodes/Document.java
 +++ org/jsoup/nodes/Document.java
-@@ -55,8 +55,14 @@
+@@ -55,7 +55,7 @@
       Accessor to the document's {@code body} element.
       @return {@code body}
       */
 -    public Element body() {
--        return findFirstElementByTagName("body", this);
 +public Element body() {
-+        Element body = findFirstElementByTagName("body", this);
-+        if (body == null) {
-+            // Return a placeholder empty body element instead of throwing an exception
-+            body = new Element(Tag.valueOf("body"), baseUri());
-+            appendChild(body);
-+        }
-+        return body;
+         return findFirstElementByTagName("body", this);
      }
  
-     /**
-@@ -358,4 +364,3 @@
+@@ -358,4 +358,3 @@
          return this;
      }
  }
 -
+
+--- org/jsoup/nodes/Document.java
++++ org/jsoup/nodes/Document.java
+@@ -160,11 +160,13 @@
+     }
+ 
+     // fast method to get first by tag name, used for html, head, body finders
+-    private Element findFirstElementByTagName(String tag, Node node) {
++private Element findFirstElementByTagName(String tag, Node node) {
++        if (node == null) return null;
+         if (node.nodeName().equals(tag))
+             return (Element) node;
+         else {
+-            for (Node child: node.childNodes) {
++            for (Node child : node.childNodes) {
++                if (child == null) continue;
+                 Element found = findFirstElementByTagName(tag, child);
+                 if (found != null)
+                     return found;
+@@ -358,4 +360,3 @@
+         return this;
+     }
+ }
+-
+
+--- org/jsoup/safety/Cleaner.java
++++ org/jsoup/safety/Cleaner.java
+@@ -36,11 +36,14 @@
+      @param dirtyDocument Untrusted base document to clean.
+      @return cleaned document.
+      */
+-    public Document clean(Document dirtyDocument) {
++public Document clean(Document dirtyDocument) {
+         Validate.notNull(dirtyDocument);
+ 
+         Document clean = Document.createShell(dirtyDocument.baseUri());
+-            copySafeNodes(dirtyDocument.body(), clean.body());
++        Element dirtyBody = dirtyDocument.body();
++        if (dirtyBody != null) {
++            copySafeNodes(dirtyBody, clean.body());
++        }
+ 
+         return clean;
+     }

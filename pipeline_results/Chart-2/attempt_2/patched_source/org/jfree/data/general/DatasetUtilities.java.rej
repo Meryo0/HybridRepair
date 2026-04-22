@@ -9,36 +9,14 @@
                                              boolean includeInterval) {
          if (dataset == null) {
              throw new IllegalArgumentException("Null 'dataset' argument.");
-@@ -776,7 +776,7 @@
-                 }
-             }
-         }
--        if (minimum > maximum) {
-+        if (minimum == Double.POSITIVE_INFINITY || maximum == Double.NEGATIVE_INFINITY) {
-             return null;
-         }
-         else {
 --- org/jfree/data/general/DatasetUtilities.java
 +++ org/jfree/data/general/DatasetUtilities.java
-@@ -1226,8 +1226,11 @@
+@@ -1226,7 +1226,7 @@
       *
       * @since 1.0.10
       */
 -    public static Range iterateRangeBounds(XYDataset dataset,
 +public static Range iterateRangeBounds(XYDataset dataset,
              boolean includeInterval) {
-+        if (dataset == null) {
-+            throw new IllegalArgumentException("Null 'dataset' argument.");
-+        }
          double minimum = Double.POSITIVE_INFINITY;
          double maximum = Double.NEGATIVE_INFINITY;
-         int seriesCount = dataset.getSeriesCount();
-@@ -1280,7 +1283,7 @@
-                 }
-             }
-         }
--        if (minimum == Double.POSITIVE_INFINITY) {
-+        if (minimum == Double.POSITIVE_INFINITY || maximum == Double.NEGATIVE_INFINITY) {
-             return null;
-         }
-         else {

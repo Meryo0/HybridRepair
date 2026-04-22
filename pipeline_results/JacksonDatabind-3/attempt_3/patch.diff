@@ -1,51 +1,27 @@
 --- com/fasterxml/jackson/databind/deser/std/StringArrayDeserializer.java
 +++ com/fasterxml/jackson/databind/deser/std/StringArrayDeserializer.java
-@@ -29,7 +29,7 @@
+@@ -29,9 +29,9 @@
       */
      protected JsonDeserializer<String> _elementDeserializer;
  
 -    public StringArrayDeserializer() {
 +public StringArrayDeserializer() {
          super(String[].class);
-         _elementDeserializer = null;
+-        _elementDeserializer = null;
++        _elementDeserializer = StringDeserializer.instance;  // Initialize with a default deserializer
      }
-@@ -39,7 +39,7 @@
-         super(String[].class);
-         _elementDeserializer = (JsonDeserializer<String>) deser;
-     }
--   
-+
-     @Override
-     public String[] deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException
-     {
-@@ -47,23 +47,20 @@
-         if (!jp.isExpectedStartArrayToken()) {
-             return handleNonArray(jp, ctxt);
-         }
--        if (_elementDeserializer != null) {
--            return _deserializeCustom(jp, ctxt);
--        }
  
-         final ObjectBuffer buffer = ctxt.leaseObjectBuffer();
-         Object[] chunk = buffer.resetAndStart();
--        
-+
-         int ix = 0;
-         JsonToken t;
--        
-+
-         while ((t = jp.nextToken()) != JsonToken.END_ARRAY) {
-             // Ok: no need to convert Strings, but must recognize nulls
-             String value;
+     @SuppressWarnings("unchecked")
+@@ -63,7 +63,7 @@
              if (t == JsonToken.VALUE_STRING) {
                  value = jp.getText();
              } else if (t == JsonToken.VALUE_NULL) {
 -                value = _elementDeserializer.getNullValue();
-+                value = (_elementDeserializer != null) ? _elementDeserializer.getNullValue(ctxt) : null;
++                value = (_elementDeserializer != null) ? _elementDeserializer.getNullValue() : null;  // Null-safe handling
              } else {
                  value = _parseString(jp, ctxt);
              }
-@@ -77,6 +74,14 @@
+@@ -77,6 +77,14 @@
          ctxt.returnObjectBuffer(buffer);
          return result;
      }

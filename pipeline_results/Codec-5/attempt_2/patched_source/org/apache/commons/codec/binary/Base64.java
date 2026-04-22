@@ -407,11 +407,10 @@ int readResults(byte[] b, int bPos, int bAvail) {
         if (buffer != null) {
             int len = Math.min(avail(), bAvail);
             if (buffer != b) {
-                if (buffer != null) { // Ensure buffer is not null before accessing
-                    System.arraycopy(buffer, readPos, b, bPos, len);
-                }
+                System.arraycopy(buffer, readPos, b, bPos, len);
                 readPos += len;
                 if (readPos >= pos) {
+                    // Only set buffer to null if it is no longer needed
                     buffer = null;
                 }
             } else {
@@ -591,19 +590,22 @@ int readResults(byte[] b, int bPos, int bAvail) {
             switch (modulus) {
                 case 2 :
                     x = x << 6;
-                    if (buffer != null) { // Ensure buffer is not null before accessing
-                        buffer[pos++] = (byte) ((x >> 16) & MASK_8BITS);
+                    if (buffer == null) {
+                        // Ensure buffer is initialized before use
+                        buffer = new byte[DEFAULT_BUFFER_SIZE];
                     }
+                    buffer[pos++] = (byte) ((x >> 16) & MASK_8BITS);
                     break;
                 case 3 :
-                    if (buffer != null) { // Ensure buffer is not null before accessing
-                        buffer[pos++] = (byte) ((x >> 16) & MASK_8BITS);
-                        buffer[pos++] = (byte) ((x >> 8) & MASK_8BITS);
+                    if (buffer == null) {
+                        // Ensure buffer is initialized before use
+                        buffer = new byte[DEFAULT_BUFFER_SIZE];
                     }
+                    buffer[pos++] = (byte) ((x >> 16) & MASK_8BITS);
+                    buffer[pos++] = (byte) ((x >> 8) & MASK_8BITS);
                     break;
             }
         }
-    }
     }
 
     /**

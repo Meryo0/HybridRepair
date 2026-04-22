@@ -1,18 +1,18 @@
 {
     "coverage_analyzer": {
-        "exec_time": "00:00:00.576",
-        "exec_time_millis": 576
+        "exec_time": "00:00:00.526",
+        "exec_time_millis": 526
     },
     "fault_localizer": {
-        "exec_time": "00:00:00.057",
-        "exec_time_millis": 57
+        "exec_time": "00:00:00.056",
+        "exec_time_millis": 56
     },
     "dynamic_analyzer": {
-        "exec_time": "00:00:00.883",
-        "exec_time_millis": 883
+        "exec_time": "00:00:00.872",
+        "exec_time_millis": 872
     },
     "static_analyzer": {
-        "exec_time": "00:00:02.732",
-        "exec_time_millis": 2732
+        "exec_time": "00:00:02.540",
+        "exec_time_millis": 2540
     }
 }

@@ -4,6 +4,6 @@
   "failed_tests": 0,
   "failing_test_names": [],
   "previously_failing_now_passing": [],
-  "compile_output": "/home/mario/Desktop/LogicFL/pipeline_results/Jsoup-8/attempt_2/patched_source/org/jsoup/nodes/Node.java:363: error: cannot find symbol\n        Document.OutputSettings outputSettings = ownerDocument() != null ? ownerDocument().outputSettings() : Document.OutputSettings.defaultSettings();\n                                                                                                                                     ^\n  symbol:   method defaultSettings()\n  location: class Document.OutputSettings\nNote: /home/mario/Desktop/LogicFL/pipeline_results/Jsoup-8/attempt_2/patched_source/org/jsoup/nodes/Node.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n1 error\n",
+  "compile_output": "/home/mario/Desktop/LogicFL/pipeline_results/Jsoup-8/attempt_2/patched_source/org/jsoup/nodes/Node.java:365: error: an enclosing instance that contains Document.OutputSettings is required\n            : new Document.OutputSettings(); // Use default settings if no document is associated\n              ^\nNote: /home/mario/Desktop/LogicFL/pipeline_results/Jsoup-8/attempt_2/patched_source/org/jsoup/nodes/Node.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n1 error\n",
   "test_output": ""
 }

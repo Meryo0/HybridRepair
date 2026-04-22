@@ -8,5 +8,5 @@
     "org.apache.commons.cli.UtilTest"
   ],
   "compile_output": "Note: /home/mario/Desktop/LogicFL/pipeline_results/Cli-5/attempt_1/patched_source/org/apache/commons/cli/TypeHandler.java uses or overrides a deprecated API.\nNote: Recompile with -Xlint:deprecation for details.\nNote: Some input files use unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
-  "test_output": "JUnit version 4.13.2\n..\nTime: 0.009\n\nOK (2 tests)\n\n"
+  "test_output": "JUnit version 4.13.2\n..\nTime: 0.008\n\nOK (2 tests)\n\n"
 }

@@ -29,7 +29,7 @@ public class Attribute implements Map.Entry<String, String>, Cloneable  {
      * @param value attribute value
      * @see #createFromEncoded
      */
-public Attribute(String key, String value) {
+    public Attribute(String key, String value) {
         this(key, value, null);
     }
 
@@ -39,7 +39,7 @@ public Attribute(String key, String value) {
      * @param val attribute value
      * @param parent the containing Attributes (this Attribute is not automatically added to said Attributes)
      * @see #createFromEncoded*/
-public Attribute(String key, String val, Attributes parent) {
+    public Attribute(String key, String val, Attributes parent) {
         Validate.notNull(key);
         key = key.trim();
         Validate.notEmpty(key); // trimming could potentially make empty, so validate here
@@ -85,13 +85,13 @@ public Attribute(String key, String val, Attributes parent) {
      @param val the new attribute value; must not be null
      */
 public String setValue(String val) {
-        String oldVal = parent != null ? parent.get(this.key) : this.val;
+        String oldVal = this.val; // Store the current value of the field
         if (parent != null) {
             int i = parent.indexOfKey(this.key);
             if (i != Attributes.NotFound)
                 parent.vals[i] = val;
         }
-        this.val = val;
+        this.val = val; // Update the field regardless of parent
         return Attributes.checkNotNull(oldVal);
     }
 

@@ -589,19 +589,20 @@ int readResults(byte[] b, int bPos, int bAvail) {
             switch (modulus) {
                 case 2 :
                     x = x << 6;
-                    if (buffer != null) {
-                        buffer[pos++] = (byte) ((x >> 16) & MASK_8BITS);
+                    if (buffer == null) {
+                        buffer = new byte[DEFAULT_BUFFER_SIZE];
                     }
+                    buffer[pos++] = (byte) ((x >> 16) & MASK_8BITS);
                     break;
                 case 3 :
-                    if (buffer != null) {
-                        buffer[pos++] = (byte) ((x >> 16) & MASK_8BITS);
-                        buffer[pos++] = (byte) ((x >> 8) & MASK_8BITS);
+                    if (buffer == null) {
+                        buffer = new byte[DEFAULT_BUFFER_SIZE];
                     }
+                    buffer[pos++] = (byte) ((x >> 16) & MASK_8BITS);
+                    buffer[pos++] = (byte) ((x >> 8) & MASK_8BITS);
                     break;
             }
         }
-    }
     }
 
     /**

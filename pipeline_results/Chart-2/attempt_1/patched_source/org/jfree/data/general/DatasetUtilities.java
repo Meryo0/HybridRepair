@@ -776,7 +776,7 @@ public static Range iterateDomainBounds(XYDataset dataset,
                 }
             }
         }
-        if (minimum > maximum || minimum == Double.POSITIVE_INFINITY) {
+        if (minimum > maximum) {
             return new Range(0.0, 0.0);
         }
         else {

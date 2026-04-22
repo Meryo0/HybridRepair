@@ -526,17 +526,16 @@ public class Scope
    * Returns the variable, may be null
    */
 public Var getVar(String name) {
-    if (name == null) {
-      return null;
+    if (vars != null) {
+      Var var = vars.get(name);
+      if (var != null) {
+        return var;
+      }
     }
-    Var var = vars.get(name);
-    if (var != null) {
-      return var;
-    } else if (parent != null) { // Recurse up the parent Scope
-      return parent != null ? parent.getVar(name) : null;
-    } else {
-      return null;
+    if (parent != null) { // Recurse up the parent Scope
+      return parent.getVar(name);
     }
+    return null;
   }
 
   /**

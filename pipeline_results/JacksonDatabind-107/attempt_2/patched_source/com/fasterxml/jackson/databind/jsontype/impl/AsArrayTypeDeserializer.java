@@ -83,7 +83,7 @@ public class AsArrayTypeDeserializer
      * deserialization.
      */
     @SuppressWarnings("resource")
-    protected Object _deserialize(JsonParser p, DeserializationContext ctxt) throws IOException
+protected Object _deserialize(JsonParser p, DeserializationContext ctxt) throws IOException
     {
         // 02-Aug-2013, tatu: May need to use native type ids
         if (p.canReadTypeId()) {
@@ -95,6 +95,9 @@ public class AsArrayTypeDeserializer
         boolean hadStartArray = p.isExpectedStartArrayToken();
         String typeId = _locateTypeId(p, ctxt);
         JsonDeserializer<Object> deser = _findDeserializer(ctxt, typeId);
+        if (deser == null) {
+            throw ctxt.mappingException("No deserializer found for type id '%s'", typeId);
+        }
         // Minor complication: we may need to merge type id in?
         if (_typeIdVisible
                 // 06-Oct-2014, tatu: To fix [databind#408], must distinguish between
@@ -124,7 +127,7 @@ public class AsArrayTypeDeserializer
             // ... but for now, fall through
         }
         return value;
-    }    
+    }
     
     protected String _locateTypeId(JsonParser p, DeserializationContext ctxt) throws IOException
     {

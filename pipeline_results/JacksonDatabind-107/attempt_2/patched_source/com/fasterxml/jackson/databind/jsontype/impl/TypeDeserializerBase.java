@@ -198,17 +198,17 @@ public abstract class TypeDeserializerBase
         return deser;
     }
 
-protected final JsonDeserializer<Object> _findDefaultImplDeserializer(DeserializationContext ctxt) throws IOException
+    protected final JsonDeserializer<Object> _findDefaultImplDeserializer(DeserializationContext ctxt) throws IOException
     {
+        /* 06-Feb-2013, tatu: As per [databind#148], consider default implementation value of
+         *   {@link java.lang.Void} to mean "serialize as null"; as well as DeserializationFeature
+         *   to do swift mapping to null
+         */
         if (_defaultImpl == null) {
             if (!ctxt.isEnabled(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE)) {
                 return NullifyingDeserializer.instance;
             }
-            // Instead of returning null, provide a meaningful exception message
-            throw JsonMappingException.from(ctxt, String.format(
-                "No default implementation specified for type id resolver '%s'", 
-                _idResolver.getClass().getName()
-            ));
+            return null;
         }
         Class<?> raw = _defaultImpl.getRawClass();
         if (ClassUtil.isBogusClass(raw)) {

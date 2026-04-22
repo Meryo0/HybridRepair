@@ -776,7 +776,7 @@ public static Range iterateDomainBounds(XYDataset dataset,
                 }
             }
         }
-        if (minimum == Double.POSITIVE_INFINITY || maximum == Double.NEGATIVE_INFINITY) {
+        if (minimum > maximum) {
             return null;
         }
         else {
@@ -1228,9 +1228,6 @@ public static Range iterateDomainBounds(XYDataset dataset,
      */
 public static Range iterateRangeBounds(XYDataset dataset,
             boolean includeInterval) {
-        if (dataset == null) {
-            throw new IllegalArgumentException("Null 'dataset' argument.");
-        }
         double minimum = Double.POSITIVE_INFINITY;
         double maximum = Double.NEGATIVE_INFINITY;
         int seriesCount = dataset.getSeriesCount();
@@ -1283,7 +1280,7 @@ public static Range iterateRangeBounds(XYDataset dataset,
                 }
             }
         }
-        if (minimum == Double.POSITIVE_INFINITY || maximum == Double.NEGATIVE_INFINITY) {
+        if (minimum == Double.POSITIVE_INFINITY) {
             return null;
         }
         else {

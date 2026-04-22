@@ -159,7 +159,7 @@ public void resetWithEmpty()
 
         _inputBuffer = new char[0];
         _resultString = null;
-        _resultArray = null;
+        _resultArray = new char[0];
 
         // And then reset internal input buffers, if necessary:
         if (_hasSegments) {

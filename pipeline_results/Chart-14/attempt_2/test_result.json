@@ -1,9 +1,12 @@
 {
-  "status": "COMPILE_ERROR",
-  "total_tests": 0,
+  "status": "PASS",
+  "total_tests": 41,
   "failed_tests": 0,
   "failing_test_names": [],
-  "previously_failing_now_passing": [],
-  "compile_output": "/home/mario/Desktop/LogicFL/pipeline_results/Chart-14/attempt_2/patched_source/org/jfree/chart/plot/CategoryPlot.java:2448: error: illegal start of type\n        if (markers == null) {\n        ^\n/home/mario/Desktop/LogicFL/pipeline_results/Chart-14/attempt_2/patched_source/org/jfree/chart/plot/CategoryPlot.java:2448: error: <identifier> expected\n        if (markers == null) {\n                   ^\n/home/mario/Desktop/LogicFL/pipeline_results/Chart-14/attempt_2/patched_source/org/jfree/chart/plot/CategoryPlot.java:2450: error: 'else' without 'if'\n        else {\n        ^\n/home/mario/Desktop/LogicFL/pipeline_results/Chart-14/attempt_2/patched_source/org/jfree/chart/plot/XYPlot.java:2529: error: illegal start of type\n        if (markers == null) {\n        ^\n/home/mario/Desktop/LogicFL/pipeline_results/Chart-14/attempt_2/patched_source/org/jfree/chart/plot/XYPlot.java:2529: error: <identifier> expected\n        if (markers == null) {\n                   ^\n/home/mario/Desktop/LogicFL/pipeline_results/Chart-14/attempt_2/patched_source/org/jfree/chart/plot/XYPlot.java:2531: error: 'else' without 'if'\n        else {\n        ^\n6 errors\n",
-  "test_output": ""
+  "previously_failing_now_passing": [
+    "org.jfree.chart.plot.junit.CategoryPlotTests",
+    "org.jfree.chart.plot.junit.XYPlotTests"
+  ],
+  "compile_output": "Note: Some input files use or override a deprecated API.\nNote: Recompile with -Xlint:deprecation for details.\nNote: Some input files use unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
+  "test_output": "JUnit version 4.13.2\n.........................................\nTime: 0.657\n\nOK (41 tests)\n\n"
 }

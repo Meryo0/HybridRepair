@@ -1,6 +1,6 @@
 --- com/fasterxml/jackson/core/util/TextBuffer.java
 +++ com/fasterxml/jackson/core/util/TextBuffer.java
-@@ -151,13 +151,13 @@
+@@ -151,15 +151,15 @@
       * Method called to clear out any content text buffer may have, and
       * initializes buffer to use non-shared data.
       */
@@ -14,8 +14,11 @@
 -        _inputBuffer = null;
 +        _inputBuffer = new char[0];
          _resultString = null;
-         _resultArray = null;
+-        _resultArray = null;
++        _resultArray = new char[0];
  
+         // And then reset internal input buffers, if necessary:
+         if (_hasSegments) {
 
 --- com/fasterxml/jackson/core/util/TextBuffer.java
 +++ com/fasterxml/jackson/core/util/TextBuffer.java

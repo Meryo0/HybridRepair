@@ -57,9 +57,7 @@ public class Document extends Element {
      */
 public Element body() {
         Element body = findFirstElementByTagName("body", this);
-        if (body == null) {
-            throw new IllegalStateException("Document has no body element");
-        }
+        Validate.notNull(body, "Document has no <body> element");
         return body;
     }
 
@@ -165,17 +163,15 @@ public Element body() {
 
     // fast method to get first by tag name, used for html, head, body finders
 private Element findFirstElementByTagName(String tag, Node node) {
-        if (node == null || tag == null) {
-            return null;
-        }
-        if (java.util.Objects.equals(node.nodeName(), tag)) {
+        if (node == null) return null;
+        if (node.nodeName().equals(tag))
             return (Element) node;
-        } else {
+        else {
             for (Node child : node.childNodes) {
+                if (child == null) continue;
                 Element found = findFirstElementByTagName(tag, child);
-                if (found != null) {
+                if (found != null)
                     return found;
-                }
             }
         }
         return null;

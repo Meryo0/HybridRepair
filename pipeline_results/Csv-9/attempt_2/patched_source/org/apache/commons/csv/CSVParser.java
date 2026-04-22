@@ -238,15 +238,14 @@ public final class CSVParser implements Iterable<CSVRecord>, Closeable {
      * @throws IOException
      *             If there is a problem reading the header or skipping the first record
      */
-public CSVParser(final Reader reader, final CSVFormat format) throws IOException {
+    public CSVParser(final Reader reader, final CSVFormat format) throws IOException {
         Assertions.notNull(reader, "reader");
         Assertions.notNull(format, "format");
 
         format.validate();
         this.format = format;
         this.lexer = new Lexer(format, new ExtendedBufferedReader(reader));
-        Map<String, Integer> tempHeaderMap = this.initializeHeader();
-        this.headerMap = tempHeaderMap != null ? tempHeaderMap : new java.util.LinkedHashMap<>(); // Ensure headerMap is never null
+        this.headerMap = this.initializeHeader();
     }
 
     private void addRecordValue() {
@@ -356,11 +355,9 @@ public CSVParser(final Reader reader, final CSVFormat format) throws IOException
      * @throws IOException if there is a problem reading the header or skipping the first record
      */
 private Map<String, Integer> initializeHeader() throws IOException {
-        Map<String, Integer> hdrMap = null;
+        Map<String, Integer> hdrMap = new LinkedHashMap<>(); // Ensure hdrMap is never null
         final String[] formatHeader = this.format.getHeader();
         if (formatHeader != null) {
-            hdrMap = new java.util.LinkedHashMap<String, Integer>();
-
             String[] header = null;
             if (formatHeader.length == 0) {
                 // read the header from the first line of the file
@@ -386,7 +383,7 @@ private Map<String, Integer> initializeHeader() throws IOException {
                 }
             }
         }
-        return hdrMap != null ? hdrMap : new java.util.LinkedHashMap<>(); // Ensure non-null return
+        return hdrMap;
     }
 
     public boolean isClosed() {

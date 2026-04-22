@@ -1,9 +1,11 @@
 {
-  "status": "COMPILE_ERROR",
-  "total_tests": 0,
+  "status": "PASS",
+  "total_tests": 19,
   "failed_tests": 0,
   "failing_test_names": [],
-  "previously_failing_now_passing": [],
-  "compile_output": "/home/mario/Desktop/LogicFL/pipeline_results/JacksonDatabind-3/attempt_1/patched_source/com/fasterxml/jackson/databind/deser/std/StringArrayDeserializer.java:82: error: constructor StringArrayDeserializer(JsonDeserializer<?>) is already defined in class StringArrayDeserializer\n    protected StringArrayDeserializer(JsonDeserializer<?> deser) {\n              ^\n/home/mario/Desktop/LogicFL/pipeline_results/JacksonDatabind-3/attempt_1/patched_source/com/fasterxml/jackson/databind/deser/std/StringArrayDeserializer.java:87: error: method does not override or implement a method from a supertype\n    @Override\n    ^\nNote: Some input files use or override a deprecated API.\nNote: Recompile with -Xlint:deprecation for details.\nNote: Some input files use unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n2 errors\n",
-  "test_output": ""
+  "previously_failing_now_passing": [
+    "com.fasterxml.jackson.databind.deser.TestArrayDeserialization"
+  ],
+  "compile_output": "Note: Some input files use or override a deprecated API.\nNote: Recompile with -Xlint:deprecation for details.\nNote: Some input files use unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
+  "test_output": "JUnit version 4.13.2\n...................\nTime: 0.242\n\nOK (19 tests)\n\n"
 }

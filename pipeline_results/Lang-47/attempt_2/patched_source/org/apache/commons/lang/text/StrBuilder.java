@@ -1182,10 +1182,8 @@ public class StrBuilder implements Cloneable {
 public StrBuilder appendFixedWidthPadLeft(Object obj, int width, char padChar) {
         if (width > 0) {
             ensureCapacity(size + width);
-            String str = (obj == null ? getNullText() : obj.toString());
-            if (str == null) {
-                str = getNullText() != null ? getNullText() : "";
-            }
+            String nullText = getNullText();
+            String str = (obj == null ? (nullText != null ? nullText : "") : obj.toString());
             int strLen = str.length();
             if (strLen >= width) {
                 str.getChars(strLen - width, strLen, buffer, size);
@@ -1229,10 +1227,8 @@ public StrBuilder appendFixedWidthPadLeft(Object obj, int width, char padChar) {
 public StrBuilder appendFixedWidthPadRight(Object obj, int width, char padChar) {
         if (width > 0) {
             ensureCapacity(size + width);
-            String str = (obj == null ? getNullText() : obj.toString());
-            if (str == null) {
-                str = getNullText() != null ? getNullText() : "";
-            }
+            String nullText = getNullText();
+            String str = (obj == null ? (nullText != null ? nullText : "") : obj.toString());
             int strLen = str.length();
             if (strLen >= width) {
                 str.getChars(0, width, buffer, size);

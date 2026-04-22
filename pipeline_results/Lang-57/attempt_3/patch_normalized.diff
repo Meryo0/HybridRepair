@@ -1,20 +1,38 @@
---- java/org/apache/commons/lang/LocaleUtils.java
-+++ java/org/apache/commons/lang/LocaleUtils.java
-@@ -219,8 +219,15 @@
-      * @param locale the Locale object to check if it is available
-      * @return true if the locale is a known locale
-      */
--    public static boolean isAvailableLocale(Locale locale) {
--        return cAvailableLocaleSet.contains(locale);
-+public static boolean isAvailableLocale(Locale locale) {
-+        if (cAvailableLocaleSet == null) {
-+            synchronized (LocaleUtils.class) {
-+                if (cAvailableLocaleSet == null) {
-+                    cAvailableLocaleSet = Collections.unmodifiableSet(LocaleUtils.availableLocaleSet());
-+                }
-+            }
-+        }
-+        return cAvailableLocaleSet != null && cAvailableLocaleSet.contains(locale);
-     }
- 
-     //-----------------------------------------------------------------------
+---
+
+**Revised Root Cause**:
+The `cAvailableLocaleSet` field is not initialized, leading to a `NullPointerException` when the `isAvailableLocale` method attempts to call `contains` on it. Additionally, the initialization of `cAvailableLocaleSet` must ensure that it contains the correct set of available locales. The previous fix attempted to initialize this field statically, but the initialization might not align with the expected behavior of the `LocaleUtils` class in the context of the failing tests.
+
+The failing tests suggest that the `cAvailableLocaleSet` field must be initialized in a way that matches the expected behavior of the `LocaleUtils` class, which may involve specific filtering or processing of the available locales.
+
+---
+
+**Revised Correct Intended Behavior**:
+1. The `cAvailableLocaleSet` field should be initialized with the correct set of available locales. This initialization should occur in a thread-safe manner to ensure correctness in multi-threaded environments.
+2. The `isAvailableLocale` method should check if the `cAvailableLocaleSet` field is null and initialize it if necessary. This ensures that the method behaves correctly even if the field was not initialized earlier.
+3. The method should return `false` if the input `locale` is null, as a null locale cannot be available.
+
+Here is the corrected method with proper initialization of `cAvailableLocaleSet` using lazy initialization and synchronization.
+
+---
+
+FILE: java/org/apache/commons/lang/LocaleUtils.java
+```java
+    private static volatile Set<Locale> cAvailableLocaleSet;
+
+    private static synchronized void initializeAvailableLocaleSet() {
+        if (cAvailableLocaleSet == null) {
+            cAvailableLocaleSet = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(Locale.getAvailableLocales())));
+        }
+    }
+
+    public static boolean isAvailableLocale(Locale locale) {
+        if (locale == null) {
+            return false;
+        }
+        if (cAvailableLocaleSet == null) {
+            initializeAvailableLocaleSet();
+        }
+        return cAvailableLocaleSet.contains(locale);
+    }
+```

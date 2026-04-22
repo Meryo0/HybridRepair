@@ -1574,7 +1574,11 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable,
      */
 public XYItemRenderer getRenderer() {
         XYItemRenderer renderer = getRenderer(0);
-        return renderer != null ? renderer : new DefaultXYItemRenderer();
+        if (renderer == null) {
+            // Return a default renderer or handle null case as needed
+            return new StandardXYItemRenderer();
+        }
+        return renderer;
     }
 
     /**
@@ -1591,7 +1595,11 @@ public XYItemRenderer getRenderer(int index) {
         if (this.renderers != null && this.renderers.size() > index) {
             result = (XYItemRenderer) this.renderers.get(index);
         }
-        return result != null ? result : new DefaultXYItemRenderer();
+        if (result == null) {
+            // Return a default renderer or handle null case as needed
+            return new StandardXYItemRenderer();
+        }
+        return result;
     }
 
     /**
@@ -1743,7 +1751,7 @@ public XYItemRenderer getRenderer(int index) {
 public XYItemRenderer getRendererForDataset(XYDataset dataset) {
         XYItemRenderer result = null;
         for (int i = 0; i < this.datasets.size(); i++) {
-            if (java.util.Objects.equals(this.datasets.get(i), dataset)) {
+            if (this.datasets.get(i) == dataset) {
                 result = (XYItemRenderer) this.renderers.get(i);
                 if (result == null) {
                     result = getRenderer();
@@ -1751,7 +1759,7 @@ public XYItemRenderer getRendererForDataset(XYDataset dataset) {
                 break;
             }
         }
-        return result != null ? result : new DefaultXYItemRenderer();
+        return result;
     }
 
     /**
@@ -4429,12 +4437,14 @@ public Range getDataRange(ValueAxis axis) {
         List includedAnnotations = new ArrayList();
         boolean isDomainAxis = true;
 
+        // is it a domain axis?
         int domainIndex = getDomainAxisIndex(axis);
         if (domainIndex >= 0) {
             isDomainAxis = true;
             mappedDatasets.addAll(getDatasetsMappedToDomainAxis(
                     new Integer(domainIndex)));
             if (domainIndex == 0) {
+                // grab the plot's annotations
                 Iterator iterator = this.annotations.iterator();
                 while (iterator.hasNext()) {
                     XYAnnotation annotation = (XYAnnotation) iterator.next();
@@ -4445,6 +4455,7 @@ public Range getDataRange(ValueAxis axis) {
             }
         }
 
+        // or is it a range axis?
         int rangeIndex = getRangeAxisIndex(axis);
         if (rangeIndex >= 0) {
             isDomainAxis = false;
@@ -4461,6 +4472,8 @@ public Range getDataRange(ValueAxis axis) {
             }
         }
 
+        // iterate through the datasets that map to the axis and get the union
+        // of the ranges.
         Iterator iterator = mappedDatasets.iterator();
         while (iterator.hasNext()) {
             XYDataset d = (XYDataset) iterator.next();

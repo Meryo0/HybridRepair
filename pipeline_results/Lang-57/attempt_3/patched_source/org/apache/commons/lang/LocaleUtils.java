@@ -219,15 +219,8 @@ public class LocaleUtils {
      * @param locale the Locale object to check if it is available
      * @return true if the locale is a known locale
      */
-public static boolean isAvailableLocale(Locale locale) {
-        if (cAvailableLocaleSet == null) {
-            synchronized (LocaleUtils.class) {
-                if (cAvailableLocaleSet == null) {
-                    cAvailableLocaleSet = Collections.unmodifiableSet(LocaleUtils.availableLocaleSet());
-                }
-            }
-        }
-        return cAvailableLocaleSet != null && cAvailableLocaleSet.contains(locale);
+    public static boolean isAvailableLocale(Locale locale) {
+        return cAvailableLocaleSet.contains(locale);
     }
 
     //-----------------------------------------------------------------------

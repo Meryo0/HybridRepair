@@ -29,9 +29,9 @@ public final class StringArrayDeserializer
      */
     protected JsonDeserializer<String> _elementDeserializer;
 
-public StringArrayDeserializer() {
+    public StringArrayDeserializer() {
         super(String[].class);
-        _elementDeserializer = new StringDeserializer();
+        _elementDeserializer = null;
     }
 
     @SuppressWarnings("unchecked")
@@ -41,7 +41,7 @@ public StringArrayDeserializer() {
     }
    
     @Override
-    public String[] deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException
+public String[] deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException
     {
         // Ok: must point to START_ARRAY (or equivalent)
         if (!jp.isExpectedStartArrayToken()) {
@@ -77,14 +77,6 @@ public StringArrayDeserializer() {
         ctxt.returnObjectBuffer(buffer);
         return result;
     }
-
-    @SuppressWarnings("unchecked")
-    protected StringArrayDeserializer(JsonDeserializer<?> deser) {
-        super(String[].class);
-        _elementDeserializer = (JsonDeserializer<String>) deser;
-    }
-   
-    @Override
 
     /**
      * Offlined version used when we do not use the default deserialization method.

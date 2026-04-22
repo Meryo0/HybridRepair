@@ -86,7 +86,7 @@ public ReadableObjectId findObjectId(Object id, ObjectIdGenerator<?> gen, Object
          */
 
         if (id == null) {
-            throw new IllegalArgumentException("Object id cannot be null");
+            return null; // Return null or handle as per specific requirements
         }
 
         final ObjectIdGenerator.IdKey key = gen.key(id);

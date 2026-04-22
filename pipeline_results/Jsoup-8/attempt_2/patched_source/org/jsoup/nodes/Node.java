@@ -360,7 +360,9 @@ public abstract class Node {
     }
 
 protected void outerHtml(StringBuilder accum) {
-        Document.OutputSettings outputSettings = ownerDocument() != null ? ownerDocument().outputSettings() : Document.OutputSettings.defaultSettings();
+        Document.OutputSettings outputSettings = ownerDocument() != null 
+            ? ownerDocument().outputSettings() 
+            : new Document.OutputSettings(); // Use default settings if no document is associated
         new NodeTraversor(new OuterHtmlVisitor(accum, outputSettings)).traverse(this);
     }
 

@@ -1,23 +1,6 @@
 --- org/apache/commons/codec/language/DoubleMetaphone.java
 +++ org/apache/commons/codec/language/DoubleMetaphone.java
-@@ -82,10 +82,10 @@
-      * @param alternate use alternate encode
-      * @return an encoded string
-      */
--    public String doubleMetaphone(String value, final boolean alternate) {
-+public String doubleMetaphone(String value, final boolean alternate) {
-         value = cleanInput(value);
--        if (value == null) {
--            return null;
-+        if (value == null || value.isEmpty()) {
-+            return "";
-         }
- 
-         final boolean slavoGermanic = isSlavoGermanic(value);
-
---- org/apache/commons/codec/language/DoubleMetaphone.java
-+++ org/apache/commons/codec/language/DoubleMetaphone.java
-@@ -240,8 +240,10 @@
+@@ -240,8 +240,13 @@
       * @return {@code true} if the encoded <code>String</code>s are equal;
       *          {@code false} otherwise.
       */
@@ -26,7 +9,10 @@
 +public boolean isDoubleMetaphoneEqual(final String value1, final String value2, final boolean alternate) {
 +        String metaphone1 = doubleMetaphone(value1, alternate);
 +        String metaphone2 = doubleMetaphone(value2, alternate);
-+        return java.util.Objects.equals(metaphone1, metaphone2);
++        if (metaphone1 == null || metaphone2 == null) {
++            return false;
++        }
++        return metaphone1.equals(metaphone2);
      }
  
      /**

@@ -78,25 +78,19 @@ public double solve(final UnivariateRealFunction f, double min, double max)
 
         clearResult();
         verifyInterval(min, max);
-
-        if (f == null) {
-            throw new IllegalArgumentException("Function cannot be null");
-        }
-
         double m;
         double fm;
         double fmin;
 
         int i = 0;
-        fmin = f.value(min); // Ensure f.value(min) is called only once and after null check
         while (i < maximalIterationCount) {
             m = UnivariateRealSolverUtils.midpoint(min, max);
+            fmin = f.value(min);
             fm = f.value(m);
 
             if (fm * fmin > 0.0) {
                 // max and m bracket the root.
                 min = m;
-                fmin = fm; // Update fmin to avoid redundant calls
             } else {
                 // min and m bracket the root.
                 max = m;

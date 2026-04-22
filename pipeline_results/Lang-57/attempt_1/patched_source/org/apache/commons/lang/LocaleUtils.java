@@ -221,11 +221,7 @@ public class LocaleUtils {
      */
 public static boolean isAvailableLocale(Locale locale) {
         if (cAvailableLocaleSet == null) {
-            synchronized (LocaleUtils.class) {
-                if (cAvailableLocaleSet == null) {
-                    cAvailableLocaleSet = Collections.unmodifiableSet(LocaleUtils.availableLocaleSet());
-                }
-            }
+            return false;
         }
         return cAvailableLocaleSet.contains(locale);
     }

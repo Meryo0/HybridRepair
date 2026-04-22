@@ -31,7 +31,7 @@ public final class StringArrayDeserializer
 
 public StringArrayDeserializer() {
         super(String[].class);
-        _elementDeserializer = null;
+        _elementDeserializer = StringDeserializer.instance;  // Initialize with a default deserializer
     }
 
     @SuppressWarnings("unchecked")
@@ -63,7 +63,7 @@ public StringArrayDeserializer() {
             if (t == JsonToken.VALUE_STRING) {
                 value = jp.getText();
             } else if (t == JsonToken.VALUE_NULL) {
-                value = (_elementDeserializer != null) ? _elementDeserializer.getNullValue() : null;
+                value = _elementDeserializer.getNullValue();  // Safe because _elementDeserializer is always initialized
             } else {
                 value = _parseString(jp, ctxt);
             }
