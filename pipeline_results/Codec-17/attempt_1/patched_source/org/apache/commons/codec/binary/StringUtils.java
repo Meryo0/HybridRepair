@@ -335,8 +335,8 @@ public class StringUtils {
      *             required by the Java platform specification.
      * @since As of 1.7, throws {@link NullPointerException} instead of UnsupportedEncodingException
      */
-public static String newStringIso8859_1(final byte[] bytes) {
-        return bytes == null ? null : new String(bytes, Charsets.ISO_8859_1);
+    public static String newStringIso8859_1(final byte[] bytes) {
+        return new String(bytes, Charsets.ISO_8859_1);
     }
 
     /**

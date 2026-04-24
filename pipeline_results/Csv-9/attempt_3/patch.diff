@@ -1,71 +1,33 @@
 --- org/apache/commons/csv/CSVParser.java
 +++ org/apache/commons/csv/CSVParser.java
-@@ -238,7 +238,7 @@
-      * @throws IOException
-      *             If there is a problem reading the header or skipping the first record
-      */
--    public CSVParser(final Reader reader, final CSVFormat format) throws IOException {
-+public CSVParser(final Reader reader, final CSVFormat format) throws IOException {
-         Assertions.notNull(reader, "reader");
-         Assertions.notNull(format, "format");
- 
-
---- org/apache/commons/csv/CSVParser.java
-+++ org/apache/commons/csv/CSVParser.java
-@@ -354,11 +354,10 @@
-      * @return null if the format has no header.
+@@ -355,11 +355,9 @@
       * @throws IOException if there is a problem reading the header or skipping the first record
       */
--    private Map<String, Integer> initializeHeader() throws IOException {
+     private Map<String, Integer> initializeHeader() throws IOException {
 -        Map<String, Integer> hdrMap = null;
-+private Map<String, Integer> initializeHeader() throws IOException {
++        Map<String, Integer> hdrMap = new LinkedHashMap<>(); // Always initialize to avoid null
          final String[] formatHeader = this.format.getHeader();
          if (formatHeader != null) {
 -            hdrMap = new LinkedHashMap<String, Integer>();
-+            final Map<String, Integer> hdrMap = new java.util.LinkedHashMap<>();
- 
+-
              String[] header = null;
              if (formatHeader.length == 0) {
-@@ -384,8 +383,9 @@
-                     hdrMap.put(header[i], Integer.valueOf(i));
+                 // read the header from the first line of the file
+@@ -373,7 +371,7 @@
+                 }
+                 header = formatHeader;
+             }
+-
++    
+             // build the name to index mappings
+             if (header != null) {
+                 for (int i = 0; i < header.length; i++) {
+@@ -385,7 +383,7 @@
                  }
              }
-+            return hdrMap;
          }
 -        return hdrMap;
-+        return java.util.Collections.emptyMap(); // Return an empty map if no header is defined
++        return hdrMap; // Always return a non-null map
      }
  
      public boolean isClosed() {
-
---- org/apache/commons/csv/CSVRecord.java
-+++ org/apache/commons/csv/CSVRecord.java
-@@ -48,11 +48,11 @@
-     /** The values of the record */
-     private final String[] values;
- 
--    CSVRecord(final String[] values, final Map<String, Integer> mapping,
-+CSVRecord(final String[] values, final Map<String, Integer> mapping,
-             final String comment, final long recordNumber) {
-         this.recordNumber = recordNumber;
-         this.values = values != null ? values : EMPTY_STRING_ARRAY;
--        this.mapping = mapping;
-+        this.mapping = mapping; // Allow mapping to be null if no header is defined
-         this.comment = comment;
-     }
- 
-
---- org/apache/commons/csv/CSVRecord.java
-+++ org/apache/commons/csv/CSVRecord.java
-@@ -176,7 +176,10 @@
-      * @param map The Map to populate.
-      * @return the given map.
-      */
--    <M extends Map<String, String>> M putIn(final M map) {
-+<M extends Map<String, String>> M putIn(final M map) {
-+        if (mapping == null) {
-+            throw new IllegalStateException("No header mapping was defined, cannot populate the map.");
-+        }
-         for (final Entry<String, Integer> entry : mapping.entrySet()) {
-             final int col = entry.getValue().intValue();
-             if (col < values.length) {

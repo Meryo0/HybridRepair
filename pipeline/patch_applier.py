@@ -15,6 +15,88 @@ from typing import List
 
 from pipeline import config
 
+# ── Common Java imports the LLM often forgets ─────────────────────────────────
+
+_COMMON_IMPORTS: dict[str, str] = {
+    "HashSet": "java.util.HashSet",
+    "LinkedHashSet": "java.util.LinkedHashSet",
+    "TreeSet": "java.util.TreeSet",
+    "ArrayList": "java.util.ArrayList",
+    "LinkedList": "java.util.LinkedList",
+    "HashMap": "java.util.HashMap",
+    "LinkedHashMap": "java.util.LinkedHashMap",
+    "TreeMap": "java.util.TreeMap",
+    "Arrays": "java.util.Arrays",
+    "Collections": "java.util.Collections",
+    "Objects": "java.util.Objects",
+    "Optional": "java.util.Optional",
+    "Iterator": "java.util.Iterator",
+    "List": "java.util.List",
+    "Map": "java.util.Map",
+    "Set": "java.util.Set",
+}
+
+
+# ── Auto-import helper ────────────────────────────────────────────────────────
+
+def _ensure_standard_imports(patched_file: Path) -> None:
+    """Add missing standard Java imports to a patched source file.
+
+    Scans the file for bare class names from _COMMON_IMPORTS that are used
+    without a matching import.  Only adds an import when ALL conditions hold:
+      1. The class name appears in the file (as a word boundary match).
+      2. No existing `import ...ClassName;` line is present.
+      3. The file has at least one `import` or `package` statement (i.e., it
+         looks like a real Java source file, not a generated artefact).
+    """
+    try:
+        source = patched_file.read_text(encoding="utf-8", errors="replace")
+    except Exception:
+        return
+
+    lines = source.splitlines(keepends=True)
+
+    # Detect EOL style
+    eol = "\r\n" if lines and lines[0].endswith("\r\n") else "\n"
+
+    # Find insertion point (after last import, or after package, whichever is later)
+    last_import_idx = -1
+    package_idx = -1
+    has_any_import_or_package = False
+    for i, raw in enumerate(lines):
+        s = raw.strip()
+        if s.startswith("import "):
+            last_import_idx = i
+            has_any_import_or_package = True
+        elif s.startswith("package "):
+            package_idx = i
+            has_any_import_or_package = True
+
+    if not has_any_import_or_package:
+        return  # not a standard Java file
+
+    insert_after = last_import_idx if last_import_idx >= 0 else package_idx
+
+    new_imports: list[str] = []
+    for simple_name, fqcn in _COMMON_IMPORTS.items():
+        # Check if the class is used in the file (word boundary)
+        if not re.search(r'\b' + re.escape(simple_name) + r'\b', source):
+            continue
+        # Check if already imported (any variant)
+        already = re.search(r'import\s+[\w.]*\b' + re.escape(simple_name) + r'\s*;', source)
+        if already:
+            continue
+        new_imports.append(f"import {fqcn};{eol}")
+
+    if new_imports:
+        idx = insert_after + 1 if insert_after >= 0 else 0
+        lines[idx:idx] = new_imports
+        patched_file.write_text("".join(lines), encoding="utf-8")
+        print(
+            f"  [patch_applier] Auto-imported {len(new_imports)} class(es) into "
+            f"{patched_file.name}: {[l.strip() for l in new_imports]}"
+        )
+
 
 # ── Directory helpers ─────────────────────────────────────────────────────────
 
@@ -373,6 +455,7 @@ def apply_patch(bug_dir: Path, diff_content: str, attempt: int) -> Path:
         success, output = _run_patch_cli(patched_source_dir, norm_path, strip)
         if success:
             print(f"  [patch_applier] Patch applied with -p{strip} (normalized)")
+            _post_process_imports(patched_source_dir, diff_content)
             return patched_source_dir
         print(f"  [patch_applier] patch -p{strip} failed: {output.strip()[:200]}")
 
@@ -383,4 +466,24 @@ def apply_patch(bug_dir: Path, diff_content: str, attempt: int) -> Path:
         print("  [patch_applier] WARNING: manual application also failed; "
               "patched_source may be unmodified")
 
+    # P3: Ensure standard imports are present in all modified files
+    _post_process_imports(patched_source_dir, diff_content)
+
     return patched_source_dir
+
+
+def _post_process_imports(patched_source_dir: Path, diff_content: str) -> None:
+    """Run auto-import fix on every .java file touched by the diff."""
+    touched: set[str] = set()
+    for line in diff_content.splitlines():
+        if line.startswith("+++ "):
+            path_part = line[4:].split("\t")[0].strip()
+            for prefix in ("a/", "b/", "src/"):
+                if path_part.startswith(prefix):
+                    path_part = path_part[len(prefix):]
+                    break
+            touched.add(Path(path_part).name)
+
+    for java_file in patched_source_dir.rglob("*.java"):
+        if java_file.name in touched:
+            _ensure_standard_imports(java_file)

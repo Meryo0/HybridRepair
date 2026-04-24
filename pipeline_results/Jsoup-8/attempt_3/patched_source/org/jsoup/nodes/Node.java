@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  The base, abstract Node model. Elements, Documents, Comments etc are all Node instances.
@@ -359,12 +360,11 @@ public abstract class Node {
         return accum.toString();
     }
 
-protected void outerHtml(StringBuilder accum) {
-        Document.OutputSettings outputSettings = ownerDocument() != null 
-            ? ownerDocument().outputSettings() 
-            : new Document.OutputSettings(); // Create a standalone OutputSettings instance
-        new NodeTraversor(new OuterHtmlVisitor(accum, outputSettings)).traverse(this);
-    }
+    protected void outerHtml(StringBuilder accum) {
+            Document ownerDoc = ownerDocument();
+            Document.OutputSettings outputSettings = (ownerDoc != null) ? ownerDoc.outputSettings() : new Document.OutputSettings(); // Handle null ownerDocument
+            new NodeTraversor(new OuterHtmlVisitor(accum, outputSettings)).traverse(this);
+        }
 
     // if this node has no document (or parent), retrieve the default output settings
 

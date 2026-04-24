@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.fasterxml.jackson.core.io.NumberInput;
+import java.util.List;
 
 /**
  * TextBuffer is a class similar to {@link StringBuffer}, with
@@ -295,19 +296,24 @@ public final class TextBuffer
         return true;
     }
     
-public char[] getTextBuffer()
-    {
-        // Are we just using shared input buffer?
-        if (_inputStart >= 0) return (_inputBuffer != null) ? _inputBuffer : NO_CHARS;
-        if (_resultArray != null) return _resultArray;
-        if (_resultString != null) {
-            return (_resultArray = _resultString.toCharArray());
+    public char[] getTextBuffer()
+        {
+            // Are we just using shared input buffer?
+            if (_inputStart >= 0) return _inputBuffer;
+            if (_resultArray != null)  return _resultArray;
+            if (_resultString != null) {
+                return (_resultArray = _resultString.toCharArray());
+            }
+            // Nope; but does it fit in just one segment?
+            if (!_hasSegments) {
+                if (_currentSegment == null) {
+                    _currentSegment = buf(0); // Initialize if null
+                }
+                return _currentSegment;
+            }
+            // Nope, need to have/create a non-segmented array and return it
+            return contentsAsArray();
         }
-        // Nope; but does it fit in just one segment?
-        if (!_hasSegments) return (_currentSegment != null) ? _currentSegment : NO_CHARS;
-        // Nope, need to have/create a non-segmented array and return it
-        return contentsAsArray();
-    }
 
     /*
     /**********************************************************

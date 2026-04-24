@@ -1,41 +1,34 @@
---- java/org/apache/commons/cli/Util.java
-+++ java/org/apache/commons/cli/Util.java
-@@ -31,8 +31,11 @@
-      *
+--- org/apache/commons/cli/Util.java
++++ org/apache/commons/cli/Util.java
+@@ -32,18 +32,21 @@
       * @return the new String.
       */
--    static String stripLeadingHyphens(String str)
-+static String stripLeadingHyphens(String str)
-     {
-+        if (str == null) {
-+            return null;
-+        }
-         if (str.startsWith("--"))
-         {
-             return str.substring(2, str.length());
-
---- java/org/apache/commons/cli/CommandLine.java
-+++ java/org/apache/commons/cli/CommandLine.java
-@@ -161,8 +161,11 @@
-      * @param opt short or long name of the option
-      * @return Canonicalized option
-      */
--    private Option resolveOption( String opt )
+     static String stripLeadingHyphens(String str)
 -    {
-+private Option resolveOption( String opt )
-+    {
-+        if (opt == null) {
-+            return null;
-+        }
-         opt = Util.stripLeadingHyphens(opt);
-         for ( Iterator it = options.iterator(); it.hasNext(); )
+-        if (str.startsWith("--"))
          {
-@@ -174,7 +177,7 @@
-             if (opt.equals( option.getLongOpt()))
-             {
-                 return option;
--        }
+-            return str.substring(2, str.length());
++            if (str == null) {
++                return null; // Handle null input gracefully
 +            }
- 
++            if (str.startsWith("--"))
++            {
++                return str.substring(2, str.length());
++            }
++            else if (str.startsWith("-"))
++            {
++                return str.substring(1, str.length());
++            }
++    
++            return str;
          }
-         return null;
+-        else if (str.startsWith("-"))
+-        {
+-            return str.substring(1, str.length());
+-        }
+-
+-        return str;
+-    }
+ 
+     /**
+      * Remove the leading and trailing quotes from <code>str</code>.

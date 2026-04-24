@@ -55,6 +55,7 @@ import java.util.ResourceBundle;
 import org.jfree.data.DataUtilities;
 import org.jfree.data.UnknownKeyException;
 import org.jfree.data.general.AbstractSeriesDataset;
+import java.util.Objects;;
 
 /**
  * A convenience class that provides a default implementation of the
@@ -237,10 +238,7 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
      * @see #getRowIndex(Comparable)
      * @see #getSeriesKey(int)
      */
-public int getSeriesIndex(Comparable seriesKey) {
-        if (this.seriesKeys == null) {
-            return -1;
-        }
+    public int getSeriesIndex(Comparable seriesKey) {
         int result = -1;
         for (int i = 0; i < this.seriesKeys.length; i++) {
             if (seriesKey.equals(this.seriesKeys[i])) {
@@ -572,13 +570,13 @@ public int getSeriesIndex(Comparable seriesKey) {
      * 
      * @see #getColumnIndex(Comparable)
      */
-public int getCategoryIndex(Comparable category) {
+    public int getCategoryIndex(Comparable category) {
         if (this.categoryKeys == null) {
-            return -1;
+            return -1; // Return -1 if categoryKeys is not initialized
         }
         int result = -1;
         for (int i = 0; i < this.categoryKeys.length; i++) {
-            if (category.equals(this.categoryKeys[i])) {
+            if (Objects.equals(category, this.categoryKeys[i])) {
                 result = i;
                 break;
             }
@@ -692,8 +690,8 @@ public int getCategoryIndex(Comparable category) {
      * @see #getCategoryCount()
      * @see #getRowCount()
      */
-public int getColumnCount() {
-        return (this.categoryKeys != null) ? this.categoryKeys.length : 0;
+    public int getColumnCount() {
+        return this.categoryKeys.length;
     }
 
     /**
@@ -748,13 +746,11 @@ public int getColumnCount() {
      * @throws CloneNotSupportedException if there is a problem cloning the
      *         dataset.
      */
-public Object clone() throws CloneNotSupportedException {
+    public Object clone() throws CloneNotSupportedException {
         DefaultIntervalCategoryDataset clone 
                 = (DefaultIntervalCategoryDataset) super.clone();
-        clone.categoryKeys = (this.categoryKeys != null) 
-                ? (Comparable[]) this.categoryKeys.clone() : null;
-        clone.seriesKeys = (this.seriesKeys != null) 
-                ? (Comparable[]) this.seriesKeys.clone() : null;
+        clone.categoryKeys = (Comparable[]) this.categoryKeys.clone();
+        clone.seriesKeys = (Comparable[]) this.seriesKeys.clone();
         clone.startData = clone(this.startData);
         clone.endData = clone(this.endData);
         return clone;

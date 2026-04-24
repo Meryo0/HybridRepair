@@ -525,17 +525,16 @@ public class Scope
   /**
    * Returns the variable, may be null
    */
-public Var getVar(String name) {
-    if (vars != null) {
+  public Var getVar(String name) {
       Var var = vars.get(name);
       if (var != null) {
-        return var;
+          return var;
+      } else if (parent != null) { // Recurse up the parent Scope
+          return parent.getVar(name);
+      } else {
+          // Throw an exception to indicate the variable was not found
+          throw new IllegalStateException("Variable '" + name + "' not found in the current or parent scopes.");
       }
-    }
-    if (parent != null) { // Recurse up the parent Scope
-      return parent.getVar(name);
-    }
-    return null;
   }
 
   /**

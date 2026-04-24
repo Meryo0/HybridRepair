@@ -1,22 +1,17 @@
 --- org/jsoup/nodes/Document.java
 +++ org/jsoup/nodes/Document.java
-@@ -55,8 +55,12 @@
-      Accessor to the document's {@code body} element.
+@@ -56,8 +56,12 @@
       @return {@code body}
       */
--    public Element body() {
+     public Element body() {
 -        return findFirstElementByTagName("body", this);
-+public Element body() {
-+        Element body = findFirstElementByTagName("body", this);
-+        if (body == null) {
-+            body = appendElement("body");
+-    }
++            Element body = findFirstElementByTagName("body", this);
++            if (body == null) {
++                body = appendElement("body");
++            }
++            return body;
 +        }
-+        return body;
-     }
  
      /**
-@@ -358,4 +362,3 @@
-         return this;
-     }
- }
--
+      Get the string contents of the document's {@code title} element.

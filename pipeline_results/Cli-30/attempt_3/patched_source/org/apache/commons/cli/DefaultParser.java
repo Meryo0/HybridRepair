@@ -136,7 +136,7 @@ public class DefaultParser implements CommandLineParser
      *
      * @param properties The value properties to be processed.
      */
-private void handleProperties(Properties properties) throws ParseException
+    private void handleProperties(Properties properties) throws ParseException
     {
         if (properties == null)
         {
@@ -150,18 +150,13 @@ private void handleProperties(Properties properties) throws ParseException
             if (!cmd.hasOption(option))
             {
                 Option opt = options.getOption(option);
+                
+                // Skip null options gracefully
                 if (opt == null)
-                {
-                    throw new UnrecognizedOptionException("Unrecognized option: " + option);
-                }
-
-                // Check if the option is part of a group and if another option in the group is already selected
-                OptionGroup group = options.getOptionGroup(opt);
-                if (group != null && group.getSelected() != null)
                 {
                     continue;
                 }
-            
+    
                 // get the value from the properties
                 String value = properties.getProperty(option);
                 
@@ -179,7 +174,7 @@ private void handleProperties(Properties properties) throws ParseException
                     // if the value is not yes, true or 1 then don't add the option to the CommandLine
                     continue;
                 }
-                
+    
                 handleOption(opt);
                 currentOption = null;
             }

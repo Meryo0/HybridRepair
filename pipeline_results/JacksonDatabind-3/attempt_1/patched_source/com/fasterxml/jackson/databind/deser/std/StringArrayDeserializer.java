@@ -31,7 +31,7 @@ public final class StringArrayDeserializer
 
     public StringArrayDeserializer() {
         super(String[].class);
-        _elementDeserializer = null;
+        _elementDeserializer = StringDeserializer.instance; // Use default String deserializer
     }
 
     @SuppressWarnings("unchecked")
@@ -41,7 +41,7 @@ public final class StringArrayDeserializer
     }
    
     @Override
-public String[] deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException
+    public String[] deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException
     {
         // Ok: must point to START_ARRAY (or equivalent)
         if (!jp.isExpectedStartArrayToken()) {
@@ -63,7 +63,7 @@ public String[] deserialize(JsonParser jp, DeserializationContext ctxt) throws I
             if (t == JsonToken.VALUE_STRING) {
                 value = jp.getText();
             } else if (t == JsonToken.VALUE_NULL) {
-                value = null; // Default behavior when _elementDeserializer is null
+                value = _elementDeserializer.getNullValue();
             } else {
                 value = _parseString(jp, ctxt);
             }

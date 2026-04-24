@@ -1,52 +1,5 @@
---- com/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver.java
-+++ com/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver.java
-@@ -125,7 +125,7 @@
-      */
- 
-     @Override
--    public Collection<NamedType> collectAndResolveSubtypesByTypeId(MapperConfig<?> config, 
-+public Collection<NamedType> collectAndResolveSubtypesByTypeId(MapperConfig<?> config, 
-             AnnotatedMember property, JavaType baseType)
-     {
-         final AnnotationIntrospector ai = config.getAnnotationIntrospector();
-@@ -142,12 +142,14 @@
-         _collectAndResolveByTypeId(ac, rootType, config, typesHandled, byName);
-         
-         // then with definitions from property
-+        if (property != null) {
-             Collection<NamedType> st = ai.findSubtypes(property);
-             if (st != null) {
-                 for (NamedType nt : st) {
-                     ac = AnnotatedClassResolver.resolveWithoutSuperTypes(config, nt.getType());
-                     _collectAndResolveByTypeId(ac, nt, config, typesHandled, byName);
-                 }            
-+            }
-         }
-         // and finally explicit type registrations (highest precedence)
-         if (_registeredSubtypes != null) {
-@@ -164,8 +166,6 @@
-     }
- 
-     @Override
--    public Collection<NamedType> collectAndResolveSubtypesByTypeId(MapperConfig<?> config,
--            AnnotatedClass baseType)
-     {
-         final Class<?> rawBase = baseType.getRawType();
-         Set<Class<?>> typesHandled = new HashSet<Class<?>>();
+</file>
 
---- com/fasterxml/jackson/databind/introspect/JacksonAnnotationIntrospector.java
-+++ com/fasterxml/jackson/databind/introspect/JacksonAnnotationIntrospector.java
-@@ -551,8 +551,11 @@
-     }
-     
-     @Override
--    public List<NamedType> findSubtypes(Annotated a)
--    {
-+public List<NamedType> findSubtypes(Annotated a)
-+    {
-+        if (a == null) {
-+            return null;
-+        }
-         JsonSubTypes t = _findAnnotation(a, JsonSubTypes.class);
-         if (t == null) return null;
-         JsonSubTypes.Type[] types = t.value();
+<file name="com/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver.java">
+IMPORT: java.util.HashMap
+IMPORT: java.util.ArrayList

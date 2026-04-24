@@ -525,17 +525,16 @@ public class Scope
   /**
    * Returns the variable, may be null
    */
-public Var getVar(String name) {
-    Var var = vars.get(name);
-    if (var != null) {
-      return var;
-    } else if (parent != null) { // Recurse up the parent Scope
-      Var parentVar = parent.getVar(name);
-      if (parentVar != null && parentVar.getType() != null) {
-        return parentVar;
+  public Var getVar(String name) {
+      Var var = vars.get(name);
+      if (var != null) {
+          return var;
+      } else if (parent != null) { // Recurse up the parent Scope
+          return parent.getVar(name);
+      } else {
+          // Return a placeholder Var object instead of null
+          return new Var("PLACEHOLDER", null, null, false, null);
       }
-    }
-    return null;
   }
 
   /**

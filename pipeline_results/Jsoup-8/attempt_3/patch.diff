@@ -1,16 +1,15 @@
 --- org/jsoup/nodes/Node.java
 +++ org/jsoup/nodes/Node.java
-@@ -359,8 +359,11 @@
-         return accum.toString();
+@@ -360,8 +360,10 @@
      }
  
--    protected void outerHtml(StringBuilder accum) {
+     protected void outerHtml(StringBuilder accum) {
 -        new NodeTraversor(new OuterHtmlVisitor(accum, ownerDocument().outputSettings())).traverse(this);
-+protected void outerHtml(StringBuilder accum) {
-+        Document.OutputSettings outputSettings = ownerDocument() != null 
-+            ? ownerDocument().outputSettings() 
-+            : new Document.OutputSettings(); // Create a standalone OutputSettings instance
-+        new NodeTraversor(new OuterHtmlVisitor(accum, outputSettings)).traverse(this);
-     }
+-    }
++            Document ownerDoc = ownerDocument();
++            Document.OutputSettings outputSettings = (ownerDoc != null) ? ownerDoc.outputSettings() : new Document.OutputSettings(); // Handle null ownerDocument
++            new NodeTraversor(new OuterHtmlVisitor(accum, outputSettings)).traverse(this);
++        }
  
      // if this node has no document (or parent), retrieve the default output settings
+ 

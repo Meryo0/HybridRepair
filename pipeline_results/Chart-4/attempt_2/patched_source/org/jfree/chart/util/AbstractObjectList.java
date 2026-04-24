@@ -105,7 +105,7 @@ public class AbstractObjectList implements Cloneable, Serializable {
      *
      * @return The object or <code>null</code>.
      */
-protected Object get(int index) {
+    protected Object get(int index) {
         Object result = null;
         if (index >= 0 && index < this.size) {
             result = this.objects[index];

@@ -2152,19 +2152,16 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      *
      * @since 1.0.10
      */
-public boolean removeDomainMarker(int index, Marker marker, Layer layer,
-    		boolean notify) {
-        ArrayList markers = null;
+    public boolean removeDomainMarker(int index, Marker marker, Layer layer,
+            boolean notify) {
+        ArrayList markers;
         if (layer == Layer.FOREGROUND) {
-            markers = (ArrayList) this.foregroundDomainMarkers.get(new Integer(
-                    index));
-        }
-        else {
-            markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(
-                    index));
+            markers = (ArrayList) this.foregroundDomainMarkers.get(new Integer(index));
+        } else {
+            markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(index));
         }
         if (markers == null) {
-            return false;
+            return false; // No markers exist for the given index and layer
         }
         boolean removed = markers.remove(marker);
         if (removed && notify) {
@@ -2434,25 +2431,19 @@ public boolean removeDomainMarker(int index, Marker marker, Layer layer,
      * 
      * @see #addRangeMarker(int, Marker, Layer, boolean)
      */
-public boolean removeRangeMarker(int index, Marker marker, Layer layer,
-    		boolean notify) {
+    public boolean removeRangeMarker(int index, Marker marker, Layer layer,
+            boolean notify) {
         if (marker == null) {
             throw new IllegalArgumentException("Null 'marker' argument.");
         }
-        ArrayList markers = null;
+        ArrayList markers;
         if (layer == Layer.FOREGROUND) {
-            markers = (ArrayList) this.foregroundRangeMarkers.get(new Integer(
-                    index));
-        }
-        }
-        if (markers == null) {
-            return false;
-        else {
-            markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(
-                    index));
+            markers = (ArrayList) this.foregroundRangeMarkers.get(new Integer(index));
+        } else {
+            markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(index));
         }
         if (markers == null) {
-            return false;
+            return false; // No markers exist for the given index and layer
         }
         boolean removed = markers.remove(marker);
         if (removed && notify) {

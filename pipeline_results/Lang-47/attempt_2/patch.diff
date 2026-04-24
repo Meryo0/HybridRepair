@@ -1,31 +1,22 @@
---- java/org/apache/commons/lang/text/StrBuilder.java
-+++ java/org/apache/commons/lang/text/StrBuilder.java
-@@ -1179,10 +1179,10 @@
-      * @param padChar  the pad character to use
-      * @return this, to enable chaining
-      */
--    public StrBuilder appendFixedWidthPadLeft(Object obj, int width, char padChar) {
-+public StrBuilder appendFixedWidthPadLeft(Object obj, int width, char padChar) {
+--- org/apache/commons/lang/text/StrBuilder.java
++++ org/apache/commons/lang/text/StrBuilder.java
+@@ -1183,6 +1183,9 @@
          if (width > 0) {
              ensureCapacity(size + width);
--            String str = (obj == null ? getNullText() : obj.toString());
-+            String str = (obj == null ? (getNullText() != null ? getNullText() : "") : obj.toString());
+             String str = (obj == null ? getNullText() : obj.toString());
++            if (str == null) { // Ensure str is never null
++                str = "";
++            }
              int strLen = str.length();
              if (strLen >= width) {
                  str.getChars(strLen - width, strLen, buffer, size);
-
---- java/org/apache/commons/lang/text/StrBuilder.java
-+++ java/org/apache/commons/lang/text/StrBuilder.java
-@@ -1223,10 +1223,10 @@
-      * @param padChar  the pad character to use
-      * @return this, to enable chaining
-      */
--    public StrBuilder appendFixedWidthPadRight(Object obj, int width, char padChar) {
-+public StrBuilder appendFixedWidthPadRight(Object obj, int width, char padChar) {
+@@ -1227,6 +1230,9 @@
          if (width > 0) {
              ensureCapacity(size + width);
--            String str = (obj == null ? getNullText() : obj.toString());
-+            String str = (obj == null ? (getNullText() != null ? getNullText() : "") : obj.toString());
+             String str = (obj == null ? getNullText() : obj.toString());
++            if (str == null) { // Ensure str is never null
++                str = "";
++            }
              int strLen = str.length();
              if (strLen >= width) {
                  str.getChars(0, width, buffer, size);

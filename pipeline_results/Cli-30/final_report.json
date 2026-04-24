@@ -1,21 +1,12 @@
 {
   "bug_id": "Cli-30",
-  "success": true,
-  "winning_attempt": 2,
-  "total_attempts": 2,
+  "success": false,
+  "winning_attempt": null,
+  "total_attempts": 3,
   "test_result": {
-    "status": "PASS",
-    "total_tests": 232,
-    "failed_tests": 0,
-    "failing_test_names": [],
-    "previously_failing_now_passing": [
-      "org.apache.commons.cli.DefaultParserTest",
-      "org.apache.commons.cli.PosixParserTest",
-      "org.apache.commons.cli.BasicParserTest",
-      "org.apache.commons.cli.GnuParserTest"
-    ],
-    "compile_output": "Note: /home/mario/Desktop/LogicFL/pipeline_results/Cli-30/attempt_2/patched_source/org/apache/commons/cli/TypeHandler.java uses or overrides a deprecated API.\nNote: Recompile with -Xlint:deprecation for details.\nNote: Some input files use unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
-    "test_output": "JUnit version 4.13.2\n........................................................................................................................................................................................................................................\nTime: 0.042\n\nOK (232 tests)\n\n"
+    "status": "FAIL",
+    "total_attempts": 3,
+    "last_failure": "JUnit version 4.13.2\n...........................................E...E.............................................E........E.........................................................E...E.........................................E.........E.......................\nTime: 0.05\nThere were 8 failures:\n1) testPropertyOptionGroup(org.apache.commons.cli.BasicParserTest)\norg.apache.commons.cli.AlreadySelectedException: The option 'b' was specified but an option from this group has already been selected: 'a"
   },
-  "timestamp": "2026-04-22T21:22:46.755618+00:00"
+  "timestamp": "2026-04-24T15:25:53.093999+00:00"
 }

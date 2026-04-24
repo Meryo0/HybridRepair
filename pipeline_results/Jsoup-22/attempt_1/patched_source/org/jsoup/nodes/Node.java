@@ -440,10 +440,8 @@ public abstract class Node implements Cloneable {
      include this node (a node is not a sibling of itself).
      @return node siblings. If the node has no parent, returns an empty list.
      */
-public List<Node> siblingNodes() {
-        if (parent() == null) {
-            return Collections.emptyList();
-        }
+    public List<Node> siblingNodes() {
+
         return parent().childNodes();
     }
 

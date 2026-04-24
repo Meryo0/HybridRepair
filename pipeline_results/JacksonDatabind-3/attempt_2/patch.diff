@@ -1,38 +1,20 @@
 --- com/fasterxml/jackson/databind/deser/std/StringArrayDeserializer.java
 +++ com/fasterxml/jackson/databind/deser/std/StringArrayDeserializer.java
-@@ -29,9 +29,9 @@
-      */
-     protected JsonDeserializer<String> _elementDeserializer;
- 
--    public StringArrayDeserializer() {
-+public StringArrayDeserializer() {
-         super(String[].class);
--        _elementDeserializer = null;
-+        _elementDeserializer = StringDeserializer.instance;  // Initialize with a default deserializer
-     }
- 
-     @SuppressWarnings("unchecked")
+@@ -50,7 +50,7 @@
+         if (_elementDeserializer != null) {
+             return _deserializeCustom(jp, ctxt);
+         }
+-
++    
+         final ObjectBuffer buffer = ctxt.leaseObjectBuffer();
+         Object[] chunk = buffer.resetAndStart();
+         
 @@ -63,7 +63,7 @@
              if (t == JsonToken.VALUE_STRING) {
                  value = jp.getText();
              } else if (t == JsonToken.VALUE_NULL) {
 -                value = _elementDeserializer.getNullValue();
-+                value = _elementDeserializer.getNullValue();  // Safe because _elementDeserializer is always initialized
++                value = null;  // Gracefully handle nulls when _elementDeserializer is not set
              } else {
                  value = _parseString(jp, ctxt);
              }
-@@ -77,6 +77,14 @@
-         ctxt.returnObjectBuffer(buffer);
-         return result;
-     }
-+
-+    @SuppressWarnings("unchecked")
-+    protected StringArrayDeserializer(JsonDeserializer<?> deser) {
-+        super(String[].class);
-+        _elementDeserializer = (JsonDeserializer<String>) deser;
-+    }
-+   
-+    @Override
- 
-     /**
-      * Offlined version used when we do not use the default deserialization method.

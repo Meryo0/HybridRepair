@@ -136,12 +136,51 @@ def _parse_fault_locations(fault_locs_path: Path, source_roots: List[Path]) -> L
                 # Still not found — use first root as best guess (file may be generated)
                 file_path = _class_to_file_path(class_name, source_roots[0])
 
+            file_path_resolved = file_path or Path(class_name.replace(".", "/") + ".java")
+            
+            # P3: Filter test-class fault locations
+            if "test" in class_name.lower() or "test" in file_path_resolved.name.lower() or "junit" in class_name.lower():
+                continue
+                
             locations.append({
                 "class": class_name,
                 "line": line_no,
-                "file_path": file_path or Path(class_name.replace(".", "/") + ".java"),
+                "file_path": file_path_resolved,
             })
-    return locations
+            
+    # P3: Deduplicate by method bounds to avoid overwhelming the LLM
+    from pipeline.code_extractor import _find_method_bounds
+    
+    deduped_locations: List[dict] = []
+    seen_methods: set[tuple[Path, int, int]] = set()
+    
+    for loc in locations:
+        fp = loc["file_path"]
+        target_line = loc["line"]
+        if not fp.exists():
+            deduped_locations.append(loc)
+            continue
+            
+        try:
+            lines = fp.read_text(encoding="utf-8", errors="replace").splitlines()
+            bounds = _find_method_bounds(lines, target_line)
+            if bounds:
+                start_1, end_1 = bounds
+                method_key = (fp, start_1, end_1)
+                if method_key not in seen_methods:
+                    seen_methods.add(method_key)
+                    deduped_locations.append(loc)
+            else:
+                # If we can't find bounds, deduplicate by file+line to be safe
+                method_key = (fp, target_line, target_line)
+                if method_key not in seen_methods:
+                    seen_methods.add(method_key)
+                    deduped_locations.append(loc)
+        except Exception:
+            deduped_locations.append(loc)
+            
+    # P3: Limit to max 15 fault locations to prevent context overflow while keeping breadth
+    return deduped_locations[:15]
 
 
 def _parse_root_cause(root_cause_path: Path) -> tuple[str, List[str]]:
@@ -218,6 +257,85 @@ def _parse_tests_json(tests_json_path: Path) -> List[dict]:
             tests.append({"class": cls, "method": method})
 
     return tests
+
+
+def extract_fault_from_stack_trace(
+    stack_traces: str,
+    source_roots: List[Path],
+) -> dict | None:
+    """Derive a fault location from a raw stack trace when LogicFL finds nothing.
+
+    Scans the stack trace for the first `at` frame that:
+    - is NOT a JUnit / Hamcrest / java.* / sun.* framework class
+    - resolves to an actual Java source file on disk
+
+    Returns a fault-location dict compatible with the rest of the pipeline,
+    or None if no valid location is found.
+    """
+    if not stack_traces:
+        return None
+
+    skip_prefixes = (
+        "junit.", "org.junit.", "sun.", "java.", "javax.",
+        "com.sun.", "org.hamcrest.", "org.mockito.internal.runners.",
+        "org.apache.maven.", "org.gradle.",
+    )
+
+    def _resolve(fqcn: str) -> "Path | None":
+        """Try to find the source file for a fully-qualified class name."""
+        for root in source_roots:
+            candidate = _class_to_file_path(fqcn, root)
+            if candidate.exists():
+                return candidate
+        simple_name = fqcn.split(".")[-1].split("$")[0] + ".java"
+        for root in source_roots:
+            hits = list(root.rglob(simple_name))
+            if hits:
+                return hits[0]
+        return None
+
+    # ── Strategy 1: Parse explicit `at` frames ───────────────────────────────
+    frame_re = re.compile(
+        r"at\s+([\w$.]+)\.([\w$<>]+)\((\w+\.java):(\d+)\)"
+    )
+    for match in frame_re.finditer(stack_traces):
+        fqcn = match.group(1)
+        line_no = int(match.group(4))
+        if any(fqcn.startswith(p) for p in skip_prefixes):
+            continue
+        class_simple = fqcn.split(".")[-1]
+        if "test" in class_simple.lower() or "test" in fqcn.lower():
+            continue
+        file_path = _resolve(fqcn)
+        if file_path is not None:
+            print(
+                f"  [logicfl_parser] Fallback FL from stack trace: "
+                f"{fqcn} line {line_no} → {file_path}"
+            )
+            return {"class": fqcn, "line": line_no, "file_path": file_path}
+
+    # ── Strategy 2: Parse Java 17 verbose NPE messages ───────────────────────
+    # e.g. 'because the return value of "org.example.Foo.bar()" is null'
+    # or   'because "this.field" is null'  → look for the class in the message
+    verbose_re = re.compile(
+        r'"([\w$.]+)\.([\w$<>]+)\([^)]*\)"\s+is null'
+    )
+    for match in verbose_re.finditer(stack_traces):
+        fqcn = match.group(1)
+        if any(fqcn.startswith(p) for p in skip_prefixes):
+            continue
+        if "test" in fqcn.lower():
+            continue
+        file_path = _resolve(fqcn)
+        if file_path is not None:
+            # Use line 1 as a placeholder — LLM will explore the method
+            print(
+                f"  [logicfl_parser] Fallback FL from NPE message: "
+                f"{fqcn} → {file_path} (line inferred from message)"
+            )
+            return {"class": fqcn, "line": 1, "file_path": file_path}
+
+    return None
 
 
 def parse_logicfl_output(bug_dir: Path) -> LogicFLResult:

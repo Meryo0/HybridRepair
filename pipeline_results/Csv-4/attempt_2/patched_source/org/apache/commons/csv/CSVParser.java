@@ -235,14 +235,14 @@ public final class CSVParser implements Iterable<CSVRecord>, Closeable {
      *             If an I/O error occurs
      */
     public CSVParser(final Reader reader, final CSVFormat format) throws IOException {
-        Assertions.notNull(reader, "reader");
-        Assertions.notNull(format, "format");
-
-        format.validate();
-        this.format = format;
-        this.lexer = new Lexer(format, new ExtendedBufferedReader(reader));
-        this.headerMap = this.initializeHeader();
-    }
+            Assertions.notNull(reader, "reader");
+            Assertions.notNull(format, "format");
+    
+            format.validate();
+            this.format = format;
+            this.lexer = new Lexer(format, new ExtendedBufferedReader(reader));
+            this.headerMap = this.initializeHeader(); // Ensure headerMap is initialized properly
+        }
 
     private void addRecordValue() {
         final String input = this.reusableToken.content.toString();
@@ -284,9 +284,9 @@ public final class CSVParser implements Iterable<CSVRecord>, Closeable {
      * </p>
      * @return a copy of the header map that iterates in column order.
      */
-public Map<String, Integer> getHeaderMap() {
-        return this.headerMap == null ? null : new LinkedHashMap<String, Integer>(this.headerMap);
-    }
+    public Map<String, Integer> getHeaderMap() {
+            return new LinkedHashMap<>(this.headerMap); // headerMap is guaranteed to be non-null
+        }
 
     /**
      * Returns the current record number in the input stream.
@@ -321,35 +321,33 @@ public Map<String, Integer> getHeaderMap() {
     /**
      * Initializes the name to index mapping if the format defines a header.
      */
-private Map<String, Integer> initializeHeader() throws IOException {
-        Map<String, Integer> hdrMap = null;
-        final String[] formatHeader = this.format.getHeader();
-        if (formatHeader != null) {
-            hdrMap = new LinkedHashMap<String, Integer>();
-
-            String[] header = null;
-            if (formatHeader.length == 0) {
-                // read the header from the first line of the file
-                final CSVRecord record = this.nextRecord();
-                if (record != null) {
-                    header = record.values();
+    private Map<String, Integer> initializeHeader() throws IOException {
+            Map<String, Integer> hdrMap = new LinkedHashMap<>(); // Initialize to an empty map by default
+            final String[] formatHeader = this.format.getHeader();
+            if (formatHeader != null) {
+                String[] header = null;
+                if (formatHeader.length == 0) {
+                    // read the header from the first line of the file
+                    final CSVRecord record = this.nextRecord();
+                    if (record != null) {
+                        header = record.values();
+                    }
+                } else {
+                    if (this.format.getSkipHeaderRecord()) {
+                        this.nextRecord();
+                    }
+                    header = formatHeader;
                 }
-            } else {
-                if (this.format.getSkipHeaderRecord()) {
-                    this.nextRecord();
+    
+                // build the name to index mappings
+                if (header != null) {
+                    for (int i = 0; i < header.length; i++) {
+                        hdrMap.put(header[i], Integer.valueOf(i));
+                    }
                 }
-                header = formatHeader;
             }
-
-            // build the name to index mappings
-            if (header != null) {
-                for (int i = 0; i < header.length; i++) {
-                    hdrMap.put(header[i], Integer.valueOf(i));
-                }
-            }
+            return hdrMap; // Always return a non-null map
         }
-        return hdrMap;
-    }
 
     public boolean isClosed() {
         return this.lexer.isClosed();

@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.LinkedHashMap;
 
 /**
  * A CSV record parsed from a CSV file.
@@ -49,12 +50,12 @@ public final class CSVRecord implements Serializable, Iterable<String> {
     private final String[] values;
 
     CSVRecord(final String[] values, final Map<String, Integer> mapping,
-            final String comment, final long recordNumber) {
-        this.recordNumber = recordNumber;
-        this.values = values != null ? values : EMPTY_STRING_ARRAY;
-        this.mapping = mapping;
-        this.comment = comment;
-    }
+                final String comment, final long recordNumber) {
+            this.recordNumber = recordNumber;
+            this.values = values != null ? values : EMPTY_STRING_ARRAY;
+            this.mapping = mapping != null ? mapping : new LinkedHashMap<>(); // Ensure mapping is never null
+            this.comment = comment;
+        }
 
     /**
      * Returns a value by {@link Enum}.
@@ -176,10 +177,7 @@ public final class CSVRecord implements Serializable, Iterable<String> {
      * @param map The Map to populate.
      * @return the given map.
      */
-<M extends Map<String, String>> M putIn(final M map) {
-        if (mapping == null) {
-            return map;
-        }
+    <M extends Map<String, String>> M putIn(final M map) {
         for (final Entry<String, Integer> entry : mapping.entrySet()) {
             final int col = entry.getValue().intValue();
             if (col < values.length) {

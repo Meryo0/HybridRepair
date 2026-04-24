@@ -2152,7 +2152,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,
      *
      * @since 1.0.10
      */
-public boolean removeDomainMarker(int index, Marker marker, Layer layer,
+    public boolean removeDomainMarker(int index, Marker marker, Layer layer,
     		boolean notify) {
         ArrayList markers;
         if (layer == Layer.FOREGROUND) {
@@ -2162,9 +2162,6 @@ public boolean removeDomainMarker(int index, Marker marker, Layer layer,
         else {
             markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(
                     index));
-        }
-        if (markers == null) {
-            return false;
         }
         boolean removed = markers.remove(marker);
         if (removed && notify) {
@@ -2434,7 +2431,7 @@ public boolean removeDomainMarker(int index, Marker marker, Layer layer,
      * 
      * @see #addRangeMarker(int, Marker, Layer, boolean)
      */
-public boolean removeRangeMarker(int index, Marker marker, Layer layer,
+    public boolean removeRangeMarker(int index, Marker marker, Layer layer,
     		boolean notify) {
         if (marker == null) {
             throw new IllegalArgumentException("Null 'marker' argument.");
@@ -2444,15 +2441,9 @@ public boolean removeRangeMarker(int index, Marker marker, Layer layer,
             markers = (ArrayList) this.foregroundRangeMarkers.get(new Integer(
                     index));
         }
-        }
-        if (markers == null) {
-            return false;
         else {
             markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(
                     index));
-        }
-        if (markers == null) {
-            return false;
         }
         boolean removed = markers.remove(marker);
         if (removed && notify) {

@@ -105,24 +105,16 @@ public class Parser {
         return treeBuilder.parseFragment(fragmentHtml, context, baseUri, ParseErrorList.noTracking());
     }
 
-    /**
-     * Parse a fragment of HTML into the {@code body} of a Document.
-     *
-     * @param bodyHtml fragment of HTML
-     * @param baseUri base URI of document (i.e. original fetch location), for resolving relative URLs.
-     *
-     * @return Document, with empty head, and HTML parsed into body
-     */
     public static Document parseBodyFragment(String bodyHtml, String baseUri) {
-        Document doc = Document.createShell(baseUri);
-        Element body = doc.body();
-        List<Node> nodeList = parseFragment(bodyHtml, body, baseUri);
-        Node[] nodes = nodeList.toArray(new Node[nodeList.size()]); // the node list gets modified when re-parented
-        for (Node node : nodes) {
-            body.appendChild(node);
+            Document doc = Document.createShell(baseUri);
+            Element body = doc.body(); // Ensured by the corrected Document.body() method
+            List<Node> nodeList = parseFragment(bodyHtml, body, baseUri);
+            Node[] nodes = nodeList.toArray(new Node[nodeList.size()]); // the node list gets modified when re-parented
+            for (Node node : nodes) {
+                body.appendChild(node);
+            }
+            return doc;
         }
-        return doc;
-    }
 
     /**
      * @param bodyHtml HTML to parse

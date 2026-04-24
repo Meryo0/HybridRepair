@@ -551,15 +551,10 @@ public class JacksonAnnotationIntrospector
     }
     
     @Override
-@Override
-    public List<NamedType> findSubtypes(Annotated a) {
-        if (a == null) {
-            return null;
-        }
+    public List<NamedType> findSubtypes(Annotated a)
+    {
         JsonSubTypes t = _findAnnotation(a, JsonSubTypes.class);
-        if (t == null) {
-            return null;
-        }
+        if (t == null) return null;
         JsonSubTypes.Type[] types = t.value();
         ArrayList<NamedType> result = new ArrayList<NamedType>(types.length);
         for (JsonSubTypes.Type type : types) {

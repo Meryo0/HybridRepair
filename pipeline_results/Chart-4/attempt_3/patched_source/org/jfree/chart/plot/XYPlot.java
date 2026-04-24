@@ -1572,7 +1572,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @see #setRenderer(XYItemRenderer)
      */
-public XYItemRenderer getRenderer() {
+    public XYItemRenderer getRenderer() {
         return getRenderer(0);
     }
 
@@ -1585,12 +1585,13 @@ public XYItemRenderer getRenderer() {
      *
      * @see #setRenderer(int, XYItemRenderer)
      */
-public XYItemRenderer getRenderer(int index) {
+    public XYItemRenderer getRenderer(int index) {
         XYItemRenderer result = null;
-        if (this.renderers != null && this.renderers.size() > index) {
+        if (this.renderers.size() > index) {
             result = (XYItemRenderer) this.renderers.get(index);
         }
         return result;
+
     }
 
     /**
@@ -1739,17 +1740,16 @@ public XYItemRenderer getRenderer(int index) {
      *
      * @return The renderer (possibly <code>null</code>).
      */
-public XYItemRenderer getRendererForDataset(XYDataset dataset) {
+    public XYItemRenderer getRendererForDataset(XYDataset dataset) {
         XYItemRenderer result = null;
         for (int i = 0; i < this.datasets.size(); i++) {
-            if (java.util.Objects.equals(this.datasets.get(i), dataset)) {
-                if (this.renderers != null && i < this.renderers.size()) {
-                    result = (XYItemRenderer) this.renderers.get(i);
-                }
+            if (this.datasets.get(i) == dataset) {
+                result = (XYItemRenderer) this.renderers.get(i);
                 break;
             }
         }
-        return result;
+        // Ensure a non-null renderer is returned
+        return (result != null) ? result : getRenderer();
     }
 
     /**

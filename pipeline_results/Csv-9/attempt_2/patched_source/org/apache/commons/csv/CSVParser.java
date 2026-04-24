@@ -354,10 +354,12 @@ public final class CSVParser implements Iterable<CSVRecord>, Closeable {
      * @return null if the format has no header.
      * @throws IOException if there is a problem reading the header or skipping the first record
      */
-private Map<String, Integer> initializeHeader() throws IOException {
-        Map<String, Integer> hdrMap = new LinkedHashMap<>(); // Ensure hdrMap is never null
+    private Map<String, Integer> initializeHeader() throws IOException {
+        Map<String, Integer> hdrMap = null;
         final String[] formatHeader = this.format.getHeader();
         if (formatHeader != null) {
+            hdrMap = new LinkedHashMap<>();
+    
             String[] header = null;
             if (formatHeader.length == 0) {
                 // read the header from the first line of the file
@@ -371,9 +373,9 @@ private Map<String, Integer> initializeHeader() throws IOException {
                 }
                 header = formatHeader;
             }
-
+    
             // build the name to index mappings
-            if (header != null) {
+            if (header != null && header.length > 0) {
                 for (int i = 0; i < header.length; i++) {
                     if (hdrMap.containsKey(header[i])) {
                         throw new IllegalArgumentException("The header contains duplicate names: " +
@@ -381,6 +383,8 @@ private Map<String, Integer> initializeHeader() throws IOException {
                     }
                     hdrMap.put(header[i], Integer.valueOf(i));
                 }
+            } else {
+                throw new IllegalStateException("Header is missing or invalid.");
             }
         }
         return hdrMap;

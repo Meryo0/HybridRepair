@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  The base, abstract Node model. Elements, Documents, Comments etc are all Node instances.
@@ -440,50 +441,47 @@ public abstract class Node implements Cloneable {
      include this node (a node is not a sibling of itself).
      @return node siblings. If the node has no parent, returns an empty list.
      */
-public List<Node> siblingNodes() {
-        if (parent() == null) {
-            return Collections.emptyList();
-        }
-        List<Node> siblings = parent().childNodes();
-        List<Node> result = new ArrayList<>(siblings.size() - 1);
-        for (Node sibling : siblings) {
-            if (sibling != this) {
-                result.add(sibling);
+    public List<Node> siblingNodes() {
+            // Return null if the node is an orphan (no parent)
+            if (parent() == null) {
+                return null;
             }
+            // Exclude the current node from the list of siblings
+            List<Node> siblings = new ArrayList<>(parent().childNodes());
+            siblings.remove(this);
+            return siblings;
         }
-        return result;
-    }
 
     /**
      Get this node's next sibling.
      @return next sibling, or null if this is the last sibling
      */
-public Node nextSibling() {
-        if (parentNode == null) {
-            return null;
-        }
+    public Node nextSibling() {
+        if (parentNode == null)
+            return null; // root
+        
         List<Node> siblings = parentNode.childNodes;
-        int index = siblingIndex();
-        if (index < siblings.size() - 1) {
-            return siblings.get(index + 1);
-        }
-        return null;
+        Integer index = siblingIndex();
+        Validate.notNull(index);
+        if (siblings.size() > index+1)
+            return siblings.get(index+1);
+        else
+            return null;
     }
 
     /**
      Get this node's previous sibling.
      @return the previous sibling, or null if this is the first sibling
      */
-public Node previousSibling() {
-        if (parentNode == null) {
-            return null;
-        }
+    public Node previousSibling() {
+
         List<Node> siblings = parentNode.childNodes;
-        int index = siblingIndex();
-        if (index > 0) {
-            return siblings.get(index - 1);
-        }
-        return null;
+        Integer index = siblingIndex();
+        Validate.notNull(index);
+        if (index > 0)
+            return siblings.get(index-1);
+        else
+            return null;
     }
 
     /**

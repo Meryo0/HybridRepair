@@ -31,6 +31,7 @@ import org.apache.commons.math3.geometry.partitioning.SubHyperplane;
 import org.apache.commons.math3.geometry.partitioning.Transform;
 import org.apache.commons.math3.util.FastMath;
 import org.apache.commons.math3.util.MathUtils;
+import java.util.Set;
 
 /** This class represents an oriented line in the 2D plane.
 
@@ -177,9 +178,9 @@ public class Line implements Hyperplane<Euclidean2D>, Embedding<Euclidean2D, Euc
     }
 
     /** {@inheritDoc} */
-public Vector1D toSubSpace(final Vector<Euclidean2D> point) {
+    public Vector1D toSubSpace(final Vector<Euclidean2D> point) {
         if (point == null) {
-            return null;
+            throw new NullPointerException("Input point cannot be null");
         }
         Vector2D p2 = (Vector2D) point;
         return new Vector1D(cos * p2.getX() + sin * p2.getY());

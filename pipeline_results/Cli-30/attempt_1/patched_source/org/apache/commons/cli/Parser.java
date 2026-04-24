@@ -249,7 +249,7 @@ public abstract class Parser implements CommandLineParser
      *
      * @param properties The value properties to be processed.
      */
-protected void processProperties(Properties properties) throws ParseException
+    protected void processProperties(Properties properties) throws ParseException
     {
         if (properties == null)
         {
@@ -263,12 +263,8 @@ protected void processProperties(Properties properties) throws ParseException
             if (!cmd.hasOption(option))
             {
                 Option opt = getOptions().getOption(option);
-                if (opt == null)
-                {
-                    continue;
-                }
             
-                // if the option is part of a group, check if another option of the group has been selected
+            // if the option is part of a group, check if another option of the group has been selected
             
                 // get the value from the properties instance
                 String value = properties.getProperty(option);

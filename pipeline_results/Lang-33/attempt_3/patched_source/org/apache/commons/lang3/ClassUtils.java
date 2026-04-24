@@ -24,6 +24,8 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Collections;
+import java.util.Set;
 
 
 /**
@@ -899,21 +901,18 @@ public class ClassUtils {
      * @return a <code>Class</code> array, <code>null</code> if null array input
      * @since 2.4
      */
-/**
-     * @since 2.4
-     */
     public static Class<?>[] toClass(Object[] array) {
-        if (array == null) {
-            return null;
-        } else if (array.length == 0) {
-            return ArrayUtils.EMPTY_CLASS_ARRAY;
+            if (array == null) {
+                return null;
+            } else if (array.length == 0) {
+                return ArrayUtils.EMPTY_CLASS_ARRAY;
+            }
+            Class<?>[] classes = new Class[array.length];
+            for (int i = 0; i < array.length; i++) {
+                classes[i] = (array[i] != null) ? array[i].getClass() : null; // Handle null elements properly
+            }
+            return classes;
         }
-        Class<?>[] classes = new Class[array.length];
-        for (int i = 0; i < array.length; i++) {
-            classes[i] = (array[i] == null) ? null : array[i].getClass();
-        }
-        return classes;
-    }
 
     // Short canonical name
     // ----------------------------------------------------------------------

@@ -14,6 +14,11 @@ import com.fasterxml.jackson.databind.deser.impl.ReadableObjectId;
 import com.fasterxml.jackson.databind.deser.impl.ReadableObjectId.Referring;
 import com.fasterxml.jackson.databind.introspect.Annotated;
 import com.fasterxml.jackson.databind.util.ClassUtil;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Complete {@link DeserializationContext} implementation that adds
@@ -79,51 +84,53 @@ public abstract class DefaultDeserializationContext
      */
 
     @Override
-public ReadableObjectId findObjectId(Object id, ObjectIdGenerator<?> gen, ObjectIdResolver resolverType)
-    {
-        /* 02-Apr-2015, tatu: As per [databind#742] should allow 'null', similar to how
-         *   missing id already works.
-         */
-
-        if (id == null) {
-            return new ReadableObjectId(new ObjectIdGenerator.IdKey(gen.getClass(), null, null));
-        }
-
-        final ObjectIdGenerator.IdKey key = gen.key(id);
-
-        if (_objectIds == null) {
-            _objectIds = new LinkedHashMap<ObjectIdGenerator.IdKey,ReadableObjectId>();
-        } else {
-            ReadableObjectId entry = _objectIds.get(key);
-            if (entry != null) {
+    public ReadableObjectId findObjectId(Object id, ObjectIdGenerator<?> gen, ObjectIdResolver resolverType)
+        {
+            /* 02-Apr-2015, tatu: As per [databind#742] should allow 'null', similar to how
+             *   missing id already works.
+             */
+            if (id == null) {
+                // Handle null id gracefully by returning a new ReadableObjectId without a key
+                ReadableObjectId entry = new ReadableObjectId(null);
+                entry.setResolver(resolverType.newForDeserialization(this));
                 return entry;
             }
-        }
-
-        // Not seen yet, must create entry and configure resolver.
-        ObjectIdResolver resolver = null;
-
-        if (_objectIdResolvers == null) {
-            _objectIdResolvers = new ArrayList<ObjectIdResolver>(8);
-        } else {
-            for (ObjectIdResolver res : _objectIdResolvers) {
-                if (res.canUseFor(resolverType)) {
-                    resolver = res;
-                    break;
+    
+            final ObjectIdGenerator.IdKey key = gen.key(id);
+    
+            if (_objectIds == null) {
+                _objectIds = new LinkedHashMap<ObjectIdGenerator.IdKey, ReadableObjectId>();
+            } else {
+                ReadableObjectId entry = _objectIds.get(key);
+                if (entry != null) {
+                    return entry;
                 }
             }
+    
+            // Not seen yet, must create entry and configure resolver.
+            ObjectIdResolver resolver = null;
+    
+            if (_objectIdResolvers == null) {
+                _objectIdResolvers = new ArrayList<ObjectIdResolver>(8);
+            } else {
+                for (ObjectIdResolver res : _objectIdResolvers) {
+                    if (res.canUseFor(resolverType)) {
+                        resolver = res;
+                        break;
+                    }
+                }
+            }
+    
+            if (resolver == null) {
+                resolver = resolverType.newForDeserialization(this);
+                _objectIdResolvers.add(resolver);
+            }
+    
+            ReadableObjectId entry = new ReadableObjectId(key);
+            entry.setResolver(resolver);
+            _objectIds.put(key, entry);
+            return entry;
         }
-
-        if (resolver == null) {
-            resolver = resolverType.newForDeserialization(this);
-            _objectIdResolvers.add(resolver);
-        }
-
-        ReadableObjectId entry = new ReadableObjectId(key);
-        entry.setResolver(resolver);
-        _objectIds.put(key, entry);
-        return entry;
-    }
     
     @Deprecated // since 2.4
     @Override

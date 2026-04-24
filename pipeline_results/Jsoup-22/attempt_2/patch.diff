@@ -1,82 +1,21 @@
 --- org/jsoup/nodes/Node.java
 +++ org/jsoup/nodes/Node.java
-@@ -440,9 +440,18 @@
-      include this node (a node is not a sibling of itself).
+@@ -441,9 +441,15 @@
       @return node siblings. If the node has no parent, returns an empty list.
       */
--    public List<Node> siblingNodes() {
+     public List<Node> siblingNodes() {
 -
 -        return parent().childNodes();
-+public List<Node> siblingNodes() {
-+        if (parent() == null) {
-+            return Collections.emptyList();
-+        }
-+        List<Node> siblings = parent().childNodes();
-+        List<Node> result = new ArrayList<>(siblings.size() - 1);
-+        for (Node sibling : siblings) {
-+            if (sibling != this) {
-+                result.add(sibling);
+-    }
++            // Return null if the node is an orphan (no parent)
++            if (parent() == null) {
++                return null;
 +            }
++            // Exclude the current node from the list of siblings
++            List<Node> siblings = new ArrayList<>(parent().childNodes());
++            siblings.remove(this);
++            return siblings;
 +        }
-+        return result;
-     }
  
      /**
-
---- org/jsoup/nodes/Node.java
-+++ org/jsoup/nodes/Node.java
-@@ -466,15 +466,16 @@
-      Get this node's previous sibling.
-      @return the previous sibling, or null if this is the first sibling
-      */
--    public Node previousSibling() {
--
-+public Node previousSibling() {
-+        if (parentNode == null) {
-+            return null;
-+        }
-         List<Node> siblings = parentNode.childNodes;
--        Integer index = siblingIndex();
--        Validate.notNull(index);
--        if (index > 0)
--            return siblings.get(index-1);
--        else
--            return null;
-+        int index = siblingIndex();
-+        if (index > 0) {
-+            return siblings.get(index - 1);
-+        }
-+        return null;
-     }
- 
-     /**
-
---- org/jsoup/nodes/Node.java
-+++ org/jsoup/nodes/Node.java
-@@ -449,17 +449,16 @@
       Get this node's next sibling.
-      @return next sibling, or null if this is the last sibling
-      */
--    public Node nextSibling() {
--        if (parentNode == null)
--            return null; // root
--        
-+public Node nextSibling() {
-+        if (parentNode == null) {
-+            return null;
-+        }
-         List<Node> siblings = parentNode.childNodes;
--        Integer index = siblingIndex();
--        Validate.notNull(index);
--        if (siblings.size() > index+1)
--            return siblings.get(index+1);
--        else
--            return null;
-+        int index = siblingIndex();
-+        if (index < siblings.size() - 1) {
-+            return siblings.get(index + 1);
-+        }
-+        return null;
-     }
- 
-     /**

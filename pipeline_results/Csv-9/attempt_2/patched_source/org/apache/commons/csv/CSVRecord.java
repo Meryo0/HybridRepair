@@ -52,6 +52,9 @@ public final class CSVRecord implements Serializable, Iterable<String> {
             final String comment, final long recordNumber) {
         this.recordNumber = recordNumber;
         this.values = values != null ? values : EMPTY_STRING_ARRAY;
+        if (mapping == null) {
+            throw new IllegalStateException("Mapping cannot be null.");
+        }
         this.mapping = mapping;
         this.comment = comment;
     }

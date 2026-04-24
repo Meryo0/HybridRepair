@@ -235,14 +235,17 @@ public final class CSVParser implements Iterable<CSVRecord>, Closeable {
      *             If an I/O error occurs
      */
     public CSVParser(final Reader reader, final CSVFormat format) throws IOException {
-        Assertions.notNull(reader, "reader");
-        Assertions.notNull(format, "format");
-
-        format.validate();
-        this.format = format;
-        this.lexer = new Lexer(format, new ExtendedBufferedReader(reader));
-        this.headerMap = this.initializeHeader();
-    }
+            Assertions.notNull(reader, "reader");
+            Assertions.notNull(format, "format");
+    
+            format.validate();
+            this.format = format;
+            this.lexer = new Lexer(format, new ExtendedBufferedReader(reader));
+            this.headerMap = this.initializeHeader();
+            if (this.headerMap == null) {
+                this.headerMap = new LinkedHashMap<>(); // Ensure headerMap is never null
+            }
+        }
 
     private void addRecordValue() {
         final String input = this.reusableToken.content.toString();
@@ -285,8 +288,8 @@ public final class CSVParser implements Iterable<CSVRecord>, Closeable {
      * @return a copy of the header map that iterates in column order.
      */
     public Map<String, Integer> getHeaderMap() {
-        return new LinkedHashMap<String, Integer>(this.headerMap);
-    }
+            return new LinkedHashMap<>(this.headerMap != null ? this.headerMap : new LinkedHashMap<>()); // Defensive null check
+        }
 
     /**
      * Returns the current record number in the input stream.
@@ -321,33 +324,35 @@ public final class CSVParser implements Iterable<CSVRecord>, Closeable {
     /**
      * Initializes the name to index mapping if the format defines a header.
      */
-private Map<String, Integer> initializeHeader() throws IOException {
-        Map<String, Integer> hdrMap = new LinkedHashMap<String, Integer>();
-        final String[] formatHeader = this.format.getHeader();
-        if (formatHeader != null) {
-            String[] header = null;
-            if (formatHeader.length == 0) {
-                // read the header from the first line of the file
-                final CSVRecord record = this.nextRecord();
-                if (record != null) {
-                    header = record.values();
+    private Map<String, Integer> initializeHeader() throws IOException {
+            Map<String, Integer> hdrMap = null;
+            final String[] formatHeader = this.format.getHeader();
+            if (formatHeader != null) {
+                hdrMap = new LinkedHashMap<>();
+    
+                String[] header = null;
+                if (formatHeader.length == 0) {
+                    // read the header from the first line of the file
+                    final CSVRecord record = this.nextRecord();
+                    if (record != null) {
+                        header = record.values();
+                    }
+                } else {
+                    if (this.format.getSkipHeaderRecord()) {
+                        this.nextRecord();
+                    }
+                    header = formatHeader;
                 }
-            } else {
-                if (this.format.getSkipHeaderRecord()) {
-                    this.nextRecord();
+    
+                // build the name to index mappings
+                if (header != null) {
+                    for (int i = 0; i < header.length; i++) {
+                        hdrMap.put(header[i], Integer.valueOf(i));
+                    }
                 }
-                header = formatHeader;
             }
-
-            // build the name to index mappings
-            if (header != null) {
-                for (int i = 0; i < header.length; i++) {
-                    hdrMap.put(header[i], Integer.valueOf(i));
-                }
-            }
+            return hdrMap != null ? hdrMap : new LinkedHashMap<>(); // Ensure non-null return
         }
-        return hdrMap;
-    }
 
     public boolean isClosed() {
         return this.lexer.isClosed();

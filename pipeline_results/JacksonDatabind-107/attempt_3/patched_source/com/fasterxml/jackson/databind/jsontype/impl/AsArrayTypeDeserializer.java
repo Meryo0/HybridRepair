@@ -83,8 +83,9 @@ public class AsArrayTypeDeserializer
      * deserialization.
      */
     @SuppressWarnings("resource")
-protected Object _deserialize(JsonParser p, DeserializationContext ctxt) throws IOException
+    protected Object _deserialize(JsonParser p, DeserializationContext ctxt) throws IOException
     {
+        // 02-Aug-2013, tatu: May need to use native type ids
         if (p.canReadTypeId()) {
             Object typeId = p.getTypeId();
             if (typeId != null) {
@@ -93,26 +94,41 @@ protected Object _deserialize(JsonParser p, DeserializationContext ctxt) throws 
         }
         boolean hadStartArray = p.isExpectedStartArrayToken();
         String typeId = _locateTypeId(p, ctxt);
-        JsonDeserializer<Object> deser;
-        try {
-            deser = _findDeserializer(ctxt, typeId);
-        } catch (JsonMappingException e) {
-            ctxt.reportMappingException("Failed to find deserializer for type id '%s': %s", typeId, e.getMessage());
-            return null;
+        JsonDeserializer<Object> deser = _findDeserializer(ctxt, typeId);
+    
+        // Ensure deserializer is valid
+        if (deser == null) {
+            throw ctxt.mappingException("Could not resolve type ID '" + typeId +
+                    "' into a valid deserializer for polymorphic type handling.");
         }
-        if (_typeIdVisible && !_usesExternalId() && p.getCurrentToken() == JsonToken.START_OBJECT) {
+    
+        // Minor complication: we may need to merge type id in?
+        if (_typeIdVisible
+                // 06-Oct-2014, tatu: To fix [databind#408], must distinguish between
+                //   internal and external properties
+                //  TODO: but does it need to be injected in external case? Why not?
+                && !_usesExternalId()
+                && p.getCurrentToken() == JsonToken.START_OBJECT) {
+            // but what if there's nowhere to add it in? Error? Or skip? For now, skip.
             TokenBuffer tb = new TokenBuffer(null, false);
-            tb.writeStartObject();
+            tb.writeStartObject(); // recreate START_OBJECT
             tb.writeFieldName(_typePropertyName);
             tb.writeString(typeId);
+            // 02-Jul-2016, tatu: Depending on for JsonParserSequence is initialized it may
+            //   try to access current token; ensure there isn't one
             p.clearCurrentToken();
             p = JsonParserSequence.createFlattened(false, tb.asParser(p), p);
             p.nextToken();
         }
         Object value = deser.deserialize(p, ctxt);
+        // And then need the closing END_ARRAY
         if (hadStartArray && p.nextToken() != JsonToken.END_ARRAY) {
             ctxt.reportWrongTokenException(baseType(), JsonToken.END_ARRAY,
                     "expected closing END_ARRAY after type information and deserialized value");
+            // 05-May-2016, tatu: Not 100% what to do if exception is stored for
+            //     future, and not thrown immediately: should probably skip until END_ARRAY
+    
+            // ... but for now, fall through
         }
         return value;
     }

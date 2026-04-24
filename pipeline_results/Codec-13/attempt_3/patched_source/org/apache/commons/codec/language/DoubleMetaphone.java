@@ -82,10 +82,10 @@ public class DoubleMetaphone implements StringEncoder {
      * @param alternate use alternate encode
      * @return an encoded string
      */
-public String doubleMetaphone(String value, final boolean alternate) {
+    public String doubleMetaphone(String value, final boolean alternate) {
         value = cleanInput(value);
-        if (value == null || value.isEmpty()) {
-            return ""; // Return an empty string instead of null to avoid NPEs
+        if (value == null) {
+            return null;
         }
 
         final boolean slavoGermanic = isSlavoGermanic(value);
@@ -240,14 +240,13 @@ public String doubleMetaphone(String value, final boolean alternate) {
      * @return {@code true} if the encoded <code>String</code>s are equal;
      *          {@code false} otherwise.
      */
-public boolean isDoubleMetaphoneEqual(final String value1, final String value2, final boolean alternate) {
-        String metaphone1 = doubleMetaphone(value1, alternate);
-        String metaphone2 = doubleMetaphone(value2, alternate);
-        if (metaphone1 == null || metaphone2 == null) {
-            return false;
+    public boolean isDoubleMetaphoneEqual(final String value1, final String value2, final boolean alternate) {
+            String metaphone1 = doubleMetaphone(value1, alternate);
+            String metaphone2 = doubleMetaphone(value2, alternate);
+    
+            // Null-safe comparison
+            return (metaphone1 == null && metaphone2 == null) || (metaphone1 != null && metaphone1.equals(metaphone2));
         }
-        return metaphone1.equals(metaphone2);
-    }
 
     /**
      * Returns the maxCodeLen.

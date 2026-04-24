@@ -1563,15 +1563,19 @@ public class TypeCheck implements NodeTraversal.Callback, CompilerPass {
    * that have been visited
    * @param interfaceType The super interface that is being visited
    */
-private void checkInterfaceConflictProperties(NodeTraversal t, Node n,
-      String functionName, HashMap<String, ObjectType> properties,
-      HashMap<String, ObjectType> currentProperties,
-      ObjectType interfaceType) {
-    ObjectType implicitProto = interfaceType.getImplicitPrototype();
-    Set<String> currentPropertyNames;
-    // This can be the case if interfaceType is proxy to a non-existent
-    // object (which is a bad type annotation, but shouldn't crash).
-    if (implicitProto != null) {
+  private void checkInterfaceConflictProperties(NodeTraversal t, Node n,
+        String functionName, HashMap<String, ObjectType> properties,
+        HashMap<String, ObjectType> currentProperties,
+        ObjectType interfaceType) {
+      ObjectType implicitProto = interfaceType.getImplicitPrototype();
+      Set<String> currentPropertyNames;
+  
+      // This can be the case if interfaceType is proxy to a non-existent
+      // object (which is a bad type annotation, but shouldn't crash).
+      if (implicitProto == null) {
+        // Skip property conflict checks if the implicit prototype is null
+        return;
+      }
       currentPropertyNames = implicitProto.getOwnPropertyNames();
       for (String name : currentPropertyNames) {
         ObjectType oType = properties.get(name);
@@ -1586,12 +1590,11 @@ private void checkInterfaceConflictProperties(NodeTraversal t, Node n,
         }
         currentProperties.put(name, interfaceType);
       }
+      for (ObjectType iType : interfaceType.getCtorExtendedInterfaces()) {
+        checkInterfaceConflictProperties(t, n, functionName, properties,
+            currentProperties, iType);
+      }
     }
-    for (ObjectType iType : interfaceType.getCtorExtendedInterfaces()) {
-      checkInterfaceConflictProperties(t, n, functionName, properties,
-          currentProperties, iType);
-    }
-  }
 
   /**
    * Visits a {@link Token#FUNCTION} node.

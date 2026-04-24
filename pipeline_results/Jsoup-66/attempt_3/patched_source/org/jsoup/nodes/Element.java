@@ -28,6 +28,7 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 import static org.jsoup.internal.Normalizer.normalize;
+import java.util.Iterator;
 
 /**
  * A HTML element consists of a tag name, attributes, and child nodes (including text nodes and
@@ -679,16 +680,20 @@ public class Element extends Node {
      * @return the next element, or null if there is no next element
      * @see #previousElementSibling()
      */
-public Element nextElementSibling() {
-        if (parentNode == null) return null;
-        Element parent = parent();
-        if (parent == null) return null;
-        List<Element> siblings = parent.childElementsList();
-        if (siblings == null || siblings.isEmpty()) return null;
-        Integer index = indexInList(this, siblings);
-        if (index == null || index < 0 || siblings.size() <= index + 1) return null;
-        return siblings.get(index + 1);
-    }
+    public Element nextElementSibling() {
+            // Handle cases where parentNode is null, such as after cloning
+            Element parent = parent();
+            if (parent == null) return null; // If there's no parent, no siblings exist.
+    
+            List<Element> siblings = parent.childElementsList();
+            if (siblings == null || siblings.isEmpty()) return null; // No siblings to process.
+    
+            Integer index = indexInList(this, siblings);
+            if (index == null || index < 0) return null; // Ensure index is valid.
+    
+            // Return the next sibling if it exists
+            return (index + 1 < siblings.size()) ? siblings.get(index + 1) : null;
+        }
 
     /**
      * Gets the previous element sibling of this element.

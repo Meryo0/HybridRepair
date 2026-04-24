@@ -1,13 +1,11 @@
 --- org/apache/commons/math3/geometry/euclidean/twod/Line.java
 +++ org/apache/commons/math3/geometry/euclidean/twod/Line.java
-@@ -177,7 +177,10 @@
-     }
+@@ -178,6 +178,9 @@
  
      /** {@inheritDoc} */
--    public Vector1D toSubSpace(final Vector<Euclidean2D> point) {
-+public Vector1D toSubSpace(final Vector<Euclidean2D> point) {
+     public Vector1D toSubSpace(final Vector<Euclidean2D> point) {
 +        if (point == null) {
-+            return null;
++            throw new NullPointerException("Input point cannot be null");
 +        }
          Vector2D p2 = (Vector2D) point;
          return new Vector1D(cos * p2.getX() + sin * p2.getY());

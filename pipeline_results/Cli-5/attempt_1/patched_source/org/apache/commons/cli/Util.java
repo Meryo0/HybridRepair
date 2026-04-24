@@ -31,22 +31,22 @@ class Util {
      *
      * @return the new String.
      */
-static String stripLeadingHyphens(String str)
-    {
-        if (str == null) {
-            return null;
-        }
-        if (str.startsWith("--"))
+    static String stripLeadingHyphens(String str)
         {
-            return str.substring(2, str.length());
+            if (str == null) {
+                return null; // Handle null input gracefully
+            }
+            if (str.startsWith("--"))
+            {
+                return str.substring(2, str.length());
+            }
+            else if (str.startsWith("-"))
+            {
+                return str.substring(1, str.length());
+            }
+    
+            return str;
         }
-        else if (str.startsWith("-"))
-        {
-            return str.substring(1, str.length());
-        }
-
-        return str;
-    }
 
     /**
      * Remove the leading and trailing quotes from <code>str</code>.

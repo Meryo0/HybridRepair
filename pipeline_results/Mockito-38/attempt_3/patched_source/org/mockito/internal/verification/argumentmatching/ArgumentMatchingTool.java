@@ -10,6 +10,7 @@ import java.util.List;
 import org.hamcrest.Matcher;
 import org.hamcrest.StringDescription;
 import org.mockito.internal.matchers.ContainsExtraTypeInformation;
+import java.util.Objects;
 
 @SuppressWarnings("unchecked")
 public class ArgumentMatchingTool {
@@ -44,14 +45,12 @@ public class ArgumentMatchingTool {
         }
     }
 
-private boolean toStringEquals(Matcher m, Object arg) {
+    private boolean toStringEquals(Matcher m, Object arg) {
         if (m == null || arg == null) {
             return false;
         }
-        try {
-            return StringDescription.toString(m).equals(arg.toString());
-        } catch (Exception e) {
-            return false;
-        }
+        String matcherString = StringDescription.toString(m);
+        String argString = (arg != null) ? arg.toString() : null;
+        return Objects.equals(matcherString, argString);
     }
 }

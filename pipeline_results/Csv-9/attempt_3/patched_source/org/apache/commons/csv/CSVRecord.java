@@ -48,11 +48,11 @@ public final class CSVRecord implements Serializable, Iterable<String> {
     /** The values of the record */
     private final String[] values;
 
-CSVRecord(final String[] values, final Map<String, Integer> mapping,
+    CSVRecord(final String[] values, final Map<String, Integer> mapping,
             final String comment, final long recordNumber) {
         this.recordNumber = recordNumber;
         this.values = values != null ? values : EMPTY_STRING_ARRAY;
-        this.mapping = mapping; // Allow mapping to be null if no header is defined
+        this.mapping = mapping;
         this.comment = comment;
     }
 
@@ -176,10 +176,7 @@ CSVRecord(final String[] values, final Map<String, Integer> mapping,
      * @param map The Map to populate.
      * @return the given map.
      */
-<M extends Map<String, String>> M putIn(final M map) {
-        if (mapping == null) {
-            throw new IllegalStateException("No header mapping was defined, cannot populate the map.");
-        }
+    <M extends Map<String, String>> M putIn(final M map) {
         for (final Entry<String, Integer> entry : mapping.entrySet()) {
             final int col = entry.getValue().intValue();
             if (col < values.length) {

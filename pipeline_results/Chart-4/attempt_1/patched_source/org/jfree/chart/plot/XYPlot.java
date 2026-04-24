@@ -1572,9 +1572,9 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @see #setRenderer(XYItemRenderer)
      */
-public XYItemRenderer getRenderer() {
-        return getRenderer(0);
-    }
+    public XYItemRenderer getRenderer() {
+            return getRenderer(0);
+        }
 
     /**
      * Returns the renderer for a dataset, or <code>null</code>.
@@ -1585,13 +1585,13 @@ public XYItemRenderer getRenderer() {
      *
      * @see #setRenderer(int, XYItemRenderer)
      */
-public XYItemRenderer getRenderer(int index) {
-        XYItemRenderer result = null;
-        if (this.renderers != null && this.renderers.size() > index) {
-            result = (XYItemRenderer) this.renderers.get(index);
+    public XYItemRenderer getRenderer(int index) {
+            XYItemRenderer result = null;
+            if (this.renderers.size() > index) {
+                result = (XYItemRenderer) this.renderers.get(index);
+            }
+            return result;
         }
-        return result;
-    }
 
     /**
      * Sets the renderer for the primary dataset and sends a
@@ -1739,23 +1739,19 @@ public XYItemRenderer getRenderer(int index) {
      *
      * @return The renderer (possibly <code>null</code>).
      */
-public XYItemRenderer getRendererForDataset(XYDataset dataset) {
-        XYItemRenderer result = null;
-        if (this.datasets != null) {
+    public XYItemRenderer getRendererForDataset(XYDataset dataset) {
+            XYItemRenderer result = null;
             for (int i = 0; i < this.datasets.size(); i++) {
                 if (this.datasets.get(i) == dataset) {
-                    if (this.renderers != null && this.renderers.size() > i) {
-                        result = (XYItemRenderer) this.renderers.get(i);
-                    }
+                    result = (XYItemRenderer) this.renderers.get(i);
                     if (result == null) {
                         result = getRenderer();
                     }
                     break;
                 }
             }
+            return result;
         }
-        return result;
-    }
 
     /**
      * Returns the weight for this plot when it is used as a subplot within a
@@ -4425,102 +4421,88 @@ public XYItemRenderer getRendererForDataset(XYDataset dataset) {
      *
      * @return The range.
      */
-public Range getDataRange(ValueAxis axis) {
-
-        Range result = null;
-        List mappedDatasets = new ArrayList();
-        List includedAnnotations = new ArrayList();
-        boolean isDomainAxis = true;
-
-        // is it a domain axis?
-        int domainIndex = getDomainAxisIndex(axis);
-        if (domainIndex >= 0) {
-            isDomainAxis = true;
-            mappedDatasets.addAll(getDatasetsMappedToDomainAxis(
-                    new Integer(domainIndex)));
-            if (domainIndex == 0) {
-                // grab the plot's annotations
-                Iterator iterator = this.annotations.iterator();
-                while (iterator.hasNext()) {
-                    XYAnnotation annotation = (XYAnnotation) iterator.next();
-                    if (annotation instanceof XYAnnotationBoundsInfo) {
-                        includedAnnotations.add(annotation);
-                    }
-                }
-            }
-        }
-
-        // or is it a range axis?
-        int rangeIndex = getRangeAxisIndex(axis);
-        if (rangeIndex >= 0) {
-            isDomainAxis = false;
-            mappedDatasets.addAll(getDatasetsMappedToRangeAxis(
-                    new Integer(rangeIndex)));
-            if (rangeIndex == 0) {
-                Iterator iterator = this.annotations.iterator();
-                while (iterator.hasNext()) {
-                    XYAnnotation annotation = (XYAnnotation) iterator.next();
-                    if (annotation instanceof XYAnnotationBoundsInfo) {
-                        includedAnnotations.add(annotation);
-                    }
-                }
-            }
-        }
-
-        // iterate through the datasets that map to the axis and get the union
-        // of the ranges.
-        Iterator iterator = mappedDatasets.iterator();
-        while (iterator.hasNext()) {
-            XYDataset d = (XYDataset) iterator.next();
-            if (d != null) {
-                XYItemRenderer r = getRendererForDataset(d);
-                if (isDomainAxis) {
-                    if (r != null) {
-                        result = Range.combine(result, r.findDomainBounds(d));
-                    }
-                    else {
-                        result = Range.combine(result,
-                                DatasetUtilities.findDomainBounds(d));
-                    }
-                }
-                else {
-                    if (r != null) {
-                        result = Range.combine(result, r.findRangeBounds(d));
-                    }
-                    else {
-                        result = Range.combine(result,
-                                DatasetUtilities.findRangeBounds(d));
-                    }
-                }
-                if (r != null) {
-                    Collection c = r.getAnnotations();
-                    Iterator i = c.iterator();
-                    while (i.hasNext()) {
-                        XYAnnotation a = (XYAnnotation) i.next();
-                        if (a instanceof XYAnnotationBoundsInfo) {
-                            includedAnnotations.add(a);
+    public Range getDataRange(ValueAxis axis) {
+            Range result = null;
+            List mappedDatasets = new ArrayList();
+            List includedAnnotations = new ArrayList();
+            boolean isDomainAxis = true;
+    
+            int domainIndex = getDomainAxisIndex(axis);
+            if (domainIndex >= 0) {
+                isDomainAxis = true;
+                mappedDatasets.addAll(getDatasetsMappedToDomainAxis(new Integer(domainIndex)));
+                if (domainIndex == 0) {
+                    Iterator iterator = this.annotations.iterator();
+                    while (iterator.hasNext()) {
+                        XYAnnotation annotation = (XYAnnotation) iterator.next();
+                        if (annotation instanceof XYAnnotationBoundsInfo) {
+                            includedAnnotations.add(annotation);
                         }
                     }
                 }
             }
-        }
-
-        Iterator it = includedAnnotations.iterator();
-        while (it.hasNext()) {
-            XYAnnotationBoundsInfo xyabi = (XYAnnotationBoundsInfo) it.next();
-            if (xyabi.getIncludeInDataBounds()) {
-                if (isDomainAxis) {
-                    result = Range.combine(result, xyabi.getXRange());
-                }
-                else {
-                    result = Range.combine(result, xyabi.getYRange());
+    
+            int rangeIndex = getRangeAxisIndex(axis);
+            if (rangeIndex >= 0) {
+                isDomainAxis = false;
+                mappedDatasets.addAll(getDatasetsMappedToRangeAxis(new Integer(rangeIndex)));
+                if (rangeIndex == 0) {
+                    Iterator iterator = this.annotations.iterator();
+                    while (iterator.hasNext()) {
+                        XYAnnotation annotation = (XYAnnotation) iterator.next();
+                        if (annotation instanceof XYAnnotationBoundsInfo) {
+                            includedAnnotations.add(annotation);
+                        }
+                    }
                 }
             }
+    
+            Iterator iterator = mappedDatasets.iterator();
+            while (iterator.hasNext()) {
+                XYDataset d = (XYDataset) iterator.next();
+                if (d != null) {
+                    XYItemRenderer r = getRendererForDataset(d);
+                    if (isDomainAxis) {
+                        if (r != null) {
+                            result = Range.combine(result, r.findDomainBounds(d));
+                        } else {
+                            result = Range.combine(result, DatasetUtilities.findDomainBounds(d));
+                        }
+                    } else {
+                        if (r != null) {
+                            result = Range.combine(result, r.findRangeBounds(d));
+                        } else {
+                            result = Range.combine(result, DatasetUtilities.findRangeBounds(d));
+                        }
+                    }
+    
+                    if (r != null) {
+                        Collection c = r.getAnnotations();
+                        Iterator i = c.iterator();
+                        while (i.hasNext()) {
+                            XYAnnotation a = (XYAnnotation) i.next();
+                            if (a instanceof XYAnnotationBoundsInfo) {
+                                includedAnnotations.add(a);
+                            }
+                        }
+                    }
+                }
+            }
+    
+            Iterator it = includedAnnotations.iterator();
+            while (it.hasNext()) {
+                XYAnnotationBoundsInfo xyabi = (XYAnnotationBoundsInfo) it.next();
+                if (xyabi.getIncludeInDataBounds()) {
+                    if (isDomainAxis) {
+                        result = Range.combine(result, xyabi.getXRange());
+                    } else {
+                        result = Range.combine(result, xyabi.getYRange());
+                    }
+                }
+            }
+    
+            return result;
         }
-
-        return result;
-
-    }
 
     /**
      * Receives notification of a change to the plot's dataset.

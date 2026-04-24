@@ -36,14 +36,11 @@ public class Cleaner {
      @param dirtyDocument Untrusted base document to clean.
      @return cleaned document.
      */
-public Document clean(Document dirtyDocument) {
+    public Document clean(Document dirtyDocument) {
         Validate.notNull(dirtyDocument);
 
         Document clean = Document.createShell(dirtyDocument.baseUri());
-        Element dirtyBody = dirtyDocument.body();
-        if (dirtyBody != null) {
-            copySafeNodes(dirtyBody, clean.body());
-        }
+            copySafeNodes(dirtyDocument.body(), clean.body());
 
         return clean;
     }
@@ -73,18 +70,23 @@ public Document clean(Document dirtyDocument) {
      @return number of discarded elements (that were considered unsafe)
      */
     private int copySafeNodes(Element source, Element dest) {
+        if (source == null) {
+            // Safeguard against null source
+            return 0;
+        }
+    
         List<Node> sourceChildren = source.childNodes();
         int numDiscarded = 0;
-
+    
         for (Node sourceChild : sourceChildren) {
             if (sourceChild instanceof Element) {
                 Element sourceEl = (Element) sourceChild;
-
+    
                 if (whitelist.isSafeTag(sourceEl.tagName())) { // safe, clone and copy safe attrs
                     ElementMeta meta = createSafeElement(sourceEl);
                     Element destChild = meta.el;
                     dest.appendChild(destChild);
-
+    
                     numDiscarded += meta.numAttribsDiscarded;
                     numDiscarded += copySafeNodes(sourceEl, destChild); // recurs
                 } else { // not a safe tag, but it may have children (els or text) that are, so recurse

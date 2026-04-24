@@ -1,35 +1,17 @@
 --- org/apache/commons/codec/language/DoubleMetaphone.java
 +++ org/apache/commons/codec/language/DoubleMetaphone.java
-@@ -240,8 +240,13 @@
-      * @return {@code true} if the encoded <code>String</code>s are equal;
+@@ -241,8 +241,12 @@
       *          {@code false} otherwise.
       */
--    public boolean isDoubleMetaphoneEqual(final String value1, final String value2, final boolean alternate) {
+     public boolean isDoubleMetaphoneEqual(final String value1, final String value2, final boolean alternate) {
 -        return doubleMetaphone(value1, alternate).equals(doubleMetaphone(value2, alternate));
-+public boolean isDoubleMetaphoneEqual(final String value1, final String value2, final boolean alternate) {
-+        String metaphone1 = doubleMetaphone(value1, alternate);
-+        String metaphone2 = doubleMetaphone(value2, alternate);
-+        if (metaphone1 == null || metaphone2 == null) {
-+            return false;
+-    }
++            String metaphone1 = doubleMetaphone(value1, alternate);
++            String metaphone2 = doubleMetaphone(value2, alternate);
++    
++            // Null-safe comparison
++            return (metaphone1 == null && metaphone2 == null) || (metaphone1 != null && metaphone1.equals(metaphone2));
 +        }
-+        return metaphone1.equals(metaphone2);
-     }
  
      /**
-
---- org/apache/commons/codec/language/DoubleMetaphone.java
-+++ org/apache/commons/codec/language/DoubleMetaphone.java
-@@ -82,10 +82,10 @@
-      * @param alternate use alternate encode
-      * @return an encoded string
-      */
--    public String doubleMetaphone(String value, final boolean alternate) {
-+public String doubleMetaphone(String value, final boolean alternate) {
-         value = cleanInput(value);
--        if (value == null) {
--            return null;
-+        if (value == null || value.isEmpty()) {
-+            return ""; // Return an empty string instead of null to avoid NPEs
-         }
- 
-         final boolean slavoGermanic = isSlavoGermanic(value);
+      * Returns the maxCodeLen.

@@ -1,25 +1,42 @@
 --- org/apache/commons/lang3/ClassUtils.java
 +++ org/apache/commons/lang3/ClassUtils.java
-@@ -899,6 +899,9 @@
-      * @return a <code>Class</code> array, <code>null</code> if null array input
+@@ -900,17 +900,28 @@
       * @since 2.4
       */
-+/**
-+     * @since 2.4
-+     */
      public static Class<?>[] toClass(Object[] array) {
-         if (array == null) {
-             return null;
-@@ -907,7 +910,11 @@
-         }
-         Class<?>[] classes = new Class[array.length];
-         for (int i = 0; i < array.length; i++) {
+-        if (array == null) {
+-            return null;
+-        } else if (array.length == 0) {
+-            return ArrayUtils.EMPTY_CLASS_ARRAY;
+-        }
+-        Class<?>[] classes = new Class[array.length];
+-        for (int i = 0; i < array.length; i++) {
 -            classes[i] = array[i].getClass();
-+            if (array[i] != null) {
-+                classes[i] = array[i].getClass();
-+            } else {
-+                classes[i] = Object.class; // Assign Object.class for null values to ensure compatibility
+-        }
+-        return classes;
+-    }
++            if (array == null) {
++                return null;
++            } else if (array.length == 0) {
++                return ArrayUtils.EMPTY_CLASS_ARRAY;
 +            }
-         }
-         return classes;
-     }
++            // Count non-null elements
++            int nonNullCount = 0;
++            for (Object obj : array) {
++                if (obj != null) {
++                    nonNullCount++;
++                }
++            }
++            // Create result array with the exact size for non-null elements
++            Class<?>[] classes = new Class[nonNullCount];
++            int index = 0;
++            for (Object obj : array) {
++                if (obj != null) {
++                    classes[index++] = obj.getClass();
++                }
++            }
++            return classes;
++        }
+ 
+     // Short canonical name
+     // ----------------------------------------------------------------------

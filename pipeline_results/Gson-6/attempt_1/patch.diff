@@ -1,20 +1,22 @@
 --- com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java
 +++ com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java
-@@ -48,6 +48,7 @@
+@@ -47,7 +47,7 @@
+     return (TypeAdapter<T>) getTypeAdapter(constructorConstructor, gson, targetType, annotation);
    }
  
-   @SuppressWarnings("unchecked") // Casts guarded by conditionals.
+-  @SuppressWarnings("unchecked") // Casts guarded by conditionals.
 +@SuppressWarnings("unchecked") // Casts guarded by conditionals.
    static TypeAdapter<?> getTypeAdapter(ConstructorConstructor constructorConstructor, Gson gson,
        TypeToken<?> fieldType, JsonAdapter annotation) {
      Class<?> value = annotation.value();
-@@ -64,7 +65,10 @@
+@@ -64,7 +64,11 @@
        throw new IllegalArgumentException(
            "@JsonAdapter value must be TypeAdapter or TypeAdapterFactory reference.");
      }
 -      typeAdapter = typeAdapter.nullSafe();
 +    if (typeAdapter == null) {
-+      throw new IllegalArgumentException("Failed to create TypeAdapter for @JsonAdapter value.");
++      throw new IllegalArgumentException(
++          "@JsonAdapter value must be a valid TypeAdapter or TypeAdapterFactory reference.");
 +    }
 +    typeAdapter = typeAdapter.nullSafe();
      return typeAdapter;

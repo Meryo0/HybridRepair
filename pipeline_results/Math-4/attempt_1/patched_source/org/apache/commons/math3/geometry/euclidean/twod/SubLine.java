@@ -32,6 +32,7 @@ import org.apache.commons.math3.geometry.partitioning.Region.Location;
 import org.apache.commons.math3.geometry.partitioning.Side;
 import org.apache.commons.math3.geometry.partitioning.SubHyperplane;
 import org.apache.commons.math3.util.FastMath;
+import java.util.Objects;;
 
 /** This class represents a sub-hyperplane for {@link Line}.
  * @version $Id$
@@ -107,30 +108,32 @@ public class SubLine extends AbstractSubHyperplane<Euclidean2D, Euclidean1D> {
      * occurring on endpoints lead to null being returned
      * @return the intersection point if there is one, null if the sub-lines don't intersect
      */
-public Vector2D intersection(final SubLine subLine, final boolean includeEndPoints) {
-
+    public Vector2D intersection(final SubLine subLine, final boolean includeEndPoints) {
+        if (subLine == null) {
+            throw new IllegalArgumentException("SubLine cannot be null.");
+        }
+    
         // retrieve the underlying lines
         Line line1 = (Line) getHyperplane();
         Line line2 = (Line) subLine.getHyperplane();
-
+    
         // compute the intersection on infinite line
         Vector2D v2D = line1.intersection(line2);
         if (v2D == null) {
             return null;
         }
-
+    
         // check location of point with respect to first sub-line
         Location loc1 = getRemainingRegion().checkPoint(line1.toSubSpace(v2D));
-
+    
         // check location of point with respect to second sub-line
         Location loc2 = subLine.getRemainingRegion().checkPoint(line2.toSubSpace(v2D));
-
+    
         if (includeEndPoints) {
             return ((loc1 != Location.OUTSIDE) && (loc2 != Location.OUTSIDE)) ? v2D : null;
         } else {
             return ((loc1 == Location.INSIDE) && (loc2 == Location.INSIDE)) ? v2D : null;
         }
-
     }
 
     /** Build an interval set from two points.

@@ -403,23 +403,27 @@ public class Base64 implements BinaryEncoder, BinaryDecoder {
      *            amount of bytes we're allowed to extract. We may extract fewer (if fewer are available).
      * @return The number of bytes successfully extracted into the provided byte[] array.
      */
-int readResults(byte[] b, int bPos, int bAvail) {
+    int readResults(byte[] b, int bPos, int bAvail) {
         if (buffer != null) {
             int len = Math.min(avail(), bAvail);
             if (buffer != b) {
                 System.arraycopy(buffer, readPos, b, bPos, len);
                 readPos += len;
                 if (readPos >= pos) {
-                    buffer = null;
+                    buffer = null; // Clear the buffer when all data has been read
                 }
             } else {
                 // Re-using the original consumer's output array is only
                 // allowed for one round.
-                buffer = null;
+                buffer = null; // Clear the buffer after one round of reuse
             }
             return len;
         }
-        return eof ? -1 : 0;
+        // Handle the case where buffer is null
+        if (b == null) {
+            throw new IllegalArgumentException("Output array 'b' cannot be null");
+        }
+        return eof ? -1 : 0; // Return -1 if EOF is reached, otherwise 0
     }
 
     /**
@@ -582,22 +586,15 @@ int readResults(byte[] b, int bPos, int bAvail) {
         // Two forms of EOF as far as base64 decoder is concerned: actual
         // EOF (-1) and first time '=' character is encountered in stream.
         // This approach makes the '=' padding characters completely optional.
-// This approach makes the '=' padding characters completely optional.
         if (eof && modulus != 0) {
             
             x = x << 6;
             switch (modulus) {
                 case 2 :
                     x = x << 6;
-                    if (buffer == null) {
-                        buffer = new byte[DEFAULT_BUFFER_SIZE];
-                    }
                     buffer[pos++] = (byte) ((x >> 16) & MASK_8BITS);
                     break;
                 case 3 :
-                    if (buffer == null) {
-                        buffer = new byte[DEFAULT_BUFFER_SIZE];
-                    }
                     buffer[pos++] = (byte) ((x >> 16) & MASK_8BITS);
                     buffer[pos++] = (byte) ((x >> 8) & MASK_8BITS);
                     break;

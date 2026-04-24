@@ -1,30 +1,81 @@
 --- org/apache/commons/csv/CSVParser.java
 +++ org/apache/commons/csv/CSVParser.java
-@@ -356,7 +356,7 @@
-      * @return null if the format has no header.
+@@ -357,41 +357,45 @@
       * @throws IOException if there is a problem reading the header or skipping the first record
       */
--    private Map<String, Integer> initializeHeader() throws IOException {
-+private Map<String, Integer> initializeHeader() throws IOException {
-         Map<String, Integer> hdrMap = null;
-         final String[] formatHeader = this.format.getHeader();
-         if (formatHeader != null) {
-@@ -380,13 +380,14 @@
-             if (headerRecord != null) {
-                 for (int i = 0; i < headerRecord.length; i++) {
-                     final String header = headerRecord[i];
+     private Map<String, Integer> initializeHeader() throws IOException {
+-        Map<String, Integer> hdrMap = null;
+-        final String[] formatHeader = this.format.getHeader();
+-        if (formatHeader != null) {
+-            hdrMap = new LinkedHashMap<String, Integer>();
+-
+-            String[] headerRecord = null;
+-            if (formatHeader.length == 0) {
+-                // read the header from the first line of the file
+-                final CSVRecord nextRecord = this.nextRecord();
+-                if (nextRecord != null) {
+-                    headerRecord = nextRecord.values();
+-                }
+-            } else {
+-                if (this.format.getSkipHeaderRecord()) {
+-                    this.nextRecord();
+-                }
+-                headerRecord = formatHeader;
++            Map<String, Integer> hdrMap = null;
++            final String[] formatHeader = this.format.getHeader();
++            if (formatHeader != null) {
++                hdrMap = new LinkedHashMap<String, Integer>();
++    
++                String[] headerRecord = null;
++                if (formatHeader.length == 0) {
++                    // read the header from the first line of the file
++                    final CSVRecord nextRecord = this.nextRecord();
++                    if (nextRecord != null) {
++                        headerRecord = nextRecord.values();
++                    }
++                } else {
++                    if (this.format.getSkipHeaderRecord()) {
++                        this.nextRecord();
++                    }
++                    headerRecord = formatHeader;
++                }
++    
++                // build the name to index mappings
++                if (headerRecord != null) {
++                    for (int i = 0; i < headerRecord.length; i++) {
++                        String header = headerRecord[i];
++                        // Treat null headers as empty strings
++                        if (header == null) {
++                            header = "";
++                        }
++                        final boolean containsHeader = hdrMap.containsKey(header);
++                        final boolean emptyHeader = header.trim().isEmpty();
++                        if (containsHeader && (!emptyHeader || (emptyHeader && !this.format.getIgnoreEmptyHeaders()))) {
++                            throw new IllegalArgumentException("The header contains a duplicate name: \"" + header +
++                                    "\" in " + Arrays.toString(headerRecord));
++                        }
++                        hdrMap.put(header, Integer.valueOf(i));
++                    }
++                }
+             }
+-
+-            // build the name to index mappings
+-            if (headerRecord != null) {
+-                for (int i = 0; i < headerRecord.length; i++) {
+-                    final String header = headerRecord[i];
 -                    final boolean containsHeader = hdrMap.containsKey(header);
 -                    final boolean emptyHeader = header.trim().isEmpty();
-+                    final String safeHeader = (header == null) ? "" : header;
-+                    final boolean containsHeader = hdrMap.containsKey(safeHeader);
-+                    final boolean emptyHeader = safeHeader.trim().isEmpty();
-                     if (containsHeader && (!emptyHeader || (emptyHeader && !this.format.getIgnoreEmptyHeaders()))) {
+-                    if (containsHeader && (!emptyHeader || (emptyHeader && !this.format.getIgnoreEmptyHeaders()))) {
 -                        throw new IllegalArgumentException("The header contains a duplicate name: \"" + header +
-+                        throw new IllegalArgumentException("The header contains a duplicate name: \"" + safeHeader +
-                                 "\" in " + Arrays.toString(headerRecord));
-                     }
+-                                "\" in " + Arrays.toString(headerRecord));
+-                    }
 -                    hdrMap.put(header, Integer.valueOf(i));
-+                    hdrMap.put(safeHeader, Integer.valueOf(i));
-                 }
-             }
+-                }
+-            }
++            return hdrMap;
          }
+-        return hdrMap;
+-    }
+ 
+     public boolean isClosed() {
+         return this.lexer.isClosed();

@@ -1,50 +1,44 @@
---- com/fasterxml/jackson/databind/deser/impl/ObjectIdValueProperty.java
-+++ com/fasterxml/jackson/databind/deser/impl/ObjectIdValueProperty.java
-@@ -78,7 +78,7 @@
-     }
- 
-     @Override
--    public Object deserializeSetAndReturn(JsonParser jp,
-+public Object deserializeSetAndReturn(JsonParser jp,
-     		DeserializationContext ctxt, Object instance) throws IOException
-     {
-         // note: no null checks (unlike usually); deserializer should fail if one found
-@@ -90,8 +90,10 @@
-          *  quite yet. Typical use case is with DB inserts.
-          */
-         
--        ReadableObjectId roid = ctxt.findObjectId(id, _objectIdReader.generator, _objectIdReader.resolver);
--        roid.bindItem(instance);
-+        ReadableObjectId roid = (id == null) ? null : ctxt.findObjectId(id, _objectIdReader.generator, _objectIdReader.resolver);
-+        if (roid != null) {
-+            roid.bindItem(instance);
-+        }
-         // also: may need to set a property value as well
-         SettableBeanProperty idProp = _objectIdReader.idProperty;
-         if (idProp != null) {
-
 --- com/fasterxml/jackson/databind/deser/DefaultDeserializationContext.java
 +++ com/fasterxml/jackson/databind/deser/DefaultDeserializationContext.java
-@@ -79,11 +79,16 @@
-      */
- 
-     @Override
--    public ReadableObjectId findObjectId(Object id, ObjectIdGenerator<?> gen, ObjectIdResolver resolverType)
-+public ReadableObjectId findObjectId(Object id, ObjectIdGenerator<?> gen, ObjectIdResolver resolverType)
-     {
+@@ -84,21 +84,27 @@
          /* 02-Apr-2015, tatu: As per [databind#742] should allow 'null', similar to how
           *   missing id already works.
           */
-+
+-
 +        if (id == null) {
-+            // Return a placeholder ReadableObjectId for null IDs
-+            return new ReadableObjectId(null);
++            // Handle null id gracefully by returning a new ReadableObjectId with a placeholder key
++            ReadableObjectId entry = new ReadableObjectId(new ObjectIdGenerator.IdKey(gen.getClass(), null, null));
++            entry.setResolver(resolverType.newForDeserialization(this));
++            return entry;
 +        }
- 
++    
          final ObjectIdGenerator.IdKey key = gen.key(id);
- 
-@@ -112,15 +117,6 @@
- 
+-
++    
+         if (_objectIds == null) {
+-            _objectIds = new LinkedHashMap<ObjectIdGenerator.IdKey,ReadableObjectId>();
++            _objectIds = new LinkedHashMap<ObjectIdGenerator.IdKey, ReadableObjectId>();
+         } else {
+             ReadableObjectId entry = _objectIds.get(key);
+             if (entry != null) {
+                 return entry;
+             }
+         }
+-
++    
+         // Not seen yet, must create entry and configure resolver.
+         ObjectIdResolver resolver = null;
+-
++    
+         if (_objectIdResolvers == null) {
+             _objectIdResolvers = new ArrayList<ObjectIdResolver>(8);
+         } else {
+@@ -109,21 +115,12 @@
+                 }
+             }
+         }
+-
++    
          if (resolver == null) {
              resolver = resolverType.newForDeserialization(this);
 -            // 19-Dec-2014, tatu: For final 2.5.0, remove temporary (2.4.x) work-around
@@ -58,4 +52,8 @@
 -            */
              _objectIdResolvers.add(resolver);
          }
- 
+-
++    
+         ReadableObjectId entry = new ReadableObjectId(key);
+         entry.setResolver(resolver);
+         _objectIds.put(key, entry);

@@ -2,9 +2,11 @@
   "bug_id": "Mockito-18",
   "success": false,
   "winning_attempt": null,
-  "total_attempts": 0,
+  "total_attempts": 3,
   "test_result": {
-    "error": "No fault locations found by LogicFL"
+    "status": "FAIL",
+    "total_attempts": 3,
+    "last_failure": ""
   },
-  "timestamp": "2026-04-22T22:10:38.480496+00:00"
+  "timestamp": "2026-04-24T16:15:16.148505+00:00"
 }

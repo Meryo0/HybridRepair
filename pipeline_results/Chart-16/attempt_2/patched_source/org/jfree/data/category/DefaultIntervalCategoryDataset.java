@@ -238,9 +238,12 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
      * @see #getSeriesKey(int)
      */
     public int getSeriesIndex(Comparable seriesKey) {
+        if (this.seriesKeys == null) {
+            return -1; // Return -1 if seriesKeys is not initialized
+        }
         int result = -1;
         for (int i = 0; i < this.seriesKeys.length; i++) {
-            if (seriesKey.equals(this.seriesKeys[i])) {
+            if (seriesKey != null && seriesKey.equals(this.seriesKeys[i])) {
                 result = i;
                 break;
             }
@@ -331,14 +334,23 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
      * @see #getRowKeys()
      * @see #setSeriesKeys(Comparable[])
      */
-public void setCategoryKeys(Comparable[] categoryKeys) {
+    public void setCategoryKeys(Comparable[] categoryKeys) {
         if (categoryKeys == null) {
             throw new IllegalArgumentException("Null 'categoryKeys' argument.");
         }
-        if (this.startData != null && categoryKeys.length != this.startData[0].length) {
-            throw new IllegalArgumentException("The number of categories does not match the data.");
+        if (categoryKeys.length != this.startData[0].length) {
+            throw new IllegalArgumentException(
+                    "The number of categories does not match the data.");
+        }
+        for (int i = 0; i < categoryKeys.length; i++) {
+            if (categoryKeys[i] == null) {
+                throw new IllegalArgumentException(
+                    "DefaultIntervalCategoryDataset.setCategoryKeys(): "
+                    + "null category not permitted.");
+            }
         }
         this.categoryKeys = categoryKeys;
+        fireDatasetChanged();
     }
 
     /**
@@ -561,9 +573,12 @@ public void setCategoryKeys(Comparable[] categoryKeys) {
      * @see #getColumnIndex(Comparable)
      */
     public int getCategoryIndex(Comparable category) {
+        if (this.categoryKeys == null) {
+            return -1; // Return -1 if categoryKeys is not initialized
+        }
         int result = -1;
         for (int i = 0; i < this.categoryKeys.length; i++) {
-            if (category.equals(this.categoryKeys[i])) {
+            if (category != null && category.equals(this.categoryKeys[i])) {
                 result = i;
                 break;
             }
@@ -678,6 +693,9 @@ public void setCategoryKeys(Comparable[] categoryKeys) {
      * @see #getRowCount()
      */
     public int getColumnCount() {
+        if (this.categoryKeys == null) {
+            return 0; // Return 0 if categoryKeys is not initialized
+        }
         return this.categoryKeys.length;
     }
 
@@ -736,8 +754,12 @@ public void setCategoryKeys(Comparable[] categoryKeys) {
     public Object clone() throws CloneNotSupportedException {
         DefaultIntervalCategoryDataset clone 
                 = (DefaultIntervalCategoryDataset) super.clone();
-        clone.categoryKeys = (Comparable[]) this.categoryKeys.clone();
-        clone.seriesKeys = (Comparable[]) this.seriesKeys.clone();
+        clone.categoryKeys = (this.categoryKeys != null) 
+                ? (Comparable[]) this.categoryKeys.clone() 
+                : null;
+        clone.seriesKeys = (this.seriesKeys != null) 
+                ? (Comparable[]) this.seriesKeys.clone() 
+                : null;
         clone.startData = clone(this.startData);
         clone.endData = clone(this.endData);
         return clone;

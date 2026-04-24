@@ -1,18 +1,12 @@
 {
   "bug_id": "Jsoup-8",
-  "success": true,
-  "winning_attempt": 1,
-  "total_attempts": 1,
+  "success": false,
+  "winning_attempt": null,
+  "total_attempts": 3,
   "test_result": {
-    "status": "PASS",
-    "total_tests": 39,
-    "failed_tests": 0,
-    "failing_test_names": [],
-    "previously_failing_now_passing": [
-      "org.jsoup.nodes.ElementTest"
-    ],
-    "compile_output": "Note: /home/mario/Desktop/LogicFL/pipeline_results/Jsoup-8/attempt_1/patched_source/org/jsoup/nodes/Node.java uses unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
-    "test_output": "JUnit version 4.13.2\n.......................................\nTime: 0.042\n\nOK (39 tests)\n\n"
+    "status": "FAIL",
+    "total_attempts": 3,
+    "last_failure": ""
   },
-  "timestamp": "2026-04-22T21:56:30.801069+00:00"
+  "timestamp": "2026-04-24T16:01:39.751516+00:00"
 }

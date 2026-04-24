@@ -1,60 +1,47 @@
 --- org/jsoup/nodes/Document.java
 +++ org/jsoup/nodes/Document.java
-@@ -55,7 +55,7 @@
-      Accessor to the document's {@code body} element.
+@@ -56,7 +56,13 @@
       @return {@code body}
       */
--    public Element body() {
-+public Element body() {
-         return findFirstElementByTagName("body", this);
+     public Element body() {
+-        return findFirstElementByTagName("body", this);
++        Element body = findFirstElementByTagName("body", this);
++        if (body == null) {
++            // Create a fallback <body> element if none exists
++            body = new Element(Tag.valueOf("body"), baseUri());
++            this.appendChild(body);
++        }
++        return body;
      }
  
-@@ -358,4 +358,3 @@
-         return this;
-     }
- }
--
-
---- org/jsoup/nodes/Document.java
-+++ org/jsoup/nodes/Document.java
-@@ -160,11 +160,13 @@
-     }
- 
-     // fast method to get first by tag name, used for html, head, body finders
--    private Element findFirstElementByTagName(String tag, Node node) {
-+private Element findFirstElementByTagName(String tag, Node node) {
-+        if (node == null) return null;
-         if (node.nodeName().equals(tag))
-             return (Element) node;
-         else {
--            for (Node child: node.childNodes) {
-+            for (Node child : node.childNodes) {
-+                if (child == null) continue;
-                 Element found = findFirstElementByTagName(tag, child);
-                 if (found != null)
-                     return found;
-@@ -358,4 +360,3 @@
-         return this;
-     }
- }
--
+     /**
 
 --- org/jsoup/safety/Cleaner.java
 +++ org/jsoup/safety/Cleaner.java
-@@ -36,11 +36,14 @@
-      @param dirtyDocument Untrusted base document to clean.
-      @return cleaned document.
+@@ -70,18 +70,23 @@
+      @return number of discarded elements (that were considered unsafe)
       */
--    public Document clean(Document dirtyDocument) {
-+public Document clean(Document dirtyDocument) {
-         Validate.notNull(dirtyDocument);
- 
-         Document clean = Document.createShell(dirtyDocument.baseUri());
--            copySafeNodes(dirtyDocument.body(), clean.body());
-+        Element dirtyBody = dirtyDocument.body();
-+        if (dirtyBody != null) {
-+            copySafeNodes(dirtyBody, clean.body());
+     private int copySafeNodes(Element source, Element dest) {
++        if (source == null) {
++            // Safeguard against null source
++            return 0;
 +        }
- 
-         return clean;
-     }
++    
+         List<Node> sourceChildren = source.childNodes();
+         int numDiscarded = 0;
+-
++    
+         for (Node sourceChild : sourceChildren) {
+             if (sourceChild instanceof Element) {
+                 Element sourceEl = (Element) sourceChild;
+-
++    
+                 if (whitelist.isSafeTag(sourceEl.tagName())) { // safe, clone and copy safe attrs
+                     ElementMeta meta = createSafeElement(sourceEl);
+                     Element destChild = meta.el;
+                     dest.appendChild(destChild);
+-
++    
+                     numDiscarded += meta.numAttribsDiscarded;
+                     numDiscarded += copySafeNodes(sourceEl, destChild); // recurs
+                 } else { // not a safe tag, but it may have children (els or text) that are, so recurse

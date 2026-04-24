@@ -55,8 +55,14 @@ public class Document extends Element {
      Accessor to the document's {@code body} element.
      @return {@code body}
      */
-public Element body() {
-        return findFirstElementByTagName("body", this);
+    public Element body() {
+        Element body = findFirstElementByTagName("body", this);
+        if (body == null) {
+            // Create a fallback <body> element if none exists
+            body = new Element(Tag.valueOf("body"), baseUri());
+            this.appendChild(body);
+        }
+        return body;
     }
 
     /**
@@ -160,13 +166,11 @@ public Element body() {
     }
 
     // fast method to get first by tag name, used for html, head, body finders
-private Element findFirstElementByTagName(String tag, Node node) {
-        if (node == null) return null;
+    private Element findFirstElementByTagName(String tag, Node node) {
         if (node.nodeName().equals(tag))
             return (Element) node;
         else {
-            for (Node child : node.childNodes) {
-                if (child == null) continue;
+            for (Node child: node.childNodes) {
                 Element found = findFirstElementByTagName(tag, child);
                 if (found != null)
                     return found;
@@ -354,8 +358,10 @@ private Element findFirstElementByTagName(String tag, Node node) {
     public QuirksMode quirksMode() {
         return quirksMode;
     }
+
     public Document quirksMode(QuirksMode quirksMode) {
         this.quirksMode = quirksMode;
         return this;
     }
 }
+

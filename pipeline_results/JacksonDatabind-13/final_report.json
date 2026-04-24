@@ -1,18 +1,12 @@
 {
   "bug_id": "JacksonDatabind-13",
-  "success": true,
-  "winning_attempt": 1,
-  "total_attempts": 1,
+  "success": false,
+  "winning_attempt": null,
+  "total_attempts": 3,
   "test_result": {
-    "status": "PASS",
-    "total_tests": 17,
-    "failed_tests": 0,
-    "failing_test_names": [],
-    "previously_failing_now_passing": [
-      "com.fasterxml.jackson.databind.struct.TestObjectIdDeserialization"
-    ],
-    "compile_output": "Note: Some input files use or override a deprecated API.\nNote: Recompile with -Xlint:deprecation for details.\nNote: Some input files use unchecked or unsafe operations.\nNote: Recompile with -Xlint:unchecked for details.\n",
-    "test_output": "JUnit version 4.11\n.................\nTime: 0.16\n\nOK (17 tests)\n\n"
+    "status": "FAIL",
+    "total_attempts": 3,
+    "last_failure": "JUnit version 4.11\n...............E..\nTime: 0.118\nThere was 1 failure:\n1) testNullObjectId(com.fasterxml.jackson.databind.struct.TestObjectIdDeserialization)\ncom.fasterxml.jackson.databind.JsonMappingException: Cannot read field \"key\" because \"<parameter1>\" is null (through reference chain: com.fasterxml.jackson.databind.struct.Identifiable[\"id\"])\n\tat com.fasterxml.jackson.databind.JsonMappingException.wrapWithPath(JsonMappingException.java:210)\n\tat com.fasterxml.jackson.databind.JsonMappingExce"
   },
-  "timestamp": "2026-04-22T21:47:28.555840+00:00"
+  "timestamp": "2026-04-24T15:52:47.531456+00:00"
 }

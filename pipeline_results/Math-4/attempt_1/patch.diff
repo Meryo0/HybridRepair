@@ -1,65 +1,151 @@
 --- org/apache/commons/math3/geometry/euclidean/twod/Line.java
 +++ org/apache/commons/math3/geometry/euclidean/twod/Line.java
-@@ -177,7 +177,10 @@
+@@ -31,6 +31,10 @@
+ import org.apache.commons.math3.geometry.partitioning.Transform;
+ import org.apache.commons.math3.util.FastMath;
+ import org.apache.commons.math3.util.MathUtils;
++import java.util.Objects;;
++import java.util.Objects;;
++import java.util.Objects;;
++import java.util.Objects;;
+ 
+ /** This class represents an oriented line in the 2D plane.
+ 
+@@ -126,18 +130,21 @@
+      * @param p2 second point
+      */
+     public void reset(final Vector2D p1, final Vector2D p2) {
++        if (p1 == null || p2 == null) {
++            throw new IllegalArgumentException("Points p1 and p2 cannot be null.");
++        }
+         final double dx = p2.getX() - p1.getX();
+         final double dy = p2.getY() - p1.getY();
+         final double d = FastMath.hypot(dx, dy);
+         if (d == 0.0) {
+-            angle        = 0.0;
+-            cos          = 1.0;
+-            sin          = 0.0;
++            angle = 0.0;
++            cos = 1.0;
++            sin = 0.0;
+             originOffset = p1.getY();
+         } else {
+-            angle        = FastMath.PI + FastMath.atan2(-dy, -dx);
+-            cos          = FastMath.cos(angle);
+-            sin          = FastMath.sin(angle);
++            angle = FastMath.PI + FastMath.atan2(-dy, -dx);
++            cos = FastMath.cos(angle);
++            sin = FastMath.sin(angle);
+             originOffset = (p2.getX() * p1.getY() - p1.getX() * p2.getY()) / d;
+         }
      }
+@@ -178,6 +185,9 @@
  
      /** {@inheritDoc} */
--    public Vector1D toSubSpace(final Vector<Euclidean2D> point) {
-+public Vector1D toSubSpace(final Vector<Euclidean2D> point) {
+     public Vector1D toSubSpace(final Vector<Euclidean2D> point) {
 +        if (point == null) {
-+            throw new IllegalArgumentException("Input point cannot be null.");
++            throw new IllegalArgumentException("Point cannot be null.");
 +        }
          Vector2D p2 = (Vector2D) point;
          return new Vector1D(cos * p2.getX() + sin * p2.getY());
      }
+@@ -195,6 +205,9 @@
+      * or null if there are no intersection points
+      */
+     public Vector2D intersection(final Line other) {
++        if (other == null) {
++            throw new IllegalArgumentException("Other line cannot be null.");
++        }
+         final double d = sin * other.cos - other.sin * cos;
+         if (FastMath.abs(d) < 1.0e-10) {
+             return null;
+@@ -233,6 +246,9 @@
+ 
+     /** {@inheritDoc} */
+     public double getOffset(final Vector<Euclidean2D> point) {
++        if (point == null) {
++            throw new IllegalArgumentException("Point cannot be null.");
++        }
+         Vector2D p2 = (Vector2D) point;
+         return sin * p2.getX() - cos * p2.getY() + originOffset;
+     }
 
 --- org/apache/commons/math3/geometry/euclidean/twod/SubLine.java
 +++ org/apache/commons/math3/geometry/euclidean/twod/SubLine.java
-@@ -107,7 +107,7 @@
-      * occurring on endpoints lead to null being returned
+@@ -32,6 +32,7 @@
+ import org.apache.commons.math3.geometry.partitioning.Side;
+ import org.apache.commons.math3.geometry.partitioning.SubHyperplane;
+ import org.apache.commons.math3.util.FastMath;
++import java.util.Objects;;
+ 
+ /** This class represents a sub-hyperplane for {@link Line}.
+  * @version $Id$
+@@ -108,26 +109,31 @@
       * @return the intersection point if there is one, null if the sub-lines don't intersect
       */
--    public Vector2D intersection(final SubLine subLine, final boolean includeEndPoints) {
-+public Vector2D intersection(final SubLine subLine, final boolean includeEndPoints) {
- 
+     public Vector2D intersection(final SubLine subLine, final boolean includeEndPoints) {
+-
++        if (subLine == null) {
++            throw new IllegalArgumentException("SubLine cannot be null.");
++        }
++    
          // retrieve the underlying lines
          Line line1 = (Line) getHyperplane();
-@@ -115,6 +115,9 @@
- 
+         Line line2 = (Line) subLine.getHyperplane();
+-
++    
          // compute the intersection on infinite line
          Vector2D v2D = line1.intersection(line2);
+-
 +        if (v2D == null) {
 +            return null;
 +        }
- 
++    
          // check location of point with respect to first sub-line
          Location loc1 = getRemainingRegion().checkPoint(line1.toSubSpace(v2D));
+-
++    
+         // check location of point with respect to second sub-line
+         Location loc2 = subLine.getRemainingRegion().checkPoint(line2.toSubSpace(v2D));
+-
++    
+         if (includeEndPoints) {
+             return ((loc1 != Location.OUTSIDE) && (loc2 != Location.OUTSIDE)) ? v2D : null;
+         } else {
+             return ((loc1 == Location.INSIDE) && (loc2 == Location.INSIDE)) ? v2D : null;
+         }
+-
+     }
+ 
+     /** Build an interval set from two points.
 
 --- org/apache/commons/math3/geometry/euclidean/threed/Line.java
 +++ org/apache/commons/math3/geometry/euclidean/threed/Line.java
-@@ -110,7 +110,10 @@
-      * @param point point to check
+@@ -25,6 +25,8 @@
+ import org.apache.commons.math3.geometry.partitioning.Embedding;
+ import org.apache.commons.math3.util.FastMath;
+ import org.apache.commons.math3.util.Precision;
++import java.util.Objects;;
++import java.util.Objects;;
+ 
+ /** The class represent lines in a three dimensional space.
+ 
+@@ -111,6 +113,9 @@
       * @return abscissa of the point
       */
--    public double getAbscissa(final Vector3D point) {
-+public double getAbscissa(final Vector3D point) {
+     public double getAbscissa(final Vector3D point) {
 +        if (point == null) {
-+            throw new IllegalArgumentException("Input point cannot be null.");
++            throw new IllegalArgumentException("Point cannot be null.");
 +        }
          return point.subtract(zero).dotProduct(direction);
      }
  
-
---- org/apache/commons/math3/geometry/euclidean/threed/Line.java
-+++ org/apache/commons/math3/geometry/euclidean/threed/Line.java
-@@ -125,7 +125,10 @@
-     /** {@inheritDoc}
+@@ -126,6 +131,9 @@
       * @see #getAbscissa(Vector3D)
       */
--    public Vector1D toSubSpace(final Vector<Euclidean3D> point) {
-+public Vector1D toSubSpace(final Vector<Euclidean3D> point) {
+     public Vector1D toSubSpace(final Vector<Euclidean3D> point) {
 +        if (point == null) {
-+            throw new IllegalArgumentException("Input point cannot be null.");
++            throw new IllegalArgumentException("Point cannot be null.");
 +        }
          return new Vector1D(getAbscissa((Vector3D) point));
      }
@@ -67,18 +153,44 @@
 
 --- org/apache/commons/math3/geometry/euclidean/threed/SubLine.java
 +++ org/apache/commons/math3/geometry/euclidean/threed/SubLine.java
-@@ -107,10 +107,13 @@
-      * occurring on endpoints lead to null being returned
+@@ -24,6 +24,7 @@
+ import org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet;
+ import org.apache.commons.math3.geometry.euclidean.oned.Vector1D;
+ import org.apache.commons.math3.geometry.partitioning.Region.Location;
++import java.util.Objects;;
+ 
+ /** This class represents a subset of a {@link Line}.
+  * @version $Id$
+@@ -108,22 +109,27 @@
       * @return the intersection point if there is one, null if the sub-lines don't intersect
       */
--    public Vector3D intersection(final SubLine subLine, final boolean includeEndPoints) {
-+public Vector3D intersection(final SubLine subLine, final boolean includeEndPoints) {
- 
+     public Vector3D intersection(final SubLine subLine, final boolean includeEndPoints) {
+-
++        if (subLine == null) {
++            throw new IllegalArgumentException("SubLine cannot be null.");
++        }
++    
          // compute the intersection on infinite line
          Vector3D v1D = line.intersection(subLine.line);
+-
 +        if (v1D == null) {
 +            return null;
 +        }
- 
++    
          // check location of point with respect to first sub-line
          Location loc1 = remainingRegion.checkPoint(line.toSubSpace(v1D));
+-
++    
+         // check location of point with respect to second sub-line
+         Location loc2 = subLine.remainingRegion.checkPoint(subLine.line.toSubSpace(v1D));
+-
++    
+         if (includeEndPoints) {
+             return ((loc1 != Location.OUTSIDE) && (loc2 != Location.OUTSIDE)) ? v1D : null;
+         } else {
+             return ((loc1 == Location.INSIDE) && (loc2 == Location.INSIDE)) ? v1D : null;
+         }
+-
+     }
+ 
+     /** Build an interval set from two points.

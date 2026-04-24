@@ -1,51 +1,18 @@
 --- org/jfree/chart/plot/XYPlot.java
 +++ org/jfree/chart/plot/XYPlot.java
-@@ -1572,7 +1572,7 @@
-      *
-      * @see #setRenderer(XYItemRenderer)
-      */
--    public XYItemRenderer getRenderer() {
-+public XYItemRenderer getRenderer() {
-         return getRenderer(0);
-     }
- 
-
---- org/jfree/chart/plot/XYPlot.java
-+++ org/jfree/chart/plot/XYPlot.java
-@@ -1585,13 +1585,12 @@
-      *
-      * @see #setRenderer(int, XYItemRenderer)
-      */
--    public XYItemRenderer getRenderer(int index) {
-+public XYItemRenderer getRenderer(int index) {
-         XYItemRenderer result = null;
--        if (this.renderers.size() > index) {
-+        if (this.renderers != null && this.renderers.size() > index) {
-             result = (XYItemRenderer) this.renderers.get(index);
+@@ -1745,13 +1745,11 @@
+         for (int i = 0; i < this.datasets.size(); i++) {
+             if (this.datasets.get(i) == dataset) {
+                 result = (XYItemRenderer) this.renderers.get(i);
+-                if (result == null) {
+-                    result = getRenderer();
+-                }
+                 break;
+             }
          }
-         return result;
--
+-        return result;
++        // Ensure a non-null renderer is returned
++        return (result != null) ? result : getRenderer();
      }
  
      /**
-
---- org/jfree/chart/plot/XYPlot.java
-+++ org/jfree/chart/plot/XYPlot.java
-@@ -1740,13 +1740,12 @@
-      *
-      * @return The renderer (possibly <code>null</code>).
-      */
--    public XYItemRenderer getRendererForDataset(XYDataset dataset) {
-+public XYItemRenderer getRendererForDataset(XYDataset dataset) {
-         XYItemRenderer result = null;
-         for (int i = 0; i < this.datasets.size(); i++) {
--            if (this.datasets.get(i) == dataset) {
--                result = (XYItemRenderer) this.renderers.get(i);
--                if (result == null) {
--                    result = getRenderer();
-+            if (java.util.Objects.equals(this.datasets.get(i), dataset)) {
-+                if (this.renderers != null && i < this.renderers.size()) {
-+                    result = (XYItemRenderer) this.renderers.get(i);
-                 }
-                 break;
-             }

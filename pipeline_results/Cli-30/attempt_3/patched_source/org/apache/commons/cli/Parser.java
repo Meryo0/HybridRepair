@@ -249,13 +249,13 @@ public abstract class Parser implements CommandLineParser
      *
      * @param properties The value properties to be processed.
      */
-protected void processProperties(Properties properties) throws ParseException
+    protected void processProperties(Properties properties) throws ParseException
     {
         if (properties == null)
         {
             return;
         }
-
+    
         for (Enumeration e = properties.propertyNames(); e.hasMoreElements();)
         {
             String option = e.nextElement().toString();
@@ -263,21 +263,16 @@ protected void processProperties(Properties properties) throws ParseException
             if (!cmd.hasOption(option))
             {
                 Option opt = getOptions().getOption(option);
+                
+                // Skip null options gracefully
                 if (opt == null)
-                {
-                    throw new UnrecognizedOptionException("Unrecognized option: " + option);
-                }
-
-                // Check if the option is part of a group and if another option in the group is already selected
-                OptionGroup group = getOptions().getOptionGroup(opt);
-                if (group != null && group.getSelected() != null)
                 {
                     continue;
                 }
-            
+    
                 // get the value from the properties instance
                 String value = properties.getProperty(option);
-
+    
                 if (opt.hasArg())
                 {
                     if (opt.getValues() == null || opt.getValues().length == 0)
@@ -300,7 +295,7 @@ protected void processProperties(Properties properties) throws ParseException
                     // option to the CommandLine
                     continue;
                 }
-
+    
                 cmd.addOption(opt);
                 updateRequiredOptions(opt);
             }

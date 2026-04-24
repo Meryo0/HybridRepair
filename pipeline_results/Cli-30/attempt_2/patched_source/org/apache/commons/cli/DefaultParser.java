@@ -136,7 +136,7 @@ public class DefaultParser implements CommandLineParser
      *
      * @param properties The value properties to be processed.
      */
-private void handleProperties(Properties properties) throws ParseException
+    private void handleProperties(Properties properties) throws ParseException
     {
         if (properties == null)
         {
@@ -150,19 +150,14 @@ private void handleProperties(Properties properties) throws ParseException
             if (!cmd.hasOption(option))
             {
                 Option opt = options.getOption(option);
+                
+                // Skip null options gracefully
                 if (opt == null)
                 {
-                    throw new UnrecognizedOptionException("Unrecognized option: " + option, option);
+                    continue;
                 }
-
-                // Check if the option is part of a group and if another option in the group is already selected
-                OptionGroup group = options.getOptionGroup(opt);
-                if (group != null && group.getSelected() != null)
-                {
-                    continue; // Skip this option as another option in the group is already selected
-                }
-
-                // Get the value from the properties
+    
+                // get the value from the properties
                 String value = properties.getProperty(option);
                 
                 if (opt.hasArg())
@@ -179,7 +174,16 @@ private void handleProperties(Properties properties) throws ParseException
                     // if the value is not yes, true or 1 then don't add the option to the CommandLine
                     continue;
                 }
-                
+    
+                // Ensure the option does not conflict with its group
+                if (opt.getOptionGroup() != null && opt.getOptionGroup().getSelected() != null)
+                {
+                    if (!opt.getOptionGroup().getSelected().equals(opt.getKey()))
+                    {
+                        throw new AlreadySelectedException("The option '" + option + "' was specified but an option from this group has already been selected: '" + opt.getOptionGroup().getSelected() + "'");
+                    }
+                }
+    
                 handleOption(opt);
                 currentOption = null;
             }

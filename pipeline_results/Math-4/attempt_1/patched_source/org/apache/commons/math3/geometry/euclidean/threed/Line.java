@@ -25,6 +25,8 @@ import org.apache.commons.math3.geometry.euclidean.oned.Vector1D;
 import org.apache.commons.math3.geometry.partitioning.Embedding;
 import org.apache.commons.math3.util.FastMath;
 import org.apache.commons.math3.util.Precision;
+import java.util.Objects;;
+import java.util.Objects;;
 
 /** The class represent lines in a three dimensional space.
 
@@ -110,9 +112,9 @@ public class Line implements Embedding<Euclidean3D, Euclidean1D> {
      * @param point point to check
      * @return abscissa of the point
      */
-public double getAbscissa(final Vector3D point) {
+    public double getAbscissa(final Vector3D point) {
         if (point == null) {
-            throw new IllegalArgumentException("Input point cannot be null.");
+            throw new IllegalArgumentException("Point cannot be null.");
         }
         return point.subtract(zero).dotProduct(direction);
     }
@@ -128,9 +130,9 @@ public double getAbscissa(final Vector3D point) {
     /** {@inheritDoc}
      * @see #getAbscissa(Vector3D)
      */
-public Vector1D toSubSpace(final Vector<Euclidean3D> point) {
+    public Vector1D toSubSpace(final Vector<Euclidean3D> point) {
         if (point == null) {
-            throw new IllegalArgumentException("Input point cannot be null.");
+            throw new IllegalArgumentException("Point cannot be null.");
         }
         return new Vector1D(getAbscissa((Vector3D) point));
     }

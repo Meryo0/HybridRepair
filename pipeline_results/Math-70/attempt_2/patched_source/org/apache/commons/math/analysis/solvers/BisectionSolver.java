@@ -73,41 +73,42 @@ public class BisectionSolver extends UnivariateRealSolverImpl {
     }
 
     /** {@inheritDoc} */
-public double solve(final UnivariateRealFunction f, double min, double max)
-        throws MaxIterationsExceededException, FunctionEvaluationException {
-
-        if (f == null) {
-            throw new IllegalArgumentException("Function cannot be null");
-        }
-
-        clearResult();
-        verifyInterval(min, max);
-        double m;
-        double fm;
-        double fmin;
-
-        int i = 0;
-        while (i < maximalIterationCount) {
-            m = UnivariateRealSolverUtils.midpoint(min, max);
-            fmin = f.value(min);
-            fm = f.value(m);
-
-            if (fm * fmin > 0.0) {
-                // max and m bracket the root.
-                min = m;
-            } else {
-                // min and m bracket the root.
-                max = m;
+    public double solve(final UnivariateRealFunction f, double min, double max)
+            throws MaxIterationsExceededException, FunctionEvaluationException {
+    
+            clearResult();
+            verifyInterval(min, max);
+    
+            if (f == null) {
+                throw new NullPointerException("Function 'f' must not be null.");
             }
-
-            if (Math.abs(max - min) <= absoluteAccuracy) {
+    
+            double m;
+            double fm;
+            double fmin;
+    
+            int i = 0;
+            while (i < maximalIterationCount) {
                 m = UnivariateRealSolverUtils.midpoint(min, max);
-                setResult(m, i);
-                return m;
+                fmin = f.value(min);  // Safe to call since 'f' is validated
+                fm = f.value(m);
+    
+                if (fm * fmin > 0.0) {
+                    // max and m bracket the root.
+                    min = m;
+                } else {
+                    // min and m bracket the root.
+                    max = m;
+                }
+    
+                if (Math.abs(max - min) <= absoluteAccuracy) {
+                    m = UnivariateRealSolverUtils.midpoint(min, max);
+                    setResult(m, i);
+                    return m;
+                }
+                ++i;
             }
-            ++i;
+    
+            throw new MaxIterationsExceededException(maximalIterationCount);
         }
-
-        throw new MaxIterationsExceededException(maximalIterationCount);
-    }
 }

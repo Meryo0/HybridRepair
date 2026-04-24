@@ -7,6 +7,7 @@ import org.jsoup.helper.Validate;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Set;
 
 /**
  A single key + value attribute. (Only used for presentation.)
@@ -29,7 +30,7 @@ public class Attribute implements Map.Entry<String, String>, Cloneable  {
      * @param value attribute value
      * @see #createFromEncoded
      */
-public Attribute(String key, String value) {
+    public Attribute(String key, String value) {
         this(key, value, null);
     }
 
@@ -84,15 +85,24 @@ public Attribute(String key, String value) {
      Set the attribute value.
      @param val the new attribute value; must not be null
      */
-public String setValue(String val) {
-        String oldVal = parent != null ? parent.get(this.key) : null;
+/**
+     * Set a new value for this attribute.
+     * If the attribute is part of an Attributes collection (parent is non-null),
+     * the collection is updated as well.
+     * @param val the new value
+     * @return the old value
+     */
+    public String setValue(String val) {
+        String oldVal = null;
         if (parent != null) {
+            oldVal = parent.get(this.key);
             int i = parent.indexOfKey(this.key);
-            if (i != Attributes.NotFound)
+            if (i != Attributes.NotFound) {
                 parent.vals[i] = val;
+            }
         }
         this.val = val;
-        return Attributes.checkNotNull(oldVal);
+        return oldVal;
     }
 
     /**

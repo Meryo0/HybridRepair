@@ -1,16 +1,14 @@
 --- org/jsoup/nodes/Node.java
 +++ org/jsoup/nodes/Node.java
-@@ -211,11 +211,11 @@
-      * Gets the Document associated with this Node. 
-      * @return the Document associated with this Node, or null if there is no such Document.
-      */
--    public Document ownerDocument() {
-+public Document ownerDocument() {
-         if (this instanceof Document)
-             return (Document) this;
-         else if (parentNode == null)
--            return null;
-+            return new Document(""); // Return a default Document instance
-         else
-             return parentNode.ownerDocument();
+@@ -360,7 +360,10 @@
      }
+ 
+     protected void outerHtml(StringBuilder accum) {
+-        new NodeTraversor(new OuterHtmlVisitor(accum, ownerDocument().outputSettings())).traverse(this);
++        Document.OutputSettings outputSettings = ownerDocument() != null 
++            ? ownerDocument().outputSettings() 
++            : new Document.OutputSettings(); // Use default settings if no document
++        new NodeTraversor(new OuterHtmlVisitor(accum, outputSettings)).traverse(this);
+     }
+ 
+     // if this node has no document (or parent), retrieve the default output settings

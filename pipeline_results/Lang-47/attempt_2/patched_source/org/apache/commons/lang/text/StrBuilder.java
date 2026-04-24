@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.SystemUtils;
+import java.util.Collections;
 
 /**
  * Builds a string from constituent parts providing a more flexible and powerful API
@@ -1179,10 +1180,13 @@ public class StrBuilder implements Cloneable {
      * @param padChar  the pad character to use
      * @return this, to enable chaining
      */
-public StrBuilder appendFixedWidthPadLeft(Object obj, int width, char padChar) {
+    public StrBuilder appendFixedWidthPadLeft(Object obj, int width, char padChar) {
         if (width > 0) {
             ensureCapacity(size + width);
-            String str = (obj == null ? (getNullText() != null ? getNullText() : "") : obj.toString());
+            String str = (obj == null ? getNullText() : obj.toString());
+            if (str == null) { // Ensure str is never null
+                str = "";
+            }
             int strLen = str.length();
             if (strLen >= width) {
                 str.getChars(strLen - width, strLen, buffer, size);
@@ -1223,10 +1227,13 @@ public StrBuilder appendFixedWidthPadLeft(Object obj, int width, char padChar) {
      * @param padChar  the pad character to use
      * @return this, to enable chaining
      */
-public StrBuilder appendFixedWidthPadRight(Object obj, int width, char padChar) {
+    public StrBuilder appendFixedWidthPadRight(Object obj, int width, char padChar) {
         if (width > 0) {
             ensureCapacity(size + width);
-            String str = (obj == null ? (getNullText() != null ? getNullText() : "") : obj.toString());
+            String str = (obj == null ? getNullText() : obj.toString());
+            if (str == null) { // Ensure str is never null
+                str = "";
+            }
             int strLen = str.length();
             if (strLen >= width) {
                 str.getChars(0, width, buffer, size);

@@ -77,13 +77,6 @@ public class KMeansPlusPlusClusterer<T extends Clusterable<T>> {
         return clusters;
     }
 
-    /**
-     * Adds the given points to the closest {@link Cluster}.
-     *
-     * @param <T> type of the points to cluster
-     * @param clusters the {@link Cluster}s to add the points to
-     * @param points the points to add to the given {@link Cluster}s
-     */
 /**
      * Adds the given points to the closest {@link Cluster}.
      *
@@ -94,9 +87,13 @@ public class KMeansPlusPlusClusterer<T extends Clusterable<T>> {
     private static <T extends Clusterable<T>> void
         assignPointsToClusters(final Collection<Cluster<T>> clusters, final Collection<T> points) {
         for (final T p : points) {
-            Cluster<T> cluster = getNearestCluster(clusters, p);
-            if (cluster != null) {
+            try {
+                Cluster<T> cluster = getNearestCluster(clusters, p);
                 cluster.addPoint(p);
+            } catch (IllegalArgumentException e) {
+                // Log or handle the case where no valid cluster is found
+                // For now, we skip the point
+                System.err.println("Skipping point due to: " + e.getMessage());
             }
         }
     }
@@ -149,14 +146,6 @@ public class KMeansPlusPlusClusterer<T extends Clusterable<T>> {
 
     }
 
-    /**
-     * Returns the nearest {@link Cluster} to the given point
-     *
-     * @param <T> type of the points to cluster
-     * @param clusters the {@link Cluster}s to search
-     * @param point the point to find the nearest {@link Cluster} for
-     * @return the nearest {@link Cluster} to the given point
-     */
 /**
      * Returns the nearest {@link Cluster} to the given point
      *
@@ -164,6 +153,7 @@ public class KMeansPlusPlusClusterer<T extends Clusterable<T>> {
      * @param clusters the {@link Cluster}s to search
      * @param point the point to find the nearest {@link Cluster} for
      * @return the nearest {@link Cluster} to the given point
+     * @throws IllegalArgumentException if no valid cluster is found
      */
     private static <T extends Clusterable<T>> Cluster<T>
         getNearestCluster(final Collection<Cluster<T>> clusters, final T point) {
@@ -175,6 +165,9 @@ public class KMeansPlusPlusClusterer<T extends Clusterable<T>> {
                 minDistance = distance;
                 minCluster = c;
             }
+        }
+        if (minCluster == null) {
+            throw new IllegalArgumentException("No valid cluster found for the given point.");
         }
         return minCluster;
     }

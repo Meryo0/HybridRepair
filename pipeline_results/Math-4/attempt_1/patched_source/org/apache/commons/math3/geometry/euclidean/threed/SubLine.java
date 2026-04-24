@@ -24,6 +24,7 @@ import org.apache.commons.math3.geometry.euclidean.oned.Interval;
 import org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet;
 import org.apache.commons.math3.geometry.euclidean.oned.Vector1D;
 import org.apache.commons.math3.geometry.partitioning.Region.Location;
+import java.util.Objects;;
 
 /** This class represents a subset of a {@link Line}.
  * @version $Id$
@@ -107,26 +108,28 @@ public class SubLine {
      * occurring on endpoints lead to null being returned
      * @return the intersection point if there is one, null if the sub-lines don't intersect
      */
-public Vector3D intersection(final SubLine subLine, final boolean includeEndPoints) {
-
+    public Vector3D intersection(final SubLine subLine, final boolean includeEndPoints) {
+        if (subLine == null) {
+            throw new IllegalArgumentException("SubLine cannot be null.");
+        }
+    
         // compute the intersection on infinite line
         Vector3D v1D = line.intersection(subLine.line);
         if (v1D == null) {
             return null;
         }
-
+    
         // check location of point with respect to first sub-line
         Location loc1 = remainingRegion.checkPoint(line.toSubSpace(v1D));
-
+    
         // check location of point with respect to second sub-line
         Location loc2 = subLine.remainingRegion.checkPoint(subLine.line.toSubSpace(v1D));
-
+    
         if (includeEndPoints) {
             return ((loc1 != Location.OUTSIDE) && (loc2 != Location.OUTSIDE)) ? v1D : null;
         } else {
             return ((loc1 == Location.INSIDE) && (loc2 == Location.INSIDE)) ? v1D : null;
         }
-
     }
 
     /** Build an interval set from two points.

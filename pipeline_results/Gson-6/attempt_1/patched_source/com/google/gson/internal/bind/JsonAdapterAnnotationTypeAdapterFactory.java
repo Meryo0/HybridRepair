@@ -47,7 +47,6 @@ public final class JsonAdapterAnnotationTypeAdapterFactory implements TypeAdapte
     return (TypeAdapter<T>) getTypeAdapter(constructorConstructor, gson, targetType, annotation);
   }
 
-  @SuppressWarnings("unchecked") // Casts guarded by conditionals.
 @SuppressWarnings("unchecked") // Casts guarded by conditionals.
   static TypeAdapter<?> getTypeAdapter(ConstructorConstructor constructorConstructor, Gson gson,
       TypeToken<?> fieldType, JsonAdapter annotation) {
@@ -66,7 +65,8 @@ public final class JsonAdapterAnnotationTypeAdapterFactory implements TypeAdapte
           "@JsonAdapter value must be TypeAdapter or TypeAdapterFactory reference.");
     }
     if (typeAdapter == null) {
-      throw new IllegalArgumentException("Failed to create TypeAdapter for @JsonAdapter value.");
+      throw new IllegalArgumentException(
+          "@JsonAdapter value must be a valid TypeAdapter or TypeAdapterFactory reference.");
     }
     typeAdapter = typeAdapter.nullSafe();
     return typeAdapter;

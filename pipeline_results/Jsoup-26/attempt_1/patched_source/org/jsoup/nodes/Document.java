@@ -8,6 +8,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  A HTML Document.
@@ -55,13 +56,13 @@ public class Document extends Element {
      Accessor to the document's {@code body} element.
      @return {@code body}
      */
-public Element body() {
-        Element body = findFirstElementByTagName("body", this);
-        if (body == null) {
-            body = appendElement("body");
+    public Element body() {
+            Element body = findFirstElementByTagName("body", this);
+            if (body == null) {
+                body = appendElement("body");
+            }
+            return body;
         }
-        return body;
-    }
 
     /**
      Get the string contents of the document's {@code title} element.
@@ -362,3 +363,4 @@ public Element body() {
         return this;
     }
 }
+

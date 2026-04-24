@@ -11,11 +11,18 @@ Assembles a structured Italian/English prompt that provides the LLM with:
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 from typing import List, Optional
 
-from pipeline import logicfl_parser, code_extractor
+from pipeline import logicfl_parser, code_extractor, config
 from pipeline.logicfl_parser import LogicFLResult
+from pipeline.prompt_templates import STRUCTURED_CODE_GEN_TEMPLATE
+from pipeline.bug_classifier import (
+    classify_bug,
+    format_classification_header,
+    get_type_specific_instructions,
+)
 
 
 def _format_fault_locations(fault_locations: List[dict]) -> str:
@@ -150,9 +157,9 @@ def _build_related_sources(fault_locations: List[dict], max_lines_per_file: int 
         candidates.sort(key=_relevance)
 
 
-    # Take top 5
+    # Take top 8
     shown: List[str] = []
-    for jf in candidates[:5]:
+    for jf in candidates[:8]:
         try:
             lines = jf.read_text(encoding="utf-8", errors="replace").splitlines()
             preview = lines[:max_lines_per_file]
@@ -244,8 +251,9 @@ Catena causale dedotta:
 2. ATTENZIONE: la riga segnalata come `// ► FAULT LOCATION` è dove l'NPE si **manifesta** nel test,
    ma la causa radice può essere a monte (es. variabili calcolate in modo errato nel loop prima
    di raggiungere quella riga, o un metodo chiamato che può ritornare null).
-   Analizza l'intera logica del metodo e considera se il fix richiede di modificare
-   il metodo chiamante o aggiungere metodi helper null-safe.
+   Analizza l'intera logica e considera se il fix richiede di modificare PIÙ METODI o PIÙ CLASSI
+   (es. se lo stack trace indica che l'NPE si sposta in una sottoclasse o in un metodo chiamato).
+   Puoi usare `read_file` per esplorare file non inclusi nel prompt se lo stack trace li cita.
 3. Se la fix è null-safe comparison, ricorda: `null == null` deve ritornare `true`
    (un confronto del tipo `a != null && a.equals(b)` ritorna `false` quando entrambi sono null,
    il che può essere sbagliato semanticamente).
@@ -292,6 +300,8 @@ def build_diagnostic_prompt(
     related_sources_section = _build_related_sources(result.fault_locations)
 
     method_sections: List[str] = []
+    all_sibling_names: list[str] = []  # accumulated across all fault locations
+    all_fault_method_names: list[str] = []  # primary (target) method names
     seen_files: set = set()
     by_file: dict = {}
     for fl in result.fault_locations:
@@ -309,13 +319,97 @@ def build_diagnostic_prompt(
         for target_line in sorted(lines):
             snippet, start_1, end_1 = code_extractor.extract_method_source(java_file, target_line)
             method_sections.append(
-                f"### FILE: {rel}  (righe {start_1}–{end_1}, fault alla riga {target_line})\\n"
-                f"```java\\n{snippet}\\n```"
+                f"### FILE: {rel}  (righe {start_1}–{end_1}, fault alla riga {target_line})\n"
+                f"```java\n{snippet}\n```"
             )
 
-    methods_block = "\\n\\n".join(method_sections) if method_sections else "(nessun metodo estratto)"
+            # S2a — Extract caller chain up to depth=2 (caller + caller-of-caller).
+            if snippet:
+                sig_line = ""
+                for sl in snippet.splitlines():
+                    if sl.strip() and not sl.strip().startswith(("@", "/", "*")):
+                        sig_line = sl.strip()
+                        break
+
+                if sig_line:
+                    fm = re.search(r"\s([\w$]+)\s*\(", sig_line)
+                    if fm:
+                        all_fault_method_names.append(fm.group(1))
+
+                    caller_snippet, c_start, c_end = code_extractor.extract_caller_context(
+                        java_file, sig_line, depth=2, max_callers_per_level=2
+                    )
+                    if caller_snippet:
+                        method_sections.append(
+                            f"### FILE: {rel}  (CALLER CHAIN up to depth=2)\n"
+                            f"```java\n{caller_snippet}\n```"
+                        )
+
+            # S2b — Detect sibling methods in same file with the same buggy pattern.
+            pattern = code_extractor.extract_fault_line_pattern(java_file, target_line)
+            if pattern and len(pattern) >= 4:
+                sibling_hits = code_extractor.find_sibling_methods_with_pattern(
+                    java_file, pattern, exclude_line=target_line, max_matches=3
+                )
+                if sibling_hits:
+                    sibling_blocks = []
+                    local_names: list[str] = []
+                    for sib_src, sib_start, sib_end in sibling_hits:
+                        first_line = sib_src.splitlines()[0] if sib_src else ""
+                        m_name = re.search(r"\s([\w$]+)\s*\(", first_line)
+                        if m_name:
+                            local_names.append(m_name.group(1))
+                        sibling_blocks.append(
+                            f"// Sibling method (lines {sib_start}-{sib_end}) contains "
+                            f"the SAME pattern `{pattern}` as the fault line\n{sib_src}"
+                        )
+                    sibling_text = "\n\n".join(sibling_blocks)
+                    method_sections.append(
+                        f"### FILE: {rel}  (⚠️ SIBLING METHODS WITH SAME PATTERN — "
+                        f"MUST be fixed together)\n"
+                        f"```java\n{sibling_text}\n```"
+                    )
+                    all_sibling_names.extend(local_names)
+                    print(
+                        f"  [prompt_builder] S2b sibling hits for pattern "
+                        f"`{pattern}`: {local_names}"
+                    )
+
+    methods_block = "\n\n".join(method_sections) if method_sections else "(nessun metodo estratto)"
+
+    # Build a strong multi-method instruction whenever siblings were detected.
+    sibling_instruction = ""
+    if all_sibling_names:
+        unique_siblings = []
+        for n in all_sibling_names:
+            if n not in unique_siblings and n not in all_fault_method_names:
+                unique_siblings.append(n)
+        if unique_siblings:
+            sibling_list = ", ".join(f"`{n}`" for n in unique_siblings[:5])
+            primary_list = (
+                ", ".join(f"`{n}`" for n in dict.fromkeys(all_fault_method_names))
+                if all_fault_method_names
+                else "the fault method"
+            )
+            sibling_instruction = (
+                f"\n\n⚠️ **MULTI-METHOD FIX REQUIRED** — the sibling methods "
+                f"{sibling_list} exhibit the EXACT same buggy pattern as "
+                f"{primary_list}. A fix that patches only the fault location "
+                f"will leave the other methods broken and the test may still "
+                f"fail. Your final patch MUST emit ONE `<bug_fix>` / FILE block "
+                f"PER method that needs changing (or a single block covering "
+                f"all of them if they live in the same file). Do NOT skip the "
+                f"sibling methods."
+            )
+
+    # S1 — Classify bug type from stack trace so the prompt can specialize.
+    classification = classify_bug(result.stack_traces, result.failing_tests)
+    classification_header = format_classification_header(classification)
+    type_specific_instructions = get_type_specific_instructions(classification.bug_type)
 
     prompt = f"""Bug ID: {result.bug_id}  |  Tentativo {attempt}
+
+{classification_header}
 
 ## Fault Locations (LogicFL)
 {fault_locs_text}
@@ -334,13 +428,21 @@ def build_diagnostic_prompt(
 {stack_traces_text}
 ```
 
+## Type-Specific Analysis Guidance
+
+{type_specific_instructions}{sibling_instruction}
+
 ## Istruzioni per la Diagnosi
 
 Analizza il bug. Puoi usare i seguenti tool per raccogliere contesto:
 - `query_prolog`: per esplorare il database Prolog (es. `method_invoc`, `assign`, ecc.) vicino alla riga del bug.
 - `read_file`: per leggere l'intero codice sorgente di un file Java e capire l'architettura della classe (variabili membro, overload di metodi, ecc.). Altamente raccomandato se il difetto non è ovvio a colpo d'occhio.
 
-Attenzione: le locazioni segnalate da LogicFL indicano il punto esatto in cui il bug si manifesta. Valuta attentamente se è corretto sanare l'errore in quel metodo esatto o se è più semanticamente corretto intercettare e gestire l'errore (o i dati nulli/invalidi) a monte, nel metodo chiamante. Non limitarti a risolvere il sintomo.
+Attenzione: le locazioni segnalate da LogicFL indicano il punto esatto in cui il bug si manifesta. 
+Valuta attentamente:
+1. È corretto sanare l'errore in quel metodo esatto o è più corretto intercettarlo a monte (nel metodo chiamante)? Abbiamo incluso il potenziale metodo chiamante sopra se trovato nello stesso file.
+2. Il fault segnalato potrebbe essere un sintomo SECONDARIO! Analizza se c'è un difetto logico a monte (overflow numerico, calcolo errato, variabile non inizializzata, delegation fra overload) che produce il comportamento errato come effetto collaterale.
+3. La correzione potrebbe richiedere modifiche a **più file** o **più metodi**. Non limitarti a risolvere il sintomo isolato. Cerca una soluzione strutturale.
 
 Quando sei sicuro, restituisci ESATTAMENTE e SOLO le seguenti due sezioni, senza nient'altro:
 
@@ -348,16 +450,21 @@ Quando sei sicuro, restituisci ESATTAMENTE e SOLO le seguenti due sezioni, senza
 (Spiega in dettaglio qual è il difetto logico nel codice originale che causa l'eccezione o il comportamento errato, tracciando il flusso di esecuzione fino al fault).
 
 **Correct Intended Behavior**:
-(Specifica cosa dovrebbe fare il codice al posto di fallire. Definisci chiaramente il comportamento corretto e null-safe).
+(Specifica cosa dovrebbe fare il codice al posto di fallire. Definisci chiaramente il comportamento corretto. Se il bug è LOGIC/NUMERIC/BOUNDS/INVARIANT, NON limitarti a null-safe comparisons — cerca il fix strutturale).
 """
     return prompt.strip()
 
 
 def build_code_gen_prompt() -> str:
     """Build the second prompt for the Specification-First session.
-    
-    Tells the LLM to use the diagnosis it just provided to generate the code.
+
+    When USE_STRUCTURED_OUTPUT is enabled, requests XML-tagged output
+    (bug_analysis, potential_impact, patch_code). Otherwise falls back
+    to the legacy FILE-block-only format.
     """
+    if getattr(config, "USE_STRUCTURED_OUTPUT", True):
+        return STRUCTURED_CODE_GEN_TEMPLATE
+
     prompt = """
 Ora, basandoti ESCLUSIVAMENTE sulla "Root Cause" e sul "Correct Intended Behavior" che hai appena stabilito, fornisci il codice Java corretto.
 
@@ -374,6 +481,10 @@ Segui queste regole TASSATIVE:
 3. La riga `// ◄ FIX THIS LINE` (se presente) indica dove il bug si manifesta. Rimuovi questo commento.
 
 4. Usa comparazioni null-safe se necessario (es. `java.util.Objects.equals(a, b)` invece di `a.equals(b)` se entrambi possono essere null). Se il metodo deve rifiutare input non validi in base alla sua firma, sentiti libero di far propagare l'eccezione o restituire un risultato adeguato a monte.
+
+5. **Logic Guidelines**:
+   - **Sibling Nodes**: In Jsoup/Nodes, `siblingNodes()` MUST exclude the node itself (a node is not its own sibling). Ensure you filter the result correctly.
+   - **Array Elements**: When processing arrays, always check if individual elements can be null (e.g., NPE in `array[i].getClass()`). Handle nulls gracefully (e.g., return `null` for that index) rather than throwing a new Exception, unless explicitly required.
 
 Restituisci SOLO i blocchi di codice Java con l'intestazione FILE, nessuna spiegazione aggiuntiva.
 """

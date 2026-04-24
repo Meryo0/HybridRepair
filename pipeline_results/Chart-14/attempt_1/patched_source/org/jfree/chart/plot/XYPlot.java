@@ -2279,26 +2279,26 @@ public class XYPlot extends Plot implements ValueAxisPlot, Zoomable,
      *
      * @since 1.0.10
      */
-public boolean removeDomainMarker(int index, Marker marker, Layer layer,
-    		boolean notify) {
-        ArrayList markers;
-        if (layer == Layer.FOREGROUND) {
-            markers = (ArrayList) this.foregroundDomainMarkers.get(new Integer(
-                    index));
+    public boolean removeDomainMarker(int index, Marker marker, Layer layer,
+                boolean notify) {
+            ArrayList markers;
+            if (layer == Layer.FOREGROUND) {
+                markers = (ArrayList) this.foregroundDomainMarkers.get(new Integer(
+                        index));
+            }
+            else {
+                markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(
+                        index));
+            }
+            if (markers == null) {
+                return false;
+            }
+            boolean removed = markers.remove(marker);
+            if (removed && notify) {
+                fireChangeEvent();
+            }
+            return removed;
         }
-        else {
-            markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(
-                    index));
-        }
-        if (markers == null) {
-            return false;
-        }
-        boolean removed = markers.remove(marker);
-        if (removed && notify) {
-            fireChangeEvent();
-        }
-        return removed;
-    }
     
     /**
      * Adds a marker for the range axis and sends a {@link PlotChangeEvent} to
@@ -2515,7 +2515,7 @@ public boolean removeDomainMarker(int index, Marker marker, Layer layer,
      *
      * @since 1.0.10
      */
-public boolean removeRangeMarker(int index, Marker marker, Layer layer,
+    public boolean removeRangeMarker(int index, Marker marker, Layer layer,
     		boolean notify) {
         if (marker == null) {
             throw new IllegalArgumentException("Null 'marker' argument.");
@@ -2525,15 +2525,9 @@ public boolean removeRangeMarker(int index, Marker marker, Layer layer,
             markers = (ArrayList) this.foregroundRangeMarkers.get(new Integer(
                     index));
         }
-        }
-        if (markers == null) {
-            return false;
         else {
             markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(
                     index));
-        }
-        if (markers == null) {
-            return false;
         }
         boolean removed = markers.remove(marker);
         if (removed && notify) {

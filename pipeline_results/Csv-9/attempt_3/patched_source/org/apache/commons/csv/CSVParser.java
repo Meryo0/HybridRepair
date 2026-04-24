@@ -238,7 +238,7 @@ public final class CSVParser implements Iterable<CSVRecord>, Closeable {
      * @throws IOException
      *             If there is a problem reading the header or skipping the first record
      */
-public CSVParser(final Reader reader, final CSVFormat format) throws IOException {
+    public CSVParser(final Reader reader, final CSVFormat format) throws IOException {
         Assertions.notNull(reader, "reader");
         Assertions.notNull(format, "format");
 
@@ -354,11 +354,10 @@ public CSVParser(final Reader reader, final CSVFormat format) throws IOException
      * @return null if the format has no header.
      * @throws IOException if there is a problem reading the header or skipping the first record
      */
-private Map<String, Integer> initializeHeader() throws IOException {
+    private Map<String, Integer> initializeHeader() throws IOException {
+        Map<String, Integer> hdrMap = new LinkedHashMap<>(); // Always initialize to avoid null
         final String[] formatHeader = this.format.getHeader();
         if (formatHeader != null) {
-            final Map<String, Integer> hdrMap = new java.util.LinkedHashMap<>();
-
             String[] header = null;
             if (formatHeader.length == 0) {
                 // read the header from the first line of the file
@@ -372,7 +371,7 @@ private Map<String, Integer> initializeHeader() throws IOException {
                 }
                 header = formatHeader;
             }
-
+    
             // build the name to index mappings
             if (header != null) {
                 for (int i = 0; i < header.length; i++) {
@@ -383,9 +382,8 @@ private Map<String, Integer> initializeHeader() throws IOException {
                     hdrMap.put(header[i], Integer.valueOf(i));
                 }
             }
-            return hdrMap;
         }
-        return java.util.Collections.emptyMap(); // Return an empty map if no header is defined
+        return hdrMap; // Always return a non-null map
     }
 
     public boolean isClosed() {

@@ -240,14 +240,16 @@ public class DoubleMetaphone implements StringEncoder {
      * @return {@code true} if the encoded <code>String</code>s are equal;
      *          {@code false} otherwise.
      */
-public boolean isDoubleMetaphoneEqual(final String value1, final String value2, final boolean alternate) {
-        String metaphone1 = doubleMetaphone(value1, alternate);
-        String metaphone2 = doubleMetaphone(value2, alternate);
-        if (metaphone1 == null || metaphone2 == null) {
-            return false;
+    public boolean isDoubleMetaphoneEqual(final String value1, final String value2, final boolean alternate) {
+            String metaphone1 = value1 == null ? null : doubleMetaphone(value1, alternate);
+            String metaphone2 = value2 == null ? null : doubleMetaphone(value2, alternate);
+    
+            if (metaphone1 == null || metaphone2 == null) {
+                return metaphone1 == metaphone2; // Both must be null to be considered equal
+            }
+    
+            return metaphone1.equals(metaphone2);
         }
-        return metaphone1.equals(metaphone2);
-    }
 
     /**
      * Returns the maxCodeLen.

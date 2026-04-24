@@ -53,15 +53,17 @@ public class Document extends Element {
 
     /**
      Accessor to the document's {@code body} element.
-     @return {@code body}
-     */
-public Element body() {
-        Element body = findFirstElementByTagName("body", this);
-        if (body == null) {
-            body = new Element(Tag.valueOf("body"), baseUri()); // Create a placeholder <body> element
-        }
-        return body;
-    }
+     public Element body() {
+             Element body = findFirstElementByTagName("body", this);
+             if (body == null) {
+                 Element html = findFirstElementByTagName("html", this);
+                 if (html == null) {
+                     html = appendElement("html");
+                 }
+                 body = html.appendElement("body");
+             }
+             return body;
+         }
 
     /**
      Get the string contents of the document's {@code title} element.
@@ -164,13 +166,11 @@ public Element body() {
     }
 
     // fast method to get first by tag name, used for html, head, body finders
-private Element findFirstElementByTagName(String tag, Node node) {
-        if (node == null) return null; // Handle null node
-        if (java.util.Objects.equals(node.nodeName(), tag))
+    private Element findFirstElementByTagName(String tag, Node node) {
+        if (node.nodeName().equals(tag))
             return (Element) node;
         else {
-            for (Node child : node.childNodes) {
-                if (child == null) continue; // Skip null children
+            for (Node child: node.childNodes) {
                 Element found = findFirstElementByTagName(tag, child);
                 if (found != null)
                     return found;
@@ -358,8 +358,10 @@ private Element findFirstElementByTagName(String tag, Node node) {
     public QuirksMode quirksMode() {
         return quirksMode;
     }
+
     public Document quirksMode(QuirksMode quirksMode) {
         this.quirksMode = quirksMode;
         return this;
     }
 }
+

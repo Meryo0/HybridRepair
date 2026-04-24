@@ -6,7 +6,7 @@
   "test_result": {
     "status": "FAIL",
     "total_attempts": 3,
-    "last_failure": "JUnit version 4.13.2\n......E.....\nTime: 0.07\nThere was 1 failure:\n1) testLanguagesByCountry(org.apache.commons.lang.LocaleUtilsTest)\njunit.framework.AssertionFailedError: expected:<1> but was:<8>\n\tat junit.framework.Assert.fail(Assert.java:57)\n\tat junit.framework.Assert.failNotEquals(Assert.java:329)\n\tat junit.framework.Assert.assertEquals(Assert.java:78)\n\tat junit.framework.Assert.assertEquals(Assert.java:234)\n\tat junit.framework.Assert.assertEquals(Assert.java:241)\n\tat junit.framework.TestCase"
+    "last_failure": "JUnit version 4.13.2\n.E.E.E..E.E.E.E.E.E.\nTime: 0.009\nThere were 9 failures:\n1) testAvailableLocaleSet(org.apache.commons.lang.LocaleUtilsTest)\njava.lang.IllegalAccessError: class org.apache.commons.lang.LocaleUtilsTest tried to access private method 'java.util.Set org.apache.commons.lang.LocaleUtils.availableLocaleSet()' (org.apache.commons.lang.LocaleUtilsTest and org.apache.commons.lang.LocaleUtils are in unnamed module of loader 'app')\n\tat org.apache.commons.lang.LocaleUtilsTest.testAvailabl"
   },
-  "timestamp": "2026-04-22T22:05:49.025596+00:00"
+  "timestamp": "2026-04-24T16:10:57.404224+00:00"
 }

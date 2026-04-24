@@ -16,12 +16,19 @@ import re
 import subprocess
 import sys
 import textwrap
+from dataclasses import dataclass
 from pathlib import Path
 from typing import List, Optional
 
 from openai import AzureOpenAI
 
 from pipeline import config
+from pipeline.prompt_templates import (
+    SYSTEM_PROMPT,
+    STRUCTURED_CODE_GEN_TEMPLATE,
+    EXECUTION_FEEDBACK_TEMPLATE,
+    CRITIC_RETRY_TEMPLATE,
+)
 
 
 # ── Azure client ────────────────────────────────────────────────────────────────
@@ -222,32 +229,44 @@ def build_diff_from_fixed_method(
     return "".join(diff_lines)
 
 
+# ── Structured response parsing ──────────────────────────────────────────────────
+
+@dataclass
+class StructuredResponse:
+    """Parsed output from an XML-tagged LLM response."""
+    bug_analysis: str
+    potential_impact: str
+    patch_code: str
+    raw: str
+
+
+def _parse_structured_response(text: str) -> StructuredResponse:
+    """Extract XML-tagged sections from an LLM response.
+
+    Falls back gracefully: if tags are missing, the raw text is used as
+    patch_code so the existing FILE-block parser can still work.
+    """
+    def _extract_tag(tag: str) -> str:
+        pattern = re.compile(rf"<{tag}>\s*(.*?)\s*</{tag}>", re.DOTALL)
+        m = pattern.search(text)
+        return m.group(1).strip() if m else ""
+
+    bug_analysis = _extract_tag("bug_analysis")
+    potential_impact = _extract_tag("potential_impact")
+    patch_code = _extract_tag("patch_code")
+
+    if not patch_code:
+        patch_code = text
+
+    return StructuredResponse(
+        bug_analysis=bug_analysis,
+        potential_impact=potential_impact,
+        patch_code=patch_code,
+        raw=text,
+    )
+
+
 # ── Stateful repair session ──────────────────────────────────────────────────────
-
-_SYSTEM_PROMPT = textwrap.dedent("""\
-    You are an expert Java developer specializing in fixing software bugs in the Defects4J benchmark.
-    The user will provide you with:
-      - A buggy Java method (the fault location identified by LogicFL)
-      - The stack trace and failing test information
-      - Causal chain analysis from LogicFL's Prolog engine
-      - Optionally: related source files in the same project
-
-    Your task is broken into TWO stages (Specification-First):
-      1. DIAGNOSIS: You will first be asked to analyze the root cause of the bug carefully and clearly specify the "Correct Intended Behavior" (Specification).
-         - During this stage, you MAY use the `query_prolog` tool to explore variable definitions and AST facts.
-         - You MAY ALSO use the `read_file` tool to read the entire source file to understand class structure, member variables, and overloaded methods.
-      2. CODE GENERATION: After your diagnosis, you will be asked to provide the corrected Java method based ONLY on your specified intended behavior.
-
-    When outputting code, you must:
-      - Return ONLY the corrected Java method — the complete, compilable method body.
-      - Use the format:
-          FILE: <relative/path/to/File.java>
-          ```java
-          <complete corrected method>
-          ```
-      - Keep the fix minimal — preserve the original style, indentation and comments.
-      - Use null-safe comparisons where appropriate (e.g., Objects.equals(a, b)).
-""")
 
 
 class RepairSession:
@@ -262,50 +281,121 @@ class RepairSession:
         self._client = _get_client()
         self._bug_dir = bug_dir
         self._history: List[dict] = [
-            {"role": "system", "content": _SYSTEM_PROMPT}
+            {"role": "system", "content": SYSTEM_PROMPT}
         ]
 
     # ── Public API ──────────────────────────────────────────────────────────────
 
-    def first_attempt(self, diagnostic_prompt: str, code_gen_prompt: str) -> tuple[str, str]:
+    def first_attempt(self, diagnostic_prompt: str, code_gen_prompt: str, temperature: float | None = None) -> tuple[str, str]:
         """Send the initial diagnostic prompt, then the code generation prompt.
+
+        Args:
+            diagnostic_prompt: The diagnostic analysis prompt.
+            code_gen_prompt: The code generation prompt.
+            temperature: Override temperature for this attempt.
 
         Returns:
             A tuple of (diagnosis_response, code_response).
         """
         # Step 1: Diagnose (Tools allowed)
         self._history.append({"role": "user", "content": diagnostic_prompt})
-        diagnosis_response = self._call(use_tools=True)
+        diagnosis_response = self._call(use_tools=True, temperature=temperature)
 
         # Step 2: Code Gen (No tools needed, just emit code)
         self._history.append({"role": "user", "content": code_gen_prompt})
-        code_response = self._call(use_tools=False)
+        code_response = self._call(use_tools=False, temperature=temperature)
 
         return diagnosis_response, code_response
 
-    def refine(self, error_message: str) -> str:
+    def refine(self, error_message: str, temperature: float | None = None, attempt: int = 2) -> str:
         """Send a follow-up message with the compile/test error for refinement.
 
         Args:
             error_message: The compiler or test output explaining what went wrong.
+            temperature: Override temperature for this attempt.
+            attempt: Current attempt number (used for diversification hints).
 
         Returns:
             The raw LLM response with (hopefully) an improved method.
         """
+        diversify_hint = ""
+        if attempt >= 3:
+            diversify_hint = (
+                "\n\n⚠️ IMPORTANT: Your previous fixes have ALL failed. "
+                "You MUST try a FUNDAMENTALLY DIFFERENT approach this time. "
+                "Consider:\n"
+                "- The bug might be in a DIFFERENT METHOD than the one you've been fixing (e.g. the caller)\n"
+                "- The bug might require fixing MULTIPLE files\n"
+                "- The NPE might be a symptom of a LOGICAL bug (e.g. integer overflow, wrong variable used, missing delegation)\n"
+                "- Perhaps the fix needs to PROPAGATE a parameter instead of adding a null check\n"
+                "Use `read_file` to inspect related classes and callers before writing code."
+            )
+
         follow_up = (
             "The fix you provided still fails. Here is the exact error from the test runner / compiler:\n\n"
             f"```\n{error_message}\n```\n\n"
             "Please carefully re-analyse the root cause based on this feedback. If your previous fix caused another exception or failed another test, your original logic might be flawed. "
             "Use the `read_file` tool to inspect the surrounding class code if you suspect the issue is structural (e.g. shadowing, missing assignments in constructors, or overloaded methods).\n\n"
             "Provide the revised Correct Intended Behavior and the corrected method(s) again using the FILE block format."
+            f"{diversify_hint}"
         )
         self._history.append({"role": "user", "content": follow_up})
         # Allow tools during refinement as well
-        return self._call(use_tools=True)
+        return self._call(use_tools=True, temperature=temperature)
+
+    # ── Actor-Critic clean-history methods ──────────────────────────────────────
+
+    def refine_from_critic(
+        self,
+        critic_reason: str,
+        original_code: str,
+        rejected_patch: str,
+        temperature: float | None = None,
+    ) -> str:
+        """Retry generation after critic rejection with a CLEAN history.
+
+        Resets the conversation to [system, user] only — no prior RAG
+        context is carried over, saving tokens and avoiding confusion.
+        """
+        user_msg = CRITIC_RETRY_TEMPLATE.format(
+            original_code=original_code,
+            rejected_patch=rejected_patch,
+            critic_reason=critic_reason,
+        )
+        self._history = [
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": user_msg},
+        ]
+        return self._call(use_tools=False, temperature=temperature)
+
+    def refine_from_execution(
+        self,
+        stack_trace: str,
+        failed_patch: str,
+        original_code: str,
+        failing_tests: str = "",
+        temperature: float | None = None,
+    ) -> str:
+        """Retry generation after test failure with a CLEAN history.
+
+        Only sends the isolated method, the failed patch, and the real
+        stack trace — no accumulated RAG or prior conversation rounds.
+        """
+        user_msg = EXECUTION_FEEDBACK_TEMPLATE.format(
+            original_code=original_code,
+            failed_patch=failed_patch,
+            stack_trace=stack_trace,
+            failing_tests=failing_tests or "(not available)",
+        )
+        self._history = [
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": user_msg},
+        ]
+        return self._call(use_tools=True, temperature=temperature)
 
     # ── Internal ────────────────────────────────────────────────────────────────
 
-    def _call(self, use_tools: bool = False) -> str:
+    def _call(self, use_tools: bool = False, temperature: float | None = None) -> str:
         tools = None
         if use_tools:
             tools = [
@@ -349,7 +439,7 @@ class RepairSession:
             kwargs = {
                 "model": config.AZURE_OPENAI_DEPLOYMENT,
                 "messages": self._history,
-                "temperature": config.LLM_TEMPERATURE,
+                "temperature": temperature if temperature is not None else config.LLM_TEMPERATURE,
                 "max_tokens": config.LLM_MAX_TOKENS,
             }
             if tools:

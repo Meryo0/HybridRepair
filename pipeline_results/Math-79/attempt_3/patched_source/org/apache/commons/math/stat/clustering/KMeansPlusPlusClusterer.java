@@ -84,28 +84,11 @@ public class KMeansPlusPlusClusterer<T extends Clusterable<T>> {
      * @param clusters the {@link Cluster}s to add the points to
      * @param points the points to add to the given {@link Cluster}s
      */
-/**
-     * Adds the given points to the closest {@link Cluster}.
-     *
-     * @param <T> type of the points to cluster
-     * @param clusters the {@link Cluster}s to add the points to
-     * @param points the points to add to the given {@link Cluster}s
-     */
     private static <T extends Clusterable<T>> void
         assignPointsToClusters(final Collection<Cluster<T>> clusters, final Collection<T> points) {
-        if (clusters == null || clusters.isEmpty()) {
-            throw new IllegalArgumentException("The clusters collection cannot be null or empty.");
-        }
         for (final T p : points) {
             Cluster<T> cluster = getNearestCluster(clusters, p);
-            if (cluster != null) {
-                cluster.addPoint(p);
-            } else {
-                // Create a new cluster for the point if no nearest cluster is found
-                Cluster<T> newCluster = new Cluster<>(p);
-                clusters.add(newCluster);
-                newCluster.addPoint(p);
-            }
+            cluster.addPoint(p);
         }
     }
 
@@ -157,29 +140,24 @@ public class KMeansPlusPlusClusterer<T extends Clusterable<T>> {
 
     }
 
-    /**
-     * Returns the nearest {@link Cluster} to the given point
-     *
-     * @param <T> type of the points to cluster
-     * @param clusters the {@link Cluster}s to search
-     * @param point the point to find the nearest {@link Cluster} for
-     * @return the nearest {@link Cluster} to the given point
-     */
 /**
-     * Returns the nearest {@link Cluster} to the given point
+     * Returns the nearest {@link Cluster} to the given point.
      *
      * @param <T> type of the points to cluster
      * @param clusters the {@link Cluster}s to search
      * @param point the point to find the nearest {@link Cluster} for
      * @return the nearest {@link Cluster} to the given point
+     * @throws IllegalStateException if no clusters are available
      */
     private static <T extends Clusterable<T>> Cluster<T>
         getNearestCluster(final Collection<Cluster<T>> clusters, final T point) {
         if (clusters == null || clusters.isEmpty()) {
-            return null; // No clusters to search
+            throw new IllegalStateException("No clusters available to assign the point.");
         }
+
         double minDistance = Double.MAX_VALUE;
         Cluster<T> minCluster = null;
+
         for (final Cluster<T> c : clusters) {
             final double distance = point.distanceFrom(c.getCenter());
             if (distance < minDistance) {
@@ -187,6 +165,12 @@ public class KMeansPlusPlusClusterer<T extends Clusterable<T>> {
                 minCluster = c;
             }
         }
+
+        // Fallback for degenerate situations where no cluster is closest
+        if (minCluster == null) {
+            throw new IllegalStateException("Unable to determine the nearest cluster for the point: " + point);
+        }
+
         return minCluster;
     }
 

@@ -356,43 +356,46 @@ public final class CSVParser implements Iterable<CSVRecord>, Closeable {
      * @return null if the format has no header.
      * @throws IOException if there is a problem reading the header or skipping the first record
      */
-private Map<String, Integer> initializeHeader() throws IOException {
-        Map<String, Integer> hdrMap = null;
-        final String[] formatHeader = this.format.getHeader();
-        if (formatHeader != null) {
-            hdrMap = new LinkedHashMap<String, Integer>();
-
-            String[] headerRecord = null;
-            if (formatHeader.length == 0) {
-                // read the header from the first line of the file
-                final CSVRecord nextRecord = this.nextRecord();
-                if (nextRecord != null) {
-                    headerRecord = nextRecord.values();
-                }
-            } else {
-                if (this.format.getSkipHeaderRecord()) {
-                    this.nextRecord();
-                }
-                headerRecord = formatHeader;
-            }
-
-            // build the name to index mappings
-            if (headerRecord != null) {
-                for (int i = 0; i < headerRecord.length; i++) {
-                    final String header = headerRecord[i];
-                    final String safeHeader = (header == null) ? "" : header;
-                    final boolean containsHeader = hdrMap.containsKey(safeHeader);
-                    final boolean emptyHeader = safeHeader.trim().isEmpty();
-                    if (containsHeader && (!emptyHeader || (emptyHeader && !this.format.getIgnoreEmptyHeaders()))) {
-                        throw new IllegalArgumentException("The header contains a duplicate name: \"" + safeHeader +
-                                "\" in " + Arrays.toString(headerRecord));
+    private Map<String, Integer> initializeHeader() throws IOException {
+            Map<String, Integer> hdrMap = null;
+            final String[] formatHeader = this.format.getHeader();
+            if (formatHeader != null) {
+                hdrMap = new LinkedHashMap<String, Integer>();
+    
+                String[] headerRecord = null;
+                if (formatHeader.length == 0) {
+                    // read the header from the first line of the file
+                    final CSVRecord nextRecord = this.nextRecord();
+                    if (nextRecord != null) {
+                        headerRecord = nextRecord.values();
                     }
-                    hdrMap.put(safeHeader, Integer.valueOf(i));
+                } else {
+                    if (this.format.getSkipHeaderRecord()) {
+                        this.nextRecord();
+                    }
+                    headerRecord = formatHeader;
+                }
+    
+                // build the name to index mappings
+                if (headerRecord != null) {
+                    for (int i = 0; i < headerRecord.length; i++) {
+                        String header = headerRecord[i];
+                        // Treat null headers as empty strings
+                        if (header == null) {
+                            header = "";
+                        }
+                        final boolean containsHeader = hdrMap.containsKey(header);
+                        final boolean emptyHeader = header.trim().isEmpty();
+                        if (containsHeader && (!emptyHeader || (emptyHeader && !this.format.getIgnoreEmptyHeaders()))) {
+                            throw new IllegalArgumentException("The header contains a duplicate name: \"" + header +
+                                    "\" in " + Arrays.toString(headerRecord));
+                        }
+                        hdrMap.put(header, Integer.valueOf(i));
+                    }
                 }
             }
+            return hdrMap;
         }
-        return hdrMap;
-    }
 
     public boolean isClosed() {
         return this.lexer.isClosed();

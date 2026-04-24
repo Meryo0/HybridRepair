@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  The base, abstract Node model. Elements, Documents, Comments etc are all Node instances.
@@ -441,9 +442,15 @@ public abstract class Node implements Cloneable {
      @return node siblings. If the node has no parent, returns an empty list.
      */
     public List<Node> siblingNodes() {
-
-        return parent().childNodes();
-    }
+            // Return an empty list if the node is an orphan (no parent)
+            if (parent() == null) {
+                return Collections.emptyList();
+            }
+            // Exclude the current node from the list of siblings
+            List<Node> siblings = new ArrayList<>(parent().childNodes());
+            siblings.remove(this);
+            return siblings;
+        }
 
     /**
      Get this node's next sibling.

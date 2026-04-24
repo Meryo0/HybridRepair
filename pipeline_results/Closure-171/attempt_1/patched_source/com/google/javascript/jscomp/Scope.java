@@ -525,15 +525,16 @@ public class Scope
   /**
    * Returns the variable, may be null
    */
-public Var getVar(String name) {
-    Var var = vars.get(name);
-    if (var != null) {
-      return var;
-    } else if (parent != null) { // Recurse up the parent Scope
-      return parent.getVar(name);
-    } else {
-      return null;
-    }
+  public Var getVar(String name) {
+      Var var = vars.get(name);
+      if (var != null) {
+          return var;
+      } else if (parent != null) { // Recurse up the parent Scope
+          return parent.getVar(name);
+      } else {
+          // Return a sentinel Var object to represent "not found"
+          return Var.NOT_FOUND;
+      }
   }
 
   /**

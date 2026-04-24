@@ -78,7 +78,7 @@ public final class ObjectIdValueProperty
     }
 
     @Override
-public Object deserializeSetAndReturn(JsonParser jp,
+    public Object deserializeSetAndReturn(JsonParser jp,
     		DeserializationContext ctxt, Object instance) throws IOException
     {
         // note: no null checks (unlike usually); deserializer should fail if one found
@@ -90,10 +90,8 @@ public Object deserializeSetAndReturn(JsonParser jp,
          *  quite yet. Typical use case is with DB inserts.
          */
         
-        ReadableObjectId roid = (id == null) ? null : ctxt.findObjectId(id, _objectIdReader.generator, _objectIdReader.resolver);
-        if (roid != null) {
-            roid.bindItem(instance);
-        }
+        ReadableObjectId roid = ctxt.findObjectId(id, _objectIdReader.generator, _objectIdReader.resolver);
+        roid.bindItem(instance);
         // also: may need to set a property value as well
         SettableBeanProperty idProp = _objectIdReader.idProperty;
         if (idProp != null) {

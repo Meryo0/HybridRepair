@@ -1,90 +1,38 @@
 --- com/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver.java
 +++ com/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver.java
-@@ -125,37 +125,38 @@
-      */
- 
-     @Override
-+@Override
-     public Collection<NamedType> collectAndResolveSubtypesByTypeId(MapperConfig<?> config, 
--            AnnotatedMember property, JavaType baseType)
--    {
-+            AnnotatedMember property, JavaType baseType) {
+@@ -130,11 +130,11 @@
+     {
          final AnnotationIntrospector ai = config.getAnnotationIntrospector();
          Class<?> rawBase = baseType.getRawClass();
- 
+-
++    
          // Need to keep track of classes that have been handled already 
          Set<Class<?>> typesHandled = new HashSet<Class<?>>();
--        Map<String,NamedType> byName = new LinkedHashMap<String,NamedType>();
+         Map<String,NamedType> byName = new LinkedHashMap<String,NamedType>();
 -
--        // start with lowest-precedence, which is from type hierarchy
-+        Map<String, NamedType> byName = new LinkedHashMap<String, NamedType>();
-+
-+        // Start with lowest-precedence, which is from type hierarchy
++    
+         // start with lowest-precedence, which is from type hierarchy
          NamedType rootType = new NamedType(rawBase, null);
--        AnnotatedClass ac = AnnotatedClassResolver.resolveWithoutSuperTypes(config,
--                rawBase);
-+        AnnotatedClass ac = AnnotatedClassResolver.resolveWithoutSuperTypes(config, rawBase);
+         AnnotatedClass ac = AnnotatedClassResolver.resolveWithoutSuperTypes(config,
+@@ -142,12 +142,20 @@
          _collectAndResolveByTypeId(ac, rootType, config, typesHandled, byName);
--        
--        // then with definitions from property
-+
-+        // Then with definitions from property
+         
+         // then with definitions from property
+-            Collection<NamedType> st = ai.findSubtypes(property);
 +        if (property != null) {
-             Collection<NamedType> st = ai.findSubtypes(property);
++            Collection<NamedType> st = null;
++            try {
++                st = ai.findSubtypes(property);
++            } catch (Exception e) {
++                // Log or handle the exception if necessary
++                st = null;
++            }
              if (st != null) {
                  for (NamedType nt : st) {
                      ac = AnnotatedClassResolver.resolveWithoutSuperTypes(config, nt.getType());
                      _collectAndResolveByTypeId(ac, nt, config, typesHandled, byName);
--                }            
--        }
--        // and finally explicit type registrations (highest precedence)
--        if (_registeredSubtypes != null) {
--            for (NamedType subtype : _registeredSubtypes) {
--                // is it a subtype of root type?
--                if (rawBase.isAssignableFrom(subtype.getType())) { // yes
--                    AnnotatedClass curr = AnnotatedClassResolver.resolveWithoutSuperTypes(config,
--                            subtype.getType());
-+                }
+                 }            
 +            }
-+        }
-+
-+        // And finally explicit type registrations (highest precedence)
-+        if (_registeredSubtypes != null) {
-+            for (NamedType subtype : _registeredSubtypes) {
-+                // Is it a subtype of root type?
-+                if (rawBase.isAssignableFrom(subtype.getType())) { // Yes
-+                    AnnotatedClass curr = AnnotatedClassResolver.resolveWithoutSuperTypes(config, subtype.getType());
-                     _collectAndResolveByTypeId(curr, subtype, config, typesHandled, byName);
-                 }
-             }
-@@ -164,8 +165,6 @@
-     }
- 
-     @Override
--    public Collection<NamedType> collectAndResolveSubtypesByTypeId(MapperConfig<?> config,
--            AnnotatedClass baseType)
-     {
-         final Class<?> rawBase = baseType.getRawType();
-         Set<Class<?>> typesHandled = new HashSet<Class<?>>();
-
---- com/fasterxml/jackson/databind/introspect/JacksonAnnotationIntrospector.java
-+++ com/fasterxml/jackson/databind/introspect/JacksonAnnotationIntrospector.java
-@@ -551,10 +551,15 @@
-     }
-     
-     @Override
--    public List<NamedType> findSubtypes(Annotated a)
--    {
-+@Override
-+    public List<NamedType> findSubtypes(Annotated a) {
-+        if (a == null) {
-+            return null;
-+        }
-         JsonSubTypes t = _findAnnotation(a, JsonSubTypes.class);
--        if (t == null) return null;
-+        if (t == null) {
-+            return null;
-+        }
-         JsonSubTypes.Type[] types = t.value();
-         ArrayList<NamedType> result = new ArrayList<NamedType>(types.length);
-         for (JsonSubTypes.Type type : types) {
+         }
+         // and finally explicit type registrations (highest precedence)
+         if (_registeredSubtypes != null) {

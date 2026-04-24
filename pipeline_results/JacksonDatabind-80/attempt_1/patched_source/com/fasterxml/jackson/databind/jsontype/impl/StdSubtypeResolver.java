@@ -125,7 +125,7 @@ public class StdSubtypeResolver
      */
 
     @Override
-public Collection<NamedType> collectAndResolveSubtypesByTypeId(MapperConfig<?> config, 
+    public Collection<NamedType> collectAndResolveSubtypesByTypeId(MapperConfig<?> config, 
             AnnotatedMember property, JavaType baseType)
     {
         final AnnotationIntrospector ai = config.getAnnotationIntrospector();
@@ -142,14 +142,12 @@ public Collection<NamedType> collectAndResolveSubtypesByTypeId(MapperConfig<?> c
         _collectAndResolveByTypeId(ac, rootType, config, typesHandled, byName);
         
         // then with definitions from property
-        if (property != null) {
             Collection<NamedType> st = ai.findSubtypes(property);
             if (st != null) {
                 for (NamedType nt : st) {
                     ac = AnnotatedClassResolver.resolveWithoutSuperTypes(config, nt.getType());
                     _collectAndResolveByTypeId(ac, nt, config, typesHandled, byName);
                 }            
-            }
         }
         // and finally explicit type registrations (highest precedence)
         if (_registeredSubtypes != null) {
@@ -166,6 +164,8 @@ public Collection<NamedType> collectAndResolveSubtypesByTypeId(MapperConfig<?> c
     }
 
     @Override
+    public Collection<NamedType> collectAndResolveSubtypesByTypeId(MapperConfig<?> config,
+            AnnotatedClass baseType)
     {
         final Class<?> rawBase = baseType.getRawType();
         Set<Class<?>> typesHandled = new HashSet<Class<?>>();

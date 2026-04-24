@@ -48,16 +48,14 @@ public final class JsonAdapterAnnotationTypeAdapterFactory implements TypeAdapte
   }
 
   @SuppressWarnings("unchecked") // Casts guarded by conditionals.
-static TypeAdapter<?> getTypeAdapter(ConstructorConstructor constructorConstructor, Gson gson,
+  static TypeAdapter<?> getTypeAdapter(ConstructorConstructor constructorConstructor, Gson gson,
       TypeToken<?> fieldType, JsonAdapter annotation) {
     Class<?> value = annotation.value();
     TypeAdapter<?> typeAdapter;
     if (TypeAdapter.class.isAssignableFrom(value)) {
-      @SuppressWarnings("unchecked") // Casts guarded by conditionals.
       Class<TypeAdapter<?>> typeAdapterClass = (Class<TypeAdapter<?>>) value;
       typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterClass)).construct();
     } else if (TypeAdapterFactory.class.isAssignableFrom(value)) {
-      @SuppressWarnings("unchecked") // Casts guarded by conditionals.
       Class<TypeAdapterFactory> typeAdapterFactory = (Class<TypeAdapterFactory>) value;
       typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterFactory))
           .construct()
@@ -66,9 +64,12 @@ static TypeAdapter<?> getTypeAdapter(ConstructorConstructor constructorConstruct
       throw new IllegalArgumentException(
           "@JsonAdapter value must be TypeAdapter or TypeAdapterFactory reference.");
     }
+  
+    // Ensure that the constructed typeAdapter is not null
     if (typeAdapter == null) {
-      throw new IllegalArgumentException("Failed to create TypeAdapter for @JsonAdapter value.");
+      throw new IllegalStateException("Failed to construct a valid TypeAdapter instance. Ensure that the @JsonAdapter annotation is correctly configured.");
     }
+  
     return typeAdapter.nullSafe();
   }
 }

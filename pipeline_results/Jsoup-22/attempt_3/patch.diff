@@ -1,30 +1,21 @@
-It seems that the Prolog queries are not yielding useful results, and the `Element.java` file is too large to read directly. However, based on the error message, the issue appears to be related to the `siblingElements` method in the `Element` class, which is invoking `parent()` and then `children()` without handling the case where `parent()` might return `null`.
-
-I will revise the root cause and provide a fix for the `siblingElements` method based on this analysis.
-
-**Revised Root Cause**:
-The `siblingElements` method in the `Element` class does not handle the case where the `parent()` method returns `null`. If the element is an orphan, attempting to call `children()` on a `null` parent will result in a `NullPointerException`.
-
-**Revised Correct Intended Behavior**:
-The `siblingElements` method should:
-1. Return an empty list if the element has no parent (`parent() == null`).
-2. Exclude the current element itself from the list of siblings when returning the parent's children.
-
-**Corrected Method**:
-
-FILE: org/jsoup/nodes/Element.java
-```java
-    public List<Element> siblingElements() {
-        if (parent() == null) {
-            return Collections.emptyList();
-        }
-        List<Element> siblings = parent().children();
-        List<Element> result = new ArrayList<>(siblings.size() - 1);
-        for (Element sibling : siblings) {
-            if (sibling != this) {
-                result.add(sibling);
-            }
-        }
-        return result;
-    }
-```
+--- org/jsoup/nodes/Node.java
++++ org/jsoup/nodes/Node.java
+@@ -441,9 +441,15 @@
+      @return node siblings. If the node has no parent, returns an empty list.
+      */
+     public List<Node> siblingNodes() {
+-
+-        return parent().childNodes();
+-    }
++            // Return an empty list if the node is an orphan (no parent)
++            if (parent() == null) {
++                return Collections.emptyList();
++            }
++            // Exclude the current node from the list of siblings
++            List<Node> siblings = new ArrayList<>(parent().childNodes());
++            siblings.remove(this);
++            return siblings;
++        }
+ 
+     /**
+      Get this node's next sibling.

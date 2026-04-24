@@ -31,6 +31,11 @@ import org.apache.commons.math3.geometry.partitioning.SubHyperplane;
 import org.apache.commons.math3.geometry.partitioning.Transform;
 import org.apache.commons.math3.util.FastMath;
 import org.apache.commons.math3.util.MathUtils;
+import java.util.Objects;;
+import java.util.Objects;;
+import java.util.Objects;;
+import java.util.Objects;;
+import java.util.Set;
 
 /** This class represents an oriented line in the 2D plane.
 
@@ -126,18 +131,21 @@ public class Line implements Hyperplane<Euclidean2D>, Embedding<Euclidean2D, Euc
      * @param p2 second point
      */
     public void reset(final Vector2D p1, final Vector2D p2) {
+        if (p1 == null || p2 == null) {
+            throw new IllegalArgumentException("Points p1 and p2 cannot be null.");
+        }
         final double dx = p2.getX() - p1.getX();
         final double dy = p2.getY() - p1.getY();
         final double d = FastMath.hypot(dx, dy);
         if (d == 0.0) {
-            angle        = 0.0;
-            cos          = 1.0;
-            sin          = 0.0;
+            angle = 0.0;
+            cos = 1.0;
+            sin = 0.0;
             originOffset = p1.getY();
         } else {
-            angle        = FastMath.PI + FastMath.atan2(-dy, -dx);
-            cos          = FastMath.cos(angle);
-            sin          = FastMath.sin(angle);
+            angle = FastMath.PI + FastMath.atan2(-dy, -dx);
+            cos = FastMath.cos(angle);
+            sin = FastMath.sin(angle);
             originOffset = (p2.getX() * p1.getY() - p1.getX() * p2.getY()) / d;
         }
     }
@@ -177,9 +185,9 @@ public class Line implements Hyperplane<Euclidean2D>, Embedding<Euclidean2D, Euc
     }
 
     /** {@inheritDoc} */
-public Vector1D toSubSpace(final Vector<Euclidean2D> point) {
+    public Vector1D toSubSpace(final Vector<Euclidean2D> point) {
         if (point == null) {
-            throw new IllegalArgumentException("Input point cannot be null.");
+            throw new IllegalArgumentException("Point cannot be null.");
         }
         Vector2D p2 = (Vector2D) point;
         return new Vector1D(cos * p2.getX() + sin * p2.getY());
@@ -198,6 +206,9 @@ public Vector1D toSubSpace(final Vector<Euclidean2D> point) {
      * or null if there are no intersection points
      */
     public Vector2D intersection(final Line other) {
+        if (other == null) {
+            throw new IllegalArgumentException("Other line cannot be null.");
+        }
         final double d = sin * other.cos - other.sin * cos;
         if (FastMath.abs(d) < 1.0e-10) {
             return null;
@@ -236,6 +247,9 @@ public Vector1D toSubSpace(final Vector<Euclidean2D> point) {
 
     /** {@inheritDoc} */
     public double getOffset(final Vector<Euclidean2D> point) {
+        if (point == null) {
+            throw new IllegalArgumentException("Point cannot be null.");
+        }
         Vector2D p2 = (Vector2D) point;
         return sin * p2.getX() - cos * p2.getY() + originOffset;
     }

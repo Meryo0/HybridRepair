@@ -9,6 +9,17 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.util.ArrayBuilders;
 import com.fasterxml.jackson.databind.util.ClassUtil;
 import com.fasterxml.jackson.databind.util.LRUMap;
+import java.util.HashSet;
+import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.TreeMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Class used for creating concrete {@link JavaType} instances,
@@ -1207,90 +1218,69 @@ public final class TypeFactory
      */
     protected JavaType _fromClass(ClassStack context, Class<?> rawType, TypeBindings bindings)
     {
-        // Very first thing: small set of core types we know well:
+        // Ensure bindings is not null
+        if (bindings == null) {
+            bindings = EMPTY_BINDINGS;
+        }
+    
         JavaType result = _findWellKnownSimple(rawType);
         if (result != null) {
             return result;
         }
-        // Barring that, we may have recently constructed an instance
-        final Object key;
-        if ((bindings == null) || bindings.isEmpty()) {
-            key = rawType;
-        } else {
-            key = bindings.asKey(rawType);
-        }
-        result = _typeCache.get(key); // ok, cache object is synced
+    
+        final Object key = bindings.isEmpty() ? rawType : bindings.asKey(rawType);
+        result = _typeCache.get(key);
         if (result != null) {
             return result;
         }
-
-        // 15-Oct-2015, tatu: recursive reference?
+    
         if (context == null) {
             context = new ClassStack(rawType);
         } else {
             ClassStack prev = context.find(rawType);
             if (prev != null) {
-                // Self-reference: needs special handling, then...
                 ResolvedRecursiveType selfRef = new ResolvedRecursiveType(rawType, EMPTY_BINDINGS);
                 prev.addSelfReference(selfRef);
                 return selfRef;
             }
-            // no, but need to update context to allow for proper cycle resolution
             context = context.child(rawType);
         }
-
-        // First: do we have an array type?
+    
         if (rawType.isArray()) {
-            result = ArrayType.construct(_fromAny(context, rawType.getComponentType(), bindings),
-                    bindings);
+            result = ArrayType.construct(_fromAny(context, rawType.getComponentType(), bindings), bindings);
         } else {
-            // If not, need to proceed by first resolving parent type hierarchy
-            
-            JavaType superClass;
-            JavaType[] superInterfaces;
-
-            if (rawType.isInterface()) {
-                superClass = null;
-                superInterfaces = _resolveSuperInterfaces(context, rawType, bindings);
-            } else {
-                // Note: even Enums can implement interfaces, so can not drop those
-                superClass = _resolveSuperClass(context, rawType, bindings);
-                superInterfaces = _resolveSuperInterfaces(context, rawType, bindings);
-            }
-
-            // 19-Oct-2015, tatu: Bit messy, but we need to 'fix' java.util.Properties here...
+            JavaType superClass = rawType.isInterface() ? null : _resolveSuperClass(context, rawType, bindings);
+            JavaType[] superInterfaces = _resolveSuperInterfaces(context, rawType, bindings);
+    
             if (rawType == Properties.class) {
-                result = MapType.construct(rawType, bindings, superClass, superInterfaces,
-                        CORE_TYPE_STRING, CORE_TYPE_STRING);
-            }
-            // And then check what flavor of type we got. Start by asking resolved
-            // super-type if refinement is all that is needed?
-            else if (superClass != null) {
+                result = MapType.construct(rawType, bindings, superClass, superInterfaces, CORE_TYPE_STRING, CORE_TYPE_STRING);
+            } else if (superClass != null) {
                 result = superClass.refine(rawType, bindings, superClass, superInterfaces);
             }
-            // if not, perhaps we are now resolving a well-known class or interface?
             if (result == null) {
-                result = _fromWellKnownClass(context, rawType, bindings, superClass, superInterfaces); 
+                result = _fromWellKnownClass(context, rawType, bindings, superClass, superInterfaces);
                 if (result == null) {
                     result = _fromWellKnownInterface(context, rawType, bindings, superClass, superInterfaces);
                     if (result == null) {
-                        // but if nothing else, "simple" class for now:
                         result = _newSimpleType(rawType, bindings, superClass, superInterfaces);
                     }
                 }
             }
         }
         context.resolveSelfReferences(result);
-        // 16-Jul-2016, tatu: [databind#1302] is solved different way, but ideally we shouldn't
-        //     cache anything with partially resolved `ResolvedRecursiveType`... so maybe improve
         if (!result.hasHandlers()) {
-            _typeCache.putIfAbsent(key, result); // cache object syncs
+            _typeCache.putIfAbsent(key, result);
         }
         return result;
     }
 
     protected JavaType _resolveSuperClass(ClassStack context, Class<?> rawType, TypeBindings parentBindings)
     {
+        // Ensure parentBindings is not null
+        if (parentBindings == null) {
+            parentBindings = EMPTY_BINDINGS;
+        }
+    
         Type parent = ClassUtil.getGenericSuperclass(rawType);
         if (parent == null) {
             return null;
@@ -1300,6 +1290,11 @@ public final class TypeFactory
 
     protected JavaType[] _resolveSuperInterfaces(ClassStack context, Class<?> rawType, TypeBindings parentBindings)
     {
+        // Ensure parentBindings is not null
+        if (parentBindings == null) {
+            parentBindings = EMPTY_BINDINGS;
+        }
+    
         Type[] types = ClassUtil.getGenericInterfaces(rawType);
         if (types == null || types.length == 0) {
             return NO_TYPES;
@@ -1363,14 +1358,14 @@ public final class TypeFactory
      * This method deals with parameterized types, that is,
      * first class generic classes.
      */
-    protected JavaType _fromParamType(ClassStack context, ParameterizedType ptype,
-            TypeBindings parentBindings)
+    protected JavaType _fromParamType(ClassStack context, ParameterizedType ptype, TypeBindings parentBindings)
     {
-        // Assumption here is we'll always get Class, not one of other Types
+        // Ensure parentBindings is not null
+        if (parentBindings == null) {
+            parentBindings = EMPTY_BINDINGS;
+        }
+    
         Class<?> rawType = (Class<?>) ptype.getRawType();
-
-        // 29-Oct-2015, tatu: For performance reasons, let's streamline handling of
-        //   couple of not-so-useful parametric types
         if (rawType == CLS_ENUM) {
             return CORE_TYPE_ENUM;
         }
@@ -1380,14 +1375,11 @@ public final class TypeFactory
         if (rawType == CLS_CLASS) {
             return CORE_TYPE_CLASS;
         }
-
-        // First: what is the actual base type? One odd thing is that 'getRawType'
-        // returns Type, not Class<?> as one might expect. But let's assume it is
-        // always of type Class: if not, need to add more code to resolve it to Class.        
+    
         Type[] args = ptype.getActualTypeArguments();
         int paramCount = (args == null) ? 0 : args.length;
-        TypeBindings newBindings;        
-
+        TypeBindings newBindings;
+    
         if (paramCount == 0) {
             newBindings = EMPTY_BINDINGS;
         } else {
@@ -1406,24 +1398,23 @@ public final class TypeFactory
         return ArrayType.construct(elementType, bindings);
     }
 
-protected JavaType _fromVariable(ClassStack context, TypeVariable<?> var, TypeBindings bindings)
+    protected JavaType _fromVariable(ClassStack context, TypeVariable<?> var, TypeBindings bindings)
     {
-        // ideally should find it via bindings:
-        final String name = var.getName();
+        // Ensure bindings is not null
         if (bindings == null) {
             bindings = EMPTY_BINDINGS;
         }
+    
+        final String name = var.getName();
         JavaType type = bindings.findBoundType(name);
         if (type != null) {
             return type;
         }
-        // but if not, use bounds... note that approach here is simplistic; not taking
-        // into account possible multiple bounds, nor consider upper bounds.
         if (bindings.hasUnbound(name)) {
             return CORE_TYPE_OBJECT;
         }
         bindings = bindings.withUnboundVariable(name);
-
+    
         Type[] bounds = var.getBounds();
         return _fromAny(context, bounds[0], bindings);
     }

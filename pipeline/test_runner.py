@@ -218,12 +218,27 @@ def _parse_junit_output(output: str, target_tests: List[str]) -> dict:
 
     status = "PASS" if failures == 0 and total > 0 else "FAIL"
 
+    # P5: Extract full stack traces from the failure block
+    # Match everything between "There was/were N failure(s):" and "FAILURES!!!"
+    stack_traces_block = ""
+    st_match = re.search(r"There (?:was|were) \d+ failure[s]?:(.*?)(?:\nFAILURES!!!|\Z)", output, re.DOTALL)
+    if st_match:
+        stack_traces_block = st_match.group(1).strip()
+    elif "Exception" in output:
+        # Fallback if the format is slightly different
+        lines = output.splitlines()
+        for i, line in enumerate(lines):
+            if ") " in line and ("Exception" in line or "Error" in line or "Assertion" in line):
+                stack_traces_block = "\n".join(lines[i:])
+                break
+
     return {
         "status": status,
         "total_tests": total,
         "failed_tests": failures,
         "failing_test_names": failing_names,
         "previously_failing_now_passing": previously_failing_now_passing,
+        "stack_traces_block": stack_traces_block,
     }
 
 

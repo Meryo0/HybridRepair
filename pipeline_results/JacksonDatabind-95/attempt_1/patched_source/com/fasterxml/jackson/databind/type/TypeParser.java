@@ -3,6 +3,8 @@ package com.fasterxml.jackson.databind.type;
 import java.util.*;
 
 import com.fasterxml.jackson.databind.JavaType;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Simple recursive-descent parser for parsing canonical {@link JavaType}
@@ -37,15 +39,14 @@ public class TypeParser
         return type;
     }
 
-protected JavaType parseType(MyTokenizer tokens)
+    protected JavaType parseType(MyTokenizer tokens)
         throws IllegalArgumentException
     {
         if (!tokens.hasMoreTokens()) {
             throw _problem(tokens, "Unexpected end-of-string");
         }
         Class<?> base = findClass(tokens.nextToken(), tokens);
-
-        // either end (ok, non generic type), or generics
+    
         if (tokens.hasMoreTokens()) {
             String token = tokens.nextToken();
             if ("<".equals(token)) {
@@ -53,7 +54,6 @@ protected JavaType parseType(MyTokenizer tokens)
                 TypeBindings b = TypeBindings.create(base, parameterTypes);
                 return _factory._fromClass(null, base, b);
             }
-            // can be comma that separates types, or closing '>'
             tokens.pushBack(token);
         }
         return _factory._fromClass(null, base, EMPTY_BINDINGS);

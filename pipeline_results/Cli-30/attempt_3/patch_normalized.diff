@@ -1,63 +1,70 @@
 --- org/apache/commons/cli/Parser.java
 +++ org/apache/commons/cli/Parser.java
-@@ -249,7 +249,7 @@
-      *
-      * @param properties The value properties to be processed.
-      */
--    protected void processProperties(Properties properties) throws ParseException
-+protected void processProperties(Properties properties) throws ParseException
-     {
-         if (properties == null)
+@@ -255,7 +255,7 @@
          {
-@@ -263,8 +263,17 @@
+             return;
+         }
+-
++    
+         for (Enumeration e = properties.propertyNames(); e.hasMoreElements();)
+         {
+             String option = e.nextElement().toString();
+@@ -263,12 +263,16 @@
              if (!cmd.hasOption(option))
              {
                  Option opt = getOptions().getOption(option);
 -            
 -            // if the option is part of a group, check if another option of the group has been selected
+-            
++                
++                // Skip null options gracefully
 +                if (opt == null)
-+                {
-+                    throw new UnrecognizedOptionException("Unrecognized option: " + option);
-+                }
-+
-+                // Check if the option is part of a group and if another option in the group is already selected
-+                OptionGroup group = getOptions().getOptionGroup(opt);
-+                if (group != null && group.getSelected() != null)
 +                {
 +                    continue;
 +                }
-             
++    
                  // get the value from the properties instance
                  String value = properties.getProperty(option);
+-
++    
+                 if (opt.hasArg())
+                 {
+                     if (opt.getValues() == null || opt.getValues().length == 0)
+@@ -291,7 +295,7 @@
+                     // option to the CommandLine
+                     continue;
+                 }
+-
++    
+                 cmd.addOption(opt);
+                 updateRequiredOptions(opt);
+             }
 
 --- org/apache/commons/cli/DefaultParser.java
 +++ org/apache/commons/cli/DefaultParser.java
-@@ -136,7 +136,7 @@
-      *
-      * @param properties The value properties to be processed.
-      */
--    private void handleProperties(Properties properties) throws ParseException
-+private void handleProperties(Properties properties) throws ParseException
-     {
-         if (properties == null)
-         {
-@@ -150,8 +150,17 @@
+@@ -150,9 +150,13 @@
              if (!cmd.hasOption(option))
              {
                  Option opt = options.getOption(option);
 -            
 -            // if the option is part of a group, check if another option of the group has been selected
+-            
++                
++                // Skip null options gracefully
 +                if (opt == null)
-+                {
-+                    throw new UnrecognizedOptionException("Unrecognized option: " + option);
-+                }
-+
-+                // Check if the option is part of a group and if another option in the group is already selected
-+                OptionGroup group = options.getOptionGroup(opt);
-+                if (group != null && group.getSelected() != null)
 +                {
 +                    continue;
 +                }
-             
++    
                  // get the value from the properties
                  String value = properties.getProperty(option);
+                 
+@@ -170,7 +174,7 @@
+                     // if the value is not yes, true or 1 then don't add the option to the CommandLine
+                     continue;
+                 }
+-                
++    
+                 handleOption(opt);
+                 currentOption = null;
+             }

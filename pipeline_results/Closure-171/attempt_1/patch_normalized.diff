@@ -1,11 +1,26 @@
 --- com/google/javascript/jscomp/Scope.java
 +++ com/google/javascript/jscomp/Scope.java
-@@ -525,7 +525,7 @@
-   /**
+@@ -526,14 +526,15 @@
     * Returns the variable, may be null
     */
--  public Var getVar(String name) {
-+public Var getVar(String name) {
-     Var var = vars.get(name);
-     if (var != null) {
-       return var;
+   public Var getVar(String name) {
+-    Var var = vars.get(name);
+-    if (var != null) {
+-      return var;
+-    } else if (parent != null) { // Recurse up the parent Scope
+-      return parent.getVar(name);
+-    } else {
+-      return null;
+-    }
++      Var var = vars.get(name);
++      if (var != null) {
++          return var;
++      } else if (parent != null) { // Recurse up the parent Scope
++          return parent.getVar(name);
++      } else {
++          // Return a sentinel Var object to represent "not found"
++          return Var.NOT_FOUND;
++      }
+   }
+ 
+   /**

@@ -107,7 +107,7 @@ public class SubLine extends AbstractSubHyperplane<Euclidean2D, Euclidean1D> {
      * occurring on endpoints lead to null being returned
      * @return the intersection point if there is one, null if the sub-lines don't intersect
      */
-public Vector2D intersection(final SubLine subLine, final boolean includeEndPoints) {
+    public Vector2D intersection(final SubLine subLine, final boolean includeEndPoints) {
 
         // retrieve the underlying lines
         Line line1 = (Line) getHyperplane();
@@ -115,9 +115,6 @@ public Vector2D intersection(final SubLine subLine, final boolean includeEndPoin
 
         // compute the intersection on infinite line
         Vector2D v2D = line1.intersection(line2);
-        if (v2D == null) {
-            return null;
-        }
 
         // check location of point with respect to first sub-line
         Location loc1 = getRemainingRegion().checkPoint(line1.toSubSpace(v2D));

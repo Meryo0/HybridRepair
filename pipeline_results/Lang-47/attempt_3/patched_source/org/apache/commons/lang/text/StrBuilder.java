@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.SystemUtils;
+import java.util.Collections;
 
 /**
  * Builds a string from constituent parts providing a more flexible and powerful API
@@ -1183,6 +1184,10 @@ public class StrBuilder implements Cloneable {
         if (width > 0) {
             ensureCapacity(size + width);
             String str = (obj == null ? getNullText() : obj.toString());
+            // Ensure str is never null, even if getNullText() returns null
+            if (str == null) {
+                str = "";
+            }
             int strLen = str.length();
             if (strLen >= width) {
                 str.getChars(strLen - width, strLen, buffer, size);
@@ -1227,6 +1232,10 @@ public class StrBuilder implements Cloneable {
         if (width > 0) {
             ensureCapacity(size + width);
             String str = (obj == null ? getNullText() : obj.toString());
+            // Ensure str is never null, even if getNullText() returns null
+            if (str == null) {
+                str = "";
+            }
             int strLen = str.length();
             if (strLen >= width) {
                 str.getChars(0, width, buffer, size);
