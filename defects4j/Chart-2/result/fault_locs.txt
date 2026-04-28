@@ -1,2 +1,0 @@
-org.jfree.data.general.DatasetUtilities 780
-org.jfree.data.general.DatasetUtilities 1284

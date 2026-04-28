@@ -1,8 +1,0 @@
-Fault Localization Results
-NPE at line(dataset_utilities_tests_1, 1276) / Null Expression - v_r_207[r]
-	 can be caused by 
-dataset_utilities_1_literal5[null] - line(dataset_utilities_1, 780).
-
-NPE at line(dataset_utilities_tests_1, 1299) / Null Expression - v_r_211[r]
-	 can be caused by 
-dataset_utilities_1_literal9[null] - line(dataset_utilities_1, 1284).

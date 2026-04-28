@@ -1,8 +1,0 @@
-Fault Localization Results
-NPE at line(json_adapter_annotation_type_adapter_factory_1, 67) / Null Expression - v_type_adapter_264[typeAdapter]
-	 can be caused by 
-v_type_adapter_264[typeAdapter] - line(json_adapter_annotation_type_adapter_factory_1, 67).
-
-NPE at line(json_adapter_annotation_type_adapter_factory_1, 67) / Null Expression - v_type_adapter_264[typeAdapter]
-	 can be caused by 
-json_adapter_annotation_type_adapter_factory_1_expr18['typeAdapter.nullSafe()'] - line(json_adapter_annotation_type_adapter_factory_1, 67).

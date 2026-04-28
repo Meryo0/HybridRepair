@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 def main():
-    workspace_dir = Path("/home/mario/Desktop/LogicFL")
+    workspace_dir = Path(__file__).resolve().parent
     defects4j_dir = workspace_dir / "defects4j"
     
     if not defects4j_dir.exists():
@@ -24,9 +24,9 @@ def main():
         print(f"{'='*60}")
         
         try:
-            # Eseguiamo lo script run_pipeline.py. check=False fa sì che non si fermi in caso di exit code diverso da 0
+            # Eseguiamo repair_bug.py (HybridRepair v2). check=False fa sì che non si fermi in caso di exit code diverso da 0
             subprocess.run(
-                ["python", "run_pipeline.py", "--bug", bug],
+                ["python", "repair_bug.py", bug, "--skip-logicfl"],
                 cwd=workspace_dir,
                 check=False
             )

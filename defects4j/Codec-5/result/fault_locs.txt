@@ -1,4 +1,0 @@
-org.apache.commons.codec.binary.Base64 594
-org.apache.commons.codec.binary.Base64 594
-org.apache.commons.codec.binary.Base64 413
-org.apache.commons.codec.binary.Base64 418

@@ -1,8 +1,0 @@
-Fault Localization Results
-NPE at line(double_metaphone_1, 244) / Null Expression - double_metaphone_1_expr11['doubleMetaphone(value1,alternate)']
-	 can be caused by 
-double_metaphone_1_expr11['doubleMetaphone(value1,alternate)'] - line(double_metaphone_1, 244).
-
-NPE at line(double_metaphone_1, 244) / Null Expression - double_metaphone_1_expr11['doubleMetaphone(value1,alternate)']
-	 can be caused by 
-double_metaphone_1_literal3[null] - line(double_metaphone_1, 88).

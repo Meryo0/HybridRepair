@@ -1,5 +1,0 @@
-{"npe.traces": [{
-    "test.method": "should_return_empty_iterable",
-    "traces": [],
-    "test.class": "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValuesTest"
-}]}

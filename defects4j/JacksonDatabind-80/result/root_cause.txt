@@ -1,8 +1,0 @@
-Fault Localization Results
-NPE at line(annotation_introspector_1, 1336) / Null Expression - p_annotated_115[annotated]
-	 can be caused by 
-p_property_2230[property] - line(std_subtype_resolver_1, 145).
-
-NPE at line(annotation_introspector_1, 1336) / Null Expression - p_annotated_115[annotated]
-	 can be caused by 
-p_a_2026[a] - line(jackson_annotation_introspector_1, 556).

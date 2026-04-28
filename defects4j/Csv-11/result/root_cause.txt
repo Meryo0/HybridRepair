@@ -1,8 +1,0 @@
-Fault Localization Results
-NPE at line(csvparser_1, 384) / Null Expression - v_header_86[header]
-	 can be caused by 
-v_header_86[header] - line(csvparser_1, 384).
-
-NPE at line(csvparser_1, 384) / Null Expression - v_header_86[header]
-	 can be caused by 
-csvparser_1_expr47['headerRecord[i]'] - line(csvparser_1, 382).

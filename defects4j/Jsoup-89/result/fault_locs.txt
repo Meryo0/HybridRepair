@@ -1,3 +1,0 @@
-org.jsoup.nodes.Attribute 88
-org.jsoup.nodes.Attribute 33
-org.jsoup.nodes.Attribute 48

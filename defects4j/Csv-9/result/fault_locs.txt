@@ -1,6 +1,0 @@
-org.apache.commons.csv.CSVParser 388
-org.apache.commons.csv.CSVRecord 180
-org.apache.commons.csv.CSVRecord 55
-org.apache.commons.csv.CSVParser 496
-org.apache.commons.csv.CSVParser 248
-org.apache.commons.csv.CSVParser 358

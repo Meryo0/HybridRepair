@@ -1,2 +1,0 @@
-com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver 145
-com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector 556

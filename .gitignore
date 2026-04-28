@@ -5,3 +5,9 @@ defects4j_issta_2014.pdf
 walkthroughs/
 implementation_plans/
 .ai_instructions.md
+
+*.class
+
+pipeline_results/
+defects4j/
+*.pdf

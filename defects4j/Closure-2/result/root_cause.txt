@@ -1,8 +1,0 @@
-Fault Localization Results
-NPE at line(type_check_1, 1574) / Null Expression - v_implicit_proto_2660[implicitProto]
-	 can be caused by 
-v_implicit_proto_2660[implicitProto] - line(type_check_1, 1574).
-
-NPE at line(type_check_1, 1574) / Null Expression - v_implicit_proto_2660[implicitProto]
-	 can be caused by 
-type_check_1_expr128['interfaceType.getImplicitPrototype()'] - line(type_check_1, 1570).

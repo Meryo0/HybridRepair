@@ -1,31 +1,6 @@
 bug_id,category,relevant_excerpt
-Mockito-18,Punti ciechi / Deduzione frammentaria,"STDOUT | 	at org.mockito.internal.creation.bytebuddy.CachingMockBytecodeGenerator.<init>(CachingMockBytecodeGenerator.java:20)
-STDOUT | 	at org.mockito.internal.creation.bytebuddy.ByteBuddyMockMaker.<init>(ByteBuddyMockMaker.java:18)
-STDOUT | 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-STDOUT | 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
-STDOUT | 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-STDOUT | 	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
-STDOUT | 	at java.base/java.lang.reflect.ReflectAccess.newInstance(ReflectAccess.java:128)
-STDOUT | 	at java.base/jdk.internal.reflect.ReflectionFactory.newInstance(ReflectionFactory.java:347)
-STDOUT | 	at java.base/java.lang.Class.newInstance(Class.java:647)
-STDOUT | 	at org.mockito.internal.configuration.plugins.PluginLoader.loadPlugin(PluginLoader.java:33)
-STDOUT | 	at org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues.<init>(ReturnsEmptyValues.java:57)
-STDOUT | 	at org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValuesTest.<init>(ReturnsEmptyValuesTest.java:31)
-STDOUT | 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-STDOUT | 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
-STDOUT | 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-STDOUT | 	at org.mockito.internal.creation.bytebuddy.CachingMockBytecodeGenerator.<init>(CachingMockBytecodeGenerator.java:20)
-STDOUT | 	at org.mockito.internal.creation.bytebuddy.ByteBuddyMockMaker.<init>(ByteBuddyMockMaker.java:18)
-STDOUT | 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-STDOUT | 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
-STDOUT | 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-STDOUT | 	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
-STDOUT | 	at java.base/java.lang.reflect.ReflectAccess.newInstance(ReflectAccess.java:128)
-STDOUT | 	at java.base/jdk.internal.reflect.ReflectionFactory.newInstance(ReflectionFactory.java:347)
-STDOUT | 	at java.base/java.lang.Class.newInstance(Class.java:647)
-STDOUT | 	at org.mockito.internal.configuration.plugins.PluginLoader.loadPlugin(PluginLoader.java:45)
-STDOUT | 	at org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues.<init>(ReturnsEmptyValues.java:57)
-STDOUT | 	at org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValuesTest.<init>(ReturnsEmptyValuesTest.java:31)
-STDOUT | 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-STDOUT | 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
-STDOUT | 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)"
+Mockito-18,Punti ciechi / Deduzione frammentaria,"STDOUT | Load configurations from config.properties
+STDOUT | Cannot load test information from /home/mario/Desktop/LogicFL/defects4j/Mockito-18/tests.json
+STDOUT | Error: coverage.sh execution failed. Stopping further execution.
+STDERR | java.nio.file.NoSuchFileException: /home/mario/Desktop/LogicFL/defects4j/Mockito-18/tests.json
+STDERR | 	at java.base/sun.nio.fs.UnixException.translateToIOException(UnixException.java:92)"

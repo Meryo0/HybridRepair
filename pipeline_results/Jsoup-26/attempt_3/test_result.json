@@ -1,9 +1,0 @@
-{
-  "status": "COMPILE_ERROR",
-  "total_tests": 0,
-  "failed_tests": 0,
-  "failing_test_names": [],
-  "previously_failing_now_passing": [],
-  "compile_output": "/home/mario/Desktop/LogicFL/pipeline_results/Jsoup-26/attempt_3/patched_source/org/jsoup/nodes/Document.java:112: error: cannot find symbol\n        if (body() == null)\n            ^\n  symbol:   method body()\n  location: class Document\n/home/mario/Desktop/LogicFL/pipeline_results/Jsoup-26/attempt_3/patched_source/org/jsoup/nodes/Document.java:141: error: cannot find symbol\n            body().prependChild(new TextNode(\" \", \"\"));\n            ^\n  symbol:   method body()\n  location: class Document\n/home/mario/Desktop/LogicFL/pipeline_results/Jsoup-26/attempt_3/patched_source/org/jsoup/nodes/Document.java:142: error: cannot find symbol\n            body().prependChild(node);\n            ^\n  symbol:   method body()\n  location: class Document\n/home/mario/Desktop/LogicFL/pipeline_results/Jsoup-26/attempt_3/patched_source/org/jsoup/nodes/Document.java:194: error: cannot find symbol\n        body().text(text); // overridden to not nuke doc structure\n        ^\n  symbol:   method body()\n  location: class Document\n/home/mario/Desktop/LogicFL/pipeline_results/Jsoup-26/attempt_3/patched_source/org/jsoup/parser/Parser.java:110: error: cannot find symbol\n            Element body = doc.body(); // Ensured by the corrected Document.body() method\n                              ^\n  symbol:   method body()\n  location: variable doc of type Document\n5 errors\n",
-  "test_output": ""
-}

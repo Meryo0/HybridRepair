@@ -1,5 +1,0 @@
-{"npe.traces": [{
-    "test.method": "testBoxedBooleans",
-    "traces": [],
-    "test.class": "com.google.gson.stream.JsonWriterTest"
-}]}

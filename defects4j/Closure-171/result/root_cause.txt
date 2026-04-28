@@ -1,8 +1,0 @@
-Fault Localization Results
-NPE at line(typed_scope_creator_test_1, 551) / Null Expression - typed_scope_creator_test_1_expr27['globalScope.getVar("I.prototype")']
-	 can be caused by 
-scope_1_literal19[null] - line(scope_1, 535).
-
-NPE at line(typed_scope_creator_test_1, 551) / Null Expression - typed_scope_creator_test_1_expr27['globalScope.getVar("I.prototype")']
-	 can be caused by 
-scope_1_expr98['parent.getVar(name)'] - line(scope_1, 533).

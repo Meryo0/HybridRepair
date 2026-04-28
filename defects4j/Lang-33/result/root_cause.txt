@@ -1,8 +1,0 @@
-Fault Localization Results
-NPE at line(class_utils_1, 910) / Null Expression - class_utils_1_expr48['array[i]']
-	 can be caused by 
-class_utils_1_expr48['array[i]'] - line(class_utils_1, 910).
-
-NPE at line(class_utils_1, 910) / Null Expression - p_array_446[array]
-	 can be caused by 
-p_array_446[array] - line(class_utils_1, 910).

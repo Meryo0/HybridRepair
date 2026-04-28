@@ -1,4 +1,0 @@
-Fault Localization Results
-NPE at line(locale_utils_1, 223) / Null Expression - f_c_available_locale_set_10[cAvailableLocaleSet]
-	 can be caused by 
-f_c_available_locale_set_10[cAvailableLocaleSet] - line(locale_utils_1, 223).
