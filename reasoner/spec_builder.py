@@ -39,8 +39,11 @@ SPEC_USER_TEMPLATE = """\
 {method_source}
 ```
 
-### Prolog Causal Chain (from LogicFL)
-{causal_chains}
+### Prolog Causal Analysis (from LogicFL — Semantically Grounded)
+{causal_analysis}
+
+### Repair Directives (from Prolog Rule Analysis)
+{repair_directives}
 
 ### Failing Test(s)
 {failing_tests}
@@ -103,12 +106,26 @@ def _build_spec_prompt(
     """Build the CoT specification prompt."""
     primary = fault_report.locations[0] if fault_report.locations else None
 
+    # Use grounded chains if available, fall back to raw chains
+    if fault_report.grounded_chains:
+        from fault_oracle.prolog_grounding import format_grounded_chains
+        causal_analysis = format_grounded_chains(fault_report.grounded_chains)
+        directives = []
+        for gc in fault_report.grounded_chains:
+            if gc.repair_directive:
+                directives.append(f"- {gc.repair_directive}")
+        repair_directives = "\n".join(directives) if directives else "(none)"
+    else:
+        causal_analysis = "\n".join(fault_report.causal_chains) or "(none)"
+        repair_directives = "(no rule-based directives available)"
+
     return SPEC_USER_TEMPLATE.format(
         bug_id=fault_report.bug_id,
         class_name=primary.class_name if primary else "unknown",
         line=primary.line if primary else 0,
         method_source=primary.method_source if primary else "(not available)",
-        causal_chains="\n".join(fault_report.causal_chains) or "(none)",
+        causal_analysis=causal_analysis,
+        repair_directives=repair_directives,
         failing_tests="\n".join(
             f"- `{t['class']}::{t.get('method', '?')}`"
             for t in fault_report.failing_tests

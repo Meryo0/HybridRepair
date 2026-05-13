@@ -331,6 +331,29 @@ def parse_logicfl_output(bug_dir: Path) -> FaultReport:
         if fallback_loc:
             locations.append(fallback_loc)
 
+    # 6. Ground causal chains with Semantic Grounding + Rule-to-Prompt
+    grounded_chains = []
+    if root_cause_text and locations:
+        try:
+            from fault_oracle.prolog_grounding import ground_causal_chains
+
+            primary_file = locations[0].file_path if locations else None
+            grounded_chains = ground_causal_chains(
+                root_cause_text,
+                source_file=primary_file,
+                source_roots=source_roots,
+            )
+            if grounded_chains:
+                print(f"  [logicfl_parser] Grounded {len(grounded_chains)} NPE chain(s):")
+                for gc in grounded_chains[:3]:
+                    cat = gc.category.value.replace("_", " ").title()
+                    null_name = gc.null_entity.java_name if gc.null_entity else "?"
+                    null_type = gc.null_entity.java_type if gc.null_entity else ""
+                    type_info = f" ({null_type})" if null_type else ""
+                    print(f"    · Line {gc.crash_line}: `{null_name}`{type_info} → {cat}")
+        except Exception as exc:
+            print(f"  [logicfl_parser] WARNING: grounding failed ({exc}), using raw chains")
+
     return FaultReport(
         bug_id=bug_id,
         locations=locations,
@@ -338,4 +361,6 @@ def parse_logicfl_output(bug_dir: Path) -> FaultReport:
         causal_chains=causal_chains,
         failing_tests=failing_tests,
         stack_traces=stack_traces,
+        grounded_chains=grounded_chains,
     )
+

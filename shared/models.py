@@ -15,6 +15,82 @@ from typing import Any, Dict, List, Optional
 # ── Phase 1: FaultOracle output ──────────────────────────────────────────────
 
 
+class NPECategory(Enum):
+    """Classification of an NPE based on Prolog rule analysis."""
+
+    NULL_RETURN = "null_return"
+    """A method returns null and the result is dereferenced."""
+
+    NULL_ARGUMENT = "null_argument"
+    """A null argument is passed to a method that doesn't handle it."""
+
+    UNINITIALIZED_FIELD = "uninitialized_field"
+    """A field is never initialized (or set to null in the constructor)."""
+
+    NULL_ARRAY_ACCESS = "null_array_access"
+    """An array/collection element that is null is accessed."""
+
+    NULL_DEREFERENCE = "null_dereference"
+    """A variable that is null is dereferenced directly."""
+
+    NULL_LITERAL_ASSIGN = "null_literal_assign"
+    """A variable is explicitly assigned null and then dereferenced."""
+
+    UNKNOWN = "unknown"
+
+
+@dataclass
+class GroundedEntity:
+    """A Prolog entity resolved to its real Java identity."""
+
+    prolog_id: str
+    """Internal Prolog identifier (e.g. 'v_r_207')."""
+
+    java_name: str
+    """Real Java name (e.g. 'r')."""
+
+    java_type: str = ""
+    """Resolved Java type (e.g. 'Range'). Empty if unresolved."""
+
+    entity_kind: str = "unknown"
+    """One of: 'variable', 'field', 'parameter', 'literal', 'expression'."""
+
+    source_line: int = 0
+    """1-indexed source line where this entity appears."""
+
+
+@dataclass
+class GroundedCause:
+    """A single cause in the NPE causal chain, with resolved Java context."""
+
+    entity: GroundedEntity
+    explanation: str = ""
+    """Human-readable explanation, e.g. 'Variable `result` (type Range) is assigned null at line 780'."""
+
+
+@dataclass
+class GroundedNPE:
+    """A fully grounded NPE diagnosis with classification and repair directive."""
+
+    crash_line: int = 0
+    """Line where the NPE manifests."""
+
+    class_id: str = ""
+    """Prolog class identifier (e.g. 'dataset_utilities_1')."""
+
+    null_entity: Optional[GroundedEntity] = None
+    """The entity that is null at the crash site."""
+
+    causes: List[GroundedCause] = field(default_factory=list)
+    """Ordered causal chain explaining how null propagated."""
+
+    category: NPECategory = NPECategory.UNKNOWN
+    """Classification of the NPE type."""
+
+    repair_directive: str = ""
+    """Targeted repair instruction based on the NPE category."""
+
+
 @dataclass
 class FaultLocation:
     """A single suspicious location identified by LogicFL."""
@@ -61,6 +137,9 @@ class FaultReport:
 
     stack_traces: str = ""
     """Raw text of stack_traces.txt."""
+
+    grounded_chains: List[GroundedNPE] = field(default_factory=list)
+    """Semantically grounded NPE chains with resolved types and repair directives."""
 
 
 # ── Phase 2: SpecReason output ───────────────────────────────────────────────

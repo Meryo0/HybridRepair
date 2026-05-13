@@ -11,3 +11,8 @@ implementation_plans/
 pipeline_results/
 defects4j/
 *.pdf
+docs/motivating_example_closure2.md
+PRESENTAZIONE_PROPOSTA_APR.md
+
+# Java crash logs
+hs_err_pid*.log

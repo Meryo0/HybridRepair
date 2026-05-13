@@ -73,8 +73,11 @@ AGENT_USER_TEMPLATE = """\
 **Intended Behavior:** {intended_behavior}
 **Minimal Fix:** {minimal_fix}
 
-### Prolog Causal Chain
-{causal_chains}
+### Prolog Causal Analysis (Semantically Grounded)
+{causal_analysis}
+
+### Repair Directives (from Prolog Rule Analysis)
+{repair_directives}
 
 ### Failing Tests
 {failing_tests}
@@ -236,6 +239,19 @@ class PatchAgent:
                 self.fault_report.bug_id, attempt_num
             )
 
+        # Use grounded chains if available, fall back to raw chains
+        if self.fault_report.grounded_chains:
+            from fault_oracle.prolog_grounding import format_grounded_chains
+            causal_analysis = format_grounded_chains(self.fault_report.grounded_chains)
+            directives = []
+            for gc in self.fault_report.grounded_chains:
+                if gc.repair_directive:
+                    directives.append(f"- {gc.repair_directive}")
+            repair_directives = "\n".join(directives) if directives else "(none)"
+        else:
+            causal_analysis = "\n".join(self.fault_report.causal_chains) or "(none)"
+            repair_directives = "(no rule-based directives available)"
+
         user_prompt = AGENT_USER_TEMPLATE.format(
             bug_id=self.fault_report.bug_id,
             class_name=primary.class_name if primary else "unknown",
@@ -244,7 +260,8 @@ class PatchAgent:
             flawed_behavior=self.repair_spec.flawed_behavior or "(not available)",
             intended_behavior=self.repair_spec.intended_behavior or "(not available)",
             minimal_fix=self.repair_spec.minimal_fix or "(not available)",
-            causal_chains="\n".join(self.fault_report.causal_chains) or "(none)",
+            causal_analysis=causal_analysis,
+            repair_directives=repair_directives,
             failing_tests="\n".join(
                 f"- `{t['class']}::{t.get('method', '?')}`"
                 for t in self.fault_report.failing_tests
