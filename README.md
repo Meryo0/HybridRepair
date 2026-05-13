@@ -8,7 +8,7 @@ To run HybridRepair, you need to have the following installed on your system:
 - **Python 3.9+**
 - **Java 17** (or above)
 - **SWI-Prolog** (installed with JPL). Recommended installation via PPA for Linux (`/usr/lib/swi-prolog/lib/x86_64-linux` needs `libjpl.so`).
-- Defects4J environment set up and populated in the correct structure.
+- **Defects4J**: Due to its large size, the `defects4j` directory is not included in the repository. See the Installation section for setup instructions.
 
 ## Installation
 
@@ -19,7 +19,16 @@ To run HybridRepair, you need to have the following installed on your system:
    pip install -r requirements.txt
    ```
 
-3. **Environment Setup:**
+3. **Download and Setup Defects4J:**
+   Since the `defects4j` folder is large, download the pre-configured zip from the [GitHub Releases](https://github.com/Meryo0/HybridRepair/releases) page (or specify another source) and extract it in the root directory:
+   ```bash
+   wget https://github.com/Meryo0/HybridRepair/releases/download/v1.0.0/defects4j.zip
+   unzip defects4j.zip
+   export PATH=$PATH:$(pwd)/defects4j/framework/bin
+   ```
+   *(Note: Ensure you update the URL to point to your actual release/hosting service)*
+
+4. **Environment Setup:**
    Copy the sample environment file and configure your LLM provider API keys (e.g., Azure OpenAI).
    ```bash
    cp .env.example .env
