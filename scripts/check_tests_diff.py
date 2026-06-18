@@ -10,7 +10,8 @@ def get_test_dir(properties_file):
     return None
 
 def main():
-    workspace_dir = os.path.dirname(os.path.abspath(__file__))
+    # Repo root is the parent of the scripts/ directory this file lives in.
+    workspace_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     defects4j_dir = os.path.join(workspace_dir, 'defects4j')
     projects = [p for p in os.listdir(defects4j_dir) if os.path.isdir(os.path.join(defects4j_dir, p)) and not p.startswith('_')]
     

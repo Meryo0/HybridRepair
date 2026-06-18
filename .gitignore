@@ -18,3 +18,16 @@ PRESENTAZIONE_PROPOSTA_APR.md
 hs_err_pid*.log
 defects4j.zip
 APR_ARCHITECTURE.md
+
+# Python virtualenv
+.venv/
+venv/
+
+# Logs and scratch artifacts
+*.log
+a.out
+scratch_diffs/
+
+# Editor / office lock files
+.~lock.*#
+.DS_Store
