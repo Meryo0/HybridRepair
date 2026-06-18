@@ -1,111 +1,134 @@
 # HybridRepair v2
 
-HybridRepair is an agent-based Automated Program Repair (APR) pipeline designed to resolve NullPointerException (NPE) bugs. It leverages semantic fault localization (LogicFL) combined with Large Language Model (LLM) reasoning and tool-use agents to generate and apply AST-based source code patches autonomously.
+HybridRepair is an agent-based Automated Program Repair (APR) pipeline designed to
+resolve NullPointerException (NPE) bugs. It combines semantic fault localization
+(LogicFL) with Large Language Model (LLM) reasoning and tool-use agents to generate
+and apply AST-based source code patches autonomously.
 
-## Prerequisites
+The pipeline has three phases: **FaultOracle** (LogicFL fault localization) →
+**SpecReason** (chain-of-thought repair specification) → **PatchAgent** (an agentic
+loop that edits, compiles, and tests candidate patches).
 
-To run HybridRepair, you need to have the following installed on your system:
-- **Python 3.9+**
-- **Java 17** (or above)
-- **SWI-Prolog** (installed with JPL). Recommended installation via PPA for Linux (`/usr/lib/swi-prolog/lib/x86_64-linux` needs `libjpl.so`).
-- **Defects4J**: Due to its large size, the `defects4j` directory is not included in the repository. See the Installation section for setup instructions.
+---
 
-## Installation
+## Quick start with Docker (recommended)
 
-1. **Clone the repository** (if not already done).
-   
-2. **Install Python dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+A pre-built image is published publicly on the GitHub Container Registry, so you do
+**not** need to install Java, SWI-Prolog/JPL, or Python yourself.
 
-3. **Download and Setup Defects4J:**
-   Since the `defects4j` folder is large, download the pre-configured zip from the [GitHub Releases](https://github.com/Meryo0/HybridRepair/releases) page (or specify another source) and extract it in the root directory:
-   ```bash
-   wget https://github.com/Meryo0/HybridRepair/releases/download/v1.0.0/defects4j.zip
-   unzip defects4j.zip
-   export PATH=$PATH:$(pwd)/defects4j/framework/bin
-   ```
-   *(Note: Ensure you update the URL to point to your actual release/hosting service)*
+### 1. Prerequisites
+- **Docker** (only this — everything else is inside the image).
+- An **Azure OpenAI** deployment (endpoint, key, deployment name).
+- The **Defects4J corpus** used by this project (~4.7 GB — see step 4).
 
-4. **Environment Setup:**
-   Copy the sample environment file and configure your LLM provider API keys (e.g., Azure OpenAI).
-   ```bash
-   cp .env.example .env
-   ```
-   Edit `.env` to include your actual API keys.
-
-## Project Structure
-
-- `patch_agent/`: The autonomous loop where the agent attempts to fix bugs, tests patches, and iterates.
-- `reasoner/`: Collects ingredients and generates the Chain-of-Thought (CoT) Repair Specifications.
-- `fault_oracle/`: Wraps LogicFL execution, parses the output, and semantically grounds Prolog AST findings.
-- `shared/`: Shared data models (e.g., `RepairResult`, `GroundedNPE`) and configuration details.
-- `docs/README_LogicFL.md`: The original LogicFL replication package instructions for running the fault localizer manually.
-- `Dockerfile`, `docker-compose.yml`, `docker/`: Containerised runtime (see *Run with Docker* below).
-
-## How to Run
-
-You can run HybridRepair on a specific bug by using the `repair_bug.py` entry point. 
-
+### 2. Pull the image
 ```bash
-# Run the full pipeline for a specific bug (e.g., Chart-2)
-python repair_bug.py Chart-2
-
-# If you have already run LogicFL for this bug and want to skip Phase 1 (to save time)
-python repair_bug.py Chart-2 --skip-logicfl
+docker pull ghcr.io/meryo0/hybridrepair:latest
 ```
 
-Alternatively, to run over a batch of bugs, use the `run_all_bugs.py` script:
-```bash
-python run_all_bugs.py
+### 3. Configure your LLM credentials
+Create a file named `.env` (you can copy `.env.example`) with your Azure OpenAI
+values:
+```ini
+AZURE_OPENAI_API_KEY=your_key_here
+AZURE_OPENAI_ENDPOINT=https://your-resource.openai.azure.com/
+AZURE_OPENAI_DEPLOYMENT=gpt-4o
+AZURE_OPENAI_API_VERSION=2024-02-01
 ```
 
-## Run with Docker (recommended for deployment)
+### 4. Get the Defects4J corpus
+The corpus (the `defects4j/` folder with one directory per bug, e.g. `Chart-2/`) is
+**not** bundled in the image or the git repository because of its size. You need a
+copy on the host machine. Pick whichever applies:
 
-The hard part of running HybridRepair is the system environment: two JDKs
-(17 + 21), SWI-Prolog with the JPL native bridge (`libjpl.so`), and Python.
-The Docker image bakes all of this in once, so you don't install any of it by
-hand. The heavy Defects4J corpus stays **outside** the image and is mounted as
-a volume, keeping the image light (~2 GB) and your folders untouched.
+- **You already have it on another machine** (the usual case for testing): copy the
+  whole folder over, e.g.
+  ```bash
+  rsync -a user@source-host:/path/to/HybridRepair/defects4j ./defects4j
+  ```
+- **You are the maintainer publishing it:** upload a `defects4j.zip` to a host you
+  control (GitHub Release asset — note the 2 GB per-file limit — or an external
+  store such as Zenodo / Drive / S3), then document the URL here. There is currently
+  **no public download link** for this corpus.
 
-**1. Configure credentials** — copy and fill in your Azure OpenAI keys:
-```bash
-cp .env.example .env   # then edit .env
-```
+After this step you should have a local `./defects4j` directory containing the bug
+folders.
 
-**2. Get the Defects4J corpus** (one time) — download and unzip it anywhere on
-the host (see the *Installation* section), e.g. into `./defects4j`.
-
-**3. Build the image:**
-```bash
-docker build -t hybridrepair .
-```
-
-**4. Run a bug** — mount your corpus and pass the bug id (anything after the
-image name is forwarded to `repair_bug.py`):
+### 5. Run a bug
+Mount your corpus and the output directory, pass your `.env`, and give a bug id.
+Anything after the image name is forwarded to the pipeline.
 ```bash
 docker run --rm \
   --env-file .env \
   -v "$(pwd)/defects4j:/opt/hybridrepair/defects4j" \
   -v "$(pwd)/pipeline_results:/opt/hybridrepair/pipeline_results" \
-  hybridrepair Chart-2 --skip-logicfl
+  ghcr.io/meryo0/hybridrepair:latest Chart-2 --skip-logicfl
 ```
+- `Chart-2` is the bug id (others: `Gson-6`, `Csv-4`, `Lang-33`, …).
+- `--skip-logicfl` reuses the fault-localization results cached in the corpus
+  (`defects4j/<Bug>/result/`). Drop it to re-run LogicFL from scratch (slower; needs
+  the full Java 21 + SWI-Prolog/JPL stack, all of which are baked into the image).
+- The container entrypoint automatically rewrites the absolute `base.dir` paths
+  inside each mounted `config.properties` to the in-container location — no manual
+  path editing required.
 
-The container's entrypoint automatically rewrites the absolute `base.dir=` paths
-inside each mounted `config.properties` to the in-container location, so no
-manual path fixing is needed.
+> **Note:** running against a mounted corpus rewrites its `base.dir` lines to the
+> container path. If you also run the pipeline natively against the *same* folder,
+> use a separate copy for the container.
 
-**Using docker compose** (paths preset — just set `DEFECTS4J_HOST` if your corpus
-lives elsewhere):
+### Using docker compose
+Paths are preset in `docker-compose.yml`; override `DEFECTS4J_HOST` if your corpus
+lives elsewhere:
 ```bash
 DEFECTS4J_HOST=/abs/path/to/defects4j docker compose run --rm repair Chart-2 --skip-logicfl
 ```
 
-> **Note:** mounting `defects4j/` normalises its `base.dir` lines to the
-> container path. Use a copy dedicated to the container if you also run the
-> pipeline natively against the same corpus.
+### Where the output goes
+Results — agent iterations, generated specs, patches (`patch.diff`), JUnit results,
+and a `final_report.json` — are written under `pipeline_results/<Bug-Id>/` on the
+host (via the mounted volume).
 
-## Logs and Outputs
+---
 
-All outputs generated by the pipeline, including agent iterations, generated specifications, patches (`patch.diff`), and JUnit test results are stored in the `pipeline_results/` directory, organized by Bug ID.
+## Alternative: build the image yourself
+If you'd rather build locally instead of pulling from GHCR:
+```bash
+docker build -t hybridrepair .
+docker run --rm --env-file .env \
+  -v "$(pwd)/defects4j:/opt/hybridrepair/defects4j" \
+  -v "$(pwd)/pipeline_results:/opt/hybridrepair/pipeline_results" \
+  hybridrepair Chart-2 --skip-logicfl
+```
+
+## Alternative: native install (without Docker)
+For development on the host directly. You must install the full toolchain yourself:
+
+- **Python 3.10+** — create a venv and install dependencies (`uv` recommended):
+  ```bash
+  uv venv .venv && source .venv/bin/activate && uv pip install -r requirements.txt
+  # or: python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
+  ```
+- **Java 17** (compile/run patches) and **Java 21** at
+  `/usr/lib/jvm/java-21-openjdk-amd64` (LogicFL's pinned `jvm`).
+- **SWI-Prolog with JPL** — install both `swi-prolog` *and* `swi-prolog-java` so that
+  `libjpl.so` lands in `/usr/lib/swi-prolog/lib/x86_64-linux/` (the path LogicFL
+  expects). On Ubuntu: `sudo add-apt-repository ppa:swi-prolog/stable`.
+- Get the **Defects4J corpus** as in step 4 above.
+
+Then run from the repo root:
+```bash
+python repair_bug.py Chart-2 --skip-logicfl   # single bug
+python run_all_bugs.py                         # batch over all bugs
+```
+
+---
+
+## Project structure
+- `patch_agent/` — the autonomous loop that edits, compiles, tests, and iterates on patches.
+- `reasoner/` — collects ingredients and builds the chain-of-thought repair specifications.
+- `fault_oracle/` — wraps LogicFL execution, parses its output, and semantically grounds the Prolog AST findings.
+- `services/` — Azure client, sandbox compile/test evaluator, reporter.
+- `shared/` — shared config and data models (`RepairResult`, `FaultReport`, …).
+- `scripts/` — analysis helpers (`compare_patches.py`, `compare_bugs.py`, `check_tests_diff.py`).
+- `Dockerfile`, `docker-compose.yml`, `docker/` — containerised runtime.
+- `docs/README_LogicFL.md` — original LogicFL replication-package instructions for running the fault localizer manually.
