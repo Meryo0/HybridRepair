@@ -38,21 +38,27 @@ AZURE_OPENAI_API_VERSION=2024-02-01
 
 ### 4. Get the Defects4J corpus
 The corpus (the `defects4j/` folder with one directory per bug, e.g. `Chart-2/`) is
-**not** bundled in the image or the git repository because of its size. You need a
-copy on the host machine. Pick whichever applies:
+**not** bundled in the image or the git repository because of its size (~4.7 GB). It
+is published as a split archive on the
+[v1.0.0 release](https://github.com/Meryo0/HybridRepair/releases/tag/v1.0.0)
+(GitHub caps release assets at 2 GB per file, so it ships in two parts).
 
-- **You already have it on another machine** (the usual case for testing): copy the
-  whole folder over, e.g.
-  ```bash
-  rsync -a user@source-host:/path/to/HybridRepair/defects4j ./defects4j
-  ```
-- **You are the maintainer publishing it:** upload a `defects4j.zip` to a host you
-  control (GitHub Release asset — note the 2 GB per-file limit — or an external
-  store such as Zenodo / Drive / S3), then document the URL here. There is currently
-  **no public download link** for this corpus.
+Download both parts and reassemble + extract them into the project root:
+```bash
+# with the GitHub CLI
+gh release download v1.0.0 --repo Meryo0/HybridRepair -p 'defects4j.tar.gz.part-*'
 
-After this step you should have a local `./defects4j` directory containing the bug
-folders.
+# or with wget
+wget https://github.com/Meryo0/HybridRepair/releases/download/v1.0.0/defects4j.tar.gz.part-00
+wget https://github.com/Meryo0/HybridRepair/releases/download/v1.0.0/defects4j.tar.gz.part-01
+
+# reassemble the parts and extract — recreates ./defects4j
+cat defects4j.tar.gz.part-* | tar xzf -
+```
+
+After this you should have a local `./defects4j` directory containing the bug
+folders. (If you already have the corpus on another machine you can of course just
+copy that folder over instead, e.g. `rsync -a host:/path/HybridRepair/defects4j .`)
 
 ### 5. Run a bug
 Mount your corpus and the output directory, pass your `.env`, and give a bug id.
