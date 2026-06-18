@@ -41,4 +41,15 @@ normalise_base_dirs() {
 normalise_base_dirs
 
 cd "${HOME_DIR}"
-exec python repair_bug.py "$@"
+
+# Dispatch: if the first argument is a Python script (e.g. run_all_bugs.py),
+# run it directly; otherwise default to repair_bug.py with the given args
+# (e.g. Chart-2 --skip-logicfl).
+case "${1:-}" in
+    *.py)
+        exec python "$@"
+        ;;
+    *)
+        exec python repair_bug.py "$@"
+        ;;
+esac

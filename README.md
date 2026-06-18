@@ -82,11 +82,26 @@ docker run --rm \
 > container path. If you also run the pipeline natively against the *same* folder,
 > use a separate copy for the container.
 
+### Run all bugs (batch)
+Pass a Python entry script instead of a bug id and the container runs that
+instead of the single-bug pipeline. To process every bug in the corpus:
+```bash
+docker run --rm \
+  --env-file .env \
+  -v "$(pwd)/defects4j:/opt/hybridrepair/defects4j" \
+  -v "$(pwd)/pipeline_results:/opt/hybridrepair/pipeline_results" \
+  ghcr.io/meryo0/hybridrepair:latest run_all_bugs.py
+```
+`run_all_bugs.py` runs `repair_bug.py <bug> --skip-logicfl` over every bug folder
+and prints a PASS/FAIL summary at the end.
+
 ### Using docker compose
 Paths are preset in `docker-compose.yml`; override `DEFECTS4J_HOST` if your corpus
 lives elsewhere:
 ```bash
 DEFECTS4J_HOST=/abs/path/to/defects4j docker compose run --rm repair Chart-2 --skip-logicfl
+# or the whole batch:
+DEFECTS4J_HOST=/abs/path/to/defects4j docker compose run --rm repair run_all_bugs.py
 ```
 
 ### Where the output goes
