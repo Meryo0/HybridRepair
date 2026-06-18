@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1
+# syntax=docker/dockerfile:1.7-labs
 #
 # HybridRepair v2 — lightweight runtime image.
 #
@@ -57,10 +57,18 @@ RUN python3 -m venv /opt/venv \
  && /opt/venv/bin/pip install --no-cache-dir -r requirements.txt
 ENV PATH="/opt/venv/bin:${PATH}"
 
-# ── Application code + small tracked datasets ───────────────────────────────────
-# .dockerignore keeps out the heavy/gitignored dirs (defects4j, pipeline_results,
-# .venv, .git). The relative `lib -> logicfl_dataset/lib` symlink is preserved.
-COPY . .
+# ── Large, rarely-changing datasets (isolated cache layers) ─────────────────────
+# Copied before the app code so that editing code does not invalidate (and force
+# a re-pull of) these ~985 MB. They change very rarely.
+COPY d4j-lib/ ./d4j-lib/
+COPY logicfl_dataset/ ./logicfl_dataset/
+
+# ── Application code (small final layer) ────────────────────────────────────────
+# Everything else from the context except the datasets already copied above.
+# A code/entrypoint change only rebuilds and re-pulls this small layer.
+# .dockerignore still excludes defects4j, pipeline_results, .venv, .git, .env.
+# The relative `lib -> logicfl_dataset/lib` symlink is preserved.
+COPY --exclude=d4j-lib --exclude=logicfl_dataset . .
 
 ENTRYPOINT ["/opt/hybridrepair/docker/entrypoint.sh"]
 CMD ["--help"]
