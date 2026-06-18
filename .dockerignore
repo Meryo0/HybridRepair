@@ -1,0 +1,29 @@
+# Heavy data — mounted as volumes at runtime, never baked into the image.
+defects4j/
+pipeline_results/
+
+# Local environment / VCS / caches
+.venv/
+venv/
+.git/
+.github/
+.cursor/
+.cursorignore
+__pycache__/
+**/__pycache__/
+*.pyc
+
+# Secrets — provide via --env-file / -e at runtime, never bake into the image.
+.env
+
+# Logs and scratch artifacts
+*.log
+a.out
+scratch_diffs/
+.~lock.*#
+.DS_Store
+
+# Docs not needed at runtime
+docs/
+*.md
+!README.md

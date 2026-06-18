@@ -41,7 +41,8 @@ To run HybridRepair, you need to have the following installed on your system:
 - `reasoner/`: Collects ingredients and generates the Chain-of-Thought (CoT) Repair Specifications.
 - `fault_oracle/`: Wraps LogicFL execution, parses the output, and semantically grounds Prolog AST findings.
 - `shared/`: Shared data models (e.g., `RepairResult`, `GroundedNPE`) and configuration details.
-- `README_LogicFL.md`: The original LogicFL replication package instructions for running the fault localizer manually.
+- `docs/README_LogicFL.md`: The original LogicFL replication package instructions for running the fault localizer manually.
+- `Dockerfile`, `docker-compose.yml`, `docker/`: Containerised runtime (see *Run with Docker* below).
 
 ## How to Run
 
@@ -59,6 +60,51 @@ Alternatively, to run over a batch of bugs, use the `run_all_bugs.py` script:
 ```bash
 python run_all_bugs.py
 ```
+
+## Run with Docker (recommended for deployment)
+
+The hard part of running HybridRepair is the system environment: two JDKs
+(17 + 21), SWI-Prolog with the JPL native bridge (`libjpl.so`), and Python.
+The Docker image bakes all of this in once, so you don't install any of it by
+hand. The heavy Defects4J corpus stays **outside** the image and is mounted as
+a volume, keeping the image light (~2 GB) and your folders untouched.
+
+**1. Configure credentials** — copy and fill in your Azure OpenAI keys:
+```bash
+cp .env.example .env   # then edit .env
+```
+
+**2. Get the Defects4J corpus** (one time) — download and unzip it anywhere on
+the host (see the *Installation* section), e.g. into `./defects4j`.
+
+**3. Build the image:**
+```bash
+docker build -t hybridrepair .
+```
+
+**4. Run a bug** — mount your corpus and pass the bug id (anything after the
+image name is forwarded to `repair_bug.py`):
+```bash
+docker run --rm \
+  --env-file .env \
+  -v "$(pwd)/defects4j:/opt/hybridrepair/defects4j" \
+  -v "$(pwd)/pipeline_results:/opt/hybridrepair/pipeline_results" \
+  hybridrepair Chart-2 --skip-logicfl
+```
+
+The container's entrypoint automatically rewrites the absolute `base.dir=` paths
+inside each mounted `config.properties` to the in-container location, so no
+manual path fixing is needed.
+
+**Using docker compose** (paths preset — just set `DEFECTS4J_HOST` if your corpus
+lives elsewhere):
+```bash
+DEFECTS4J_HOST=/abs/path/to/defects4j docker compose run --rm repair Chart-2 --skip-logicfl
+```
+
+> **Note:** mounting `defects4j/` normalises its `base.dir` lines to the
+> container path. Use a copy dedicated to the container if you also run the
+> pipeline natively against the same corpus.
 
 ## Logs and Outputs
 

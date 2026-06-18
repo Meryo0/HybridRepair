@@ -1,0 +1,29 @@
+# HybridRepair v2 — Docker Compose convenience wrapper.
+#
+# Usage:
+#   1. Put your Azure OpenAI keys in .env (see .env.example).
+#   2. Download + unzip the Defects4J corpus somewhere on the host, then point
+#      DEFECTS4J_HOST at it (defaults to ./defects4j next to this file):
+#        export DEFECTS4J_HOST=/abs/path/to/defects4j
+#   3. Run a bug:
+#        docker compose run --rm repair Chart-2 --skip-logicfl
+#
+# The data directories are mounted (not copied), so the host folders stay
+# exactly as they are and the image remains light.
+
+services:
+  repair:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: hybridrepair:latest
+    env_file:
+      - .env
+    volumes:
+      # Heavy Defects4J corpus — mounted from the host, never baked in.
+      - ${DEFECTS4J_HOST:-./defects4j}:/opt/hybridrepair/defects4j
+      # Pipeline outputs — persisted back to the host.
+      - ${PIPELINE_RESULTS_HOST:-./pipeline_results}:/opt/hybridrepair/pipeline_results
+    # `docker compose run repair <args>` appends <args> after the entrypoint.
+    # Default command shows usage when no bug id is given.
+    command: ["--help"]
