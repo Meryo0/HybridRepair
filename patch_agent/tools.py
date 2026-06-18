@@ -157,9 +157,28 @@ def tool_apply_ast_patch(
     search_name = Path(file_path).name
     target: Optional[Path] = None
 
-    matches = list(ctx.patched_source_dir.rglob(search_name))
-    if matches:
-        target = matches[0]
+    # Exact relative-path match first
+    candidate = ctx.patched_source_dir / file_path
+    if candidate.exists():
+        target = candidate
+    else:
+        matches = list(ctx.patched_source_dir.rglob(search_name))
+        if len(matches) > 1:
+            # Prefer the match whose path ends with the requested relative path
+            suffix_matches = [m for m in matches if str(m).endswith(file_path)]
+            if len(suffix_matches) == 1:
+                target = suffix_matches[0]
+            else:
+                listing = "\n".join(
+                    f"  - {m.relative_to(ctx.patched_source_dir)}" for m in matches[:10]
+                )
+                return (
+                    f"Error: '{search_name}' is ambiguous — {len(matches)} files match:\n"
+                    f"{listing}\n"
+                    f"Re-call apply_ast_patch with the full relative path."
+                )
+        elif matches:
+            target = matches[0]
 
     if target is None:
         return f"Error: File '{file_path}' not found in patched source."

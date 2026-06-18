@@ -38,7 +38,13 @@ An analyst produced the following bug specification. Validate it.
 **Minimal Fix:**
 {minimal_fix}
 
+**Fix Locations (per-location verdict):**
+{fix_locations}
+
 ### Ground Truth (from test execution)
+
+**Fault Locations (causal chain from fault localization):**
+{fault_locations}
 
 **Stack Trace:**
 ```
@@ -55,7 +61,11 @@ An analyst produced the following bug specification. Validate it.
 1. Is the "Flawed Behavior" description consistent with the stack trace?
 2. Is the "Intended Behavior" plausible given the test expectations?
 3. Is the "Minimal Fix" truly minimal, or does it over-engineer the solution?
-4. Rate your confidence that this specification would lead to a correct fix (0.0-1.0).
+4. COVERAGE CHECK: does the "Fix Locations" verdict account for EVERY fault \
+location of the causal chain? Patching only the crash point while an \
+upstream cause (null origin, inverted logic, unguarded twin method) stays \
+broken cures the symptom, not the disease — correct the analysis if so.
+5. Rate your confidence that this specification would lead to a correct fix (0.0-1.0).
 
 If the analysis is correct, respond with the SAME content.
 If corrections are needed, provide the corrected version.
@@ -64,6 +74,7 @@ Respond in this exact format:
 <flawed_behavior>...</flawed_behavior>
 <intended_behavior>...</intended_behavior>
 <minimal_fix>...</minimal_fix>
+<fix_locations>...</fix_locations>
 <confidence>0.X</confidence>
 """
 
@@ -86,6 +97,7 @@ def _parse_critic_response(response: str) -> tuple[RepairSpec, float]:
         flawed_behavior=extract("flawed_behavior"),
         intended_behavior=extract("intended_behavior"),
         minimal_fix=extract("minimal_fix"),
+        fix_locations=extract("fix_locations"),
         confidence=confidence,
     ), confidence
 
@@ -115,11 +127,18 @@ def validate(
         print("  [spec_critic] WARNING: empty spec, skipping validation")
         return spec
 
+    fault_locations = "\n".join(
+        f"- Location {i}: `{loc.class_name}:{loc.line}`"
+        for i, loc in enumerate(fault_report.locations[:5], 1)
+    ) or "(none)"
+
     prompt = CRITIC_USER_TEMPLATE.format(
         bug_id=fault_report.bug_id,
         flawed_behavior=spec.flawed_behavior,
         intended_behavior=spec.intended_behavior,
         minimal_fix=spec.minimal_fix,
+        fix_locations=spec.fix_locations or "(not provided)",
+        fault_locations=fault_locations,
         stack_traces=fault_report.stack_traces[:2000] or "(none)",
         failing_tests="\n".join(
             f"- `{t['class']}::{t.get('method', '?')}`"
@@ -144,6 +163,8 @@ def validate(
         validated_spec.intended_behavior = spec.intended_behavior
     if not validated_spec.minimal_fix:
         validated_spec.minimal_fix = spec.minimal_fix
+    if not validated_spec.fix_locations:
+        validated_spec.fix_locations = spec.fix_locations
 
     print(f"  [spec_critic] Confidence: {confidence:.2f}")
     if confidence < 0.5:

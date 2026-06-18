@@ -54,6 +54,8 @@ def save_attempt(
             "total_tests": attempt.test_result.total_tests,
             "failed_tests": attempt.test_result.failed_tests,
             "failing_test_names": attempt.test_result.failing_test_names,
+            "semantic_valid": attempt.semantic_valid,
+            "semantic_reason": attempt.semantic_reason,
             "compile_output": attempt.test_result.compile_output[:2000],
             "test_output": attempt.test_result.test_output[:5000],
         }
@@ -79,6 +81,8 @@ def save_final_report(result: RepairResult) -> None:
         "success": result.success,
         "winning_attempt": result.winning_attempt,
         "total_attempts": result.total_attempts,
+        "semantic_valid": result.semantic_valid,
+        "semantic_reason": result.semantic_reason,
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }
 
@@ -95,6 +99,11 @@ def print_summary(result: RepairResult) -> None:
     print(f"\n{bar}")
     print(f"  BUG: {result.bug_id}")
     print(f"  STATUS: {result.summary()}")
+    if result.semantic_valid is False:
+        print(f"  ⚠️  SEMANTIC: patch passes tests but violates the contract "
+              f"— {result.semantic_reason}")
+    elif result.semantic_valid is True:
+        print(f"  SEMANTIC: ✓ contract check passed")
     if result.winning_attempt:
         patch_path = (
             config.PIPELINE_RESULTS_DIR / result.bug_id

@@ -157,6 +157,56 @@ def extract_method_at_line(
     return "\n".join(output_lines), start_1, end_1
 
 
+def extract_javadoc_for_method(
+    java_file: Path,
+    method_start_line: int,
+) -> str:
+    """Extract the Javadoc block (/** ... */) directly above a method.
+
+    Walks upward from the line before the method declaration, skipping blank
+    lines and annotations, and returns the block comment if it is a Javadoc.
+
+    Args:
+        java_file: Path to the Java source file.
+        method_start_line: 1-indexed line where the method declaration starts.
+
+    Returns:
+        The Javadoc text (including delimiters) or "" if absent.
+    """
+    if not java_file.exists() or method_start_line <= 1:
+        return ""
+
+    source = java_file.read_text(encoding="utf-8", errors="replace")
+    return extract_javadoc_from_lines(source.splitlines(), method_start_line)
+
+
+def extract_javadoc_from_lines(lines: List[str], method_start_line: int) -> str:
+    """Core of extract_javadoc_for_method, operating on pre-split lines."""
+    idx = method_start_line - 2  # 0-indexed line above the declaration
+
+    # Skip blank lines and annotations between the Javadoc and the method
+    while idx >= 0:
+        stripped = lines[idx].strip()
+        if stripped == "" or stripped.startswith("@"):
+            idx -= 1
+            continue
+        break
+
+    if idx < 0 or not lines[idx].strip().endswith("*/"):
+        return ""
+
+    end_idx = idx
+    while idx >= 0:
+        stripped = lines[idx].strip()
+        if stripped.startswith("/**"):
+            return "\n".join(lines[idx:end_idx + 1])
+        if stripped.startswith("/*"):
+            return ""  # plain block comment, not a Javadoc
+        idx -= 1
+
+    return ""
+
+
 def extract_method_context(
     java_file: Path,
     target_line: int,

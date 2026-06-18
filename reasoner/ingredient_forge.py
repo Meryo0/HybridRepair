@@ -179,6 +179,51 @@ def _extract_local_variables(
     return list(dict.fromkeys(variables))
 
 
+_CALL_EXPR_RE = re.compile(r"\b\w+\.\w+\s*\([^()]*\)")
+
+
+def _find_sibling_occurrences(
+    java_file: Path,
+    fault_line: int,
+    method_start: int,
+    method_end: int,
+) -> List[str]:
+    """Find other occurrences of the crash-line expression in the same class.
+
+    When the expression that crashes (e.g. `ai.findSubtypes(property)`)
+    appears verbatim in ANOTHER method of the same file, that method is a
+    likely "twin" with the same latent defect (cf. JacksonDatabind-80, where
+    only one of two mirror methods got patched). Returns human-readable
+    warnings for the prompt.
+    """
+    if not java_file.exists() or fault_line <= 0:
+        return []
+
+    lines = java_file.read_text(encoding="utf-8", errors="replace").splitlines()
+    if fault_line > len(lines):
+        return []
+
+    crash_text = lines[fault_line - 1]
+    calls = _CALL_EXPR_RE.findall(crash_text)
+    if not calls:
+        return []
+
+    occurrences: List[str] = []
+    for call in calls:
+        for i, line in enumerate(lines, 1):
+            if i == fault_line:
+                continue
+            if method_start <= i <= method_end:
+                continue  # same method as the crash — already in context
+            if call in line:
+                occurrences.append(
+                    f"{java_file.name}:{i} — `{line.strip()}` contains the same "
+                    f"expression `{call}` as the crash line {fault_line}"
+                )
+
+    return occurrences[:5]
+
+
 # ── Public API ────────────────────────────────────────────────────────────────
 
 
@@ -250,6 +295,14 @@ def collect(fault_report: FaultReport) -> Ingredients:
     ingredients.local_variables = _extract_local_variables(
         java_file, primary.method_start, primary.method_end
     )
+
+    # 6. Twin locations: same crash expression in other methods of the class
+    ingredients.sibling_occurrences = _find_sibling_occurrences(
+        java_file, primary.line, primary.method_start, primary.method_end
+    )
+    if ingredients.sibling_occurrences:
+        print(f"  [ingredient_forge] ⚠ Found {len(ingredients.sibling_occurrences)} "
+              f"suspect twin location(s) for the crash expression")
 
     print(f"  [ingredient_forge] Collected: "
           f"{len(ingredients.class_fields)} fields, "

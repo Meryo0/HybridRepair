@@ -47,6 +47,13 @@ Defects4J Java project using the tools available to you.
 - If tests fail, analyze the stack trace and try a different approach.
 - Keep fixes MINIMAL. Prefer the smallest change that fixes the bug.
 - Do NOT add unnecessary null checks or try/catch blocks.
+- PRESERVE the documented contract (Javadoc): never return an internal \
+mutable field where the contract requires a copy, never introduce \
+exceptions the Javadoc does not document, never return dummy/default \
+objects just to silence a crash. Passing the tests is NOT enough.
+- Address EVERY fault location in the causal chain (and every suspect \
+twin location), or explicitly rule it out. Patching only the crash line \
+while an upstream cause stays broken is an invalid fix.
 
 ## Available Tools
 - `read_file(file_path)` — Read a Java source file
@@ -60,18 +67,15 @@ Defects4J Java project using the tools available to you.
 AGENT_USER_TEMPLATE = """\
 ## Bug: {bug_id}
 
-### Fault Location
-- **Class:** `{class_name}`
-- **Line:** {line}
-- **Method source:**
-```java
-{method_source}
-```
-
+### Fault Locations (full causal chain — address or explicitly rule out EACH one)
+{fault_locations}
+{sibling_occurrences}
 ### Bug Specification (from analysis phase)
 **Flawed Behavior:** {flawed_behavior}
 **Intended Behavior:** {intended_behavior}
 **Minimal Fix:** {minimal_fix}
+**Fix Locations (per-location verdict):**
+{fix_locations}
 
 ### Prolog Causal Analysis (Semantically Grounded)
 {causal_analysis}
@@ -164,10 +168,28 @@ class PatchAgent:
             if attempt.test_result and attempt.test_result.status == AttemptStatus.PASS:
                 self.result.success = True
                 self.result.winning_attempt = attempt_num
+                self.result.semantic_valid = attempt.semantic_valid
+                self.result.semantic_reason = attempt.semantic_reason
                 print(f"  [agent] ✅ {bug_id} FIXED at attempt {attempt_num}!")
                 break
-            else:
-                print(f"  [agent] ❌ Attempt {attempt_num} failed: {attempt.error_summary}")
+
+            is_semantic_fail = (
+                attempt.test_result
+                and attempt.test_result.status == AttemptStatus.SEMANTIC_FAIL
+            )
+            if is_semantic_fail and attempt_num == self.max_attempts:
+                # Tests pass but the contract check failed and the retry budget
+                # is exhausted: keep the patch, flag it honestly in the report
+                # instead of discarding a green build.
+                self.result.success = True
+                self.result.winning_attempt = attempt_num
+                self.result.semantic_valid = False
+                self.result.semantic_reason = attempt.semantic_reason
+                print(f"  [agent] ⚠️  {bug_id} passes tests but FAILED semantic "
+                      f"validation: {attempt.semantic_reason}")
+                break
+
+            print(f"  [agent] ❌ Attempt {attempt_num} failed: {attempt.error_summary}")
 
         return self.result
 
@@ -216,6 +238,36 @@ class PatchAgent:
         final_result = self._verify_final(bug_dir, patched_dir, test_classes, attempt_num)
         attempt.test_result = final_result
 
+        # Post-pass semantic validation: static guard rails + LLM judge.
+        # A green build that violates the documented contract is a
+        # SEMANTIC_FAIL and triggers a retry with the verdict as feedback.
+        if final_result.status == AttemptStatus.PASS:
+            sem_valid, sem_reason, sem_skipped = self._semantic_check(bug_dir, patched_dir)
+            attempt.semantic_valid = None if sem_skipped else sem_valid
+            attempt.semantic_reason = sem_reason
+
+            if not sem_valid:
+                final_result.status = AttemptStatus.SEMANTIC_FAIL
+                attempt.error_summary = f"SEMANTIC_FAIL: {sem_reason}"
+                # Make the verdict visible to the next attempt's failure
+                # history (get_failure_summary scans tool messages for
+                # "fail"/"error" markers).
+                messages.append({
+                    "role": "tool",
+                    "content": (
+                        f"❌ SEMANTIC VALIDATION FAILED: {sem_reason}\n"
+                        f"The patch passes the test suite but violates the "
+                        f"documented contract (Javadoc). Produce a fix that "
+                        f"preserves the contract: respect @return semantics, "
+                        f"do not expose internal state, and do not introduce "
+                        f"undocumented exceptions or dummy default objects."
+                    ),
+                })
+                attempt.agent_messages = messages
+                conversation_store.save(self.fault_report.bug_id, attempt_num, messages)
+                self._persist_attempt(attempt, bug_dir, patched_dir)
+                return attempt
+
         if final_result.status == AttemptStatus.PASS:
             attempt.error_summary = ""
         elif final_result.status == AttemptStatus.COMPILE_ERROR:
@@ -226,11 +278,60 @@ class PatchAgent:
                 f"({final_result.failing_test_names})"
             )
 
+        self._persist_attempt(attempt, bug_dir, patched_dir)
         return attempt
+
+    def _persist_attempt(self, attempt: PatchAttempt, bug_dir: Path, patched_dir: Path) -> None:
+        """Write patch.diff + test_result.json into the attempt directory."""
+        try:
+            attempt.diff = self._compute_patch_diff(bug_dir, patched_dir)
+            from services.reporter import save_attempt
+            save_attempt(self.fault_report.bug_id, attempt)
+        except Exception as exc:
+            print(f"  [agent] WARNING: could not persist attempt artifacts ({exc})")
+
+    def _compute_patch_diff(self, bug_dir: Path, patched_dir: Path) -> str:
+        """Unified diff of every modified .java file (original root vs patched copy)."""
+        import difflib
+        import filecmp
+
+        from services.sandbox_evaluator import read_source_roots
+
+        source_roots = read_source_roots(bug_dir)
+        if not source_roots:
+            return ""
+        root = source_roots[0]
+
+        chunks: List[str] = []
+        for patched_file in sorted(patched_dir.rglob("*.java")):
+            rel = patched_file.relative_to(patched_dir)
+            original_file = root / rel
+            if not original_file.exists():
+                continue
+            # Cheap mtime/size check first; copytree preserves metadata, so
+            # only files the agent touched fail the shallow comparison.
+            if filecmp.cmp(original_file, patched_file, shallow=True):
+                continue
+            original = original_file.read_text(encoding="utf-8", errors="replace")
+            patched = patched_file.read_text(encoding="utf-8", errors="replace")
+            if original == patched:
+                continue
+            chunks.append("".join(difflib.unified_diff(
+                original.splitlines(keepends=True),
+                patched.splitlines(keepends=True),
+                fromfile=f"a/{rel}",
+                tofile=f"b/{rel}",
+                n=3,
+            )))
+
+        return "\n".join(chunks)
 
     def _build_messages(self, attempt_num: int) -> List[Dict[str, Any]]:
         """Build the initial message list for the agent."""
-        primary = self.fault_report.locations[0] if self.fault_report.locations else None
+        from reasoner.spec_builder import (
+            format_fault_locations,
+            format_sibling_occurrences,
+        )
 
         # Get failure history from previous attempts
         failure_history = ""
@@ -254,12 +355,12 @@ class PatchAgent:
 
         user_prompt = AGENT_USER_TEMPLATE.format(
             bug_id=self.fault_report.bug_id,
-            class_name=primary.class_name if primary else "unknown",
-            line=primary.line if primary else 0,
-            method_source=primary.method_source if primary else "(not available)",
+            fault_locations=format_fault_locations(self.fault_report),
+            sibling_occurrences=format_sibling_occurrences(self.ingredients),
             flawed_behavior=self.repair_spec.flawed_behavior or "(not available)",
             intended_behavior=self.repair_spec.intended_behavior or "(not available)",
             minimal_fix=self.repair_spec.minimal_fix or "(not available)",
+            fix_locations=self.repair_spec.fix_locations or "(not available)",
             causal_analysis=causal_analysis,
             repair_directives=repair_directives,
             failing_tests="\n".join(
@@ -311,3 +412,41 @@ class PatchAgent:
         from services.sandbox_evaluator import evaluate
 
         return evaluate(bug_dir, patched_dir, test_classes, attempt_num)
+
+    def _semantic_check(
+        self,
+        bug_dir: Path,
+        patched_dir: Path,
+    ) -> tuple:
+        """Run static guard rails + LLM judge on a patch that passed the tests.
+
+        Returns (valid, reason, skipped). Fail-open on infrastructure errors:
+        a broken validator must never reject a green build by accident.
+        """
+        from services.sandbox_evaluator import read_source_roots
+
+        try:
+            source_roots = read_source_roots(bug_dir)
+            if not source_roots:
+                return True, "No source roots — semantic check skipped.", True
+
+            # 1. Deterministic guard rails (free, no LLM)
+            from patch_agent import guard_rails
+            rails = guard_rails.check(source_roots[0], patched_dir)
+            if not rails.passed:
+                return False, "; ".join(rails.violations), False
+
+            # 2. LLM-as-Judge on the modified methods' Javadoc contracts
+            from reasoner.semantic_validator import SemanticValidator
+            verdict = SemanticValidator(self.client).validate(
+                patched_dir,
+                self.repair_spec,
+                bug_dir,
+                static_warnings=rails.warnings,
+            )
+            if verdict.skipped:
+                return True, verdict.reason, True
+            return verdict.valid, verdict.reason, False
+        except Exception as exc:
+            print(f"  [agent] WARNING: semantic check failed ({exc}) — skipping")
+            return True, f"Semantic check error: {exc}", True

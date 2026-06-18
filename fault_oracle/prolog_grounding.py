@@ -349,39 +349,56 @@ def _classify_npe(
 
 # ── Repair Directives ────────────────────────────────────────────────────────
 
+_CONTRACT_CLAUSE = (
+    " Preserve the documented contract: do NOT introduce new exception types, "
+    "do NOT return dummy/default objects to silence the crash, and do NOT "
+    "expose internal state. If the Javadoc allows null, propagating null is "
+    "the correct behaviour. Fix the CAUSE shown in the causal chain, not just "
+    "the crash line."
+)
+
 _REPAIR_DIRECTIVES: Dict[NPECategory, str] = {
     NPECategory.NULL_RETURN: (
-        "The method {cause_expr} can return null. "
-        "Add a null-check on its return value before dereferencing, "
-        "OR modify the method to guarantee a non-null return value (e.g., return an empty collection or a default object)."
+        "The method {cause_expr} can return null and the result is dereferenced. "
+        "Decide from the callee's documented contract: if null is a legal return "
+        "value, handle it at the call site; if the callee should never return "
+        "null, fix the callee." + _CONTRACT_CLAUSE
     ),
     NPECategory.NULL_ARGUMENT: (
         "The parameter `{null_name}` can be null when passed to this method. "
-        "Add an early null guard at the top of the method (e.g., `if ({null_name} == null) return ...;`), "
-        "OR ensure the caller never passes null."
+        "Check the causal chain for WHERE the null originates: prefer fixing "
+        "the caller that passes null (e.g., passing the documented neutral "
+        "value instead), and only guard inside the callee if null is a legal "
+        "input per its contract." + _CONTRACT_CLAUSE
     ),
     NPECategory.UNINITIALIZED_FIELD: (
         "The field `{null_name}` is not initialized (or explicitly set to null). "
         "Add initialization in the constructor or a lazy-init null-check before use. "
-        "Consider what the correct default value should be."
+        "Choose the default that the class contract implies, not an arbitrary one."
+        + _CONTRACT_CLAUSE
     ),
     NPECategory.NULL_ARRAY_ACCESS: (
         "An array or collection element is null when accessed. "
-        "Add a null-check on the element before dereferencing, "
-        "OR skip null elements during iteration."
+        "Handle the null element the way the surrounding API documents it "
+        "(skip, store, or propagate it) — do not invent new behaviour."
+        + _CONTRACT_CLAUSE
     ),
     NPECategory.NULL_DEREFERENCE: (
         "The variable `{null_name}` is null when dereferenced at line {crash_line}. "
-        "Trace where it gets its value and add appropriate null handling."
+        "Trace where it gets its value (see the causal chain) and fix the origin; "
+        "guard the dereference only if null is a legal state for `{null_name}`."
+        + _CONTRACT_CLAUSE
     ),
     NPECategory.NULL_LITERAL_ASSIGN: (
         "The variable `{null_name}` is explicitly assigned `null` at line {assign_line} "
         "and later dereferenced at line {crash_line}. "
-        "Change the null assignment to a safe default, or add a null-check before the dereference."
+        "Fix the assignment site (line {assign_line}) if a meaningful value exists, "
+        "otherwise handle the null where it is dereferenced." + _CONTRACT_CLAUSE
     ),
     NPECategory.UNKNOWN: (
         "A NullPointerException occurs at line {crash_line}. "
-        "Inspect the variable `{null_name}` and trace its value to find the root cause."
+        "Inspect the variable `{null_name}` and trace its value to find the root "
+        "cause." + _CONTRACT_CLAUSE
     ),
 }
 

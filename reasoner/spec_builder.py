@@ -31,14 +31,9 @@ SPEC_USER_TEMPLATE = """\
 
 **Bug ID:** {bug_id}
 
-### Fault Location
-- **Class:** `{class_name}`
-- **Line:** {line}
-- **Method:**
-```java
-{method_source}
-```
-
+### Fault Locations (full causal chain from LogicFL)
+{fault_locations}
+{sibling_occurrences}
 ### Prolog Causal Analysis (from LogicFL — Semantically Grounded)
 {causal_analysis}
 
@@ -79,11 +74,70 @@ What is the SMALLEST conceptual change that fixes the bug? Describe it \
 in plain English (e.g., "Add a null check for `result` before line 42, \
 returning an empty array if null"). Do NOT write code.
 
+### 4. Fix Locations
+For EACH fault location listed above (and each suspect twin location, if \
+any), state whether the fix must touch it, and why. A fix that silences \
+the crash point while leaving an upstream cause unaddressed (a null \
+origin, an inverted logic, an unguarded twin method) is INVALID. Be \
+explicit: "Location 1 (Class:line): must change because ... / no change \
+needed because ...".
+
 Respond in this exact format:
 <flawed_behavior>...</flawed_behavior>
 <intended_behavior>...</intended_behavior>
 <minimal_fix>...</minimal_fix>
+<fix_locations>...</fix_locations>
 """
+
+
+# ── Shared prompt-section formatters (also used by patch_agent.agent) ─────────
+
+MAX_PROMPT_LOCATIONS = 5
+"""Cap the number of fault locations rendered in prompts to bound context size."""
+
+
+def format_fault_locations(fault_report: FaultReport) -> str:
+    """Render ALL fault locations (crash point + transfer chain) for a prompt.
+
+    The full method source is included for the primary location; secondary
+    locations within the same method are merged by the parser already, so
+    each entry here is a distinct method/position of the causal chain.
+    """
+    if not fault_report.locations:
+        return "(no fault locations available)"
+
+    sections = []
+    for i, loc in enumerate(fault_report.locations[:MAX_PROMPT_LOCATIONS], 1):
+        tag = "PRIMARY (crash point)" if i == 1 else "transfer-chain location"
+        body = loc.method_source or "(method source not available)"
+        javadoc = f"```java\n{loc.javadoc}\n```\n" if loc.javadoc else ""
+        sections.append(
+            f"#### Location {i} — {tag}\n"
+            f"- **Class:** `{loc.class_name}`\n"
+            f"- **Line:** {loc.line}\n"
+            f"{javadoc}"
+            f"```java\n{body}\n```"
+        )
+
+    skipped = len(fault_report.locations) - MAX_PROMPT_LOCATIONS
+    if skipped > 0:
+        sections.append(f"(+{skipped} lower-ranked location(s) omitted)")
+
+    return "\n\n".join(sections)
+
+
+def format_sibling_occurrences(ingredients: Ingredients) -> str:
+    """Render the twin-location warnings collected by the IngredientForge."""
+    if not ingredients.sibling_occurrences:
+        return ""
+    bullets = "\n".join(f"- {s}" for s in ingredients.sibling_occurrences)
+    return (
+        "\n### ⚠ Suspect twin locations\n"
+        "The expression at the crash line also appears UNGUARDED elsewhere "
+        "in the same class. The same defect likely exists there too — "
+        "consider fixing ALL of them:\n"
+        f"{bullets}\n"
+    )
 
 
 # ── Building and Parsing ─────────────────────────────────────────────────────
@@ -104,8 +158,6 @@ def _build_spec_prompt(
     ingredients: Ingredients,
 ) -> str:
     """Build the CoT specification prompt."""
-    primary = fault_report.locations[0] if fault_report.locations else None
-
     # Use grounded chains if available, fall back to raw chains
     if fault_report.grounded_chains:
         from fault_oracle.prolog_grounding import format_grounded_chains
@@ -121,9 +173,8 @@ def _build_spec_prompt(
 
     return SPEC_USER_TEMPLATE.format(
         bug_id=fault_report.bug_id,
-        class_name=primary.class_name if primary else "unknown",
-        line=primary.line if primary else 0,
-        method_source=primary.method_source if primary else "(not available)",
+        fault_locations=format_fault_locations(fault_report),
+        sibling_occurrences=format_sibling_occurrences(ingredients),
         causal_analysis=causal_analysis,
         repair_directives=repair_directives,
         failing_tests="\n".join(
@@ -150,6 +201,7 @@ def _parse_spec_response(response: str) -> RepairSpec:
         flawed_behavior=extract("flawed_behavior"),
         intended_behavior=extract("intended_behavior"),
         minimal_fix=extract("minimal_fix"),
+        fix_locations=extract("fix_locations"),
     )
 
 
@@ -193,8 +245,9 @@ def build(
     spec = _parse_spec_response(response)
 
     print(f"  [spec_builder] RepairSpec built:")
-    print(f"    Flawed:   {spec.flawed_behavior[:100]}...")
-    print(f"    Intended: {spec.intended_behavior[:100]}...")
-    print(f"    Fix:      {spec.minimal_fix[:100]}...")
+    print(f"    Flawed:    {spec.flawed_behavior[:100]}...")
+    print(f"    Intended:  {spec.intended_behavior[:100]}...")
+    print(f"    Fix:       {spec.minimal_fix[:100]}...")
+    print(f"    Locations: {spec.fix_locations[:100]}...")
 
     return spec

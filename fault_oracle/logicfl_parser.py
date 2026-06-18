@@ -20,7 +20,11 @@ from typing import List, Optional, Tuple
 
 from shared.models import FaultLocation, FaultReport
 from services.sandbox_evaluator import read_source_roots
-from fault_oracle.ast_extractor import find_method_bounds_ast, extract_method_at_line
+from fault_oracle.ast_extractor import (
+    find_method_bounds_ast,
+    extract_method_at_line,
+    extract_javadoc_for_method,
+)
 
 
 def _class_to_file_path(class_name: str, source_root: Path) -> Path:
@@ -97,11 +101,16 @@ def _parse_fault_locations(
             method_source = ""
             method_start = 0
             method_end = 0
+            javadoc = ""
             if file_path_resolved.exists():
                 try:
                     method_source, method_start, method_end = extract_method_at_line(
                         file_path_resolved, line_no, annotate_fault=False
                     )
+                    if method_start > 0:
+                        javadoc = extract_javadoc_for_method(
+                            file_path_resolved, method_start
+                        )
                 except Exception:
                     pass
 
@@ -112,6 +121,7 @@ def _parse_fault_locations(
                 method_source=method_source,
                 method_start=method_start,
                 method_end=method_end,
+                javadoc=javadoc,
             ))
 
     # Deduplicate by method bounds to avoid overwhelming the LLM

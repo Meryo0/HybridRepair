@@ -113,6 +113,9 @@ class FaultLocation:
     method_end: int = 0
     """1-indexed end line of the enclosing method."""
 
+    javadoc: str = ""
+    """Javadoc block of the enclosing method, if present (populated by ast_extractor)."""
+
 
 @dataclass
 class FaultReport:
@@ -161,6 +164,9 @@ class RepairSpec:
     minimal_fix: str = ""
     """Conceptual description of the smallest change that fixes the bug."""
 
+    fix_locations: str = ""
+    """Per-location verdict: which causal-chain locations the fix must touch and why."""
+
     confidence: float = 0.0
     """Self-assessed confidence from the critic (0.0–1.0)."""
 
@@ -190,6 +196,10 @@ class Ingredients:
     caller_context: str = ""
     """Source of the method(s) that call the buggy method."""
 
+    sibling_occurrences: List[str] = field(default_factory=list)
+    """Occurrences of the crash-line expression elsewhere in the same class
+    (potential twin locations needing the same fix, e.g. JacksonDatabind-80)."""
+
 
 # ── Phase 3: PatchAgent output ───────────────────────────────────────────────
 
@@ -200,6 +210,8 @@ class AttemptStatus(Enum):
     PENDING = "PENDING"
     COMPILE_ERROR = "COMPILE_ERROR"
     TEST_FAIL = "TEST_FAIL"
+    SEMANTIC_FAIL = "SEMANTIC_FAIL"
+    """Tests pass, but the patch violates the documented contract (guard rails / LLM judge)."""
     PASS = "PASS"
 
 
@@ -240,6 +252,12 @@ class PatchAttempt:
     error_summary: str = ""
     """Human-readable summary of why this attempt failed (if it did)."""
 
+    semantic_valid: Optional[bool] = None
+    """Post-pass semantic validation verdict (None = not performed/skipped)."""
+
+    semantic_reason: str = ""
+    """Explanation from guard rails / LLM judge for the semantic verdict."""
+
 
 # ── Final pipeline output ────────────────────────────────────────────────────
 
@@ -259,6 +277,12 @@ class RepairResult:
 
     fault_report: Optional[FaultReport] = None
     repair_spec: Optional[RepairSpec] = None
+
+    semantic_valid: Optional[bool] = None
+    """Semantic verdict for the winning patch (None = skipped / not applicable)."""
+
+    semantic_reason: str = ""
+    """Explanation for the semantic verdict of the winning patch."""
 
     def summary(self) -> str:
         """One-line summary for terminal output."""

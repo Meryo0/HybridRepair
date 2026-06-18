@@ -81,10 +81,19 @@ def repair_bug(bug_id: str, skip_logicfl: bool = False) -> RepairResult:
     # Collect static ingredients
     ingredients = collect_ingredients(fault_report)
 
-    # Build repair specification
+    # Build repair specification (one rebuild if the critic has low confidence)
+    LOW_CONFIDENCE = 0.4
     try:
         spec = build_spec(fault_report, ingredients, client=client)
         spec = validate_spec(spec, fault_report, client=client)
+        if spec.confidence < LOW_CONFIDENCE:
+            print(f"  ⚠️  Low critic confidence ({spec.confidence:.2f}) — "
+                  f"rebuilding the spec once")
+            retry = build_spec(fault_report, ingredients, client=client,
+                               temperature=0.3)
+            retry = validate_spec(retry, fault_report, client=client)
+            if retry.confidence > spec.confidence:
+                spec = retry
     except Exception as exc:
         print(f"  ⚠️  Phase 2 failed ({exc}), proceeding with empty spec")
         from shared.models import RepairSpec
