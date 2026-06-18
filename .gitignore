@@ -31,3 +31,5 @@ scratch_diffs/
 # Editor / office lock files
 .~lock.*#
 .DS_Store
+.cursor/
+.cursorignore
