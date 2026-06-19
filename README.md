@@ -47,13 +47,13 @@ Run all of the following **from inside the cloned `HybridRepair/` folder**, so t
 corpus is assembled at `HybridRepair/defects4j/` (that's where the run commands
 below expect it):
 ```bash
-cd HybridRepair            # the cloned project root
+cd HybridRepair            # the cloned project root (skip if already inside it)
 
-# download both parts here (GitHub CLI)
-gh release download v1.0.0 --repo Meryo0/HybridRepair -p 'defects4j.tar.gz.part-*'
-# ...or with wget:
-# wget https://github.com/Meryo0/HybridRepair/releases/download/v1.0.0/defects4j.tar.gz.part-00
-# wget https://github.com/Meryo0/HybridRepair/releases/download/v1.0.0/defects4j.tar.gz.part-01
+# download both parts here — public release, no authentication needed
+wget https://github.com/Meryo0/HybridRepair/releases/download/v1.0.0/defects4j.tar.gz.part-00
+wget https://github.com/Meryo0/HybridRepair/releases/download/v1.0.0/defects4j.tar.gz.part-01
+# ...or, if you have the GitHub CLI already logged in:
+# gh release download v1.0.0 --repo Meryo0/HybridRepair -p 'defects4j.tar.gz.part-*'
 
 # reassemble the parts and extract — creates ./defects4j inside HybridRepair/
 cat defects4j.tar.gz.part-* | tar xzf -
