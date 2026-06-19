@@ -43,22 +43,29 @@ is published as a split archive on the
 [v1.0.0 release](https://github.com/Meryo0/HybridRepair/releases/tag/v1.0.0)
 (GitHub caps release assets at 2 GB per file, so it ships in two parts).
 
-Download both parts and reassemble + extract them into the project root:
+Run all of the following **from inside the cloned `HybridRepair/` folder**, so the
+corpus is assembled at `HybridRepair/defects4j/` (that's where the run commands
+below expect it):
 ```bash
-# with the GitHub CLI
+cd HybridRepair            # the cloned project root
+
+# download both parts here (GitHub CLI)
 gh release download v1.0.0 --repo Meryo0/HybridRepair -p 'defects4j.tar.gz.part-*'
+# ...or with wget:
+# wget https://github.com/Meryo0/HybridRepair/releases/download/v1.0.0/defects4j.tar.gz.part-00
+# wget https://github.com/Meryo0/HybridRepair/releases/download/v1.0.0/defects4j.tar.gz.part-01
 
-# or with wget
-wget https://github.com/Meryo0/HybridRepair/releases/download/v1.0.0/defects4j.tar.gz.part-00
-wget https://github.com/Meryo0/HybridRepair/releases/download/v1.0.0/defects4j.tar.gz.part-01
-
-# reassemble the parts and extract — recreates ./defects4j
+# reassemble the parts and extract — creates ./defects4j inside HybridRepair/
 cat defects4j.tar.gz.part-* | tar xzf -
+
+# remove the downloaded parts (no longer needed)
+rm defects4j.tar.gz.part-*
 ```
 
-After this you should have a local `./defects4j` directory containing the bug
-folders. (If you already have the corpus on another machine you can of course just
-copy that folder over instead, e.g. `rsync -a host:/path/HybridRepair/defects4j .`)
+You should now have `HybridRepair/defects4j/` containing the bug folders. (If you
+already have the corpus on another machine you can just copy that folder in instead,
+e.g. `rsync -a host:/path/HybridRepair/defects4j .` — again from inside
+`HybridRepair/`.)
 
 ### 5. Run a bug
 Mount your corpus and the output directory, pass your `.env`, and give a bug id.
@@ -77,6 +84,9 @@ docker run --rm \
 - The container entrypoint automatically rewrites the absolute `base.dir` paths
   inside each mounted `config.properties` to the in-container location — no manual
   path editing required.
+- Pipeline output streams **line-by-line** in real time (the image sets
+  `PYTHONUNBUFFERED=1`). On an older pulled image you can force it with
+  `-e PYTHONUNBUFFERED=1` in the `docker run` command.
 
 > **Note:** running against a mounted corpus rewrites its `base.dir` lines to the
 > container path. If you also run the pipeline natively against the *same* folder,

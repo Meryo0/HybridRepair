@@ -70,5 +70,9 @@ COPY logicfl_dataset/ ./logicfl_dataset/
 # The relative `lib -> logicfl_dataset/lib` symlink is preserved.
 COPY --exclude=d4j-lib --exclude=logicfl_dataset . .
 
+# Stream stdout/stderr unbuffered so pipeline logs appear line-by-line in real
+# time (no need to pass -e PYTHONUNBUFFERED=1 or -t at run time).
+ENV PYTHONUNBUFFERED=1
+
 ENTRYPOINT ["/opt/hybridrepair/docker/entrypoint.sh"]
 CMD ["--help"]
