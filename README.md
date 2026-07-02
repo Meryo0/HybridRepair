@@ -114,6 +114,43 @@ DEFECTS4J_HOST=/abs/path/to/defects4j docker compose run --rm repair Chart-2 --s
 DEFECTS4J_HOST=/abs/path/to/defects4j docker compose run --rm repair run_all_bugs.py
 ```
 
+### Windows (PowerShell)
+Docker Desktop runs the exact same Linux image, so everything works on Windows —
+only a few shell details differ from the bash commands above. Use **PowerShell**
+(the examples below assume you are inside the cloned `HybridRepair\` folder).
+
+**Get the corpus** (Windows 10/11 ship `curl` and `tar`, but not `wget`/`cat`):
+```powershell
+curl -L -o defects4j.tar.gz.part-00 https://github.com/Meryo0/HybridRepair/releases/download/v1.0.0/defects4j.tar.gz.part-00
+curl -L -o defects4j.tar.gz.part-01 https://github.com/Meryo0/HybridRepair/releases/download/v1.0.0/defects4j.tar.gz.part-01
+
+# reassemble the parts (copy /b keeps the data binary-safe) and extract
+cmd /c copy /b defects4j.tar.gz.part-00+defects4j.tar.gz.part-01 defects4j.tar.gz
+tar -xzf defects4j.tar.gz
+del defects4j.tar.gz.part-* defects4j.tar.gz
+```
+
+**Configure `.env`** — copy the example (save it as plain UTF-8, **not** "UTF-8 with
+BOM" from Notepad; VS Code is safest):
+```powershell
+copy .env.example .env
+```
+
+**Run a bug** — easiest is `docker compose`, whose paths are preset so nothing
+changes on Windows:
+```powershell
+docker compose run --rm repair Chart-2 --skip-logicfl
+# whole batch:
+docker compose run --rm repair run_all_bugs.py
+```
+
+Or the plain `docker run` form. Note the Windows differences: use `${PWD}` instead
+of `$(pwd)`, and keep it on **one line** (PowerShell has no `\` line continuation —
+use a backtick `` ` `` if you must wrap):
+```powershell
+docker run --rm --env-file .env -v "${PWD}/defects4j:/opt/hybridrepair/defects4j" -v "${PWD}/pipeline_results:/opt/hybridrepair/pipeline_results" ghcr.io/meryo0/hybridrepair:latest Chart-2 --skip-logicfl
+```
+
 ### Where the output goes
 Results — agent iterations, generated specs, patches (`patch.diff`), JUnit results,
 and a `final_report.json` — are written under `pipeline_results/<Bug-Id>/` on the
